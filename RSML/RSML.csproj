@@ -7,8 +7,32 @@
 		<Title>Red Sea Markup Language</Title>
 		<Authors>Matthew</Authors>
 		<Company>OceanApocalypseStudios</Company>
-		<Description>The modern, more robust fork on MF's CrossRoad for C#.
-Its syntax is simple, easy-to-learn and the language is, altogether, a pretty good alternative to MFRoad.</Description>
+		<Description>
+			The modern, more robust fork on MF's CrossRoad for C#.
+			Its syntax is simple, easy-to-learn and the language is, altogether, a pretty good alternative to MFRoad.
+		</Description>
+		<Copyright>Copyright (c) 2025 OceanApocalypseStudios</Copyright>
+		<PackageIcon>Icon.png</PackageIcon>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryUrl>https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage</RepositoryUrl>
+		<PackageTags>Markup;Crossroad</PackageTags>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\Assets\Icon.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\LICENSE">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
 
 </Project>
