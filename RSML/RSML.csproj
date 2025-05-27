@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<Title>Red Sea Markup Language</Title>
+		<Authors>Matthew</Authors>
+		<Company>OceanApocalypseStudios</Company>
+		<Description>The modern, more robust fork on MF's CrossRoad for C#.
+Its syntax is simple, easy-to-learn and the language is, altogether, a pretty good alternative to MFRoad.</Description>
+	</PropertyGroup>
+
+</Project>
