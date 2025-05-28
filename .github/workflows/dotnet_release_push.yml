@@ -64,4 +64,10 @@ jobs:
           
       # Step 10
       - name: Push to NuGet
-        run: dotnet nuget push ./nupkgs/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+        shell: pwsh
+        run: |
+          $nupkgs = Get-ChildItem -Path ./nupkgs -Filter *.nupkg
+          foreach ($pkg in $nupkgs) {
+            dotnet nuget push $pkg.FullName --api-key $env:NUGET_API_KEY --source https://api.nuget.org/v3/index.json
+          }
+
