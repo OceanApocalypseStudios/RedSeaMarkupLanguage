@@ -26,7 +26,7 @@ jobs:
 
       # Step 4
       - name: Build the project
-        run: dotnet build --configuration Release --output ./bin
+        run: dotnet build RSML.CLI/RSML.CLI.csproj --configuration Release --output ./bin
 
       # Step 5
       - name: Run tests
@@ -36,18 +36,18 @@ jobs:
       - name: Create ZIP archives
         run: |
           cd ./bin
-          powershell Compress-Archive -Path * -DestinationPath "../RSML.zip"
+          powershell Compress-Archive -Path * -DestinationPath "../RSML_CLI.zip"
 
       # Step 7
       - name: Create TAR.GZ archives
         run: |
           cd ./bin
-          tar -czvf "../RSML.tar.gz" *
+          tar -czvf "../RSML_CLI.tar.gz" *
           cd ..
 
       # Step 8
       - name: Pack NuGet Package
-        run: dotnet pack --no-build --configuration Release --output ./nupkgs
+        run: dotnet pack RSML/RSML.csproj --configuration Release --output ./nupkgs
 
       # Step 9
       - name: Create Release
