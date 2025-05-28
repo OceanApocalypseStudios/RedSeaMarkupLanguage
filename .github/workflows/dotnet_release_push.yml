@@ -48,8 +48,17 @@ jobs:
       # Step 8
       - name: Pack NuGet Package
         run: dotnet pack RSML/RSML.csproj --configuration Release --output ./nupkgs
-
+        
       # Step 9
+      - name: Append Release Warning
+        run: |
+             echo "> [!CAUTION]" >> LatestReleaseNotes.md
+             echo "> The following binaries were not compiled manually. **Use them at your own risk!**" >> LatestReleaseNotes.md
+             echo "" >> LatestReleaseNotes.md
+             echo "> [!TIP]" >> LatestReleaseNotes.md
+             echo "> If you have the .NET runtime installed, I highly recommend compiling my code yourself, because the binaries below are `self-contained` and take up a lot more space than they should." >> LatestReleaseNotes.md
+
+      # Step 10
       - name: Create Release
         uses: softprops/action-gh-release@v1
 
@@ -61,13 +70,3 @@ jobs:
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
-      # Step 10
-      - name: Push to NuGet
-        shell: pwsh
-        run: |
-          $nupkgs = Get-ChildItem -Path ./nupkgs -Filter *.nupkg
-          foreach ($pkg in $nupkgs) {
-            dotnet nuget push $pkg.FullName --api-key $env:NUGET_API_KEY --source https://api.nuget.org/v3/index.json
-          }
-
