@@ -1,11 +1,12 @@
 # Red Sea Markup Language
 <img src="Assets/FullSizeLogo.png" alt="RSML Logo" align="right" width="96" height="96">
 
-[![Latest Version](https://img.shields.io/github/v/tag/OceanApocalypseStudios/RedSeaMarkupLanguage?color=brown)](https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/releases/latest)
-[![License](https://img.shields.io/github/license/OceanApocalypseStudios/RedSeaMarkupLanguage)](https://raw.githubusercontent.com/OceanApocalypseStudios/RedSeaMarkupLanguage/main/LICENSE)
-![GitHub top language](https://img.shields.io/github/languages/top/OceanApocalypseStudios/RedSeaMarkupLanguage)
-![GitHub Repo stars](https://img.shields.io/github/stars/OceanApocalypseStudios/RedSeaMarkupLanguage?color=red)
-![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/OceanApocalypseStudios/RedSeaMarkupLanguage?style=flat&color=purple)
+[![NuGet Version](https://img.shields.io/nuget/v/RSML?style=for-the-badge&logo=nuget&link=https%3A%2F%2Fwww.nuget.org%2Fpackages%2FRSML)](https://www.nuget.org/packages/RSML)
+[![GitHub Release](https://img.shields.io/github/v/release/OceanApocalypseStudios/RedSeaMarkupLanguage?sort=semver&style=for-the-badge&color=orange)](https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/releases/latest)
+[![GitHub License](https://img.shields.io/github/license/OceanApocalypseStudios/RedSeaMarkupLanguage?style=for-the-badge)](https://raw.githubusercontent.com/OceanApocalypseStudios/RedSeaMarkupLanguage/main/LICENSE)
+![GitHub top language](https://img.shields.io/github/languages/top/OceanApocalypseStudios/RedSeaMarkupLanguage?style=for-the-badge&logo=dotnet&logoColor=purple&logoSize=auto&labelColor=lightgrey&color=darkgreen)
+![GitHub Repo stars](https://img.shields.io/github/stars/OceanApocalypseStudios/RedSeaMarkupLanguage?style=for-the-badge&logo=github&color=yellow)
+![NuGet Downloads](https://img.shields.io/nuget/dt/RSML?style=for-the-badge&logo=nuget&color=red)
 
 > The modern fork of [MF's Crossroad](https://github.com/MF366-Coding/MFRoad) we're sure you'll love.
 
