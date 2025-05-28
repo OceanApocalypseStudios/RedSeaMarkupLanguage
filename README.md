@@ -1,1 +1,169 @@
-# RedSeaMarkupLanguage
+# Red Sea Markup Language
+<img src="Assets/FullSizeLogo.png" alt="RSML Logo" align="right" width="96" height="96">
+
+[![Latest Version](https://img.shields.io/github/v/tag/OceanApocalypseStudios/RedSeaMarkupLanguage?color=brown)](https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/releases/latest)
+[![License](https://img.shields.io/github/license/OceanApocalypseStudios/RedSeaMarkupLanguage)](https://raw.githubusercontent.com/OceanApocalypseStudios/RedSeaMarkupLanguage/main/LICENSE)
+![GitHub top language](https://img.shields.io/github/languages/top/OceanApocalypseStudios/RedSeaMarkupLanguage)
+![GitHub Repo stars](https://img.shields.io/github/stars/OceanApocalypseStudios/RedSeaMarkupLanguage?color=red)
+![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/OceanApocalypseStudios/RedSeaMarkupLanguage?style=flat&color=purple)
+
+> The modern fork of [MF's Crossroad](https://github.com/MF366-Coding/MFRoad) we're sure you'll love.
+
+Below is a list of features (or reasons why RSML is better than MFRoad - call them what you want) in this markup language.
+
+<hr />
+
+## Regex Support
+Instead of those awful `win32:any` and `any:amd64`, you have Regex support in RSML.
+
+```python
+win.+ -> "Return value"
+# ^ this literally stands for "starts with win and has any amount of characters that's larger than 3"
+# pure regex, as simple as it can get, eh eh
+```
+
+<hr />
+
+## More *space* to breathe
+One of the low points of MFRoad was not allowing for spaces in statements. Worry no more.
+
+```python
+# all of the below statements are valid
+win -> "valid"
+win->"valid"
+win                      ->               "valid"
+win                                 ->"valid"
+win->          "valid"
+```
+
+<hr />
+
+## Known system identifier format
+MFRoad used the poorly-documented `sys.platform` from python and, for Linux distros, the `distro` module.
+
+Since RSML is made in C#, we decided to change things up a bit: **system identifiers are now the same as [MSBuild Runtime Identifiers](https://learn.microsoft.com/en-us/dotnet/core/rid-catalog),** which are pretty well documented.
+
+<hr />
+
+## Directly in your terminal
+RSML is not just a library for .NET: you can also use it directly in your terminal.
+
+```bash
+cat somefile.rsea | RSML.CLI evaluate --no-pretty
+```
+
+> [!HINT]
+> `--no-pretty` disabled ASCII art and copyright messages so you can easily pipe the evaluation into another command without it also piping the ASCII art.
+
+<hr />
+
+## Documentation build process
+You may build the documentation for RSML yourself!
+
+Just try doing this:
+```bash
+RSML.Docs
+```
+
+Or, if you're scared of the commandline, just run the `main.py` that's bundled with **RSML.Docs**.
+
+<hr />
+
+## Still kind of compatible?
+Yes, RSML is still kind of compatible with MFRoad. It supports MFRoad's operators as long as they're specified.
+
+It can't emulate the `any` or the `<system>:<architecture>` behavior though.
+
+<hr />
+
+## Comments
+This might be hard to take in at first but... everything that's not a statement is a comment. Yup.
+
+```ruby
+# this is a comment - the recommended way as these are always ignored
+// but this is technically also a valid comment
+
+in fact, any statement that does not start with special actions
+and does not have any operators
+
+yup, it's a comment
+
+the problem arises when you do things like this:
+etc etc -> etc etc
+
+problem? RSML considers that to be a valid statement because of the operator in it
+
+so my recommendation?
+# always stick with the default comments, as they're always ignored
+```
+
+
+<hr />
+
+## Custom actions
+MFRoad only allowed 3 actions: returning a value (primary), outputting text (secondary) and throwing an error (tertiary).
+
+RSML still only allows 3 main actions, but they can be customized (does not apply to the CLI).
+
+Hell, you can even customize the operators that those actions use.
+
+```c#
+using System;
+
+// ...
+
+// let's say your RSParser is at a variable named "parser"
+parser.DefineOperator(OperatorType.Primary, ";)")
+// ;) will now be your primary operator (basically, it'll replace ->)
+
+// you may also register an action
+parser.RegisterAction(OperatorType.Secondary, (_, argument) => Console.WriteLine(argument));
+// _ is a parameter of type RSParser. I've discarded it as we don't need it
+// argument is a string
+
+// you can register actions only for secondary, tertiary and special operators
+// the primary action cannot be redefined - it's always the return action
+```
+
+<hr />
+
+## Special Actions
+Special actions are also a new thing.
+
+```ruby
+@MySpecialAction TheArgument # arguments here cannot contain any spaces
+```
+
+There is only one built-in special action, an argument-less one. All of the others must be defined for them to work.
+
+```ruby
+@EndAll # the only built-in special action in RSML
+```
+
+You may define special actions but keep in mind they take 2 arguments, like normal main actions but also return a value, of type `byte`.
+
+```c#
+parser.RegisterSpecialFunction("TestFunc", (_, _) => 251);
+// 251 is a special return code that removes all defined special actions (except for @EndAll)
+// other special return codes are 250 and 252
+```
+
+This `TestFunc` can then be used in RSML.
+
+```ruby
+@TestFunc
+@MySpecial
+# even if MySpecial was defined, it'll become undefined after @TestFunc
+```
+
+<hr />
+
+## What about other languages?
+As for right now, we don't intend in porting RSML library to other languages, but you could include the DLLs in your project and call them.
+Not a graceful solution, but not a bad one either.
+
+<hr />
+
+> **Copyright (c) 2025 OceanApocalypseStudios**
+> 
+> We :heart: open-source!

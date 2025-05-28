@@ -141,10 +141,10 @@ namespace RSML.Parser
 		}
 
 		/// <summary>
-		/// 
+		/// Handles a call to a special action/function.
 		/// </summary>
-		/// <param name="line"></param>
-		/// <exception cref="UndefinedSpecialException"></exception>
+		/// <param name="line">The line where the function is called</param>
+		/// <exception cref="UndefinedSpecialException">The special is undefined</exception>
 		protected byte HandleSpecialFunctionCall(string line)
 		{
 
