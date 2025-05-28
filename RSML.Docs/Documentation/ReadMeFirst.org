@@ -1,0 +1,29 @@
+#+TITLE: Red Sea Markup Language Official Documentation
+#+AUTHOR: Matthew (MF366)
+#+DESCRIPTION: The welcome page for the RSML Documentation.
+
+* 👋 Welcome!
+This is the official documentation for *RSML* (Red Sea Markup Language), *the* modern fork of MFRoad, but up to ten times better.
+
+* 🔧 How to Build
+To build this documentation, simply run =RSML.Docs.exe= or =RSML.Docs=. Yea, it's *that* easy.
+
+You may also specify a custom build filetype (such as *PDF (with LaTeX)*):
+
+#+begin_src bash
+# These ones stand for PDF
+>> RSML.Docs pdf
+>> RSML.Docs latex
+
+# These ones, Markdown
+>> RSML.Docs markdown
+>> RSML.Docs mdown
+
+# HTML is default so you don't need to specify it
+>> RSML.Docs html
+#+end_src
+
+* 👉 Start Here
+Below, you can find a selection of recommended documentation pages to start with.
+
+TODO: add said pages

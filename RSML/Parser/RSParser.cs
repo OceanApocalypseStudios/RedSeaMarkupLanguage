@@ -3,17 +3,28 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
+
 using RSML.Exceptions;
 
 
 namespace RSML.Parser
 {
 
+	/// <summary>
+	/// The default parser for Red Sea Markup Language.
+	/// </summary>
 	public class RSParser
 	{
 
-		protected Action<RSParser>? secondaryAction;
-		protected Action<RSParser>? tertiaryAction;
+		/// <summary>
+		/// The secondary action.
+		/// </summary>
+		protected Action<RSParser, string>? secondaryAction;
+
+		/// <summary>
+		/// The tertiary action.
+		/// </summary>
+		protected Action<RSParser, string>? tertiaryAction;
 
 		/// <summary>
 		/// A dictionary containing all of the special actions.
@@ -71,7 +82,7 @@ namespace RSML.Parser
 		/// <summary>
 		/// Register a new special function.
 		/// </summary>
-		/// <param name="nameOfSpecial">The name of the special function</param>
+		/// <param name="nameOfSpecial">The name of the special function (without the <strong>@</strong>)</param>
 		/// <param name="specialAction">A method that returns a 8 bit unsigned integer and 2 parameters of type <see cref="RSParser" /> and <see cref="String" />, respectively.</param>
 		public void RegisterSpecialFunction(string nameOfSpecial, Func<RSParser, string, byte> specialAction) => specials.Add(nameOfSpecial, specialAction);
 
@@ -79,21 +90,24 @@ namespace RSML.Parser
 		/// Register a main action.
 		/// Can either be secondary or tertiary.
 		/// </summary>
-		/// <param name="isTertiary">If false (default), set it as secondary instead of tertiary.</param>
 		/// <param name="action">The action to run</param>
-		public void RegisterAction(Action<RSParser> action, bool isTertiary = false)
+		/// <param name="operatorType">The operator to redefine</param>
+		public void RegisterAction(OperatorType operatorType, Action<RSParser, string> action)
 		{
 
-			if (isTertiary)
+			switch (operatorType)
 			{
 
-				tertiaryAction = action;
+				case OperatorType.Secondary:
+					secondaryAction = action;
+					break;
 
-			}
-			else
-			{
+				case OperatorType.Tertiary:
+					tertiaryAction = action;
+					break;
 
-				secondaryAction = action;
+				default:
+					throw new ImmutableActionException("The primary action is immutable and cannot be redefined whatsoever.");
 
 			}
 
@@ -138,35 +152,68 @@ namespace RSML.Parser
 			string functionName = splitLine[0];
 			string argument = splitLine[1];
 
-			return !(specials.ContainsKey(functionName))
+			return !(specials.TryGetValue(functionName, out var value))
 				? throw new UndefinedSpecialException($"Special @{functionName} is undefined.")
-				: specials[functionName](this, argument);
+				: value(this, argument);
 
 		}
 
-		protected string? HandlePrimaryAction(string line)
+		/// <summary>
+		/// Handles a RSML action.
+		/// </summary>
+		/// <param name="line">The RSML line</param>
+		/// <param name="operatorType">The operator (primary, secondary or tertiary - all of them must be defined)</param>
+		/// <returns>Null if there was no match or the return value/argument as a string (even if the action was not primary).</returns>
+		/// <exception cref="UndefinedActionException">At least one action is undefined.</exception>
+		protected string? HandleAction(string line, OperatorType operatorType = OperatorType.Primary)
 		{
 
-			string[] splitLine = line.Split(primaryActionDelimiter);
-			int pos = 0;
-
-			foreach (string token in splitLine)
+			if (secondaryAction is null || tertiaryAction is null)
 			{
 
-				string trimmedToken = token.Trim();
-
-				if (pos == 0)
-				{
-
-					if (!Regex.IsMatch(RuntimeInformation.RuntimeIdentifier, trimmedToken)) return null;
-
-				}
-
-				// todo: cook ze rest
-
-				++pos;
+				throw new UndefinedActionException("All actions must be defined for them to be handled, even if only primary ones are used.");
 
 			}
+
+			// split the line
+			string[] splitLine = line.Split(operatorType == OperatorType.Primary ?
+											primaryActionDelimiter : (operatorType == OperatorType.Secondary) ?
+											secondaryActionDelimiter : tertiaryActionDelimiter);
+
+			// not enough tokens, fuckersss
+			if (splitLine.Length < 2) return null; // ignore it like a comment
+
+			// get system name
+			string systemName = splitLine[0].Trim();
+
+			// quick evaluation
+			if (!Regex.IsMatch(RuntimeInformation.RuntimeIdentifier, systemName)) return null;
+
+			string returnValue = splitLine[1].Trim();
+
+			if (returnValue.Length < 3 || !(returnValue.StartsWith('"') && returnValue.EndsWith('"'))) // the quotes and the characters inside of it
+			{
+
+				return null; // commenttttttttt
+
+			}
+
+			string trimmedArgument = returnValue[1..^1];
+
+			switch (operatorType)
+			{
+
+				case OperatorType.Secondary:
+					secondaryAction.Invoke(this, trimmedArgument);
+					break;
+
+				case OperatorType.Tertiary:
+					tertiaryAction.Invoke(this, trimmedArgument);
+					break;
+
+			}
+
+			return trimmedArgument; // ignore the quotes
 
 		}
 
@@ -174,10 +221,9 @@ namespace RSML.Parser
 		/// Evaluate RSML.
 		/// </summary>
 		/// <param name="linesepChar">The line separation string to use (defaults to system line separation)</param>
+		/// <returns>The evaluated result (only for primary action; if there's a secondary/tertiary match, it's ignored) or null (no primary matches)</returns>
 		public string? EvaluateRSML(string? linesepChar = null)
 		{
-
-			// todo: cook dis
 
 			foreach (string line in content.Split(linesepChar ?? Environment.NewLine))
 			{
@@ -214,24 +260,35 @@ namespace RSML.Parser
 				else if (line.Contains(primaryActionDelimiter))
 				{
 
-					HandlePrimaryAction(line);
+					string? actionReturnValue = HandleAction(line);
+
+					if (actionReturnValue is not null)
+					{
+
+						return actionReturnValue;
+
+					}
 
 				}
+#pragma warning disable IDE0058 // expression value unused
 				else if (line.Contains(secondaryActionDelimiter))
 				{
 
-					HandleSecondaryAction(line);
+					HandleAction(line, OperatorType.Secondary);
 
 				}
 				else if (line.Contains(tertiaryActionDelimiter))
 				{
 
-					HandleTertiaryAction(line);
+					HandleAction(line, OperatorType.Tertiary);
 
 				}
+#pragma warning restore
 				else continue;
 
 			}
+
+			return null; // no matches
 
 		}
 
