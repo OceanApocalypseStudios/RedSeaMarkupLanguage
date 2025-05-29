@@ -53,7 +53,7 @@ RSML is not just a library for .NET: you can also use it directly in your termin
 cat somefile.rsea | RSML.CLI evaluate --no-pretty
 ```
 
-> [!HINT]
+> [!NOTE]
 > `--no-pretty` disabled ASCII art and copyright messages so you can easily pipe the evaluation into another command without it also piping the ASCII art.
 
 <hr />
