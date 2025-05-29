@@ -26,4 +26,4 @@ You may also specify a custom build filetype (such as *PDF (with LaTeX)*):
 * 👉 Start Here
 Below, you can find a selection of recommended documentation pages to start with.
 
-TODO: add said pages
+- [[file:RSML_Language_Standards/ReadMeFirst.org][*Language Standards*]]

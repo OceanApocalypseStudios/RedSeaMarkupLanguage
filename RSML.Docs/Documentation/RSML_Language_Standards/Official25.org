@@ -1,0 +1,45 @@
+#+title: The official-25 Language Standard
+#+author: Matthew (MF366)
+#+description: The official-25 language standard for RSML.
+
+#+options: toc:nil
+
+#+TOC: headlines 3
+
+* 🛠 Operators
+~official-25~ makes use of all the three operators, as indicated below.
+
+| Operator       | Definition as specified by ~official-25~ |
+|----------------+----------------------------------------|
+| =->=             | Primary Operator                       |
+| 2 pipe symbols | Secondary Operator                     |
+| =^!=             | Tertiary Operator                      |
+
+* 💡 Main Actions
+~official-25~ defines all three actions, as it's mandatory to do so (otherwise, an error is thrown).
+
+| Operator Type | Action that's performed                   |
+|---------------+-------------------------------------------|
+| Secondary     | Outputs the value suceeding it.           |
+| Tertiary      | Throws an error with a specified message. |
+
+#+begin_quote
+^ Primary operator has been omitted as it can't be redefined - it's always the return operator.
+#+end_quote
+
+* 🎯 Special Actions
+~official-25~ does not define any special action.
+
+#+begin_quote
+=@EndAll= is already built-in.
+#+end_quote
+
+* ❓ So why use this standard?
+Use this standard when you want:
+- [X] *Simplicity.* Since ~official-25~ only defines the absolutely necessary, you don't waste time learning specific features.
+- [X] *Recognition.* Since ~official-25~ is, as the same implies, official and is also the default standard used by the RSML parser, it's also the most widely recognized standard.
+- [X] *CLI compatibility.* You can run a parser with this standard directly in the CLI.
+
+However, you may want to use a different parser if you want:
+- [ ] *Features.* ~official-25~ is quite limited in terms of features - it doesn't even have any *special actions*.
+- [ ] *Custom operators (and/or actions).* If you don't like this standard's operators (and/or actions), you might want to customize them.

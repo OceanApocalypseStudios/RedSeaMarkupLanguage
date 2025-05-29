@@ -4,7 +4,7 @@
 [![NuGet Version](https://img.shields.io/nuget/v/RSML?style=for-the-badge&logo=nuget&link=https%3A%2F%2Fwww.nuget.org%2Fpackages%2FRSML)](https://www.nuget.org/packages/RSML)
 [![GitHub Release](https://img.shields.io/github/v/release/OceanApocalypseStudios/RedSeaMarkupLanguage?sort=semver&style=for-the-badge&color=orange)](https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/releases/latest)
 [![GitHub License](https://img.shields.io/github/license/OceanApocalypseStudios/RedSeaMarkupLanguage?style=for-the-badge)](https://raw.githubusercontent.com/OceanApocalypseStudios/RedSeaMarkupLanguage/main/LICENSE)
-![GitHub top language](https://img.shields.io/github/languages/top/OceanApocalypseStudios/RedSeaMarkupLanguage?style=for-the-badge&logo=dotnet&logoColor=purple&logoSize=auto&labelColor=lightgrey&color=darkgreen)
+![GitHub top language](https://img.shields.io/github/languages/top/OceanApocalypseStudios/RedSeaMarkupLanguage?style=for-the-badge&logo=dotnet&logoColor=hotpink&logoSize=auto&color=darkgreen)
 ![GitHub Repo stars](https://img.shields.io/github/stars/OceanApocalypseStudios/RedSeaMarkupLanguage?style=for-the-badge&logo=github&color=yellow)
 ![NuGet Downloads](https://img.shields.io/nuget/dt/RSML?style=for-the-badge&logo=nuget&color=red)
 

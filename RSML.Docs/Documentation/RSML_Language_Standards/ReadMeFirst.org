@@ -1,0 +1,28 @@
+#+title: Red Sea Markup Language Standards
+#+author: Matthew (MF366)
+#+description: The welcome page for the RSML Language Standards documentation module.
+
+#+options: toc:nil
+
+#+TOC: headlines 3
+
+* 👋 Welcome!
+This is the official documentation module for the *Red Sea Markup Language Standards*. But firstly: what are the Language Standards?
+
+* 🤔 What are the Language Standards?
+The language standards is the list of *offically recognized* special actions, operators and action behaviors.
+
+Since by using *RSML for C#* you can define your custom behaviors, it's important to specify whether your RSML snippet/file is written according to the standards specified in this documentation or according to another standard - or maybe your own standard...
+
+The recommended way to specify the language standard you're using is the following:
+#+begin_src python
+# !standard: <name-of-standard>
+# the rest of your file goes here
+#+end_src
+
+The codename of the official standards is: *official-25*.
+
+While this isn't used by the parser, it's helpful for people so they can easily identify the language standard you're writing your Red Sea file in.
+
+** List of common standards
+- [[file:Official25.org][*official-25*]]
