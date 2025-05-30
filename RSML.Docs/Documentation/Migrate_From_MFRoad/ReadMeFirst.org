@@ -1,5 +1,14 @@
-#+title: Migrate from MFRoad to RSML
+﻿#+title: Migrate from MFRoad to RSML
 #+author: Matthew (MF366)
 #+description: A quick guide on how to migrate from MFRoad to RSML.
 
-#+todo: write dis lol
+#+options: toc:nil
+#+TOC: headlines 3
+
+* 👋 Welcome!
+This documentation module is specific for the [[https://github.com/MF366-Coding/MFRoad][MFRoad]] users who wish to migrate to Red Sea Markup Language easily.
+
+While RSML might seem more complicated at first - and it's true, it requires more coding skills - it's also easier in terms of syntax and parsing flexibility.
+
+* 👉 Read this next
+If you wish to migrate, it's recommended you follow [[file:Migrating.org][*this*]] guide.

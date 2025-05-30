@@ -21,9 +21,9 @@ Module Program
 
 		Dim format As OutputFormat
 
-		Console.Beep()
 		Console.WriteLine("[WARNING] This program requires Emacs (recommended version: 30.1). Make sure it's on PATH.")
-		Console.WriteLine("Press any key to continue or 'q' to abort...")
+		Console.WriteLine("[->] Press any key to continue or 'q' to abort...")
+		Console.Beep()
 
 		Dim key As ConsoleKeyInfo
 		key = Console.ReadKey(True)
@@ -31,7 +31,7 @@ Module Program
 		' Q has been pressed
 		If key.Key = ConsoleKey.Q Then
 			Console.Beep()
-			Console.WriteLine("Aborting...")
+			Console.WriteLine("[!] Aborting...")
 			Environment.Exit(1) ' aborting
 		End If
 
@@ -60,8 +60,8 @@ Module Program
 
 			Case Else
 				Console.Beep()
-				Console.WriteLine("Usage: [FORMAT]")
-				Console.WriteLine("Format may be pdf, latex, x, l, t or p (PDF), md, m, mdown, markdown (Markdown) or anything else (HTML).")
+				Console.WriteLine("[?] Usage: [FORMAT]")
+				Console.WriteLine("[?] Format may be pdf, latex, x, l, t or p (PDF), md, m, mdown, markdown (Markdown) or anything else (HTML).")
 				Environment.Exit(2)
 
 		End Select
@@ -98,7 +98,7 @@ Module Program
 
 
 		For Each moduleName In Directory.GetDirectories(remnant)
-			Console.WriteLine($"Mapping {moduleName}...")
+			Console.WriteLine($"[*] Mapping {moduleName}...")
 
 			Try
 				Directory.CreateDirectory(Path.Join(OUTPUT_DIR, RemoveFirstSegmentOfPath(moduleName)))
@@ -174,12 +174,12 @@ Module Program
 				.Arguments = $"--batch {fileToBuild} -f {emacsFunction}"
 			}
 			processX = Process.Start(psi)
-			Console.WriteLine($"Building {fileToBuild} with Emacs...")
+			Console.WriteLine($"[...] Building {fileToBuild} with Emacs...")
 
 			processX.WaitForExit()
 
 			If processX.ExitCode <> 0 Then
-				Console.WriteLine("Emacs exited with a non-zero error code.")
+				Console.WriteLine("[!!] Emacs exited with a non-zero error code.")
 				Throw New Exception()
 			End If
 
@@ -198,7 +198,7 @@ Module Program
 
 			Try
 				File.Move(outputFile, outputFile.Replace("Documentation", "Output"))
-				Console.WriteLine("Moved file to destination.")
+				Console.WriteLine("[*] Moved file to destination.")
 
 			Catch ex As Exception
 				Console.WriteLine("[ERROR] Failed to move converted file to destination.")

@@ -1,4 +1,4 @@
-#+title: The official-25 Language Standard
+#+title: official-25 Language Standard Reference Sheet
 #+author: Matthew (MF366)
 #+description: The official-25 language standard for RSML.
 
@@ -6,32 +6,25 @@
 
 #+TOC: headlines 3
 
-* 🛠 Operators
-~official-25~ makes use of all the three operators, as indicated below.
-
-| Operator       | Definition as specified by ~official-25~ |
-|----------------+----------------------------------------|
-| =->=             | Primary Operator                       |
-| 2 pipe symbols | Secondary Operator                     |
-| =^!=             | Tertiary Operator                      |
+* 🔧 Operators
+~official-25~ defines the following operators, ordered from primary to tertiary:
+- =->=
+- =||=
+- =^!= 
 
 * 💡 Main Actions
-~official-25~ defines all three actions, as it's mandatory to do so (otherwise, an error is thrown).
+~official-25~ defines all three actions as indicated below:
 
 | Operator Type | Action that's performed                   |
 |---------------+-------------------------------------------|
 | Secondary     | Outputs the value suceeding it.           |
 | Tertiary      | Throws an error with a specified message. |
 
-#+begin_quote
-^ Primary operator has been omitted as it can't be redefined - it's always the return operator.
-#+end_quote
-
 * 🎯 Special Actions
-~official-25~ does not define any special action.
+~official-25~ does not define any special actions whatsoever.
 
 #+begin_quote
-=@EndAll= is already built-in.
+*Remember:* =@EndAll= is already built-in into RSML.
 #+end_quote
 
 * ❓ So why use this standard?

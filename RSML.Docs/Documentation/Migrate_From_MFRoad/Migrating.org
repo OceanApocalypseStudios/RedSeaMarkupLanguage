@@ -1,0 +1,53 @@
+﻿#+title: Migrate from MFRoad to RSML
+#+author: Matthew (MF366)
+#+description: A quick guide on how to migrate from MFRoad to RSML.
+
+#+options: toc:nil
+#+TOC: headlines 3
+
+* 🛩 Starting the migration
+#+begin_quote
+This guide assumes you've already installed RSML.
+#+end_quote
+
+The first incovenience you'll face is that you are required to know C#. Well, either that or you use another language and make calls to the RSML DLL.
+
+The second inconvenience - from a RSML begginer's point of view - is the fact RSML is *not* normalized. Each developer is free to use their own [[file:../RSML_Language_Standards/ReadMeFirst.org][language standards]], which is something that isn't easy to take in at first. However, RSML brings a better, easier and more readable syntax, as well as a couple of other pretty useful features. Let's take a look at each one individually.
+
+** 🌀 Dropping the ~any~
+Well, the first thing you're gonna have to get used to is not using ~any~.
+
+#+begin_src mfroad
+win32:any???foobar;
+#+end_src
+
+While it might seem like a good solution at first, it easily becomes unreadable, specially when ~any:any~ is used.
+
+And this begs the question: what ~any~ alternative could you use? Well, *Regular Expressions* of course!
+
+#+begin_src python
+win.+ -> "foobar"
+#+end_src
+
+Yup, that represents the very same thing. And before you say "win32 isn't the same as win", remember that in MFRoad, ~win32~ is the designation for any Windows version.
+
+However - and this is going to be specifically amusing to those wo fear Regex - you don't need it in your RSML. At least, most of the time. The reason for it is that RSML uses MSBuild Runtime Identifiers and these follow a hierarchy.
+
+Just writing the following RSML will evluate to ~"Hello, World!"~ in every single x64 machine.
+#+begin_src python
+x64 -> "Hello, World!"
+# you don't need .+x64
+#+end_src
+
+Same with MacOS (which uses RID ~osx~) and Linux. If you want to adress both, you don't need to do Regex black magic. You can just use RID ~unix~.
+#+begin_src python
+# Don't do this:
+# {linux|osx}+. -> "Hey"
+
+# Do this:
+unix -> "Hey"
+#+end_src
+
+However, if you're doing more complex checking, you are completely free to use Regex.
+
+#+todo: cook dis
