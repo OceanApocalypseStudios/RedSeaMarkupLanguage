@@ -19,7 +19,7 @@ Instead of those awful `win32:any` and `any:amd64`, you have Regex support in RS
 
 ```python
 win.+ -> "Return value"
-# ^ this literally stands for "starts with win and has any amount of characters that's larger than 3"
+# ^ this literally stands for "starts with win and goes on undefinitely"
 # pure regex, as simple as it can get, eh eh
 ```
 
@@ -80,7 +80,7 @@ It can't emulate the `any` or the `<system>:<architecture>` behavior though.
 ## Comments
 This might be hard to take in at first but... everything that's not a statement is a comment. Yup.
 
-```ruby
+```python
 # this is a comment - the recommended way as these are always ignored
 // but this is technically also a valid comment
 

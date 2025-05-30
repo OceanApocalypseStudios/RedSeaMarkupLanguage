@@ -1,7 +1,24 @@
 ﻿import sys
 import os
 import subprocess
+import random
 
+# [*] colorss
+ASCII_COLOR: str = random.choice((f"\033[{random.randint(30, 37)}m",
+								  f"\033[{random.randint(90, 97)}m"))
+RED = "\033[31m"
+GREEN = "\033[32m"
+YELLOW = "\033[33m"
+BLUE = "\033[34m"
+MAGENTA = "\033[35m"
+CYAN = "\033[36m"
+RESET = "\033[0m"
+
+STATUS_COLORS: dict[str, str] = {
+	"Yes.": GREEN,
+	"No.": RED,
+	"Unsure.": YELLOW
+}
 
 output_format: str = "HTML"
 emacs_on_path: str = "Unsure."
@@ -29,30 +46,38 @@ def show_build_screen():
 	global output_format, emacs_on_path
 
 	os.system('cls' if sys.platform == 'win32' else 'clear')
-	print("""RSML.Docs
-====================
-RSML stands for Red Sea Markup Language.
-It is made by OceanApocalypseStudios.
-====================
-OUTPUT_FORMAT = {0}
-Emacs on PATH? {1}
-====================
-[1] Build Documentation with format OUTPUT_FORMAT
-[2] Check if Emacs is on PATH
-[3] Set OUTPUT_FORMAT to HTML
-[4] Set OUTPUT_FORMAT to PDF (requires LaTeX)
-[5] Set OUTPUT_FORMAT to Markdown
-[0] Exit
-""".format(output_format, emacs_on_path))
+	print(f"""{ASCII_COLOR}    _      ______  _____ ___  ___ _        ______                         _    
+ /\| |/\   | ___ \/  ___||  \/  || |       |  _  \                     /\| |/\ 
+ \ ` ' /   | |_/ /\ `--. | .  . || |       | | | |  ___    ___  ___    \ ` ' / 
+|_     _|  |    /  `--. \| |\/| || |       | | | | / _ \  / __|/ __|  |_     _|
+ / , . \   | |\ \ /\__/ /| |  | || |____ _ | |/ / | (_) || (__ \__ \   / , . \ 
+ \/|_|\/   \_| \_|\____/ \_|  |_/\_____/(_)|___/   \___/  \___||___/   \/|_|\/ 
+                                                                               
+                                                                               
+Copyright (c) 2025 OceanApocalypseStudios{RESET}
+=========================================
+{MAGENTA}RSML stands for Red Sea Markup Language.{RESET}
+It is made by {BLUE}OceanApocalypseStudios.{RESET}
+=========================================
+{YELLOW}Output format set to:{RESET} {output_format}
+Emacs on PATH? {STATUS_COLORS[emacs_on_path]}{emacs_on_path}{RESET}
+=========================================
+{CYAN}[ 1 ]{RESET} Build Documentation with format OUTPUT_FORMAT
+{CYAN}[ 2 ]{RESET} Check if Emacs is on PATH
+{CYAN}[ 3 ]{RESET} Set OUTPUT_FORMAT to HTML
+{CYAN}[ 4 ]{RESET} Set OUTPUT_FORMAT to PDF (requires LaTeX)
+{CYAN}[ 5 ]{RESET} Set OUTPUT_FORMAT to Markdown
+{RED}[...]{RESET} Exit
+""")
 	
-	action: str = input("Your input: ")
+	action: str = input(f"{CYAN}Your input:{RESET} ")
 
 	if not action.isdigit():
-		print("Aborting...")
+		print(f"{RED}Aborting...{RESET}")
 		sys.exit(1) # wrong option
 
 	if action not in ('1', '2', '3', '4', '5'):
-		print("Aborting...")
+		print(f"{RED}Aborting...{RESET}")
 		sys.exit(1)
 
 	if action == "3":
@@ -83,6 +108,6 @@ Emacs on PATH? {1}
 
 
 if __name__ == '__main__':
-	print("Requirements:\n- Emacs\n- RSML.Docs in the same directory\n")
+	print(f"{MAGENTA}Requirements:{RESET}\n {GREEN}[x] Emacs\n [x] RSML.Docs in the same directory\n{RESET}")
 	input("Press any key to continue...")
 	show_build_screen()
