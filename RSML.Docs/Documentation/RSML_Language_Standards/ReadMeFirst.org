@@ -6,6 +6,8 @@
 
 #+TOC: headlines 3
 
+[[file:../ReadMeFirst.org][*◀ Go back*]]
+
 * 👋 Welcome!
 This is the official documentation module for the *Red Sea Markup Language Standards*. But firstly: what are the Language Standards?
 

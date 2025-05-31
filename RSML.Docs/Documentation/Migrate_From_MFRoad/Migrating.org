@@ -5,6 +5,8 @@
 #+options: toc:nil
 #+TOC: headlines 3
 
+[[file:ReadMeFirst.org][*◀ Go back*]]
+
 * 🛩 Starting the migration
 #+begin_quote
 This guide assumes you've already installed RSML.
@@ -31,4 +33,22 @@ win.+ -> "foobar"
 
 Yup, that represents the very same thing. And before you say "win32 isn't the same as win", remember that in MFRoad, ~win32~ is the designation for any Windows version.
 
-#+todo: cook dis
+** 🔡 Different system identification format
+I hate to say it, but get ready to stop using ~win32~, ~linux2~ and ~darwin~... Actually, nevermind - it's for the better.
+
+RSML moved from a poorly-documented mess (Python's ~sys.platform~) to a much better system identification system - pardon the redundancy - called *MSBuild Runtime Identifiers*. Yup, those.
+
+I highly recommend reading Microsoft's documentation for RIDs in order to learn more about them.
+
+** 🔷 Special Actions
+*Special Actions* allow for more features to be specified. They are prefixed with ~@~ and they aren't built-in (except for =@EndAll=).
+
+They can be given a string with no spaces as an argument. Internally, they can modify the parser or perform an action based on their return code.
+
+** ✅ Choosing the right standard for you
+Choosing the right standard is hard. Maybe you want [[file:../RSML_Language_Standards/MFRoadLike.org][something that feels like MFRoad]] or a [[file:../RSML_Language_Standards/Official25.org][recognized standard]].
+
+There are several standards and since anyone can make their own, we can't possibly have a full list of standards here.
+
+* 👀 In Conclusion
+Hopefully, this documentation module helped you in your migration process. If you have doubts, feel free to expose them: you may contact me via [[mailto:real_mf366@yahoo.com][this link]] (or just send an email to ~real_mf366@yahoo.com~).

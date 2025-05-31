@@ -18,8 +18,8 @@
 		<PackageTags>Markup;Crossroad</PackageTags>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-		<Version>1.0.0</Version>
-		<FileVersion>1.0.0.1</FileVersion>
+		<Version>1.0.1</Version>
+		<FileVersion>1.0.0.2</FileVersion>
 		<InformationalVersion>$(Version)</InformationalVersion>
 
 		<!-- no source revision thank you -->

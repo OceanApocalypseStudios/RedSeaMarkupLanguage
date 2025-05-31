@@ -5,6 +5,8 @@
 #+options: toc:nil
 #+TOC: headlines 3
 
+[[file:../ReadMeFirst.org][*◀ Go back*]]
+
 * 👋 Welcome!
 This documentation module is specific for the [[https://github.com/MF366-Coding/MFRoad][MFRoad]] users who wish to migrate to Red Sea Markup Language easily.
 

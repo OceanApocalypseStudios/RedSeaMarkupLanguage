@@ -6,6 +6,8 @@
 
 #+TOC: headlines 3
 
+[[file:ReadMeFirst.org][*◀ Go back*]]
+
 * 🔧 Operators
 ~official-25~ defines the following operators, ordered from primary to tertiary:
 - =->=
