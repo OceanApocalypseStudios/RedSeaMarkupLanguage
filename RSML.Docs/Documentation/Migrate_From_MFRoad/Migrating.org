@@ -31,23 +31,4 @@ win.+ -> "foobar"
 
 Yup, that represents the very same thing. And before you say "win32 isn't the same as win", remember that in MFRoad, ~win32~ is the designation for any Windows version.
 
-However - and this is going to be specifically amusing to those who fear Regex - you don't need it in your RSML. At least, most of the time. The reason for it is that RSML uses MSBuild Runtime Identifiers and these follow a hierarchy.
-
-Just writing the following RSML will evluate to ~"Hello, World!"~ in every single x64 machine.
-#+begin_src python
-x64 -> "Hello, World!"
-# you don't need .+x64
-#+end_src
-
-Same with MacOS (which uses RID ~osx~) and Linux. If you want to adress both, you don't need to do Regex black magic. You can just use RID ~unix~.
-#+begin_src python
-# Don't do this:
-# {linux|osx}.+ -> "Hey"
-
-# Do this:
-unix -> "Hey"
-#+end_src
-
-However, if you're doing more complex checking, you are completely free to use Regex.
-
 #+todo: cook dis

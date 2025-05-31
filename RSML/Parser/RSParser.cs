@@ -187,7 +187,7 @@ namespace RSML.Parser
 			string systemName = splitLine[0].Trim();
 
 			// quick evaluation
-			if (!Regex.IsMatch(RuntimeInformation.RuntimeIdentifier, systemName)) return null;
+			if (!Regex.IsMatch(RuntimeInformation.RuntimeIdentifier, $"^{systemName}$")) return null;
 
 			string returnValue = splitLine[1].Trim();
 
