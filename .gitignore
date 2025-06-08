@@ -361,3 +361,12 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+
+### MY STUFF ###
+# PowerShell Runner
+runner.ps1
+
+# Inno Setup
+SetupOut/*
+*.iss
