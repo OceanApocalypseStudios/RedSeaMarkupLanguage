@@ -18,13 +18,19 @@
 		<PackageTags>Markup;Crossroad</PackageTags>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-		<Version>1.0.1</Version>
-		<FileVersion>1.0.0.2</FileVersion>
+		<Version>1.0.2</Version>
+		<FileVersion>1.0.0.3</FileVersion>
 		<InformationalVersion>$(Version)</InformationalVersion>
 
 		<!-- no source revision thank you -->
 		<SourceRevisionId></SourceRevisionId>
 		<Platforms>AnyCPU;x64;x86</Platforms>
+		<PackageReleaseNotes>
+			v1.0.3 added support for rid emulation.
+			From an OS, you may emulate the evaluation of RSML as if you were doing it from another.
+
+			In CLI: RSML.CLI evaluate --custom-rid
+		</PackageReleaseNotes>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -32,11 +38,11 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
-	  <DebugType>none</DebugType>
+		<DebugType>none</DebugType>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-	  <DebugType>none</DebugType>
+		<DebugType>none</DebugType>
 	</PropertyGroup>
 
 	<ItemGroup>

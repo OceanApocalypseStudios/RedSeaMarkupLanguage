@@ -9,6 +9,11 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "RSML.Docs", "RSML.Docs\RSML
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RSML.CLI", "RSML.CLI\RSML.CLI.csproj", "{F365A776-5802-42A8-BF46-0A5046421B31}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{089100B1-113F-4E66-888A-E83F3999EAFD}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

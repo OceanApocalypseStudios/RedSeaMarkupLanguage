@@ -103,12 +103,18 @@ namespace RSML.CLI
 				description: "Fallback for error scenarios",
 				getDefaultValue: () => null
 			);
+			var customRidOption = new Option<string?>(
+				aliases: ["--custom-rid", "-r", "--rid"],
+				description: "Custom RID to check against",
+				getDefaultValue: () => null
+			);
 
 			evaluateCommand.AddOption(printOnlyPrimaryOption);
+			evaluateCommand.AddOption(customRidOption);
 			evaluateCommand.AddOption(fallbackForErrorOption);
 			evaluateCommand.AddOption(fallbackForNullOption);
 
-			evaluateCommand.SetHandler(void (primaryOnly, nullFallback, errorFallback) =>
+			evaluateCommand.SetHandler(void (primaryOnly, nullFallback, errorFallback, customRid) =>
 			{
 
 				string? currentInState = Console.In.ReadToEnd();
@@ -143,7 +149,9 @@ namespace RSML.CLI
 				try
 				{
 
-					Console.WriteLine(document.EvaluateDocument() ?? ((nullFallback ?? "") == "" ? "[WARNING] No match was found." : nullFallback!));
+					Console.WriteLine(customRid is null
+						? document.EvaluateDocument() ?? ((nullFallback ?? "") == "" ? "[WARNING] No match was found." : nullFallback!)
+						: document.EvaluateDocument(customRid, null) ?? ((nullFallback ?? "") == "" ? "[WARNING] No match was found." : nullFallback!));
 
 				}
 				catch (RSMLRuntimeException ex)
@@ -156,7 +164,7 @@ namespace RSML.CLI
 
 				Environment.Exit(0);
 
-			}, printOnlyPrimaryOption, fallbackForNullOption, fallbackForErrorOption);
+			}, printOnlyPrimaryOption, fallbackForNullOption, fallbackForErrorOption, customRidOption);
 
 			evaluateCommand.AddAlias("eval");
 			evaluateCommand.AddAlias("parse");

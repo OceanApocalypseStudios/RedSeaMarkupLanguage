@@ -80,6 +80,14 @@ namespace RSML
 		/// <returns>Null if no priamry matches or a string matching the return value of the only primary match</returns>
 		public string? EvaluateDocument(string lineSeparation) => parser.EvaluateRSML(lineSeparation);
 
+		/// <summary>
+		/// Parses and evaluates the document.
+		/// </summary>
+		/// <param name="customRid">The custom RID to check against</param>
+		/// <param name="lineSeparation">The custom line separation character to use</param>
+		/// <returns>Null if no priamry matches or a string matching the return value of the only primary match</returns>
+		public string? EvaluateDocument(string customRid, string? lineSeparation = null) => parser.EvaluateRSMLWithCustomRid(customRid, lineSeparation);
+
 	}
 
 }

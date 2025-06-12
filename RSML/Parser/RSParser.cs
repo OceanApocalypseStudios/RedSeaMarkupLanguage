@@ -218,11 +218,79 @@ namespace RSML.Parser
 		}
 
 		/// <summary>
+		/// Handles a RSML action, using a custom RID.
+		/// </summary>
+		/// <param name="line">The RSML line</param>
+		/// <param name="operatorType">The operator (primary, secondary or tertiary - all of them must be defined)</param>
+		/// <param name="customRid">A custom RID to use as system identifier</param>
+		/// <returns>Null if there was no match or the return value/argument as a string (even if the action was not primary).</returns>
+		/// <exception cref="UndefinedActionException">At least one action is undefined.</exception>
+		protected string? HandleAction(string line, OperatorType operatorType, string customRid)
+		{
+
+			if (secondaryAction is null || tertiaryAction is null)
+			{
+
+				throw new UndefinedActionException("All actions must be defined for them to be handled, even if only primary ones are used.");
+
+			}
+
+			// split the line
+			string[] splitLine = line.Split(operatorType == OperatorType.Primary ?
+											primaryActionDelimiter : (operatorType == OperatorType.Secondary) ?
+											secondaryActionDelimiter : tertiaryActionDelimiter);
+
+			// not enough tokens, fuckersss
+			if (splitLine.Length < 2) return null; // ignore it like a comment
+
+			// get system name
+			string systemName = splitLine[0].Trim();
+
+			// quick evaluation
+			if (!Regex.IsMatch(customRid, $"^{systemName}$")) return null;
+
+			string returnValue = splitLine[1].Trim();
+
+			if (returnValue.Length < 3 || !(returnValue.StartsWith('"') && returnValue.EndsWith('"'))) // the quotes and the characters inside of it
+			{
+
+				return null; // commenttttttttt
+
+			}
+
+			string trimmedArgument = returnValue[1..^1];
+
+			switch (operatorType)
+			{
+
+				case OperatorType.Secondary:
+					secondaryAction.Invoke(this, trimmedArgument);
+					break;
+
+				case OperatorType.Tertiary:
+					tertiaryAction.Invoke(this, trimmedArgument);
+					break;
+
+			}
+
+			return trimmedArgument; // ignore the quotes
+
+		}
+
+		/// <summary>
 		/// Evaluate RSML.
 		/// </summary>
 		/// <param name="linesepChar">The line separation string to use (defaults to system line separation)</param>
 		/// <returns>The evaluated result (only for primary action; if there's a secondary/tertiary match, it's ignored) or null (no primary matches)</returns>
-		public string? EvaluateRSML(string? linesepChar = null)
+		public string? EvaluateRSML(string? linesepChar = null) => EvaluateRSMLWithCustomRid(RuntimeInformation.RuntimeIdentifier, linesepChar);
+
+		/// <summary>
+		/// Evaluate RSML.
+		/// </summary>
+		/// <param name="customRid">A custom RID to check against</param>
+		/// <param name="linesepChar">The line separation string to use (defaults to system line separation)</param>
+		/// <returns>The evaluated result (only for primary action; if there's a secondary/tertiary match, it's ignored) or null (no primary matches)</returns>
+		public string? EvaluateRSMLWithCustomRid(string customRid, string? linesepChar = null)
 		{
 
 			foreach (string line in content.Split(linesepChar ?? Environment.NewLine))
@@ -260,7 +328,7 @@ namespace RSML.Parser
 				else if (line.Contains(primaryActionDelimiter))
 				{
 
-					string? actionReturnValue = HandleAction(line);
+					string? actionReturnValue = HandleAction(line, OperatorType.Primary, customRid);
 
 					if (actionReturnValue is not null)
 					{
@@ -270,20 +338,24 @@ namespace RSML.Parser
 					}
 
 				}
+
 #pragma warning disable IDE0058 // expression value unused
 				else if (line.Contains(secondaryActionDelimiter))
 				{
 
-					HandleAction(line, OperatorType.Secondary);
+					HandleAction(line, OperatorType.Secondary, customRid);
 
 				}
+
 				else if (line.Contains(tertiaryActionDelimiter))
 				{
 
-					HandleAction(line, OperatorType.Tertiary);
+					HandleAction(line, OperatorType.Tertiary, customRid);
 
 				}
+
 #pragma warning restore
+
 				else continue;
 
 			}
