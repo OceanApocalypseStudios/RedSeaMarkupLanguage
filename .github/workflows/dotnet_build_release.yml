@@ -44,7 +44,8 @@ jobs:
           Get-ChildItem -Path ./nupkg -Filter *.nupkg | ForEach-Object {
             dotnet nuget push $_.FullName `
             --api-key ${{ secrets.NUGET_API_KEY }} `
-            --source https://api.nuget.org/v3/index.json
+            --source https://api.nuget.org/v3/index.json `
+            --skip-duplicate
           }
 
       - name: Publish CLI archives (Windows)
