@@ -47,10 +47,21 @@ jobs:
             --source https://api.nuget.org/v3/index.json
           }
 
-      - name: Publish CLI archives
-        if: matrix.arch == 'x64'
+      - name: Publish CLI archives (Windows)
+        if: matrix.os == 'windows-latest'
         run: |
-          dotnet publish ./RSML.CLI/RSML.CLI.csproj -c Release -r ${{ matrix.os == 'windows-latest' && 'win-x64' || matrix.os == 'ubuntu-latest' && 'linux-x64' || 'osx-x64' }} --self-contained true -o publish
+          dotnet publish ./RSML.CLI/RSML.CLI.csproj -c Release -r win-x64 --self-contained true -o publish
+          
+          cd publish
+          Compress-Archive -Path * -DestinationPath ../RSML.CLI-windows-latest.zip
+          tar -czf ../RSML.CLI-windows-latest.tar.gz *
+          cd ..
+        shell: pwsh
+
+      - name: Publish CLI archives (Linux and MacOS)
+        if: matrix.arch == 'x64' && matrix.os != 'windows-latest'
+        run: |
+          dotnet publish ./RSML.CLI/RSML.CLI.csproj -c Release -r ${{ matrix.os == 'ubuntu-latest' && 'linux-x64' || 'osx-x64' }} --self-contained true -o publish
 
           cd publish
           zip -r ../RSML.CLI-${{ matrix.os }}.zip .
