@@ -18,18 +18,18 @@
 		<PackageTags>Markup;Crossroad</PackageTags>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-		<Version>1.0.2</Version>
-		<FileVersion>1.0.0.3</FileVersion>
+		<Version>1.0.3</Version>
+		<FileVersion>1.0.0.4</FileVersion>
 		<InformationalVersion>$(Version)</InformationalVersion>
 
 		<!-- no source revision thank you -->
 		<SourceRevisionId></SourceRevisionId>
 		<Platforms>AnyCPU;x64;x86</Platforms>
 		<PackageReleaseNotes>
-			v1.0.3 added support for rid emulation.
-			From an OS, you may emulate the evaluation of RSML as if you were doing it from another.
-
-			In CLI: RSML.CLI evaluate --custom-rid
+			# 🚀 v'$(Version)' is now available
+			- Expansion of the `any` RID into Regex `.+`
+			- More methods
+			- CLI improvements
 		</PackageReleaseNotes>
 	</PropertyGroup>
 

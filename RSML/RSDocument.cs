@@ -83,10 +83,33 @@ namespace RSML
 		/// <summary>
 		/// Parses and evaluates the document.
 		/// </summary>
+		/// <param name="expandAny">Whether to expand any or not</param>
+		/// <param name="lineSeparation">The custom line separation character to use</param>
+		/// <returns>Null if no priamry matches or a string matching the return value of the only primary match</returns>
+		public string? EvaluateDocument(bool expandAny, string? lineSeparation = null) => parser.EvaluateRSML(expandAny, lineSeparation);
+
+		/// <summary>
+		/// Parses and evaluates the document.
+		/// </summary>
 		/// <param name="customRid">The custom RID to check against</param>
 		/// <param name="lineSeparation">The custom line separation character to use</param>
 		/// <returns>Null if no priamry matches or a string matching the return value of the only primary match</returns>
 		public string? EvaluateDocument(string customRid, string? lineSeparation = null) => parser.EvaluateRSMLWithCustomRid(customRid, lineSeparation);
+
+		/// <summary>
+		/// Parses and evaluates the document.
+		/// </summary>
+		/// <param name="customRid">The custom RID to check against</param>
+		/// <param name="expandAny">Whether to expand any or not</param>
+		/// <param name="lineSeparation">The custom line separation character to use</param>
+		/// <returns>Null if no priamry matches or a string matching the return value of the only primary match</returns>
+		public string? EvaluateDocument(string customRid, bool expandAny, string? lineSeparation = null) => parser.EvaluateRSMLWithCustomRid(customRid, expandAny, lineSeparation);
+
+		/// <summary>
+		/// Returns this document's contents.
+		/// </summary>
+		/// <returns>The RSML data</returns>
+		public override string ToString() => parser.ToString();
 
 	}
 

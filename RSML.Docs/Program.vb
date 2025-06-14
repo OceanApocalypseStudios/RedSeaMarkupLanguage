@@ -1,5 +1,3 @@
-Imports System
-Imports System.Formats
 Imports System.IO
 
 
@@ -21,6 +19,7 @@ Module Program
 
 		Dim format As OutputFormat
 
+		Console.WriteLine("[DEPRECATION] Soon, RSML.Docs will be deprecated in favor of Org4Docs. This will NOT affect the actual documentation.")
 		Console.WriteLine("[WARNING] This program requires Emacs (recommended version: 30.1). Make sure it's on PATH.")
 		Console.WriteLine("[->] Press any key to continue or 'q' to abort...")
 		Console.Beep()

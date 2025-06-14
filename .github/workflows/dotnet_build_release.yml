@@ -1,0 +1,79 @@
+name: Build & Publish
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest]
+        arch: [x64, x86]
+        exclude:
+          - os: macos-latest
+            arch: x86
+
+    steps:
+      # Checkout the repo
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Build solution
+        run: dotnet build RedSeaMarkupLanguage.sln -c Release -p:Platform=${{ matrix.arch }}
+
+      # to uncomment if I add unit testing
+      #- name: Run tests
+      #  run: dotnet test ./RSML.Tests/RSML.Tests.csproj --no-build
+
+      - name: Pack & push to NuGet
+        if: github.event_name == 'push' && matrix.os == 'windows-latest' && matrix.arch == 'x64'
+        run: |
+          dotnet pack ./RSML/RSML.csproj -c Release -o ./nupkg
+          dotnet nuget push ./nupkg/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+
+      - name: Publish CLI archives
+        if: matrix.arch == 'x64'
+        run: |
+          dotnet publish ./RSML.CLI/RSML.CLI.csproj -c Release -r ${{ matrix.os == 'windows-latest' && 'win-x64' || matrix.os == 'ubuntu-latest' && 'linux-x64' || 'osx-x64' }} --self-contained true -o publish
+
+          cd publish
+          zip -r ../RSML.CLI-${{ matrix.os }}.zip .
+          tar -czf ../RSML.CLI-${{ matrix.os }}.tar.gz .
+          cd ..
+          
+      - uses: actions/checkout@v4
+      
+  release:
+    name: Create GitHub Release
+    needs: [build]
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download CLI archives
+        uses: actions/download-artifact@v4
+        with:
+          path: ./release-assets
+
+      - name: Display downloaded files
+        run: ls -R ./release-assets
+
+      - name: Upload release artifacts
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            ./release-assets/**/**/*.zip
+            ./release-assets/**/**/*.tar.gz
+            ./release-assets/**/**/*.nupkg
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+      - uses: actions/checkout@v4

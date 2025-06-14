@@ -2,12 +2,11 @@
 using System.Threading.Tasks;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 
 using System.CommandLine;
 
-using RSML;
 using RSML.Parser;
-using System.Runtime.InteropServices;
 using RSML.Exceptions;
 
 
@@ -108,13 +107,19 @@ namespace RSML.CLI
 				description: "Custom RID to check against",
 				getDefaultValue: () => null
 			);
+			var expandAnyOption = new Option<bool>(
+				aliases: ["--expand-any", "-x"],
+				description: "Expands the any RID",
+				getDefaultValue: () => false
+			);
 
 			evaluateCommand.AddOption(printOnlyPrimaryOption);
 			evaluateCommand.AddOption(customRidOption);
+			evaluateCommand.AddOption(expandAnyOption);
 			evaluateCommand.AddOption(fallbackForErrorOption);
 			evaluateCommand.AddOption(fallbackForNullOption);
 
-			evaluateCommand.SetHandler(void (primaryOnly, nullFallback, errorFallback, customRid) =>
+			evaluateCommand.SetHandler(void (primaryOnly, nullFallback, errorFallback, customRid, expandAny) =>
 			{
 
 				string? currentInState = Console.In.ReadToEnd();
@@ -149,9 +154,26 @@ namespace RSML.CLI
 				try
 				{
 
-					Console.WriteLine(customRid is null
-						? document.EvaluateDocument() ?? ((nullFallback ?? "") == "" ? "[WARNING] No match was found." : nullFallback!)
-						: document.EvaluateDocument(customRid, null) ?? ((nullFallback ?? "") == "" ? "[WARNING] No match was found." : nullFallback!));
+					if (customRid is not null)
+					{
+
+						Console.WriteLine(
+							(document.EvaluateDocument(customRid, expandAny)) ??
+								((nullFallback is null)
+									? "[WARNING] No match was found."
+									: nullFallback));
+
+					}
+					else
+					{
+
+						Console.WriteLine(
+							(document.EvaluateDocument(expandAny)) ??
+								((nullFallback is null)
+									? "[WARNING] No match was found."
+									: nullFallback));
+
+					}
 
 				}
 				catch (RSMLRuntimeException ex)
@@ -164,7 +186,7 @@ namespace RSML.CLI
 
 				Environment.Exit(0);
 
-			}, printOnlyPrimaryOption, fallbackForNullOption, fallbackForErrorOption, customRidOption);
+			}, printOnlyPrimaryOption, fallbackForNullOption, fallbackForErrorOption, customRidOption, expandAnyOption);
 
 			evaluateCommand.AddAlias("eval");
 			evaluateCommand.AddAlias("parse");
@@ -175,7 +197,7 @@ namespace RSML.CLI
 			repoCommand.SetHandler(void () =>
 			{
 
-				Console.WriteLine("\033[1mVisit the repository at:\033[0m\033[4mhttps://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage\033[0m");
+				Console.WriteLine("Visit the repository at: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage");
 				Environment.Exit(0);
 
 			});

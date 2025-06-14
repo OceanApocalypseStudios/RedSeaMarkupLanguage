@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Threading.Tasks;
 
 
 namespace RSML
@@ -20,6 +21,13 @@ namespace RSML
 		/// <param name="filepath">The path to the file</param>
 		/// <returns>The RSML inside the file</returns>
 		public static string LoadRSMLFromFile(string filepath) => File.ReadAllText(filepath);
+
+		/// <summary>
+		/// Loads a RSML file into a string asynchronously.
+		/// </summary>
+		/// <param name="filepath">The path to the file</param>
+		/// <returns>The RSML inside the file</returns>
+		public static async Task<string> LoadRSMLFromFileAsync(string filepath) => await File.ReadAllTextAsync(filepath);
 
 		/// <summary>
 		/// Loads a RSML file into a document.

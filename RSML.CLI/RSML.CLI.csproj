@@ -20,12 +20,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Include="..\runner.ps1">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
 	</ItemGroup>
 
