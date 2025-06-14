@@ -26,7 +26,7 @@
 		<SourceRevisionId></SourceRevisionId>
 		<Platforms>AnyCPU;x64;x86</Platforms>
 		<PackageReleaseNotes>
-			# 🚀 v'$(Version)' is now available
+			# 🚀 v$(Version) is now available
 			- Expansion of the `any` RID into Regex `.+`
 			- More methods
 			- CLI improvements
