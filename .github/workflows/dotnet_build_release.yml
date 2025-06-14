@@ -24,16 +24,6 @@ jobs:
       # Checkout the repo
       - uses: actions/checkout@v4
 
-      - name: Strip 'v' from tag name
-        id: versioning
-        run: |
-          $version = "${{ github.ref_name }}"
-          if ($version.StartsWith("v")) {
-            $version = $version.Substring(1)
-          }
-          echo "VERSION_NUMBER=$version" >> $env:GITHUB_ENV
-        shell: pwsh
-
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
@@ -54,9 +44,11 @@ jobs:
           dotnet pack ./RSML/RSML.csproj -c Release -o ./nupkg
           ls .
           ls ./nupkg/
-          dotnet nuget push "./nupkg/RSML.${{ env.VERSION_NUMBER }}.nupkg" `
+          Get-ChildItem -Path ./nupkg -Filter *.nupkg | ForEach-Object {
+            dotnet nuget push $_.FullName `
             --api-key ${{ secrets.NUGET_API_KEY }} `
             --source https://api.nuget.org/v3/index.json
+          }
 
       - name: Publish CLI archives
         if: matrix.arch == 'x64'
