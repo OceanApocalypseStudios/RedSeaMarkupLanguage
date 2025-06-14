@@ -7,7 +7,6 @@ on:
 
 env:
   VERSION: ${{ github.ref_name }}
-  VERSION_NUMBER: ${{ github.ref_name && github.ref_name.startsWith('v') && replace(github.ref_name, 'v', '') || github.ref_name }}
 
 
 jobs:
@@ -24,6 +23,16 @@ jobs:
     steps:
       # Checkout the repo
       - uses: actions/checkout@v4
+
+      - name: Strip 'v' from tag name
+        id: versioning
+        run: |
+          $version = "${{ github.ref_name }}"
+          if ($version.StartsWith("v")) {
+            $version = $version.Substring(1)
+          }
+          echo "VERSION_NUMBER=$version" >> $env:GITHUB_ENV
+        shell: pwsh
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
