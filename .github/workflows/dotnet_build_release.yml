@@ -51,23 +51,41 @@ jobs:
       - name: Publish CLI archives (Windows)
         if: matrix.os == 'windows-latest'
         run: |
-          dotnet publish ./RSML.CLI/RSML.CLI.csproj -c Release -r win-x64 --self-contained true -o publish
+          dotnet publish ./RSML.CLI/RSML.CLI.csproj -c Release -r win-${{ matrix.arch }} --self-contained true -o publish
           
           cd publish
-          Compress-Archive -Path * -DestinationPath ../RSML.CLI-windows-latest.zip
-          tar -czf ../RSML.CLI-windows-latest.tar.gz *
+          Compress-Archive -Path * -DestinationPath ../RSML.CLI-windows-latest-${{ matrix.arch }}.zip
+          tar -czf ../RSML.CLI-windows-latest-${{ matrix.arch }}.tar.gz *
           cd ..
         shell: pwsh
 
       - name: Publish CLI archives (Linux and MacOS)
-        if: matrix.arch == 'x64' && matrix.os != 'windows-latest'
+        if: matrix.os != 'windows-latest'
         run: |
           dotnet publish ./RSML.CLI/RSML.CLI.csproj -c Release -r ${{ matrix.os == 'ubuntu-latest' && 'linux-x64' || 'osx-x64' }} --self-contained true -o publish
 
           cd publish
-          zip -r ../RSML.CLI-${{ matrix.os }}.zip .
-          tar -czf ../RSML.CLI-${{ matrix.os }}.tar.gz .
+          zip -r ../RSML.CLI-${{ matrix.os }}-${{ matrix.arch }}.zip .
+          tar -czf ../RSML.CLI-${{ matrix.os }}-${{ matrix.arch }}.tar.gz .
           cd ..
+       
+      - name: Upload CLI artifacts (Windows)
+        if: matrix.os == 'windows-latest'
+        uses: actions/upload-artifact@v4
+        with:
+          name: cli-windows-${{ matrix.arch }}
+          path: |
+            RSML.CLI-windows-latest-${{ matrix.arch }}.zip
+            RSML.CLI-windows-latest-${{ matrix.arch }}.tar.gz
+      
+      - name: Upload CLI artifacts (Linux/macOS)
+        if: matrix.os != 'windows-latest'
+        uses: actions/upload-artifact@v4
+        with:
+          name: cli-${{ matrix.os }}-${{ matrix.arch }}
+          path: |
+            RSML.CLI-${{ matrix.os }}-${{ matrix.arch }}.zip
+            RSML.CLI-${{ matrix.os }}-${{ matrix.arch }}.tar.gz
           
       - uses: actions/checkout@v4
       
