@@ -5,6 +5,11 @@ on:
     tags:
       - 'v*'
 
+env:
+  VERSION: ${{ github.ref_name }}
+  VERSION_NUMBER: ${{ github.ref_name != null && startsWith(github.ref_name, 'v') && github.ref_name[1:] || github.ref_name }}
+
+
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -34,13 +39,15 @@ jobs:
 
       - name: Pack & push to NuGet
         if: github.event_name == 'push' && matrix.os == 'windows-latest' && matrix.arch == 'x64'
+        shell: pwsh
         run: |
-          echo Before
           ls .
           dotnet pack ./RSML/RSML.csproj -c Release -o ./nupkg
-          echo After
           ls .
-          dotnet nuget push ./nupkg/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+          ls ./nupkg/
+          dotnet nuget push "./nupkg/RSML.${{ env.VERSION_NUMBER }}.nupkg" `
+            --api-key ${{ secrets.NUGET_API_KEY }} `
+            --source https://api.nuget.org/v3/index.json
 
       - name: Publish CLI archives
         if: matrix.arch == 'x64'
