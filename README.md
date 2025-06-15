@@ -1,4 +1,4 @@
-# Red Sea Markup Language
+﻿# Red Sea Markup Language
 <img src="Assets/FullSizeLogo.png" alt="RSML Logo" align="right" width="96" height="96">
 
 [![NuGet Version](https://img.shields.io/nuget/v/RSML?style=for-the-badge&logo=nuget&link=https%3A%2F%2Fwww.nuget.org%2Fpackages%2FRSML)](https://www.nuget.org/packages/RSML)
@@ -98,7 +98,6 @@ so my recommendation?
 # always stick with the default comments, as they're always ignored
 ```
 
-
 <hr />
 
 ## Custom actions
@@ -160,8 +159,156 @@ This `TestFunc` can then be used in RSML.
 <hr />
 
 ## What about other languages?
-As for right now, we don't intend in porting RSML library to other languages, but you could include the DLLs in your project and call them.
+*~~As for right now, we don't intend in porting RSML library to other languages, but~~* You could include the DLLs in your project and call them.
 Not a graceful solution, but not a bad one either.
+
+<table>
+	<!-- Header -->
+	<tr>
+		<th>
+			Languages
+		</th>
+		<th>
+			Is available?
+		</th>
+		<th>
+			Documentaion
+		</th>
+		<th>
+			Is official?
+		</th>
+		<th>
+			Package Manager
+		</th>
+		<th>
+			Other Links
+		</th>
+	</tr>
+	<!-- Body -->
+	<tr>
+		<td>
+			<img src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/refs/heads/master/icons/file_type_csharp.svg" alt="C#" width="80" />
+			<!-- Official C# logo
+			<img src="https://learn.microsoft.com/en-us/dotnet/media/logo_csharp.png" alt="C#" width=75 />
+			-->
+		</td>
+		<td>
+			✔ RSML is intended for use in C#.
+		</td>
+		<td>
+			Not ready yet.
+		</td>
+		<td>
+			✔
+		</td>
+		<td>
+			<a href="https://www.nuget.org/packages/RSML">NuGet</a>
+		</td>
+		<td>
+			---
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<img src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/refs/heads/master/icons/file_type_python.svg" alt="Python 3" width="80" />
+		</td>
+		<td>
+			✔ Since June 12, 2025.
+		</td>
+		<td>
+			Not ready yet.
+		</td>
+		<td>
+			✔
+		</td>
+		<td>
+			<a href="https://pypi.org/project/rsml-python/">PyPI</a>
+		</td>
+		<td>
+			---
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<img src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/refs/heads/master/icons/file_type_cpp.svg" alt="C++" width="80" />
+		</td>
+		<td>
+			❌
+		</td>
+		<td>
+			---
+		</td>
+		<td>
+			---
+		</td>
+		<td>
+			---
+		</td>
+		<td>
+			---
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<img src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/refs/heads/master/icons/file_type_c.svg" alt="C" width="80" />
+		</td>
+		<td>
+			❌
+		</td>
+		<td>
+			---
+		</td>
+		<td>
+			---
+		</td>
+		<td>
+			---
+		</td>
+		<td>
+			---
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<img src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/refs/heads/master/icons/file_type_lua.svg" alt="Lua" width="80" />
+		</td>
+		<td>
+			❌
+		</td>
+		<td>
+			---
+		</td>
+		<td>
+			---
+		</td>
+		<td>
+			---
+		</td>
+		<td>
+			---
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<img src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/refs/heads/master/icons/file_type_vbproj.svg" alt="Visual Basic.NET" width="80" />
+		</td>
+		<td>
+			⚠ Not tested but should be compatible with the C# package, since they're both .NET languages.
+		</td>
+		<td>
+			Not ready yet.
+		</td>
+		<td>
+			⚠ Hasn't been officially tested on VB.NET, but yes.
+		</td>
+		<td>
+			<a href="https://www.nuget.org/packages/RSML">NuGet</a>
+		</td>
+		<td>
+			---
+		</td>
+	</tr>
+</table>
 
 <hr />
 
