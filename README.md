@@ -4,7 +4,7 @@
 [![NuGet Version](https://img.shields.io/nuget/v/RSML?style=for-the-badge&logo=nuget&link=https%3A%2F%2Fwww.nuget.org%2Fpackages%2FRSML)](https://www.nuget.org/packages/RSML)
 [![GitHub Release](https://img.shields.io/github/v/release/OceanApocalypseStudios/RedSeaMarkupLanguage?sort=semver&style=for-the-badge&color=orange)](https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/releases/latest)
 [![GitHub License](https://img.shields.io/github/license/OceanApocalypseStudios/RedSeaMarkupLanguage?style=for-the-badge)](https://raw.githubusercontent.com/OceanApocalypseStudios/RedSeaMarkupLanguage/main/LICENSE)
-![GitHub top language](https://img.shields.io/github/languages/top/OceanApocalypseStudios/RedSeaMarkupLanguage?style=for-the-badge&logo=dotnet&logoColor=hotpink&logoSize=auto&color=darkgreen)
+![GitHub top language](https://img.shields.io/github/languages/top/OceanApocalypseStudios/RedSeaMarkupLanguage?style=for-the-badge&logo=dotnet&logoSize=auto&color=darkgreen)
 ![GitHub Repo stars](https://img.shields.io/github/stars/OceanApocalypseStudios/RedSeaMarkupLanguage?style=for-the-badge&logo=github&color=yellow)
 ![NuGet Downloads](https://img.shields.io/nuget/dt/RSML?style=for-the-badge&logo=nuget&color=red)
 
@@ -54,7 +54,7 @@ cat somefile.rsea | RSML.CLI evaluate --no-pretty
 ```
 
 > [!NOTE]
-> `--no-pretty` disabled ASCII art and copyright messages so you can easily pipe the evaluation into another command without it also piping the ASCII art.
+> `--no-pretty` disables ASCII art and copyright messages so you can easily pipe the evaluation into another command without it also piping the ASCII art.
 
 <hr />
 
@@ -196,7 +196,7 @@ Not a graceful solution, but not a bad one either.
 			✔ RSML is intended for use in C#.
 		</td>
 		<td>
-			Not ready yet.
+			🟡 In the making.
 		</td>
 		<td>
 			✔
@@ -216,7 +216,7 @@ Not a graceful solution, but not a bad one either.
 			✔ Since June 12, 2025.
 		</td>
 		<td>
-			Not ready yet.
+			🔴 Not started.
 		</td>
 		<td>
 			✔
@@ -296,7 +296,7 @@ Not a graceful solution, but not a bad one either.
 			⚠ Not tested but should be compatible with the C# package, since they're both .NET languages.
 		</td>
 		<td>
-			Not ready yet.
+			🟣 No specific documentation planned (refer to RSML for C# docs).
 		</td>
 		<td>
 			⚠ Hasn't been officially tested on VB.NET, but yes.
