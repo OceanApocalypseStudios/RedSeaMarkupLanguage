@@ -18,7 +18,7 @@ namespace RSML.CLI
 		/// <summary>
 		/// The current version of the API.
 		/// </summary>
-		const string PKG_VERSION = "v1.0.4";
+		const string PKG_VERSION = "v1.0.5";
 
 		/// <summary>
 		/// The color randomizer to use and discard.

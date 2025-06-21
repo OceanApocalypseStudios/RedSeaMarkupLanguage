@@ -24,9 +24,9 @@
 		Program.cs > Program > const PKG_VERSION
 		FOR THE LOVE OF GOD DON'T FORGET
 		PLEAAAAAAASE -->
-		<Version>1.0.4</Version>
+		<Version>1.0.5</Version>
 		
-		<FileVersion>1.0.0.4</FileVersion>
+		<FileVersion>1.0.0.5</FileVersion>
 		<InformationalVersion>$(Version)</InformationalVersion>
 
 		<!-- no source revision thank you -->
