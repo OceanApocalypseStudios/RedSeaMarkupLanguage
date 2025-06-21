@@ -290,7 +290,7 @@ Not a graceful solution, but not a bad one either.
 	</tr>
 	<tr>
 		<td>
-			<img src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/refs/heads/master/icons/file_type_vbproj.svg" alt="Visual Basic.NET" width="80" />
+			<img src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/refs/heads/master/icons/file_type_vb.svg" alt="Visual Basic.NET" width="80" />
 		</td>
 		<td>
 			⚠ Not tested but should be compatible with the C# package, since they're both .NET languages.
