@@ -208,7 +208,7 @@ Not a graceful solution, but not a bad one either.
 			<a href="https://www.nuget.org/packages/RSML">NuGet</a>
 		</td>
 		<td>
-			<a href="https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage" />
+			<a href="https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage"></a>
 		</td>
 		<td>
 			---
@@ -231,7 +231,7 @@ Not a graceful solution, but not a bad one either.
 			<a href="https://pypi.org/project/rsml-python/">PyPI</a>
 		</td>
 		<td>
-			<a href="https://github.com/OceanApocalypseStudios/RSML.Python" />
+			<a href="https://github.com/OceanApocalypseStudios/RSML.Python"></a>
 		</td>
 		<td>
 			---
@@ -323,7 +323,7 @@ Not a graceful solution, but not a bad one either.
 			<a href="https://www.nuget.org/packages/RSML">NuGet</a>
 		</td>
 		<td>
-			<a href="https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage" />
+			<a href="https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage"></a>
 		</td>
 		<td>
 			---
