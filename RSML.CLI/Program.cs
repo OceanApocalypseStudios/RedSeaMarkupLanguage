@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Linq;
-using System.Reflection;
 using System.Runtime.InteropServices;
 
 using System.CommandLine;
@@ -15,6 +14,11 @@ namespace RSML.CLI
 
 	internal class Program
 	{
+
+		/// <summary>
+		/// The current version of the API.
+		/// </summary>
+		const string PKG_VERSION = "v1.0.4";
 
 		/// <summary>
 		/// The color randomizer to use and discard.
@@ -61,21 +65,7 @@ namespace RSML.CLI
 			versionCommand.SetHandler(void () =>
 			{
 
-				Assembly rsmlAssembly = typeof(RSDocument).Assembly; // this will get the assembly where RSDocument is, so fuck yeah
-				try
-				{
-
-					Console.WriteLine($"You're currently running RSML v{(rsmlAssembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion ?? "UNKNOWN").Split("+")[0]}.\nGoodbye!");
-
-				}
-				catch (IndexOutOfRangeException)
-				{
-
-					Console.WriteLine("[ERROR] Could not get RSML's version.");
-					Environment.Exit(2);
-
-				}
-
+				Console.WriteLine($"You're currently running RSML {PKG_VERSION}.\nGoodbye!");
 				Environment.Exit(0);
 
 			});

@@ -18,7 +18,14 @@
 		<PackageTags>Markup;Crossroad</PackageTags>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-		<Version>1.0.3</Version>
+		
+		<!-- WHEN CHANGING THE VERSION
+		DON'T FORGET TO ALSO CHANGE IN THE CLI
+		Program.cs > Program > const PKG_VERSION
+		FOR THE LOVE OF GOD DON'T FORGET
+		PLEAAAAAAASE -->
+		<Version>1.0.4</Version>
+		
 		<FileVersion>1.0.0.4</FileVersion>
 		<InformationalVersion>$(Version)</InformationalVersion>
 
