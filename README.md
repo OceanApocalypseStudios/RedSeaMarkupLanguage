@@ -181,6 +181,9 @@ Not a graceful solution, but not a bad one either.
 			Package Manager
 		</th>
 		<th>
+			GitHub Repository
+		</th>
+		<th>
 			Other Links
 		</th>
 	</tr>
@@ -205,6 +208,9 @@ Not a graceful solution, but not a bad one either.
 			<a href="https://www.nuget.org/packages/RSML">NuGet</a>
 		</td>
 		<td>
+			<a href="https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage" />
+		</td>
+		<td>
 			---
 		</td>
 	</tr>
@@ -225,6 +231,9 @@ Not a graceful solution, but not a bad one either.
 			<a href="https://pypi.org/project/rsml-python/">PyPI</a>
 		</td>
 		<td>
+			<a href="https://github.com/OceanApocalypseStudios/RSML.Python" />
+		</td>
+		<td>
 			---
 		</td>
 	</tr>
@@ -234,6 +243,9 @@ Not a graceful solution, but not a bad one either.
 		</td>
 		<td>
 			❌
+		</td>
+		<td>
+			---
 		</td>
 		<td>
 			---
@@ -267,6 +279,9 @@ Not a graceful solution, but not a bad one either.
 		<td>
 			---
 		</td>
+		<td>
+			---
+		</td>
 	</tr>
 	<tr>
 		<td>
@@ -274,6 +289,9 @@ Not a graceful solution, but not a bad one either.
 		</td>
 		<td>
 			❌
+		</td>
+		<td>
+			---
 		</td>
 		<td>
 			---
@@ -303,6 +321,9 @@ Not a graceful solution, but not a bad one either.
 		</td>
 		<td>
 			<a href="https://www.nuget.org/packages/RSML">NuGet</a>
+		</td>
+		<td>
+			<a href="https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage" />
 		</td>
 		<td>
 			---
