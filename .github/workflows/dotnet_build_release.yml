@@ -26,7 +26,12 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
-      - name: Build solution
+      - name: Build solution (Windows)
+        if: matrix.os == 'windows-latest' && matrix.arch == 'x64'
+        run: dotnet build RedSeaMarkupLanguage.sln -c Release -p:Platform=${{ matrix.arch }}
+
+      - name: Build solution (Linux and MacOS)
+        if: matrix.os != 'windows-latest'
         run: dotnet build RedSeaMarkupLanguage.sln -c Release -p:Platform=${{ matrix.arch }}
 
       # to uncomment if I add unit testing
