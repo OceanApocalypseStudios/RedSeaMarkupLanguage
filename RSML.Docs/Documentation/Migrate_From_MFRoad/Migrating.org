@@ -12,12 +12,20 @@
 This guide assumes you've already installed RSML.
 #+end_quote
 
-The first incovenience you'll face is that you are required to know C#. Well, either that or you use another language and make calls to the RSML DLL.
+The first incovenience you'll face is that you are required to know C#.
 
-The second inconvenience - from a RSML begginer's point of view - is the fact RSML is *not* normalized. Each developer is free to use their own [[file:../RSML_Language_Standards/ReadMeFirst.org][language standards]], which is something that isn't easy to take in at first. However, RSML brings a better, easier and more readable syntax, as well as a couple of other pretty useful features. Let's take a look at each one individually.
+#+begin_quote
+You may also use Python, if you prefer. See [[file:../RSML_Python/ReadMeFirst.org][RSML for Python]].
+#+end_quote
+
+The second inconvenience - from a RSML begginer's point of view - is the fact RSML is *not* normalized. Each developer is free to use their own [[file:../RSML_Language_Standards/ReadMeFirst.org][language standard]], which is something that isn't easy to take in at first. However, RSML brings a better, easier and more readable syntax, as well as a couple of other pretty useful features. Let's take a look at each one individually.
 
 ** 🌀 Dropping the ~any~
 Well, the first thing you're gonna have to get used to is not using ~any~.
+
+#+begin_quote
+~any~ can still be used if you expand it while parsing RSML. In the CLI, this means using the ~-x~ flag.
+#+end_quote
 
 #+begin_src mfroad
 win32:any???foobar;
@@ -28,7 +36,7 @@ While it might seem like a good solution at first, it easily becomes unreadable,
 And this begs the question: what ~any~ alternative could you use? Well, *Regular Expressions* of course!
 
 #+begin_src python
-win.+ -> "foobar"
+win.* -> "foobar"
 #+end_src
 
 Yup, that represents the very same thing. And before you say "win32 isn't the same as win", remember that in MFRoad, ~win32~ is the designation for any Windows version.
@@ -38,7 +46,7 @@ I hate to say it, but get ready to stop using ~win32~, ~linux2~ and ~darwin~... 
 
 RSML moved from a poorly-documented mess (Python's ~sys.platform~) to a much better system identification system - pardon the redundancy - called *MSBuild Runtime Identifiers*. Yup, those.
 
-I highly recommend reading Microsoft's documentation for RIDs in order to learn more about them.
+I highly recommend reading [[https://learn.microsoft.com/en-us/dotnet/core/rid-catalog][Microsoft's documentation for RIDs]] in order to learn more about them.
 
 ** 🔷 Special Actions
 *Special Actions* allow for more features to be specified. They are prefixed with ~@~ and they aren't built-in (except for =@EndAll=).
@@ -49,6 +57,8 @@ They can be given a string with no spaces as an argument. Internally, they can m
 Choosing the right standard is hard. Maybe you want [[file:../RSML_Language_Standards/MFRoadLike.org][something that feels like MFRoad]] or a [[file:../RSML_Language_Standards/Official25.org][recognized standard]].
 
 There are several standards and since anyone can make their own, we can't possibly have a full list of standards here.
+
+If you don't like any, maybe you could try making your own standard.
 
 * 👀 In Conclusion
 Hopefully, this documentation module helped you in your migration process. If you have doubts, feel free to expose them: you may contact me via [[mailto:real_mf366@yahoo.com][this link]] (or just send an email to ~real_mf366@yahoo.com~).

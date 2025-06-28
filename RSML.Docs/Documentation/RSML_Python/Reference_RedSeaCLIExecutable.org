@@ -1,0 +1,103 @@
+#+title: RedSeaCLIExecutable (Reference Sheet)
+#+author: Matthew (MF366)
+#+description: Reference docs for RedSeaCLIExecutable class.
+
+#+options: toc:nil
+#+TOC: headlines 3
+
+[[file:PostInstallation.org][*◀ Go back*]]
+
+* ⚙ Inheritance
+=RedSeaCLIExecutable= inherits from =object=.
+
+* 🚀 Constructor
+=RedSeaCLIExecutable.__init__(self, path_to_executable: str | None)=
+
+The constructor takes 2 arguments:
+- *~self~ (RedSeaCLIExecutable):* automatically set to the instance, shouldn't be specified
+- *~path_to_executable~ (str | None):* a path, in the form of a string, to the RSML.CLI executable you wish to use for that OS and architecture
+
+* 🔃 Methods
+Below are all the available methods for this class.
+
+** =__init__(self, path_to_executable: str | None)=
+Creates a new executable given a path. If a path isn't given at this stage, it may *NOT* be given later.
+
+- *Returns:* None
+
+| Argument             | Datatype              | Description                                   | Default Value |
+|----------------------+-----------------------+-----------------------------------------------+---------------|
+| ~self~               | ~RedSeaCLIExecutable~ | N/A                                           | N/A           |
+| ~path_to_executable~ | ~str~                 | The path to the executable, defaults to None. | =None=        |
+
+** =load_document(self, document: RedSeaDocument)=
+Loads a document in.
+
+- *Returns:* None
+
+| Argument   | Datatype              | Description           | Default Value |
+|------------+-----------------------+-----------------------+---------------|
+| ~self~     | ~RedSeaCLIExecutable~ | N/A                   | N/A           |
+| ~document~ | ~RedSeaDocument~      | The document to load. | N/A           |
+
+** =evaluate_document_as_mfroad(self)=
+Evaluates the document as if it was MFRoad.
+
+- *ValueError:* No executable loaded.
+- *Returns:* A string, the output of the evaluation
+
+| Argument   | Datatype              | Description           | Default Value |
+|------------+-----------------------+-----------------------+---------------|
+| ~self~     | ~RedSeaCLIExecutable~ | N/A                   | N/A           |
+
+** =evaluate_document(self, custom_rid: str, primary_only: bool, fallbacks: tuple[str | None, str], expand_any: bool)=
+Evaluates a document with ~official-25~.
+
+- *ValueError:* No executable loaded.
+- *Returns:* A string, the output of the evaluation
+
+| Argument       | Datatype                 | Description                                                                                                                   | Default Value                             |
+|----------------+--------------------------+-------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------|
+| ~self~         | ~RedSeaCLIExecutable~    | N/A                                                                                                                           | N/A                                       |
+| ~custom_rid~   | ~str | None~             | A custom *host* RID to pass instead of the actual host one.                                                                   | ~None~                                    |
+| ~primary_only~ | ~bool~                   | If set to ~True~, only primary actions will modify the output (other actions will be ignored).                                | ~False~                                   |
+| ~fallbacks~    | ~tuple[str | None, str]~ | A tuple containing 2 fallback messages. The first is shown when errors happen. The second is shown when there are no matches. | ~(None, "[WARNING] No match was found.")~ |
+| ~expand_any~   | ~bool~                   | If set to ~True~, ~any~ will be expanded into ~.+~ Regex expression.                                                          | ~False~                                   |
+
+** =get_runtime_id(self)=
+Return the executable's RID.
+
+- *ValueError:* No executable loaded.
+- *Returns:* A string containing nothing but the RID (for example: ~win-x64~).
+
+| Argument   | Datatype              | Description           | Default Value |
+|------------+-----------------------+-----------------------+---------------|
+| ~self~     | ~RedSeaCLIExecutable~ | N/A                   | N/A           |
+
+* ⚒ Properties
+Below are all the available property methods for this class.
+
+** =version= (get-only)
+Returns RSML's version - not the CLI's version and not this module's version - the actual library's version.
+
+- *ValueError:* No executable loaded.
+- *Returns:* A string containing the version, as in vX.X.X
+
+** =repository= (get-only)
+Returns the link to RSML's repository.
+
+- *ValueError:* No executable loaded.
+- *Returns:* A string, the link to the repository
+
+** =repository_python= (get-only)
+Returns the link to rsml_python's repository.
+
+- *ValueError:* No executable loaded.
+- *Returns:* A string literal ~https://github.com/OceanApocalypseStudios/RSML.Python~
+
+* 📜 Other Reference Sheets
+- [[file:Reference_RedSeaCLIExecutable.org][~RedSeaCLIExecutable~]]
+- [[file:Reference_RedSeaDocument.org][~RedSeaDocument~]]
+
+* 👀 In Conclusion
+Hopefully, this documentation module helped you in setting up your development environment for RSML in Python. If you have doubts, feel free to expose them: you may contact me via [[mailto:real_mf366@yahoo.com][this link]] (or just send an email to ~real_mf366@yahoo.com~).
