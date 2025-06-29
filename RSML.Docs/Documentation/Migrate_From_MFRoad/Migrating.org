@@ -5,6 +5,7 @@
 #+options: toc:nil
 #+TOC: headlines 3
 
+[[file:../GlobalIndex.org][*◀ Global Navigation*]]
 [[file:ReadMeFirst.org][*◀ Go back*]]
 
 * 🛩 Starting the migration

@@ -1,0 +1,22 @@
+#+TITLE: RSML Documentation - Global Index
+#+AUTHOR: Matthew (MF366)
+#+DESCRIPTION: The global index for the RSML Documentation.
+
+#+options: toc:nil
+
+[[file:ReadMeFirst.org][*◀ Go back*]]
+
+* 💨 Navigation
+You may use this page to quickly navigate through documentation modules and pages.
+
+- [[file:ReadMeFirst.org][Start here]]
+- [[file:Migrate_From_MFRoad/ReadMeFirst.org][Migrate from MFRoad]]
+	- [[file:Migrate_From_MFRoad/Migrating.org][Migration Process]]
+- [[file:RSML_Language_Standards/ReadMeFirst.org][Language Standards]]
+	- [[file:RSML_Language_Standards/Official25.org][~official-25~]]
+	- [[file:RSML_Language_Standards/MFRoadLike.org][~mfroad-like~]]
+- TODO: add more links here
+- [[file:RSML_Python/ReadMeFirst.org][RSML for Python]]
+	- [[file:RSML_Python/PostInstallation.org][Post-installation process]]
+	- Reference Sheets
+		- [[file:RSML_Python/Reference_RedSeaCLIExecutable.org][~RedSeaCLIExecutable~ (class)]]

@@ -6,6 +6,7 @@
 
 #+TOC: headlines 3
 
+[[file:../GlobalIndex.org][*◀ Global Navigation*]]
 [[file:ReadMeFirst.org][*◀ Go back*]]
 
 * 🔧 Operators

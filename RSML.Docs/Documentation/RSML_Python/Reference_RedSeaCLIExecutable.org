@@ -5,6 +5,7 @@
 #+options: toc:nil
 #+TOC: headlines 3
 
+[[file:../GlobalIndex.org][*◀ Global Navigation*]]
 [[file:PostInstallation.org][*◀ Go back*]]
 
 * ⚙ Inheritance
@@ -56,13 +57,13 @@ Evaluates a document with ~official-25~.
 - *ValueError:* No executable loaded.
 - *Returns:* A string, the output of the evaluation
 
-| Argument       | Datatype                 | Description                                                                                                                   | Default Value                             |
-|----------------+--------------------------+-------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------|
-| ~self~         | ~RedSeaCLIExecutable~    | N/A                                                                                                                           | N/A                                       |
-| ~custom_rid~   | ~str | None~             | A custom *host* RID to pass instead of the actual host one.                                                                   | ~None~                                    |
-| ~primary_only~ | ~bool~                   | If set to ~True~, only primary actions will modify the output (other actions will be ignored).                                | ~False~                                   |
-| ~fallbacks~    | ~tuple[str | None, str]~ | A tuple containing 2 fallback messages. The first is shown when errors happen. The second is shown when there are no matches. | ~(None, "[WARNING] No match was found.")~ |
-| ~expand_any~   | ~bool~                   | If set to ~True~, ~any~ will be expanded into ~.+~ Regex expression.                                                          | ~False~                                   |
+| Argument       | Datatype                       | Description                                                                                                                   | Default Value                             |
+|----------------+--------------------------------+-------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------|
+| ~self~         | ~RedSeaCLIExecutable~          | N/A                                                                                                                           | N/A                                       |
+| ~custom_rid~   | ~Union(str, None)~             | A custom *host* RID to pass instead of the actual host one.                                                                   | ~None~                                    |
+| ~primary_only~ | ~bool~                         | If set to ~True~, only primary actions will modify the output (other actions will be ignored).                                | ~False~                                   |
+| ~fallbacks~    | ~tuple[Union(str, None), str]~ | A tuple containing 2 fallback messages. The first is shown when errors happen. The second is shown when there are no matches. | ~(None, "[WARNING] No match was found.")~ |
+| ~expand_any~   | ~bool~                         | If set to ~True~, ~any~ will be expanded into ~.+~ Regex expression.                                                          | ~False~                                   |
 
 ** =get_runtime_id(self)=
 Return the executable's RID.
@@ -93,7 +94,7 @@ Returns the link to RSML's repository.
 Returns the link to rsml_python's repository.
 
 - *ValueError:* No executable loaded.
-- *Returns:* A string literal ~https://github.com/OceanApocalypseStudios/RSML.Python~
+- *Returns:* A string literal, ~"https://github.com/OceanApocalypseStudios/RSML.Python"~
 
 * 📜 Other Reference Sheets
 - [[file:Reference_RedSeaCLIExecutable.org][~RedSeaCLIExecutable~]]

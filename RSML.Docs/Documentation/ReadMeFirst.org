@@ -5,6 +5,9 @@
 * 👋 Welcome!
 This is the official documentation for *RSML* (Red Sea Markup Language), *the* modern fork of MFRoad, but up to ten times better.
 
+* 💨 Navigating the documentation
+To browse this documentation, you're advised to use the [[file:GlobalIndex.org][global index]], which contains links to every single page in this documentation.
+
 * 💗 Contributing
 If you wish to contribute to the documentation, we'd really appreciate it. However, there are some rules and guidelines you must follow:
 - *KISS: Keep It Simple, Stupid.* Make sure your changes do not affect the simplicity and readability of the documentation in a negative way.
