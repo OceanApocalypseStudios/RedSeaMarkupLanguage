@@ -20,3 +20,4 @@ You may use this page to quickly navigate through documentation modules and page
 	- [[file:RSML_Python/PostInstallation.org][Post-installation process]]
 	- Reference Sheets
 		- [[file:RSML_Python/Reference_RedSeaCLIExecutable.org][~RedSeaCLIExecutable~ (class)]]
+		- [[file:RSML_Python/Reference_RedSeaDocument.org][~RedSeaDocument~ (class)]]
