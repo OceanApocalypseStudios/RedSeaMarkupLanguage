@@ -370,3 +370,6 @@ runner.ps1
 # Inno Setup
 SetupOut/*
 *.iss
+
+# backup
+*.bak
