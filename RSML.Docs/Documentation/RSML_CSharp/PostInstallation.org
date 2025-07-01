@@ -1,0 +1,95 @@
+#+title: Post Installation Guide for RSML C#
+#+author: Matthew (MF366)
+#+description: A quick guide on post installation setup for RSML in C#.
+
+#+options: toc:nil
+#+TOC: headlines 3
+
+[[file:../GlobalIndex.org][*◀ Global Navigation*]]
+[[file:ReadMeFirst.org][*◀ Go back*]]
+
+* 🤔 After installing
+#+begin_quote
+This guide assumes you've already managed to reference RSML from within your projects.
+#+end_quote
+
+#+begin_quote
+Keep in mind ~rsml-python~ is a lot more limited than its C# counterpart. For example, you may only use *2* different language standards (~official-25~ and ~mfroad-like~).
+#+end_quote
+
+Let's start. To begin your script, you must import RSML.
+
+#+begin_src python
+import rsml_python as rsml
+#+end_src
+
+Make sure you have an executable to point to, as well.
+
+#+begin_src python
+import rsml_python as rsml
+
+RSML_PATH: str = "path/to/cli"
+#+end_src
+
+RSML for Python has a OOP approach, so we must initialize 2 things: the executable and the document.
+
+#+begin_src python
+executable = RedSeaCLIExecutable(RSML_PATH)
+
+document = RedSeaDocument()
+#+end_src
+
+Our document exists, but is empty. Let's load from a string.
+
+#+begin_src python
+my_doc: str = '''win.* -> "Windows"
+(arch|ubuntu|debian).* -> "Linux"
+osx.+ -> "MacOS or something"
+.+ -> "Unknown"
+'''
+
+document.load_from_string(my_doc)
+#+end_src
+
+We now feed the document into the executable and retrieve output.
+
+#+begin_src python
+executable.load_document(document)
+
+output = executable.evaluate_document() # non-prettified output
+#+end_src
+
+We may not print the output, if we want.
+
+Here's the whole script:
+
+#+begin_src python
+# Importing
+import rsml_python as rsml
+
+# Executable
+RSML_PATH: str = "path/to/cli"
+executable = RedSeaCLIExecutable(RSML_PATH)
+
+# Document
+document = RedSeaDocument()
+my_doc: str = '''win.* -> "Windows"
+(arch|ubuntu|debian).* -> "Linux"
+osx.+ -> "MacOS or something"
+.+ -> "Unknown"
+'''
+
+document.load_from_string(my_doc)
+
+# Output
+executable.load_document(document)
+
+output = executable.evaluate_document() # non-prettified output
+print(output) # printing
+#+end_src
+
+* 📜 Reference Sheets
+You'll find the reference sheets for *RSML for Python* in this very same documentation module. Why don't you start with the [[file:Reference_RedSeaCLIExecutable.org][~RedSeaCLIExecutable~]]
+
+* 👀 In Conclusion
+Hopefully, this documentation module helped you in setting up your development environment for RSML in Python. If you have doubts, feel free to expose them: you may contact me via [[mailto:real_mf366@yahoo.com][this link]] (or just send an email to ~real_mf366@yahoo.com~).

@@ -1,4 +1,4 @@
-#+title: Red Sea Markup Language Standards
+#+title: Red Sea Markup Language for Python
 #+author: Matthew (MF366)
 #+description: The welcome page for the RSML for Python documentation module.
 
