@@ -199,7 +199,7 @@ Not a graceful solution, but not a bad one either.
 			✔ RSML is intended for use in C#.
 		</td>
 		<td>
-			🟡 In the making.
+			🟡 <a href="https://oceanapocalypsestudios.github.io/rsml-docs/api/csharp/">In the making</a>
 		</td>
 		<td>
 			✔
@@ -222,7 +222,7 @@ Not a graceful solution, but not a bad one either.
 			✔ Since June 12, 2025.
 		</td>
 		<td>
-			🟡 In the making.
+			🟡 <a href="https://oceanapocalypsestudios.github.io/rsml-docs/api/python/">In the making</a>
 		</td>
 		<td>
 			✔
