@@ -14,6 +14,13 @@ Below is a list of features (or reasons why RSML is better than MFRoad - call th
 
 <hr />
 
+## Coming Soon: RSML v2.0.0
+**Red Sea Markup Language v2.0.0** is currently **in the making** and will be a huge release, bringing native binding support into the table _(this also means AOT "friendliness")_, which will let you use RSML in Python, Go, Rust _(if you're about that)_, wherever you want, really _(that supports native interop)_.
+
+RSML v2.0.0 will also improve the current API **a lot**, as v1.0.5 still has its fair share of issues, not to mention [RSML for Python](https://github.com/OceanApocalypseStudios/RSML.Python)'s ones.
+
+<hr />
+
 ## Regex Support
 Instead of those awful `win32:any` and `any:amd64`, you have Regex support in RSML.
 
