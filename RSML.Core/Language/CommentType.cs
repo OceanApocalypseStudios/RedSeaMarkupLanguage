@@ -10,7 +10,7 @@ namespace RSML.Core.Language
 	/// AND implicit comments.
 	/// </summary>
 	[Flags]
-	public enum CommentType
+	public enum CommentType : byte
 	{
 
 		/// <summary>

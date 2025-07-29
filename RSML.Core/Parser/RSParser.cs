@@ -38,7 +38,9 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Xml;
 using RSML.Core.Actions;
 using RSML.Core.Exceptions;
 using RSML.Core.Language;
@@ -159,12 +161,6 @@ namespace RSML.Core.Parser
 		}
 
 		/// <summary>
-		/// Activates the <see cref="cacheNeedsRebuild" /> flag.
-		/// This method does not trigger the rebuild itself as the cache is lazy.
-		/// </summary>
-		private void InformCacheRebuild() => cacheNeedsRebuild = true;
-
-		/// <summary>
 		/// Initializes a RSML parser from a language standard.
 		/// </summary>
 		/// <param name="content">The string the parser should evaluate. This can be changed later.</param>
@@ -185,7 +181,214 @@ namespace RSML.Core.Parser
 
 		}
 
-		// todo: code evaluation
+		/// <summary>
+		/// Activates the <see cref="cacheNeedsRebuild" /> flag.
+		/// This method does not trigger the rebuild itself as the cache is lazy.
+		/// </summary>
+		private void InformCacheRebuild() => cacheNeedsRebuild = true;
+
+		/// <summary>
+		/// Handles a call to a special action.
+		/// </summary>
+		/// <param name="line">A line of RSML, containing a special action</param>
+		/// <returns></returns>
+		/// <exception cref="InvalidRSMLSyntax">A line containing a special action must have at least 2 characters</exception>
+		/// <exception cref="UndefinedActionException">Action is undefined but used</exception>
+		private byte HandleSpecialActionCall(string line)
+		{
+
+			if (line.Length < 2)
+				throw new InvalidRSMLSyntax("A line containing a special action must have at least 2 characters");
+
+			string[] splitLine = line[1..].Split(' ');
+			string actionName = splitLine[0];
+			string actionArgument = splitLine.Length < 2 ? "" : splitLine[1];
+
+			if (!SpecialActions.TryGetValue(actionName, out var action))
+				throw new UndefinedActionException("Action is undefined but used");
+
+			return action.Invoke(this, actionArgument);
+
+		}
+
+		/// <summary>
+		/// Handles a call to an operator's action.
+		/// </summary>
+		/// <param name="operatorType">The operator type</param>
+		/// <param name="line">A line of RSML containing a logic path</param>
+		/// <param name="properties">Evaluation properties</param>
+		/// <returns>The operator's right side or <c>null</c> if there was no match</returns>
+		/// <exception cref="InvalidRSMLSyntax">
+		/// <list type="bullet">A line containing a logic path must be splittable in 2 tokens: LEFT and RIGHT</list>
+		/// <list type="bullet">A logic path's return value must be enclosed in double quotes</list>
+		/// </exception>
+		private string? HandleOperatorAction(OperatorType operatorType, string line, ref EvaluationProperties properties)
+		{
+
+			string[] splitLine = line.Split(operatorType == OperatorType.Primary
+												? PrimaryOperatorSymbol
+												: (operatorType == OperatorType.Secondary)
+													? SecondaryOperatorSymbol
+													: TertiaryOperatorSymbol
+											);
+
+			if (splitLine.Length < 2)
+				throw new InvalidRSMLSyntax("A line containing a logic path must be splittable in 2 tokens: LEFT and RIGHT");
+
+			string left = splitLine[0].TrimEnd(); // we had already trimmed the start, remember
+
+			if (left == "any" && properties.ExpandAnyIntoRegularExpression)
+				left = ".+";
+
+			// actual evaluation
+			if (!Regex.IsMatch(properties.RuntimeIdentifier, $"^{left}$"))
+				return null; // no bueno
+
+			// we only trim if necssary
+			// we're both avoiding heap allocs
+			// but also avoiding somewhat expensive operations
+			string right = splitLine[1].Trim(); // but this we gon' have to fully trim
+
+			if (right.Length < 3 || !(right.StartsWith('"') && right.EndsWith('"')))
+				throw new InvalidRSMLSyntax("A logic path's return value must be enclosed in double quotes");
+
+			string actualReturnValue = right[1..^1]; // this trims the quotes
+
+			switch (operatorType)
+			{
+
+				case OperatorType.Secondary:
+					SecondaryOperatorAction!.Invoke(this, actualReturnValue);
+					break;
+
+				case OperatorType.Tertiary:
+					TertiaryOperatorAction!.Invoke(this, actualReturnValue);
+					break;
+
+			}
+
+			return actualReturnValue;
+
+		}
+
+		// todo: the evaluation below me doesn't givew a shit about properties so we gon' have to cook that up
+		// ^ VERY IMPORTANT !!!1!1!!1!1 :o
+		// todo: also reminder i dont fucking need to overload this - i can overload it in the RSML package afterwards not here
+		public EvaluationResult Evaluate(EvaluationProperties properties)
+		{
+
+			if (SecondaryOperatorSymbol is null || TertiaryOperatorSymbol is null)
+				throw new UndefinedOperatorException("All operators must have a symbol by this point");
+
+			if (SecondaryOperatorAction is null || TertiaryOperatorAction is null)
+				throw new UndefinedOperatorException("All operator's actions must be defined at this point");
+
+			StringBuilder builder = new("--START-OF-STREAM--\n");
+
+			foreach (string rawLine in content)
+			{
+
+				if (GetCommentType(rawLine, out var line) is not null)
+					continue; // this is a comment - null means no comment type because it's not a comment
+
+				if (line is null)
+					continue; // this won't happen but it makes .NET happy sooooo
+
+				if (line.StartsWith("@EndAll"))
+					return new();
+
+				if (line.StartsWith('@'))
+				{
+
+					var result = HandleSpecialActionCall(line);
+
+					switch (result)
+					{
+
+						case SpecialActionBehavior.Success:
+							break;
+
+						case SpecialActionBehavior.Error:
+							// always use 1 for errors, no matter the default case - it may change in the future
+							// but this one won't
+							_ = builder.AppendLine(
+								$"Special action returned error code 1 in line '{line}'."
+							);
+							break;
+
+						case SpecialActionBehavior.StopEvaluation:
+							return new();
+
+						case SpecialActionBehavior.ResetSpecials:
+							specialActions.Clear();
+							break;
+
+						case SpecialActionBehavior.ResetOperators:
+							SecondaryOperatorAction = (_, _) => { };
+							TertiaryOperatorAction = (_, _) => { };
+
+							// we are going to reset to official-25's operators
+							// todo: document this later maybe i dunno
+
+							var official25 = LanguageStandard.Official25;
+							PrimaryOperatorSymbol = official25.Properties.PrimaryOperatorSymbol;
+							SecondaryOperatorSymbol = official25.Properties.SecondaryOperatorSymbol;
+							TertiaryOperatorSymbol = official25.Properties.TertiaryOperatorSymbol;
+							break;
+
+						default:
+							// anything else is an error tho it's recommended to use 1 as error
+							// as we may add other special behaviors
+							_ = builder.AppendLine(
+								$"""
+								--SECTION--
+								Special action returned an error code ({result}) in line '{line}'. If you're the creator of the file,
+								please strictly use code 1 for errors in the future.
+								--SECTION--
+								"""
+							);
+							break;
+
+					}
+
+					continue;
+
+				}
+
+				if (line.Contains(PrimaryOperatorSymbol))
+				{
+
+					var val = HandleOperatorAction(OperatorType.Primary, line, ref properties);
+
+
+					if (val is not null)
+					{
+
+						var builderValue = builder.ToString();
+						return new(val, builderValue.Length != 20 ? builderValue : "");
+						// 20 is the length of --START-OF-END--\n 
+						// yes my lazy ass hardcoded it cry harder
+
+					}
+
+					continue;
+
+				}
+
+				if (line.Contains(SecondaryOperatorSymbol))
+					_ = HandleOperatorAction(OperatorType.Secondary, line, ref properties);
+
+				else if (line.Contains(TertiaryOperatorSymbol))
+					_ = HandleOperatorAction(OperatorType.Tertiary, line, ref properties);
+
+				continue;
+
+			}
+
+			return new(); // nothing found
+
+		}
+
 		// todo: fix workflows (after major release, it happens)
 
 		/// <summary>
@@ -291,6 +494,58 @@ namespace RSML.Core.Parser
 				&& !line.Contains(TertiaryOperatorSymbol))
 				return CommentType.Implicit;
 
+			return null;
+
+		}
+
+		/// <summary>
+		/// Gets the type of comment of a line of RSML, taking into consideration
+		/// the parser's properties, or <c>null</c> if the line is not a comment.
+		/// </summary>
+		/// <param name="line">A line of RSML</param>
+		/// <param name="trimmedLine">
+		/// Since this method trims the given line, you can get it back to avoid trimming twice,
+		/// which would cost performance.
+		/// </param>
+		/// <returns>The type of comment of the line, or <c>null</c> if the line is not a comment</returns>
+		/// <exception cref="UndefinedOperatorException" />
+		private CommentType? GetCommentType(string line, out string? trimmedLine)
+		{
+
+			if (SecondaryOperatorSymbol is null || TertiaryOperatorSymbol is null)
+				throw new UndefinedOperatorException("All operators must be defined at this stage.");
+
+			if (String.IsNullOrWhiteSpace(line))
+			{
+
+				trimmedLine = null;
+				return CommentType.Whitespace;
+
+			}
+
+			line = line.TrimStart();
+
+			if (line.StartsWith('#'))
+			{
+
+				trimmedLine = line;
+				return CommentType.Explicit;
+
+			}
+
+			if (!line.StartsWith('#')
+				&& !line.StartsWith('@')
+				&& !line.Contains(PrimaryOperatorSymbol)
+				&& !line.Contains(SecondaryOperatorSymbol)
+				&& !line.Contains(TertiaryOperatorSymbol))
+			{
+
+				trimmedLine = line;
+				return CommentType.Implicit;
+
+			}
+
+			trimmedLine = line;
 			return null;
 
 		}
