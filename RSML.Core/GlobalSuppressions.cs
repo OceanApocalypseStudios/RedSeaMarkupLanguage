@@ -16,3 +16,4 @@ using System.Diagnostics.CodeAnalysis;
 // (These ones specifically would make the code unreadable)
 [assembly: SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "<Pending>", Scope = "member", Target = "~M:RSML.Core.Parser.RSParser.GetCommentType(System.String)~System.Nullable{RSML.Core.Language.CommentType}")]
 [assembly: SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "<Pending>", Scope = "member", Target = "~M:RSML.Core.Parser.RSParser.HandleSpecialActionCall(System.String)~System.Byte")]
+[assembly: SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "<Pending>", Scope = "member", Target = "~M:RSML.Core.Parser.RSParser.Evaluate(RSML.Core.Parser.EvaluationProperties)~RSML.Core.Parser.EvaluationResult")]

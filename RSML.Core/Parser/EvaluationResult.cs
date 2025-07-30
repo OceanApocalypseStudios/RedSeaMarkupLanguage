@@ -56,12 +56,12 @@
 		/// </summary>
 		/// <param name="errors">Errors during evaluation</param>
 		public static EvaluationResult NoMatchFound(string errors) => new()
-			{
+		{
 
-				Errors = errors,
-				MatchValue = null
+			Errors = errors,
+			MatchValue = null
 
-			};
+		};
 
 	}
 

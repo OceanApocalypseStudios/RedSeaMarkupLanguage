@@ -40,7 +40,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Xml;
+
 using RSML.Core.Actions;
 using RSML.Core.Exceptions;
 using RSML.Core.Language;
@@ -271,17 +271,141 @@ namespace RSML.Core.Parser
 
 		}
 
-		// todo: the evaluation below me doesn't givew a shit about properties so we gon' have to cook that up
-		// ^ VERY IMPORTANT !!!1!1!!1!1 :o
-		// todo: also reminder i dont fucking need to overload this - i can overload it in the RSML package afterwards not here
-		public EvaluationResult Evaluate(EvaluationProperties properties)
+		private EvaluationResult StrictEvaluation(ref EvaluationProperties properties)
 		{
 
-			if (SecondaryOperatorSymbol is null || TertiaryOperatorSymbol is null)
-				throw new UndefinedOperatorException("All operators must have a symbol by this point");
+			foreach (string rawLine in content)
+			{
 
-			if (SecondaryOperatorAction is null || TertiaryOperatorAction is null)
-				throw new UndefinedOperatorException("All operator's actions must be defined at this point");
+				if (GetCommentType(rawLine, out var line) is not null)
+					continue; // this is a comment - null means no comment type because it's not a comment
+
+				if (line is null)
+					continue; // this won't happen but it makes .NET happy sooooo
+
+				if (line.StartsWith("@EndAll"))
+					return new();
+
+				if (line.StartsWith('@'))
+				{
+
+					byte result = 0;
+
+					try
+					{
+
+						result = HandleSpecialActionCall(line);
+
+					}
+					catch (InvalidRSMLSyntax) { throw; }
+					catch (UndefinedActionException) { throw; }
+
+					switch (result)
+					{
+
+						case SpecialActionBehavior.Success:
+							break;
+
+						case SpecialActionBehavior.Error:
+							// always use 1 for errors, no matter the default case - it may change in the future
+							// but this one won't
+							throw new ActionStandardErrorException($"Action at line '{line}' raised an error code of 1");
+
+						case SpecialActionBehavior.StopEvaluation:
+							return new();
+
+						case SpecialActionBehavior.ResetSpecials:
+							specialActions.Clear();
+							break;
+
+						case SpecialActionBehavior.ResetOperators:
+							SecondaryOperatorAction = (_, _) => { };
+							TertiaryOperatorAction = (_, _) => { };
+
+							// we are going to reset to official-25's operators
+							// todo: document this later maybe i dunno
+
+							var official25 = LanguageStandard.Official25;
+							PrimaryOperatorSymbol = official25.Properties.PrimaryOperatorSymbol;
+							SecondaryOperatorSymbol = official25.Properties.SecondaryOperatorSymbol;
+							TertiaryOperatorSymbol = official25.Properties.TertiaryOperatorSymbol;
+							break;
+
+						default:
+							// anything else is an error tho it's recommended to use 1 as error
+							// as we may add other special behaviors
+							throw new ActionStandardErrorException($"Action at line '{line}' raised an error code of {result}. If you're the creator of the file, please use code 1 for errors the future.");
+
+					}
+
+					continue;
+
+				}
+
+				if (line.Contains(PrimaryOperatorSymbol))
+				{
+
+					string? val = null;
+
+					try
+					{
+
+						val = HandleOperatorAction(OperatorType.Primary, line, ref properties);
+
+					}
+					catch (InvalidRSMLSyntax)
+					{
+
+						throw; // this seems weird but trust me - it's for the better
+							   // i just want to check if it's the actual correct error
+							   // plus it's cleaner
+							   // and tells Visual Studio to warn me to document this
+
+					}
+
+					if (val is not null)
+						return new(val);
+
+					continue;
+
+				}
+
+				if (line.Contains(SecondaryOperatorSymbol!))
+				{
+
+					try
+					{
+
+						_ = HandleOperatorAction(OperatorType.Secondary, line, ref properties);
+
+					}
+					catch (InvalidRSMLSyntax) { throw; }
+
+				}
+
+				else if (line.Contains(TertiaryOperatorSymbol!))
+				{
+
+					try
+					{
+
+						_ = HandleOperatorAction(OperatorType.Tertiary, line, ref properties);
+
+					}
+					catch (InvalidRSMLSyntax) { throw; }
+
+				}
+
+				continue;
+
+			}
+
+			return new(); // nothing found
+
+		}
+
+		private EvaluationResult BasicEvaluation(ref EvaluationProperties properties)
+		{
 
 			StringBuilder builder = new("--START-OF-STREAM--\n");
 
@@ -300,7 +424,42 @@ namespace RSML.Core.Parser
 				if (line.StartsWith('@'))
 				{
 
-					var result = HandleSpecialActionCall(line);
+					byte result;
+
+					try
+					{
+
+						result = HandleSpecialActionCall(line);
+
+					}
+					catch (InvalidRSMLSyntax e)
+					{
+
+						_ = builder.AppendLine(
+							$"""
+							--SECTION--
+							{e}
+							Line = '{line}'
+							--SECTION--
+							"""
+						);
+						continue;
+
+					}
+					catch (UndefinedActionException e)
+					{
+							_ = builder.AppendLine(
+							$"""
+							--SECTION--
+							{e}
+							Line = '{line}'
+							--SECTION--
+							"""
+						);
+						continue;
+					}
+
+					// treat errors as comments
 
 					switch (result)
 					{
@@ -317,7 +476,8 @@ namespace RSML.Core.Parser
 							break;
 
 						case SpecialActionBehavior.StopEvaluation:
-							return new();
+							var builderValue = builder.ToString();
+							return EvaluationResult.NoMatchFound(builderValue.Length != 20 ? builderValue : "");
 
 						case SpecialActionBehavior.ResetSpecials:
 							specialActions.Clear();
@@ -358,8 +518,27 @@ namespace RSML.Core.Parser
 				if (line.Contains(PrimaryOperatorSymbol))
 				{
 
-					var val = HandleOperatorAction(OperatorType.Primary, line, ref properties);
+					string? val = null;
 
+					try
+					{
+
+						val = HandleOperatorAction(OperatorType.Primary, line, ref properties);
+
+					}
+					catch (InvalidRSMLSyntax e)
+					{
+
+						_ = builder.AppendLine(
+							$"""
+							--SECTION--
+							{e}
+							Line = '{line}'
+							--SECTION--
+							"""
+						);
+
+					}
 
 					if (val is not null)
 					{
@@ -375,17 +554,84 @@ namespace RSML.Core.Parser
 
 				}
 
-				if (line.Contains(SecondaryOperatorSymbol))
-					_ = HandleOperatorAction(OperatorType.Secondary, line, ref properties);
+				if (line.Contains(SecondaryOperatorSymbol!))
+				{
 
-				else if (line.Contains(TertiaryOperatorSymbol))
-					_ = HandleOperatorAction(OperatorType.Tertiary, line, ref properties);
+					try
+					{
+
+						_ = HandleOperatorAction(OperatorType.Secondary, line, ref properties);
+
+					}
+					catch (InvalidRSMLSyntax e)
+					{
+
+						_ = builder.AppendLine(
+							$"""
+							--SECTION--
+							{e}
+							Line = '{line}'
+							--SECTION--
+							"""
+						);
+
+					}
+
+				}
+
+				else if (line.Contains(TertiaryOperatorSymbol!))
+				{
+
+					try
+					{
+
+						_ = HandleOperatorAction(OperatorType.Tertiary, line, ref properties);
+
+					}
+					catch (InvalidRSMLSyntax e)
+					{
+
+						_ = builder.AppendLine(
+							$"""
+							--SECTION--
+							{e}
+							Line = '{line}'
+							--SECTION--
+							"""
+						);
+
+					}
+
+				}
 
 				continue;
 
 			}
 
-			return new(); // nothing found
+			var builderString = builder.ToString();
+			return EvaluationResult.NoMatchFound(builderString.Length != 20 ? builderString : ""); // nothing found
+
+		}
+
+		/// <summary>
+		/// Evaluates a RSML document given some properties.
+		/// </summary>
+		/// <param name="properties">The set of properties to feed into the evaluation</param>
+		/// <returns>An evaluation result</returns>
+		/// <exception cref="UndefinedOperatorException">All operators and their actions must be defined</exception>
+		public EvaluationResult Evaluate(EvaluationProperties properties)
+		{
+
+			if (SecondaryOperatorSymbol is null || TertiaryOperatorSymbol is null)
+				throw new UndefinedOperatorException("All operators must have a symbol by this point");
+
+			if (SecondaryOperatorAction is null || TertiaryOperatorAction is null)
+				throw new UndefinedOperatorException("All operator's actions must be defined at this point");
+
+			if (properties.StrictnessLevel == StrictnessLevel.Strict)
+				return StrictEvaluation(ref properties);
+
+			return BasicEvaluation(ref properties);
 
 		}
 
