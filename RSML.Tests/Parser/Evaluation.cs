@@ -1,4 +1,6 @@
-﻿using RSML.Exceptions;
+﻿using System;
+
+using RSML.Exceptions;
 using RSML.Language;
 using RSML.Parser;
 
@@ -50,7 +52,7 @@ namespace RSML.Tests.Parser
 		}
 
 		[Theory]
-		[InlineData("win.* ->")]
+		[InlineData("win.* -> xs")] // too small input
 		[InlineData("win.+ -> no quotes")]
 		public void HandleOperatorAction_WithInvalidSyntax_ThrowsInvalidRSMLSyntax(string input)
 		{
@@ -61,13 +63,13 @@ namespace RSML.Tests.Parser
 			{
 
 				parser.Evaluate(EvaluationProperties.FromMachineRid(true));
+				Assert.Fail();
 
 			}
-			catch (InvalidRSMLSyntax)
+			catch (Exception ex)
 			{
 
-				Assert.False(1 == 1); // this is stupid and pointless
-									  // but at least it's better than xUnit crying because i used ref structs
+				Assert.IsType<InvalidRSMLSyntax>(ex);
 
 			}
 

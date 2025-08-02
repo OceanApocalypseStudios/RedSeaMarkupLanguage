@@ -373,3 +373,6 @@ SetupOut/*
 
 # backup
 *.bak
+
+# diagnostics
+*.diagsession

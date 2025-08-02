@@ -4,7 +4,7 @@
 	/// <summary>
 	/// The result of the evaluation of an RSML document.
 	/// </summary>
-	public readonly ref struct EvaluationResult
+	public readonly struct EvaluationResult
 	{
 
 		/// <summary>
@@ -32,6 +32,12 @@
 			MatchValue = matchValue;
 
 		}
+
+		/// <summary>
+		/// String representation of the current instance of an evaluation result.
+		/// </summary>
+		/// <returns>A string</returns>
+		public override string ToString() => MatchValue ?? "";
 
 	}
 

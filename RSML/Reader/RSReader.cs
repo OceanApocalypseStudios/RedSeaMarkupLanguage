@@ -1,5 +1,6 @@
 ﻿using System;
 using RSML.Language;
+using RSML.Tokenization;
 
 
 namespace RSML.Reader
@@ -11,10 +12,10 @@ namespace RSML.Reader
 	public ref struct RSReader
 	{
 
-		private bool consumed = false;
-		private ReadOnlySpan<char> source;
-		private readonly RSToken eofToken = new() { Type = RSTokenType.EOF, Value = "\0".AsMemory() };
-		private readonly RSToken eolToken = new() { Type = RSTokenType.EOL, Value = "\n".AsMemory() };
+		private int curIndex = -1;
+		private readonly ReadOnlySpan<char> source;
+		private static readonly RSToken eofToken = new(RSTokenType.EOF, "\0");
+		private static readonly RSToken eolToken = new(RSTokenType.EOL, "\n");
 
 		/// <summary>
 		/// Initializes a RSML reader.
@@ -47,9 +48,9 @@ namespace RSML.Reader
 		{
 
 			if (source.Length < 1)
-				consumed = true;
+				curIndex = -1;
 
-			if (consumed)
+			if (curIndex < 0)
 			{
 
 				character = '\0';
@@ -57,9 +58,7 @@ namespace RSML.Reader
 
 			}
 
-			character = source[0];
-			source = source.Length == 1 ? [] : source[1..];
-
+			character = source[curIndex++];
 			return true;
 
 		}
@@ -75,9 +74,9 @@ namespace RSML.Reader
 		{
 
 			if (source.Length < 1)
-				consumed = true;
+				curIndex = -1;
 
-			if (consumed)
+			if (curIndex < 0)
 			{
 
 				tokens = new([eofToken]);
@@ -85,18 +84,18 @@ namespace RSML.Reader
 
 			}
 
-			var nextNewline = source.IndexOf('\n');
+			var nextNewline = source[curIndex..].IndexOf('\n');
 
 			if (nextNewline == -1)
 			{
 
 				tokens = tokenizer.TokenizeLine(source, languageStandard);
-				consumed = true; // we consumed it. done.
+				curIndex = -1; // we consumed it. done.
 				return true;
 
 			}
 
-			var temp = source[..nextNewline];
+			var temp = source[curIndex..nextNewline];
 
 			if (temp.Length > 0 && temp[^1] == '\r')
 				temp = temp[..^1]; // normalize \r\n by ignoring \r
@@ -105,13 +104,13 @@ namespace RSML.Reader
 			{
 
 				tokens = new([eolToken]);
-				source = source[(nextNewline + 1)..];
+				curIndex++;
 				return true;
 
 			}
 
 			tokens = tokenizer.TokenizeLine(temp, languageStandard);
-			source = source[(nextNewline + 1)..];
+			curIndex += temp.Length; // this already counts +1
 			return true;
 
 		}

@@ -42,6 +42,7 @@ using RSML.Actions;
 using RSML.Exceptions;
 using RSML.Language;
 using RSML.Reader;
+using RSML.Tokenization;
 
 
 namespace RSML.Parser
@@ -118,13 +119,13 @@ namespace RSML.Parser
 		private readonly byte HandleSpecialActionCall(ReadOnlySpan<char> name, ReadOnlySpan<char> arg)
 		{
 
-			if (name == "EndAll")
+			if (name.IsEquals("EndAll"))
 				return SpecialActionBehavior.StopEvaluation;
 
 			if (!LanguageStandard.SpecialActions.TryGetValue(name.ToString(), out var action))
 				throw new UndefinedActionException("Action is undefined but used");
 
-			return action.Invoke(this, arg.ToString());
+			return action.Invoke(this, arg);
 
 		}
 
@@ -136,17 +137,17 @@ namespace RSML.Parser
 		/// <param name="right">Right side of logic path</param>
 		/// <param name="properties">Evaluation properties</param>
 		/// <returns>The operator's right side or <c>null</c> if there was no match</returns>
-		private readonly string? HandleOperatorAction(OperatorType operatorType, ReadOnlySpan<char> left, ReadOnlySpan<char> right, in EvaluationProperties properties)
+		private readonly ReadOnlySpan<char> HandleOperatorAction(OperatorType operatorType, ReadOnlySpan<char> left, ReadOnlySpan<char> right, in EvaluationProperties properties)
 		{
 
-			if (left == "any" && properties.ExpandAnyIntoRegularExpression)
+			if (left.IsEquals("any") && properties.ExpandAnyIntoRegularExpression)
 				left = ".+";
 
 			// actual evaluation
 			if (!Regex.IsMatch(properties.RuntimeIdentifier, $"^{left}$"))
-				return null; // no bueno
+				return []; // no bueno
 
-			string actualReturnValue = right[1..^1].ToString(); // this trims the quotes
+			var actualReturnValue = right[1..^1]; // this trims the quotes
 
 			switch (operatorType)
 			{
@@ -241,15 +242,12 @@ namespace RSML.Parser
 						if (tokens[1].Type != RSTokenType.SpecialActionName)
 							continue;
 
-						if (tokens[1].Value.Span == "EndAll")
-							return new();
-
 						byte result;
 
 						try
 						{
 
-							result = HandleSpecialActionCall(tokens[1].Value.Span, "");
+							result = HandleSpecialActionCall(tokens[1].Value, "");
 
 						}
 						catch (InvalidRSMLSyntax) { throw; }
@@ -306,15 +304,12 @@ namespace RSML.Parser
 							if (tokens[1].Type != RSTokenType.SpecialActionName)
 								continue;
 
-							if (tokens[1].Value.Span == "EndAll")
-								return new();
-
 							byte res;
 
 							try
 							{
 
-								res = HandleSpecialActionCall(tokens[1].Value.Span, tokens[2].Value.Span);
+								res = HandleSpecialActionCall(tokens[1].Value, tokens[2].Value);
 
 							}
 							catch (InvalidRSMLSyntax) { throw; }
@@ -376,10 +371,10 @@ namespace RSML.Parser
 						if (tokens[2].Type != RSTokenType.LogicPathRight)
 							continue;
 
-						if (tokens[2].Value.Span.Length < 3)
+						if (tokens[2].Value.Length < 3)
 							throw new InvalidRSMLSyntax("Right side of logic path malformed");
 
-						if (tokens[2].Value.Span[0] != '"' || tokens[2].Value.Span[^1] != '"')
+						if (tokens[2].Value[0] != '"' || tokens[2].Value[^1] != '"')
 							throw new InvalidRSMLSyntax("Right side of logic path malformed - should be enclosed in double quotes");
 
 						var returnResult = HandleOperatorAction(
@@ -388,13 +383,13 @@ namespace RSML.Parser
 								: (tokens[1].Type == RSTokenType.SecondaryOperator)
 									? OperatorType.Secondary
 									: OperatorType.Tertiary,
-							tokens[0].Value.Span,
-							tokens[2].Value.Span,
+							tokens[0].Value,
+							tokens[2].Value,
 							properties
 						);
 
-						if (returnResult is not null && tokens[1].Type == RSTokenType.PrimaryOperator)
-							return new(returnResult);
+						if (!returnResult.IsEmpty && tokens[1].Type == RSTokenType.PrimaryOperator)
+							return new(returnResult.ToString());
 
 						continue;
 
@@ -454,9 +449,9 @@ namespace RSML.Parser
 			}
 
 			if (line[0] != '@'
-				&& !line.Contains(LanguageStandard.PrimaryOperatorSymbol, StringComparison.InvariantCulture)
-				&& !line.Contains(LanguageStandard.SecondaryOperatorSymbol, StringComparison.InvariantCulture)
-				&& !line.Contains(LanguageStandard.TertiaryOperatorSymbol, StringComparison.InvariantCulture))
+				&& line.IndexOf(LanguageStandard.PrimaryOperatorSymbol) < 0
+				&& line.IndexOf(LanguageStandard.SecondaryOperatorSymbol) < 0
+				&& line.IndexOf(LanguageStandard.TertiaryOperatorSymbol) < 0)
 			{
 
 				trimmedLine = line;

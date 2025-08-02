@@ -1,4 +1,6 @@
-﻿using RSML.Parser;
+﻿using System;
+
+using RSML.Parser;
 
 
 namespace RSML.Actions
@@ -11,6 +13,6 @@ namespace RSML.Actions
 	/// <param name="actionArgument">The string argument passed to this delegate</param>
 	/// <returns>A behavior of a special action</returns>
 	/// <remarks>For the behaviors, you might want to see <see cref="SpecialActionBehavior" />'s constants.</remarks>
-	public delegate byte SpecialAction(RSParser parser, string actionArgument);
+	public delegate byte SpecialAction(RSParser parser, ReadOnlySpan<char> actionArgument);
 
 }

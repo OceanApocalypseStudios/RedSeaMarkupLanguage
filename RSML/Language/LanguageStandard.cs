@@ -23,8 +23,13 @@ namespace RSML.Language
 			"->",
 			"||",
 			"^!",
-			(_, a) => Console.WriteLine(a),
-			(_, a) => throw new UserRaisedException(a),
+			(_, a) => {
+				foreach (var c in a)
+					Console.Write(c);
+
+				Console.WriteLine();
+			},
+			(_, a) => throw new UserRaisedException(a.ToString()),
 			[]
 		);
 
@@ -35,8 +40,13 @@ namespace RSML.Language
 			"???",
 			"<<",
 			"!!!",
-			(_, a) => Console.WriteLine(a),
-			(_, a) => throw new UserRaisedException(a),
+			(_, a) => {
+				foreach (var c in a)
+					Console.Write(c);
+
+				Console.WriteLine();
+			},
+			(_, a) => throw new UserRaisedException(a.ToString()),
 			[]
 		);
 

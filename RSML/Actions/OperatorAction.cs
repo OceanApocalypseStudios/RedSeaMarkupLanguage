@@ -1,4 +1,6 @@
-﻿using RSML.Parser;
+﻿using System;
+
+using RSML.Parser;
 
 
 namespace RSML.Actions
@@ -9,6 +11,6 @@ namespace RSML.Actions
 	/// </summary>
 	/// <param name="parser">The RSML parser that invoked this delegate</param>
 	/// <param name="right">The right side of the operator (the argument)</param>
-	public delegate void OperatorAction(RSParser parser, string right);
+	public delegate void OperatorAction(RSParser parser, ReadOnlySpan<char> right);
 
 }

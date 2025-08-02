@@ -15,8 +15,6 @@ namespace RSML.Tests.Parser
 			# Comment
 			""";
 
-		private const string PrimaryOperator = "->";
-
 		[Fact]
 		public void GetCommentType_ReturnsCorrectType()
 		{

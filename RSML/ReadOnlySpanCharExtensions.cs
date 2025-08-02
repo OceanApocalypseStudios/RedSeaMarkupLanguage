@@ -23,6 +23,24 @@ namespace RSML
 
 		}
 
+		internal static bool IsEquals(this ReadOnlySpan<char> chars, string str)
+		{
+
+			if (chars.Length != str.Length)
+				return false;
+
+			for (int i = 0; i < chars.Length; i++)
+			{
+
+				if (chars[i] != str[i])
+					return false;
+
+			}
+
+			return true;
+
+		}
+
 	}
 
 }

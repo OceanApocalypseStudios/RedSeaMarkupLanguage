@@ -1,9 +1,7 @@
 ﻿using System;
-
 using RSML.Language;
 
-
-namespace RSML.Reader
+namespace RSML.Tokenization
 {
 
 	/// <summary>

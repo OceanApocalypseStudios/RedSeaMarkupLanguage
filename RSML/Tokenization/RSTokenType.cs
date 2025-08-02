@@ -1,4 +1,4 @@
-﻿namespace RSML.Reader
+﻿namespace RSML.Tokenization
 {
 
 	/// <summary>
