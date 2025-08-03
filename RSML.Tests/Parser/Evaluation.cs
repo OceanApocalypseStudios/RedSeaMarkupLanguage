@@ -8,14 +8,14 @@ using RSML.Parser;
 namespace RSML.Tests.Parser
 {
 
-	public partial class RSParserTests
+	public partial class RsParserTests
 	{
 
 		[Fact]
 		public void Evaluate_WithPrimaryOperatorMatch_ReturnsCorrectValue()
 		{
 
-			RSParser parser = new("test -> \"value\"", LanguageStandard.Official25);
+			RsParser parser = new("test -> \"value\"", LanguageStandard.Official25);
 
 			var result = parser.Evaluate("test");
 
@@ -29,8 +29,16 @@ namespace RSML.Tests.Parser
 		{
 
 			bool actionExecuted = false;
-			var parser = new RSParser("@TestAction", LanguageStandard.Official25);
-			parser.RegisterSpecialAction("TestAction", (_, _) => { actionExecuted = true; return 0; });
+			var parser = new RsParser("@TestAction", LanguageStandard.Official25);
+
+			parser.RegisterSpecialAction(
+				"TestAction", (_, _) =>
+				{
+					actionExecuted = true;
+
+					return 0;
+				}
+			);
 
 			parser.Evaluate("test");
 
@@ -42,8 +50,8 @@ namespace RSML.Tests.Parser
 		public void Evaluate_WithEndAll_StopsEvaluation()
 		{
 
-			var content = "line1\n@EndAll\ntest -> \"this shouldn't be accessed\"";
-			RSParser parser = new(content, LanguageStandard.Official25);
+			string content = "line1\n@EndAll\ntest -> \"this shouldn't be accessed\"";
+			RsParser parser = new(content, LanguageStandard.Official25);
 
 			var result = parser.Evaluate("test");
 
@@ -57,19 +65,19 @@ namespace RSML.Tests.Parser
 		public void HandleOperatorAction_WithInvalidSyntax_ThrowsInvalidRSMLSyntax(string input)
 		{
 
-			var parser = new RSParser(input, LanguageStandard.Official25);
+			var parser = new RsParser(input, LanguageStandard.Official25);
 
 			try
 			{
 
 				parser.Evaluate(EvaluationProperties.FromMachineRid(true));
-				Assert.Fail();
+				Assert.Fail("No error was raised.");
 
 			}
 			catch (Exception ex)
 			{
 
-				Assert.IsType<InvalidRSMLSyntax>(ex);
+				Assert.IsType<InvalidRsmlSyntax>(ex);
 
 			}
 
@@ -79,7 +87,7 @@ namespace RSML.Tests.Parser
 		public void Evaluate_WithExpandAny_ExpandsAnyToRegex()
 		{
 
-			var parser = new RSParser("any -> \"value\"", LanguageStandard.Official25);
+			var parser = new RsParser("any -> \"value\"", LanguageStandard.Official25);
 
 			var result = parser.Evaluate("some-random-rid", true);
 

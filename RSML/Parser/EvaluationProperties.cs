@@ -24,12 +24,7 @@ namespace RSML.Parser
 		/// Initializes a new set of evaluation properties.
 		/// </summary>
 		/// <param name="rid">The RID to check against, in the form of a string</param>
-		public EvaluationProperties(string rid)
-		{
-
-			RuntimeIdentifier = rid;
-
-		}
+		public EvaluationProperties(string rid) { RuntimeIdentifier = rid; }
 
 		/// <summary>
 		/// Initializes a new set of evaluation properties.

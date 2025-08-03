@@ -14,7 +14,7 @@ namespace RSML.Exceptions
 		/// <summary>
 		/// Initializes a new instance of the <see cref="UndefinedOperatorException" /> class.
 		/// </summary>
-		public UndefinedOperatorException() : base() { }
+		public UndefinedOperatorException() { }
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="UndefinedOperatorException" />

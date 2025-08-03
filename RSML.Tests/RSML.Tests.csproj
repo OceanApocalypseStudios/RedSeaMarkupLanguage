@@ -16,8 +16,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\RSML.Native\RSML.Native.csproj" />
-	  <ProjectReference Include="..\RSML\RSML.csproj" />
+		<ProjectReference Include="..\RSML.Native\RSML.Native.csproj" />
+		<ProjectReference Include="..\RSML\RSML.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

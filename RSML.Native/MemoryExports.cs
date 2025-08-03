@@ -8,7 +8,7 @@ namespace RSML.Native
 	/// <summary>
 	/// Exports for public memory-related operations.
 	/// </summary>
-	public unsafe static class MemoryExports
+	public static class MemoryExports
 	{
 
 		/// <summary>
@@ -27,10 +27,14 @@ namespace RSML.Native
 					return 0;
 
 				Marshal.FreeHGlobal(ptr);
+
 				return 1;
 
 			}
-			catch { return -1; }
+			catch
+			{
+				return -1;
+			}
 
 		}
 

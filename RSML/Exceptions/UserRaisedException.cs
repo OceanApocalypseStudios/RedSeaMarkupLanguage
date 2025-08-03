@@ -14,7 +14,7 @@ namespace RSML.Exceptions
 		/// <summary>
 		/// Initializes a new instance of the <see cref="UserRaisedException" /> class.
 		/// </summary>
-		public UserRaisedException() : base() { }
+		public UserRaisedException() { }
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="UserRaisedException" />

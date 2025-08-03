@@ -8,20 +8,21 @@ namespace RSML.Samples.Samples
 	internal class Sample7 : ISample
 	{
 
-		public string Content => """
+		public string Content =>
+			"""
 			# ignored
 			ignored
 
 			# line above is ignored
 
 			# this throws errors fun fact lol
-			any ^! "Error out biatch"
+			any ^! "Error out"
 			""";
 
 		public EvaluationProperties Properties => new("does-not-matter", true);
 
 		/*
-		 * 
+		 *
 		 * Expected Output
 		 * ===============
 		 * - Line 1-6: Ignored
@@ -34,7 +35,14 @@ namespace RSML.Samples.Samples
 		 *
 		 */
 
-		public EvaluationResult EvaluateSample() => new RSParser(Content, LanguageStandard.Official25).Evaluate(Properties);
+		public EvaluationResult EvaluateSample()
+		{
+
+			RsParser parser = new(Content, LanguageStandard.Official25);
+
+			return parser.Evaluate(Properties);
+
+		}
 
 	}
 

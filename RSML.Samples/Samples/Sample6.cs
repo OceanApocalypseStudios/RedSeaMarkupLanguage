@@ -8,7 +8,8 @@ namespace RSML.Samples.Samples
 	internal class Sample6 : ISample
 	{
 
-		public string Content => """
+		public string Content =>
+			"""
 			# ignored
 			ignored
 
@@ -24,7 +25,7 @@ namespace RSML.Samples.Samples
 		public EvaluationProperties Properties => new("does-not-matter", true);
 
 		/*
-		 * 
+		 *
 		 * Expected Output
 		 * ===============
 		 * - Line 1-5: Ignored
@@ -34,7 +35,14 @@ namespace RSML.Samples.Samples
 		 *
 		 */
 
-		public EvaluationResult EvaluateSample() => new RSParser(Content, LanguageStandard.RoadLike).Evaluate(Properties);
+		public EvaluationResult EvaluateSample()
+		{
+
+			RsParser parser = new(Content, LanguageStandard.RoadLike);
+
+			return parser.Evaluate(Properties);
+
+		}
 
 	}
 

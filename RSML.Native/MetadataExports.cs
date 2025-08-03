@@ -10,16 +10,22 @@ namespace RSML.Native
 	/// <summary>
 	/// Exports for RSML metadata.
 	/// </summary>
-	public unsafe static class MetadataExports
+	public static unsafe class MetadataExports
 	{
 
-		private static readonly byte[] authorName = [0x4F, 0x63, 0x65, 0x61, 0x6E, 0x41, 0x70, 0x6F, 0x63, 0x61,
-			0x6C, 0x79, 0x70, 0x73, 0x65, 0x53, 0x74, 0x75, 0x64, 0x69, 0x6F, 0x73]; // OceanApocalypseStudios
 		private const byte ApiAuthorNameLen = 16;
 
-		private static readonly byte[] docsLink = Encoding.UTF8.GetBytes($"https://oceanapocalypsestudios.org/rsml-docs/{RSParser.ApiVersion}/");
+		private static readonly byte[] authorName =
+		[
+			0x4F, 0x63, 0x65, 0x61, 0x6E, 0x41,
+			0x70, 0x6F, 0x63, 0x61, 0x6C, 0x79,
+			0x70, 0x73, 0x65, 0x53, 0x74, 0x75,
+			0x64, 0x69, 0x6F, 0x73
+		]; // OceanApocalypseStudios
 
-		private static readonly byte[] utf8ApiVersion = Encoding.UTF8.GetBytes(RSParser.ApiVersion);
+		private static readonly byte[] docsLink = Encoding.UTF8.GetBytes($"https://oceanapocalypsestudios.org/rsml-docs/{RsParser.ApiVersion}/");
+
+		private static readonly byte[] utf8ApiVersion = Encoding.UTF8.GetBytes(RsParser.ApiVersion);
 
 		/// <summary>
 		/// Writes the API version to a supplied buffer.
@@ -31,7 +37,7 @@ namespace RSML.Native
 		public static int GetApiVersion(byte* buffer, int bufferSize)
 		{
 
-			var len = utf8ApiVersion.Length;
+			int len = utf8ApiVersion.Length;
 
 			if (bufferSize < len)
 				return -1;

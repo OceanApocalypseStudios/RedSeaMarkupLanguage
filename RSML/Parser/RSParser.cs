@@ -1,29 +1,29 @@
-﻿/* 
- *       :::::::::   ::::::::     :::   :::   :::  
- *      :+:    :+: :+:    :+:   :+:+: :+:+:  :+:   
- *     +:+    +:+ +:+         +:+ +:+:+ +:+ +:+    
- *    +#++:++#:  +#++:++#++  +#+  +:+  +#+ +#+     
- *   +#+    +#+        +#+  +#+       +#+ +#+      
- *  #+#    #+# #+#    #+#  #+#       #+# #+#       
- * ###    ###  ########   ###       ### ########## 
- * 
+﻿/*
+ *       :::::::::   ::::::::     :::   :::   :::
+ *      :+:    :+: :+:    :+:   :+:+: :+:+:  :+:
+ *     +:+    +:+ +:+         +:+ +:+:+ +:+ +:+
+ *    +#++:++#:  +#++:++#++  +#+  +:+  +#+ +#+
+ *   +#+    +#+        +#+  +#+       +#+ +#+
+ *  #+#    #+# #+#    #+#  #+#       #+# #+#
+ * ###    ###  ########   ###       ### ##########
+ *
  * OceanApocalypseStudios * C# * Lead Development by Matthew
  *												(MF366)
- *												
+ *
  * MIT License
- * 
+ *
  * Copyright (c) 2025 OceanApocalypseStudios
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -43,6 +43,7 @@ using RSML.Exceptions;
 using RSML.Language;
 using RSML.Reader;
 using RSML.Tokenization;
+using RSML.Trimming;
 
 
 namespace RSML.Parser
@@ -51,7 +52,7 @@ namespace RSML.Parser
 	/// <summary>
 	/// Represents a parser for <strong>Red Sea Markup Language</strong>.
 	/// </summary>
-	public ref struct RSParser
+	public ref partial struct RsParser
 	{
 
 		/// <summary>
@@ -59,26 +60,28 @@ namespace RSML.Parser
 		/// </summary>
 		public const string ApiVersion = "2.0.0";
 
+		private LanguageStandard languageStandard;
+
 		/// <summary>
 		/// The RSML content to evaluate.
 		/// </summary>
-		public ReadOnlySpan<char> Content { get; set; }
+		public ReadOnlySpan<char> Content { get; private set; }
 
 		/// <summary>
 		/// The RSML language standard to apply.
 		/// </summary>
-		public LanguageStandard LanguageStandard { get; set; }
+		public readonly LanguageStandard LanguageStandard => languageStandard;
 
 		/// <summary>
 		/// Initializes a RSML parser with a defined primary operator and some content to
 		/// evaluate.
 		/// </summary>
 		/// <param name="content">The span of characters the parser should evaluate. This can be changed later.</param>
-		public RSParser(ReadOnlySpan<char> content)
+		public RsParser(ReadOnlySpan<char> content)
 		{
 
-			Content = content;
-			LanguageStandard = LanguageStandard.Official25;
+			SetContent(content);
+			SetLanguageStandard(LanguageStandard.Official25);
 
 		}
 
@@ -87,11 +90,11 @@ namespace RSML.Parser
 		/// </summary>
 		/// <param name="content">The span of characters the parser should evaluate. This can be changed later.</param>
 		/// <param name="languageStandard">The RSML language standard to use.</param>
-		public RSParser(ReadOnlySpan<char> content, LanguageStandard languageStandard)
+		public RsParser(ReadOnlySpan<char> content, LanguageStandard languageStandard)
 		{
 
-			Content = content;
-			LanguageStandard = languageStandard;
+			SetContent(content);
+			SetLanguageStandard(languageStandard);
 
 		}
 
@@ -100,11 +103,11 @@ namespace RSML.Parser
 		/// </summary>
 		/// <param name="content">The string the parser should evaluate. This can be changed later.</param>
 		/// <param name="languageStandard">The RSML language standard to use.</param>
-		public RSParser(string content, LanguageStandard languageStandard)
+		public RsParser(string content, LanguageStandard languageStandard)
 		{
 
-			Content = content;
-			LanguageStandard = languageStandard;
+			SetContent(content);
+			SetLanguageStandard(languageStandard);
 
 		}
 
@@ -114,7 +117,7 @@ namespace RSML.Parser
 		/// <param name="name">The name of the special action</param>
 		/// <param name="arg">An argument of the special action or null if empty string</param>
 		/// <returns></returns>
-		/// <exception cref="InvalidRSMLSyntax">A line containing a special action must have at least 2 characters</exception>
+		/// <exception cref="InvalidRsmlSyntax">A line containing a special action must have at least 2 characters</exception>
 		/// <exception cref="UndefinedActionException">Action is undefined but used</exception>
 		private readonly byte HandleSpecialActionCall(ReadOnlySpan<char> name, ReadOnlySpan<char> arg)
 		{
@@ -137,30 +140,34 @@ namespace RSML.Parser
 		/// <param name="right">Right side of logic path</param>
 		/// <param name="properties">Evaluation properties</param>
 		/// <returns>The operator's right side or <c>null</c> if there was no match</returns>
-		private readonly ReadOnlySpan<char> HandleOperatorAction(OperatorType operatorType, ReadOnlySpan<char> left, ReadOnlySpan<char> right, in EvaluationProperties properties)
+		private readonly ReadOnlySpan<char> HandleOperatorAction(
+			OperatorType operatorType,
+			ReadOnlySpan<char> left,
+			ReadOnlySpan<char> right,
+			in EvaluationProperties properties
+		)
 		{
 
-			if (left.IsEquals("any") && properties.ExpandAnyIntoRegularExpression)
-				left = ".+";
+			if ((left.IsEquals("any") && properties.ExpandAnyIntoRegularExpression) || left.IsEquals(".+") || left.IsEquals(".*"))
+				return [ ];
+
+			Span<char> regexSafeLeft = stackalloc char[left.Length + 2];
+			regexSafeLeft[0] = '^';
+			left.CopyTo(regexSafeLeft);
+			regexSafeLeft[^1] = '$';
 
 			// actual evaluation
-			if (!Regex.IsMatch(properties.RuntimeIdentifier, $"^{left}$"))
-				return []; // no bueno
+			if (!Regex.IsMatch((ReadOnlySpan<char>)properties.RuntimeIdentifier, regexSafeLeft.ToString()))
+				return [ ]; // no bueno
 
 			var actualReturnValue = right[1..^1]; // this trims the quotes
 
-			switch (operatorType)
-			{
+			// ReSharper disable once ConvertIfStatementToSwitchStatement
+			if (operatorType == OperatorType.Secondary)
+				LanguageStandard.SecondaryOperatorAction.Invoke(this, actualReturnValue);
 
-				case OperatorType.Secondary:
-					LanguageStandard.SecondaryOperatorAction!.Invoke(this, actualReturnValue);
-					break;
-
-				case OperatorType.Tertiary:
-					LanguageStandard.TertiaryOperatorAction!.Invoke(this, actualReturnValue);
-					break;
-
-			}
+			else if (operatorType == OperatorType.Tertiary)
+				LanguageStandard.TertiaryOperatorAction.Invoke(this, actualReturnValue);
 
 			return actualReturnValue;
 
@@ -177,9 +184,7 @@ namespace RSML.Parser
 		/// </summary>
 		/// <param name="rid">The RID to use</param>
 		/// <returns>A result</returns>
-		public EvaluationResult Evaluate(string rid) => Evaluate(
-			new EvaluationProperties(rid, false)
-		);
+		public EvaluationResult Evaluate(string rid) => Evaluate(new EvaluationProperties(rid, false));
 
 		/// <summary>
 		/// Evaluates the RSML document given a custom RID and an <c>expandAny</c> flag.
@@ -187,9 +192,7 @@ namespace RSML.Parser
 		/// <param name="rid">The RID to use</param>
 		/// <param name="expandAny"><c>true</c> if <c>any</c> should be expanded into <c>.+</c></param>
 		/// <returns>A result</returns>
-		public EvaluationResult Evaluate(string rid, bool expandAny) => Evaluate(
-			new EvaluationProperties(rid, expandAny)
-		);
+		public EvaluationResult Evaluate(string rid, bool expandAny) => Evaluate(new EvaluationProperties(rid, expandAny));
 
 		/// <summary>
 		/// Evaluates the RSML document given an <c>expandAny</c> flag and a strictness level.
@@ -197,9 +200,7 @@ namespace RSML.Parser
 		/// </summary>
 		/// <param name="expandAny"><c>true</c> if <c>any</c> should be expanded into <c>.+</c></param>
 		/// <returns>A result</returns>
-		public EvaluationResult Evaluate(bool expandAny) => Evaluate(
-			new EvaluationProperties(RuntimeInformation.RuntimeIdentifier, expandAny)
-		);
+		public EvaluationResult Evaluate(bool expandAny) => Evaluate(new EvaluationProperties(RuntimeInformation.RuntimeIdentifier, expandAny));
 
 		/// <summary>
 		/// Evaluates a RSML document given some properties.
@@ -210,16 +211,16 @@ namespace RSML.Parser
 		public EvaluationResult Evaluate(EvaluationProperties properties)
 		{
 
-			if (LanguageStandard.PrimaryOperatorSymbol.Length < 1
-				|| LanguageStandard.SecondaryOperatorSymbol.Length < 1
-				|| LanguageStandard.TertiaryOperatorSymbol.Length < 1)
+			if (LanguageStandard.PrimaryOperatorSymbol.Length < 1 ||
+				LanguageStandard.SecondaryOperatorSymbol.Length < 1 ||
+				LanguageStandard.TertiaryOperatorSymbol.Length < 1)
 				throw new UndefinedOperatorException("All operators must have a symbol by this point");
 
 			if (LanguageStandard.SecondaryOperatorAction is null || LanguageStandard.TertiaryOperatorAction is null)
 				throw new UndefinedOperatorException("All operator's actions must be defined at this point");
 
-			RSReader reader = new(Content);
-			RSTokenizer tokenizer = new();
+			RsReader reader = new(Content);
+			RsTokenizer tokenizer = new();
 
 			while (reader.TryReadAndTokenizeLine(tokenizer, LanguageStandard, out var tokens))
 			{
@@ -236,22 +237,10 @@ namespace RSML.Parser
 
 					case 2:
 						// special action with no arg
-						if (tokens[0].Type != RSTokenType.SpecialActionHandler)
+						if (tokens[0].Type != RsTokenType.SpecialActionHandler || tokens[1].Type != RsTokenType.SpecialActionName)
 							continue;
 
-						if (tokens[1].Type != RSTokenType.SpecialActionName)
-							continue;
-
-						byte result;
-
-						try
-						{
-
-							result = HandleSpecialActionCall(tokens[1].Value, "");
-
-						}
-						catch (InvalidRSMLSyntax) { throw; }
-						catch (UndefinedActionException) { throw; }
+						byte result = HandleSpecialActionCall(tokens[1].Value, "");
 
 						switch (result)
 						{
@@ -269,6 +258,7 @@ namespace RSML.Parser
 
 							case SpecialActionBehavior.ResetSpecials:
 								LanguageStandard.SpecialActions.Clear();
+
 								break;
 
 							case SpecialActionBehavior.ResetOperators:
@@ -276,13 +266,16 @@ namespace RSML.Parser
 								// todo: document this. later???? maybe???? i dunno...
 
 								var official25 = LanguageStandard.Official25;
-								LanguageStandard = new(
-									official25.PrimaryOperatorSymbol,
-									official25.SecondaryOperatorSymbol,
-									official25.TertiaryOperatorSymbol,
-									(_, _) => { },
-									(_, _) => { },
-									LanguageStandard.SpecialActions
+
+								SetLanguageStandard(
+									new(
+										official25.PrimaryOperatorSymbol,
+										official25.SecondaryOperatorSymbol,
+										official25.TertiaryOperatorSymbol,
+										(_, _) => { },
+										(_, _) => { },
+										LanguageStandard.SpecialActions
+									)
 								);
 
 								break;
@@ -290,7 +283,9 @@ namespace RSML.Parser
 							default:
 								// anything else is an error tho it's recommended to use 1 as error
 								// as we may add other special behaviors
-								throw new ActionErrorException("Action raised error with status code 1 - if you're the creator of the file, please strictly use code 1 for errors in the future.");
+								throw new ActionErrorException(
+									"Action raised error with status code 1 - if you're the creator of the file, please strictly use code 1 for errors in the future."
+								);
 
 						}
 
@@ -298,22 +293,10 @@ namespace RSML.Parser
 
 					case 3:
 						// special actions with argument or like logic paths
-						if (tokens[0].Type == RSTokenType.SpecialActionHandler)
+						if (tokens[0].Type == RsTokenType.SpecialActionHandler && tokens[1].Type == RsTokenType.SpecialActionName)
 						{
 
-							if (tokens[1].Type != RSTokenType.SpecialActionName)
-								continue;
-
-							byte res;
-
-							try
-							{
-
-								res = HandleSpecialActionCall(tokens[1].Value, tokens[2].Value);
-
-							}
-							catch (InvalidRSMLSyntax) { throw; }
-							catch (UndefinedActionException) { throw; }
+							byte res = HandleSpecialActionCall(tokens[1].Value, tokens[2].Value);
 
 							switch (res)
 							{
@@ -331,6 +314,7 @@ namespace RSML.Parser
 
 								case SpecialActionBehavior.ResetSpecials:
 									LanguageStandard.SpecialActions.Clear();
+
 									break;
 
 								case SpecialActionBehavior.ResetOperators:
@@ -338,13 +322,16 @@ namespace RSML.Parser
 									// todo: document this. later???? maybe???? i dunno...
 
 									var official25 = LanguageStandard.Official25;
-									LanguageStandard = new(
-										official25.PrimaryOperatorSymbol,
-										official25.SecondaryOperatorSymbol,
-										official25.TertiaryOperatorSymbol,
-										(_, _) => { },
-										(_, _) => { },
-										LanguageStandard.SpecialActions
+
+									SetLanguageStandard(
+										new(
+											official25.PrimaryOperatorSymbol,
+											official25.SecondaryOperatorSymbol,
+											official25.TertiaryOperatorSymbol,
+											(_, _) => { },
+											(_, _) => { },
+											LanguageStandard.SpecialActions
+										)
 									);
 
 									break;
@@ -352,7 +339,9 @@ namespace RSML.Parser
 								default:
 									// anything else is an error tho it's recommended to use 1 as error
 									// as we may add other special behaviors
-									throw new ActionErrorException("Action raised error with status code 1 - if you're the creator of the file, please strictly use code 1 for errors in the future.");
+									throw new ActionErrorException(
+										"Action raised error with status code 1 - if you're the creator of the file, please strictly use code 1 for errors in the future."
+									);
 
 							}
 
@@ -360,27 +349,23 @@ namespace RSML.Parser
 
 						}
 
-						if (tokens[0].Type != RSTokenType.LogicPathLeft)
-							continue;
-
-						if (tokens[1].Type != RSTokenType.PrimaryOperator
-							&& tokens[1].Type != RSTokenType.SecondaryOperator
-							&& tokens[1].Type != RSTokenType.TertiaryOperator)
-							continue;
-
-						if (tokens[2].Type != RSTokenType.LogicPathRight)
+						if (tokens[0].Type != RsTokenType.LogicPathLeft &&
+							tokens[1].Type != RsTokenType.PrimaryOperator &&
+							tokens[1].Type != RsTokenType.SecondaryOperator &&
+							tokens[1].Type != RsTokenType.TertiaryOperator &&
+							tokens[2].Type != RsTokenType.LogicPathRight)
 							continue;
 
 						if (tokens[2].Value.Length < 3)
-							throw new InvalidRSMLSyntax("Right side of logic path malformed");
+							throw new InvalidRsmlSyntax("Right side of logic path malformed");
 
 						if (tokens[2].Value[0] != '"' || tokens[2].Value[^1] != '"')
-							throw new InvalidRSMLSyntax("Right side of logic path malformed - should be enclosed in double quotes");
+							throw new InvalidRsmlSyntax("Right side of logic path malformed - should be enclosed in double quotes");
 
 						var returnResult = HandleOperatorAction(
-							tokens[1].Type == RSTokenType.PrimaryOperator
+							tokens[1].Type == RsTokenType.PrimaryOperator
 								? OperatorType.Primary
-								: (tokens[1].Type == RSTokenType.SecondaryOperator)
+								: tokens[1].Type == RsTokenType.SecondaryOperator
 									? OperatorType.Secondary
 									: OperatorType.Tertiary,
 							tokens[0].Value,
@@ -388,13 +373,13 @@ namespace RSML.Parser
 							properties
 						);
 
-						if (!returnResult.IsEmpty && tokens[1].Type == RSTokenType.PrimaryOperator)
+						if (!returnResult.IsEmpty && tokens[1].Type == RsTokenType.PrimaryOperator)
 							return new(returnResult.ToString());
 
 						continue;
 
 					default:
-						continue; // 4 tokens would be unprecedent
+						continue; // 4 tokens would be unprecedented
 
 				}
 
@@ -405,61 +390,63 @@ namespace RSML.Parser
 		}
 
 		/// <summary>
-		/// Gets the type of comment of a line of RSML, taking into consideration
-		/// the parser's properties, or <c>null</c> if the line is not a comment.
+		/// Sets the content to a string.
 		/// </summary>
-		/// <param name="line">A line of RSML</param>
-		/// <returns>The type of comment of the line, or <c>null</c> if the line is not a comment</returns>
-		/// <exception cref="UndefinedOperatorException" />
-		public readonly CommentType? GetCommentType(ReadOnlySpan<char> line) => GetCommentType(line, out _);
+		/// <param name="value">The new content</param>
+		public void SetContent(string value) => Content = value;
+
+		/// <summary>
+		/// Sets the content to a span of characters.
+		/// </summary>
+		/// <param name="value">The new content</param>
+		public void SetContent(ReadOnlySpan<char> value) => Content = value;
+
+		/// <summary>
+		/// Sets the language standard to a new one.
+		/// </summary>
+		/// <param name="languageStandard">The new language standard</param>
+		public void SetLanguageStandard(LanguageStandard languageStandard) => this.languageStandard = languageStandard;
+
+		/// <summary>
+		/// Trims the RSML document softly.
+		/// </summary>
+		public void Trim() => SetContent(SoftTrimmer.Trim(new(Content), languageStandard));
+
+		/// <summary>
+		/// Trims the RSML document with a given trimmer.
+		/// </summary>
+		/// <param name="trimmer">The given trimmer</param>
+		public void Trim(ITrimmer trimmer) => SetContent(trimmer.Trim(Content, languageStandard));
 
 		/// <summary>
 		/// Gets the type of comment of a line of RSML, taking into consideration
 		/// the parser's properties, or <c>null</c> if the line is not a comment.
 		/// </summary>
 		/// <param name="line">A line of RSML</param>
-		/// <param name="trimmedLine">
-		/// Since this method trims the given line, you can get it back to avoid trimming twice,
-		/// which would cost performance.
-		/// </param>
 		/// <returns>The type of comment of the line, or <c>null</c> if the line is not a comment</returns>
 		/// <exception cref="UndefinedOperatorException" />
-		private readonly CommentType? GetCommentType(ReadOnlySpan<char> line, out ReadOnlySpan<char> trimmedLine)
+		public readonly CommentType? GetCommentType(ReadOnlySpan<char> line)
 		{
 
-			if (LanguageStandard.PrimaryOperatorSymbol.Length < 1 || LanguageStandard.SecondaryOperatorSymbol.Length < 1 || LanguageStandard.TertiaryOperatorSymbol.Length < 1)
+			if (LanguageStandard.PrimaryOperatorSymbol.Length < 1 ||
+				LanguageStandard.SecondaryOperatorSymbol.Length < 1 ||
+				LanguageStandard.TertiaryOperatorSymbol.Length < 1)
 				throw new UndefinedOperatorException("All operators must be defined at this stage.");
 
 			if (line.IsEmpty || line.IsWhiteSpace() || line.IsNewLinesOnly())
-			{
-
-				trimmedLine = []; // empty
 				return CommentType.Whitespace;
-
-			}
 
 			line = line.TrimStart();
 
 			if (line[0] == '#')
-			{
-
-				trimmedLine = line;
 				return CommentType.Explicit;
 
-			}
-
-			if (line[0] != '@'
-				&& line.IndexOf(LanguageStandard.PrimaryOperatorSymbol) < 0
-				&& line.IndexOf(LanguageStandard.SecondaryOperatorSymbol) < 0
-				&& line.IndexOf(LanguageStandard.TertiaryOperatorSymbol) < 0)
-			{
-
-				trimmedLine = line;
+			if (line[0] != '@' &&
+				line.IndexOf(LanguageStandard.PrimaryOperatorSymbol) < 0 &&
+				line.IndexOf(LanguageStandard.SecondaryOperatorSymbol) < 0 &&
+				line.IndexOf(LanguageStandard.TertiaryOperatorSymbol) < 0)
 				return CommentType.Implicit;
 
-			}
-
-			trimmedLine = [];
 			return null;
 
 		}

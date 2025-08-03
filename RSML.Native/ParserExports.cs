@@ -8,9 +8,9 @@ namespace RSML.Native
 {
 
 	/// <summary>
-	/// Exports for <see cref="RSParser "/>.
+	/// Exports for <see cref="RsParser " />.
 	/// </summary>
-	public unsafe static class ParserExports
+	public static class ParserExports
 	{
 
 		[UnmanagedCallersOnly(EntryPoint = "rsml_create_parser")]

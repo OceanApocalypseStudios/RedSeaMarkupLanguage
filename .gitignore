@@ -362,8 +362,10 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
+# JetBrains
+.idea/**/*
+!.idea/.idea.RedSeaMarkupLanguage/.idea/encodings.xml
 
-### MY STUFF ###
 # PowerShell Runner
 runner.ps1
 

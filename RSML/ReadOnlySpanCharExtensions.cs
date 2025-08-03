@@ -15,9 +15,11 @@ namespace RSML
 		internal static bool IsNewLinesOnly(this ReadOnlySpan<char> chars)
 		{
 
-			foreach (var c in chars)
+			foreach (char c in chars)
+			{
 				if (c != '\r' && c != '\n')
 					return false;
+			}
 
 			return true;
 

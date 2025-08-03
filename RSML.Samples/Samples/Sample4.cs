@@ -8,7 +8,8 @@ namespace RSML.Samples.Samples
 	internal class Sample4 : ISample
 	{
 
-		public string Content => """
+		public string Content =>
+			"""
 			# ignored
 			ignored
 
@@ -25,7 +26,7 @@ namespace RSML.Samples.Samples
 		public EvaluationProperties Properties => new("osx-arm64", false);
 
 		/*
-		 * 
+		 *
 		 * Expected Output
 		 * ===============
 		 * - Line 1-5: Ignored
@@ -37,7 +38,14 @@ namespace RSML.Samples.Samples
 		 *
 		 */
 
-		public EvaluationResult EvaluateSample() => new RSParser(Content, LanguageStandard.Official25).Evaluate(Properties);
+		public EvaluationResult EvaluateSample()
+		{
+
+			RsParser parser = new(Content, LanguageStandard.Official25);
+
+			return parser.Evaluate(Properties);
+
+		}
 
 	}
 

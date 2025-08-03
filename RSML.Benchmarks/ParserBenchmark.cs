@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 using BenchmarkDotNet.Attributes;
@@ -13,14 +14,15 @@ namespace RSML.Benchmarks
 
 	[MemoryDiagnoser]
 	[SimpleJob(RuntimeMoniker.Net80)]
-	[System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0058:Expression value is never used", Justification = "<Pending>")]
-	public class RSParserBenchmarks
+	[SuppressMessage("Style", "IDE0058:Expression value is never used", Justification = "<Pending>")]
+	public class RsParserBenchmarks
 	{
 
-		private string smallContent = null!;
-		private string mediumContent = null!;
-		private string largeContent = null!;
 		private string complexContent = null!;
+		private string largeContent = null!;
+		private string mediumContent = null!;
+
+		private string smallContent = null!;
 
 		[GlobalSetup]
 		public void Setup()
@@ -39,9 +41,13 @@ namespace RSML.Benchmarks
 			var sb = new StringBuilder();
 
 			for (int i = 0; i < lines; i++)
-				_ = sb.AppendLine(i % 5 == 0
-					? $"line{i} -> \"value{i}\""
-					: $"# Comment {i}");
+			{
+				_ = sb.AppendLine(
+					i % 5 == 0
+						? $"line{i} -> \"value{i}\""
+						: $"# Comment {i}"
+				);
+			}
 
 			return sb.ToString();
 
@@ -72,11 +78,12 @@ namespace RSML.Benchmarks
 
 		}
 
-		private static RSParser CreateConfiguredParser(string content)
+		private static RsParser CreateConfiguredParser(string content)
 		{
 
-			var parser = new RSParser(content, LanguageStandard.Official25);
+			RsParser parser = new(content, LanguageStandard.Official25);
 			parser.RegisterSpecialAction("SpecialAction", (_, _) => 0);
+
 			return parser;
 
 		}

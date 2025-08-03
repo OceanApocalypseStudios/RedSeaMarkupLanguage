@@ -13,72 +13,76 @@ namespace RSML.Language
 	/// Learn more about language standards here:
 	/// <a href="https://oceanapocalypsestudios.github.io/rsml-docs/latest/language/standards/" />.
 	/// </summary>
-	public ref struct LanguageStandard
+	public readonly ref struct LanguageStandard
 	{
 
 		/// <summary>
 		/// Official 25 language standard, also known as official-25.
 		/// </summary>
-		public static LanguageStandard Official25 => new(
-			"->",
-			"||",
-			"^!",
-			(_, a) => {
-				foreach (var c in a)
-					Console.Write(c);
+		public static LanguageStandard Official25 =>
+			new(
+				"->",
+				"||",
+				"^!",
+				(_, a) =>
+				{
+					foreach (char c in a)
+						Console.Write(c);
 
-				Console.WriteLine();
-			},
-			(_, a) => throw new UserRaisedException(a.ToString()),
-			[]
-		);
+					Console.WriteLine();
+				},
+				(_, a) => throw new UserRaisedException(a.ToString()),
+				[ ]
+			);
 
 		/// <summary>
 		/// Road-Like language standard, also known as roadlike.
 		/// </summary>
-		public static LanguageStandard RoadLike => new(
-			"???",
-			"<<",
-			"!!!",
-			(_, a) => {
-				foreach (var c in a)
-					Console.Write(c);
+		public static LanguageStandard RoadLike =>
+			new(
+				"???",
+				"<<",
+				"!!!",
+				(_, a) =>
+				{
+					foreach (char c in a)
+						Console.Write(c);
 
-				Console.WriteLine();
-			},
-			(_, a) => throw new UserRaisedException(a.ToString()),
-			[]
-		);
+					Console.WriteLine();
+				},
+				(_, a) => throw new UserRaisedException(a.ToString()),
+				[ ]
+			);
 
 		/// <summary>
 		/// The primary operator's symbol.
 		/// </summary>
-		public ReadOnlySpan<char> PrimaryOperatorSymbol { get; set; }
+		public ReadOnlySpan<char> PrimaryOperatorSymbol { get; }
 
 		/// <summary>
 		/// The secondary operator's symbol.
 		/// </summary>
-		public ReadOnlySpan<char> SecondaryOperatorSymbol { get; set; }
+		public ReadOnlySpan<char> SecondaryOperatorSymbol { get; }
 
 		/// <summary>
 		/// The tertiary operator's symbol.
 		/// </summary>
-		public ReadOnlySpan<char> TertiaryOperatorSymbol { get; set; }
+		public ReadOnlySpan<char> TertiaryOperatorSymbol { get; }
 
 		/// <summary>
 		/// The secondary operator's action.
 		/// </summary>
-		public OperatorAction SecondaryOperatorAction { get; set; }
+		public OperatorAction SecondaryOperatorAction { get; }
 
 		/// <summary>
 		/// The tertiary operator's action.
 		/// </summary>
-		public OperatorAction TertiaryOperatorAction { get; set; }
+		public OperatorAction TertiaryOperatorAction { get; }
 
 		/// <summary>
 		/// The special actions this standard defines.
 		/// </summary>
-		public Dictionary<string, SpecialAction> SpecialActions { get; init; } = [];
+		public Dictionary<string, SpecialAction> SpecialActions { get; init; } = [ ];
 
 		/// <summary>
 		/// Initializes a new language standard for RSML.
@@ -89,12 +93,14 @@ namespace RSML.Language
 		/// <param name="secondaryOperatorAction">The action for the secondary operator</param>
 		/// <param name="tertiaryOperatorAction">The action for the tertiary operator</param>
 		/// <param name="specialActions">The special actions</param>
-		public LanguageStandard(ReadOnlySpan<char> primaryOperatorSymbol,
-								ReadOnlySpan<char> secondaryOperatorSymbol,
-								ReadOnlySpan<char> tertiaryOperatorSymbol,
-								OperatorAction secondaryOperatorAction,
-								OperatorAction tertiaryOperatorAction,
-								Dictionary<string, SpecialAction> specialActions)
+		public LanguageStandard(
+			ReadOnlySpan<char> primaryOperatorSymbol,
+			ReadOnlySpan<char> secondaryOperatorSymbol,
+			ReadOnlySpan<char> tertiaryOperatorSymbol,
+			OperatorAction secondaryOperatorAction,
+			OperatorAction tertiaryOperatorAction,
+			Dictionary<string, SpecialAction> specialActions
+		)
 		{
 
 			PrimaryOperatorSymbol = primaryOperatorSymbol;

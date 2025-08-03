@@ -1,5 +1,7 @@
 ﻿using System;
+
 using RSML.Actions;
+
 
 namespace RSML.Exceptions
 {
@@ -14,7 +16,7 @@ namespace RSML.Exceptions
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ActionStandardErrorException" /> class.
 		/// </summary>
-		public ActionStandardErrorException() : base() { }
+		public ActionStandardErrorException() { }
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ActionStandardErrorException" />

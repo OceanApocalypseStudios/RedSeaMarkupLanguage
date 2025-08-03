@@ -8,7 +8,8 @@ namespace RSML.Samples.Samples
 	internal class Sample2 : ISample
 	{
 
-		public string Content => """
+		public string Content =>
+			"""
 			# i have a lot of comments here
 			this should be ignored
 			(arch|ubuntu|debian).+ -> "tux is happy!"
@@ -19,7 +20,7 @@ namespace RSML.Samples.Samples
 		public EvaluationProperties Properties => new("debian-x86", true);
 
 		/*
-		 * 
+		 *
 		 * Expected Output
 		 * ===============
 		 * - Line 1: Ignored
@@ -29,7 +30,14 @@ namespace RSML.Samples.Samples
 		 *
 		 */
 
-		public EvaluationResult EvaluateSample() => new RSParser(Content, LanguageStandard.Official25).Evaluate(Properties);
+		public EvaluationResult EvaluateSample()
+		{
+
+			RsParser parser = new(Content, LanguageStandard.Official25);
+
+			return parser.Evaluate(Properties);
+
+		}
 
 	}
 

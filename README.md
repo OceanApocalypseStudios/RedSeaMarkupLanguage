@@ -10,14 +10,25 @@
 
 > The modern fork of [MF's Crossroad](https://github.com/MF366-Coding/MFRoad) we're sure you'll love.
 
-Below is a list of features (or reasons why RSML is better than MFRoad - call them what you want) in this markup language.
+Below is a list of features (or reasons why RSML is better than MFRoad - call them what you want) in this markup
+language.
 
 <hr />
 
 ## Coming Soon: RSML v2.0.0
-**Red Sea Markup Language v2.0.0** is currently **in the making** and will be a huge release, bringing native binding support into the table _(this also means AOT "friendliness")_, which will let you use RSML in Python, Go, Rust _(if you're about that)_, wherever you want, really _(that supports native interop)_.
+**Red Sea Markup Language v2.0.0** is currently **in the making** and will be a huge release, bringing native binding
+support into the table _(this also means AOT "friendliness")_, which will let you use RSML in Python, Go, Rust _(if
+you're about that)_, wherever you want, really _(that supports native interop)_.
 
-RSML v2.0.0 will also improve the current API **a lot**, as v1.0.5 still has its fair share of issues, not to mention [RSML for Python](https://github.com/OceanApocalypseStudios/RSML.Python)'s ones.
+RSML v2.0.0 will also improve the current API **a lot**, as v1.0.5 still has its fair share of issues, not to
+mention [RSML for Python](https://github.com/OceanApocalypseStudios/RSML.Python)'s ones.
+
+<hr />
+
+## Performance
+At OceanApocalypseStudios, we value performance **a lot**.
+
+And that's why we're pleased to announce that RSML is _TBA_.
 
 <hr />
 
@@ -49,7 +60,9 @@ win->          "valid"
 ## Known system identifier format
 MFRoad used the poorly-documented `sys.platform` from python and, for Linux distros, the `distro` module.
 
-Since RSML is made in C#, we decided to change things up a bit: **system identifiers are now the same as [MSBuild Runtime Identifiers](https://learn.microsoft.com/en-us/dotnet/core/rid-catalog),** which are pretty well documented.
+Since RSML is made in C#, we decided to change things up a bit: **system identifiers are now the same
+as [MSBuild Runtime Identifiers](https://learn.microsoft.com/en-us/dotnet/core/rid-catalog),** which are pretty well
+documented.
 
 <hr />
 
@@ -61,7 +74,8 @@ cat somefile.rsea | RSML.CLI evaluate --no-pretty
 ```
 
 > [!NOTE]
-> `--no-pretty` disables ASCII art and copyright messages so you can easily pipe the evaluation into another command without it also piping the ASCII art.
+> `--no-pretty` disables ASCII art and copyright messages so you can easily pipe the evaluation into another command
+> without it also piping the ASCII art.
 
 <hr />
 
@@ -69,6 +83,7 @@ cat somefile.rsea | RSML.CLI evaluate --no-pretty
 You may build the documentation for RSML yourself!
 
 Just try doing this:
+
 ```bash
 RSML.Docs
 ```
@@ -108,7 +123,8 @@ so my recommendation?
 <hr />
 
 ## Custom actions
-MFRoad only allowed 3 actions: returning a value (primary), outputting text (secondary) and throwing an error (tertiary).
+MFRoad only allowed 3 actions: returning a value (primary), outputting text (secondary) and throwing an error (
+tertiary).
 
 RSML still only allows 3 main actions, but they can be customized (does not apply to the CLI).
 
@@ -147,7 +163,8 @@ There is only one built-in special action, an argument-less one. All of the othe
 @EndAll # the only built-in special action in RSML
 ```
 
-You may define special actions but keep in mind they take 2 arguments, like normal main actions but also return a value, of type `byte`.
+You may define special actions but keep in mind they take 2 arguments, like normal main actions but also return a value,
+of type `byte`.
 
 ```c#
 parser.RegisterSpecialFunction("TestFunc", (_, _) => 251);
@@ -166,7 +183,8 @@ This `TestFunc` can then be used in RSML.
 <hr />
 
 ## What about other languages?
-*~~As for right now, we don't intend in porting RSML library to other languages, but~~* You could include the DLLs in your project and call them.
+*~~As for right now, we don't intend in porting RSML library to other languages, but~~* You could include the DLLs in
+your project and call them.
 Not a graceful solution, but not a bad one either.
 
 <table>
@@ -341,5 +359,5 @@ Not a graceful solution, but not a bad one either.
 <hr />
 
 > **Copyright (c) 2025 OceanApocalypseStudios**
-> 
+>
 > We :heart: open-source!

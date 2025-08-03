@@ -21,8 +21,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RSML.Benchmarks", "RSML.Ben
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RSML.Samples", "RSML.Samples\RSML.Samples.csproj", "{4A302A93-D984-414D-BDA5-D335CE482B2B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RSML.CompilerServices", "RSML.CompilerServices\RSML.CompilerServices.csproj", "{55595051-CDFA-4296-A904-21A3C4C73F9C}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,18 +91,6 @@ Global
 		{4A302A93-D984-414D-BDA5-D335CE482B2B}.Release|x64.Build.0 = Release|Any CPU
 		{4A302A93-D984-414D-BDA5-D335CE482B2B}.Release|x86.ActiveCfg = Release|Any CPU
 		{4A302A93-D984-414D-BDA5-D335CE482B2B}.Release|x86.Build.0 = Release|Any CPU
-		{55595051-CDFA-4296-A904-21A3C4C73F9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{55595051-CDFA-4296-A904-21A3C4C73F9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{55595051-CDFA-4296-A904-21A3C4C73F9C}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{55595051-CDFA-4296-A904-21A3C4C73F9C}.Debug|x64.Build.0 = Debug|Any CPU
-		{55595051-CDFA-4296-A904-21A3C4C73F9C}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{55595051-CDFA-4296-A904-21A3C4C73F9C}.Debug|x86.Build.0 = Debug|Any CPU
-		{55595051-CDFA-4296-A904-21A3C4C73F9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{55595051-CDFA-4296-A904-21A3C4C73F9C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{55595051-CDFA-4296-A904-21A3C4C73F9C}.Release|x64.ActiveCfg = Release|Any CPU
-		{55595051-CDFA-4296-A904-21A3C4C73F9C}.Release|x64.Build.0 = Release|Any CPU
-		{55595051-CDFA-4296-A904-21A3C4C73F9C}.Release|x86.ActiveCfg = Release|Any CPU
-		{55595051-CDFA-4296-A904-21A3C4C73F9C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

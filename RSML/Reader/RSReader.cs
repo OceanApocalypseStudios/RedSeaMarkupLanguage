@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Runtime.InteropServices;
+
 using RSML.Language;
 using RSML.Tokenization;
 
@@ -9,35 +11,25 @@ namespace RSML.Reader
 	/// <summary>
 	/// A performant byref stack allocated RSML reader that reads AND tokenizes RSML.
 	/// </summary>
-	public ref struct RSReader
+	public ref struct RsReader
 	{
 
-		private int curIndex = -1;
+		private int curIndex = 0;
 		private readonly ReadOnlySpan<char> source;
-		private static readonly RSToken eofToken = new(RSTokenType.EOF, "\0");
-		private static readonly RSToken eolToken = new(RSTokenType.EOL, "\n");
+		private static RsToken eofToken = new(RsTokenType.EOF, "\0");
+		private static RsToken eolToken = new(RsTokenType.EOL, "\n");
 
 		/// <summary>
 		/// Initializes a RSML reader.
 		/// </summary>
 		/// <param name="source">A span of characters as input</param>
-		public RSReader(ReadOnlySpan<char> source)
-		{
-
-			this.source = source;
-
-		}
+		public RsReader(ReadOnlySpan<char> source) { this.source = source; }
 
 		/// <summary>
 		/// Initializes a RSML reader.
 		/// </summary>
 		/// <param name="source">A string as input</param>
-		public RSReader(string source)
-		{
-
-			this.source = source.AsSpan();
-
-		}
+		public RsReader(string source) { this.source = source.AsSpan(); }
 
 		/// <summary>
 		/// Tries to read the next character.
@@ -54,11 +46,13 @@ namespace RSML.Reader
 			{
 
 				character = '\0';
+
 				return false;
 
 			}
 
 			character = source[curIndex++];
+
 			return true;
 
 		}
@@ -70,7 +64,7 @@ namespace RSML.Reader
 		/// <param name="languageStandard">The language standard to use for the line</param>
 		/// <param name="tokens">The return tokens</param>
 		/// <returns><c>false</c> if the end has been reached</returns>
-		public bool TryReadAndTokenizeLine(ITokenizer tokenizer, in LanguageStandard languageStandard, out ReadOnlySpan<RSToken> tokens)
+		public bool TryReadAndTokenizeLine(ITokenizer tokenizer, in LanguageStandard languageStandard, out ReadOnlySpan<RsToken> tokens)
 		{
 
 			if (source.Length < 1)
@@ -79,38 +73,47 @@ namespace RSML.Reader
 			if (curIndex < 0)
 			{
 
-				tokens = new([eofToken]);
+				tokens = MemoryMarshal.CreateReadOnlySpan(ref eofToken, 1);
+
 				return false;
 
 			}
 
-			var nextNewline = source[curIndex..].IndexOf('\n');
+			int nextNewline = source[curIndex..].IndexOf('\n');
 
-			if (nextNewline == -1)
+			if (nextNewline < 0)
 			{
 
-				tokens = tokenizer.TokenizeLine(source, languageStandard);
-				curIndex = -1; // we consumed it. done.
+				tokens = tokenizer.TokenizeLine(source[curIndex..], languageStandard);
+				curIndex = -1; // We consumed it. Done.
+
 				return true;
 
 			}
 
-			var temp = source[curIndex..nextNewline];
+			var temp = source[curIndex..(curIndex + nextNewline)];
 
 			if (temp.Length > 0 && temp[^1] == '\r')
+			{
+
+				curIndex++;        // skip the \r in the next iteration
 				temp = temp[..^1]; // normalize \r\n by ignoring \r
+
+			}
 
 			if (temp.Length < 1)
 			{
 
-				tokens = new([eolToken]);
+				tokens = MemoryMarshal.CreateReadOnlySpan(ref eolToken, 1);
 				curIndex++;
+
 				return true;
 
 			}
 
 			tokens = tokenizer.TokenizeLine(temp, languageStandard);
-			curIndex += temp.Length; // this already counts +1
+			curIndex += temp.Length + 1;
+
 			return true;
 
 		}

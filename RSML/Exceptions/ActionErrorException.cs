@@ -14,7 +14,7 @@ namespace RSML.Exceptions
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ActionErrorException" /> class.
 		/// </summary>
-		public ActionErrorException() : base() { }
+		public ActionErrorException() { }
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ActionErrorException" />

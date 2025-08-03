@@ -8,7 +8,8 @@ namespace RSML.Samples.Samples
 	internal class Sample1 : ISample
 	{
 
-		public string Content => """
+		public string Content =>
+			"""
 			(ubuntu|debian).+ -> "Debian-based"
 			@EndAll
 			win.+ -> "windows"
@@ -22,7 +23,7 @@ namespace RSML.Samples.Samples
 		public EvaluationProperties Properties => new("win-x64", false);
 
 		/*
-		 * 
+		 *
 		 * Expected Output
 		 * ===============
 		 * - Line 1: No match, ignored
@@ -31,7 +32,14 @@ namespace RSML.Samples.Samples
 		 *
 		 */
 
-		public EvaluationResult EvaluateSample() => new RSParser(Content, LanguageStandard.Official25).Evaluate(Properties);
+		public EvaluationResult EvaluateSample()
+		{
+
+			RsParser parser = new(Content, LanguageStandard.Official25);
+
+			return parser.Evaluate(Properties);
+
+		}
 
 	}
 

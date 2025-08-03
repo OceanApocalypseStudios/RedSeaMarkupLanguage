@@ -4,7 +4,7 @@
 	/// <summary>
 	/// A RSMl token's type.
 	/// </summary>
-	public enum RSTokenType : byte
+	public enum RsTokenType : byte
 	{
 
 		/// <summary>
@@ -41,7 +41,7 @@
 		/// Special action's name.
 		/// </summary>
 		SpecialActionName,
-		
+
 		/// <summary>
 		/// Special action's argument.
 		/// </summary>

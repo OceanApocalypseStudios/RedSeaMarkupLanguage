@@ -13,7 +13,7 @@ namespace RSML.Exceptions
 		/// <summary>
 		/// Initializes a new instance of the <see cref="UndefinedActionException" /> class.
 		/// </summary>
-		public UndefinedActionException() : base() { }
+		public UndefinedActionException() { }
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="UndefinedActionException" />

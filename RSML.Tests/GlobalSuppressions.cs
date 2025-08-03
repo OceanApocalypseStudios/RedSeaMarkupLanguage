@@ -5,4 +5,9 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Style", "IDE0039:Use local function", Justification = "<Pending>", Scope = "member", Target = "~M:RSML.Tests.LanguageStandardTests.Constructor_InitializesCorrectly")]
+
+[assembly:
+	SuppressMessage(
+		"Style", "IDE0039:Use local function", Justification = "<Pending>", Scope = "member",
+		Target = "~M:RSML.Tests.LanguageStandardTests.Constructor_InitializesCorrectly"
+	)]

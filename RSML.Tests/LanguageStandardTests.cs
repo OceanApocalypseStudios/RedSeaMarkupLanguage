@@ -38,13 +38,13 @@ namespace RSML.Tests
 		public void Constructor_InitializesCorrectly()
 		{
 
-			var primaryOperatorSymbol = ">";
-			var secondaryOperatorSymbol = ">>";
-			var tertiaryOperatorSymbol = ">>>";
+			string primaryOperatorSymbol = ">";
+			string secondaryOperatorSymbol = ">>";
+			string tertiaryOperatorSymbol = ">>>";
 			OperatorAction secondaryOperatorAction = (_, _) => { };
 			OperatorAction tertiaryOperatorAction = (_, _) => { };
 
-			Dictionary<string, SpecialAction> actions = new([new("Test", (_, _) => 0)]);
+			Dictionary<string, SpecialAction> actions = new([ new("Test", (_, _) => 0) ]);
 
 			LanguageStandard standard = new(
 				primaryOperatorSymbol, secondaryOperatorSymbol, tertiaryOperatorSymbol,
