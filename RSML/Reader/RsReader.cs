@@ -1,23 +1,20 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-using RSML.Language;
 using RSML.Tokenization;
 
 
 namespace RSML.Reader
 {
 
-	/// <summary>
-	/// A performant byref stack allocated RSML reader that reads AND tokenizes RSML.
-	/// </summary>
+	// todo: code this motherfucking class
 	public ref struct RsReader
 	{
 
 		private int curIndex = 0;
 		private readonly ReadOnlySpan<char> source;
-		private static RsToken eofToken = new(RsTokenType.EOF, "\0");
-		private static RsToken eolToken = new(RsTokenType.EOL, "\n");
+		private static RsToken eofToken = new(RsTokenType.Eof, "\0");
+		private static RsToken eolToken = new(RsTokenType.Eol, "\n");
 
 		/// <summary>
 		/// Initializes a RSML reader.

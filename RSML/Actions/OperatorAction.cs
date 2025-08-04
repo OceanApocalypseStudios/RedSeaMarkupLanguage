@@ -11,6 +11,6 @@ namespace RSML.Actions
 	/// </summary>
 	/// <param name="parser">The RSML parser that invoked this delegate</param>
 	/// <param name="right">The right side of the operator (the argument)</param>
-	public delegate void OperatorAction(RsParser parser, ReadOnlySpan<char> right);
+	public delegate void OperatorAction(RsParser parser, string right);
 
 }

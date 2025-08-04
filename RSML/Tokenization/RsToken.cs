@@ -14,12 +14,12 @@ namespace RSML.Tokenization
 		/// <summary>
 		/// The token's type.
 		/// </summary>
-		public RsTokenType Type { get; init; }
+		public RsTokenType Type { get; }
 
 		/// <summary>
 		/// The token's value.
 		/// </summary>
-		public char[] Value { get; init; }
+		public string Value { get; }
 
 		/// <summary>
 		/// Initializes a new RSML token.
@@ -30,7 +30,7 @@ namespace RSML.Tokenization
 		{
 
 			Type = type;
-			Value = value.ToArray();
+			Value = value.ToString();
 
 		}
 
@@ -43,7 +43,20 @@ namespace RSML.Tokenization
 		{
 
 			Type = type;
-			Value = value.ToCharArray();
+			Value = value;
+
+		}
+
+		/// <summary>
+		/// Initializes a new RSML token.
+		/// </summary>
+		/// <param name="type">Token type</param>
+		/// <param name="value">Token value, as a character</param>
+		public RsToken(RsTokenType type, char value)
+		{
+
+			Type = type;
+			Value = String.Create(1, value, (span, ch) => span[0] = ch);
 
 		}
 

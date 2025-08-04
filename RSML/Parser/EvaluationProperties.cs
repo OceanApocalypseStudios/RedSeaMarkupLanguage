@@ -13,12 +13,12 @@ namespace RSML.Parser
 		/// <summary>
 		/// The Runtime Identifier to use.
 		/// </summary>
-		public string RuntimeIdentifier { get; init; }
+		public string RuntimeIdentifier { get; }
 
 		/// <summary>
 		/// If set to <c>true</c>, expands <c>any</c> into <c>.+</c>.
 		/// </summary>
-		public bool ExpandAnyIntoRegularExpression { get; init; } = false;
+		public bool ExpandAnyIntoRegularExpression { get; } = false;
 
 		/// <summary>
 		/// Initializes a new set of evaluation properties.

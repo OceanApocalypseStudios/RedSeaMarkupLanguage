@@ -4,13 +4,13 @@
 	/// <summary>
 	/// The result of the evaluation of an RSML document.
 	/// </summary>
-	public readonly struct EvaluationResult
+	public class EvaluationResult
 	{
 
 		/// <summary>
 		/// The match's value or <c>null</c> if none was found.
 		/// </summary>
-		public string? MatchValue { get; } = null;
+		public string? MatchValue { get; }
 
 		/// <summary>
 		/// Whether a match was found (<c>true</c>) or not.
