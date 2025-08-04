@@ -4,6 +4,35 @@
 		<TargetFramework>net8.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<Version>2.0.0</Version>
+		<Title>Red Sea Markup Language</Title>
+		<Authors>OceanApocalypseStudios</Authors>
+		<Description>An extremely performant markup language for designing system-based logic paths in C#.</Description>
+		<Copyright>Copyright (c) 2025 OceanApocalypseStudios</Copyright>
+		<PackageProjectUrl>https://oceanapocalypsestudios.org/rsml-docs/2.0.0/</PackageProjectUrl>
+		<PackageLicenseUrl>https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/blob/main/LICENSE.txt</PackageLicenseUrl>
+		<PackageIcon>Icon.png</PackageIcon>
+		<RepositoryUrl>https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>markup</PackageTags>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<Company>OceanApocalypseStudios</Company>
+		<NeutralLanguage>en</NeutralLanguage>
 	</PropertyGroup>
+
+	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+		<DebugType>full</DebugType>
+	</PropertyGroup>
+
+	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+		<DebugType>none</DebugType>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\Assets\Icon.png">
+			<Pack>True</Pack>
+			<Link>Icon.png</Link>
+		</None>
+	</ItemGroup>
 
 </Project>
