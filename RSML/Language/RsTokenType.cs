@@ -1,4 +1,4 @@
-﻿namespace RSML.Tokenization
+﻿namespace RSML.Language
 {
 
 	/// <summary>
@@ -25,68 +25,14 @@
 		ThrowErrorOperator,
 
 		/// <summary>
-		/// The Microsoft Windows system identification keyword.
+		/// The system identification keyword.
 		/// </summary>
-		Windows,
+		SystemName,
 
 		/// <summary>
-		/// The OSX system identification keyword.
+		/// The system architecture identification keyword.
 		/// </summary>
-		OSX,
-
-		/// <summary>
-		/// The Linux system identification keyword.
-		/// Use this if you want to specify any Linux distro
-		/// or any Linux distro with a certain kernel version.
-		/// </summary>
-		Linux,
-
-		/// <summary>
-		/// The FreeBSD system identification keyword.
-		/// </summary>
-		FreeBsd,
-
-		/// <summary>
-		/// The Linux system identification keyword for Debian-based
-		/// distributions.
-		/// </summary>
-		Debian,
-
-		/// <summary>
-		/// The Linux system identification keyword for Arch-based
-		/// distributions.
-		/// </summary>
-		Arch,
-
-		/// <summary>
-		/// The Linux system identification keyword for Alpine distro.
-		/// </summary>
-		Alpine,
-
-		/// <summary>
-		/// The Linux system identification keyword for Gentoo distro.
-		/// </summary>
-		Gentoo,
-
-		/// <summary>
-		/// The x64 architecture identification keyword.
-		/// </summary>
-		X64,
-
-		/// <summary>
-		/// The x86 architecture identification keyword.
-		/// </summary>
-		X86,
-
-		/// <summary>
-		/// The arm32 (or simply arm) architecture identification keyword.
-		/// </summary>
-		Arm32,
-
-		/// <summary>
-		/// The arm64 architecture identification keyword.
-		/// </summary>
-		Arm64,
+		ArchitectureIdentifier,
 
 		/// <summary>
 		/// The equals keyword (<c>==</c>).
@@ -104,9 +50,9 @@
 		GreaterThan,
 
 		/// <summary>
-		/// The lower-than keyword (<c>&lt;</c>).
+		/// The less-than keyword (<c>&lt;</c>).
 		/// </summary>
-		LowerThan,
+		LessThan,
 
 		/// <summary>
 		/// The greater-than keyword (<c>&gt;=</c>).
@@ -114,9 +60,9 @@
 		GreaterOrEqualsThan,
 
 		/// <summary>
-		/// The lower-than or equals to keyword (<c>&lt;=</c>).
+		/// The less-than or equals to keyword (<c>&lt;=</c>).
 		/// </summary>
-		LowerOrEqualsThan,
+		LessOrEqualsThan,
 
 		/// <summary>
 		/// The value token. This is the argument passed to an operator.

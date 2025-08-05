@@ -20,7 +20,7 @@ namespace RSML.Exceptions
 		/// with a custom error message.
 		/// </summary>
 		/// <param name="message">The custom error message</param>
-		public InvalidRsmlSyntax(string message) : base(message) { }
+		public InvalidRsmlSyntax(string? message) : base(message) { }
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="InvalidRsmlSyntax" />
@@ -30,6 +30,15 @@ namespace RSML.Exceptions
 		/// <param name="message"></param>
 		/// <param name="innerException"></param>
 		public InvalidRsmlSyntax(string? message, Exception? innerException) : base(message, innerException) { }
+
+		/// <summary>
+		/// Throws a new syntax exception.
+		/// </summary>
+		/// <param name="lineNum">The line number.</param>
+		/// <param name="message1">The message containing a reference to line number</param>
+		/// <param name="message2">A reference-free message</param>
+		/// <exception cref="InvalidRsmlSyntax">The exception</exception>
+		protected internal static void Throw(int lineNum, string message1, string message2) => throw new InvalidRsmlSyntax(lineNum > 0 ? message1 : message2);
 
 	}
 

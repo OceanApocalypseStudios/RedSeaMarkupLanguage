@@ -14,14 +14,14 @@ namespace RSML.Exceptions
 		/// <summary>
 		/// Initializes a new instance of the <see cref="UserRaisedException" /> class.
 		/// </summary>
-		public UserRaisedException() { }
+		protected UserRaisedException() { }
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="UserRaisedException" />
 		/// with a custom error message.
 		/// </summary>
 		/// <param name="message">The custom error message</param>
-		public UserRaisedException(string message) : base(message) { }
+		protected UserRaisedException(string message) : base(message) { }
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="UserRaisedException" />
@@ -30,7 +30,7 @@ namespace RSML.Exceptions
 		/// </summary>
 		/// <param name="message"></param>
 		/// <param name="innerException"></param>
-		public UserRaisedException(string? message, Exception? innerException) : base(message, innerException) { }
+		protected UserRaisedException(string? message, Exception? innerException) : base(message, innerException) { }
 
 	}
 

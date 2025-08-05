@@ -1,6 +1,4 @@
-﻿using System;
-
-using RSML.Parser;
+﻿using RSML.Parser;
 
 
 namespace RSML.Actions
