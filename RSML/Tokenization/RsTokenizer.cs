@@ -18,13 +18,15 @@ namespace RSML.Tokenization
 		/// </summary>
 		public int LineNumber { get; set; }
 
-		// The goal is to minimize heap allocations, motherfucker.
+		// The goal is to minimize allocations, motherfucker.
 		// Hence, the initialization of an array here instead of in every loop.
 		private static readonly RsToken[] eolToken = [ new(RsTokenType.Eol, Environment.NewLine) ];
 		private static readonly RsToken atToken = new(RsTokenType.SpecialActionHandler, '@');
 		private static readonly RsToken hashToken = new(RsTokenType.CommentSymbol, '#');
 		private static readonly RsToken errorToken = new(RsTokenType.ThrowErrorOperator, "!>");
 		private static readonly RsToken returnToken = new(RsTokenType.ReturnOperator, "->");
+		private static readonly RsToken definedToken = new(RsTokenType.DefinedKeyword, "defined");
+		private static readonly RsToken anyToken = new(RsTokenType.WildcardKeyword, "any");
 
 		/// <summary>
 		/// Initializes a tokenizer at a given line number
@@ -100,6 +102,34 @@ namespace RSML.Tokenization
 
 		}
 
+		private void ValidateNumberOfEntries(int partsCount)
+		{
+
+			switch (partsCount)
+			{
+
+				// this means there's only 1 entry - the return value
+				case < 1:
+					InvalidRsmlSyntax.Throw(
+						LineNumber, $"Malformed logic path at line {LineNumber}. A valid logic path must contain at least 2 valid arguments.",
+						"Malformed logic path. A valid logic path must contain at least 2 valid arguments."
+					);
+
+					break;
+
+				// this means there's more than 5 entries
+				case > 4:
+					InvalidRsmlSyntax.Throw(
+						LineNumber, $"Malformed logic path at line {LineNumber}. A valid logic path must contain less than 5 arguments.",
+						"Malformed logic path. A valid logic path must contain less than 5 arguments."
+					);
+
+					break;
+
+			}
+
+		}
+
 		private RsToken[] TokenizeLogicPath(ReadOnlySpan<char> line, bool errorIf)
 		{
 
@@ -113,51 +143,35 @@ namespace RSML.Tokenization
 			var lineUpToQuote = line[..firstQuoteIdx];
 
 			Span<Range> ranges = stackalloc Range[(line.Count(' '))];
-			int splitCount = lineUpToQuote.Split(ranges, ' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+			int entryCount = lineUpToQuote.Split(ranges, ' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
 
 			// so we now should have either 1 entry
 			// 2 entries
 			// 3 entries
 			// or 4 entries
 			// BUT NEVER 5
+			ValidateNumberOfEntries(entryCount);
 
 			// todo: clean-up this method further
 			// todo: apply the new way of splitting (keeping quotes)
 			// todo: change the Windows, OSX, etc token types to just be RsTokenType.SystemName for scalability reasons
 			// todo: same with architectures (already done is RsTokenType, just has to be cleaned up here and in other spots)
 
-			switch (splitCount)
-			{
-
-				// see comment below
-				// for more info
-				// yeah, the one called "Allowed logic path syntaxes"
-				case < 2 when LineNumber > 0:
-					throw new InvalidRsmlSyntax($"Malformed logic path at line {LineNumber}. A valid logic path must contain at least 2 valid entries.");
-
-				case < 2:
-					throw new InvalidRsmlSyntax("Malformed logic path. A valid logic path must contain at least 2 valid entries.");
-
-				case > 5 when LineNumber > 0:
-					throw new InvalidRsmlSyntax($"Malformed logic path at line {LineNumber}. A valid logic path must contain less than 6 entries.");
-
-				case > 5:
-					throw new InvalidRsmlSyntax("Malformed logic path. A valid logic path must contain less than 6 entries.");
-
-			}
-
 			/*
 			 * Allowed logic path syntaxes
 			 * --------------------------
 			 * Minimum entries: 2
 			 * Maximum entries: 5
+			 * For now, maximum entries: 4
 			 *
-			 *	   0		     1			      2			        3			     4
+			 * However, we hide the return value for now.
 			 *
-			 * <operator> <return--value>
-			 * <operator>  <system-name>   <return--value>
-			 * <operator>  <system-name>  <architecture-id>  <return--value>
-			 * <operator>  <system-name>   <major-version>  <architecture-id> <return--value>
+			 *	   0		      1			       2			      3			       [4]
+			 *
+			 * <operator> [<return--value>]
+			 * <operator>   <system-name>   [<return--value>]
+			 * <operator>   <system-name>   <architecture-id>  [<return--value>]
+			 * <operator>   <system-name>    <major-version>   <architecture-id> [<return--value>]
 			 *
 			 */
 
@@ -165,10 +179,9 @@ namespace RSML.Tokenization
 			// can either be return-value
 			// or system-name
 			// the check is simple
-			if (TryTokenizeReturnValue(line[ranges[0]], out var token1))
-				return [ errorIf ? errorToken : returnToken, (RsToken)(token1!) ];
+			if (TryTokenizeReturnValue(line[firstQuoteIdx..], out var token1))
+				return [ errorIf ? errorToken : returnToken, anyToken, anyToken, anyToken, (RsToken)(token1!), eolToken[0] ];
 
-			// ReSharper disable once GrammarMistakeInComment
 			// ok so that means the first item must be a system name
 			// but then again some dumbass gonna write some shitty
 			// RSML that doesn't work
@@ -258,7 +271,9 @@ namespace RSML.Tokenization
 					}
 
 					if (LineNumber > 0)
-						throw new InvalidRsmlSyntax($"Malformed logic path at line {LineNumber}. All overloads for the operators have been exhausted.");
+						throw new InvalidRsmlSyntax(
+							$"Malformed logic path at line {LineNumber}. All overloads for the operators have been exhausted."
+						);
 
 					throw new InvalidRsmlSyntax("Malformed logic path. All overloads for the operators have been exhausted.");
 
@@ -440,6 +455,7 @@ namespace RSML.Tokenization
 			// error-throw op
 			// ReSharper disable StringLiteralTypo
 			if (line.StartsWith("!> ") || line.StartsWith("error ") || line.StartsWith("errorif "))
+
 				// ReSharper restore StringLiteralTypo
 				return TokenizeLogicPath(line, true);
 

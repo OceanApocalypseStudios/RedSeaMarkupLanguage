@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 
+using RSML.Language;
+
 
 namespace RSML.Tokenization
 {
@@ -27,6 +29,19 @@ namespace RSML.Tokenization
 		/// <param name="type">Token type</param>
 		/// <param name="value">Token value, as span</param>
 		public RsToken(RsTokenType type, ReadOnlySpan<char> value)
+		{
+
+			Type = type;
+			Value = value.ToString();
+
+		}
+
+		/// <summary>
+		/// Initializes a new RSML token.
+		/// </summary>
+		/// <param name="type">Token type</param>
+		/// <param name="value">Token value, as span</param>
+		public RsToken(RsTokenType type, Span<char> value)
 		{
 
 			Type = type;
