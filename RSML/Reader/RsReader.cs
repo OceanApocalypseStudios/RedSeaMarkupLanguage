@@ -1,38 +1,40 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 
+using RSML.Language;
 using RSML.Tokenization;
 
 
 namespace RSML.Reader
 {
 
-	// todo: code this motherfucking class
-	public ref struct RsReader
+	/// <summary>
+	/// A RSML reader that reads from a buffer and tokenizes the lines.
+	/// </summary>
+	public sealed class RsReader
 	{
 
-		private int curIndex = 0;
-		private readonly ReadOnlySpan<char> source;
-		private static RsToken eofToken = new(RsTokenType.Eof, "\0");
-		private static RsToken eolToken = new(RsTokenType.Eol, "\n");
+		private int curIndex;
+		private readonly string source;
+		private static readonly RsToken[] eofToken = [ new(RsTokenType.Eof, '\0') ];
+		private static readonly RsToken[] eolToken = [ new(RsTokenType.Eol, Environment.NewLine) ];
 
 		/// <summary>
 		/// Initializes a RSML reader.
 		/// </summary>
 		/// <param name="source">A span of characters as input</param>
-		public RsReader(ReadOnlySpan<char> source) { this.source = source; }
+		public RsReader(ReadOnlySpan<char> source) { this.source = source.ToString(); }
 
 		/// <summary>
 		/// Initializes a RSML reader.
 		/// </summary>
 		/// <param name="source">A string as input</param>
-		public RsReader(string source) { this.source = source.AsSpan(); }
+		public RsReader(string source) { this.source = source; }
 
 		/// <summary>
 		/// Tries to read the next character.
 		/// </summary>
 		/// <param name="character">The next character</param>
-		/// <returns><c>false</c> if the end has been reached, in which case the character will be a null termiantor (<c>\0</c>)</returns>
+		/// <returns><c>false</c> if the end has been reached, in which case the character will be a null terminator (<c>\0</c>)</returns>
 		public bool TryReadNextCharacter(out char character)
 		{
 
@@ -57,38 +59,39 @@ namespace RSML.Reader
 		/// <summary>
 		/// Tries to read and tokenize a whole line.
 		/// </summary>
-		/// <param name="tokenizer">The tokenizer to use</param>
-		/// <param name="languageStandard">The language standard to use for the line</param>
+		/// <param name="lexer">The tokenizer to use</param>
 		/// <param name="tokens">The return tokens</param>
 		/// <returns><c>false</c> if the end has been reached</returns>
-		public bool TryReadAndTokenizeLine(ITokenizer tokenizer, in LanguageStandard languageStandard, out ReadOnlySpan<RsToken> tokens)
+		public bool TryReadAndTokenizeLine(ILexer lexer, out RsToken[] tokens)
 		{
 
-			if (source.Length < 1)
+			ReadOnlySpan<char> span = stackalloc char[source.Length];
+
+			if (span.Length < 1)
 				curIndex = -1;
 
 			if (curIndex < 0)
 			{
 
-				tokens = MemoryMarshal.CreateReadOnlySpan(ref eofToken, 1);
+				tokens = eofToken;
 
 				return false;
 
 			}
 
-			int nextNewline = source[curIndex..].IndexOf('\n');
+			int nextNewline = span[curIndex..].IndexOf('\n');
 
 			if (nextNewline < 0)
 			{
 
-				tokens = tokenizer.TokenizeLine(source[curIndex..], languageStandard);
+				tokens = lexer.TokenizeLine(span[curIndex..]);
 				curIndex = -1; // We consumed it. Done.
 
 				return true;
 
 			}
 
-			var temp = source[curIndex..(curIndex + nextNewline)];
+			var temp = span[curIndex..(curIndex + nextNewline)];
 
 			if (temp.Length > 0 && temp[^1] == '\r')
 			{
@@ -101,14 +104,14 @@ namespace RSML.Reader
 			if (temp.Length < 1)
 			{
 
-				tokens = MemoryMarshal.CreateReadOnlySpan(ref eolToken, 1);
+				tokens = eolToken;
 				curIndex++;
 
 				return true;
 
 			}
 
-			tokens = tokenizer.TokenizeLine(temp, languageStandard);
+			tokens = lexer.TokenizeLine(temp);
 			curIndex += temp.Length + 1;
 
 			return true;

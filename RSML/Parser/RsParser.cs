@@ -40,6 +40,9 @@ using System.Runtime.InteropServices;
 
 using RSML.Actions;
 using RSML.Exceptions;
+using RSML.Language;
+using RSML.Reader;
+using RSML.Tokenization;
 
 
 namespace RSML.Parser
@@ -50,11 +53,6 @@ namespace RSML.Parser
 	/// </summary>
 	public class RsParser
 	{
-
-		private const string returnOp1 = "return";
-		private const string returnOp2 = "returnif";
-		private const string returnOp3 = "->";
-		private const string returnOp4 = "=>";
 
 		/// <summary>
 		/// The current API version of the library.
@@ -150,12 +148,58 @@ namespace RSML.Parser
 		/// </summary>
 		/// <param name="properties">The set of properties to feed into the evaluation</param>
 		/// <returns>An evaluation result</returns>
-		/// <exception cref="UndefinedOperatorException">All operators and their actions must be defined</exception>
 		public EvaluationResult Evaluate(EvaluationProperties properties)
 		{
 
-			// todo: code this
-			throw new NotImplementedException("This method is being worked on");
+			RsReader reader = new(Content);
+			RsLexer lexer = new();
+
+			while (reader.TryReadAndTokenizeLine(lexer, out var tokens))
+			{
+
+				// we basically do length-based checks
+				/*
+				 * Possible Lengths of tokens:
+				 *	3 - Comment (#, Text, EOL)
+				 *	4 - Special Action (@, Name, Arg, EOL)
+				 *	6 - Logic Path (Op, Sys, Version Major = ANY, Arch, RetVal, EOL)
+				 *	7 - Logic Path (Op, Sys, Version Major, Arch, RetVal, EOL)
+				 *
+				 */
+
+				switch (tokens.Length)
+				{
+
+					case 3:
+						// comment, ignore it
+						continue;
+
+					case 4:
+						// todo: handle special action
+						// + don't forget properties
+						continue;
+
+					case 6:
+						// todo: handle major version indifferent logic path
+						// + don't forget properties
+						continue;
+
+					case 7:
+						// todo: handle fully qualified logic path
+						// + don't forget properties
+						continue;
+
+					default:
+						if (tokens[0].Type == RsTokenType.CommentSymbol)
+							continue; // it's somehow a comment
+
+						throw new InvalidRsmlSyntax("Unexpected error: invalid line tokenized successfully.");
+
+				}
+
+			}
+
+			return new(); // no matches
 
 		}
 

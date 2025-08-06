@@ -7,7 +7,7 @@ namespace RSML.Tokenization
 	/// <summary>
 	/// RSML tokenizer.
 	/// </summary>
-	public interface ITokenizer
+	public interface ILexer
 	{
 
 		/// <summary>

@@ -10,13 +10,18 @@ namespace RSML.Tokenization
 	/// <summary>
 	/// Standard RSML tokenizer.
 	/// </summary>
-	public sealed class RsTokenizer : ITokenizer
+	public sealed class RsLexer : ILexer
 	{
+
+		/// <summary>
+		/// The API version this tokenizer is built for.
+		/// </summary>
+		public const string ApiVersion = "2.0.0";
 
 		/// <summary>
 		/// The current line number.
 		/// </summary>
-		public int LineNumber { get; set; }
+		public int LineNumber { get; private set; }
 
 		// The goal is to minimize allocations, motherfucker.
 		// Hence, the initialization of an array here instead of in every loop.
@@ -26,16 +31,20 @@ namespace RSML.Tokenization
 		private static readonly RsToken errorToken = new(RsTokenType.ThrowErrorOperator, "!>");
 		private static readonly RsToken returnToken = new(RsTokenType.ReturnOperator, "->");
 		private static readonly RsToken definedToken = new(RsTokenType.DefinedKeyword, "defined");
-		private static readonly RsToken anyToken = new(RsTokenType.WildcardKeyword, "any");
+		private static readonly RsToken[] anyToken = [ new(RsTokenType.WildcardKeyword, "any") ];
+
+		private static readonly string[] validComparators = [ "!=", "==", ">=", "<=", ">", "<" ]; // ! in order of priorities - very important
 
 		/// <summary>
 		/// Initializes a tokenizer at a given line number
 		/// or line number 1.
 		/// </summary>
 		/// <param name="lineNum">The custom line number to start at or 1 if untouched</param>
-		public RsTokenizer(int lineNum = 1) { LineNumber = lineNum; }
+		public RsLexer(int lineNum = 1) { LineNumber = lineNum - 1; }
 
-		private bool TryTokenizeReturnValue(ReadOnlySpan<char> valueSpan, out RsToken? token)
+		#region Helpers
+
+		private bool TokenizeReturnValue(ReadOnlySpan<char> valueSpan, out RsToken? token)
 		{
 
 			if (valueSpan[0] != '"') // null token
@@ -58,7 +67,9 @@ namespace RSML.Tokenization
 
 			}
 
-			if (valueSpan[^1] != '"') // exception here
+			var lastQuoteIdx = valueSpan.LastIndexOf('"');
+
+			if (lastQuoteIdx <= 0)
 			{
 
 				InvalidRsmlSyntax.Throw(
@@ -68,7 +79,7 @@ namespace RSML.Tokenization
 
 			}
 
-			token = new(RsTokenType.Value, valueSpan[1..^1]);
+			token = new(RsTokenType.Value, valueSpan[1..lastQuoteIdx]);
 
 			return true;
 
@@ -130,6 +141,128 @@ namespace RSML.Tokenization
 
 		}
 
+		private RsToken TokenizeSystemName(Span<char> systemName)
+		{
+
+			if (systemName.IsEquals("any"))
+				return anyToken[0];
+
+			if (systemName.IsEquals("defined"))
+			{
+
+				InvalidRsmlSyntax.Throw(
+					LineNumber, $"Malformed logic path at line {LineNumber}. Invalid use of 'defined'.",
+					"Malformed logic path. Invalid use of 'defined'."
+				);
+
+			}
+
+			if (!systemName.IsEquals(
+					StringComparison.Ordinal, "windows", "osx", "linux", "freebsd",
+					"debian", "arch", "alpine", "gentoo"
+				))
+			{
+
+				InvalidRsmlSyntax.Throw(
+					LineNumber, $"Malformed logic path at line {LineNumber}. System name is not allowed.",
+					"Malformed logic path. System name is not allowed."
+				);
+
+			}
+
+			return new(RsTokenType.SystemName, systemName);
+
+		}
+
+		private RsToken TokenizeArchitectureIdentifier(Span<char> archId)
+		{
+
+			if (archId.IsEquals("any"))
+				return anyToken[0];
+
+			if (archId.IsEquals("defined"))
+			{
+
+				InvalidRsmlSyntax.Throw(
+					LineNumber, $"Malformed logic path at line {LineNumber}. Invalid use of 'defined'.",
+					"Malformed logic path. Invalid use of 'defined'."
+				);
+
+			}
+
+			if (!archId.IsEquals(StringComparison.Ordinal, "x64", "arm64", "arm32", "x86"))
+			{
+
+				InvalidRsmlSyntax.Throw(
+					LineNumber, $"Malformed logic path at line {LineNumber}. Architecture ID is not allowed.",
+					"Malformed logic path. Architecture ID is not allowed."
+				);
+
+			}
+
+			return new(RsTokenType.ArchitectureIdentifier, archId);
+
+		}
+
+		private static RsTokenType GetComparatorTokenType(string comp) =>
+			comp switch
+			{
+
+				"==" => RsTokenType.Equals,
+				">=" => RsTokenType.GreaterOrEqualsThan,
+				"<=" => RsTokenType.LessOrEqualsThan,
+				"!=" => RsTokenType.Different,
+				">"  => RsTokenType.GreaterThan,
+				"<"  => RsTokenType.LessThan,
+				_    => throw new ArgumentException("Invalid comparator.", nameof(comp))
+
+			};
+
+		private RsToken[] ParseMajorVersion(ReadOnlySpan<char> span)
+		{
+
+			if (span.IsEquals("any"))
+				return anyToken;
+
+			if (span.IsEquals("defined"))
+				return [ definedToken ];
+
+			string comparator = "=="; // assume equals by default
+			int compLen = 0;
+
+			foreach (var cmp in validComparators)
+			{
+
+				if (!span.StartsWith(cmp.AsSpan(), StringComparison.Ordinal))
+					continue;
+
+				comparator = cmp;
+				compLen = cmp.Length;
+
+				break;
+
+			}
+
+			// the actual number
+			var numberPart = span[compLen..];
+
+			if (!Int32.TryParse(numberPart, out int verNum))
+			{
+
+				InvalidRsmlSyntax.Throw(
+					LineNumber,
+					$"Malformed logic path at line {LineNumber}. Major version must be a valid integer, 'any', 'defined' or an integer with a valid comparison.",
+					"Malformed logic path. Invalid major version."
+				);
+
+			}
+
+			return [ new(GetComparatorTokenType(comparator), comparator), new(RsTokenType.MajorVersionId, verNum.ToString()) ];
+
+		}
+
+		#endregion
+
 		private RsToken[] TokenizeLogicPath(ReadOnlySpan<char> line, bool errorIf)
 		{
 
@@ -140,22 +273,36 @@ namespace RSML.Tokenization
 			// we split by the space character
 			// BUT NOT THE WHOLE STRING/SPAN!!
 			// only up to the first quote
-			var lineUpToQuote = line[..firstQuoteIdx];
-
-			Span<Range> ranges = stackalloc Range[(line.Count(' '))];
-			int entryCount = lineUpToQuote.Split(ranges, ' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+			var preQuoteSpan = line[..firstQuoteIdx];
+			Span<Range> ranges = stackalloc Range[preQuoteSpan.Count(' ')];
+			int partsCount = preQuoteSpan.Split(ranges, ' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
 
 			// so we now should have either 1 entry
 			// 2 entries
 			// 3 entries
 			// or 4 entries
 			// BUT NEVER 5
-			ValidateNumberOfEntries(entryCount);
+			ValidateNumberOfEntries(partsCount);
 
-			// todo: clean-up this method further
-			// todo: apply the new way of splitting (keeping quotes)
-			// todo: change the Windows, OSX, etc token types to just be RsTokenType.SystemName for scalability reasons
-			// todo: same with architectures (already done is RsTokenType, just has to be cleaned up here and in other spots)
+			var systemNameSpan = partsCount > 1 ? preQuoteSpan[ranges[1]] : [ ];
+
+			var architectureIdSpan = partsCount > 2
+										 ? partsCount > 3
+											   ? preQuoteSpan[ranges[3]]
+											   : preQuoteSpan[ranges[2]]
+										 : [ ];
+
+			var versionMajorSpan = partsCount > 3 ? preQuoteSpan[ranges[2]] : [ ];
+
+			Span<char> systemNameSpanLower = stackalloc char[systemNameSpan.Length];
+			Span<char> architectureIdSpanLower = stackalloc char[architectureIdSpan.Length];
+			Span<char> versionMajorSpanLower = stackalloc char[versionMajorSpan.Length];
+
+			systemNameSpan.ToLowerInvariant(systemNameSpanLower);
+			architectureIdSpan.ToLowerInvariant(architectureIdSpanLower);
+			versionMajorSpan.ToLowerInvariant(versionMajorSpanLower);
+
+			var afterQuoteSpan = line[firstQuoteIdx..];
 
 			/*
 			 * Allowed logic path syntaxes
@@ -175,161 +322,58 @@ namespace RSML.Tokenization
 			 *
 			 */
 
-			// let's do 1 first
-			// can either be return-value
-			// or system-name
-			// the check is simple
-			if (TryTokenizeReturnValue(line[firstQuoteIdx..], out var token1))
-				return [ errorIf ? errorToken : returnToken, anyToken, anyToken, anyToken, (RsToken)(token1!), eolToken[0] ];
-
-			// ok so that means the first item must be a system name
-			// but then again some dumbass gonna write some shitty
-			// RSML that doesn't work
-			// cuz fuck people
-			if (!line[ranges[1]]
-					.IsEquals(
-						StringComparison.OrdinalIgnoreCase, "windows", "osx", "linux", "freebsd",
-						"debian", "arch", "alpine", "gentoo"
-					))
+			if (TokenizeReturnValue(afterQuoteSpan, out var returnValueToken))
 			{
 
-				if (LineNumber > 0)
+				// operator + return value
+				if (partsCount == 1)
+					return [ errorIf ? errorToken : returnToken, anyToken[0], anyToken[0], anyToken[0], (RsToken)(returnValueToken!), eolToken[0] ];
+
+				var systemToken = TokenizeSystemName(systemNameSpanLower);
+
+				// operator + system name + return value
+				if (partsCount == 2)
+					return [ errorIf ? errorToken : returnToken, systemToken, anyToken[0], anyToken[0], (RsToken)(returnValueToken!), eolToken[0] ];
+
+				// operator + system name + architecture + return value
+				var archToken = TokenizeArchitectureIdentifier(architectureIdSpanLower);
+
+				switch (partsCount)
 				{
 
-					throw new InvalidRsmlSyntax(
-						$"Malformed logic path at line {LineNumber}. The second entry of a logic path must either be a return value or an allowed system name."
-					);
+					case 3:
+						return [ errorIf ? errorToken : returnToken, systemToken, anyToken[0], archToken, (RsToken)(returnValueToken!), eolToken[0] ];
 
-				}
-
-				throw new InvalidRsmlSyntax(
-					"Malformed logic path. The second entry of a logic path must either be a return value or an allowed system name."
-				);
-
-			}
-
-			// ok this is correct
-			Span<char> sysSpan = stackalloc char[line[ranges[1]].Length];
-			line[ranges[1]].ToLowerInvariant(sysSpan);
-
-			// we get the system from the span
-			var tokenType = sysSpan.GetSystemTokenType();
-
-			// ok now let's move on to the next fields
-			// if it's another return value, we end here ofc
-			if (TryTokenizeReturnValue(line[ranges[2]], out var token2))
-				return [ errorIf ? errorToken : returnToken, new((RsTokenType)(tokenType!), sysSpan), (RsToken)(token2!) ];
-
-			// but it probably isn't so let's continue
-			// ok so now we have uh
-			// fuck
-			// it's either an architecture or a major version
-			// and this depends on how many entries we got
-			if (splitCount == 5)
-			{
-
-				// then this ugh is
-				// the major version ugh
-				if (!line[ranges[3]].IsEquals(StringComparison.Ordinal, "x64", "x86", "arm64", "arm32"))
-				{
-
-					if (LineNumber > 0)
-					{
-
-						throw new InvalidRsmlSyntax(
-							$"Malformed logic path at line {LineNumber}. The third entry of a 4-entry long logic path must be an allowed architecture ID."
-						);
-
-					}
-
-					throw new InvalidRsmlSyntax(
-						"Malformed logic path. The third entry of a 4-entry long logic path must be an allowed architecture ID."
-					);
-
-				}
-
-				RsTokenType archTokenType1 = (RsTokenType)(line[ranges[3]].GetArchTokenType()!); // we have to do this cuz Rider is fucking dumb
-
-				// ok so now we know
-				// that it's a valid architecture
-				// architectures ARE case-sensitive so
-				// we don't need to worry
-
-				// ok so now, let's see that motherfucking version number
-				if (line[ranges[2]].IsDigitOnly()) // it's a digit
-				{
-
-					if (TryTokenizeReturnValue(line[ranges[4]], out var token3))
-					{
+					// operator + system name + major version + architecture + return value
+					case 4:
+						var majorVersionTokens = ParseMajorVersion(versionMajorSpanLower);
 
 						return
 						[
-							errorIf ? errorToken : returnToken, new((RsTokenType)(tokenType!), sysSpan), new(RsTokenType.Equals, "=="),
-							new(RsTokenType.MajorVersionId, line[ranges[2]]), new(archTokenType1, line[ranges[3]]), (RsToken)token3!
+							errorIf ? errorToken : returnToken, systemToken, majorVersionTokens[0], majorVersionTokens[1], archToken,
+							(RsToken)(returnValueToken!), eolToken[0]
 						];
 
-					}
-
-					if (LineNumber > 0)
-						throw new InvalidRsmlSyntax(
-							$"Malformed logic path at line {LineNumber}. All overloads for the operators have been exhausted."
+					default:
+						InvalidRsmlSyntax.Throw(
+							LineNumber,
+							$"Malformed logic path at line {LineNumber}. Unexpected number of arguments.",
+							"Malformed logic path. All overloads failed."
 						);
 
-					throw new InvalidRsmlSyntax("Malformed logic path. All overloads for the operators have been exhausted.");
-
-				}
-
-				// todo: parse version number when it has conditional operators
-
-			}
-
-			// alright, so no version number which is good because version number is the hardest part to parse
-			if (splitCount == 4)
-			{
-
-				// then this ugh is
-				// the major version ugh
-				if (!line[ranges[3]].IsEquals(StringComparison.Ordinal, "x64", "x86", "arm64", "arm32"))
-				{
-
-					if (LineNumber > 0)
-					{
-
-						throw new InvalidRsmlSyntax(
-							$"Malformed logic path at line {LineNumber}. The third entry of a 4-entry long logic path must be an allowed architecture ID."
-						);
-
-					}
-
-					throw new InvalidRsmlSyntax(
-						"Malformed logic path. The third entry of a 4-entry long logic path must be an allowed architecture ID."
-					);
-
-				}
-
-				RsTokenType archTokenType1 = (RsTokenType)(line[ranges[3]].GetArchTokenType()!); // we have to do this cuz Rider is fucking dumb
-
-				// ok so now we know
-				// that it's a valid architecture
-				// architectures ARE case-sensitive so
-				// we don't need to worry
-				if (TryTokenizeReturnValue(line[ranges[4]], out var token3))
-				{
-
-					return
-					[
-						errorIf ? errorToken : returnToken, new((RsTokenType)(tokenType!), sysSpan), new(RsTokenType.Equals, "=="),
-						new(RsTokenType.MajorVersionId, line[ranges[2]]), new(archTokenType1, line[ranges[3]]), (RsToken)token3!
-					];
+						break;
 
 				}
 
 			}
 
-			if (LineNumber > 0)
-				throw new InvalidRsmlSyntax($"Malformed logic path at line {LineNumber}. All overloads for the operators have been exhausted.");
+			InvalidRsmlSyntax.Throw(
+				LineNumber,
+				$"Malformed logic path at line {LineNumber}. All overloads failed.",
+				"Malformed logic path. All overloads failed."
+			);
 
-			throw new InvalidRsmlSyntax("Malformed logic path. All overloads for the operators have been exhausted.");
+			return null!; // won't happen, but it pleases .NET in ways nobody can understand
 
 		}
 
@@ -367,7 +411,7 @@ namespace RSML.Tokenization
 
 				< 0 => // no argument (no space)
 				[
-					atToken, new(RsTokenType.SpecialActionName, line[1..nextNewline]), eolToken[0]
+					atToken, new(RsTokenType.SpecialActionName, line[1..nextNewline]), new(RsTokenType.SpecialActionArgument, ""), eolToken[0]
 				],
 
 				_ => // literally anything fucking else
@@ -383,6 +427,8 @@ namespace RSML.Tokenization
 		/// <inheritdoc />
 		public RsToken[] TokenizeLine(ReadOnlySpan<char> line)
 		{
+
+			++LineNumber;
 
 			// Ok imma comment the shit out of this
 			// just so you know what the process is
@@ -447,36 +493,25 @@ namespace RSML.Tokenization
 			// easy-peasy motherfucker
 			// first let's see the return operator cuz it's more important and doesn't suck ass
 			// ReSharper disable StringLiteralTypo
-			if (line.StartsWith("-> ") || line.StartsWith("=> ") || line.StartsWith("return ") || line.StartsWith("returnif "))
+			if (line.StartsWith("-> "))
 
 				// ReSharper restore StringLiteralTypo
 				return TokenizeLogicPath(line, false);
 
 			// error-throw op
 			// ReSharper disable StringLiteralTypo
-			if (line.StartsWith("!> ") || line.StartsWith("error ") || line.StartsWith("errorif "))
+			if (line.StartsWith("!> "))
 
 				// ReSharper restore StringLiteralTypo
 				return TokenizeLogicPath(line, true);
 
-			throw LineNumber switch
-			{
+			InvalidRsmlSyntax.Throw(
+				LineNumber,
+				$"Malformed RSML at line {LineNumber}. A line must either be whitespace, special action, logic path or comment.",
+				"Malformed RSML line. A line must either be whitespace, special action, logic path or comment."
+			);
 
-				// anything else is a fucking error
-				// cuz fuck implicit comments
-				> 0 => new InvalidRsmlSyntax(
-					$"Malformed RSML at line {LineNumber}. A line must either be whitespace, special action, logic path or comment."
-				),
-
-				_ => new("Malformed RSML line. A line must either be whitespace, special action, logic path or comment.")
-
-				// Uh, new what? Oh, it's a C# feature - implicit exception from previous switch case
-				// or something I don't know
-				// ...
-				// yeah I only found out today thanks to Rider
-				// the things we learn lol
-
-			};
+			return null!; // won't run
 
 		}
 
