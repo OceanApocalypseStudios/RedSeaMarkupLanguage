@@ -17,6 +17,13 @@ namespace RSML.Tokenization
 		/// <returns>An array of tokens</returns>
 		public RsToken[] TokenizeLine(ReadOnlySpan<char> line);
 
+		/// <summary>
+		/// Forms a RSML document from an array of tokens.
+		/// </summary>
+		/// <param name="tokens">The tokens</param>
+		/// <returns>A RSML document</returns>
+		public string CreateDocumentFromTokens(RsToken[] tokens);
+
 	}
 
 }

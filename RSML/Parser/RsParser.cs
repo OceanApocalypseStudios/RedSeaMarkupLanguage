@@ -36,11 +36,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 
 using RSML.Actions;
 using RSML.Exceptions;
 using RSML.Language;
+using RSML.Machine;
 using RSML.Reader;
 using RSML.Tokenization;
 
@@ -114,41 +114,245 @@ namespace RSML.Parser
 
 		}
 
+		private static bool HandleLogicPath_Simple(RsToken[] tokens, in LocalMachine machine, bool isLinux)
+		{
+
+			if (isLinux)
+				return HandleLogicPath_Simple_Linux(tokens, machine);
+
+			bool systemNameMatches = tokens[1].Type switch
+			{
+
+				RsTokenType.WildcardKeyword => true,
+				RsTokenType.DefinedKeyword  => machine.SystemName is not null,
+				_                           => machine.SystemName == tokens[1].Value
+
+			};
+
+			bool systemVersionMatches = tokens[2].Type switch
+			{
+
+				RsTokenType.WildcardKeyword => true,
+				RsTokenType.DefinedKeyword  => machine.SystemVersion != -1,
+				_                           => machine.SystemVersion.ToString() == tokens[2].Value
+
+			};
+
+			bool architectureMatches = tokens[3].Type switch
+			{
+
+				RsTokenType.WildcardKeyword => true,
+				RsTokenType.DefinedKeyword  => machine.ProcessorArchitecture is not null,
+				_                           => machine.ProcessorArchitecture == tokens[3].Value
+
+			};
+
+			return (systemNameMatches && systemVersionMatches && architectureMatches);
+
+		}
+
+		private static bool HandleLogicPath_Complex(RsToken[] tokens, in LocalMachine machine, bool isLinux)
+		{
+
+			if (isLinux)
+				return HandleLogicPath_Complex_Linux(tokens, machine);
+
+			bool systemNameMatches = tokens[1].Type switch
+			{
+
+				RsTokenType.WildcardKeyword => true,
+				RsTokenType.DefinedKeyword  => machine.SystemName is not null,
+				_                           => machine.SystemName == tokens[1].Value
+
+			};
+
+			bool systemVersionMatches = false;
+			int versionNum;
+
+			// ReSharper disable once SwitchStatementHandlesSomeKnownEnumValuesWithDefault
+			switch (tokens[2].Type)
+			{
+
+				case RsTokenType.Equals:
+					systemVersionMatches = machine.SystemVersion.ToString() == tokens[3].Value;
+
+					break;
+
+				case RsTokenType.Different:
+					systemVersionMatches = machine.SystemVersion.ToString() != tokens[3].Value;
+
+					break;
+
+				case RsTokenType.GreaterOrEqualsThan:
+					if (Int32.TryParse(tokens[3].Value, out versionNum))
+						systemVersionMatches = machine.SystemVersion >= versionNum;
+
+					break;
+
+				case RsTokenType.LessOrEqualsThan:
+					if (Int32.TryParse(tokens[3].Value, out versionNum))
+						systemVersionMatches = machine.SystemVersion <= versionNum;
+
+					break;
+
+				case RsTokenType.GreaterThan:
+					if (Int32.TryParse(tokens[3].Value, out versionNum))
+						systemVersionMatches = machine.SystemVersion > versionNum;
+
+					break;
+
+				case RsTokenType.LessThan:
+					if (Int32.TryParse(tokens[3].Value, out versionNum))
+						systemVersionMatches = machine.SystemVersion < versionNum;
+
+					break;
+
+				default:
+					systemVersionMatches = false;
+
+					break;
+
+			}
+
+
+			bool architectureMatches = tokens[4].Type switch
+			{
+
+				RsTokenType.WildcardKeyword => true,
+				RsTokenType.DefinedKeyword  => machine.ProcessorArchitecture is not null,
+				_                           => machine.ProcessorArchitecture == tokens[3].Value
+
+			};
+
+			return (systemNameMatches && systemVersionMatches && architectureMatches);
+
+		}
+
+		private static bool HandleLogicPath_Simple_Linux(RsToken[] tokens, in LocalMachine machine)
+		{
+
+			bool systemNameMatches = tokens[1].Type switch
+			{
+
+				RsTokenType.WildcardKeyword => true,
+				RsTokenType.DefinedKeyword  => machine.DistroName is not null,
+				_ => machine.SystemName == tokens[1].Value ||
+					 machine.DistroName == tokens[1].Value ||
+					 machine.DistroFamily == tokens[1].Value
+
+			};
+
+			bool systemVersionMatches = tokens[2].Type switch
+			{
+
+				RsTokenType.WildcardKeyword => true,
+				RsTokenType.DefinedKeyword  => machine.SystemVersion != -1,
+				_                           => machine.SystemVersion.ToString() == tokens[2].Value
+
+			};
+
+			bool architectureMatches = tokens[3].Type switch
+			{
+
+				RsTokenType.WildcardKeyword => true,
+				RsTokenType.DefinedKeyword  => machine.ProcessorArchitecture is not null,
+				_                           => machine.ProcessorArchitecture == tokens[3].Value
+
+			};
+
+			return (systemNameMatches && systemVersionMatches && architectureMatches);
+
+		}
+
+		private static bool HandleLogicPath_Complex_Linux(RsToken[] tokens, in LocalMachine machine)
+		{
+
+			bool systemNameMatches = tokens[1].Type switch
+			{
+
+				RsTokenType.WildcardKeyword => true,
+				RsTokenType.DefinedKeyword  => machine.DistroName is not null,
+				_ => machine.SystemName == tokens[1].Value ||
+					 machine.DistroName == tokens[1].Value ||
+					 machine.DistroFamily == tokens[1].Value
+
+			};
+
+			bool systemVersionMatches = false;
+			int versionNum;
+
+			// ReSharper disable once SwitchStatementHandlesSomeKnownEnumValuesWithDefault
+			switch (tokens[2].Type)
+			{
+
+				case RsTokenType.Equals:
+					systemVersionMatches = machine.SystemVersion.ToString() == tokens[3].Value;
+
+					break;
+
+				case RsTokenType.Different:
+					systemVersionMatches = machine.SystemVersion.ToString() != tokens[3].Value;
+
+					break;
+
+				case RsTokenType.GreaterOrEqualsThan:
+					if (Int32.TryParse(tokens[3].Value, out versionNum))
+						systemVersionMatches = machine.SystemVersion >= versionNum;
+
+					break;
+
+				case RsTokenType.LessOrEqualsThan:
+					if (Int32.TryParse(tokens[3].Value, out versionNum))
+						systemVersionMatches = machine.SystemVersion <= versionNum;
+
+					break;
+
+				case RsTokenType.GreaterThan:
+					if (Int32.TryParse(tokens[3].Value, out versionNum))
+						systemVersionMatches = machine.SystemVersion > versionNum;
+
+					break;
+
+				case RsTokenType.LessThan:
+					if (Int32.TryParse(tokens[3].Value, out versionNum))
+						systemVersionMatches = machine.SystemVersion < versionNum;
+
+					break;
+
+				default:
+					systemVersionMatches = false;
+
+					break;
+
+			}
+
+
+			bool architectureMatches = tokens[4].Type switch
+			{
+
+				RsTokenType.WildcardKeyword => true,
+				RsTokenType.DefinedKeyword  => machine.ProcessorArchitecture is not null,
+				_                           => machine.ProcessorArchitecture == tokens[3].Value
+
+			};
+
+			return (systemNameMatches && systemVersionMatches && architectureMatches);
+
+		}
+
+
 		/// <summary>
 		/// Evaluates the RSML document using the default properties and the machine's RID.
 		/// </summary>
 		/// <returns>A result</returns>
-		public EvaluationResult Evaluate() => Evaluate(RuntimeInformation.RuntimeIdentifier);
-
-		/// <summary>
-		/// Evaluates the RSML document given a custom RID.
-		/// </summary>
-		/// <param name="rid">The RID to use</param>
-		/// <returns>A result</returns>
-		public EvaluationResult Evaluate(string rid) => Evaluate(new EvaluationProperties(rid, false));
-
-		/// <summary>
-		/// Evaluates the RSML document given a custom RID and an <c>expandAny</c> flag.
-		/// </summary>
-		/// <param name="rid">The RID to use</param>
-		/// <param name="expandAny"><c>true</c> if <c>any</c> should be expanded into <c>.+</c></param>
-		/// <returns>A result</returns>
-		public EvaluationResult Evaluate(string rid, bool expandAny) => Evaluate(new EvaluationProperties(rid, expandAny));
-
-		/// <summary>
-		/// Evaluates the RSML document given an <c>expandAny</c> flag and a strictness level.
-		/// The RID will be the machine's RID.
-		/// </summary>
-		/// <param name="expandAny"><c>true</c> if <c>any</c> should be expanded into <c>.+</c></param>
-		/// <returns>A result</returns>
-		public EvaluationResult Evaluate(bool expandAny) => Evaluate(new EvaluationProperties(RuntimeInformation.RuntimeIdentifier, expandAny));
+		public EvaluationResult Evaluate() => Evaluate(new LocalMachine());
 
 		/// <summary>
 		/// Evaluates a RSML document given some properties.
 		/// </summary>
-		/// <param name="properties">The set of properties to feed into the evaluation</param>
+		/// <param name="machineData">The machine's data</param>
 		/// <returns>An evaluation result</returns>
-		public EvaluationResult Evaluate(EvaluationProperties properties)
+		public EvaluationResult Evaluate(LocalMachine machineData)
 		{
 
 			RsReader reader = new(Content);
@@ -175,18 +379,56 @@ namespace RSML.Parser
 						continue;
 
 					case 4:
-						// todo: handle special action
-						// + don't forget properties
-						continue;
+						byte result = HandleSpecialActionCall(tokens[1].Value, tokens[2].Value);
+
+						switch (result)
+						{
+
+							case SpecialActionBehavior.NoBehavior:
+								continue;
+
+							case SpecialActionBehavior.Error:
+								throw new ActionStandardErrorException("A special action returned error code 1.");
+
+							case SpecialActionBehavior.StopEvaluation:
+								return new();
+
+							case SpecialActionBehavior.ResetSpecials:
+								SpecialActions.Clear();
+
+								continue;
+
+							default:
+								throw new ActionErrorException(
+									$"A special action returned error code {result}. In the future, please use 1 to signal errors."
+								);
+
+						}
 
 					case 6:
-						// todo: handle major version indifferent logic path
-						// + don't forget properties
+						if (HandleLogicPath_Simple(tokens, machineData, machineData.SystemName == "linux"))
+						{
+
+							if (tokens[0].Type == RsTokenType.ThrowErrorOperator)
+								throw new UserRaisedException("Error-throw operator used.");
+
+							return new(tokens[5].Value);
+
+						}
+
 						continue;
 
 					case 7:
-						// todo: handle fully qualified logic path
-						// + don't forget properties
+						if (HandleLogicPath_Complex(tokens, machineData, machineData.SystemName == "linux"))
+						{
+
+							if (tokens[0].Type == RsTokenType.ThrowErrorOperator)
+								throw new UserRaisedException("Error-throw operator used.");
+
+							return new(tokens[6].Value);
+
+						}
+
 						continue;
 
 					default:

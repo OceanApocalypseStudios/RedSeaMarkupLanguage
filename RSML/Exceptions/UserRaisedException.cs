@@ -21,7 +21,7 @@ namespace RSML.Exceptions
 		/// with a custom error message.
 		/// </summary>
 		/// <param name="message">The custom error message</param>
-		protected UserRaisedException(string message) : base(message) { }
+		protected internal UserRaisedException(string message) : base(message) { }
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="UserRaisedException" />

@@ -1,4 +1,5 @@
-﻿using RSML.Parser;
+﻿using RSML.Machine;
+using RSML.Parser;
 
 
 namespace RSML.Samples
@@ -9,7 +10,7 @@ namespace RSML.Samples
 
 		string Content { get; }
 
-		EvaluationProperties Properties { get; }
+		LocalMachine MachineData { get; }
 
 		EvaluationResult EvaluateSample();
 

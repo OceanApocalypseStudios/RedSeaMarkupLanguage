@@ -21,9 +21,8 @@ namespace RSML.Trimming
 		/// Returns the content as is.
 		/// </summary>
 		/// <param name="document">The document</param>
-		/// <param name="_">Ignored</param>
 		/// <returns>The input document, untouched</returns>
-		public string Trim(ReadOnlySpan<char> document, in LanguageStandard _) => document.ToString();
+		public string Trim(ReadOnlySpan<char> document) => document.ToString();
 
 	}
 

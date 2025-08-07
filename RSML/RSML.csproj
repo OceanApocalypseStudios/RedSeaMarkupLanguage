@@ -1,13 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+	<!-- General Properties -->
 	<PropertyGroup>
+		<!-- Language-related -->
 		<TargetFramework>net8.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<LangVersion>12</LangVersion>
+		
+		<!-- Maintainability-related -->
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<Version>2.0.0</Version>
+		<NeutralLanguage>en</NeutralLanguage>
+		
+		<!-- NuGet Properties -->
 		<Title>Red Sea Markup Language</Title>
 		<Authors>OceanApocalypseStudios</Authors>
+		<Company>OceanApocalypseStudios</Company>
+		<Version>2.0.0</Version>
 		<Description>An extremely performant markup language for designing system-based logic paths in C#.</Description>
 		<Copyright>Copyright (c) 2025 OceanApocalypseStudios</Copyright>
 		<PackageProjectUrl>https://oceanapocalypsestudios.org/rsml-docs/2.0.0/</PackageProjectUrl>
@@ -17,18 +25,29 @@
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>markup</PackageTags>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-		<Company>OceanApocalypseStudios</Company>
-		<NeutralLanguage>en</NeutralLanguage>
 	</PropertyGroup>
 
+	<!-- Windows only -->
+	<PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
+		<DefineConstants>WINDOWS;$(DefineConstants)</DefineConstants>
+	</PropertyGroup>
+
+	<!-- Not Windows -->
+	<PropertyGroup Condition="'$(OS)' != 'Windows_NT'">
+		<DefineConstants>NOT_WINDOWS;$(DefineConstants)</DefineConstants>
+	</PropertyGroup>
+
+	<!-- Debug -->
 	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
 		<DebugType>full</DebugType>
 	</PropertyGroup>
 
+	<!-- Release -->
 	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
 		<DebugType>none</DebugType>
 	</PropertyGroup>
 
+	<!-- Items -->
 	<ItemGroup>
 		<None Include="..\Assets\Icon.png">
 			<Pack>True</Pack>

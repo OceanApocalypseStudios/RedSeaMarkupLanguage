@@ -17,9 +17,8 @@ namespace RSML.Trimming
 		/// in order to make it more lightweight.
 		/// </summary>
 		/// <param name="document">The document</param>
-		/// <param name="languageStandard">The language standard</param>
 		/// <returns>A trimmed document</returns>
-		public string Trim(ReadOnlySpan<char> document, in LanguageStandard languageStandard);
+		public string Trim(ReadOnlySpan<char> document);
 
 	}
 

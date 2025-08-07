@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 using RSML.Exceptions;
 using RSML.Language;
@@ -30,7 +31,7 @@ namespace RSML.Tokenization
 		private static readonly RsToken hashToken = new(RsTokenType.CommentSymbol, '#');
 		private static readonly RsToken errorToken = new(RsTokenType.ThrowErrorOperator, "!>");
 		private static readonly RsToken returnToken = new(RsTokenType.ReturnOperator, "->");
-		private static readonly RsToken definedToken = new(RsTokenType.DefinedKeyword, "defined");
+		private static readonly RsToken[] definedToken = [ new(RsTokenType.DefinedKeyword, "defined") ];
 		private static readonly RsToken[] anyToken = [ new(RsTokenType.WildcardKeyword, "any") ];
 
 		private static readonly string[] validComparators = [ "!=", "==", ">=", "<=", ">", "<" ]; // ! in order of priorities - very important
@@ -148,14 +149,7 @@ namespace RSML.Tokenization
 				return anyToken[0];
 
 			if (systemName.IsEquals("defined"))
-			{
-
-				InvalidRsmlSyntax.Throw(
-					LineNumber, $"Malformed logic path at line {LineNumber}. Invalid use of 'defined'.",
-					"Malformed logic path. Invalid use of 'defined'."
-				);
-
-			}
+				return definedToken[0];
 
 			if (!systemName.IsEquals(
 					StringComparison.Ordinal, "windows", "osx", "linux", "freebsd",
@@ -181,14 +175,7 @@ namespace RSML.Tokenization
 				return anyToken[0];
 
 			if (archId.IsEquals("defined"))
-			{
-
-				InvalidRsmlSyntax.Throw(
-					LineNumber, $"Malformed logic path at line {LineNumber}. Invalid use of 'defined'.",
-					"Malformed logic path. Invalid use of 'defined'."
-				);
-
-			}
+				return definedToken[0];
 
 			if (!archId.IsEquals(StringComparison.Ordinal, "x64", "arm64", "arm32", "x86"))
 			{
@@ -225,7 +212,7 @@ namespace RSML.Tokenization
 				return anyToken;
 
 			if (span.IsEquals("defined"))
-				return [ definedToken ];
+				return definedToken;
 
 			string comparator = "=="; // assume equals by default
 			int compLen = 0;
@@ -512,6 +499,38 @@ namespace RSML.Tokenization
 			);
 
 			return null!; // won't run
+
+		}
+
+		/// <inheritdoc />
+		public string CreateDocumentFromTokens(RsToken[] tokens)
+		{
+
+			StringBuilder builder = new();
+
+			foreach (var token in tokens)
+			{
+
+				if (token.Type == RsTokenType.Eof)
+					break;
+
+				if (token is { Type: RsTokenType.SpecialActionArgument, Value: "" })
+					continue;
+
+				if (token.Type == RsTokenType.Value)
+					_ = builder.Append('"');
+
+				_ = builder.Append(token.Value);
+
+				if (token.Type == RsTokenType.Value)
+					_ = builder.Append('"');
+
+				if (token.Type != RsTokenType.Value && token.Type != RsTokenType.Eol)
+					_ = builder.Append(' ');
+
+			}
+
+			return builder.ToString();
 
 		}
 
