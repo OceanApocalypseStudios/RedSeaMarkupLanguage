@@ -1,8 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 using System.Text;
 
-using RSML.Parser;
-
 
 namespace RSML.Native
 {
@@ -23,9 +21,9 @@ namespace RSML.Native
 			0x64, 0x69, 0x6F, 0x73
 		]; // OceanApocalypseStudios
 
-		private static readonly byte[] docsLink = Encoding.UTF8.GetBytes($"https://oceanapocalypsestudios.org/rsml-docs/{RsParser.ApiVersion}/");
+		private static readonly byte[] docsLink = Encoding.UTF8.GetBytes($"https://oceanapocalypsestudios.org/rsml-docs/{"change me"}/"); // todo
 
-		private static readonly byte[] utf8ApiVersion = Encoding.UTF8.GetBytes(RsParser.ApiVersion);
+		private static readonly byte[] utf8ApiVersion = Encoding.UTF8.GetBytes("change me"); // todo
 
 		/// <summary>
 		/// Writes the API version to a supplied buffer.

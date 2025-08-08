@@ -1,538 +1,247 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Collections.ObjectModel;
 using System.Text;
-
-using RSML.Exceptions;
-using RSML.Language;
 
 
 namespace RSML.Tokenization
 {
 
 	/// <summary>
-	/// Standard RSML tokenizer.
+	/// The officially maintained lexer/tokenizer for RSML v2.0.0.
 	/// </summary>
 	public sealed class RsLexer : ILexer
 	{
 
-		/// <summary>
-		/// The API version this tokenizer is built for.
-		/// </summary>
-		public const string ApiVersion = "2.0.0";
+		/// <inheritdoc/>
+		public string? StandardizedVersion => "2.0.0";
 
-		/// <summary>
-		/// The current line number.
-		/// </summary>
-		public int LineNumber { get; private set; }
+		/// <inheritdoc/>
+		public ImmutableHashSet<string> ValidComparators => [ "==", "!=", "<", ">", "<=", ">=" ];
 
-		// The goal is to minimize allocations, motherfucker.
-		// Hence, the initialization of an array here instead of in every loop.
-		private static readonly RsToken[] eolToken = [ new(RsTokenType.Eol, Environment.NewLine) ];
-		private static readonly RsToken atToken = new(RsTokenType.SpecialActionHandler, '@');
-		private static readonly RsToken hashToken = new(RsTokenType.CommentSymbol, '#');
-		private static readonly RsToken errorToken = new(RsTokenType.ThrowErrorOperator, "!>");
-		private static readonly RsToken returnToken = new(RsTokenType.ReturnOperator, "->");
-		private static readonly RsToken[] definedToken = [ new(RsTokenType.DefinedKeyword, "defined") ];
-		private static readonly RsToken[] anyToken = [ new(RsTokenType.WildcardKeyword, "any") ];
-
-		private static readonly string[] validComparators = [ "!=", "==", ">=", "<=", ">", "<" ]; // ! in order of priorities - very important
-
-		/// <summary>
-		/// Initializes a tokenizer at a given line number
-		/// or line number 1.
-		/// </summary>
-		/// <param name="lineNum">The custom line number to start at or 1 if untouched</param>
-		public RsLexer(int lineNum = 1) { LineNumber = lineNum - 1; }
-
-		#region Helpers
-
-		private bool TokenizeReturnValue(ReadOnlySpan<char> valueSpan, out RsToken? token)
-		{
-
-			if (valueSpan[0] != '"') // null token
-			{
-
-				token = null;
-
-				return false;
-
-			}
-
-			if (valueSpan.Length < 3) // exception here
-			{
-
-				InvalidRsmlSyntax.Throw(
-					LineNumber,
-					$"Malformed logic path at line {LineNumber}. The return value must be enclosed in double quotes and have at least 1 character.",
-					"Malformed logic path. The return value must be enclosed in double quotes and be at least 1 character long."
-				);
-
-			}
-
-			var lastQuoteIdx = valueSpan.LastIndexOf('"');
-
-			if (lastQuoteIdx <= 0)
-			{
-
-				InvalidRsmlSyntax.Throw(
-					LineNumber, $"Malformed logic path at line {LineNumber}. The return value must be enclosed in double quotes.",
-					"Malformed logic path. The return value must be enclosed in double quotes."
-				);
-
-			}
-
-			token = new(RsTokenType.Value, valueSpan[1..lastQuoteIdx]);
-
-			return true;
-
-		}
-
-		private int ValidateBasicLogicPathStructure(ReadOnlySpan<char> line)
-		{
-
-			// a logic path always contains at least 1 space
-			if (!line.Contains(' '))
-				InvalidRsmlSyntax.Throw(LineNumber, $"Malformed logic path at line {LineNumber}.", "Malformed logic path.");
-
-			// same with the double quote, must appear at least twice
-			var firstQuoteIdx = line.IndexOf('"');
-
-			// an operator is 2 characters long,
-			// but it must always be succeeded by a space
-			// meaning the quote can't be in indexes 0, 1 or 2
-			if (firstQuoteIdx < 3)
-			{
-
-				InvalidRsmlSyntax.Throw(
-					LineNumber,
-					$"Malformed logic path at line {LineNumber}. A logic path's value must be enclosed in double quotes.",
-					"Malformed logic path. A logic path's value must be enclosed in double quotes."
-				);
-
-			}
-
-			return firstQuoteIdx;
-
-		}
-
-		private void ValidateNumberOfEntries(int partsCount)
-		{
-
-			switch (partsCount)
-			{
-
-				// this means there's only 1 entry - the return value
-				case < 1:
-					InvalidRsmlSyntax.Throw(
-						LineNumber, $"Malformed logic path at line {LineNumber}. A valid logic path must contain at least 2 valid arguments.",
-						"Malformed logic path. A valid logic path must contain at least 2 valid arguments."
-					);
-
-					break;
-
-				// this means there's more than 5 entries
-				case > 4:
-					InvalidRsmlSyntax.Throw(
-						LineNumber, $"Malformed logic path at line {LineNumber}. A valid logic path must contain less than 5 arguments.",
-						"Malformed logic path. A valid logic path must contain less than 5 arguments."
-					);
-
-					break;
-
-			}
-
-		}
-
-		private RsToken TokenizeSystemName(Span<char> systemName)
-		{
-
-			if (systemName.IsEquals("any"))
-				return anyToken[0];
-
-			if (systemName.IsEquals("defined"))
-				return definedToken[0];
-
-			if (!systemName.IsEquals(
-					StringComparison.Ordinal, "windows", "osx", "linux", "freebsd",
-					"debian", "arch", "alpine", "gentoo"
-				))
-			{
-
-				InvalidRsmlSyntax.Throw(
-					LineNumber, $"Malformed logic path at line {LineNumber}. System name is not allowed.",
-					"Malformed logic path. System name is not allowed."
-				);
-
-			}
-
-			return new(RsTokenType.SystemName, systemName);
-
-		}
-
-		private RsToken TokenizeArchitectureIdentifier(Span<char> archId)
-		{
-
-			if (archId.IsEquals("any"))
-				return anyToken[0];
-
-			if (archId.IsEquals("defined"))
-				return definedToken[0];
-
-			if (!archId.IsEquals(StringComparison.Ordinal, "x64", "arm64", "arm32", "x86"))
-			{
-
-				InvalidRsmlSyntax.Throw(
-					LineNumber, $"Malformed logic path at line {LineNumber}. Architecture ID is not allowed.",
-					"Malformed logic path. Architecture ID is not allowed."
-				);
-
-			}
-
-			return new(RsTokenType.ArchitectureIdentifier, archId);
-
-		}
-
-		private static RsTokenType GetComparatorTokenType(string comp) =>
-			comp switch
-			{
-
-				"==" => RsTokenType.Equals,
-				">=" => RsTokenType.GreaterOrEqualsThan,
-				"<=" => RsTokenType.LessOrEqualsThan,
-				"!=" => RsTokenType.Different,
-				">"  => RsTokenType.GreaterThan,
-				"<"  => RsTokenType.LessThan,
-				_    => throw new ArgumentException("Invalid comparator.", nameof(comp))
-
-			};
-
-		private RsToken[] ParseMajorVersion(ReadOnlySpan<char> span)
-		{
-
-			if (span.IsEquals("any"))
-				return anyToken;
-
-			if (span.IsEquals("defined"))
-				return definedToken;
-
-			string comparator = "=="; // assume equals by default
-			int compLen = 0;
-
-			foreach (var cmp in validComparators)
-			{
-
-				if (!span.StartsWith(cmp.AsSpan(), StringComparison.Ordinal))
-					continue;
-
-				comparator = cmp;
-				compLen = cmp.Length;
-
-				break;
-
-			}
-
-			// the actual number
-			var numberPart = span[compLen..];
-
-			if (!Int32.TryParse(numberPart, out int verNum))
-			{
-
-				InvalidRsmlSyntax.Throw(
-					LineNumber,
-					$"Malformed logic path at line {LineNumber}. Major version must be a valid integer, 'any', 'defined' or an integer with a valid comparison.",
-					"Malformed logic path. Invalid major version."
-				);
-
-			}
-
-			return [ new(GetComparatorTokenType(comparator), comparator), new(RsTokenType.MajorVersionId, verNum.ToString()) ];
-
-		}
-
-		#endregion
-
-		private RsToken[] TokenizeLogicPath(ReadOnlySpan<char> line, bool errorIf)
-		{
-
-			// first let's validate the basic structure of the line
-			var firstQuoteIdx = ValidateBasicLogicPathStructure(line);
-
-			// now for the actual tokenization!!!!!
-			// we split by the space character
-			// BUT NOT THE WHOLE STRING/SPAN!!
-			// only up to the first quote
-			var preQuoteSpan = line[..firstQuoteIdx];
-			Span<Range> ranges = stackalloc Range[preQuoteSpan.Count(' ')];
-			int partsCount = preQuoteSpan.Split(ranges, ' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
-
-			// so we now should have either 1 entry
-			// 2 entries
-			// 3 entries
-			// or 4 entries
-			// BUT NEVER 5
-			ValidateNumberOfEntries(partsCount);
-
-			var systemNameSpan = partsCount > 1 ? preQuoteSpan[ranges[1]] : [ ];
-
-			var architectureIdSpan = partsCount > 2
-										 ? partsCount > 3
-											   ? preQuoteSpan[ranges[3]]
-											   : preQuoteSpan[ranges[2]]
-										 : [ ];
-
-			var versionMajorSpan = partsCount > 3 ? preQuoteSpan[ranges[2]] : [ ];
-
-			Span<char> systemNameSpanLower = stackalloc char[systemNameSpan.Length];
-			Span<char> architectureIdSpanLower = stackalloc char[architectureIdSpan.Length];
-			Span<char> versionMajorSpanLower = stackalloc char[versionMajorSpan.Length];
-
-			systemNameSpan.ToLowerInvariant(systemNameSpanLower);
-			architectureIdSpan.ToLowerInvariant(architectureIdSpanLower);
-			versionMajorSpan.ToLowerInvariant(versionMajorSpanLower);
-
-			var afterQuoteSpan = line[firstQuoteIdx..];
-
-			/*
-			 * Allowed logic path syntaxes
-			 * --------------------------
-			 * Minimum entries: 2
-			 * Maximum entries: 5
-			 * For now, maximum entries: 4
-			 *
-			 * However, we hide the return value for now.
-			 *
-			 *	   0		      1			       2			      3			       [4]
-			 *
-			 * <operator> [<return--value>]
-			 * <operator>   <system-name>   [<return--value>]
-			 * <operator>   <system-name>   <architecture-id>  [<return--value>]
-			 * <operator>   <system-name>    <major-version>   <architecture-id> [<return--value>]
-			 *
-			 */
-
-			if (TokenizeReturnValue(afterQuoteSpan, out var returnValueToken))
-			{
-
-				// operator + return value
-				if (partsCount == 1)
-					return [ errorIf ? errorToken : returnToken, anyToken[0], anyToken[0], anyToken[0], (RsToken)(returnValueToken!), eolToken[0] ];
-
-				var systemToken = TokenizeSystemName(systemNameSpanLower);
-
-				// operator + system name + return value
-				if (partsCount == 2)
-					return [ errorIf ? errorToken : returnToken, systemToken, anyToken[0], anyToken[0], (RsToken)(returnValueToken!), eolToken[0] ];
-
-				// operator + system name + architecture + return value
-				var archToken = TokenizeArchitectureIdentifier(architectureIdSpanLower);
-
-				switch (partsCount)
-				{
-
-					case 3:
-						return [ errorIf ? errorToken : returnToken, systemToken, anyToken[0], archToken, (RsToken)(returnValueToken!), eolToken[0] ];
-
-					// operator + system name + major version + architecture + return value
-					case 4:
-						var majorVersionTokens = ParseMajorVersion(versionMajorSpanLower);
-
-						return
-						[
-							errorIf ? errorToken : returnToken, systemToken, majorVersionTokens[0], majorVersionTokens[1], archToken,
-							(RsToken)(returnValueToken!), eolToken[0]
-						];
-
-					default:
-						InvalidRsmlSyntax.Throw(
-							LineNumber,
-							$"Malformed logic path at line {LineNumber}. Unexpected number of arguments.",
-							"Malformed logic path. All overloads failed."
-						);
-
-						break;
-
-				}
-
-			}
-
-			InvalidRsmlSyntax.Throw(
-				LineNumber,
-				$"Malformed logic path at line {LineNumber}. All overloads failed.",
-				"Malformed logic path. All overloads failed."
-			);
-
-			return null!; // won't happen, but it pleases .NET in ways nobody can understand
-
-		}
-
-		private RsToken[] TokenizeSpecialAction(ReadOnlySpan<char> line, int nextNewline)
-		{
-
-			// ok so now we have to find the name
-			// now unlike before, v2.0.0 is much, MUCH
-			// stricter
-			// so like no more bullshit like this:
-			// @@ "This is allowed"
-			// well NOT ANYMORE DUMBASS
-			var nextSpace = line.IndexOf(' ');
-
-			// depending on where the next space is
-			// or if it EVEN FUCKING EXISTS
-			// we decide the NextStepToTakeTM
-			// shit
-			return nextSpace switch
-			{
-
-				1 => // malformed bullshit (space right after @)
-					throw new InvalidRsmlSyntax(
-						LineNumber > 0
-							? $"Malformed special action in line {LineNumber}. A special action must have a name."
-							: "Malformed special action. A special action must have a name."
-					),
-
-				2 when line[1] == '@' => // malformed ass (@ is not an allowed name)
-					throw new InvalidRsmlSyntax(
-						LineNumber > 0
-							? $"Malformed special action in line {LineNumber}. A special action must not be named '@'."
-							: "Malformed special action. A special action must not be named '@'."
-					),
-
-				< 0 => // no argument (no space)
-				[
-					atToken, new(RsTokenType.SpecialActionName, line[1..nextNewline]), new(RsTokenType.SpecialActionArgument, ""), eolToken[0]
-				],
-
-				_ => // literally anything fucking else
-				[
-					atToken, new(RsTokenType.SpecialActionName, line[1..nextSpace]),
-					new(RsTokenType.SpecialActionArgument, line[(nextSpace + 1)..nextNewline]), eolToken[0]
-				]
-
-			};
-
-		}
-
-		/// <inheritdoc />
-		public RsToken[] TokenizeLine(ReadOnlySpan<char> line)
-		{
-
-			++LineNumber;
-
-			// Ok imma comment the shit out of this
-			// just so you know what the process is
-			// or something stupid like that k?
-			if (line.IsEmpty)
-				return eolToken;
-
-			// this isn't supposed to happen
-			// but some dumbass user probably going to attempt this
-			// so just to be safe
-			var nextNewline = line.IndexOf('\n');
-
-			// carriage returns are a thing tho
-			if (nextNewline > 0)
-			{
-
-				if (line[nextNewline - 1] == '\r')
-					nextNewline--;
-
-			}
-
-			// we trim to get rid of any whitespace that might exist
-			line = nextNewline >= 0 ? line.Trim() : line[..nextNewline].Trim();
-
-			// if it's empty or just whitespace, it's an EOL token
-			if (line.IsEmpty || line.IsWhiteSpace())
-				return eolToken;
-
-			// technically you should only pass LINES here and not several ones
-			// but ofc someone's going to try to break this piece of shit
-			if (line.IsNewLinesOnly())
-			{
-
-				RsToken[] result = new RsToken[line.Length];
-				result.AsSpan().Fill(eolToken[0]);
-
-				return result;
-
-			}
-
-			// the first character of the line
-			// tells us a shitton of things
-			switch (line[0])
-			{
-
-				// if it's a comment, it's a FUCKING comment!
-				// don't FUCKING bother with doing extra checks
-				// we're supposed to be fast, remember?
-				case '#':
-					return [ hashToken, new(RsTokenType.CommentText, line[1..]), eolToken[0] ];
-
-				// special actions are cool until you do
-				// Thread.Sleep(1000); like a FUCKING dumbass
-				// special actions are not supposed to be used like that, y'know
-				// ugh
-				case '@':
-					return TokenizeSpecialAction(line, nextNewline);
-
-			}
-
-			// ok so now we check for operators
-			// easy-peasy motherfucker
-			// first let's see the return operator cuz it's more important and doesn't suck ass
-			// ReSharper disable StringLiteralTypo
-			if (line.StartsWith("-> "))
-
-				// ReSharper restore StringLiteralTypo
-				return TokenizeLogicPath(line, false);
-
-			// error-throw op
-			// ReSharper disable StringLiteralTypo
-			if (line.StartsWith("!> "))
-
-				// ReSharper restore StringLiteralTypo
-				return TokenizeLogicPath(line, true);
-
-			InvalidRsmlSyntax.Throw(
-				LineNumber,
-				$"Malformed RSML at line {LineNumber}. A line must either be whitespace, special action, logic path or comment.",
-				"Malformed RSML line. A line must either be whitespace, special action, logic path or comment."
-			);
-
-			return null!; // won't run
-
-		}
-
-		/// <inheritdoc />
-		public string CreateDocumentFromTokens(RsToken[] tokens)
+		/// <inheritdoc/>
+		public string CreateDocumentFromTokens(IEnumerable<RsToken> tokens)
 		{
 
 			StringBuilder builder = new();
 
-			foreach (var token in tokens)
+			foreach (var t in tokens)
 			{
 
-				if (token.Type == RsTokenType.Eof)
+				if (t.Type == RsTokenType.Eof)
 					break;
 
-				if (token is { Type: RsTokenType.SpecialActionArgument, Value: "" })
+				if (t.Type == RsTokenType.Eol)
+				{
+
+					_ = builder.AppendLine();
 					continue;
 
-				if (token.Type == RsTokenType.Value)
-					_ = builder.Append('"');
+				}
 
-				_ = builder.Append(token.Value);
+				if (t.Type == RsTokenType.SpecialActionSymbol)
+				{
 
-				if (token.Type == RsTokenType.Value)
-					_ = builder.Append('"');
+					_ = builder.Append('@');
+					continue;
 
-				if (token.Type != RsTokenType.Value && token.Type != RsTokenType.Eol)
-					_ = builder.Append(' ');
+				}
+
+				if (t.Type == RsTokenType.LogicPathValue)
+				{
+
+					_ = builder.Append(t.Value);
+					continue;
+
+				}
+
+				_ = builder.Append(t.Value);
+				_ = builder.Append(' ');
 
 			}
 
 			return builder.ToString();
 
 		}
+
+		/// <inheritdoc/>
+		public IEnumerable<RsToken> TokenizeLine(string line)
+		{
+
+			int pos = 0;
+			SkipWhitespace(line, ref pos);
+
+			if (pos >= line.Length)
+			{
+
+				yield return new(RsTokenType.Eol, Environment.NewLine);
+				yield break;
+
+			}
+
+			if (line[ pos ] == '#')
+			{
+
+				yield return new(RsTokenType.CommentSymbol, '#');
+				yield return new(RsTokenType.CommentText, line[ ++pos.. ]);
+				yield return new(RsTokenType.Eol, Environment.NewLine);
+				yield break;
+
+			}
+
+			if (line[ pos ] == '@')
+			{
+
+				yield return new(RsTokenType.SpecialActionSymbol, '@');
+
+				++pos; // advance to ignore the #
+				var actionName = ReadUntilWhitespaceOrEol(line, ref pos);
+				yield return new(RsTokenType.SpecialActionName, actionName);
+
+				var argument = ReadUntilWhitespaceOrEol(line, ref pos);
+				yield return new(RsTokenType.SpecialActionArgument, argument);
+
+				yield return new(RsTokenType.Eol, Environment.NewLine);
+				yield break;
+
+			}
+
+			var op = ReadUntilWhitespaceOrEol(line, ref pos);
+
+			if (op.IsEquals("->"))
+				yield return new(RsTokenType.ReturnOperator, op);
+
+			else if (op.IsEquals("!>"))
+				yield return new(RsTokenType.ThrowErrorOperator, op);
+
+			while (pos < line.Length)
+			{
+
+				if (line[ pos ] == '"')
+				{
+
+					pos++; // ignore the double quote
+					var retVal = ReadQuotedString(line, ref pos);
+
+					yield return new(RsTokenType.LogicPathValue, retVal);
+					yield return new(RsTokenType.Eol, Environment.NewLine);
+					yield break;
+
+				}
+
+				var token = TokenizeLogicPathComponent(line, ref pos);
+
+				if (token is not null)
+					yield return (RsToken)token;
+
+			}
+
+		}
+
+		/// <inheritdoc/>
+		public RsToken? TokenizeLogicPathComponent(ReadOnlySpan<char> line, ref int pos)
+		{
+
+			SkipWhitespace(line, ref pos);
+			int currentPosVal = pos;
+			var chars = ReadUntilWhitespaceOrEol(line, ref pos);
+
+			if (chars.IsEquals("any"))
+				return new(RsTokenType.WildcardKeyword, "any");
+
+			if (chars.IsEquals("defined"))
+				return new(RsTokenType.DefinedKeyword, "defined");
+
+			if (chars.IsEquals(StringComparison.OrdinalIgnoreCase, "windows", "osx", "linux", "freebsd", "debian", "archlinux", "fedora", "alpine", "gentoo"))
+				return new(RsTokenType.SystemName, chars);
+
+			if (chars.IsEquals(StringComparison.OrdinalIgnoreCase, "x64", "x86", "arm32", "arm64", "loongarch64"))
+				return new(RsTokenType.ArchitectureIdentifier, chars);
+
+			if (Int32.TryParse(chars, out int result))
+				return new(RsTokenType.MajorVersionId, result.ToString());
+
+			var str = chars.ToString();
+
+			if (ValidComparators.Contains(str))
+			{
+
+				#region Pragmas
+#pragma warning disable CS8509 // The switch expression does not handle all possible values of its input type (it is not exhaustive).
+				#endregion
+
+				return str switch
+				{
+
+					"==" => new(RsTokenType.Equals, str),
+					"!=" => new(RsTokenType.Different, str),
+					">" => new(RsTokenType.GreaterThan, str),
+					"<" => new(RsTokenType.LessThan, str),
+					">=" => new(RsTokenType.GreaterOrEqualsThan, str),
+					"<=" => new(RsTokenType.LessOrEqualsThan, str)
+
+				};
+
+				#region Pragmas
+#pragma warning restore CS8509 // The switch expression does not handle all possible values of its input type (it is not exhaustive).
+				#endregion
+
+			}
+
+			pos = currentPosVal; // in case we read what we shouldn't
+			return null;
+
+		}
+
+		#region Helpers
+
+		private static string ReadQuotedString(ReadOnlySpan<char> line, ref int pos)
+		{
+
+			int start = pos;
+			var finalQuoteIndex = line[ pos.. ].LastIndexOf('"');
+
+			if (finalQuoteIndex == -1)
+				return "";
+
+			finalQuoteIndex += pos; // absolute count
+
+			while (pos < line.Length)
+			{
+
+				if (pos == finalQuoteIndex)
+					break;
+
+				pos++;
+
+			}
+
+			return line[ start..pos ].ToString(); // ignores last double quote
+
+		}
+
+		private static ReadOnlySpan<char> ReadUntilWhitespaceOrEol(ReadOnlySpan<char> line, ref int pos)
+		{
+
+			int start = pos;
+
+			while (pos < line.Length && !Char.IsWhiteSpace(line[ pos ]))
+				pos++;
+
+			return line[ start..pos ];
+
+		}
+
+		private static void SkipWhitespace(ReadOnlySpan<char> chars, ref int pos)
+		{
+
+			while (pos < chars.Length && Char.IsWhiteSpace(chars[ pos ]))
+				pos++;
+
+		}
+
+		#endregion
 
 	}
 

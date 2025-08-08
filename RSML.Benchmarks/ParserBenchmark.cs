@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
+using System.Net.Http.Headers;
 using System.Text;
 
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Jobs;
-
-using RSML.Language;
-using RSML.Parser;
+using RSML.Evaluation;
 
 
 namespace RSML.Benchmarks
@@ -14,14 +12,15 @@ namespace RSML.Benchmarks
 
 	[MemoryDiagnoser]
 	[SimpleJob(RuntimeMoniker.Net80)]
-	[SuppressMessage("Style", "IDE0058:Expression value is never used", Justification = "<Pending>")]
+	[System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "<Pending>")]
+	[System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0058:Expression value is never used", Justification = "<Pending>")]
+	[System.Diagnostics.CodeAnalysis.SuppressMessage("CodeQuality", "IDE0079:Remove unnecessary suppression", Justification = "<Pending>")] // vs thinks the above one is unnecessary for whatever reason
 	public class RsParserBenchmarks
 	{
 
 		private string complexContent = null!;
 		private string largeContent = null!;
 		private string mediumContent = null!;
-
 		private string smallContent = null!;
 
 		[GlobalSetup]
@@ -42,11 +41,13 @@ namespace RSML.Benchmarks
 
 			for (int i = 0; i < lines; i++)
 			{
+
 				_ = sb.AppendLine(
 					i % 5 == 0
-						? $"line{i} -> \"value{i}\""
+						? $"-> line{i} \"value{i}\""
 						: $"# Comment {i}"
 				);
+
 			}
 
 			return sb.ToString();
@@ -62,13 +63,15 @@ namespace RSML.Benchmarks
 			for (int i = 0; i < lines; i++)
 			{
 
-				_ = rand.Next(0, 4) switch
+				_ = rand.Next(0, 6) switch
 				{
 
-					0 => sb.AppendLine($"line{i} -> \"value{i}\""),
+					0 => sb.AppendLine($"-> line{i} \"value{i}\""),
 					1 => sb.AppendLine($"@SpecialAction arg{i}"),
-					2 => sb.AppendLine($"match{i} || \"action{i}\""),
-					_ => sb.AppendLine($"# Comment {i}")
+					2 => sb.AppendLine($"!> match{i} x64 \"value{i}\""),
+					3 => sb.AppendLine($"-> line{i} 25 x64 \"value{i}\""),
+					4 => sb.AppendLine($"# Comment {i}"),
+					_ => sb.AppendLine($"     # Comment {i}")
 
 				};
 
@@ -78,10 +81,10 @@ namespace RSML.Benchmarks
 
 		}
 
-		private static RsParser CreateConfiguredParser(string content)
+		private static RsEvaluator CreateConfiguredParser(string content)
 		{
 
-			RsParser parser = new(content, LanguageStandard.Official25);
+			RsEvaluator parser = new(content);
 			parser.RegisterSpecialAction("SpecialAction", (_, _) => 0);
 
 			return parser;
@@ -93,7 +96,7 @@ namespace RSML.Benchmarks
 		{
 
 			var parser = CreateConfiguredParser(smallContent);
-			parser.Evaluate("test");
+			parser.Evaluate(new("test", null, null));
 
 		}
 
@@ -102,7 +105,7 @@ namespace RSML.Benchmarks
 		{
 
 			var parser = CreateConfiguredParser(mediumContent);
-			parser.Evaluate("line50");
+			parser.Evaluate(new("line50", null, null));
 
 		}
 
@@ -111,7 +114,7 @@ namespace RSML.Benchmarks
 		{
 
 			var parser = CreateConfiguredParser(largeContent);
-			parser.Evaluate("line5000");
+			parser.Evaluate(new("line5000", null, null));
 
 		}
 
@@ -120,7 +123,7 @@ namespace RSML.Benchmarks
 		{
 
 			var parser = CreateConfiguredParser(complexContent);
-			parser.Evaluate("line250");
+			parser.Evaluate(new("line250", null, null));
 
 		}
 
@@ -143,22 +146,16 @@ namespace RSML.Benchmarks
 		}
 
 		[Benchmark]
-		public void GetCommentType_Explicit()
-		{
-
-			var parser = CreateConfiguredParser(smallContent);
-			parser.GetCommentType("# comment");
-
-		}
+		public void IsComment_True_Medium() => new RsEvaluator("# ").IsComment("# This is not a big comment, but also not really a small one. Either ways, this will let us test the method and benchmark it somewhat accurately.");
 
 		[Benchmark]
-		public void GetCommentType_Implicit()
-		{
+		public void IsComment_True_Small() => new RsEvaluator("# ").IsComment("# small");
 
-			var parser = CreateConfiguredParser(smallContent);
-			parser.GetCommentType("just text");
+		[Benchmark]
+		public void IsComment_False_Medium() => new RsEvaluator("# ").IsComment("             * One day, I hope this string is no longer  spaced in  a weird way, but it'll let us test the IsComment() method of the     RsParser class locatedin the namespace known as RSML.Parser.RsParser. Interesting,  right?");
 
-		}
+		[Benchmark]
+		public void IsComment_False_Small() => new RsEvaluator("# ").IsComment("not a comment");
 
 	}
 

@@ -1,4 +1,4 @@
-﻿namespace RSML.Language
+﻿namespace RSML.Tokenization
 {
 
 	/// <summary>
@@ -8,19 +8,17 @@
 	{
 
 		/// <summary>
-		/// The return operator. In RSML, this is:
-		/// <c>return</c>
-		/// <c>returnif</c>
-		/// <c>-></c>
-		/// <c>=></c>
+		/// An invalid or undefined token.
+		/// </summary>
+		UndefinedToken,
+
+		/// <summary>
+		/// The return operator.
 		/// </summary>
 		ReturnOperator,
 
 		/// <summary>
-		/// The error out operator. In RSML, this is:
-		/// <c>error</c>
-		/// <c>errorif</c>
-		/// <c>!></c>
+		/// The error out operator.
 		/// </summary>
 		ThrowErrorOperator,
 
@@ -33,6 +31,12 @@
 		/// The system architecture identification keyword.
 		/// </summary>
 		ArchitectureIdentifier,
+
+		/// <summary>
+		/// The major version ID token. This is version of the system, <em>unless</em>
+		/// <c>defined</c> or <c>any</c> were used instead.
+		/// </summary>
+		MajorVersionId,
 
 		/// <summary>
 		/// The equals keyword (<c>==</c>).
@@ -67,13 +71,7 @@
 		/// <summary>
 		/// The value token. This is the argument passed to an operator.
 		/// </summary>
-		Value,
-
-		/// <summary>
-		/// The major version ID token. This is version of the system, <em>unless</em>
-		/// <c>defined</c> or <c>any</c> were used instead.
-		/// </summary>
-		MajorVersionId,
+		LogicPathValue,
 
 		/// <summary>
 		/// The <c>defined</c> keyword used to specify a version must be defined.
@@ -86,9 +84,9 @@
 		WildcardKeyword,
 
 		/// <summary>
-		/// The special action handler (<c>@</c>).
+		/// The special action symbol (<c>@</c>).
 		/// </summary>
-		SpecialActionHandler,
+		SpecialActionSymbol,
 
 		/// <summary>
 		/// The special action name.

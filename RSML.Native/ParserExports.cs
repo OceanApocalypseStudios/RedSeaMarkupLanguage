@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-using RSML.Parser;
-
 
 namespace RSML.Native
 {
 
-	/// <summary>
-	/// Exports for <see cref="RsParser " />.
-	/// </summary>
 	public static class ParserExports
 	{
 

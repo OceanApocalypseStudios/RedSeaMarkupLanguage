@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 
-using RSML.Language;
-
 
 namespace RSML.Tokenization
 {

@@ -1,28 +1,45 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+
+using RSML.ComponentLayout;
 
 
 namespace RSML.Tokenization
 {
 
 	/// <summary>
-	/// RSML tokenizer.
+	/// A lexer for RSML that converts lines into collections of tokens.
 	/// </summary>
-	public interface ILexer
+	public interface ILexer : IRsToolchainComponent
 	{
+
+		/// <summary>
+		/// Valid version number comparators.
+		/// </summary>
+		ImmutableHashSet<string> ValidComparators { get; }
 
 		/// <summary>
 		/// Tokenizes a RSML line.
 		/// </summary>
 		/// <param name="line">The line to tokenize</param>
-		/// <returns>An array of tokens</returns>
-		public RsToken[] TokenizeLine(ReadOnlySpan<char> line);
+		/// <returns>An enumerable of tokens</returns>
+		IEnumerable<RsToken> TokenizeLine(string line);
 
 		/// <summary>
-		/// Forms a RSML document from an array of tokens.
+		/// Forms a RSML document from an enumerable of tokens.
 		/// </summary>
 		/// <param name="tokens">The tokens</param>
 		/// <returns>A RSML document</returns>
-		public string CreateDocumentFromTokens(RsToken[] tokens);
+		string CreateDocumentFromTokens(IEnumerable<RsToken> tokens);
+
+		/// <summary>
+		/// Tokenizes a component of a logic path.
+		/// </summary>
+		/// <param name="component">The component to tokenize</param>
+		/// <param name="pos">The position at which the tokenization is being done</param>
+		/// <returns>A single token or <c>null</c> if not recognized in the context of a logic path.</returns>
+		RsToken? TokenizeLogicPathComponent(ReadOnlySpan<char> component, ref int pos);
 
 	}
 

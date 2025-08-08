@@ -1,5 +1,5 @@
-﻿using RSML.Machine;
-using RSML.Parser;
+﻿using RSML.Evaluation;
+using RSML.Machine;
 
 
 namespace RSML.Samples.Samples
@@ -16,7 +16,7 @@ namespace RSML.Samples.Samples
 		public LocalMachine MachineData => new();
 
 		/// <inheritdoc />
-		public EvaluationResult EvaluateSample() => new RsParser(Content).Evaluate(MachineData);
+		public EvaluationResult EvaluateSample() => new RsEvaluator(Content).Evaluate(MachineData);
 
 	}
 

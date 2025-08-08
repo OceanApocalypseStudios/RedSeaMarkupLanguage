@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
 
-using RSML.Language;
 using RSML.Tokenization;
 
 
@@ -8,91 +8,75 @@ namespace RSML.Reader
 {
 
 	/// <summary>
-	/// A RSML reader that reads from a buffer and tokenizes the lines.
+	/// The officially maintained RSML Reader that reads lines from a buffer and feeds them into a lexer.
 	/// </summary>
-	public sealed class RsReader
+	public sealed class RsReader : IReader
 	{
 
-		private int curIndex;
+		private int curIndex = 0;
 		private readonly string source;
-		private static readonly RsToken[] eofToken = [ new(RsTokenType.Eof, '\0') ];
-		private static readonly RsToken[] eolToken = [ new(RsTokenType.Eol, Environment.NewLine) ];
+		private readonly RsToken[] eofToken = [ new(RsTokenType.Eof, '\0') ];
+		private readonly RsToken[] eolToken = [ new(RsTokenType.Eol, Environment.NewLine) ];
+
+		/// <inheritdoc/>
+		public string? StandardizedVersion => "2.0.0";
 
 		/// <summary>
 		/// Initializes a RSML reader.
 		/// </summary>
 		/// <param name="source">A span of characters as input</param>
-		public RsReader(ReadOnlySpan<char> source) { this.source = source.ToString(); }
+		public RsReader(ReadOnlySpan<char> source) { this.source = source.ToString().ReplaceLineEndings(); }
 
 		/// <summary>
 		/// Initializes a RSML reader.
 		/// </summary>
 		/// <param name="source">A string as input</param>
-		public RsReader(string source) { this.source = source; }
+		public RsReader(string source) { this.source = source.ReplaceLineEndings(); }
 
-		/// <summary>
-		/// Tries to read and tokenize a whole line.
-		/// </summary>
-		/// <param name="lexer">The tokenizer to use</param>
-		/// <param name="tokens">The return tokens</param>
-		/// <returns><c>false</c> if the end has been reached</returns>
-		public bool TryReadAndTokenizeLine(ILexer lexer, out RsToken[] tokens)
+		/// <inheritdoc/>
+		public bool TryTokenizeNextLine(ILexer lexer, out IEnumerable<RsToken> tokens)
 		{
 
-			if (curIndex < 0)
+			if (curIndex < 0 || curIndex >= source.Length)
 			{
 
 				tokens = eofToken;
-
 				return false;
 
 			}
 
-			var span = source[curIndex..].AsSpan();
+			ReadOnlySpan<char> span = source.AsSpan(curIndex);
+			int nextNewline = span.IndexOf(Environment.NewLine);
 
-			if (span.Length < 1)
-			{
-
-				curIndex = -1;
-				TryReadAndTokenizeLine(lexer, out _); // will return false with EOF token
-
-			}
-
-			int nextNewline = span.IndexOf('\n');
+			ReadOnlySpan<char> lineSpan;
+			int advancedBy;
 
 			if (nextNewline < 0)
 			{
 
-				tokens = lexer.TokenizeLine(span);
-				curIndex = -1; // We consumed it. Done.
-
-				return true;
+				lineSpan = span;
+				advancedBy = lineSpan.Length;
 
 			}
-
-			var temp = span[..(nextNewline)];
-
-			if (temp.Length > 0 && temp[^1] == '\r')
+			else
 			{
 
-				curIndex++;        // skip the \r in the next iteration
-				temp = temp[..^1]; // normalize \r\n by ignoring \r
+				lineSpan = span[ ..nextNewline ];
+				advancedBy = nextNewline + 1;
 
 			}
 
-			if (temp.Length < 1)
+			curIndex += advancedBy;
+
+			if (lineSpan.IsEmpty)
 			{
 
 				tokens = eolToken;
-				curIndex++;
-
 				return true;
 
 			}
 
-			tokens = lexer.TokenizeLine(temp);
-			curIndex += temp.Length + 1;
-
+			tokens = lexer.TokenizeLine(lineSpan.ToString());
 			return true;
 
 		}

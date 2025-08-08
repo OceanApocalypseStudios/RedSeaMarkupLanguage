@@ -1,11 +1,11 @@
-﻿using RSML.Machine;
-using RSML.Parser;
+﻿using RSML.Evaluation;
+using RSML.Machine;
 
 
 namespace RSML.Tests
 {
 
-	public class RsParserTests
+	public class RsEvaluatorTests
 	{
 
 		private static readonly LocalMachine win10X64 = new("windows", "x64", 10);
@@ -17,7 +17,7 @@ namespace RSML.Tests
 		public void Evaluate_Windows10_X64_CorrectValue(string data, string? expected)
 		{
 
-			RsParser parser = new(data);
+			RsEvaluator parser = new(data);
 			var evaluationStr = parser.Evaluate(win10X64).MatchValue;
 			Assert.Equal(expected, evaluationStr);
 
@@ -29,7 +29,7 @@ namespace RSML.Tests
 		public void Evaluate_Ubuntu22_Arm64_CorrectValue(string data, string? expected)
 		{
 
-			RsParser parser = new(data);
+			RsEvaluator parser = new(data);
 			var evaluationStr = parser.Evaluate(ubuntu22Arm64).MatchValue;
 			Assert.Equal(expected, evaluationStr);
 
