@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<PublishAot>true</PublishAot>
+		<InvariantGlobalization>true</InvariantGlobalization>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Spectre.Console" Version="0.50.1-preview.0.24" />
+		<PackageReference Include="System.CommandLine" Version="2.0.0-beta6.25358.103" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\RSML\RSML.csproj" />
+	</ItemGroup>
+
+</Project>

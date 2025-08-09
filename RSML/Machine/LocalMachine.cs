@@ -110,18 +110,18 @@ namespace RSML.Machine
 			if (!File.Exists("/etc/os-release"))
 				return;
 
-			var lines = File.ReadAllLines("/etc/os-release");
+			string[] lines = File.ReadAllLines("/etc/os-release");
 
-			var idLine = lines.FirstOrDefault(l => l.StartsWith("ID="));
+			string? idLine = lines.FirstOrDefault(l => l.StartsWith("ID="));
 
 			if (idLine is null)
 				return; // we don't care about anything else
 
 			DistroName = idLine.Split('=')[1].Trim('"');
 
-			var versionLine = lines.FirstOrDefault(l => l.StartsWith("VERSION_ID="));
+			string? versionLine = lines.FirstOrDefault(l => l.StartsWith("VERSION_ID="));
 
-			if (versionLine is not null && Int32.TryParse(versionLine.Split('=')[1].Trim('"').Split('.')[0], out var versionNum))
+			if (versionLine is not null && Int32.TryParse(versionLine.Split('=')[1].Trim('"').Split('.')[0], out int versionNum))
 				SystemVersion = versionNum;
 
 			if (DistroName == "fedora")
@@ -132,7 +132,7 @@ namespace RSML.Machine
 
 			}
 
-			var likeLine = lines.FirstOrDefault(l => l.StartsWith("ID_LIKE="));
+			string? likeLine = lines.FirstOrDefault(l => l.StartsWith("ID_LIKE="));
 
 			if (likeLine is not null)
 				DistroFamily = likeLine.Split('=')[1].Trim('"');
@@ -159,7 +159,7 @@ namespace RSML.Machine
 
 				string? fullVer = unameR?.StandardOutput.ReadLine()?.Trim();
 
-				if (!Int32.TryParse(fullVer?.Split('.')[0], out var versionNum))
+				if (!Int32.TryParse(fullVer?.Split('.')[0], out int versionNum))
 					return;
 
 				SystemVersion = versionNum;
@@ -179,7 +179,7 @@ namespace RSML.Machine
 			{
 
 				using var proc = Process.Start(
-					new ProcessStartInfo()
+					new ProcessStartInfo
 					{
 
 						FileName = "sw_vers",
@@ -192,7 +192,7 @@ namespace RSML.Machine
 
 				string? fullVer = proc?.StandardOutput.ReadLine();
 
-				if (!Int32.TryParse(fullVer?.Split('.')[0], out var versionNum))
+				if (!Int32.TryParse(fullVer?.Split('.')[0], out int versionNum))
 					return;
 
 				SystemVersion = versionNum;

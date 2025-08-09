@@ -1,0 +1,8 @@
+{
+	"profiles": {
+		"RSML.CLI": {
+			"commandName": "Project",
+			"commandLineArgs": "--version"
+		}
+	}
+}

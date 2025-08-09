@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Collections.ObjectModel;
 using System.Text;
 
 
@@ -14,13 +13,13 @@ namespace RSML.Tokenization
 	public sealed class RsLexer : ILexer
 	{
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public string? StandardizedVersion => "2.0.0";
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public ImmutableHashSet<string> ValidComparators => [ "==", "!=", "<", ">", "<=", ">=" ];
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public string CreateDocumentFromTokens(IEnumerable<RsToken> tokens)
 		{
 
@@ -36,6 +35,7 @@ namespace RSML.Tokenization
 				{
 
 					_ = builder.AppendLine();
+
 					continue;
 
 				}
@@ -44,6 +44,7 @@ namespace RSML.Tokenization
 				{
 
 					_ = builder.Append('@');
+
 					continue;
 
 				}
@@ -52,6 +53,7 @@ namespace RSML.Tokenization
 				{
 
 					_ = builder.Append(t.Value);
+
 					continue;
 
 				}
@@ -65,7 +67,7 @@ namespace RSML.Tokenization
 
 		}
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public IEnumerable<RsToken> TokenizeLine(string line)
 		{
 
@@ -76,33 +78,38 @@ namespace RSML.Tokenization
 			{
 
 				yield return new(RsTokenType.Eol, Environment.NewLine);
+
 				yield break;
 
 			}
 
-			if (line[ pos ] == '#')
+			if (line[pos] == '#')
 			{
 
 				yield return new(RsTokenType.CommentSymbol, '#');
-				yield return new(RsTokenType.CommentText, line[ ++pos.. ]);
+				yield return new(RsTokenType.CommentText, line[++pos..]);
 				yield return new(RsTokenType.Eol, Environment.NewLine);
+
 				yield break;
 
 			}
 
-			if (line[ pos ] == '@')
+			if (line[pos] == '@')
 			{
 
 				yield return new(RsTokenType.SpecialActionSymbol, '@');
 
 				++pos; // advance to ignore the #
 				var actionName = ReadUntilWhitespaceOrEol(line, ref pos);
+
 				yield return new(RsTokenType.SpecialActionName, actionName);
 
 				var argument = ReadUntilWhitespaceOrEol(line, ref pos);
+
 				yield return new(RsTokenType.SpecialActionArgument, argument);
 
 				yield return new(RsTokenType.Eol, Environment.NewLine);
+
 				yield break;
 
 			}
@@ -118,14 +125,15 @@ namespace RSML.Tokenization
 			while (pos < line.Length)
 			{
 
-				if (line[ pos ] == '"')
+				if (line[pos] == '"')
 				{
 
 					pos++; // ignore the double quote
-					var retVal = ReadQuotedString(line, ref pos);
+					string retVal = ReadQuotedString(line, ref pos);
 
 					yield return new(RsTokenType.LogicPathValue, retVal);
 					yield return new(RsTokenType.Eol, Environment.NewLine);
+
 					yield break;
 
 				}
@@ -139,7 +147,7 @@ namespace RSML.Tokenization
 
 		}
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
 		public RsToken? TokenizeLogicPathComponent(ReadOnlySpan<char> line, ref int pos)
 		{
 
@@ -153,22 +161,30 @@ namespace RSML.Tokenization
 			if (chars.IsEquals("defined"))
 				return new(RsTokenType.DefinedKeyword, "defined");
 
-			if (chars.IsEquals(StringComparison.OrdinalIgnoreCase, "windows", "osx", "linux", "freebsd", "debian", "archlinux", "fedora", "alpine", "gentoo"))
+			if (chars.IsEquals(
+					StringComparison.OrdinalIgnoreCase, "windows", "osx", "linux", "freebsd",
+					"debian", "ubuntu", "archlinux", "fedora"
+				))
 				return new(RsTokenType.SystemName, chars);
 
-			if (chars.IsEquals(StringComparison.OrdinalIgnoreCase, "x64", "x86", "arm32", "arm64", "loongarch64"))
+			if (chars.IsEquals(
+					StringComparison.OrdinalIgnoreCase, "x64", "x86", "arm32", "arm64",
+					"loongarch64"
+				))
 				return new(RsTokenType.ArchitectureIdentifier, chars);
 
 			if (Int32.TryParse(chars, out int result))
 				return new(RsTokenType.MajorVersionId, result.ToString());
 
-			var str = chars.ToString();
+			string str = chars.ToString();
 
 			if (ValidComparators.Contains(str))
 			{
 
 				#region Pragmas
-#pragma warning disable CS8509 // The switch expression does not handle all possible values of its input type (it is not exhaustive).
+
+				#pragma warning disable CS8509 // The switch expression does not handle all possible values of its input type (it is not exhaustive).
+
 				#endregion
 
 				return str switch
@@ -176,21 +192,31 @@ namespace RSML.Tokenization
 
 					"==" => new(RsTokenType.Equals, str),
 					"!=" => new(RsTokenType.Different, str),
-					">" => new(RsTokenType.GreaterThan, str),
-					"<" => new(RsTokenType.LessThan, str),
+					">"  => new(RsTokenType.GreaterThan, str),
+					"<"  => new(RsTokenType.LessThan, str),
 					">=" => new(RsTokenType.GreaterOrEqualsThan, str),
 					"<=" => new(RsTokenType.LessOrEqualsThan, str)
 
 				};
 
 				#region Pragmas
-#pragma warning restore CS8509 // The switch expression does not handle all possible values of its input type (it is not exhaustive).
+
+				#pragma warning restore CS8509 // The switch expression does not handle all possible values of its input type (it is not exhaustive).
+
 				#endregion
 
 			}
 
-			pos = currentPosVal; // in case we read what we shouldn't
-			return null;
+			if (str[0] == '"')
+			{
+
+				pos = currentPosVal;
+
+				return null;
+
+			}
+
+			return new(RsTokenType.UndefinedToken, str);
 
 		}
 
@@ -200,7 +226,7 @@ namespace RSML.Tokenization
 		{
 
 			int start = pos;
-			var finalQuoteIndex = line[ pos.. ].LastIndexOf('"');
+			int finalQuoteIndex = line[pos..].LastIndexOf('"');
 
 			if (finalQuoteIndex == -1)
 				return "";
@@ -217,7 +243,7 @@ namespace RSML.Tokenization
 
 			}
 
-			return line[ start..pos ].ToString(); // ignores last double quote
+			return line[start..pos].ToString(); // ignores last double quote
 
 		}
 
@@ -226,17 +252,17 @@ namespace RSML.Tokenization
 
 			int start = pos;
 
-			while (pos < line.Length && !Char.IsWhiteSpace(line[ pos ]))
+			while (pos < line.Length && !Char.IsWhiteSpace(line[pos]))
 				pos++;
 
-			return line[ start..pos ];
+			return line[start..pos];
 
 		}
 
 		private static void SkipWhitespace(ReadOnlySpan<char> chars, ref int pos)
 		{
 
-			while (pos < chars.Length && Char.IsWhiteSpace(chars[ pos ]))
+			while (pos < chars.Length && Char.IsWhiteSpace(chars[pos]))
 				pos++;
 
 		}

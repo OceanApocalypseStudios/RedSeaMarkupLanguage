@@ -2,7 +2,7 @@
 {
 
 	/// <summary>
-	/// A component of the RSML toolchain. Can be custom made or officially maintained.
+	/// A component of the RSML toolchain. Can be custom-made or officially maintained.
 	/// </summary>
 	public interface IRsToolchainComponent
 	{

@@ -13,13 +13,11 @@ namespace RSML.Reader
 	public sealed class RsReader : IReader
 	{
 
-		private int curIndex = 0;
-		private readonly string source;
 		private readonly RsToken[] eofToken = [ new(RsTokenType.Eof, '\0') ];
 		private readonly RsToken[] eolToken = [ new(RsTokenType.Eol, Environment.NewLine) ];
+		private readonly string source;
 
-		/// <inheritdoc/>
-		public string? StandardizedVersion => "2.0.0";
+		private int curIndex;
 
 		/// <summary>
 		/// Initializes a RSML reader.
@@ -33,7 +31,10 @@ namespace RSML.Reader
 		/// <param name="source">A string as input</param>
 		public RsReader(string source) { this.source = source.ReplaceLineEndings(); }
 
-		/// <inheritdoc/>
+		/// <inheritdoc />
+		public string? StandardizedVersion => "2.0.0";
+
+		/// <inheritdoc />
 		public bool TryTokenizeNextLine(ILexer lexer, out IEnumerable<RsToken> tokens)
 		{
 
@@ -41,11 +42,12 @@ namespace RSML.Reader
 			{
 
 				tokens = eofToken;
+
 				return false;
 
 			}
 
-			ReadOnlySpan<char> span = source.AsSpan(curIndex);
+			var span = source.AsSpan(curIndex);
 			int nextNewline = span.IndexOf(Environment.NewLine);
 
 			ReadOnlySpan<char> lineSpan;
@@ -61,7 +63,7 @@ namespace RSML.Reader
 			else
 			{
 
-				lineSpan = span[ ..nextNewline ];
+				lineSpan = span[..nextNewline];
 				advancedBy = nextNewline + 1;
 
 			}
@@ -72,11 +74,13 @@ namespace RSML.Reader
 			{
 
 				tokens = eolToken;
+
 				return true;
 
 			}
 
 			tokens = lexer.TokenizeLine(lineSpan.ToString());
+
 			return true;
 
 		}

@@ -23,7 +23,7 @@ namespace RSML.Machine
 
 			string? buildNumStr = key.GetValue("CurrentBuildNumber") as string;
 
-			if (Int32.TryParse(buildNumStr, out var buildNum) && buildNum >= 22000)
+			if (Int32.TryParse(buildNumStr, out int buildNum) && buildNum >= 22000)
 			{
 
 				SystemVersion = 11; // Windows 11
@@ -82,7 +82,7 @@ namespace RSML.Machine
 			 * For 7 and 8, it's [0] + [1].
 			 */
 
-			if (!Int32.TryParse(parts[0], out var ver1) || !Int32.TryParse(parts[1], out var ver2))
+			if (!Int32.TryParse(parts[0], out int ver1) || !Int32.TryParse(parts[1], out int ver2))
 				return;
 
 			SystemVersion = ver1 + ver2;

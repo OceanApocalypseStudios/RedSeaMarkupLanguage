@@ -6,11 +6,11 @@
 		<TargetFramework>net8.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<LangVersion>12</LangVersion>
-		
+
 		<!-- Maintainability-related -->
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<NeutralLanguage>en</NeutralLanguage>
-		
+
 		<!-- NuGet Properties -->
 		<Title>Red Sea Markup Language</Title>
 		<Authors>OceanApocalypseStudios</Authors>

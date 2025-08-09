@@ -27,21 +27,6 @@ namespace RSML
 
 		}
 
-		internal static bool IsDigitOnly(this ReadOnlySpan<char> chars)
-		{
-
-			foreach (char c in chars)
-			{
-
-				if (c != 0 && c != 1 && c != 2 && c != 3 && c != 4 && c != 5 && c != 6 && c != 7 && c != 8 && c != 9)
-					return false;
-
-			}
-
-			return true;
-
-		}
-
 		internal static bool IsEquals(this Span<char> chars, string str) => chars.SequenceEqual(str);
 
 		internal static bool IsEquals(this Span<char> chars, string? str, StringComparison stringComparison)
@@ -63,24 +48,6 @@ namespace RSML
 				_ => throw new ArgumentException("Unsupported StringComparison mode.", nameof(stringComparison))
 
 			};
-
-		}
-
-		internal static bool IsEquals(this Span<char> chars, StringComparison stringComparison, params string?[] strings)
-		{
-
-			foreach (var str in strings)
-			{
-
-				if (str is null)
-					continue;
-
-				if (chars.IsEquals(str, stringComparison))
-					return true;
-
-			}
-
-			return false;
 
 		}
 
@@ -111,7 +78,7 @@ namespace RSML
 		internal static bool IsEquals(this ReadOnlySpan<char> chars, StringComparison stringComparison, params string?[] strings)
 		{
 
-			foreach (var str in strings)
+			foreach (string? str in strings)
 			{
 
 				if (str is null)

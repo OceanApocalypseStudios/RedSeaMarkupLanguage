@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 		LICENSE.txt = LICENSE.txt
 		README.md = README.md
+		TODO.md = TODO.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RSML.Tests", "RSML.Tests\RSML.Tests.csproj", "{41B38F2B-D090-4F6C-8BE8-906AF9A5ACDA}"
@@ -19,7 +20,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RSML.Native", "RSML.Native\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RSML.Benchmarks", "RSML.Benchmarks\RSML.Benchmarks.csproj", "{3361B292-D8D6-45AF-BDE3-5A6B15270FBF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RSML.Samples", "RSML.Samples\RSML.Samples.csproj", "{4A302A93-D984-414D-BDA5-D335CE482B2B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RSML.CLI", "RSML.CLI\RSML.CLI.csproj", "{02D1CB8C-7923-4409-B320-822DC4E4AD2F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -79,18 +80,18 @@ Global
 		{3361B292-D8D6-45AF-BDE3-5A6B15270FBF}.Release|x64.Build.0 = Release|Any CPU
 		{3361B292-D8D6-45AF-BDE3-5A6B15270FBF}.Release|x86.ActiveCfg = Release|Any CPU
 		{3361B292-D8D6-45AF-BDE3-5A6B15270FBF}.Release|x86.Build.0 = Release|Any CPU
-		{4A302A93-D984-414D-BDA5-D335CE482B2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4A302A93-D984-414D-BDA5-D335CE482B2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4A302A93-D984-414D-BDA5-D335CE482B2B}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{4A302A93-D984-414D-BDA5-D335CE482B2B}.Debug|x64.Build.0 = Debug|Any CPU
-		{4A302A93-D984-414D-BDA5-D335CE482B2B}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{4A302A93-D984-414D-BDA5-D335CE482B2B}.Debug|x86.Build.0 = Debug|Any CPU
-		{4A302A93-D984-414D-BDA5-D335CE482B2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4A302A93-D984-414D-BDA5-D335CE482B2B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4A302A93-D984-414D-BDA5-D335CE482B2B}.Release|x64.ActiveCfg = Release|Any CPU
-		{4A302A93-D984-414D-BDA5-D335CE482B2B}.Release|x64.Build.0 = Release|Any CPU
-		{4A302A93-D984-414D-BDA5-D335CE482B2B}.Release|x86.ActiveCfg = Release|Any CPU
-		{4A302A93-D984-414D-BDA5-D335CE482B2B}.Release|x86.Build.0 = Release|Any CPU
+		{02D1CB8C-7923-4409-B320-822DC4E4AD2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02D1CB8C-7923-4409-B320-822DC4E4AD2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02D1CB8C-7923-4409-B320-822DC4E4AD2F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{02D1CB8C-7923-4409-B320-822DC4E4AD2F}.Debug|x64.Build.0 = Debug|Any CPU
+		{02D1CB8C-7923-4409-B320-822DC4E4AD2F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{02D1CB8C-7923-4409-B320-822DC4E4AD2F}.Debug|x86.Build.0 = Debug|Any CPU
+		{02D1CB8C-7923-4409-B320-822DC4E4AD2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02D1CB8C-7923-4409-B320-822DC4E4AD2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02D1CB8C-7923-4409-B320-822DC4E4AD2F}.Release|x64.ActiveCfg = Release|Any CPU
+		{02D1CB8C-7923-4409-B320-822DC4E4AD2F}.Release|x64.Build.0 = Release|Any CPU
+		{02D1CB8C-7923-4409-B320-822DC4E4AD2F}.Release|x86.ActiveCfg = Release|Any CPU
+		{02D1CB8C-7923-4409-B320-822DC4E4AD2F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
