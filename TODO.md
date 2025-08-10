@@ -11,7 +11,7 @@ It's close. *Very* close.
 
 ### Performance
 
-- [ ] Compiled RSML via Source Generators (C# exclusive feature)
+- [X] Compiled RSML via ~~Source Generators~~ (ended up going for MSBuild Tasks for compatibility reasons)
 - [ ] **Benchmark RSML for C#**
 	- [ ] Optimize if necessary
 

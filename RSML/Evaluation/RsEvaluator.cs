@@ -56,7 +56,6 @@ namespace RSML.Evaluation
 	{
 
 		private static readonly RsToken wildcard = new(RsTokenType.WildcardKeyword, "any");
-		private static readonly RsToken defined = new(RsTokenType.DefinedKeyword, "defined");
 		private static readonly RsToken eol = new(RsTokenType.Eol, Environment.NewLine);
 
 		/// <summary>
@@ -84,7 +83,7 @@ namespace RSML.Evaluation
 		}
 
 		/// <inheritdoc />
-		public string? StandardizedVersion => "2.0.0";
+		public string StandardizedVersion => "2.0.0";
 
 		/// <inheritdoc />
 		public string Content { get; set; }
@@ -112,9 +111,13 @@ namespace RSML.Evaluation
 			if (reader.StandardizedVersion != StandardizedVersion ||
 				lexer.StandardizedVersion != StandardizedVersion ||
 				validator.StandardizedVersion != StandardizedVersion)
+			{
+
 				throw new ArgumentException(
 					"One of the specified components does not respect the same language standard version as the evaluator's."
 				);
+
+			}
 
 			while (reader.TryTokenizeNextLine(lexer, out var rawTokens))
 			{
