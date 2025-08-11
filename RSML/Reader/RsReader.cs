@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using RSML.Tokenization;
+using RSML.Analyzer.Syntax;
+using RSML.Toolchain;
 
 
 namespace RSML.Reader
@@ -13,8 +14,8 @@ namespace RSML.Reader
 	public sealed class RsReader : IReader
 	{
 
-		private readonly RsToken[] eofToken = [ new(RsTokenType.Eof, '\0') ];
-		private readonly RsToken[] eolToken = [ new(RsTokenType.Eol, Environment.NewLine) ];
+		private readonly SyntaxToken[] eofToken = [ TokenBank.eofToken ];
+		private readonly SyntaxToken[] eolToken = [ TokenBank.eolToken ];
 		private readonly string source;
 
 		private int curIndex;
@@ -32,10 +33,10 @@ namespace RSML.Reader
 		public RsReader(string source) { this.source = source.ReplaceLineEndings(); }
 
 		/// <inheritdoc />
-		public string? StandardizedVersion => "2.0.0";
+		public string StandardizedVersion => "2.0.0";
 
 		/// <inheritdoc />
-		public bool TryTokenizeNextLine(ILexer lexer, out IEnumerable<RsToken> tokens)
+		public bool TryTokenizeNextLine(ILexer lexer, out IEnumerable<SyntaxToken> tokens)
 		{
 
 			if (curIndex < 0 || curIndex >= source.Length)

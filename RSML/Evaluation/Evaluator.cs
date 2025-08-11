@@ -39,11 +39,12 @@ using System.Collections.Generic;
 using System.Linq;
 
 using RSML.Actions;
+using RSML.Analyzer.Semantics;
+using RSML.Analyzer.Syntax;
 using RSML.Exceptions;
 using RSML.Machine;
+using RSML.Middlewares;
 using RSML.Reader;
-using RSML.Semantics;
-using RSML.Tokenization;
 
 
 namespace RSML.Evaluation
@@ -52,21 +53,18 @@ namespace RSML.Evaluation
 	/// <summary>
 	/// The officially maintained RSML evaluator that evaluates a document and returns a match's value, in case one was found.
 	/// </summary>
-	public sealed class RsEvaluator : IEvaluator
+	public sealed class Evaluator : IEvaluator
 	{
-
-		private static readonly RsToken wildcard = new(RsTokenType.WildcardKeyword, "any");
-		private static readonly RsToken eol = new(RsTokenType.Eol, Environment.NewLine);
 
 		/// <summary>
 		/// Creates a new instance of a RSML evaluator.
 		/// </summary>
 		/// <param name="content">The document</param>
-		public RsEvaluator(ReadOnlySpan<char> content)
+		public Evaluator(ReadOnlySpan<char> content)
 		{
 
 			Content = $"{content.ToString().ReplaceLineEndings()}{Environment.NewLine}";
-			SpecialActions = [ ];
+			SpecialActions = [];
 
 		}
 
@@ -74,11 +72,11 @@ namespace RSML.Evaluation
 		/// Creates a new instance of a RSML evaluator.
 		/// </summary>
 		/// <param name="content">The document</param>
-		public RsEvaluator(string content)
+		public Evaluator(string content)
 		{
 
 			Content = $"{content.ReplaceLineEndings()}{Environment.NewLine}";
-			SpecialActions = [ ];
+			SpecialActions = [];
 
 		}
 
@@ -88,6 +86,11 @@ namespace RSML.Evaluation
 		/// <inheritdoc />
 		public string Content { get; set; }
 
+		/// <summary>
+		/// The loaded middlewares.
+		/// </summary>
+		private readonly Dictionary<MiddlewareRunnerLocation, ICollection<Middleware>> evaluatorMiddlewares = [];
+
 		/// <inheritdoc />
 		public Dictionary<string, SpecialAction> SpecialActions { get; }
 
@@ -95,21 +98,23 @@ namespace RSML.Evaluation
 		public EvaluationResult Evaluate() => Evaluate(new());
 
 		/// <inheritdoc />
-		public EvaluationResult Evaluate(LocalMachine machineData) => Evaluate(machineData, new RsReader(Content), new RsLexer(), new RsValidator());
+		public EvaluationResult Evaluate(LocalMachine machineData) => Evaluate(machineData, null, null, null, null);
 
 		/// <inheritdoc />
-		public EvaluationResult Evaluate(LocalMachine machineData, IReader? reader, ILexer? lexer, IValidator? validator)
+		public EvaluationResult Evaluate(LocalMachine machineData, IReader? reader, ILexer? lexer, INormalizer? normalizer, IValidator? validator)
 		{
 
 			if (Content.Length == 0)
 				return new();
 
 			reader ??= new RsReader(Content);
-			lexer ??= new RsLexer();
-			validator ??= new RsValidator();
+			lexer ??= new Lexer();
+			validator ??= new Validator();
+			normalizer ??= new Normalizer();
 
 			if (reader.StandardizedVersion != StandardizedVersion ||
 				lexer.StandardizedVersion != StandardizedVersion ||
+				normalizer.StandardizedVersion != StandardizedVersion ||
 				validator.StandardizedVersion != StandardizedVersion)
 			{
 
@@ -122,10 +127,22 @@ namespace RSML.Evaluation
 			while (reader.TryTokenizeNextLine(lexer, out var rawTokens))
 			{
 
-				var tokens = NormalizeTokens(rawTokens);
+				var assTokens = rawTokens.ToArray(); // look i dunno wat to name dis
+
+				if (RunMiddlewares(MiddlewareRunnerLocation.BeforeNormalization, assTokens) == MiddlewareResult.EndEvaluation)
+					return new();
+
+				var tokens = normalizer.NormalizeLine(assTokens, out _).ToArray();
+
+				if (RunMiddlewares(MiddlewareRunnerLocation.BeforeValidation, tokens) == MiddlewareResult.EndEvaluation)
+					return new();
+
 				validator.ValidateLine(tokens.AsSpan()); // line validation
 
-				if (tokens[^1].Type == RsTokenType.Eol)
+				if (RunMiddlewares(MiddlewareRunnerLocation.BeforeEolRemoval, tokens) == MiddlewareResult.EndEvaluation)
+					return new();
+
+				if (tokens[^1].Kind == TokenKind.Eol)
 					tokens = tokens[..^1];
 
 				// we basically do length-based checks
@@ -138,18 +155,30 @@ namespace RSML.Evaluation
 				 *
 				 */
 
+				if (RunMiddlewares(MiddlewareRunnerLocation.BeforeLengthCheck, tokens) == MiddlewareResult.EndEvaluation)
+					return new();
+
 				switch (tokens.Length)
 				{
 
 					case 0:
 						// literally nothing
+						if (RunMiddlewares(MiddlewareRunnerLocation.ZeroLength, tokens) == MiddlewareResult.EndEvaluation)
+							return new();
+
 						continue;
 
 					case 2:
 						// comment, ignore it
+						if (RunMiddlewares(MiddlewareRunnerLocation.TwoLength, tokens) == MiddlewareResult.EndEvaluation)
+							return new();
+
 						continue;
 
 					case 3:
+						if (RunMiddlewares(MiddlewareRunnerLocation.ThreeLengthBeforeSpecialCall, tokens) == MiddlewareResult.EndEvaluation)
+							return new();
+
 						byte result = HandleSpecialActionCall(tokens[1].Value, tokens[2].Value);
 
 						switch (result)
@@ -177,10 +206,16 @@ namespace RSML.Evaluation
 						}
 
 					case 5:
+						if (RunMiddlewares(MiddlewareRunnerLocation.FiveLengthBeforeHandling, tokens) == MiddlewareResult.EndEvaluation)
+							return new();
+
 						if (HandleLogicPath_Simple(tokens, machineData, machineData.SystemName == "linux"))
 						{
 
-							return tokens[0].Type == RsTokenType.ThrowErrorOperator
+							if (RunMiddlewares(MiddlewareRunnerLocation.FiveLengthAfterHandling, tokens) == MiddlewareResult.EndEvaluation)
+								return new();
+
+							return tokens[0].Kind == TokenKind.ThrowErrorOperator
 									   ? throw new UserRaisedException("Error-throw operator used.")
 									   : new(tokens[4].Value);
 
@@ -189,18 +224,28 @@ namespace RSML.Evaluation
 						continue;
 
 					case 6:
+						if (RunMiddlewares(MiddlewareRunnerLocation.SixLengthBeforeHandling, tokens) == MiddlewareResult.EndEvaluation)
+							return new();
+
 						if (HandleLogicPath_Complex(tokens, machineData, machineData.SystemName == "linux"))
 						{
 
-							return tokens[0].Type == RsTokenType.ThrowErrorOperator
+							if (RunMiddlewares(MiddlewareRunnerLocation.SixLengthAfterHandling, tokens) == MiddlewareResult.EndEvaluation)
+								return new();
+
+							return tokens[0].Kind == TokenKind.ThrowErrorOperator
 									   ? throw new UserRaisedException("Error-throw operator used.")
 									   : new(tokens[5].Value);
+
 						}
 
 						continue;
 
 					default:
-						if (tokens[0].Type == RsTokenType.CommentSymbol)
+						if (RunMiddlewares(MiddlewareRunnerLocation.AnyLengthBeforeCommentCheck, tokens) == MiddlewareResult.EndEvaluation)
+							return new();
+
+						if (tokens[0].Kind == TokenKind.CommentSymbol)
 							continue; // it's somehow a comment
 
 						throw new InvalidRsmlSyntax("Unexpected error: invalid line tokenized successfully.");
@@ -231,6 +276,65 @@ namespace RSML.Evaluation
 
 		}
 
+		/// <summary>
+		/// Binds a middleware to a runner location.
+		/// </summary>
+		/// <param name="runnerLocation">The runner location</param>
+		/// <param name="middleware">The middleware</param>
+		/// <returns>The evaluator (fluent API)</returns>
+		public Evaluator BindMiddleware(MiddlewareRunnerLocation runnerLocation, Middleware middleware)
+		{
+
+			if (!evaluatorMiddlewares.TryGetValue(runnerLocation, out var value))
+			{
+
+				value = [middleware];
+				evaluatorMiddlewares.Add(runnerLocation, value);
+				return this;
+
+			}
+
+			value.Add(middleware);
+			return this;
+
+		}
+
+		/// <summary>
+		/// Unbinds a middleware from a runner location.
+		/// </summary>
+		/// <param name="runnerLocation">The runner location</param>
+		/// <param name="middleware">The middleware</param>
+		/// <returns>The evaluator (fluent API)</returns>
+		public Evaluator UnbindMiddleware(MiddlewareRunnerLocation runnerLocation, Middleware middleware)
+		{
+
+			if (evaluatorMiddlewares.TryGetValue(runnerLocation, out var value))
+				_ = value.Remove(middleware);
+
+			return this;
+
+		}
+
+		private MiddlewareResult RunMiddlewares(MiddlewareRunnerLocation location, IEnumerable<SyntaxToken> tokens)
+		{
+
+			if (!evaluatorMiddlewares.ContainsKey(location))
+				return MiddlewareResult.ContinueEvaluation;
+
+			foreach (var middleware in evaluatorMiddlewares[location])
+			{
+
+				var result = middleware.Invoke(tokens);
+
+				if (result != MiddlewareResult.ContinueEvaluation)
+					return result;
+
+			}
+
+			return MiddlewareResult.ContinueEvaluation;
+
+		}
+
 		private byte HandleSpecialActionCall(string name, string? arg)
 		{
 
@@ -244,36 +348,36 @@ namespace RSML.Evaluation
 
 		}
 
-		private static bool HandleLogicPath_Simple(RsToken[] tokens, in LocalMachine machine, bool isLinux)
+		private static bool HandleLogicPath_Simple(SyntaxToken[] tokens, in LocalMachine machine, bool isLinux)
 		{
 
 			if (isLinux)
 				return HandleLogicPath_Simple_Linux(tokens, machine);
 
-			bool systemNameMatches = tokens[1].Type switch
+			bool systemNameMatches = tokens[1].Kind switch
 			{
 
-				RsTokenType.WildcardKeyword => true,
-				RsTokenType.DefinedKeyword  => machine.SystemName is not null,
-				_                           => machine.SystemName == tokens[1].Value
+				TokenKind.WildcardKeyword => true,
+				TokenKind.DefinedKeyword => machine.SystemName is not null,
+				_ => machine.SystemName == tokens[1].Value
 
 			};
 
-			bool systemVersionMatches = tokens[2].Type switch
+			bool systemVersionMatches = tokens[2].Kind switch
 			{
 
-				RsTokenType.WildcardKeyword => true,
-				RsTokenType.DefinedKeyword  => machine.SystemVersion != -1,
-				_                           => machine.SystemVersion.ToString() == tokens[2].Value
+				TokenKind.WildcardKeyword => true,
+				TokenKind.DefinedKeyword => machine.SystemVersion != -1,
+				_ => machine.SystemVersion.ToString() == tokens[2].Value
 
 			};
 
-			bool architectureMatches = tokens[3].Type switch
+			bool architectureMatches = tokens[3].Kind switch
 			{
 
-				RsTokenType.WildcardKeyword => true,
-				RsTokenType.DefinedKeyword  => machine.ProcessorArchitecture is not null,
-				_                           => machine.ProcessorArchitecture == tokens[3].Value
+				TokenKind.WildcardKeyword => true,
+				TokenKind.DefinedKeyword => machine.ProcessorArchitecture is not null,
+				_ => machine.ProcessorArchitecture == tokens[3].Value
 
 			};
 
@@ -281,18 +385,18 @@ namespace RSML.Evaluation
 
 		}
 
-		private static bool HandleLogicPath_Complex(RsToken[] tokens, in LocalMachine machine, bool isLinux)
+		private static bool HandleLogicPath_Complex(SyntaxToken[] tokens, in LocalMachine machine, bool isLinux)
 		{
 
 			if (isLinux)
 				return HandleLogicPath_Complex_Linux(tokens, machine);
 
-			bool systemNameMatches = tokens[1].Type switch
+			bool systemNameMatches = tokens[1].Kind switch
 			{
 
-				RsTokenType.WildcardKeyword => true,
-				RsTokenType.DefinedKeyword  => machine.SystemName is not null,
-				_                           => machine.SystemName == tokens[1].Value
+				TokenKind.WildcardKeyword => true,
+				TokenKind.DefinedKeyword => machine.SystemName is not null,
+				_ => machine.SystemName == tokens[1].Value
 
 			};
 
@@ -300,38 +404,38 @@ namespace RSML.Evaluation
 			int versionNum;
 
 			// ReSharper disable once SwitchStatementHandlesSomeKnownEnumValuesWithDefault
-			switch (tokens[2].Type)
+			switch (tokens[2].Kind)
 			{
 
-				case RsTokenType.Equals:
+				case TokenKind.Equals:
 					systemVersionMatches = machine.SystemVersion.ToString() == tokens[3].Value;
 
 					break;
 
-				case RsTokenType.Different:
+				case TokenKind.Different:
 					systemVersionMatches = machine.SystemVersion.ToString() != tokens[3].Value;
 
 					break;
 
-				case RsTokenType.GreaterOrEqualsThan:
+				case TokenKind.GreaterOrEqualsThan:
 					if (Int32.TryParse(tokens[3].Value, out versionNum))
 						systemVersionMatches = machine.SystemVersion >= versionNum;
 
 					break;
 
-				case RsTokenType.LessOrEqualsThan:
+				case TokenKind.LessOrEqualsThan:
 					if (Int32.TryParse(tokens[3].Value, out versionNum))
 						systemVersionMatches = machine.SystemVersion <= versionNum;
 
 					break;
 
-				case RsTokenType.GreaterThan:
+				case TokenKind.GreaterThan:
 					if (Int32.TryParse(tokens[3].Value, out versionNum))
 						systemVersionMatches = machine.SystemVersion > versionNum;
 
 					break;
 
-				case RsTokenType.LessThan:
+				case TokenKind.LessThan:
 					if (Int32.TryParse(tokens[3].Value, out versionNum))
 						systemVersionMatches = machine.SystemVersion < versionNum;
 
@@ -344,12 +448,12 @@ namespace RSML.Evaluation
 
 			}
 
-			bool architectureMatches = tokens[4].Type switch
+			bool architectureMatches = tokens[4].Kind switch
 			{
 
-				RsTokenType.WildcardKeyword => true,
-				RsTokenType.DefinedKeyword  => machine.ProcessorArchitecture is not null,
-				_                           => machine.ProcessorArchitecture == tokens[3].Value
+				TokenKind.WildcardKeyword => true,
+				TokenKind.DefinedKeyword => machine.ProcessorArchitecture is not null,
+				_ => machine.ProcessorArchitecture == tokens[3].Value
 
 			};
 
@@ -357,35 +461,35 @@ namespace RSML.Evaluation
 
 		}
 
-		private static bool HandleLogicPath_Simple_Linux(RsToken[] tokens, in LocalMachine machine)
+		private static bool HandleLogicPath_Simple_Linux(SyntaxToken[] tokens, in LocalMachine machine)
 		{
 
-			bool systemNameMatches = tokens[1].Type switch
+			bool systemNameMatches = tokens[1].Kind switch
 			{
 
-				RsTokenType.WildcardKeyword => true,
-				RsTokenType.DefinedKeyword  => machine.DistroName is not null,
+				TokenKind.WildcardKeyword => true,
+				TokenKind.DefinedKeyword => machine.DistroName is not null,
 				_ => machine.SystemName == tokens[1].Value ||
 					 machine.DistroName == tokens[1].Value ||
 					 machine.DistroFamily == tokens[1].Value
 
 			};
 
-			bool systemVersionMatches = tokens[2].Type switch
+			bool systemVersionMatches = tokens[2].Kind switch
 			{
 
-				RsTokenType.WildcardKeyword => true,
-				RsTokenType.DefinedKeyword  => machine.SystemVersion != -1,
-				_                           => machine.SystemVersion.ToString() == tokens[2].Value
+				TokenKind.WildcardKeyword => true,
+				TokenKind.DefinedKeyword => machine.SystemVersion != -1,
+				_ => machine.SystemVersion.ToString() == tokens[2].Value
 
 			};
 
-			bool architectureMatches = tokens[3].Type switch
+			bool architectureMatches = tokens[3].Kind switch
 			{
 
-				RsTokenType.WildcardKeyword => true,
-				RsTokenType.DefinedKeyword  => machine.ProcessorArchitecture is not null,
-				_                           => machine.ProcessorArchitecture == tokens[3].Value
+				TokenKind.WildcardKeyword => true,
+				TokenKind.DefinedKeyword => machine.ProcessorArchitecture is not null,
+				_ => machine.ProcessorArchitecture == tokens[3].Value
 
 			};
 
@@ -393,14 +497,14 @@ namespace RSML.Evaluation
 
 		}
 
-		private static bool HandleLogicPath_Complex_Linux(RsToken[] tokens, in LocalMachine machine)
+		private static bool HandleLogicPath_Complex_Linux(SyntaxToken[] tokens, in LocalMachine machine)
 		{
 
-			bool systemNameMatches = tokens[1].Type switch
+			bool systemNameMatches = tokens[1].Kind switch
 			{
 
-				RsTokenType.WildcardKeyword => true,
-				RsTokenType.DefinedKeyword  => machine.DistroName is not null,
+				TokenKind.WildcardKeyword => true,
+				TokenKind.DefinedKeyword => machine.DistroName is not null,
 				_ => machine.SystemName == tokens[1].Value ||
 					 machine.DistroName == tokens[1].Value ||
 					 machine.DistroFamily == tokens[1].Value
@@ -411,38 +515,38 @@ namespace RSML.Evaluation
 			int versionNum;
 
 			// ReSharper disable once SwitchStatementHandlesSomeKnownEnumValuesWithDefault
-			switch (tokens[2].Type)
+			switch (tokens[2].Kind)
 			{
 
-				case RsTokenType.Equals:
+				case TokenKind.Equals:
 					systemVersionMatches = machine.SystemVersion.ToString() == tokens[3].Value;
 
 					break;
 
-				case RsTokenType.Different:
+				case TokenKind.Different:
 					systemVersionMatches = machine.SystemVersion.ToString() != tokens[3].Value;
 
 					break;
 
-				case RsTokenType.GreaterOrEqualsThan:
+				case TokenKind.GreaterOrEqualsThan:
 					if (Int32.TryParse(tokens[3].Value, out versionNum))
 						systemVersionMatches = machine.SystemVersion >= versionNum;
 
 					break;
 
-				case RsTokenType.LessOrEqualsThan:
+				case TokenKind.LessOrEqualsThan:
 					if (Int32.TryParse(tokens[3].Value, out versionNum))
 						systemVersionMatches = machine.SystemVersion <= versionNum;
 
 					break;
 
-				case RsTokenType.GreaterThan:
+				case TokenKind.GreaterThan:
 					if (Int32.TryParse(tokens[3].Value, out versionNum))
 						systemVersionMatches = machine.SystemVersion > versionNum;
 
 					break;
 
-				case RsTokenType.LessThan:
+				case TokenKind.LessThan:
 					if (Int32.TryParse(tokens[3].Value, out versionNum))
 						systemVersionMatches = machine.SystemVersion < versionNum;
 
@@ -456,42 +560,16 @@ namespace RSML.Evaluation
 			}
 
 
-			bool architectureMatches = tokens[4].Type switch
+			bool architectureMatches = tokens[4].Kind switch
 			{
 
-				RsTokenType.WildcardKeyword => true,
-				RsTokenType.DefinedKeyword  => machine.ProcessorArchitecture is not null,
-				_                           => machine.ProcessorArchitecture == tokens[3].Value
+				TokenKind.WildcardKeyword => true,
+				TokenKind.DefinedKeyword => machine.ProcessorArchitecture is not null,
+				_ => machine.ProcessorArchitecture == tokens[3].Value
 
 			};
 
 			return systemNameMatches && systemVersionMatches && architectureMatches;
-
-		}
-
-		private static RsToken[] NormalizeTokens(IEnumerable<RsToken> tokens)
-		{
-
-			var actualTokens = tokens.ToArray();
-
-			return actualTokens[0].Type is RsTokenType.ReturnOperator or RsTokenType.ThrowErrorOperator
-					   ? actualTokens.Length switch
-					   {
-
-						   // eol matters
-						   3 => [ actualTokens[0], wildcard, wildcard, wildcard, actualTokens[1], eol ],
-						   4 => [ actualTokens[0], actualTokens[1], wildcard, wildcard, actualTokens[2], eol ],
-						   5 => [ actualTokens[0], actualTokens[1], wildcard, actualTokens[2], actualTokens[3], eol ],
-						   6 => [ actualTokens[0], actualTokens[1], actualTokens[2], actualTokens[3], actualTokens[4], eol ],
-						   7 =>
-						   [
-							   actualTokens[0], actualTokens[1], actualTokens[2], actualTokens[3], actualTokens[4], actualTokens[5],
-							   eol
-						   ],
-						   _ => [ ]
-
-					   }
-					   : actualTokens;
 
 		}
 

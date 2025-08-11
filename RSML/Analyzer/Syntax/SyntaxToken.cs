@@ -2,19 +2,19 @@
 using System.Diagnostics.CodeAnalysis;
 
 
-namespace RSML.Tokenization
+namespace RSML.Analyzer.Syntax
 {
 
 	/// <summary>
 	/// A RSML token.
 	/// </summary>
-	public readonly struct RsToken
+	public readonly struct SyntaxToken
 	{
 
 		/// <summary>
 		/// The token's type.
 		/// </summary>
-		public RsTokenType Type { get; }
+		public TokenKind Kind { get; }
 
 		/// <summary>
 		/// The token's value.
@@ -24,12 +24,12 @@ namespace RSML.Tokenization
 		/// <summary>
 		/// Initializes a new RSML token.
 		/// </summary>
-		/// <param name="type">Token type</param>
+		/// <param name="kind">Token type</param>
 		/// <param name="value">Token value, as span</param>
-		public RsToken(RsTokenType type, ReadOnlySpan<char> value)
+		public SyntaxToken(TokenKind kind, ReadOnlySpan<char> value)
 		{
 
-			Type = type;
+			Kind = kind;
 			Value = value.ToString();
 
 		}
@@ -37,12 +37,12 @@ namespace RSML.Tokenization
 		/// <summary>
 		/// Initializes a new RSML token.
 		/// </summary>
-		/// <param name="type">Token type</param>
+		/// <param name="kind">Token type</param>
 		/// <param name="value">Token value, as span</param>
-		public RsToken(RsTokenType type, Span<char> value)
+		public SyntaxToken(TokenKind kind, Span<char> value)
 		{
 
-			Type = type;
+			Kind = kind;
 			Value = value.ToString();
 
 		}
@@ -50,12 +50,12 @@ namespace RSML.Tokenization
 		/// <summary>
 		/// Initializes a new RSML token.
 		/// </summary>
-		/// <param name="type">Token type</param>
+		/// <param name="kind">Token type</param>
 		/// <param name="value">Token value, as string</param>
-		public RsToken(RsTokenType type, string value)
+		public SyntaxToken(TokenKind kind, string value)
 		{
 
-			Type = type;
+			Kind = kind;
 			Value = value;
 
 		}
@@ -63,12 +63,12 @@ namespace RSML.Tokenization
 		/// <summary>
 		/// Initializes a new RSML token.
 		/// </summary>
-		/// <param name="type">Token type</param>
+		/// <param name="kind">Token type</param>
 		/// <param name="value">Token value, as a character</param>
-		public RsToken(RsTokenType type, char value)
+		public SyntaxToken(TokenKind kind, char value)
 		{
 
-			Type = type;
+			Kind = kind;
 			Value = String.Create(1, value, (span, ch) => span[0] = ch);
 
 		}
@@ -79,13 +79,13 @@ namespace RSML.Tokenization
 		/// </summary>
 		/// <param name="obj">The object to check for equality</param>
 		/// <returns><c>true</c> if the 2 objects are the same</returns>
-		public override bool Equals([NotNullWhen(true)] object? obj) => obj is RsToken token && token.Type == Type && token.Value == Value;
+		public override bool Equals([NotNullWhen(true)] object? obj) => obj is SyntaxToken token && token.Kind == Kind && token.Value == Value;
 
 		/// <summary>
 		/// Returns the hash code of this instance of a token.
 		/// </summary>
 		/// <returns>The hash code, as an <see cref="Int32" /></returns>
-		public override int GetHashCode() => HashCode.Combine(Type, Value);
+		public override int GetHashCode() => HashCode.Combine(Kind, Value);
 
 		/// <summary>
 		/// Checks if 2 tokens are the same.
@@ -93,7 +93,7 @@ namespace RSML.Tokenization
 		/// <param name="token1"></param>
 		/// <param name="token2"></param>
 		/// <returns><c>true</c> if they're equals</returns>
-		public static bool operator ==(RsToken token1, RsToken token2) => token1.Type == token2.Type && token1.Value == token2.Value;
+		public static bool operator ==(SyntaxToken token1, SyntaxToken token2) => token1.Kind == token2.Kind && token1.Value == token2.Value;
 
 		/// <summary>
 		/// Checks if 2 tokens are different.
@@ -101,7 +101,7 @@ namespace RSML.Tokenization
 		/// <param name="token1"></param>
 		/// <param name="token2"></param>
 		/// <returns><c>true</c> if they're different</returns>
-		public static bool operator !=(RsToken token1, RsToken token2) => token1.Type != token2.Type || token1.Value != token2.Value;
+		public static bool operator !=(SyntaxToken token1, SyntaxToken token2) => token1.Kind != token2.Kind || token1.Value != token2.Value;
 
 	}
 

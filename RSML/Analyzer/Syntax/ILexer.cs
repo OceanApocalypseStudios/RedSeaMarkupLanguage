@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 
-using RSML.ComponentLayout;
+using RSML.Toolchain;
 
 
-namespace RSML.Tokenization
+namespace RSML.Analyzer.Syntax
 {
 
 	/// <summary>
 	/// A lexer for RSML that converts lines into collections of tokens.
 	/// </summary>
-	public interface ILexer : IRsToolchainComponent
+	public interface ILexer : IToolchainComponent
 	{
 
 		/// <summary>
@@ -24,14 +24,14 @@ namespace RSML.Tokenization
 		/// </summary>
 		/// <param name="line">The line to tokenize</param>
 		/// <returns>An enumerable of tokens</returns>
-		IEnumerable<RsToken> TokenizeLine(string line);
+		IEnumerable<SyntaxToken> TokenizeLine(string line);
 
 		/// <summary>
 		/// Forms a RSML document from an enumerable of tokens.
 		/// </summary>
 		/// <param name="tokens">The tokens</param>
 		/// <returns>A RSML document</returns>
-		string CreateDocumentFromTokens(IEnumerable<RsToken> tokens);
+		string CreateDocumentFromTokens(IEnumerable<SyntaxToken> tokens);
 
 		/// <summary>
 		/// Tokenizes a component of a logic path.
@@ -39,7 +39,7 @@ namespace RSML.Tokenization
 		/// <param name="component">The component to tokenize</param>
 		/// <param name="pos">The position at which the tokenization is being done</param>
 		/// <returns>A single token or <c>null</c> if not recognized in the context of a logic path.</returns>
-		RsToken? TokenizeLogicPathComponent(ReadOnlySpan<char> component, ref int pos);
+		SyntaxToken? TokenizeLogicPathComponent(ReadOnlySpan<char> component, ref int pos);
 
 	}
 

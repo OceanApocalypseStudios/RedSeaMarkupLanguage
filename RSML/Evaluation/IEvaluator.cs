@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 
 using RSML.Actions;
-using RSML.ComponentLayout;
+using RSML.Analyzer.Semantics;
+using RSML.Analyzer.Syntax;
 using RSML.Machine;
 using RSML.Reader;
-using RSML.Semantics;
-using RSML.Tokenization;
+using RSML.Toolchain;
 
 
 namespace RSML.Evaluation
@@ -15,7 +15,7 @@ namespace RSML.Evaluation
 	/// <summary>
 	/// An evaluator that evaluates a RSML document and returns a match's value, if one was found.
 	/// </summary>
-	public interface IEvaluator : IRsToolchainComponent
+	public interface IEvaluator : IToolchainComponent
 	{
 
 		/// <summary>
@@ -57,15 +57,16 @@ namespace RSML.Evaluation
 
 		/// <summary>
 		/// Evaluates the RSML document with the specified machine data, a lexer, a reader and a semantic validator.
-		/// Note that the above mentioned toolchain components should have the same standardized version as the evaluator itself,
+		/// Note that the above-mentioned toolchain components should have the same standardized version as the evaluator itself,
 		/// when using the official evaluator.
 		/// </summary>
 		/// <param name="machineData">The machine data</param>
 		/// <param name="reader">The custom reader</param>
 		/// <param name="lexer">The custom lexer</param>
+		/// <param name="normalizer">The custom normalizer</param>
 		/// <param name="validator">The custom validator</param>
 		/// <returns></returns>
-		EvaluationResult Evaluate(LocalMachine machineData, IReader? reader, ILexer? lexer, IValidator? validator);
+		EvaluationResult Evaluate(LocalMachine machineData, IReader? reader, ILexer? lexer, INormalizer? normalizer, IValidator? validator);
 
 		/// <summary>
 		/// Registers a special action.

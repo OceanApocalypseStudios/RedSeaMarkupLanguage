@@ -1,10 +1,10 @@
-﻿namespace RSML.ComponentLayout
+﻿namespace RSML.Toolchain
 {
 
 	/// <summary>
 	/// A component of the RSML toolchain. Can be custom-made or officially maintained.
 	/// </summary>
-	public interface IRsToolchainComponent
+	public interface IToolchainComponent
 	{
 
 		/// <summary>

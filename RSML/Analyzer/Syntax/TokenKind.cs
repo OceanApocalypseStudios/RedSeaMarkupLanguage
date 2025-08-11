@@ -1,10 +1,10 @@
-﻿namespace RSML.Tokenization
+﻿namespace RSML.Analyzer.Syntax
 {
 
 	/// <summary>
 	/// A RSML token's type.
 	/// </summary>
-	public enum RsTokenType : byte
+	public enum TokenKind : byte
 	{
 
 		/// <summary>

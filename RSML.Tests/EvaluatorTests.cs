@@ -6,7 +6,7 @@ using RSML.Machine;
 namespace RSML.Tests
 {
 
-	public class RsEvaluatorTests
+	public class EvaluatorTests
 	{
 
 		private static readonly LocalMachine win10X64 = new("windows", "x64", 10);
@@ -25,7 +25,7 @@ namespace RSML.Tests
 		public void Evaluate_Windows10_X64_CorrectValue(string data, string? expected)
 		{
 
-			RsEvaluator parser = new(data);
+			Evaluator parser = new(data);
 			string? evaluationStr = parser.Evaluate(win10X64).MatchValue;
 			Assert.Equal(expected, evaluationStr);
 
@@ -39,7 +39,7 @@ namespace RSML.Tests
 		public void Evaluate_Ubuntu22_Arm64_CorrectValue(string data, string? expected)
 		{
 
-			RsEvaluator parser = new(data);
+			Evaluator parser = new(data);
 			string? evaluationStr = parser.Evaluate(ubuntu22Arm64).MatchValue;
 			Assert.Equal(expected, evaluationStr);
 
@@ -49,7 +49,7 @@ namespace RSML.Tests
 		public void Evaluate_LinuxMoreGlobalThanDebian()
 		{
 
-			RsEvaluator evaluator = new("-> linux \"This is the output...\"\n-> debian \"...not this.\"");
+			Evaluator evaluator = new("-> linux \"This is the output...\"\n-> debian \"...not this.\"");
 			string? evaluationStr = evaluator.Evaluate(debianUnknownVersionX86).MatchValue;
 			Assert.Equal("This is the output...", evaluationStr);
 
@@ -59,7 +59,7 @@ namespace RSML.Tests
 		public void Evaluate_DebianMoreGlobalThanUbuntu()
 		{
 
-			RsEvaluator evaluator = new("-> debian \"This is the output...\"\n-> ubuntu \"...not this.\"");
+			Evaluator evaluator = new("-> debian \"This is the output...\"\n-> ubuntu \"...not this.\"");
 			string? evaluationStr = evaluator.Evaluate(ubuntu22Arm64).MatchValue;
 			Assert.Equal("This is the output...", evaluationStr);
 
@@ -69,7 +69,7 @@ namespace RSML.Tests
 		public void Evaluate_AnyWorksEvenIfUnknown()
 		{
 
-			RsEvaluator evaluator = new("-> osx any any \"Output!\"");
+			Evaluator evaluator = new("-> osx any any \"Output!\"");
 			string? evaluationStr = evaluator.Evaluate(osxUnknownVersionUnknownArch).MatchValue;
 			Assert.Equal("Output!", evaluationStr);
 
@@ -79,7 +79,7 @@ namespace RSML.Tests
 		public void Evaluate_DefinedWorksOnlyIfKnown()
 		{
 
-			RsEvaluator evaluator = new("-> osx defined defined \"Output!\"");
+			Evaluator evaluator = new("-> osx defined defined \"Output!\"");
 			string? evaluationStr = evaluator.Evaluate(osxUnknownVersionUnknownArch).MatchValue;
 			Assert.Null(evaluationStr); // no match
 
@@ -95,7 +95,7 @@ namespace RSML.Tests
 		public void Evaluate_ComparatorWorks(string input, string? expected)
 		{
 
-			RsEvaluator evaluator = new($"-> windows {input} 10 defined \"Result A\"\n-> windows == 10 defined \"Result B\"\r\n");
+			Evaluator evaluator = new($"-> windows {input} 10 defined \"Result A\"\n-> windows == 10 defined \"Result B\"\r\n");
 			string? evaluationStr = evaluator.Evaluate(win10X64).MatchValue;
 			Assert.Equal(expected, evaluationStr);
 
@@ -105,7 +105,7 @@ namespace RSML.Tests
 		public void Evaluate_ComparatorPlusWildcard_InvalidSyntax()
 		{
 
-			RsEvaluator evaluator = new("-> windows == defined defined \"Output!\"");
+			Evaluator evaluator = new("-> windows == defined defined \"Output!\"");
 			_ = Assert.Throws<InvalidRsmlSyntax>(() => evaluator.Evaluate(win10X64));
 
 		}
@@ -114,7 +114,7 @@ namespace RSML.Tests
 		public void Evaluate_ComparatorWithNoSpacing_InvalidSyntax()
 		{
 
-			RsEvaluator evaluator = new("-> windows ==10 any \"Output!\"");
+			Evaluator evaluator = new("-> windows ==10 any \"Output!\"");
 			_ = Assert.Throws<InvalidRsmlSyntax>(() => evaluator.Evaluate(win10X64));
 
 		}

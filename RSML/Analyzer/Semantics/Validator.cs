@@ -2,21 +2,21 @@
 using System.Collections.Immutable;
 using System.Linq;
 
+using RSML.Analyzer.Syntax;
 using RSML.Exceptions;
-using RSML.Tokenization;
 
 
-namespace RSML.Semantics
+namespace RSML.Analyzer.Semantics
 {
 
 	/// <summary>
 	/// The officially maintained semantics validator for RSML.
 	/// </summary>
-	public sealed class RsValidator : IValidator
+	public sealed class Validator : IValidator
 	{
 
 		/// <inheritdoc />
-		public string? StandardizedVersion => "2.0.0";
+		public string StandardizedVersion => "2.0.0";
 
 		/// <inheritdoc />
 		public ImmutableHashSet<string> ValidComparators => [ "==", "!=", "<", ">", "<=", ">=" ];
@@ -32,7 +32,7 @@ namespace RSML.Semantics
 		];
 
 		/// <inheritdoc />
-		public void ValidateLine(ReadOnlySpan<RsToken> tokens)
+		public void ValidateLine(ReadOnlySpan<SyntaxToken> tokens)
 		{
 
 			if (tokens.IsEmpty)
@@ -40,17 +40,14 @@ namespace RSML.Semantics
 
 			var actualTokens = tokens.Length == 1
 								   ? tokens
-								   : tokens[^1].Type == RsTokenType.Eol
+								   : tokens[^1].Kind == TokenKind.Eol
 									   ? tokens[..^1]
 									   : tokens;
 
-			if (actualTokens[0].Type is RsTokenType.Eol or RsTokenType.Eof)
+			if (actualTokens[0].Kind is TokenKind.Eol or TokenKind.Eof)
 				return; // we're done here
 
-			if (actualTokens[0].Type == RsTokenType.CommentSymbol)
-
-				#region Comments
-
+			if (actualTokens[0].Kind == TokenKind.CommentSymbol)
 			{
 
 				if (actualTokens.Length != 2)
@@ -61,19 +58,14 @@ namespace RSML.Semantics
 				if (actualTokens[0].Value != "#")
 					throw new InvalidRsmlSyntax($"Expected CommentSymbol of value '#', but received {actualTokens[0].Value} instead.");
 
-				if (actualTokens[1].Type != RsTokenType.CommentText)
-					throw new InvalidRsmlSyntax($"Expected CommentText, but received {actualTokens[1].Type} instead.");
+				if (actualTokens[1].Kind != TokenKind.CommentText)
+					throw new InvalidRsmlSyntax($"Expected CommentText, but received {actualTokens[1].Kind} instead.");
 
 				return;
 
 			}
 
-			#endregion
-
-			if (actualTokens[0].Type == RsTokenType.SpecialActionSymbol)
-
-				#region Special Actions
-
+			if (actualTokens[0].Kind == TokenKind.SpecialActionSymbol)
 			{
 
 				if (actualTokens.Length != 3)
@@ -82,22 +74,17 @@ namespace RSML.Semantics
 				if (actualTokens[0].Value != "@")
 					throw new InvalidRsmlSyntax($"Expected SpecialActionSymbol of value '@', but received {actualTokens[0].Value} instead.");
 
-				if (actualTokens[1].Type != RsTokenType.SpecialActionName)
-					throw new InvalidRsmlSyntax($"Expected SpecialActionName, but received {actualTokens[1].Type} instead.");
+				if (actualTokens[1].Kind != TokenKind.SpecialActionName)
+					throw new InvalidRsmlSyntax($"Expected SpecialActionName, but received {actualTokens[1].Kind} instead.");
 
-				if (actualTokens[2].Type != RsTokenType.SpecialActionArgument)
-					throw new InvalidRsmlSyntax($"Expected SpecialActionArgument, but received {actualTokens[2].Type} instead.");
+				if (actualTokens[2].Kind != TokenKind.SpecialActionArgument)
+					throw new InvalidRsmlSyntax($"Expected SpecialActionArgument, but received {actualTokens[2].Kind} instead.");
 
 				return;
 
 			}
 
-			#endregion
-
-			if (actualTokens[0].Type is RsTokenType.ReturnOperator or RsTokenType.ThrowErrorOperator)
-
-				#region Logic Path
-
+			if (actualTokens[0].Kind is TokenKind.ReturnOperator or TokenKind.ThrowErrorOperator)
 			{
 
 				if (!(actualTokens[0].Value is "!>" or "->"))
@@ -107,40 +94,40 @@ namespace RSML.Semantics
 				{
 
 					case 2:
-						if (actualTokens[1].Type != RsTokenType.LogicPathValue)
+						if (actualTokens[1].Kind != TokenKind.LogicPathValue)
 							throw new InvalidRsmlSyntax("A 2 token long logic path must be a *Operator + LogicPathValue overload.");
 
 						return;
 
 					case 3:
-						if ((actualTokens[1].Type != RsTokenType.SystemName &&
-							 actualTokens[1].Type != RsTokenType.DefinedKeyword &&
-							 actualTokens[1].Type != RsTokenType.WildcardKeyword) ||
-							actualTokens[2].Type != RsTokenType.LogicPathValue)
+						if ((actualTokens[1].Kind != TokenKind.SystemName &&
+							 actualTokens[1].Kind != TokenKind.DefinedKeyword &&
+							 actualTokens[1].Kind != TokenKind.WildcardKeyword) ||
+							actualTokens[2].Kind != TokenKind.LogicPathValue)
 							throw new InvalidRsmlSyntax("A 3 token long logic path must be a *Operator + SystemName + LogicPathValue overload.");
 
 						string sysName1 = actualTokens[1].Value;
 
-						if (actualTokens[1].Value != "any" && actualTokens[1].Type == RsTokenType.WildcardKeyword)
+						if (actualTokens[1].Value != "any" && actualTokens[1].Kind == TokenKind.WildcardKeyword)
 							throw new InvalidRsmlSyntax("A token of type WildcardKeyword must have a value of 'any'.");
 
-						if (actualTokens[1].Value != "defined" && actualTokens[1].Type == RsTokenType.DefinedKeyword)
+						if (actualTokens[1].Value != "defined" && actualTokens[1].Kind == TokenKind.DefinedKeyword)
 							throw new InvalidRsmlSyntax("A token of type DefinedKeyword must have a value of 'defined'.");
 
 						if (!ValidSystems.Any(s => sysName1.Equals(s, StringComparison.OrdinalIgnoreCase)) &&
-							actualTokens[1].Type == RsTokenType.SystemName)
+							actualTokens[1].Kind == TokenKind.SystemName)
 							throw new InvalidRsmlSyntax("Invalid system name as of v2.0.0.");
 
 						return;
 
 					case 4:
-						if ((actualTokens[1].Type != RsTokenType.SystemName &&
-							 actualTokens[1].Type != RsTokenType.DefinedKeyword &&
-							 actualTokens[1].Type != RsTokenType.WildcardKeyword) ||
-							(actualTokens[2].Type != RsTokenType.ArchitectureIdentifier &&
-							 actualTokens[2].Type != RsTokenType.DefinedKeyword &&
-							 actualTokens[2].Type != RsTokenType.WildcardKeyword) ||
-							actualTokens[3].Type != RsTokenType.LogicPathValue)
+						if ((actualTokens[1].Kind != TokenKind.SystemName &&
+							 actualTokens[1].Kind != TokenKind.DefinedKeyword &&
+							 actualTokens[1].Kind != TokenKind.WildcardKeyword) ||
+							(actualTokens[2].Kind != TokenKind.ArchitectureIdentifier &&
+							 actualTokens[2].Kind != TokenKind.DefinedKeyword &&
+							 actualTokens[2].Kind != TokenKind.WildcardKeyword) ||
+							actualTokens[3].Kind != TokenKind.LogicPathValue)
 							throw new InvalidRsmlSyntax(
 								"A 4 token long logic path must be a *Operator + SystemName + ArchitectureIdentifier + LogicPathValue overload."
 							);
@@ -148,39 +135,39 @@ namespace RSML.Semantics
 						string sysName2 = actualTokens[1].Value;
 						string archName1 = actualTokens[2].Value;
 
-						if (actualTokens[1].Value != "any" && actualTokens[1].Type == RsTokenType.WildcardKeyword)
+						if (actualTokens[1].Value != "any" && actualTokens[1].Kind == TokenKind.WildcardKeyword)
 							throw new InvalidRsmlSyntax("A token of type WildcardKeyword must have a value of 'any'.");
 
-						if (actualTokens[1].Value != "defined" && actualTokens[1].Type == RsTokenType.DefinedKeyword)
+						if (actualTokens[1].Value != "defined" && actualTokens[1].Kind == TokenKind.DefinedKeyword)
 							throw new InvalidRsmlSyntax("A token of type DefinedKeyword must have a value of 'defined'.");
 
-						if (actualTokens[2].Value != "any" && actualTokens[2].Type == RsTokenType.WildcardKeyword)
+						if (actualTokens[2].Value != "any" && actualTokens[2].Kind == TokenKind.WildcardKeyword)
 							throw new InvalidRsmlSyntax("A token of type WildcardKeyword must have a value of 'any'.");
 
-						if (actualTokens[2].Value != "defined" && actualTokens[2].Type == RsTokenType.DefinedKeyword)
+						if (actualTokens[2].Value != "defined" && actualTokens[2].Kind == TokenKind.DefinedKeyword)
 							throw new InvalidRsmlSyntax("A token of type DefinedKeyword must have a value of 'defined'.");
 
 						if (!ValidSystems.Any(s => sysName2.Equals(s, StringComparison.OrdinalIgnoreCase)) &&
-							actualTokens[1].Type == RsTokenType.SystemName)
+							actualTokens[1].Kind == TokenKind.SystemName)
 							throw new InvalidRsmlSyntax("Invalid system name as of v2.0.0.");
 
 						if (!ValidArchitectures.Any(s => archName1.Equals(s, StringComparison.OrdinalIgnoreCase)) &&
-							actualTokens[2].Type == RsTokenType.ArchitectureIdentifier)
+							actualTokens[2].Kind == TokenKind.ArchitectureIdentifier)
 							throw new InvalidRsmlSyntax("Invalid architecture identifier as of v2.0.0.");
 
 						return;
 
 					case 5:
-						if ((actualTokens[1].Type != RsTokenType.SystemName &&
-							 actualTokens[1].Type != RsTokenType.DefinedKeyword &&
-							 actualTokens[1].Type != RsTokenType.WildcardKeyword) ||
-							(actualTokens[2].Type != RsTokenType.MajorVersionId &&
-							 actualTokens[2].Type != RsTokenType.DefinedKeyword &&
-							 actualTokens[2].Type != RsTokenType.WildcardKeyword) ||
-							(actualTokens[3].Type != RsTokenType.ArchitectureIdentifier &&
-							 actualTokens[3].Type != RsTokenType.DefinedKeyword &&
-							 actualTokens[3].Type != RsTokenType.WildcardKeyword) ||
-							actualTokens[4].Type != RsTokenType.LogicPathValue)
+						if ((actualTokens[1].Kind != TokenKind.SystemName &&
+							 actualTokens[1].Kind != TokenKind.DefinedKeyword &&
+							 actualTokens[1].Kind != TokenKind.WildcardKeyword) ||
+							(actualTokens[2].Kind != TokenKind.MajorVersionId &&
+							 actualTokens[2].Kind != TokenKind.DefinedKeyword &&
+							 actualTokens[2].Kind != TokenKind.WildcardKeyword) ||
+							(actualTokens[3].Kind != TokenKind.ArchitectureIdentifier &&
+							 actualTokens[3].Kind != TokenKind.DefinedKeyword &&
+							 actualTokens[3].Kind != TokenKind.WildcardKeyword) ||
+							actualTokens[4].Kind != TokenKind.LogicPathValue)
 							throw new InvalidRsmlSyntax(
 								"A 5 token long logic path must be a *Operator + SystemName + MajorVersionId + ArchitectureIdentifier + LogicPathValue overload."
 							);
@@ -189,54 +176,54 @@ namespace RSML.Semantics
 						string major1 = actualTokens[2].Value;
 						string archName2 = actualTokens[3].Value;
 
-						if (actualTokens[1].Value != "any" && actualTokens[1].Type == RsTokenType.WildcardKeyword)
+						if (actualTokens[1].Value != "any" && actualTokens[1].Kind == TokenKind.WildcardKeyword)
 							throw new InvalidRsmlSyntax("A token of type WildcardKeyword must have a value of 'any'.");
 
-						if (actualTokens[1].Value != "defined" && actualTokens[1].Type == RsTokenType.DefinedKeyword)
+						if (actualTokens[1].Value != "defined" && actualTokens[1].Kind == TokenKind.DefinedKeyword)
 							throw new InvalidRsmlSyntax("A token of type DefinedKeyword must have a value of 'defined'.");
 
-						if (actualTokens[2].Value != "any" && actualTokens[2].Type == RsTokenType.WildcardKeyword)
+						if (actualTokens[2].Value != "any" && actualTokens[2].Kind == TokenKind.WildcardKeyword)
 							throw new InvalidRsmlSyntax("A token of type WildcardKeyword must have a value of 'any'.");
 
-						if (actualTokens[2].Value != "defined" && actualTokens[2].Type == RsTokenType.DefinedKeyword)
+						if (actualTokens[2].Value != "defined" && actualTokens[2].Kind == TokenKind.DefinedKeyword)
 							throw new InvalidRsmlSyntax("A token of type DefinedKeyword must have a value of 'defined'.");
 
-						if (actualTokens[3].Value != "any" && actualTokens[3].Type == RsTokenType.WildcardKeyword)
+						if (actualTokens[3].Value != "any" && actualTokens[3].Kind == TokenKind.WildcardKeyword)
 							throw new InvalidRsmlSyntax("A token of type WildcardKeyword must have a value of 'any'.");
 
-						if (actualTokens[3].Value != "defined" && actualTokens[3].Type == RsTokenType.DefinedKeyword)
+						if (actualTokens[3].Value != "defined" && actualTokens[3].Kind == TokenKind.DefinedKeyword)
 							throw new InvalidRsmlSyntax("A token of type DefinedKeyword must have a value of 'defined'.");
 
 						if (!ValidSystems.Any(s => sysName3.Equals(s, StringComparison.OrdinalIgnoreCase)) &&
-							actualTokens[1].Type == RsTokenType.SystemName)
+							actualTokens[1].Kind == TokenKind.SystemName)
 							throw new InvalidRsmlSyntax($"Invalid system name ({sysName3}) as of v2.0.0.");
 
 						if (!ValidArchitectures.Any(s => archName2.Equals(s, StringComparison.OrdinalIgnoreCase)) &&
-							actualTokens[3].Type == RsTokenType.ArchitectureIdentifier)
+							actualTokens[3].Kind == TokenKind.ArchitectureIdentifier)
 							throw new InvalidRsmlSyntax("Invalid architecture identifier as of v2.0.0.");
 
-						if (!Int32.TryParse(major1, out _) && actualTokens[2].Type == RsTokenType.MajorVersionId)
+						if (!Int32.TryParse(major1, out _) && actualTokens[2].Kind == TokenKind.MajorVersionId)
 							throw new InvalidRsmlSyntax("The major version must be a valid integer");
 
 						return;
 
 					case 6:
-						if ((actualTokens[1].Type != RsTokenType.SystemName &&
-							 actualTokens[1].Type != RsTokenType.DefinedKeyword &&
-							 actualTokens[1].Type != RsTokenType.WildcardKeyword) ||
-							(actualTokens[2].Type != RsTokenType.Equals &&
-							 actualTokens[2].Type != RsTokenType.Different &&
-							 actualTokens[2].Type != RsTokenType.GreaterThan &&
-							 actualTokens[2].Type != RsTokenType.LessThan &&
-							 actualTokens[2].Type != RsTokenType.GreaterOrEqualsThan &&
-							 actualTokens[2].Type != RsTokenType.LessOrEqualsThan) ||
-							(actualTokens[3].Type != RsTokenType.MajorVersionId &&
-							 actualTokens[3].Type != RsTokenType.DefinedKeyword &&
-							 actualTokens[3].Type != RsTokenType.WildcardKeyword) ||
-							(actualTokens[4].Type != RsTokenType.ArchitectureIdentifier &&
-							 actualTokens[4].Type != RsTokenType.DefinedKeyword &&
-							 actualTokens[4].Type != RsTokenType.WildcardKeyword) ||
-							actualTokens[5].Type != RsTokenType.LogicPathValue)
+						if ((actualTokens[1].Kind != TokenKind.SystemName &&
+							 actualTokens[1].Kind != TokenKind.DefinedKeyword &&
+							 actualTokens[1].Kind != TokenKind.WildcardKeyword) ||
+							(actualTokens[2].Kind != TokenKind.Equals &&
+							 actualTokens[2].Kind != TokenKind.Different &&
+							 actualTokens[2].Kind != TokenKind.GreaterThan &&
+							 actualTokens[2].Kind != TokenKind.LessThan &&
+							 actualTokens[2].Kind != TokenKind.GreaterOrEqualsThan &&
+							 actualTokens[2].Kind != TokenKind.LessOrEqualsThan) ||
+							(actualTokens[3].Kind != TokenKind.MajorVersionId &&
+							 actualTokens[3].Kind != TokenKind.DefinedKeyword &&
+							 actualTokens[3].Kind != TokenKind.WildcardKeyword) ||
+							(actualTokens[4].Kind != TokenKind.ArchitectureIdentifier &&
+							 actualTokens[4].Kind != TokenKind.DefinedKeyword &&
+							 actualTokens[4].Kind != TokenKind.WildcardKeyword) ||
+							actualTokens[5].Kind != TokenKind.LogicPathValue)
 							throw new InvalidRsmlSyntax(
 								"A 5 token long logic path must be a *Operator + SystemName + |Comparator| + MajorVersionId + ArchitectureIdentifier + LogicPathValue overload."
 							);
@@ -246,24 +233,24 @@ namespace RSML.Semantics
 						string major2 = actualTokens[3].Value;
 						string archName3 = actualTokens[4].Value;
 
-						if (actualTokens[1].Value != "any" && actualTokens[1].Type == RsTokenType.WildcardKeyword)
+						if (actualTokens[1].Value != "any" && actualTokens[1].Kind == TokenKind.WildcardKeyword)
 							throw new InvalidRsmlSyntax("A token of type WildcardKeyword must have a value of 'any'.");
 
-						if (actualTokens[1].Value != "defined" && actualTokens[1].Type == RsTokenType.DefinedKeyword)
+						if (actualTokens[1].Value != "defined" && actualTokens[1].Kind == TokenKind.DefinedKeyword)
 							throw new InvalidRsmlSyntax("A token of type DefinedKeyword must have a value of 'defined'.");
 
-						if (actualTokens[4].Value != "any" && actualTokens[4].Type == RsTokenType.WildcardKeyword)
+						if (actualTokens[4].Value != "any" && actualTokens[4].Kind == TokenKind.WildcardKeyword)
 							throw new InvalidRsmlSyntax("A token of type WildcardKeyword must have a value of 'any'.");
 
-						if (actualTokens[4].Value != "defined" && actualTokens[4].Type == RsTokenType.DefinedKeyword)
+						if (actualTokens[4].Value != "defined" && actualTokens[4].Kind == TokenKind.DefinedKeyword)
 							throw new InvalidRsmlSyntax("A token of type DefinedKeyword must have a value of 'defined'.");
 
 						if (!ValidSystems.Any(s => sysName4.Equals(s, StringComparison.OrdinalIgnoreCase)) &&
-							actualTokens[1].Type == RsTokenType.SystemName)
+							actualTokens[1].Kind == TokenKind.SystemName)
 							throw new InvalidRsmlSyntax("Invalid system name as of v2.0.0.");
 
 						if (!ValidArchitectures.Any(s => archName3.Equals(s, StringComparison.OrdinalIgnoreCase)) &&
-							actualTokens[1].Type == RsTokenType.ArchitectureIdentifier)
+							actualTokens[1].Kind == TokenKind.ArchitectureIdentifier)
 							throw new InvalidRsmlSyntax("Invalid architecture identifier as of v2.0.0.");
 
 						if (!ValidComparators.Any(s => comp.Equals(s, StringComparison.OrdinalIgnoreCase)))
@@ -281,14 +268,12 @@ namespace RSML.Semantics
 
 			}
 
-			#endregion
-
 			throw new InvalidRsmlSyntax("Unrecognized start-of-line token.");
 
 		}
 
 		/// <inheritdoc />
-		public void ValidateBuffer(ReadOnlySpan<RsToken> bufferTokens)
+		public void ValidateBuffer(ReadOnlySpan<SyntaxToken> bufferTokens)
 		{
 
 			if (bufferTokens.IsEmpty)
@@ -315,27 +300,29 @@ namespace RSML.Semantics
 
 		}
 
-		private static ReadOnlySpan<RsToken> ReadUntilEolOrEof(ReadOnlySpan<RsToken> tokens, ref int pos)
+		#region Helpers
+
+		private static ReadOnlySpan<SyntaxToken> ReadUntilEolOrEof(ReadOnlySpan<SyntaxToken> tokens, ref int pos)
 		{
 
 			int start = pos;
 
-			while (pos < tokens.Length && tokens[pos].Type != RsTokenType.Eol && tokens[pos].Type != RsTokenType.Eof)
+			while (pos < tokens.Length && tokens[pos].Kind != TokenKind.Eol && tokens[pos].Kind != TokenKind.Eof)
 				pos++;
 
 			return tokens[start..pos];
 
 		}
 
-		private static bool SkipNewlines(ReadOnlySpan<RsToken> tokens, ref int pos)
+		private static bool SkipNewlines(ReadOnlySpan<SyntaxToken> tokens, ref int pos)
 		{
 
-			while (pos < tokens.Length && tokens[pos].Type == RsTokenType.Eol)
+			while (pos < tokens.Length && tokens[pos].Kind == TokenKind.Eol)
 			{
 
 				pos++;
 
-				if (tokens[pos].Type == RsTokenType.Eof)
+				if (tokens[pos].Kind == TokenKind.Eof)
 					return false; // eof hit
 
 			}
@@ -343,6 +330,8 @@ namespace RSML.Semantics
 			return true;
 
 		}
+
+		#endregion
 
 	}
 

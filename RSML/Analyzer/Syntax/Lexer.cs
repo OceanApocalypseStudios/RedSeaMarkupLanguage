@@ -4,23 +4,23 @@ using System.Collections.Immutable;
 using System.Text;
 
 
-namespace RSML.Tokenization
+namespace RSML.Analyzer.Syntax
 {
 
 	/// <summary>
 	/// The officially maintained lexer/tokenizer for RSML v2.0.0.
 	/// </summary>
-	public sealed class RsLexer : ILexer
+	public sealed class Lexer : ILexer
 	{
 
 		/// <inheritdoc />
-		public string? StandardizedVersion => "2.0.0";
+		public string StandardizedVersion => "2.0.0";
 
 		/// <inheritdoc />
 		public ImmutableHashSet<string> ValidComparators => [ "==", "!=", "<", ">", "<=", ">=" ];
 
 		/// <inheritdoc />
-		public string CreateDocumentFromTokens(IEnumerable<RsToken> tokens)
+		public string CreateDocumentFromTokens(IEnumerable<SyntaxToken> tokens)
 		{
 
 			StringBuilder builder = new();
@@ -28,10 +28,10 @@ namespace RSML.Tokenization
 			foreach (var t in tokens)
 			{
 
-				if (t.Type == RsTokenType.Eof)
+				if (t.Kind == TokenKind.Eof)
 					break;
 
-				if (t.Type == RsTokenType.Eol)
+				if (t.Kind == TokenKind.Eol)
 				{
 
 					_ = builder.AppendLine();
@@ -40,7 +40,7 @@ namespace RSML.Tokenization
 
 				}
 
-				if (t.Type == RsTokenType.SpecialActionSymbol)
+				if (t.Kind == TokenKind.SpecialActionSymbol)
 				{
 
 					_ = builder.Append('@');
@@ -49,7 +49,7 @@ namespace RSML.Tokenization
 
 				}
 
-				if (t.Type == RsTokenType.LogicPathValue)
+				if (t.Kind == TokenKind.LogicPathValue)
 				{
 
 					_ = builder.Append(t.Value);
@@ -68,7 +68,7 @@ namespace RSML.Tokenization
 		}
 
 		/// <inheritdoc />
-		public IEnumerable<RsToken> TokenizeLine(string line)
+		public IEnumerable<SyntaxToken> TokenizeLine(string line)
 		{
 
 			int pos = 0;
@@ -77,7 +77,7 @@ namespace RSML.Tokenization
 			if (pos >= line.Length)
 			{
 
-				yield return new(RsTokenType.Eol, Environment.NewLine);
+				yield return new(TokenKind.Eol, Environment.NewLine);
 
 				yield break;
 
@@ -86,9 +86,9 @@ namespace RSML.Tokenization
 			if (line[pos] == '#')
 			{
 
-				yield return new(RsTokenType.CommentSymbol, '#');
-				yield return new(RsTokenType.CommentText, line[++pos..]);
-				yield return new(RsTokenType.Eol, Environment.NewLine);
+				yield return new(TokenKind.CommentSymbol, '#');
+				yield return new(TokenKind.CommentText, line[++pos..]);
+				yield return new(TokenKind.Eol, Environment.NewLine);
 
 				yield break;
 
@@ -97,18 +97,18 @@ namespace RSML.Tokenization
 			if (line[pos] == '@')
 			{
 
-				yield return new(RsTokenType.SpecialActionSymbol, '@');
+				yield return new(TokenKind.SpecialActionSymbol, '@');
 
 				++pos; // advance to ignore the #
 				var actionName = ReadUntilWhitespaceOrEol(line, ref pos);
 
-				yield return new(RsTokenType.SpecialActionName, actionName);
+				yield return new(TokenKind.SpecialActionName, actionName);
 
 				var argument = ReadUntilWhitespaceOrEol(line, ref pos);
 
-				yield return new(RsTokenType.SpecialActionArgument, argument);
+				yield return new(TokenKind.SpecialActionArgument, argument);
 
-				yield return new(RsTokenType.Eol, Environment.NewLine);
+				yield return new(TokenKind.Eol, Environment.NewLine);
 
 				yield break;
 
@@ -117,10 +117,10 @@ namespace RSML.Tokenization
 			var op = ReadUntilWhitespaceOrEol(line, ref pos);
 
 			if (op.IsEquals("->"))
-				yield return new(RsTokenType.ReturnOperator, op);
+				yield return new(TokenKind.ReturnOperator, op);
 
 			else if (op.IsEquals("!>"))
-				yield return new(RsTokenType.ThrowErrorOperator, op);
+				yield return new(TokenKind.ThrowErrorOperator, op);
 
 			while (pos < line.Length)
 			{
@@ -131,8 +131,8 @@ namespace RSML.Tokenization
 					pos++; // ignore the double quote
 					string retVal = ReadQuotedString(line, ref pos);
 
-					yield return new(RsTokenType.LogicPathValue, retVal);
-					yield return new(RsTokenType.Eol, Environment.NewLine);
+					yield return new(TokenKind.LogicPathValue, retVal);
+					yield return new(TokenKind.Eol, Environment.NewLine);
 
 					yield break;
 
@@ -141,14 +141,14 @@ namespace RSML.Tokenization
 				var token = TokenizeLogicPathComponent(line, ref pos);
 
 				if (token is not null)
-					yield return (RsToken)token;
+					yield return (SyntaxToken)token;
 
 			}
 
 		}
 
 		/// <inheritdoc />
-		public RsToken? TokenizeLogicPathComponent(ReadOnlySpan<char> line, ref int pos)
+		public SyntaxToken? TokenizeLogicPathComponent(ReadOnlySpan<char> line, ref int pos)
 		{
 
 			SkipWhitespace(line, ref pos);
@@ -156,25 +156,25 @@ namespace RSML.Tokenization
 			var chars = ReadUntilWhitespaceOrEol(line, ref pos);
 
 			if (chars.IsEquals("any"))
-				return new(RsTokenType.WildcardKeyword, "any");
+				return new(TokenKind.WildcardKeyword, "any");
 
 			if (chars.IsEquals("defined"))
-				return new(RsTokenType.DefinedKeyword, "defined");
+				return new(TokenKind.DefinedKeyword, "defined");
 
 			if (chars.IsEquals(
 					StringComparison.OrdinalIgnoreCase, "windows", "osx", "linux", "freebsd",
 					"debian", "ubuntu", "archlinux", "fedora"
 				))
-				return new(RsTokenType.SystemName, chars);
+				return new(TokenKind.SystemName, chars);
 
 			if (chars.IsEquals(
 					StringComparison.OrdinalIgnoreCase, "x64", "x86", "arm32", "arm64",
 					"loongarch64"
 				))
-				return new(RsTokenType.ArchitectureIdentifier, chars);
+				return new(TokenKind.ArchitectureIdentifier, chars);
 
 			if (Int32.TryParse(chars, out int result))
-				return new(RsTokenType.MajorVersionId, result.ToString());
+				return new(TokenKind.MajorVersionId, result.ToString());
 
 			string str = chars.ToString();
 
@@ -190,12 +190,12 @@ namespace RSML.Tokenization
 				return str switch
 				{
 
-					"==" => new(RsTokenType.Equals, str),
-					"!=" => new(RsTokenType.Different, str),
-					">"  => new(RsTokenType.GreaterThan, str),
-					"<"  => new(RsTokenType.LessThan, str),
-					">=" => new(RsTokenType.GreaterOrEqualsThan, str),
-					"<=" => new(RsTokenType.LessOrEqualsThan, str)
+					"==" => new(TokenKind.Equals, str),
+					"!=" => new(TokenKind.Different, str),
+					">"  => new(TokenKind.GreaterThan, str),
+					"<"  => new(TokenKind.LessThan, str),
+					">=" => new(TokenKind.GreaterOrEqualsThan, str),
+					"<=" => new(TokenKind.LessOrEqualsThan, str)
 
 				};
 
@@ -211,12 +211,11 @@ namespace RSML.Tokenization
 			{
 
 				pos = currentPosVal;
-
 				return null;
 
 			}
 
-			return new(RsTokenType.UndefinedToken, str);
+			return new(TokenKind.UndefinedToken, str);
 
 		}
 
