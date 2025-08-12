@@ -4,6 +4,7 @@ using System.Linq;
 
 using RSML.Analyzer.Syntax;
 using RSML.Exceptions;
+using RSML.Toolchain.Compliance;
 
 
 namespace RSML.Analyzer.Semantics
@@ -15,8 +16,10 @@ namespace RSML.Analyzer.Semantics
 	public sealed class Validator : IValidator
 	{
 
+		private const string ApiVersion = "2.0.0";
+
 		/// <inheritdoc />
-		public string StandardizedVersion => "2.0.0";
+		public SpecificationCompliance SpecificationCompliance => SpecificationCompliance.CreateFull(ApiVersion);
 
 		/// <inheritdoc />
 		public ImmutableHashSet<string> ValidComparators => [ "==", "!=", "<", ">", "<=", ">=" ];
@@ -51,9 +54,11 @@ namespace RSML.Analyzer.Semantics
 			{
 
 				if (actualTokens.Length != 2)
+				{
 					throw new InvalidRsmlSyntax(
 						"A comment must be 2 tokens long."
 					); // even if you have a comment with no text not even spaces, you'll have 2 tokens
+				}
 
 				if (actualTokens[0].Value != "#")
 					throw new InvalidRsmlSyntax($"Expected CommentSymbol of value '#', but received {actualTokens[0].Value} instead.");
@@ -128,9 +133,11 @@ namespace RSML.Analyzer.Semantics
 							 actualTokens[2].Kind != TokenKind.DefinedKeyword &&
 							 actualTokens[2].Kind != TokenKind.WildcardKeyword) ||
 							actualTokens[3].Kind != TokenKind.LogicPathValue)
+						{
 							throw new InvalidRsmlSyntax(
 								"A 4 token long logic path must be a *Operator + SystemName + ArchitectureIdentifier + LogicPathValue overload."
 							);
+						}
 
 						string sysName2 = actualTokens[1].Value;
 						string archName1 = actualTokens[2].Value;
@@ -168,9 +175,11 @@ namespace RSML.Analyzer.Semantics
 							 actualTokens[3].Kind != TokenKind.DefinedKeyword &&
 							 actualTokens[3].Kind != TokenKind.WildcardKeyword) ||
 							actualTokens[4].Kind != TokenKind.LogicPathValue)
+						{
 							throw new InvalidRsmlSyntax(
 								"A 5 token long logic path must be a *Operator + SystemName + MajorVersionId + ArchitectureIdentifier + LogicPathValue overload."
 							);
+						}
 
 						string sysName3 = actualTokens[1].Value;
 						string major1 = actualTokens[2].Value;
@@ -224,9 +233,11 @@ namespace RSML.Analyzer.Semantics
 							 actualTokens[4].Kind != TokenKind.DefinedKeyword &&
 							 actualTokens[4].Kind != TokenKind.WildcardKeyword) ||
 							actualTokens[5].Kind != TokenKind.LogicPathValue)
+						{
 							throw new InvalidRsmlSyntax(
 								"A 5 token long logic path must be a *Operator + SystemName + |Comparator| + MajorVersionId + ArchitectureIdentifier + LogicPathValue overload."
 							);
+						}
 
 						string sysName4 = actualTokens[1].Value;
 						string comp = actualTokens[2].Value;

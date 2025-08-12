@@ -1,4 +1,6 @@
-﻿using BenchmarkDotNet.Running;
+﻿using System;
+
+using BenchmarkDotNet.Running;
 
 
 namespace RSML.Benchmarks
@@ -7,7 +9,7 @@ namespace RSML.Benchmarks
 	internal class Program
 	{
 
-		private static void Main() => BenchmarkRunner.Run<RsParserBenchmarks>();
+		private static void Main() => BenchmarkRunner.Run<EvaluatorBenchmarks>();
 
 	}
 

@@ -5,5 +5,15 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "<Pending>", Scope = "member", Target = "~M:RSML.Evaluation.Evaluator.Evaluate(RSML.Machine.LocalMachine,RSML.Reader.IReader,RSML.Analyzer.Syntax.ILexer,RSML.Analyzer.Semantics.INormalizer,RSML.Analyzer.Semantics.IValidator)~RSML.Evaluation.EvaluationResult")]
-[assembly: SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "<Pending>", Scope = "member", Target = "~M:RSML.Evaluation.Evaluator.HandleSpecialActionCall(System.String,System.String)~System.Byte")]
+
+[assembly:
+	SuppressMessage(
+		"Style", "IDE0046:Convert to conditional expression", Justification = "<Pending>", Scope = "member",
+		Target =
+			"~M:RSML.Evaluation.Evaluator.Evaluate(RSML.Machine.LocalMachine,RSML.Reader.IReader,RSML.Analyzer.Syntax.ILexer,RSML.Analyzer.Semantics.INormalizer,RSML.Analyzer.Semantics.IValidator)~RSML.Evaluation.EvaluationResult"
+	)]
+[assembly:
+	SuppressMessage(
+		"Style", "IDE0046:Convert to conditional expression", Justification = "<Pending>", Scope = "member",
+		Target = "~M:RSML.Evaluation.Evaluator.HandleSpecialActionCall(System.String,System.String)~System.Byte"
+	)]

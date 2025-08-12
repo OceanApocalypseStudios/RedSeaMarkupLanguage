@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 
 using RSML.Toolchain;
 
@@ -15,19 +14,14 @@ namespace RSML.Analyzer.Syntax
 	{
 
 		/// <summary>
-		/// Valid version number comparators.
-		/// </summary>
-		ImmutableHashSet<string> ValidComparators { get; }
-
-		/// <summary>
 		/// Tokenizes a RSML line.
 		/// </summary>
 		/// <param name="line">The line to tokenize</param>
-		/// <returns>An enumerable of tokens</returns>
+		/// <returns>An enumerable collection of tokens</returns>
 		IEnumerable<SyntaxToken> TokenizeLine(string line);
 
 		/// <summary>
-		/// Forms a RSML document from an enumerable of tokens.
+		/// Forms a RSML document from an enumerable collection of tokens.
 		/// </summary>
 		/// <param name="tokens">The tokens</param>
 		/// <returns>A RSML document</returns>

@@ -75,20 +75,20 @@ namespace RSML.Toolchain
 		/// <param name="evaluator">The evaluator</param>
 		/// <returns>The toolchain</returns>
 		public Toolchain Bind(IEvaluator? evaluator) => ReturnHelper(() => Evaluator = evaluator);
-		
+
 		/// <summary>
 		/// Unbinds all toolchain components.
 		/// </summary>
 		/// <returns>The toolchain</returns>
 		public Toolchain UnbindAll()
 		{
-			
+
 			Lexer = null;
 			Reader = null;
 			Normalizer = null;
 			Validator = null;
 			Evaluator = null;
-			
+
 			return this;
 
 		}
@@ -145,7 +145,7 @@ namespace RSML.Toolchain
 			{
 
 				Lexer = Activator.CreateInstance<TLexer>(),
-				Reader = Activator.CreateInstance(typeof(TReader), content) as RsReader,
+				Reader = Activator.CreateInstance(typeof(TReader), content) as RsmlReader,
 				Normalizer = Activator.CreateInstance<TNormalizer>(),
 				Validator = Activator.CreateInstance<TValidator>(),
 				Evaluator = Activator.CreateInstance(typeof(TValidator), content) as Evaluator

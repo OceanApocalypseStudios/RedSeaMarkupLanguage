@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Text;
+
+using RSML.Toolchain.Compliance;
 
 
 namespace RSML.Analyzer.Syntax
@@ -13,11 +14,10 @@ namespace RSML.Analyzer.Syntax
 	public sealed class Lexer : ILexer
 	{
 
-		/// <inheritdoc />
-		public string StandardizedVersion => "2.0.0";
+		private const string ApiVersion = "2.0.0";
 
 		/// <inheritdoc />
-		public ImmutableHashSet<string> ValidComparators => [ "==", "!=", "<", ">", "<=", ">=" ];
+		public SpecificationCompliance SpecificationCompliance => SpecificationCompliance.CreateFull(ApiVersion);
 
 		/// <inheritdoc />
 		public string CreateDocumentFromTokens(IEnumerable<SyntaxToken> tokens)
@@ -31,35 +31,32 @@ namespace RSML.Analyzer.Syntax
 				if (t.Kind == TokenKind.Eof)
 					break;
 
-				if (t.Kind == TokenKind.Eol)
+				// ReSharper disable once SwitchStatementHandlesSomeKnownEnumValuesWithDefault
+				switch (t.Kind)
 				{
 
-					_ = builder.AppendLine();
+					case TokenKind.Eol:
+						_ = builder.AppendLine();
 
-					continue;
+						continue;
+
+					case TokenKind.SpecialActionSymbol:
+						_ = builder.Append('@');
+
+						continue;
+
+					case TokenKind.LogicPathValue:
+						_ = builder.Append(t.Value);
+
+						continue;
+
+					default:
+						_ = builder.Append(t.Value);
+						_ = builder.Append(' ');
+
+						break;
 
 				}
-
-				if (t.Kind == TokenKind.SpecialActionSymbol)
-				{
-
-					_ = builder.Append('@');
-
-					continue;
-
-				}
-
-				if (t.Kind == TokenKind.LogicPathValue)
-				{
-
-					_ = builder.Append(t.Value);
-
-					continue;
-
-				}
-
-				_ = builder.Append(t.Value);
-				_ = builder.Append(' ');
 
 			}
 
@@ -83,34 +80,31 @@ namespace RSML.Analyzer.Syntax
 
 			}
 
-			if (line[pos] == '#')
+			switch (line[pos])
 			{
 
-				yield return new(TokenKind.CommentSymbol, '#');
-				yield return new(TokenKind.CommentText, line[++pos..]);
-				yield return new(TokenKind.Eol, Environment.NewLine);
+				case '#':
+					yield return new(TokenKind.CommentSymbol, '#');
+					yield return new(TokenKind.CommentText, line[++pos..]);
+					yield return new(TokenKind.Eol, Environment.NewLine);
 
-				yield break;
+					yield break;
 
-			}
+				case '@':
+					yield return new(TokenKind.SpecialActionSymbol, '@');
 
-			if (line[pos] == '@')
-			{
+					++pos; // advance to ignore the #
+					var actionName = ReadUntilWhitespaceOrEol(line, ref pos);
 
-				yield return new(TokenKind.SpecialActionSymbol, '@');
+					yield return new(TokenKind.SpecialActionName, actionName);
 
-				++pos; // advance to ignore the #
-				var actionName = ReadUntilWhitespaceOrEol(line, ref pos);
+					var argument = ReadUntilWhitespaceOrEol(line, ref pos);
 
-				yield return new(TokenKind.SpecialActionName, actionName);
+					yield return new(TokenKind.SpecialActionArgument, argument);
 
-				var argument = ReadUntilWhitespaceOrEol(line, ref pos);
+					yield return new(TokenKind.Eol, Environment.NewLine);
 
-				yield return new(TokenKind.SpecialActionArgument, argument);
-
-				yield return new(TokenKind.Eol, Environment.NewLine);
-
-				yield break;
+					yield break;
 
 			}
 
@@ -129,7 +123,7 @@ namespace RSML.Analyzer.Syntax
 				{
 
 					pos++; // ignore the double quote
-					string retVal = ReadQuotedString(line, ref pos);
+					var retVal = ReadQuotedString(line, ref pos);
 
 					yield return new(TokenKind.LogicPathValue, retVal);
 					yield return new(TokenKind.Eol, Environment.NewLine);
@@ -176,9 +170,10 @@ namespace RSML.Analyzer.Syntax
 			if (Int32.TryParse(chars, out int result))
 				return new(TokenKind.MajorVersionId, result.ToString());
 
-			string str = chars.ToString();
-
-			if (ValidComparators.Contains(str))
+			if (chars.IsEquals(
+					StringComparison.Ordinal, "==", "!=", "<", ">",
+					"<=", ">="
+				))
 			{
 
 				#region Pragmas
@@ -187,17 +182,23 @@ namespace RSML.Analyzer.Syntax
 
 				#endregion
 
-				return str switch
-				{
+				if (chars.IsEquals("=="))
+					return new(TokenKind.Equals, chars);
 
-					"==" => new(TokenKind.Equals, str),
-					"!=" => new(TokenKind.Different, str),
-					">"  => new(TokenKind.GreaterThan, str),
-					"<"  => new(TokenKind.LessThan, str),
-					">=" => new(TokenKind.GreaterOrEqualsThan, str),
-					"<=" => new(TokenKind.LessOrEqualsThan, str)
+				if (chars.IsEquals("!="))
+					return new(TokenKind.Different, chars);
 
-				};
+				if (chars.IsEquals(">"))
+					return new(TokenKind.GreaterThan, chars);
+
+				if (chars.IsEquals("<"))
+					return new(TokenKind.LessThan, chars);
+
+				if (chars.IsEquals(">="))
+					return new(TokenKind.GreaterOrEqualsThan, chars);
+
+				if (chars.IsEquals("<="))
+					return new(TokenKind.LessOrEqualsThan, chars);
 
 				#region Pragmas
 
@@ -207,21 +208,18 @@ namespace RSML.Analyzer.Syntax
 
 			}
 
-			if (str[0] == '"')
-			{
+			if (chars[0] != '"')
+				return new(TokenKind.UndefinedToken, chars);
 
-				pos = currentPosVal;
-				return null;
+			pos = currentPosVal;
 
-			}
-
-			return new(TokenKind.UndefinedToken, str);
+			return null;
 
 		}
 
 		#region Helpers
 
-		private static string ReadQuotedString(ReadOnlySpan<char> line, ref int pos)
+		private static ReadOnlySpan<char> ReadQuotedString(ReadOnlySpan<char> line, ref int pos)
 		{
 
 			int start = pos;
@@ -242,7 +240,7 @@ namespace RSML.Analyzer.Syntax
 
 			}
 
-			return line[start..pos].ToString(); // ignores last double quote
+			return line[start..pos]; // ignores last double quote
 
 		}
 

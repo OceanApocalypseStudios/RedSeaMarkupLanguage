@@ -1,6 +1,13 @@
-﻿using RSML.Evaluation;
+﻿using System;
+using System.Diagnostics;
+using System.Linq;
+
+using RSML.Actions;
+using RSML.Analyzer.Syntax;
+using RSML.Evaluation;
 using RSML.Exceptions;
 using RSML.Machine;
+using RSML.Middlewares;
 
 
 namespace RSML.Tests
@@ -13,6 +20,50 @@ namespace RSML.Tests
 		private static readonly LocalMachine ubuntu22Arm64 = new("ubuntu", "debian", "x64", 22);
 		private static readonly LocalMachine debianUnknownVersionX86 = new("debian", "debian", "x86", null);
 		private static readonly LocalMachine osxUnknownVersionUnknownArch = new("osx", null, null);
+
+		[Fact]
+		public void Evaluate_SpecialActionNoArgument_ImplicitEmptyString()
+		{
+
+			var result = new Evaluator("@MyAwesomeAction").RegisterSpecialAction(
+															  "MyAwesomeAction", (_, argument) =>
+															  {
+
+																  Debug.WriteLine("@MyAwesomeAction was ran.");
+																  Assert.Equal(String.Empty, argument);
+
+																  return SpecialActionBehavior.Success;
+
+															  }
+														  )
+														  .Evaluate(win10X64);
+
+			Assert.Null(result.MatchValue);
+
+		}
+
+		[Fact]
+		public void Evaluate_CommentWithNoTextIsStillComment()
+		{
+
+			var result = new Evaluator("#").BindMiddleware(
+											   MiddlewareRunnerLocation.TwoLength, tokens =>
+											   {
+
+												   var t = tokens.ToArray();
+												   Debug.WriteLine($"Middleware ran: {t.Length}");
+												   Assert.Equal(TokenKind.CommentSymbol, t[0].Kind);
+												   Assert.Equal(String.Empty, t[1].Value);
+
+												   return MiddlewareResult.ContinueEvaluation;
+
+											   }
+										   )
+										   .Evaluate(debianUnknownVersionX86);
+
+			Assert.Null(result.MatchValue);
+
+		}
 
 		[Theory]
 		[InlineData(

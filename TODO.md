@@ -6,13 +6,13 @@ It's close. *Very* close.
 
 ### Testing
 
-- [ ] Test even more potential edge cases, like the `==10` edge case that caused an infinite loop *(that one's fixed
+- [X] Test even more potential edge cases, like the `==10` edge case that caused an infinite loop *(that one's fixed
   tho)*
 
 ### Performance
 
 - [X] Compiled RSML via ~~Source Generators~~ (ended up going for MSBuild Tasks for compatibility reasons)
-- [ ] **Benchmark RSML for C#**
+- [X] **Benchmark RSML for C#**
 	- [ ] Optimize if necessary
 
 ### Native
@@ -25,11 +25,11 @@ It's close. *Very* close.
 
 ### Language Specification
 
-- [ ] **Lexical Structure**
+- [X] **Lexical Structure**
 	- [X] Character Set
 	- [X] Tokens
-	- [ ] Comments
-	- [ ] Whitespace
+	- [X] Comments
+	- [X] Whitespace
 
 - [ ] **Syntax**
 	- [ ] Markup Structure
@@ -55,8 +55,8 @@ It's close. *Very* close.
 
 ### CommandLine Interface
 
-- [ ] Improve on Specification Support (`--specification-support`)
-- [ ] Improve the help screen
+- [X] Improve on Specification Support (`--specification-support`)
+- [X] Improve the help screen
 - [ ] Add actual evaluation support from `stdin`
 - [ ] Add tokenization support *(somehow)*
 - [ ] Add semantic validation support *(somehow)*

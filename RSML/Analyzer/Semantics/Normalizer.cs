@@ -3,6 +3,7 @@ using System.Linq;
 
 using RSML.Analyzer.Syntax;
 using RSML.Toolchain;
+using RSML.Toolchain.Compliance;
 
 
 namespace RSML.Analyzer.Semantics
@@ -14,16 +15,18 @@ namespace RSML.Analyzer.Semantics
 	public sealed class Normalizer : INormalizer
 	{
 
+		private const string ApiVersion = "2.0.0";
+
 		private static readonly SyntaxToken wildcard = TokenBank.wildcard;
 		private static readonly SyntaxToken eol = TokenBank.eolToken;
-
-		/// <inheritdoc />
-		public string StandardizedVersion => "2.0.0";
 
 		/// <summary>
 		/// Creates a new Normalizer instance.
 		/// </summary>
 		public Normalizer() { }
+
+		/// <inheritdoc />
+		public SpecificationCompliance SpecificationCompliance => SpecificationCompliance.CreateFull(ApiVersion);
 
 		/// <inheritdoc />
 		public IEnumerable<SyntaxToken> NormalizeLine(IEnumerable<SyntaxToken> tokens, out int length)
@@ -47,6 +50,7 @@ namespace RSML.Analyzer.Semantics
 				case TokenKind.Eol when actualTokens.Length == 1:
 				case TokenKind.Eof when actualTokens.Length == 1:
 					length = 1;
+
 					return actualTokens;
 
 				case TokenKind.CommentSymbol:

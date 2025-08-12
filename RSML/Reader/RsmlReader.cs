@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 using RSML.Analyzer.Syntax;
 using RSML.Toolchain;
+using RSML.Toolchain.Compliance;
 
 
 namespace RSML.Reader
@@ -11,9 +12,10 @@ namespace RSML.Reader
 	/// <summary>
 	/// The officially maintained RSML Reader that reads lines from a buffer and feeds them into a lexer.
 	/// </summary>
-	public sealed class RsReader : IReader
+	public sealed class RsmlReader : IReader
 	{
 
+		private const string ApiVersion = "2.0.0";
 		private readonly SyntaxToken[] eofToken = [ TokenBank.eofToken ];
 		private readonly SyntaxToken[] eolToken = [ TokenBank.eolToken ];
 		private readonly string source;
@@ -24,16 +26,16 @@ namespace RSML.Reader
 		/// Initializes a RSML reader.
 		/// </summary>
 		/// <param name="source">A span of characters as input</param>
-		public RsReader(ReadOnlySpan<char> source) { this.source = source.ToString().ReplaceLineEndings(); }
+		public RsmlReader(ReadOnlySpan<char> source) { this.source = source.ToString().ReplaceLineEndings(); }
 
 		/// <summary>
 		/// Initializes a RSML reader.
 		/// </summary>
 		/// <param name="source">A string as input</param>
-		public RsReader(string source) { this.source = source.ReplaceLineEndings(); }
+		public RsmlReader(string source) { this.source = source.ReplaceLineEndings(); }
 
 		/// <inheritdoc />
-		public string StandardizedVersion => "2.0.0";
+		public SpecificationCompliance SpecificationCompliance => SpecificationCompliance.CreateFull(ApiVersion);
 
 		/// <inheritdoc />
 		public bool TryTokenizeNextLine(ILexer lexer, out IEnumerable<SyntaxToken> tokens)

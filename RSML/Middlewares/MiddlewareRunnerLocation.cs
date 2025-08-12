@@ -69,12 +69,7 @@
 		/// <summary>
 		/// Runs if the length is not 0, 2, 3, 5 or 6 AND before the comment check.
 		/// </summary>
-		AnyLengthBeforeCommentCheck,
-
-		/// <summary>
-		/// Runs after an iteration of the token loop.
-		/// </summary>
-		AfterIteration
+		AnyLengthBeforeCommentCheck
 
 	}
 

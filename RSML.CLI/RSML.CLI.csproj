@@ -6,36 +6,7 @@
 		<Nullable>enable</Nullable>
 		<PublishAot>true</PublishAot>
 		<InvariantGlobalization>true</InvariantGlobalization>
-		<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
-		<CompilerGeneratedFilesOutputPath>Generated</CompilerGeneratedFilesOutputPath>
 	</PropertyGroup>
-	
-	<!-- COMPILED RSML
-	<UsingTask TaskName="RsmlCompileTask" AssemblyFile="..\RSML.Compiler\bin\Release\net8.0\publish\RSML.Compiler.dll" />
-	
-	<Target Name="LoadRsml" BeforeTargets="CompileRsml">
-		<ReadLinesFromFile File="MyTestFile.rsea">
-			<Output PropertyName="RsmlDoc" TaskParameter="Lines" />
-		</ReadLinesFromFile>
-		<Message Importance="high" Text="[RSML] Loaded $(RsmlDoc.Length) characters of RSML" />
-		<Message Importance="high" Text="[RSML] $(RsmlDoc)" />
-	</Target>
-	
-	<Target Name="CompileRsml" BeforeTargets="CoreCompile">
-		<Message Importance="high" Text="[RSML] Compiling RSML" />
-		<RsmlCompileTask RsmlDocument="$(RsmlDoc)" ClassName="MyAwesomeRsml">
-			<Output PropertyName="GeneratedCode" TaskParameter="GeneratedCSharpCode" />
-		</RsmlCompileTask>
-		<Message Importance="high" Text="[RSML] Generated code length: $(GeneratedCode.Length)" />
-		<WriteLinesToFile File="$(IntermediateOutputPath)_MyAwesomeRsml.g.cs"
-		                  Lines="$(GeneratedCode)"
-		                  Overwrite="true" />
-	</Target>
-	
-	<ItemGroup>
-		<Compile Include="$(IntermediateOutputPath)_MyAwesomeRsml.g.cs" />
-	</ItemGroup>
-	-->
 	
 	<ItemGroup>
 		<PackageReference Include="Spectre.Console" Version="0.50.1-preview.0.24" />

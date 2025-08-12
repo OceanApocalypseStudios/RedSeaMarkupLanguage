@@ -1,4 +1,7 @@
-﻿namespace RSML.Toolchain
+﻿using RSML.Toolchain.Compliance;
+
+
+namespace RSML.Toolchain
 {
 
 	/// <summary>
@@ -8,11 +11,9 @@
 	{
 
 		/// <summary>
-		/// The officially released version of RSML this component of the RSML toolchain is
-		/// standardized for.
-		/// If only partially standardized or no version is accurate, use <c>null</c>.
+		/// The level of compliance, per feature, this toolchain component has.
 		/// </summary>
-		string? StandardizedVersion { get; }
+		public SpecificationCompliance SpecificationCompliance { get; }
 
 	}
 

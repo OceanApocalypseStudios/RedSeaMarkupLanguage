@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 using RSML.Actions;
 using RSML.Analyzer.Semantics;
@@ -26,7 +26,7 @@ namespace RSML.Evaluation
 		/// <summary>
 		/// The special actions in use.
 		/// </summary>
-		Dictionary<string, SpecialAction> SpecialActions { get; }
+		ReadOnlyDictionary<string, SpecialAction> SpecialActions { get; }
 
 		/// <summary>
 		/// Checks if a given line of RSML is a comment.
@@ -73,7 +73,8 @@ namespace RSML.Evaluation
 		/// </summary>
 		/// <param name="name">The name of the action</param>
 		/// <param name="action">The action to register</param>
-		void RegisterSpecialAction(string name, SpecialAction action);
+		/// <returns>Self. Fluent API.</returns>
+		IEvaluator RegisterSpecialAction(string name, SpecialAction action);
 
 	}
 
