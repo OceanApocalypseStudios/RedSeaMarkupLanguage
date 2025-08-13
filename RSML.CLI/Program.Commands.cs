@@ -1,11 +1,29 @@
 ﻿using Spectre.Console;
 
+using RSML.Evaluation;
+
 
 namespace RSML.CLI
 {
 
 	internal partial class Program
 	{
+
+		public static string? CompileRsml_NoPretty(string rsml, string language, string moduleName)
+		{
+
+			var result = new Evaluator(rsml).Evaluate();
+			return language switch
+			{
+
+				"C#" => CompiledRsmlGenerator.GenerateCSharp(moduleName, result.WasMatchFound ? $"(\"{result.MatchValue!}\")" : "()"),
+				"F#" => CompiledRsmlGenerator.GenerateFSharp(moduleName, result.WasMatchFound ? $"(\"{result.MatchValue!}\")" : "()"),
+				"VB" => CompiledRsmlGenerator.GenerateVisualBasic(moduleName, result.WasMatchFound ? $"(\"{result.MatchValue!}\")" : "()"),
+				_ => null
+
+			};
+
+		}
 
 		public static int SpecificationSupport_NoPretty()
 		{

@@ -158,24 +158,24 @@ namespace RSML.Benchmarks
 		[Benchmark]
 		[BenchmarkCategory("IsComment")]
 		public void IsComment_True_Medium() =>
-			new Evaluator("# ").IsComment(
+			Evaluator.IsComment(
 				"# This is not a big comment, but also not really a small one. Either ways, this will let us test the method and benchmark it somewhat accurately."
 			);
 
 		[Benchmark]
 		[BenchmarkCategory("IsComment")]
-		public void IsComment_True_Small() => new Evaluator("# ").IsComment("# small");
+		public void IsComment_True_Small() => Evaluator.IsComment("# small");
 
 		[Benchmark]
 		[BenchmarkCategory("IsComment")]
 		public void IsComment_False_Medium() =>
-			new Evaluator("# ").IsComment(
+			Evaluator.IsComment(
 				"             * One day, I hope this string is no longer  spaced in  a weird way, but it'll let us test the IsComment() method of the     RsParser class located    in the namespace known as RSML.Parser.RsParser. Interesting,  right?"
 			);
 
 		[Benchmark]
 		[BenchmarkCategory("IsComment")]
-		public void IsComment_False_Small() => new Evaluator("# ").IsComment("not a comment");
+		public void IsComment_False_Small() => Evaluator.IsComment("not a comment");
 
 	}
 

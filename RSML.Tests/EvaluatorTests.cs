@@ -42,6 +42,16 @@ namespace RSML.Tests
 
 		}
 
+		[Theory]
+		[InlineData("#")]
+		[InlineData("#Comment")]
+		[InlineData("# ")]
+		[InlineData("# Comment")]
+		[InlineData("#                                   Comment")]
+		[InlineData("    # Still a comment")]
+		[InlineData("                                            #")]
+		public void Evaluator_IsComment(string input) => Assert.True(Evaluator.IsComment(input));
+
 		[Fact]
 		public void Evaluate_CommentWithNoTextIsStillComment()
 		{

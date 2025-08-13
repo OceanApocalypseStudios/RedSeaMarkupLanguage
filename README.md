@@ -10,12 +10,12 @@
 
 > The modern fork of [MF's Crossroad](https://github.com/MF366-Coding/MFRoad) we're sure you'll love.
 
-Below is a list of features (or reasons why RSML is better than MFRoad - call them what you want) in this markup
-language.
-
 <hr />
 
-## Coming Soon: RSML v2.0.0
+## Coming Soon*er*: RSML v2.0.0
+> [!NOTE]
+> RSML v2.0.0 is coming first as a `prerelease`. To be exact, this will be `prerelease8` with no native interop support yet.
+
 **Red Sea Markup Language v2.0.0** is currently **in the making** and will be a huge release, bringing native binding
 support into the table _(this also means AOT "friendliness")_, which will let you use RSML in Python, Go, Rust _(if
 you're about that)_, wherever you want, really _(that supports native interop)_.
@@ -25,167 +25,10 @@ mention [RSML for Python](https://github.com/OceanApocalypseStudios/RSML.Python)
 
 <hr />
 
-## Performance
-At OceanApocalypseStudios, we value performance **a lot**.
+## Programming Language Support
+RSML v2.0.0 will support native interop by exporting a C ABI, meaning it can be used in any language that supports C interop.
 
-And that's why we're pleased to announce that RSML is _TBA_.
-
-<hr />
-
-## Regex Support
-Instead of those awful `win32:any` and `any:amd64`, you have Regex support in RSML.
-
-```python
-win.+ -> "Return value"
-# ^ this literally stands for "starts with win and goes on undefinitely"
-# pure regex, as simple as it can get, eh eh
-```
-
-<hr />
-
-## More *space* to breathe
-One of the low points of MFRoad was not allowing for spaces in statements. Worry no more.
-
-```python
-# all of the below statements are valid
-win -> "valid"
-win->"valid"
-win                      ->               "valid"
-win                                 ->"valid"
-win->          "valid"
-```
-
-<hr />
-
-## Known system identifier format
-MFRoad used the poorly-documented `sys.platform` from python and, for Linux distros, the `distro` module.
-
-Since RSML is made in C#, we decided to change things up a bit: **system identifiers are now the same
-as [MSBuild Runtime Identifiers](https://learn.microsoft.com/en-us/dotnet/core/rid-catalog),** which are pretty well
-documented.
-
-<hr />
-
-## Directly in your terminal
-RSML is not just a library for .NET: you can also use it directly in your terminal.
-
-```bash
-cat somefile.rsea | RSML.CLI evaluate --no-pretty
-```
-
-> [!NOTE]
-> `--no-pretty` disables ASCII art and copyright messages so you can easily pipe the evaluation into another command
-> without it also piping the ASCII art.
-
-<hr />
-
-## Documentation build process
-You may build the documentation for RSML yourself!
-
-Just try doing this:
-
-```bash
-RSML.Docs
-```
-
-Or, if you're scared of the commandline, just run the `main.py` that's bundled with **RSML.Docs**.
-
-<hr />
-
-## Still kind of compatible?
-Yes, RSML is still kind of compatible with MFRoad. It supports MFRoad's operators as long as they're specified.
-
-It can't emulate the `any` or the `<system>:<architecture>` behavior though.
-
-<hr />
-
-## Comments
-This might be hard to take in at first but... everything that's not a statement is a comment. Yup.
-
-```python
-# this is a comment - the recommended way as these are always ignored
-// but this is technically also a valid comment
-
-in fact, any statement that does not start with special actions
-and does not have any operators
-
-yup, it's a comment
-
-the problem arises when you do things like this:
-etc etc -> etc etc
-
-problem? RSML considers that to be a valid statement because of the operator in it
-
-so my recommendation?
-# always stick with the default comments, as they're always ignored
-```
-
-<hr />
-
-## Custom actions
-MFRoad only allowed 3 actions: returning a value (primary), outputting text (secondary) and throwing an error (
-tertiary).
-
-RSML still only allows 3 main actions, but they can be customized (does not apply to the CLI).
-
-Hell, you can even customize the operators that those actions use.
-
-```c#
-using System;
-
-// ...
-
-// let's say your RSParser is at a variable named "parser"
-parser.DefineOperator(OperatorType.Primary, ";)")
-// ;) will now be your primary operator (basically, it'll replace ->)
-
-// you may also register an action
-parser.RegisterAction(OperatorType.Secondary, (_, argument) => Console.WriteLine(argument));
-// _ is a parameter of type RSParser. I've discarded it as we don't need it
-// argument is a string
-
-// you can register actions only for secondary, tertiary and special operators
-// the primary action cannot be redefined - it's always the return action
-```
-
-<hr />
-
-## Special Actions
-Special actions are also a new thing.
-
-```ruby
-@MySpecialAction TheArgument # arguments here cannot contain any spaces
-```
-
-There is only one built-in special action, an argument-less one. All of the others must be defined for them to work.
-
-```ruby
-@EndAll # the only built-in special action in RSML
-```
-
-You may define special actions but keep in mind they take 2 arguments, like normal main actions but also return a value,
-of type `byte`.
-
-```c#
-parser.RegisterSpecialFunction("TestFunc", (_, _) => 251);
-// 251 is a special return code that removes all defined special actions (except for @EndAll)
-// other special return codes are 250 and 252
-```
-
-This `TestFunc` can then be used in RSML.
-
-```ruby
-@TestFunc
-@MySpecial
-# even if MySpecial was defined, it'll become undefined after @TestFunc
-```
-
-<hr />
-
-## What about other languages?
-*~~As for right now, we don't intend in porting RSML library to other languages, but~~* You could include the DLLs in
-your project and call them.
-Not a graceful solution, but not a bad one either.
+However, to make it easier for people who are unexperienced with C, we plan on creating packages for popular languages so people can use high-level APIs instead of having to struggle with DLLs.
 
 <table>
 	<!-- Header -->
@@ -221,10 +64,10 @@ Not a graceful solution, but not a bad one either.
 			-->
 		</td>
 		<td>
-			✔ RSML is intended for use in C#.
+			✔ As a pre-release.
 		</td>
 		<td>
-			🟡 <a href="https://oceanapocalypsestudios.github.io/rsml-docs/api/csharp/">In the making</a>
+			🔴 <a href="https://oceanapocalypsestudios.github.io/rsml-docs/api/csharp/">Out-of-date</a>
 		</td>
 		<td>
 			✔
@@ -241,22 +84,22 @@ Not a graceful solution, but not a bad one either.
 	</tr>
 	<tr>
 		<td>
-			<img src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/refs/heads/master/icons/file_type_python.svg" alt="Python 3" width="80" />
+			<img src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/refs/heads/master/icons/file_type_fsharp.svg" alt="F#" width="80" />
 		</td>
 		<td>
-			✔ Since June 12, 2025.
+			✔ As a pre-release.
 		</td>
 		<td>
-			🟡 <a href="https://oceanapocalypsestudios.github.io/rsml-docs/api/python/">In the making</a>
+			🟣 No specific documentation planned (refer to <strong>RSML for C#</strong> docs).
 		</td>
 		<td>
 			✔
 		</td>
 		<td>
-			<a href="https://pypi.org/project/rsml-python/">PyPI</a>
+			<a href="https://www.nuget.org/packages/RSML">NuGet</a>
 		</td>
 		<td>
-			<a href="https://github.com/OceanApocalypseStudios/RSML.Python">Visit</a>
+			<a href="https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage">Visit</a>
 		</td>
 		<td>
 			---
@@ -264,7 +107,30 @@ Not a graceful solution, but not a bad one either.
 	</tr>
 	<tr>
 		<td>
-			<img src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/refs/heads/master/icons/file_type_cpp.svg" alt="C++" width="80" />
+			<img src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/refs/heads/master/icons/file_type_vb.svg" alt="Visual Basic.NET" width="80" />
+		</td>
+		<td>
+			✔ As a pre-release.
+		</td>
+		<td>
+			🟣 No specific documentation planned (refer to <strong>RSML for C#</strong> docs).
+		</td>
+		<td>
+			✔
+		</td>
+		<td>
+			<a href="https://www.nuget.org/packages/RSML">NuGet</a>
+		</td>
+		<td>
+			<a href="https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage">Visit</a>
+		</td>
+		<td>
+			---
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<img src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/refs/heads/master/icons/file_type_c.svg" alt="C" width="80" />
 		</td>
 		<td>
 			❌
@@ -287,7 +153,7 @@ Not a graceful solution, but not a bad one either.
 	</tr>
 	<tr>
 		<td>
-			<img src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/refs/heads/master/icons/file_type_c.svg" alt="C" width="80" />
+			<img src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/refs/heads/master/icons/file_type_cpp.svg" alt="C++" width="80" />
 		</td>
 		<td>
 			❌
@@ -333,28 +199,70 @@ Not a graceful solution, but not a bad one either.
 	</tr>
 	<tr>
 		<td>
-			<img src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/refs/heads/master/icons/file_type_vb.svg" alt="Visual Basic.NET" width="80" />
+			<img src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/refs/heads/master/icons/file_type_python.svg" alt="Python 3" width="80" />
 		</td>
 		<td>
-			⚠ Not tested but should be compatible with the C# package, since they're both .NET languages.
+			❌ Is not compliant with the new API.
 		</td>
 		<td>
-			🟣 No specific documentation planned (refer to RSML for C# docs).
+			🔴 <a href="https://oceanapocalypsestudios.github.io/rsml-docs/api/python/">Out-of-date</a>
 		</td>
 		<td>
-			⚠ Hasn't been officially tested on VB.NET, but yes.
+			✔
 		</td>
 		<td>
-			<a href="https://www.nuget.org/packages/RSML">NuGet</a>
+			<a href="https://pypi.org/project/rsml-python/">PyPI</a>
 		</td>
 		<td>
-			<a href="https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage">Visit</a>
+			<a href="https://github.com/OceanApocalypseStudios/RSML.Python">Visit</a>
 		</td>
 		<td>
 			---
 		</td>
 	</tr>
 </table>
+
+<hr />
+
+## Performance
+At OceanApocalypseStudios, we value performance.
+
+Below is a comparison between the first benchmark of v2.0.0-prerelease8 and the latest one.
+
+### The Before
+| Friendly Name                                                                  | Method Name                  | Mean (ns)    | Error (ns)    | Gen 0     | Gen 1    | Gen 2    | Allocs    |
+|------------------------------------------------------------------------------- |----------------------------- |-------------:|--------------:|----------:|---------:|---------:|----------:|
+| Creation of a new evaluator and accessing its `Content` property (1 line)      | ContentProperty SmallContent |        279.1 |        722.46 |    0.2789 |        - |        - |     584 B |
+| Creation of a new evaluator and accessing its `Content` property (10000 lines) | ContentProperty LargeContent |    405,550.6 |    117,660.61 |  110.8398 | 110.8398 | 110.8398 |  350181 B |
+| Evaluating 1 line of RSML                                                      | Evaluate SmallContent        |      5,287.5 |        378.29 |    2.0752 |        - |        - |    4352 B |
+| Evaluating 100 lines of RSML                                                   | Evaluate MediumContent       |     98,444.7 |     40,498.33 |   40.6494 |        - |        - |   85256 B |
+| Evaluating 10000 lines of RSML                                                 | Evaluate LargeContent        | 11,233,432.8 | 12,026,706.66 | 4015.6250 | 109.3750 | 109.3750 | 8747973 B |
+| Evaluating 500 lines of RSML, but with mixed statements                        | Evaluate ComplexContent      |  1,049,512.7 |    364,556.17 |  451.1719 |        - |        - |  943960 B |
+| Checking if a short line is a comment                                          | IsComment True_Medium        |        109.3 |         28.13 |    0.1109 |        - |        - |     232 B |
+| Checking if an extremely short line is a comment                               | IsComment True_Small         |        111.9 |         65.24 |    0.1109 |        - |        - |     232 B |
+| Checking if a short line is a comment                                          | IsComment False_Medium       |        124.9 |         71.19 |    0.1109 |        - |        - |     232 B |
+| Checking if an extremely short line is a comment                               | IsComment False_Small        |        184.0 |      1,105.59 |    0.1109 |        - |        - |     232 B |
+
+### The After
+| Friendly Name                                                                  | Method                       | Mean             | Error            | Gen 0     | Allocated |
+|------------------------------------------------------------------------------- |----------------------------- |-----------------:|-----------------:|----------:|----------:|
+| Creation of a new evaluator and accessing its `Content` property (1 line)      | ContentProperty SmallContent |       193.142 ns |     1,229.594 ns |    0.1605 |     336 B |
+| Creation of a new evaluator and accessing its `Content` property (10000 lines) | ContentProperty LargeContent |       128.318 ns |       237.470 ns |    0.1605 |     336 B |
+| Evaluating 1 line of RSML                                                      | Evaluate SmallContent        |     5,047.466 ns |     6,844.805 ns |    1.4343 |    3000 B |
+| Evaluating 100 lines of RSML                                                   | Evaluate MediumContent       |   110,423.043 ns |   290,075.337 ns |   30.6396 |   64240 B |
+| Evaluating 10000 lines of RSML                                                 | Evaluate LargeContent        | 9,369,561.458 ns | 2,808,413.891 ns | 3078.1250 | 6440560 B |
+| Evaluating 500 lines of RSML, but with mixed statements                        | Evaluate ComplexContent      | 1,281,701.042 ns | 1,287,522.972 ns |  292.9688 |  613328 B |
+| Checking if a short line is a comment                                          | IsComment True_Medium        |         7.858 ns |         2.828 ns |         - |         - |
+| Checking if an extremely short line is a comment                               | IsComment True_Small         |         7.615 ns |         3.161 ns |         - |         - |
+| Checking if a short line is a comment                                          | IsComment False_Medium       |        24.107 ns |         4.930 ns |         - |         - |
+| Checking if an extremely short line is a comment                               | IsComment False_Small        |         6.202 ns |        16.032 ns |         - |         - |
+
+### Our Next Goals for Performance
+We plan on reducing the amount of allocated bytes, as well as reducing the time it takes for a large buffer.
+
+However, considering most RSML files are up to 100 lines long, these times are good enough for a pre-release.
+
+In the future, we may create an external package called `RSML.Performance` which will contain toolchain components as `ref structs`, at the cost of less control over the toolchain (such as not being able to use middlewares).
 
 <hr />
 

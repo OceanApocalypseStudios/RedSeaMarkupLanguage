@@ -71,13 +71,13 @@ namespace RSML.Evaluation
 		/// Creates a new instance of a RSML evaluator.
 		/// </summary>
 		/// <param name="content">The document</param>
-		public Evaluator(ReadOnlySpan<char> content) { Content = $"{content.ToString().ReplaceLineEndings()}{Environment.NewLine}"; }
+		public Evaluator(ReadOnlySpan<char> content) { Content = content.ToString(); }
 
 		/// <summary>
 		/// Creates a new instance of a RSML evaluator.
 		/// </summary>
 		/// <param name="content">The document</param>
-		public Evaluator(string content) { Content = $"{content.ReplaceLineEndings()}{Environment.NewLine}"; }
+		public Evaluator(string content) { Content = content; }
 
 		/// <inheritdoc />
 		public SpecificationCompliance SpecificationCompliance => SpecificationCompliance.CreateFull(ApiVersion);
@@ -245,11 +245,11 @@ namespace RSML.Evaluation
 		}
 
 		/// <inheritdoc />
-		public bool IsComment(ReadOnlySpan<char> line) =>
+		public static bool IsComment(ReadOnlySpan<char> line) =>
 			line.TrimStart()[0] == '#' && !(line.IsEmpty || line.IsWhiteSpace() || line.IsNewLinesOnly());
 
 		/// <inheritdoc />
-		public bool IsComment(string line) => IsComment(line.AsSpan());
+		public static bool IsComment(string line) => IsComment(line.AsSpan());
 
 		/// <inheritdoc />
 		public IEvaluator RegisterSpecialAction(string name, SpecialAction action)
@@ -358,6 +358,9 @@ namespace RSML.Evaluation
 						continue;
 
 					case 3:
+						if (tokens[1].Value == "EndAll")
+							continue;
+
 						byte result = HandleSpecialActionCall(tokens[1].Value, tokens[2].Value);
 
 						switch (result)
@@ -426,8 +429,7 @@ namespace RSML.Evaluation
 			evaluatorMiddlewares.TryGetValue(location, out var value)
 				? value
 				  .Select(middleware => middleware.Invoke(tokens))
-				  .FirstOrDefault(result => result != MiddlewareResult.ContinueEvaluation
-				  )
+				  .FirstOrDefault(result => result != MiddlewareResult.ContinueEvaluation)
 				: MiddlewareResult.ContinueEvaluation;
 
 		private byte HandleSpecialActionCall(string name, string? arg)

@@ -33,14 +33,14 @@ namespace RSML.Evaluation
 		/// </summary>
 		/// <param name="line">The line</param>
 		/// <returns><c>true</c> if comment</returns>
-		bool IsComment(ReadOnlySpan<char> line);
+		static abstract bool IsComment(ReadOnlySpan<char> line);
 
 		/// <summary>
 		/// Checks if a given line of RSML is a comment.
 		/// </summary>
 		/// <param name="line">The line</param>
 		/// <returns><c>true</c> if comment</returns>
-		bool IsComment(string line);
+		static abstract bool IsComment(string line);
 
 		/// <summary>
 		/// Evaluates the RSML document with the machine's data.

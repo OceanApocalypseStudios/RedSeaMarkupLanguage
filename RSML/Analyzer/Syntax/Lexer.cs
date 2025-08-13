@@ -85,7 +85,7 @@ namespace RSML.Analyzer.Syntax
 
 				case '#':
 					yield return new(TokenKind.CommentSymbol, '#');
-					yield return new(TokenKind.CommentText, line[++pos..]);
+					yield return new(TokenKind.CommentText, line.AsSpan()[++pos..]);
 					yield return new(TokenKind.Eol, Environment.NewLine);
 
 					yield break;
@@ -155,32 +155,23 @@ namespace RSML.Analyzer.Syntax
 			if (chars.IsEquals("defined"))
 				return new(TokenKind.DefinedKeyword, "defined");
 
-			if (chars.IsEquals(
-					StringComparison.OrdinalIgnoreCase, "windows", "osx", "linux", "freebsd",
-					"debian", "ubuntu", "archlinux", "fedora"
+			if (chars.IsAsciiEqualsIgnoreCase_10(
+					"windows", "osx", "linux", "freebsd", "debian",
+					"ubuntu", "archlinux", "fedora"
 				))
 				return new(TokenKind.SystemName, chars);
 
-			if (chars.IsEquals(
-					StringComparison.OrdinalIgnoreCase, "x64", "x86", "arm32", "arm64",
-					"loongarch64"
-				))
+			if (chars.IsAsciiEqualsIgnoreCase_5("x64", "x86", "arm32", "arm64", "loongarch64"))
 				return new(TokenKind.ArchitectureIdentifier, chars);
 
 			if (Int32.TryParse(chars, out int result))
 				return new(TokenKind.MajorVersionId, result.ToString());
 
-			if (chars.IsEquals(
-					StringComparison.Ordinal, "==", "!=", "<", ">",
-					"<=", ">="
+			if (chars.IsEquals_8(
+					"==", "!=", "<", ">", "<=",
+					">="
 				))
 			{
-
-				#region Pragmas
-
-				#pragma warning disable CS8509 // The switch expression does not handle all possible values of its input type (it is not exhaustive).
-
-				#endregion
 
 				if (chars.IsEquals("=="))
 					return new(TokenKind.Equals, chars);
@@ -199,12 +190,6 @@ namespace RSML.Analyzer.Syntax
 
 				if (chars.IsEquals("<="))
 					return new(TokenKind.LessOrEqualsThan, chars);
-
-				#region Pragmas
-
-				#pragma warning restore CS8509 // The switch expression does not handle all possible values of its input type (it is not exhaustive).
-
-				#endregion
 
 			}
 

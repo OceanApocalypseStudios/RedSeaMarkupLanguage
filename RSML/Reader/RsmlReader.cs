@@ -26,13 +26,13 @@ namespace RSML.Reader
 		/// Initializes a RSML reader.
 		/// </summary>
 		/// <param name="source">A span of characters as input</param>
-		public RsmlReader(ReadOnlySpan<char> source) { this.source = source.ToString().ReplaceLineEndings(); }
+		public RsmlReader(ReadOnlySpan<char> source) { this.source = source.ToString(); }
 
 		/// <summary>
 		/// Initializes a RSML reader.
 		/// </summary>
 		/// <param name="source">A string as input</param>
-		public RsmlReader(string source) { this.source = source.ReplaceLineEndings(); }
+		public RsmlReader(string source) { this.source = source; }
 
 		/// <inheritdoc />
 		public SpecificationCompliance SpecificationCompliance => SpecificationCompliance.CreateFull(ApiVersion);
@@ -51,7 +51,7 @@ namespace RSML.Reader
 			}
 
 			var span = source.AsSpan(curIndex);
-			int nextNewline = span.IndexOf(Environment.NewLine);
+			int nextNewline = span.IndexOfNewline(out var newlineLen);
 
 			ReadOnlySpan<char> lineSpan;
 			int advancedBy;
@@ -67,7 +67,7 @@ namespace RSML.Reader
 			{
 
 				lineSpan = span[..nextNewline];
-				advancedBy = nextNewline + 1;
+				advancedBy = nextNewline + newlineLen; // handle CRLF and LF
 
 			}
 

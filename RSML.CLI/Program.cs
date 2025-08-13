@@ -64,6 +64,42 @@ namespace RSML.CLI
 			rootCommand.Options.Add(disableAnsiOpt);
 			rootCommand.Options.Add(versionOpt);
 
+			Command generateCmd = new("generate", "Generate \"compiled\" RSML for C#, F# or Visual Basic");
+
+			var languageOpt = new Option<string>("--language")
+			{
+
+				Description = "The language to generate for.",
+				DefaultValueFactory = _ => "C#",
+
+			}.AcceptOnlyFromAmong("C#", "F#", "VB");
+			languageOpt.Aliases.Add("--dotnet-lang");
+			languageOpt.Aliases.Add("-L");
+
+			Option<string> moduleNameOpt = new("--module-name")
+			{
+
+				Description = "The name of the static class (C#) or module (VB/F#) that will contain the generated code.",
+				DefaultValueFactory = _ => "GeneratedRsml",
+
+			};
+			moduleNameOpt.Aliases.Add("--class-name");
+			moduleNameOpt.Aliases.Add("-M");
+
+			generateCmd.Options.Add(languageOpt);
+			generateCmd.Options.Add(moduleNameOpt);
+
+			generateCmd.SetAction(result =>
+				{
+
+					Console.WriteLine(CompileRsml_NoPretty(Console.In.ReadToEnd(), result.GetValue(languageOpt) ?? "InvalidValue", result.GetValue(moduleNameOpt) ?? "GeneratedRsml"));
+					return 0;
+
+				}
+			);
+
+			rootCommand.Add(generateCmd);
+
 			rootCommand.SetAction(result =>
 				{
 
