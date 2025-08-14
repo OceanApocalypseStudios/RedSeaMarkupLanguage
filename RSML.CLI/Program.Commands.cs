@@ -1,6 +1,7 @@
 ﻿using Spectre.Console;
 
 using RSML.Evaluation;
+using RSML.Machine;
 
 
 namespace RSML.CLI
@@ -8,6 +9,23 @@ namespace RSML.CLI
 
 	internal partial class Program
 	{
+
+		public static void LocalMachineInfo_Pretty() => LocalMachineOutput.AsPrettyText(new());
+
+		public static string? LocalMachineInfo_NoPretty(string outputFormat)
+		{
+
+			LocalMachine machine = new();
+			return outputFormat switch
+			{
+
+				"PlainText" => LocalMachineOutput.AsPlainText(machine),
+				"JSON" => LocalMachineOutput.AsJson(machine),
+				_ => null
+
+			};
+
+		}
 
 		public static string? CompileRsml_NoPretty(string rsml, string language, string moduleName)
 		{

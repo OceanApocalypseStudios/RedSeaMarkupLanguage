@@ -62,7 +62,7 @@ namespace RSML.Machine
 					// this technically can also be Windows 10
 					// but Windows 10 usually has CurrentMajorVersionNumber, so THAT has greater priority
 
-					SystemVersion = 8; // technically Windows 8.1, but we only care about major
+					SystemVersion = 9; // yes, Windows 8.1 will be 9 in this case, cuz no decimals
 
 					return;
 

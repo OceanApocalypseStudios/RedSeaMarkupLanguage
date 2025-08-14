@@ -18,6 +18,8 @@ namespace RSML.CLI
 		private static async Task<int> Main(string[] args)
 		{
 
+			#region Global Options
+
 			Option<bool> versionOpt = new("--version")
 			{
 
@@ -47,6 +49,10 @@ namespace RSML.CLI
 
 			disableAnsiOpt.Aliases.Add("--no-colors");
 
+			#endregion
+
+			#region RootCommand Setup
+
 			RootCommand rootCommand = new("Red Sea Markup Language CLI");
 
 			var helpVersionOpt = rootCommand.Options.FirstOrDefault(o => o is HelpOption);
@@ -63,6 +69,59 @@ namespace RSML.CLI
 			rootCommand.Options.Add(specSupportOpt);
 			rootCommand.Options.Add(disableAnsiOpt);
 			rootCommand.Options.Add(versionOpt);
+
+			#endregion
+
+			#region Machine Command
+
+			Command machineCmd = new("machine", "Gets information about the current machine");
+
+			var outputFormatMOpt = new Option<string>("--output-format")
+			{
+
+				Description = "The format to output as.",
+				DefaultValueFactory = _ => "PlainText",
+
+			}.AcceptOnlyFromAmong("PlainText", "JSON");
+			outputFormatMOpt.Aliases.Add("--format");
+			outputFormatMOpt.Aliases.Add("-o");
+
+			machineCmd.Options.Add(outputFormatMOpt);
+			machineCmd.Options.Add(disableAnsiOpt);
+
+			machineCmd.SetAction(result =>
+			{
+
+				var format = result.GetValue(outputFormatMOpt);
+
+				if (result.GetValue(disableAnsiOpt) || format == "JSON")
+				{
+
+					var x = LocalMachineInfo_NoPretty(
+								format ?? "InvalidValue"
+							);
+
+					if (x is not null)
+						Console.WriteLine(x);
+
+					return x is not null ? 0 : 1;
+
+				}
+
+				if (format == "PlainText")
+					LocalMachineInfo_Pretty(); // eh eh
+				else
+					return 1;
+
+				return 0;
+
+			});
+
+			rootCommand.Add(machineCmd);
+
+			#endregion
+
+			#region Generate Command
 
 			Command generateCmd = new("generate", "Generate \"compiled\" RSML for C#, F# or Visual Basic");
 
@@ -88,6 +147,7 @@ namespace RSML.CLI
 
 			generateCmd.Options.Add(languageOpt);
 			generateCmd.Options.Add(moduleNameOpt);
+			generateCmd.Options.Add(disableAnsiOpt);
 
 			generateCmd.SetAction(result =>
 				{
@@ -99,6 +159,8 @@ namespace RSML.CLI
 			);
 
 			rootCommand.Add(generateCmd);
+
+			#endregion
 
 			rootCommand.SetAction(result =>
 				{
