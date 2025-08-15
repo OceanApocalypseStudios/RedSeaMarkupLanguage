@@ -1,8 +1,11 @@
 ﻿using System;
 using System.CommandLine;
 using System.CommandLine.Help;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+
+using RSML.CLI.Helpers;
 
 using Spectre.Console;
 
@@ -14,6 +17,10 @@ namespace RSML.CLI
 	{
 
 		public const string LanguageVersion = "v2.0.0";
+
+		public static string? fSharpLogo;
+		public static string? cSharpLogo;
+		public static string? visualBasicLogo;
 
 		private static async Task<int> Main(string[] args)
 		{
@@ -74,49 +81,121 @@ namespace RSML.CLI
 
 			#region Machine Command
 
-			Command machineCmd = new("machine", "Gets information about the current machine");
+			Command machineCmd = new("machine", "Handles machines");
+
+			Command createMachineCmd = new("create", "Creates a new machine");
+			Command getMachineDataCmd = new("get", "Gets the current machine");
 
 			var outputFormatMOpt = new Option<string>("--output-format")
 			{
 
 				Description = "The format to output as.",
-				DefaultValueFactory = _ => "PlainText",
+				DefaultValueFactory = _ => "PlainText"
 
 			}.AcceptOnlyFromAmong("PlainText", "JSON");
+
 			outputFormatMOpt.Aliases.Add("--format");
 			outputFormatMOpt.Aliases.Add("-o");
 
-			machineCmd.Options.Add(outputFormatMOpt);
-			machineCmd.Options.Add(disableAnsiOpt);
-
-			machineCmd.SetAction(result =>
+			Option<string?> systemNameOpt = new("--system-name")
 			{
 
-				var format = result.GetValue(outputFormatMOpt);
+				Description = "The name of the operating system.",
+				DefaultValueFactory = _ => null
 
-				if (result.GetValue(disableAnsiOpt) || format == "JSON")
+			};
+
+			systemNameOpt.Aliases.Add("-S");
+
+			Option<string?> linuxNameOpt = new("--distro-name")
+			{
+
+				Description = "The name of the Linux distribution.",
+				DefaultValueFactory = _ => null
+
+			};
+
+			linuxNameOpt.Aliases.Add("-D");
+
+			Option<string?> linuxFamilyOpt = new("--distro-family")
+			{
+
+				Description = "The family of the Linux distribution.",
+				DefaultValueFactory = _ => null
+
+			};
+
+			linuxFamilyOpt.Aliases.Add("-F");
+
+			Option<string?> procArchOpt = new("--processor-architecture")
+			{
+
+				Description = "The architecture of the processor.",
+				DefaultValueFactory = _ => null
+
+			};
+
+			procArchOpt.Aliases.Add("-P");
+
+			Option<int> sysVersionOpt = new("--system-version")
+			{
+
+				Description = "The operating system's version.",
+				DefaultValueFactory = _ => -1
+
+			};
+
+			sysVersionOpt.Aliases.Add("-V");
+
+			createMachineCmd.Options.Add(disableAnsiOpt);
+			createMachineCmd.Options.Add(systemNameOpt);
+			createMachineCmd.Options.Add(sysVersionOpt);
+			createMachineCmd.Options.Add(linuxNameOpt);
+			createMachineCmd.Options.Add(linuxFamilyOpt);
+			createMachineCmd.Options.Add(procArchOpt);
+			createMachineCmd.Options.Add(outputFormatMOpt);
+
+			getMachineDataCmd.Options.Add(outputFormatMOpt);
+			getMachineDataCmd.Options.Add(disableAnsiOpt);
+
+			createMachineCmd.SetAction(result =>
 				{
 
-					var x = LocalMachineInfo_NoPretty(
-								format ?? "InvalidValue"
-							);
+					string? distroName = result.GetValue(linuxNameOpt);
+					string? sysName = distroName is not null ? "linux" : result.GetValue(systemNameOpt);
 
-					if (x is not null)
-						Console.WriteLine(x);
+					string? distroFamily = (sysName?.Equals("linux", StringComparison.OrdinalIgnoreCase) ?? false)
+											   ? result.GetValue(linuxFamilyOpt)
+											   : null;
 
-					return x is not null ? 0 : 1;
+					string? processorArch = result.GetValue(procArchOpt);
+					int sysVersion = result.GetValue(sysVersionOpt);
+
+					return GetMachine(
+						result,
+						(sysName?.Equals("linux", StringComparison.OrdinalIgnoreCase) ?? false)
+							? new(distroName, distroFamily, processorArch, sysVersion)
+							: new(sysName, processorArch, sysVersion),
+						result.GetValue(disableAnsiOpt), result.GetValue(outputFormatMOpt)
+					);
 
 				}
+			);
 
-				if (format == "PlainText")
-					LocalMachineInfo_Pretty(); // eh eh
-				else
+			getMachineDataCmd.SetAction(result => GetMachine(result, new(), result.GetValue(disableAnsiOpt), result.GetValue(outputFormatMOpt)));
+
+			machineCmd.SetAction(_ =>
+				{
+
+					Console.WriteLine("Use one of machine command's subcommands.");
+
 					return 1;
 
-				return 0;
+				}
+			);
 
-			});
-
+			machineCmd.Add(createMachineCmd);
+			machineCmd.Add(getMachineDataCmd);
 			rootCommand.Add(machineCmd);
 
 			#endregion
@@ -129,19 +208,21 @@ namespace RSML.CLI
 			{
 
 				Description = "The language to generate for.",
-				DefaultValueFactory = _ => "C#",
+				DefaultValueFactory = _ => "C#"
 
 			}.AcceptOnlyFromAmong("C#", "F#", "VB");
+
 			languageOpt.Aliases.Add("--dotnet-lang");
-			languageOpt.Aliases.Add("-L");
+			languageOpt.Aliases.Add("-l");
 
 			Option<string> moduleNameOpt = new("--module-name")
 			{
 
 				Description = "The name of the static class (C#) or module (VB/F#) that will contain the generated code.",
-				DefaultValueFactory = _ => "GeneratedRsml",
+				DefaultValueFactory = _ => "GeneratedRsml"
 
 			};
+
 			moduleNameOpt.Aliases.Add("--class-name");
 			moduleNameOpt.Aliases.Add("-M");
 
@@ -152,7 +233,93 @@ namespace RSML.CLI
 			generateCmd.SetAction(result =>
 				{
 
-					Console.WriteLine(CompileRsml_NoPretty(Console.In.ReadToEnd(), result.GetValue(languageOpt) ?? "InvalidValue", result.GetValue(moduleNameOpt) ?? "GeneratedRsml"));
+					bool disableAnsi = result.GetValue(disableAnsiOpt);
+					string? language = result.GetValue(languageOpt);
+
+					string compilerOutput = CompileRsml_NoPretty(
+												Console.In.ReadToEnd(), language ?? "InvalidValue", result.GetValue(moduleNameOpt) ?? "GeneratedRsml"
+											) ??
+											"//Failed to generate compiled RSML!";
+
+					if (language is not null && !disableAnsi)
+					{
+
+						int colWidth = (Console.BufferWidth - 8) / 2;
+
+						switch (language)
+						{
+
+							case "C#":
+								if (cSharpLogo is null)
+								{
+									using AsciiImage img = new(Path.Join(AppContext.BaseDirectory, "InternalAssets", "csharp-logo.png"));
+
+									cSharpLogo = img.GetRenderable(60, 50);
+
+								}
+
+								var grid1 = new Grid()
+											.AddColumns(new GridColumn().Width(colWidth), new GridColumn().Width(colWidth))
+											.AddRow(
+												new Markup(cSharpLogo).Centered(),
+												new Text(compilerOutput)
+											)
+											.Expand();
+
+								AnsiConsole.Write(grid1);
+
+								return 0;
+
+							case "F#":
+								if (fSharpLogo is null)
+								{
+
+									using AsciiImage img = new(Path.Join(AppContext.BaseDirectory, "InternalAssets", "fsharp-logo.png"));
+
+									fSharpLogo = img.GetRenderable(60, 50);
+
+								}
+
+								var grid2 = new Grid()
+											.AddColumns(new GridColumn().Width(colWidth), new GridColumn().Width(colWidth))
+											.AddRow(
+												new Markup(fSharpLogo).Centered(),
+												new Text(compilerOutput)
+											)
+											.Expand();
+
+								AnsiConsole.Write(grid2);
+
+								return 0;
+
+							case "VB":
+								if (visualBasicLogo is null)
+								{
+
+									using AsciiImage img = new(Path.Join(AppContext.BaseDirectory, "InternalAssets", "vbnet-logo.png"));
+
+									visualBasicLogo = img.GetRenderable(60, 50);
+
+								}
+
+								var grid3 = new Grid()
+											.AddColumns(new GridColumn().Width(colWidth), new GridColumn().Width(colWidth))
+											.AddRow(
+												new Markup(visualBasicLogo).Centered(),
+												new Text(compilerOutput)
+											)
+											.Expand();
+
+								AnsiConsole.Write(grid3);
+
+								return 0;
+
+						}
+
+					}
+
+					Console.WriteLine(compilerOutput);
+
 					return 0;
 
 				}

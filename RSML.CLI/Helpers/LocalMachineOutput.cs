@@ -1,0 +1,130 @@
+﻿using System;
+using System.Text;
+
+using RSML.Machine;
+
+using Spectre.Console;
+
+
+namespace RSML.CLI.Helpers
+{
+
+	internal static class LocalMachineOutput
+	{
+
+		public static string AsJson(LocalMachine machine)
+		{
+
+			string systemVersion = machine.SystemVersion == -1 ? "null" : machine.SystemVersion.ToString();
+
+			return $$"""
+					 {
+					 	"system": {
+					 		"name": {{machine.SystemName ?? "null"}},
+					 		"version" : {{systemVersion}}
+					 	},
+					 	"linuxDistro": {
+					 		"name": {{machine.DistroName ?? "null"}},
+					 		"family": {{machine.DistroFamily ?? "null"}}
+					 	},
+					 	"processor": {
+					 		"architecture": {{machine.ProcessorArchitecture ?? "null"}}
+					 	}
+					 }
+					 """;
+
+		}
+
+		public static string AsPlainText(LocalMachine machine)
+		{
+
+			string systemVersion = (machine.SystemName?.Equals("windows", StringComparison.OrdinalIgnoreCase) ?? false)
+									   ? machine.SystemVersion switch
+									   {
+
+										   6                  => "Vista",
+										   7 or 8 or 10 or 11 => machine.SystemVersion.ToString(),
+										   9                  => "8.1",
+										   _                  => "Unknown"
+
+									   }
+									   : machine.SystemVersion.ToString();
+
+			if (machine.SystemVersion == -1)
+				systemVersion = "Unknown";
+
+			return new StringBuilder()
+				   .AppendLine($"System Name: {(machine.SystemName ?? "Unknown").Capitalize()}")
+				   .AppendLine($"System Version: {systemVersion}")
+				   .AppendLine()
+				   .AppendLine($"Distro Name: {(machine.DistroName ?? "Unknown").Capitalize()}")
+				   .AppendLine($"Distro Family: {(machine.DistroFamily ?? "Unknown").Capitalize()}")
+				   .AppendLine()
+				   .AppendLine($"Processor Architecture: {machine.ProcessorArchitecture ?? "Unknown"}")
+				   .ToString();
+
+		}
+
+		public static void AsPrettyText(LocalMachine machine)
+		{
+
+			string systemVersion = (machine.SystemName?.Equals("windows", StringComparison.OrdinalIgnoreCase) ?? false)
+									   ? machine.SystemVersion switch
+									   {
+
+										   6                  => "Vista",
+										   7 or 8 or 10 or 11 => machine.SystemVersion.ToString(),
+										   9                  => "8.1",
+										   _                  => "Unknown"
+
+									   }
+									   : machine.SystemVersion.ToString();
+
+			if (machine.SystemVersion == -1)
+				systemVersion = "Unknown";
+
+			AnsiConsole.Write(
+				new Panel(
+					new Rows(
+						new Panel(
+							new Columns(
+								new Panel(
+									new Rows(
+										new Markup("[yellow]Operating System[/]"),
+										new Markup($"[white]Name:[/] [grey]{(machine.SystemName ?? "Unknown").Capitalize()}[/]"),
+										new Markup($"[white]Version:[/] [grey]{systemVersion}[/]")
+									)
+								).Expand(),
+								new Panel(
+									new Rows(
+										new Markup(
+											"[green]Linux Distribution[/] [grey](if applicable)[/]",
+											(machine.SystemName?.Equals("linux", StringComparison.OrdinalIgnoreCase) ?? false) ? null : new(null, null, Decoration.Strikethrough)
+										),
+										new Markup(
+											$"[white]Family:[/] [grey]{(machine.DistroFamily ?? "Unknown").Capitalize()}[/]",
+											(machine.SystemName?.Equals("linux", StringComparison.OrdinalIgnoreCase) ?? false) ? null : new(null, null, Decoration.Strikethrough)
+										),
+										new Markup(
+											$"[white]Name:[/] [grey]{(machine.DistroName ?? "Unknown").Capitalize()}[/]",
+											(machine.SystemName?.Equals("linux", StringComparison.OrdinalIgnoreCase) ?? false) ? null : new(null, null, Decoration.Strikethrough)
+										)
+									)
+								).Expand()
+							)
+						).Expand(),
+						new Panel(
+							new Rows(
+								new Markup("[cyan]Processor[/]"),
+								new Markup($"[white]Architecture:[/] [grey]{machine.ProcessorArchitecture ?? "Unknown"}[/]")
+							)
+						).Expand()
+					)
+				).Expand()
+			);
+
+		}
+
+	}
+
+}

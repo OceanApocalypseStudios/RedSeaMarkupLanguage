@@ -1,7 +1,12 @@
-﻿using Spectre.Console;
+﻿using System;
+using System.CommandLine;
 
+using RSML.CLI.Helpers;
 using RSML.Evaluation;
+using RSML.Exceptions;
 using RSML.Machine;
+
+using Spectre.Console;
 
 
 namespace RSML.CLI
@@ -10,34 +15,73 @@ namespace RSML.CLI
 	internal partial class Program
 	{
 
-		public static void LocalMachineInfo_Pretty() => LocalMachineOutput.AsPrettyText(new());
-
-		public static string? LocalMachineInfo_NoPretty(string outputFormat)
+		public static int GetMachine(ParseResult result, LocalMachine machine, bool disableAnsi, string? format)
 		{
 
-			LocalMachine machine = new();
-			return outputFormat switch
+			if (disableAnsi || format == "JSON")
+			{
+
+				string? x = LocalMachineInfo_NoPretty(machine, format ?? "InvalidValue");
+
+				if (x is not null)
+					Console.WriteLine(x);
+
+				return x is not null ? 0 : 1;
+
+			}
+
+			if (format == "PlainText")
+				LocalMachineInfo_Pretty(machine); // eh eh
+			else
+				return 1;
+
+			return 0;
+
+		}
+
+		public static void LocalMachineInfo_Pretty(LocalMachine machine) => LocalMachineOutput.AsPrettyText(machine);
+
+		public static string? LocalMachineInfo_NoPretty(LocalMachine machine, string outputFormat) =>
+			outputFormat switch
 			{
 
 				"PlainText" => LocalMachineOutput.AsPlainText(machine),
-				"JSON" => LocalMachineOutput.AsJson(machine),
-				_ => null
+				"JSON"      => LocalMachineOutput.AsJson(machine),
+				_           => null
 
 			};
-
-		}
 
 		public static string? CompileRsml_NoPretty(string rsml, string language, string moduleName)
 		{
 
-			var result = new Evaluator(rsml).Evaluate();
+			EvaluationResult result;
+
+			try
+			{
+
+				result = new Evaluator(rsml).Evaluate();
+
+			}
+			catch (UserRaisedException)
+			{
+
+				return null;
+
+			}
+			catch (InvalidRsmlSyntax)
+			{
+
+				return null;
+
+			}
+
 			return language switch
 			{
 
 				"C#" => CompiledRsmlGenerator.GenerateCSharp(moduleName, result.WasMatchFound ? $"(\"{result.MatchValue!}\")" : "()"),
 				"F#" => CompiledRsmlGenerator.GenerateFSharp(moduleName, result.WasMatchFound ? $"(\"{result.MatchValue!}\")" : "()"),
 				"VB" => CompiledRsmlGenerator.GenerateVisualBasic(moduleName, result.WasMatchFound ? $"(\"{result.MatchValue!}\")" : "()"),
-				_ => null
+				_    => null
 
 			};
 
@@ -72,8 +116,10 @@ namespace RSML.CLI
 			_ = operators.AddNode("[green](V)[/] Error-throw Operator (!>)");
 
 			var specialActions = statements.AddNode("[green](V)[/] Special Actions with @");
+
 			_ = specialActions.AddNode("[green](V)[/] Argument-less")
 							  .AddNode("[green](V)[/] Argument-less are treated as Single-argument with empty argument");
+
 			_ = specialActions.AddNode("[green](V)[/] Single-argument");
 
 			var lexicalStructure = tree.AddNode("[yellow](!)[/] Lexical Structure");

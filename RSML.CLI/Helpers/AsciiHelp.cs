@@ -1,12 +1,11 @@
-﻿using System;
-using System.CommandLine;
+﻿using System.CommandLine;
 using System.CommandLine.Help;
 using System.CommandLine.Invocation;
 
 using Spectre.Console;
 
 
-namespace RSML.CLI
+namespace RSML.CLI.Helpers
 {
 
 	public class AsciiHelp(
