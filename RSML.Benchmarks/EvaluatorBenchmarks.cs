@@ -22,19 +22,19 @@ namespace RSML.Benchmarks
 	public class EvaluatorBenchmarks
 	{
 
-		private string complexContent = "";
-		private string largeContent = "";
-		private string mediumContent = "";
-		private string smallContent = "";
+		private Evaluator? complexEvaluator;
+		private Evaluator? largeEvaluator;
+		private Evaluator? mediumEvaluator;
+		private Evaluator? smallEvaluator;
 
 		[GlobalSetup]
 		public void Setup()
 		{
 
-			smallContent = "-> windows \"value\"\n@SpecialAction arg\n# Comment";
-			mediumContent = GenerateContent(100);
-			largeContent = GenerateContent(10000);
-			complexContent = GenerateComplexContent(500);
+			smallEvaluator = CreateConfiguredParser("-> windows \"value\"\n@SpecialAction arg\n# Comment");
+			mediumEvaluator = CreateConfiguredParser(GenerateContent(100));
+			largeEvaluator = CreateConfiguredParser(GenerateContent(10000));
+			complexEvaluator = CreateConfiguredParser(GenerateComplexContent(500));
 
 		}
 
@@ -97,63 +97,27 @@ namespace RSML.Benchmarks
 
 		[Benchmark]
 		[BenchmarkCategory("Evaluator")]
-		public void Evaluate_SmallContent()
-		{
-
-			var evaluator = CreateConfiguredParser(smallContent);
-			_ = evaluator.Evaluate(new("ubuntu", null, null));
-
-		}
+		public void Evaluate_SmallContent() => smallEvaluator!.Evaluate(new("ubuntu", null, null));
 
 		[Benchmark]
 		[BenchmarkCategory("Evaluator")]
-		public void Evaluate_MediumContent()
-		{
-
-			var evaluator = CreateConfiguredParser(mediumContent);
-			_ = evaluator.Evaluate(new("ubuntu", null, null));
-
-		}
+		public void Evaluate_MediumContent() => mediumEvaluator!.Evaluate(new("ubuntu", null, null));
 
 		[Benchmark]
 		[BenchmarkCategory("Evaluator")]
-		public void Evaluate_LargeContent()
-		{
-
-			var evaluator = CreateConfiguredParser(largeContent);
-			_ = evaluator.Evaluate(new("ubuntu", null, null));
-
-		}
+		public void Evaluate_LargeContent() => largeEvaluator!.Evaluate(new("ubuntu", null, null));
 
 		[Benchmark]
 		[BenchmarkCategory("Evaluator")]
-		public void Evaluate_ComplexContent()
-		{
-
-			var evaluator = CreateConfiguredParser(complexContent);
-			_ = evaluator.Evaluate(new("ubuntu", null, null));
-
-		}
+		public void Evaluate_ComplexContent() => complexEvaluator!.Evaluate(new("ubuntu", null, null));
 
 		[Benchmark]
 		[BenchmarkCategory("ContentPropertyAccess")]
-		public void ContentProperty_SmallContent()
-		{
-
-			var evaluator = CreateConfiguredParser(smallContent);
-			string _ = evaluator.Content;
-
-		}
+		public void ContentProperty_SmallContent() => _ = smallEvaluator!.Content;
 
 		[Benchmark]
 		[BenchmarkCategory("ContentPropertyAccess")]
-		public void ContentProperty_LargeContent()
-		{
-
-			var evaluator = CreateConfiguredParser(largeContent);
-			string _ = evaluator.Content;
-
-		}
+		public void ContentProperty_LargeContent() => _ = largeEvaluator!.Content;
 
 		[Benchmark]
 		[BenchmarkCategory("IsComment")]

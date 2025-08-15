@@ -3,6 +3,10 @@ At OceanApocalypseStudios, we value performance.
 
 Below is a comparison between the first benchmark of v2.0.0-prerelease8 and the latest one.
 
+> [!WARNING]
+> The benchmarks sometimes "lie". Right now, the data is generated during the benchmark's global setup, so the benchmark
+> will be different everytime. We're working on this.
+
 ## The Before
 <details>
 	<summary>Show/Hide Benchmark</summary>
@@ -222,38 +226,38 @@ Below is a comparison between the first benchmark of v2.0.0-prerelease8 and the 
 		</tr>
 		<tr>
 			<td style="text-align: left;">
-				Creation of a new evaluator and accessing its `Content` property (1 line)
+				Accessing an evaluator's `Content` property (1 line)
 			</td>
 			<td style="text-align: left;">
 				ContentProperty SmallContent
 			</td>
 			<td>
-				193.142
+				0.5433
 			</td>
 			<td>
-				1,229.594 ns
+				4.7374
 			<td>
-				0.1605
+				-
 			</td>
 			<td>
-				336
+				-
 			</td>
 		</tr>
 		<tr>
 			<td style="text-align: left;">
-				Creation of a new evaluator and accessing its `Content` property (10000 lines)
+				Accessing an evaluator's `Content` property (10000 line)
 			</td>
 			<td style="text-align: left;">
 				ContentProperty LargeContent
 			</td>
-			<td>128.318</td>
+			<td>0.0001</td>
 			<td>
-				237.470
+				0.0001
 			<td>
-				0.1605
+				-
 			</td>
 			<td>
-				336
+				-
 			</td>
 		</tr>
 		<tr>
@@ -267,12 +271,12 @@ Below is a comparison between the first benchmark of v2.0.0-prerelease8 and the 
 				5,047.466
 			</td>
 			<td>
-				6,844.805
+				2,067.6529
 			<td>
-				1.4343
+				1.2512
 			</td>
 			<td>
-				3000
+				2624
 			</td>
 		</tr>
 		<tr>
@@ -286,29 +290,29 @@ Below is a comparison between the first benchmark of v2.0.0-prerelease8 and the 
 				110,423.043
 			</td>
 			<td>
-				290,075.337
+				62,391.6186
 			<td>
-				30.6396
+				30.5176
 			</td>
 			<td>
-				64240
+				63904
 			</td>
 		</tr>
 		<tr>
             <td style="text-align: left;">Evaluating 10000 lines of RSML</td>
             <td style="text-align: left;">Evaluate LargeContent</td>
             <td>9,369,561.458</td>
-            <td>2,808,413.891</td>
+            <td>8,073,274.0617</td>
             <td>3078.1250</td>
-            <td>6440560</td>
+            <td>6440224</td>
         </tr>
         <tr>
             <td style="text-align: left;">Evaluating 500 lines of RSML, but with mixed statements</td>
             <td style="text-align: left;">Evaluate ComplexContent</td>
-            <td>1,281,701.042</td>
-            <td>1,287,522.972</td>
-            <td>292.9688</td>
-            <td>613328</td>
+            <td>1,302,738.4766</td>
+            <td>402,971.8666</td>
+            <td>277.3438</td>
+            <td>580000</td>
         </tr>
         <tr>
             <td style="text-align: left;">Checking if a short line is a comment</td>
@@ -337,8 +341,8 @@ Below is a comparison between the first benchmark of v2.0.0-prerelease8 and the 
         <tr>
             <td style="text-align: left;">Checking if an extremely short line is a comment</td>
             <td style="text-align: left;">IsComment False Small</td>
-            <td>6.202</td>
-            <td>16.032</td>
+            <td>5.4572</td>
+            <td>2.7231</td>
             <td>-</td>
             <td>-</td>
         </tr>
