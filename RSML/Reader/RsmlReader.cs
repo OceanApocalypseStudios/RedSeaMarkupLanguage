@@ -51,7 +51,7 @@ namespace RSML.Reader
 			}
 
 			var span = source.AsSpan(curIndex);
-			int nextNewline = span.IndexOfNewline(out var newlineLen);
+			int nextNewline = span.IndexOfNewline(out byte newlineLen);
 
 			ReadOnlySpan<char> lineSpan;
 			int advancedBy;

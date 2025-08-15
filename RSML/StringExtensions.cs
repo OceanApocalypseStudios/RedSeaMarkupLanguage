@@ -150,8 +150,8 @@ namespace RSML
 					char spanChar = *ptrToSpan++;
 					char strChar = *ptrToStr++;
 
-					spanChar |= (spanChar is >= 'A' and <= 'Z') ? (char)AsciiCaseBit : (char)0;
-					strChar |= (strChar is >= 'A' and <= 'Z') ? (char)AsciiCaseBit : (char)0;
+					spanChar |= spanChar is >= 'A' and <= 'Z' ? (char)AsciiCaseBit : (char)0;
+					strChar |= strChar is >= 'A' and <= 'Z' ? (char)AsciiCaseBit : (char)0;
 
 					if (spanChar != strChar)
 						return false;

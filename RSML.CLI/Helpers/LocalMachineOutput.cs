@@ -38,7 +38,7 @@ namespace RSML.CLI.Helpers
 		public static string AsPlainText(LocalMachine machine)
 		{
 
-			string systemVersion = (machine.SystemName?.Equals("windows", StringComparison.OrdinalIgnoreCase) ?? false)
+			string systemVersion = machine.SystemName?.Equals("windows", StringComparison.OrdinalIgnoreCase) ?? false
 									   ? machine.SystemVersion switch
 									   {
 
@@ -68,7 +68,7 @@ namespace RSML.CLI.Helpers
 		public static void AsPrettyText(LocalMachine machine)
 		{
 
-			string systemVersion = (machine.SystemName?.Equals("windows", StringComparison.OrdinalIgnoreCase) ?? false)
+			string systemVersion = machine.SystemName?.Equals("windows", StringComparison.OrdinalIgnoreCase) ?? false
 									   ? machine.SystemVersion switch
 									   {
 
@@ -99,15 +99,21 @@ namespace RSML.CLI.Helpers
 									new Rows(
 										new Markup(
 											"[green]Linux Distribution[/] [grey](if applicable)[/]",
-											(machine.SystemName?.Equals("linux", StringComparison.OrdinalIgnoreCase) ?? false) ? null : new(null, null, Decoration.Strikethrough)
+											machine.SystemName?.Equals("linux", StringComparison.OrdinalIgnoreCase) ?? false
+												? null
+												: new(null, null, Decoration.Strikethrough)
 										),
 										new Markup(
 											$"[white]Family:[/] [grey]{(machine.DistroFamily ?? "Unknown").Capitalize()}[/]",
-											(machine.SystemName?.Equals("linux", StringComparison.OrdinalIgnoreCase) ?? false) ? null : new(null, null, Decoration.Strikethrough)
+											machine.SystemName?.Equals("linux", StringComparison.OrdinalIgnoreCase) ?? false
+												? null
+												: new(null, null, Decoration.Strikethrough)
 										),
 										new Markup(
 											$"[white]Name:[/] [grey]{(machine.DistroName ?? "Unknown").Capitalize()}[/]",
-											(machine.SystemName?.Equals("linux", StringComparison.OrdinalIgnoreCase) ?? false) ? null : new(null, null, Decoration.Strikethrough)
+											machine.SystemName?.Equals("linux", StringComparison.OrdinalIgnoreCase) ?? false
+												? null
+												: new(null, null, Decoration.Strikethrough)
 										)
 									)
 								).Expand()

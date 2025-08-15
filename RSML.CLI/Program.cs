@@ -164,7 +164,7 @@ namespace RSML.CLI
 					string? distroName = result.GetValue(linuxNameOpt);
 					string? sysName = distroName is not null ? "linux" : result.GetValue(systemNameOpt);
 
-					string? distroFamily = (sysName?.Equals("linux", StringComparison.OrdinalIgnoreCase) ?? false)
+					string? distroFamily = sysName?.Equals("linux", StringComparison.OrdinalIgnoreCase) ?? false
 											   ? result.GetValue(linuxFamilyOpt)
 											   : null;
 
@@ -173,7 +173,7 @@ namespace RSML.CLI
 
 					return GetMachine(
 						result,
-						(sysName?.Equals("linux", StringComparison.OrdinalIgnoreCase) ?? false)
+						sysName?.Equals("linux", StringComparison.OrdinalIgnoreCase) ?? false
 							? new(distroName, distroFamily, processorArch, sysVersion)
 							: new(sysName, processorArch, sysVersion),
 						result.GetValue(disableAnsiOpt), result.GetValue(outputFormatMOpt)

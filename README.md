@@ -15,7 +15,8 @@
 
 ## Coming Soon*er*: RSML v2.0.0
 > [!NOTE]
-> RSML v2.0.0 is coming first as a `prerelease`. To be exact, this will be `prerelease8` with no native interop support yet.
+> RSML v2.0.0 is coming first as a `prerelease`. To be exact, this will be `prerelease8` with no native interop support
+> yet.
 
 **Red Sea Markup Language v2.0.0** is currently **in the making** and will be a huge release, bringing native binding
 support into the table _(this also means AOT "friendliness")_, which will let you use RSML in Python, Go, Rust _(if
