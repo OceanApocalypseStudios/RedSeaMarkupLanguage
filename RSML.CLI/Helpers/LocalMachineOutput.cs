@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using System.Text.Json;
 
 using RSML.Machine;
 
@@ -12,6 +13,31 @@ namespace RSML.CLI.Helpers
 	internal static class LocalMachineOutput
 	{
 
+		public static LocalMachine FromJson(string? json)
+		{
+
+			if (json is null)
+				return new();
+
+			using var document = JsonDocument.Parse(json);
+
+			var system = document.RootElement.GetProperty("system");
+			var sysName = system.GetProperty("name").GetString();
+			var sysVersion = system.GetProperty("version").GetInt32();
+
+			var linuxDistro = document.RootElement.GetProperty("linuxDistro");
+			var distroName = system.GetProperty("name").GetString();
+			var distroFamily = system.GetProperty("family").GetString();
+
+			var procArch = document.RootElement.GetProperty("processor").GetProperty("architecture").GetString();
+
+			if (sysName == "linux")
+				return new(distroName, distroFamily, procArch, sysVersion);
+
+			return new(sysName, procArch, sysVersion);
+
+		}
+
 		public static string AsJson(LocalMachine machine)
 		{
 
@@ -20,15 +46,15 @@ namespace RSML.CLI.Helpers
 			return $$"""
 					 {
 					 	"system": {
-					 		"name": {{machine.SystemName ?? "null"}},
+					 		"name": "{{machine.SystemName ?? "null"}}",
 					 		"version" : {{systemVersion}}
 					 	},
 					 	"linuxDistro": {
-					 		"name": {{machine.DistroName ?? "null"}},
-					 		"family": {{machine.DistroFamily ?? "null"}}
+					 		"name": "{{machine.DistroName ?? "null"}}",
+					 		"family": "{{machine.DistroFamily ?? "null"}}"
 					 	},
 					 	"processor": {
-					 		"architecture": {{machine.ProcessorArchitecture ?? "null"}}
+					 		"architecture": "{{machine.ProcessorArchitecture ?? "null"}}"
 					 	}
 					 }
 					 """;

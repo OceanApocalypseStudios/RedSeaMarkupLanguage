@@ -89,6 +89,11 @@ namespace RSML.Evaluation
 		/// <inheritdoc />
 		public ReadOnlyDictionary<string, SpecialAction> SpecialActions => specialActions.AsReadOnly();
 
+		/// <summary>
+		/// The amount of loaded middlewares.
+		/// </summary>
+		public int LoadedMiddlewaresCount => evaluatorMiddlewares.Values.Sum(midCol => midCol.Count);
+
 		/// <inheritdoc />
 		public EvaluationResult Evaluate() => Evaluate(new());
 

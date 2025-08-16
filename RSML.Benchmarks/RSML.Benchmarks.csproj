@@ -13,7 +13,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\RSML.Native\RSML.Native.csproj" />
+		<None Include="Dataset\**\*">
+			<Link>Dataset\%(RecursiveDir)%(Filename)%(Extension)</Link>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\RSML\RSML.csproj" />
 	</ItemGroup>
 

@@ -53,6 +53,7 @@ namespace RSML
 
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		private static int CrLfCheck(ReadOnlySpan<char> chars, int index, out byte length)
 		{
 
@@ -92,6 +93,13 @@ namespace RSML
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static bool IsEquals(this ReadOnlySpan<char> chars, string str) => chars.SequenceEqual(str);
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static bool IsEquals(this ReadOnlyMemory<char> chars, string? str) => str is not null && chars.Span.IsEquals(str);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static bool IsEquals(this ReadOnlyMemory<char> chars, ReadOnlyMemory<char> memory) => chars.Span.SequenceEqual(memory.Span);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static bool IsEquals_8(
 			this ReadOnlySpan<char> chars,
 			string strA,
@@ -130,6 +138,7 @@ namespace RSML
 
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static unsafe bool IsAsciiEqualsIgnoreCase(this ReadOnlySpan<char> chars, string str)
 		{
 
@@ -170,6 +179,7 @@ namespace RSML
 		/// I call this method every single iteration of a loop.
 		/// If I used params string[], that would allocate a whole new array every single time I call this method.
 		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static bool IsAsciiEqualsIgnoreCase_10(
 			this ReadOnlySpan<char> chars,
 			string strA,
@@ -222,6 +232,7 @@ namespace RSML
 		/// I call this method every single iteration of a loop.
 		/// If I used params string[], that would allocate a whole new array every single time I call this method.
 		/// </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static bool IsAsciiEqualsIgnoreCase_5(
 			this ReadOnlySpan<char> chars,
 			string strA,

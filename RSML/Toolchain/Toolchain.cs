@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 using RSML.Analyzer.Semantics;
 using RSML.Analyzer.Syntax;
@@ -42,39 +43,56 @@ namespace RSML.Toolchain
 		public IEvaluator? Evaluator { get; private set; }
 
 		/// <summary>
-		/// Binds a lexer.
+		/// Binds a toolchain component.
 		/// </summary>
-		/// <param name="lexer">The lexer</param>
+		/// <param name="component">The component to attach</param>
 		/// <returns>The toolchain</returns>
-		public Toolchain Bind(ILexer? lexer) => ReturnHelper(() => Lexer = lexer);
+		public Toolchain Bind(IToolchainComponent component)
+		{
+
+			switch (component)
+			{
+
+				case ILexer lexer:
+					Lexer = lexer;
+
+					break;
+
+				case IReader reader:
+					Reader = reader;
+
+					break;
+
+				case INormalizer normalizer:
+					Normalizer = normalizer;
+
+					break;
+
+				case IValidator validator:
+					Validator = validator;
+
+					break;
+
+				case IEvaluator evaluator:
+					Evaluator = evaluator;
+
+					break;
+
+			}
+
+			return this;
+
+		}
 
 		/// <summary>
-		/// Binds a reader.
+		/// Binds a toolchain component by creating a new one.
 		/// </summary>
-		/// <param name="reader">The reader</param>
+		/// <typeparam name="TComponent">The type of the component</typeparam>
 		/// <returns>The toolchain</returns>
-		public Toolchain Bind(IReader? reader) => ReturnHelper(() => Reader = reader);
-
-		/// <summary>
-		/// Binds a normalizer.
-		/// </summary>
-		/// <param name="normalizer">The normalizer</param>
-		/// <returns>The toolchain</returns>
-		public Toolchain Bind(INormalizer? normalizer) => ReturnHelper(() => Normalizer = normalizer);
-
-		/// <summary>
-		/// Binds a semantic validator.
-		/// </summary>
-		/// <param name="validator">The validator</param>
-		/// <returns>The toolchain</returns>
-		public Toolchain Bind(IValidator? validator) => ReturnHelper(() => Validator = validator);
-
-		/// <summary>
-		/// Binds an evaluator.
-		/// </summary>
-		/// <param name="evaluator">The evaluator</param>
-		/// <returns>The toolchain</returns>
-		public Toolchain Bind(IEvaluator? evaluator) => ReturnHelper(() => Evaluator = evaluator);
+		/// <remarks>This method uses Activator.CreateInstance, therefore not being AOT-friendly.</remarks>
+		[RequiresDynamicCode("This method uses Activator.CreateInstance")]
+		public Toolchain Bind<TComponent>()
+			where TComponent : IToolchainComponent => Bind(Activator.CreateInstance<TComponent>());
 
 		/// <summary>
 		/// Unbinds all toolchain components.
@@ -99,15 +117,6 @@ namespace RSML.Toolchain
 		/// <param name="machineData">The machine's data</param>
 		/// <returns>The evaluation result or <c>null</c> if the evaluator is <c>null</c></returns>
 		public EvaluationResult? EvaluateRsml(LocalMachine machineData) => Evaluator?.Evaluate(machineData, Reader, Lexer, Normalizer, Validator);
-
-		private Toolchain ReturnHelper(Action action)
-		{
-
-			action.Invoke();
-
-			return this;
-
-		}
 
 		/// <summary>
 		/// Creates an empty toolchain.
@@ -134,7 +143,9 @@ namespace RSML.Toolchain
 		/// <typeparam name="TNormalizer">The normalizer</typeparam>
 		/// <typeparam name="TValidator">The validator</typeparam>
 		/// <typeparam name="TEvaluator">The evaluator</typeparam>
-		/// <returns></returns>
+		/// <returns>The toolchain</returns>
+		/// <remarks>This method uses Activator.CreateInstance, therefore not being AOT-friendly.</remarks>
+		[RequiresDynamicCode("This method uses Activator.CreateInstance")]
 		public static Toolchain Create<TLexer, TReader, TNormalizer, TValidator, TEvaluator>(string content)
 			where TLexer : ILexer
 			where TReader : IReader

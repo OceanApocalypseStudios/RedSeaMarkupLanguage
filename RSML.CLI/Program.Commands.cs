@@ -1,5 +1,5 @@
 ﻿using System;
-using System.CommandLine;
+using System.Diagnostics;
 
 using RSML.CLI.Helpers;
 using RSML.Evaluation;
@@ -15,7 +15,60 @@ namespace RSML.CLI
 	internal partial class Program
 	{
 
-		public static int GetMachine(ParseResult result, LocalMachine machine, bool disableAnsi, string? format)
+		public static void Evaluate_NoPretty(string data, LocalMachine machine, bool cacheActionResults = true) =>
+			Console.WriteLine(new Evaluator(data).Evaluate(machine, !cacheActionResults).MatchValue);
+
+		public static void Evaluate_Pretty(string data, LocalMachine machine, bool cacheActionResults = true)
+		{
+
+			Evaluator evaluator = new(data);
+
+			var start = Stopwatch.GetTimestamp();
+			var result = evaluator.Evaluate(machine, !cacheActionResults);
+
+			if (data.Length <= 10000) // 10000 characters, not lines brother
+			{
+
+				for (int i = 0; i < 10; i++)
+					_ = evaluator.Evaluate(machine, !cacheActionResults);
+				// average of several calls to avoid overhead of Stopwatch
+
+			}
+
+			var end = Stopwatch.GetTimestamp();
+
+			var timeTaken = (end - start) * 1000 / Stopwatch.Frequency;
+
+			if (data.Length <= 10000)
+				timeTaken /= 10; // iterations (or calls)
+
+			AnsiConsole.Write(
+				new Columns(
+					new Panel(
+						new Rows(
+							new Markup("[yellow]Evaluation Result[/]").Centered(),
+							new Markup(
+								result.WasMatchFound ? "[green]Match found![/]" : "[red]No matches found.[/]", new(null, null, Decoration.Italic)
+							),
+							new Markup(result.WasMatchFound ? result.MatchValue! : "", new(Color.White))
+						).Expand()
+					).Expand(),
+					new Panel(
+						new Rows(
+							new Markup("[green]Statistics[/]").Centered(),
+							new Markup($"[white]Time elapsed [/][red](crude estimate)[/][white]:[/] [gray]{timeTaken} ms[/]"),
+							new Markup($"[white]Special actions loaded:[/] [gray]{evaluator.SpecialActions.Count + 1}[/]"),
+							new Markup($"[white]Middlewares loaded:[/] [gray]{evaluator.LoadedMiddlewaresCount}[/]"),
+							new Markup($"[white]Special action caching:[/] [gray]{cacheActionResults}[/]"),
+							new Markup($"[white]Amount of characters in document:[/] [gray]{data.Length}[/]")
+						)
+					).Expand()
+				).Expand()
+			);
+
+		}
+
+		public static int GetMachine(LocalMachine machine, bool disableAnsi, string? format)
 		{
 
 			if (disableAnsi || format == "JSON")
@@ -128,7 +181,7 @@ namespace RSML.CLI
 			_ = charset.AddNode("[red](X)[/] UTF-8");
 			_ = charset.AddNode("[green](V)[/] UTF-16");
 
-			var tokens = lexicalStructure.AddNode("[green](V)[/] All token types supported");
+			_ = lexicalStructure.AddNode("[green](V)[/] All token types supported");
 
 			AnsiConsole.Write(tree);
 

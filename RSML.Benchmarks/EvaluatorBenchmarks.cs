@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Text;
 
 using BenchmarkDotNet.Attributes;
@@ -7,6 +8,7 @@ using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Jobs;
 
 using RSML.Evaluation;
+using RSML.Machine;
 
 
 namespace RSML.Benchmarks
@@ -22,19 +24,41 @@ namespace RSML.Benchmarks
 	public class EvaluatorBenchmarks
 	{
 
-		private Evaluator? complexEvaluator;
-		private Evaluator? largeEvaluator;
-		private Evaluator? mediumEvaluator;
+		private readonly LocalMachine ubuntu = new("ubuntu", null, null);
+
+		private Evaluator? primitiveEvaluatorLogic;
+		private Evaluator? primitiveEvaluatorAction;
+		private Evaluator? primitiveEvaluatorComment;
+		private Evaluator? primitiveEvaluatorCommentWs;
+		private Evaluator? primitiveEvaluatorNewlines;
+
+		private Evaluator? complexEvaluator1;
+		private Evaluator? complexEvaluator2;
+		private Evaluator? complexEvaluator3;
+
 		private Evaluator? smallEvaluator;
+		private Evaluator? mediumEvaluator;
+		private Evaluator? largeEvaluator;
 
 		[GlobalSetup]
 		public void Setup()
 		{
 
+			var datasetPath = Path.Join(Environment.CurrentDirectory, "..", "..", "..", "..", "Dataset");
+
+			primitiveEvaluatorComment = CreateConfiguredParser("# comment");
+			primitiveEvaluatorCommentWs = CreateConfiguredParser("                       # comment");
+			primitiveEvaluatorNewlines = CreateConfiguredParser("\n\n\n\n\n\n\n\n");
+			primitiveEvaluatorLogic = CreateConfiguredParser("-> windows 10 x64 \"Some random value\"");
+			primitiveEvaluatorAction = CreateConfiguredParser("@SpecialAction\n@SpecialAction\n@EndAll");
+
 			smallEvaluator = CreateConfiguredParser("-> windows \"value\"\n@SpecialAction arg\n# Comment");
-			mediumEvaluator = CreateConfiguredParser(GenerateContent(100));
-			largeEvaluator = CreateConfiguredParser(GenerateContent(10000));
-			complexEvaluator = CreateConfiguredParser(GenerateComplexContent(500));
+			mediumEvaluator = CreateConfiguredParser(File.ReadAllText(Path.Join(datasetPath, "medium_content.rsea")));
+			largeEvaluator = CreateConfiguredParser(File.ReadAllText(Path.Join(datasetPath, "large_content.rsea")));
+
+			complexEvaluator1 = CreateConfiguredParser(File.ReadAllText(Path.Join(datasetPath, "complex_content_1.rsea")));
+			complexEvaluator2 = CreateConfiguredParser(File.ReadAllText(Path.Join(datasetPath, "complex_content_2.rsea")));
+			complexEvaluator3 = CreateConfiguredParser(File.ReadAllText(Path.Join(datasetPath, "complex_content_3.rsea")));
 
 		}
 
@@ -96,28 +120,48 @@ namespace RSML.Benchmarks
 		}
 
 		[Benchmark]
-		[BenchmarkCategory("Evaluator")]
-		public void Evaluate_SmallContent() => smallEvaluator!.Evaluate(new("ubuntu", null, null));
+		[BenchmarkCategory("Primitives")]
+		public void Evaluate_PrimitiveLogic() => primitiveEvaluatorLogic!.Evaluate(ubuntu);
+
+		[Benchmark]
+		[BenchmarkCategory("Primitives")]
+		public void Evaluate_PrimitiveAction() => primitiveEvaluatorAction!.Evaluate(ubuntu);
+
+		[Benchmark]
+		[BenchmarkCategory("Primitives")]
+		public void Evaluate_PrimitiveComment() => primitiveEvaluatorComment!.Evaluate(ubuntu);
+
+		[Benchmark]
+		[BenchmarkCategory("Primitives")]
+		public void Evaluate_PrimitiveCommentWhitespace() => primitiveEvaluatorCommentWs!.Evaluate(ubuntu);
+
+		[Benchmark]
+		[BenchmarkCategory("Primitives")]
+		public void Evaluate_PrimitiveNewlines() => primitiveEvaluatorNewlines!.Evaluate(ubuntu);
 
 		[Benchmark]
 		[BenchmarkCategory("Evaluator")]
-		public void Evaluate_MediumContent() => mediumEvaluator!.Evaluate(new("ubuntu", null, null));
+		public void Evaluate_SmallContent() => smallEvaluator!.Evaluate(ubuntu);
 
 		[Benchmark]
 		[BenchmarkCategory("Evaluator")]
-		public void Evaluate_LargeContent() => largeEvaluator!.Evaluate(new("ubuntu", null, null));
+		public void Evaluate_MediumContent() => mediumEvaluator!.Evaluate(ubuntu);
 
 		[Benchmark]
 		[BenchmarkCategory("Evaluator")]
-		public void Evaluate_ComplexContent() => complexEvaluator!.Evaluate(new("ubuntu", null, null));
+		public void Evaluate_LargeContent() => largeEvaluator!.Evaluate(ubuntu);
 
 		[Benchmark]
-		[BenchmarkCategory("ContentPropertyAccess")]
-		public void ContentProperty_SmallContent() => _ = smallEvaluator!.Content;
+		[BenchmarkCategory("Evaluator")]
+		public void Evaluate_ComplexContent_1() => complexEvaluator1!.Evaluate(ubuntu);
 
 		[Benchmark]
-		[BenchmarkCategory("ContentPropertyAccess")]
-		public void ContentProperty_LargeContent() => _ = largeEvaluator!.Content;
+		[BenchmarkCategory("Evaluator")]
+		public void Evaluate_ComplexContent_2() => complexEvaluator2!.Evaluate(ubuntu);
+
+		[Benchmark]
+		[BenchmarkCategory("Evaluator")]
+		public void Evaluate_ComplexContent_3() => complexEvaluator3!.Evaluate(ubuntu);
 
 		[Benchmark]
 		[BenchmarkCategory("IsComment")]

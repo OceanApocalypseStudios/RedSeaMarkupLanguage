@@ -17,7 +17,7 @@ namespace RSML.Analyzer.Semantics
 
 		private const string ApiVersion = "2.0.0";
 
-		private static readonly SyntaxToken wildcard = TokenBank.wildcard;
+		private static readonly SyntaxToken wildcard = TokenBank.wildcardToken;
 		private static readonly SyntaxToken eol = TokenBank.eolToken;
 
 		/// <summary>

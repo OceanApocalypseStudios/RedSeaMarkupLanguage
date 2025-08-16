@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using RSML.CLI.Helpers;
+using RSML.Machine;
 
 using Spectre.Console;
 
@@ -172,7 +173,6 @@ namespace RSML.CLI
 					int sysVersion = result.GetValue(sysVersionOpt);
 
 					return GetMachine(
-						result,
 						sysName?.Equals("linux", StringComparison.OrdinalIgnoreCase) ?? false
 							? new(distroName, distroFamily, processorArch, sysVersion)
 							: new(sysName, processorArch, sysVersion),
@@ -182,7 +182,7 @@ namespace RSML.CLI
 				}
 			);
 
-			getMachineDataCmd.SetAction(result => GetMachine(result, new(), result.GetValue(disableAnsiOpt), result.GetValue(outputFormatMOpt)));
+			getMachineDataCmd.SetAction(result => GetMachine(new(), result.GetValue(disableAnsiOpt), result.GetValue(outputFormatMOpt)));
 
 			machineCmd.SetAction(_ =>
 				{
@@ -326,6 +326,85 @@ namespace RSML.CLI
 			);
 
 			rootCommand.Add(generateCmd);
+
+			#endregion
+
+			#region Evaluate Command
+
+			Command evaluateCmd = new("evaluate", "Evaluates a RSML document");
+
+			Option<string?> machineOpt = new("--machine")
+			{
+
+				Description = "The machine, in JSON, to evaluate from.",
+				DefaultValueFactory = _ => null
+
+			};
+
+			machineOpt.Aliases.Add("-m");
+
+			Option<FileInfo?> filepathOpt = new("--filepath")
+			{
+
+				Description = "The file to load RSML from, instead of the stdin.",
+				DefaultValueFactory = _ => null
+
+			};
+
+			filepathOpt.Aliases.Add("-M");
+
+			Option<bool> cacheSpecialActionsOpt = new("--no-cache-specials")
+			{
+
+				Description = "Don't cache special actions' results (causes performance hit).",
+				DefaultValueFactory = _ => false
+
+			};
+
+			cacheSpecialActionsOpt.Aliases.Add("-C");
+
+			evaluateCmd.Options.Add(machineOpt);
+			evaluateCmd.Options.Add(filepathOpt);
+			evaluateCmd.Options.Add(cacheSpecialActionsOpt);
+			evaluateCmd.Options.Add(disableAnsiOpt);
+
+			evaluateCmd.SetAction(result =>
+				{
+
+					bool disableAnsi = result.GetValue(disableAnsiOpt);
+					string? filepath = result.GetValue(filepathOpt)?.FullName;
+					string data = filepath is null ? Console.In.ReadToEnd() : File.ReadAllText(filepath);
+
+					LocalMachine machine;
+					try
+					{
+
+						machine = LocalMachineOutput.FromJson(result.GetValue(machineOpt));
+
+					}
+					catch (Exception ex)
+					{
+
+						if (disableAnsi)
+							Console.WriteLine($"JSON Error: {ex.Message}");
+						else
+							AnsiConsole.Markup($"[red]JSON Error on Machine load[/] {ex.Message}");
+
+						return 2; // json error
+
+					}
+
+					if (disableAnsi)
+						Evaluate_NoPretty(data, machine, !result.GetValue(cacheSpecialActionsOpt));
+					else
+						Evaluate_Pretty(data, machine, !result.GetValue(cacheSpecialActionsOpt));
+
+					return 0;
+
+				}
+			);
+
+			rootCommand.Add(evaluateCmd);
 
 			#endregion
 

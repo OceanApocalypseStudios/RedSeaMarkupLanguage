@@ -3,10 +3,6 @@ At OceanApocalypseStudios, we value performance.
 
 Below is a comparison between the first benchmark of v2.0.0-prerelease8 and the latest one.
 
-> [!WARNING]
-> The benchmarks sometimes "lie". Right now, the data is generated during the benchmark's global setup, so the benchmark
-> will be different everytime. We're working on this.
-
 ## The Before
 <details>
 	<summary>Show/Hide Benchmark</summary>
@@ -201,6 +197,9 @@ Below is a comparison between the first benchmark of v2.0.0-prerelease8 and the 
 </details>
 
 ## The After
+> [!NOTE]
+> The `Content` property is no longer being benchmarked, as its time is the same as an empty method *(accessor-only is extremely fast)* and that causes BenchmarkDotNet errors.
+
 <details>
 	<summary>Show/Hide Benchmark</summary>
 	<table style="text-align: right; border-collapse: collapse;">
@@ -223,42 +222,6 @@ Below is a comparison between the first benchmark of v2.0.0-prerelease8 and the 
 			<th>
 				Allocations (B)
 			</th>
-		</tr>
-		<tr>
-			<td style="text-align: left;">
-				Accessing an evaluator's `Content` property (1 line)
-			</td>
-			<td style="text-align: left;">
-				ContentProperty SmallContent
-			</td>
-			<td>
-				0.5433
-			</td>
-			<td>
-				4.7374
-			<td>
-				-
-			</td>
-			<td>
-				-
-			</td>
-		</tr>
-		<tr>
-			<td style="text-align: left;">
-				Accessing an evaluator's `Content` property (10000 line)
-			</td>
-			<td style="text-align: left;">
-				ContentProperty LargeContent
-			</td>
-			<td>0.0001</td>
-			<td>
-				0.0001
-			<td>
-				-
-			</td>
-			<td>
-				-
-			</td>
 		</tr>
 		<tr>
 			<td style="text-align: left;">
@@ -346,13 +309,53 @@ Below is a comparison between the first benchmark of v2.0.0-prerelease8 and the 
             <td>-</td>
             <td>-</td>
         </tr>
+        <tr>
+            <td style="text-align: left;">Evaluating one single logic path</td>
+            <td style="text-align: left;">Evaluate Primitive Logic</td>
+            <td>8,490.74</td>
+            <td>3,505.343</td>
+            <td>1.1292</td>
+            <td>2384</td>
+        </tr>
+        <tr>
+            <td style="text-align: left;">Evaluating one single special action</td>
+            <td style="text-align: left;">Evaluate Primitive Action</td>
+            <td>2,625.34</td>
+            <td>1,272.459</td>
+            <td>0.5074</td>
+            <td>1064</td>
+        </tr>
+        <tr>
+            <td style="text-align: left;">Evaluating one single comment</td>
+            <td style="text-align: left;">Evaluate Primitive Comment</td>
+            <td>875.69</td>
+            <td>133.534</td>
+            <td>0.2670</td>
+            <td>560</td>
+        </tr>
+        <tr>
+            <td style="text-align: left;">Evaluating one single comment (after 24 spaces)</td>
+            <td style="text-align: left;">Evaluate Primitive Comment Whitespace</td>
+            <td>1,006.54</td>
+            <td>1,415.454</td>
+            <td>0.2899</td>
+            <td>608</td>
+        </tr>
+        <tr>
+            <td style="text-align: left;">Evaluating 8 consecutive newlines</td>
+            <td style="text-align: left;">Evaluate Primitive Comment Whitespace</td>
+            <td>1,703.88</td>
+            <td>5,530.023</td>
+            <td>0.2594</td>
+            <td>544</td>
+        </tr>
 	</table>
 </details>
 
 ## Our Next Goals for Performance
-We plan on reducing the amount of allocated bytes, as well as reducing the time it takes for a large buffer.
+**We plan on reducing the amount of heap allocations, as well as reducing the evaluation time for a large buffer.**
 
-However, considering most RSML files are up to 100 lines long, these times are good enough for a pre-release.
+However, considering most RSML files are up to 100 lines long, these times are acceptable for a pre-release, emphasis on **"for a pre-release"**.
 
-In the future, we may create an external package called `RSML.Performance` which will contain toolchain components as
-`ref structs`, at the cost of less control over the toolchain (such as not being able to use middlewares).
+In the future, we may create an external package called `RSML.Performance` which will contain **toolchain components as
+`ref structs`**. This approach would cut allocations and make the process of evaluating RSML extremely fast, at the cost of less control over the toolchain *(such as limited middleware support)*.
