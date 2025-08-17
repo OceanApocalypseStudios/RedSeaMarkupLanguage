@@ -19,7 +19,7 @@ namespace RSML.Analyzer.Semantics
 		/// <param name="tokens">The tokens to semantically normalize</param>
 		/// <param name="length">The amount of tokens output</param>
 		/// <returns>Normalized tokens</returns>
-		public IEnumerable<SyntaxToken> NormalizeLine(IEnumerable<SyntaxToken> tokens, out int length);
+		public static abstract IEnumerable<SyntaxToken> NormalizeLine(IEnumerable<SyntaxToken> tokens, out int length);
 
 	}
 

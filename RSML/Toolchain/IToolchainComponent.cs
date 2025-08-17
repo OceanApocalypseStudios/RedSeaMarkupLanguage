@@ -13,7 +13,7 @@ namespace RSML.Toolchain
 		/// <summary>
 		/// The level of compliance, per feature, this toolchain component has.
 		/// </summary>
-		public SpecificationCompliance SpecificationCompliance { get; }
+		public static abstract SpecificationCompliance SpecificationCompliance { get; }
 
 	}
 

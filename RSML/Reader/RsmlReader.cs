@@ -35,10 +35,10 @@ namespace RSML.Reader
 		public RsmlReader(string source) { this.source = source; }
 
 		/// <inheritdoc />
-		public SpecificationCompliance SpecificationCompliance => SpecificationCompliance.CreateFull(ApiVersion);
+		public static SpecificationCompliance SpecificationCompliance => SpecificationCompliance.CreateFull(ApiVersion);
 
 		/// <inheritdoc />
-		public bool TryTokenizeNextLine(ILexer lexer, out IEnumerable<SyntaxToken> tokens)
+		public bool TryTokenizeNextLine(out IEnumerable<SyntaxToken> tokens)
 		{
 
 			if (curIndex < 0 || curIndex >= source.Length)
@@ -82,7 +82,7 @@ namespace RSML.Reader
 
 			}
 
-			tokens = lexer.TokenizeLine(lineSpan.ToString());
+			tokens = Lexer.TokenizeLine(lineSpan.ToString());
 
 			return true;
 

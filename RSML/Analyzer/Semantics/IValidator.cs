@@ -17,29 +17,29 @@ namespace RSML.Analyzer.Semantics
 		/// <summary>
 		/// Valid version number comparators.
 		/// </summary>
-		ImmutableHashSet<string> ValidComparators { get; }
+		static abstract ImmutableHashSet<string> ValidComparators { get; }
 
 		/// <summary>
 		/// Valid architecture identifiers. Case-insensitive.
 		/// </summary>
-		ImmutableHashSet<string> ValidArchitectures { get; }
+		static abstract ImmutableHashSet<string> ValidArchitectures { get; }
 
 		/// <summary>
 		/// Valid system names. Case-insensitive.
 		/// </summary>
-		ImmutableHashSet<string> ValidSystems { get; }
+		static abstract ImmutableHashSet<string> ValidSystems { get; }
 
 		/// <summary>
 		/// Validates a RSML buffer from its tokens.
 		/// </summary>
 		/// <param name="bufferTokens">The buffer's tokens</param>
-		void ValidateBuffer(ReadOnlySpan<SyntaxToken> bufferTokens);
+		static abstract void ValidateBuffer(ReadOnlySpan<SyntaxToken> bufferTokens);
 
 		/// <summary>
 		/// Validates a single line of RSML from its tokens.
 		/// </summary>
 		/// <param name="tokens">The line's tokens</param>
-		void ValidateLine(ReadOnlySpan<SyntaxToken> tokens);
+		static abstract void ValidateLine(ReadOnlySpan<SyntaxToken> tokens);
 
 	}
 

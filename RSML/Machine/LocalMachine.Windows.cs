@@ -50,6 +50,11 @@ namespace RSML.Machine
 			switch (version)
 			{
 
+				case "5.1":
+					// ReSharper disable once CommentTypo
+					SystemVersion = 5; // WINDOWS XPPPPPP LESGOOOOOOOO
+					return;
+
 				case "6.0":
 					// this is Windows Vista
 					// but like we don't take strings soooo

@@ -6,6 +6,7 @@
 		<TargetFramework>net8.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<LangVersion>12</LangVersion>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 
 		<!-- Maintainability-related -->
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -25,7 +26,6 @@
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>markup</PackageTags>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	</PropertyGroup>
 
 	<!-- Windows only -->
@@ -53,6 +53,10 @@
 		<None Include="..\Assets\Icon.png">
 			<Pack>True</Pack>
 			<Link>Icon.png</Link>
+		</None>
+		<None Update="Icon.png">
+		  <Pack>True</Pack>
+		  <PackagePath></PackagePath>
 		</None>
 	</ItemGroup>
 

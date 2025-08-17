@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 
 using RSML.Actions;
-using RSML.Analyzer.Semantics;
 using RSML.Analyzer.Syntax;
 using RSML.Machine;
 using RSML.Reader;
@@ -56,17 +55,14 @@ namespace RSML.Evaluation
 		EvaluationResult Evaluate(LocalMachine machineData);
 
 		/// <summary>
-		/// Evaluates the RSML document with the specified machine data, a lexer, a reader and a semantic validator.
+		/// Evaluates the RSML document with the specified machine data and a reader.
 		/// Note that the above-mentioned toolchain components should have the same standardized version as the evaluator itself,
 		/// when using the official evaluator.
 		/// </summary>
 		/// <param name="machineData">The machine data</param>
 		/// <param name="reader">The custom reader</param>
-		/// <param name="lexer">The custom lexer</param>
-		/// <param name="normalizer">The custom normalizer</param>
-		/// <param name="validator">The custom validator</param>
 		/// <returns></returns>
-		EvaluationResult Evaluate(LocalMachine machineData, IReader? reader, ILexer? lexer, INormalizer? normalizer, IValidator? validator);
+		EvaluationResult Evaluate(LocalMachine machineData, IReader? reader);
 
 		/// <summary>
 		/// Registers a special action.

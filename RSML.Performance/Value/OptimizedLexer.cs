@@ -1,120 +1,64 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
+using RSML.Analyzer.Syntax;
 using RSML.Toolchain.Compliance;
 
 
-namespace RSML.Analyzer.Syntax
+namespace RSML.Performance.Value
 {
 
 	/// <summary>
-	/// The officially maintained lexer/tokenizer for RSML v2.0.0.
+	/// An optimized, stateless lexer.
 	/// </summary>
-	public sealed class Lexer : ILexer
+	public static class OptimizedLexer
 	{
 
-		private const string ApiVersion = "2.0.0";
+		/// <summary>
+		/// The level of compliance, per feature, with the official language standard for the current API version.
+		/// </summary>
+		public static SpecificationCompliance SpecificationCompliance => SpecificationCompliance.CreateFull("2.0.0");
 
-		/// <inheritdoc />
-		public static SpecificationCompliance SpecificationCompliance => SpecificationCompliance.CreateFull(ApiVersion);
-
-		/// <inheritdoc />
-		public static string CreateDocumentFromTokens(IEnumerable<SyntaxToken> tokens)
-		{
-
-			StringBuilder builder = new();
-
-			foreach (var t in tokens)
-			{
-
-				if (t.Kind == TokenKind.Eof)
-					break;
-
-				// ReSharper disable once SwitchStatementHandlesSomeKnownEnumValuesWithDefault
-				switch (t.Kind)
-				{
-
-					case TokenKind.Eol:
-						_ = builder.AppendLine();
-
-						continue;
-
-					case TokenKind.SpecialActionSymbol:
-						_ = builder.Append('@');
-
-						continue;
-
-					case TokenKind.LogicPathValue:
-						_ = builder.Append(t.Value);
-
-						continue;
-
-					default:
-						_ = builder.Append(t.Value);
-						_ = builder.Append(' ');
-
-						break;
-
-				}
-
-			}
-
-			return builder.ToString();
-
-		}
-
-		/// <inheritdoc />
-		public static IEnumerable<SyntaxToken> TokenizeLine(string line)
+		/// <summary>
+		/// Tokenizes a line of RSML.
+		/// </summary>
+		/// <param name="line">The line</param>
+		/// <returns>A container for up to 8 tokens</returns>
+		public static SyntaxLine TokenizeLine(ReadOnlySpan<char> line)
 		{
 
 			int pos = 0;
 			SkipWhitespace(line, ref pos);
 
 			if (pos >= line.Length)
-			{
-
-				yield return new(TokenKind.Eol, Environment.NewLine);
-
-				yield break;
-
-			}
+				return new(new(TokenKind.Eol, Environment.NewLine));
 
 			switch (line[pos])
 			{
 
 				case '#':
-					yield return new(TokenKind.CommentSymbol, '#');
-					yield return new(TokenKind.CommentText, line.AsSpan()[++pos..]);
-					yield return new(TokenKind.Eol, Environment.NewLine);
-
-					yield break;
+					return new(new(TokenKind.CommentSymbol, '#'), new(TokenKind.CommentText, line[++pos..]), new(TokenKind.Eol, Environment.NewLine));
 
 				case '@':
-					yield return new(TokenKind.SpecialActionSymbol, '@');
-
 					++pos; // advance to ignore the #
 					var actionName = ReadUntilWhitespaceOrEol(line, ref pos);
-
-					yield return new(TokenKind.SpecialActionName, actionName);
-
 					var argument = ReadUntilWhitespaceOrEol(line, ref pos);
 
-					yield return new(TokenKind.SpecialActionArgument, argument);
-
-					yield return new(TokenKind.Eol, Environment.NewLine);
-
-					yield break;
+					return new(
+						new(TokenKind.SpecialActionSymbol, '@'), new(TokenKind.SpecialActionName, actionName.ToString()),
+						new(TokenKind.SpecialActionArgument, argument.ToString()), new(TokenKind.Eol, Environment.NewLine),
+						ValueToken.Empty
+					);
 
 			}
 
 			var op = ReadUntilWhitespaceOrEol(line, ref pos);
+			SyntaxLine logicLine = new();
 
 			if (op.IsEquals("->"))
-				yield return new(TokenKind.ReturnOperator, op);
+				logicLine.Add(new(TokenKind.ReturnOperator, "->"));
 
 			else if (op.IsEquals("!>"))
-				yield return new(TokenKind.ThrowErrorOperator, op);
+				logicLine.Add(new(TokenKind.ThrowErrorOperator, "!>"));
 
 			while (pos < line.Length)
 			{
@@ -125,24 +69,31 @@ namespace RSML.Analyzer.Syntax
 					pos++; // ignore the double quote
 					var retVal = ReadQuotedString(line, ref pos);
 
-					yield return new(TokenKind.LogicPathValue, retVal);
-					yield return new(TokenKind.Eol, Environment.NewLine);
+					logicLine.Add(new(TokenKind.LogicPathValue, retVal.ToString()));
+					logicLine.Add(new(TokenKind.Eol, Environment.NewLine));
 
-					yield break;
+					break;
 
 				}
 
 				var token = TokenizeLogicPathComponent(line, ref pos);
 
-				if (token is not null)
-					yield return (SyntaxToken)token;
+				if (!token.IsEmpty())
+					logicLine.Add(new(token.Kind, token.Value.ToString()));
 
 			}
 
+			return logicLine;
+
 		}
 
-		/// <inheritdoc />
-		public static SyntaxToken? TokenizeLogicPathComponent(ReadOnlySpan<char> line, ref int pos)
+		/// <summary>
+		/// Tokenizes a logic path's component.
+		/// </summary>
+		/// <param name="line">The line</param>
+		/// <param name="pos">The index position</param>
+		/// <returns>A token</returns>
+		public static ValueToken TokenizeLogicPathComponent(ReadOnlySpan<char> line, ref int pos)
 		{
 
 			SkipWhitespace(line, ref pos);
@@ -198,7 +149,7 @@ namespace RSML.Analyzer.Syntax
 
 			pos = currentPosVal;
 
-			return null;
+			return ValueToken.Empty;
 
 		}
 

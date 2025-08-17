@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using System.Text;
 
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Configs;
@@ -9,15 +8,14 @@ using BenchmarkDotNet.Jobs;
 
 using RSML.Evaluation;
 using RSML.Machine;
+using RSML.Performance.Stateless;
 
 
 namespace RSML.Benchmarks
 {
 
 	[MemoryDiagnoser]
-	[SimpleJob(RuntimeMoniker.Net80)]
-	[WarmupCount(2)]
-	[IterationCount(3)]
+	[SimpleJob(RuntimeMoniker.Net80, warmupCount: 2, iterationCount: 3)]
 	[HideColumns("Job", "StdDev")]
 	[GroupBenchmarksBy(BenchmarkLogicalGroupRule.ByCategory)]
 	[SuppressMessage("Performance", "CA1822:Mark members as static")]
@@ -26,11 +24,12 @@ namespace RSML.Benchmarks
 
 		private readonly LocalMachine ubuntu = new("ubuntu", null, null);
 
-		private Evaluator? primitiveEvaluatorLogic;
-		private Evaluator? primitiveEvaluatorAction;
-		private Evaluator? primitiveEvaluatorComment;
-		private Evaluator? primitiveEvaluatorCommentWs;
-		private Evaluator? primitiveEvaluatorNewlines;
+		private string? complexContent1;
+		private string? complexContent2;
+
+		private const string SmallContent = "-> windows \"value\"\n@SpecialAction arg\n# Comment";
+		private string? mediumContent;
+		private string? largeContent;
 
 		private Evaluator? complexEvaluator1;
 		private Evaluator? complexEvaluator2;
@@ -40,11 +39,23 @@ namespace RSML.Benchmarks
 		private Evaluator? mediumEvaluator;
 		private Evaluator? largeEvaluator;
 
+		private Evaluator? primitiveEvaluatorAction;
+		private Evaluator? primitiveEvaluatorComment;
+		private Evaluator? primitiveEvaluatorCommentWs;
+
+		private Evaluator? primitiveEvaluatorLogic;
+		private Evaluator? primitiveEvaluatorNewlines;
+
 		[GlobalSetup]
 		public void Setup()
 		{
 
-			var datasetPath = Path.Join(Environment.CurrentDirectory, "..", "..", "..", "..", "Dataset");
+			string datasetPath = Path.Join(
+				Environment.CurrentDirectory, "..", "..", "..", "..",
+				"Dataset"
+			);
+
+			StatelessEvaluator.SpecialActions["SpecialAction"] = (_, _) => 0;
 
 			primitiveEvaluatorComment = CreateConfiguredParser("# comment");
 			primitiveEvaluatorCommentWs = CreateConfiguredParser("                       # comment");
@@ -52,60 +63,19 @@ namespace RSML.Benchmarks
 			primitiveEvaluatorLogic = CreateConfiguredParser("-> windows 10 x64 \"Some random value\"");
 			primitiveEvaluatorAction = CreateConfiguredParser("@SpecialAction\n@SpecialAction\n@EndAll");
 
-			smallEvaluator = CreateConfiguredParser("-> windows \"value\"\n@SpecialAction arg\n# Comment");
-			mediumEvaluator = CreateConfiguredParser(File.ReadAllText(Path.Join(datasetPath, "medium_content.rsea")));
-			largeEvaluator = CreateConfiguredParser(File.ReadAllText(Path.Join(datasetPath, "large_content.rsea")));
+			mediumContent = File.ReadAllText(Path.Join(datasetPath, "medium_content.rsea"));
+			largeContent = File.ReadAllText(Path.Join(datasetPath, "large_content.rsea"));
 
-			complexEvaluator1 = CreateConfiguredParser(File.ReadAllText(Path.Join(datasetPath, "complex_content_1.rsea")));
-			complexEvaluator2 = CreateConfiguredParser(File.ReadAllText(Path.Join(datasetPath, "complex_content_2.rsea")));
+			complexContent1 = File.ReadAllText(Path.Join(datasetPath, "complex_content_1.rsea"));
+			complexContent2 = File.ReadAllText(Path.Join(datasetPath, "complex_content_2.rsea"));
+
+			smallEvaluator = CreateConfiguredParser(SmallContent);
+			mediumEvaluator = CreateConfiguredParser(mediumContent);
+			largeEvaluator = CreateConfiguredParser(largeContent);
+
+			complexEvaluator1 = CreateConfiguredParser(complexContent1);
+			complexEvaluator2 = CreateConfiguredParser(complexContent2);
 			complexEvaluator3 = CreateConfiguredParser(File.ReadAllText(Path.Join(datasetPath, "complex_content_3.rsea")));
-
-		}
-
-		internal static string GenerateContent(int lines)
-		{
-
-			var sb = new StringBuilder();
-
-			for (int i = 0; i < lines; i++)
-			{
-
-				_ = sb.AppendLine(
-					i % 5 == 0
-						? $"-> windows \"value{i}\""
-						: $"# Comment {i}"
-				);
-
-			}
-
-			return sb.ToString();
-
-		}
-
-		internal static string GenerateComplexContent(int lines)
-		{
-
-			var sb = new StringBuilder();
-			var rand = new Random();
-
-			for (int i = 0; i < lines; i++)
-			{
-
-				_ = rand.Next(0, 6) switch
-				{
-
-					0 => sb.AppendLine($"-> windows \"value{i}\""),
-					1 => sb.AppendLine($"@SpecialAction arg{i}"),
-					2 => sb.AppendLine($"!> windows x64 \"value{i}\""),
-					3 => sb.AppendLine($"-> windows {i} x64 \"value{i}\""),
-					4 => sb.AppendLine($"# Comment {i}"),
-					_ => sb.AppendLine($"     # Comment {i}")
-
-				};
-
-			}
-
-			return sb.ToString();
 
 		}
 
@@ -138,6 +108,26 @@ namespace RSML.Benchmarks
 		[Benchmark]
 		[BenchmarkCategory("Primitives")]
 		public void Evaluate_PrimitiveNewlines() => primitiveEvaluatorNewlines!.Evaluate(ubuntu);
+
+		[Benchmark]
+		[BenchmarkCategory("StatelessEvaluator")]
+		public void Evaluate_Stateless_SmallContent() => StatelessEvaluator.Evaluate(SmallContent, ubuntu);
+
+		[Benchmark]
+		[BenchmarkCategory("StatelessEvaluator")]
+		public void Evaluate_Stateless_MediumContent() => StatelessEvaluator.Evaluate(mediumContent, ubuntu);
+
+		[Benchmark]
+		[BenchmarkCategory("StatelessEvaluator")]
+		public void Evaluate_Stateless_LargeContent() => StatelessEvaluator.Evaluate(largeContent, ubuntu);
+
+		[Benchmark]
+		[BenchmarkCategory("StatelessEvaluator")]
+		public void Evaluate_Stateless_ComplexContent_1() => StatelessEvaluator.Evaluate(complexContent1, ubuntu);
+
+		[Benchmark]
+		[BenchmarkCategory("StatelessEvaluator")]
+		public void Evaluate_Stateless_ComplexContent_2() => StatelessEvaluator.Evaluate(complexContent2, ubuntu);
 
 		[Benchmark]
 		[BenchmarkCategory("Evaluator")]

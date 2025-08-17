@@ -10,8 +10,8 @@
 
 	<ItemGroup>
 		<PackageReference Include="coverlet.collector" Version="6.0.4">
-		  <PrivateAssets>all</PrivateAssets>
-		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
 		<PackageReference Include="xunit" Version="2.5.3" />
@@ -19,7 +19,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\RSML.Native\RSML.Native.csproj" />
+		<ProjectReference Include="..\RSML.Performance\RSML.Performance.csproj" />
 		<ProjectReference Include="..\RSML\RSML.csproj" />
 	</ItemGroup>
 

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 using RSML.Analyzer.Syntax;
 using RSML.Toolchain;
@@ -26,10 +27,10 @@ namespace RSML.Analyzer.Semantics
 		public Normalizer() { }
 
 		/// <inheritdoc />
-		public SpecificationCompliance SpecificationCompliance => SpecificationCompliance.CreateFull(ApiVersion);
+		public static SpecificationCompliance SpecificationCompliance => SpecificationCompliance.CreateFull(ApiVersion);
 
 		/// <inheritdoc />
-		public IEnumerable<SyntaxToken> NormalizeLine(IEnumerable<SyntaxToken> tokens, out int length)
+		public static IEnumerable<SyntaxToken> NormalizeLine(IEnumerable<SyntaxToken> tokens, out int length)
 		{
 
 			var actualTokens = tokens.ToArray();
@@ -96,6 +97,7 @@ namespace RSML.Analyzer.Semantics
 
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		private static SyntaxToken[] ReturnHelper(SyntaxToken[] tokens, out int len)
 		{
 

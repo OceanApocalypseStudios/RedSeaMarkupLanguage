@@ -19,23 +19,23 @@ namespace RSML.Analyzer.Semantics
 		private const string ApiVersion = "2.0.0";
 
 		/// <inheritdoc />
-		public SpecificationCompliance SpecificationCompliance => SpecificationCompliance.CreateFull(ApiVersion);
+		public static SpecificationCompliance SpecificationCompliance => SpecificationCompliance.CreateFull(ApiVersion);
 
 		/// <inheritdoc />
-		public ImmutableHashSet<string> ValidComparators => [ "==", "!=", "<", ">", "<=", ">=" ];
+		public static ImmutableHashSet<string> ValidComparators => [ "==", "!=", "<", ">", "<=", ">=" ];
 
 		/// <inheritdoc />
-		public ImmutableHashSet<string> ValidArchitectures => [ "x64", "x86", "arm64", "arm32", "loongarch64" ];
+		public static ImmutableHashSet<string> ValidArchitectures => [ "x64", "x86", "arm64", "arm32", "loongarch64" ];
 
 		/// <inheritdoc />
-		public ImmutableHashSet<string> ValidSystems =>
+		public static ImmutableHashSet<string> ValidSystems =>
 		[
 			"windows", "osx", "linux", "freebsd", "debian", "ubuntu",
 			"archlinux", "fedora"
 		];
 
 		/// <inheritdoc />
-		public void ValidateLine(ReadOnlySpan<SyntaxToken> tokens)
+		public static void ValidateLine(ReadOnlySpan<SyntaxToken> tokens)
 		{
 
 			if (tokens.IsEmpty)
@@ -275,7 +275,7 @@ namespace RSML.Analyzer.Semantics
 		}
 
 		/// <inheritdoc />
-		public void ValidateBuffer(ReadOnlySpan<SyntaxToken> bufferTokens)
+		public static void ValidateBuffer(ReadOnlySpan<SyntaxToken> bufferTokens)
 		{
 
 			if (bufferTokens.IsEmpty)

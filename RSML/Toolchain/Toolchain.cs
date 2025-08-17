@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 
-using RSML.Analyzer.Semantics;
 using RSML.Analyzer.Syntax;
 using RSML.Evaluation;
 using RSML.Machine;
@@ -26,16 +25,6 @@ namespace RSML.Toolchain
 		/// The RSML reader.
 		/// </summary>
 		public IReader? Reader { get; private set; }
-
-		/// <summary>
-		/// The normalizer.
-		/// </summary>
-		public INormalizer? Normalizer { get; private set; }
-
-		/// <summary>
-		/// The validator.
-		/// </summary>
-		public IValidator? Validator { get; private set; }
 
 		/// <summary>
 		/// The evaluator.
@@ -63,16 +52,6 @@ namespace RSML.Toolchain
 
 					break;
 
-				case INormalizer normalizer:
-					Normalizer = normalizer;
-
-					break;
-
-				case IValidator validator:
-					Validator = validator;
-
-					break;
-
 				case IEvaluator evaluator:
 					Evaluator = evaluator;
 
@@ -92,7 +71,8 @@ namespace RSML.Toolchain
 		/// <remarks>This method uses Activator.CreateInstance, therefore not being AOT-friendly.</remarks>
 		[RequiresDynamicCode("This method uses Activator.CreateInstance")]
 		public Toolchain Bind<TComponent>()
-			where TComponent : IToolchainComponent => Bind(Activator.CreateInstance<TComponent>());
+			where TComponent : IToolchainComponent =>
+			Bind(Activator.CreateInstance<TComponent>());
 
 		/// <summary>
 		/// Unbinds all toolchain components.
@@ -103,8 +83,6 @@ namespace RSML.Toolchain
 
 			Lexer = null;
 			Reader = null;
-			Normalizer = null;
-			Validator = null;
 			Evaluator = null;
 
 			return this;
@@ -116,7 +94,7 @@ namespace RSML.Toolchain
 		/// </summary>
 		/// <param name="machineData">The machine's data</param>
 		/// <returns>The evaluation result or <c>null</c> if the evaluator is <c>null</c></returns>
-		public EvaluationResult? EvaluateRsml(LocalMachine machineData) => Evaluator?.Evaluate(machineData, Reader, Lexer, Normalizer, Validator);
+		public EvaluationResult? EvaluateRsml(LocalMachine machineData) => Evaluator?.Evaluate(machineData, Reader);
 
 		/// <summary>
 		/// Creates an empty toolchain.
@@ -128,8 +106,6 @@ namespace RSML.Toolchain
 
 				Lexer = null,
 				Reader = null,
-				Normalizer = null,
-				Validator = null,
 				Evaluator = null
 
 			};
@@ -140,26 +116,20 @@ namespace RSML.Toolchain
 		/// <param name="content">The reader's content</param>
 		/// <typeparam name="TLexer">The lexer</typeparam>
 		/// <typeparam name="TReader">The reader</typeparam>
-		/// <typeparam name="TNormalizer">The normalizer</typeparam>
-		/// <typeparam name="TValidator">The validator</typeparam>
 		/// <typeparam name="TEvaluator">The evaluator</typeparam>
 		/// <returns>The toolchain</returns>
 		/// <remarks>This method uses Activator.CreateInstance, therefore not being AOT-friendly.</remarks>
 		[RequiresDynamicCode("This method uses Activator.CreateInstance")]
-		public static Toolchain Create<TLexer, TReader, TNormalizer, TValidator, TEvaluator>(string content)
+		public static Toolchain Create<TLexer, TReader, TEvaluator>(string content)
 			where TLexer : ILexer
 			where TReader : IReader
-			where TNormalizer : INormalizer
-			where TValidator : IValidator
 			where TEvaluator : IEvaluator =>
 			new()
 			{
 
 				Lexer = Activator.CreateInstance<TLexer>(),
-				Reader = Activator.CreateInstance(typeof(TReader), content) as RsmlReader,
-				Normalizer = Activator.CreateInstance<TNormalizer>(),
-				Validator = Activator.CreateInstance<TValidator>(),
-				Evaluator = Activator.CreateInstance(typeof(TValidator), content) as Evaluator
+				Reader = Activator.CreateInstance(typeof(TReader), content) as IReader,
+				Evaluator = Activator.CreateInstance(typeof(TEvaluator), content) as IEvaluator
 
 			};
 

@@ -57,6 +57,16 @@ namespace RSML.CLI
 
 			disableAnsiOpt.Aliases.Add("--no-colors");
 
+			Option<FileInfo?> filepathOpt = new("--filepath")
+			{
+
+				Description = "The file to load RSML from, instead of the stdin.",
+				DefaultValueFactory = _ => null
+
+			};
+
+			filepathOpt.Aliases.Add("-f");
+
 			#endregion
 
 			#region RootCommand Setup
@@ -329,6 +339,29 @@ namespace RSML.CLI
 
 			#endregion
 
+			#region Tokenize Command
+
+			Command tokenizeCmd = new("tokenize", "Tokenizes a RSML document");
+
+			tokenizeCmd.Options.Add(filepathOpt);
+
+			tokenizeCmd.SetAction(result =>
+				{
+
+					string? filepath = result.GetValue(filepathOpt)?.FullName;
+					string data = filepath is null ? Console.In.ReadToEnd() : File.ReadAllText(filepath);
+
+					Console.WriteLine(Tokenize_NoPretty(data));
+
+					return 0;
+
+				}
+			);
+
+			rootCommand.Add(tokenizeCmd);
+
+			#endregion
+
 			#region Evaluate Command
 
 			Command evaluateCmd = new("evaluate", "Evaluates a RSML document");
@@ -343,29 +376,8 @@ namespace RSML.CLI
 
 			machineOpt.Aliases.Add("-m");
 
-			Option<FileInfo?> filepathOpt = new("--filepath")
-			{
-
-				Description = "The file to load RSML from, instead of the stdin.",
-				DefaultValueFactory = _ => null
-
-			};
-
-			filepathOpt.Aliases.Add("-M");
-
-			Option<bool> cacheSpecialActionsOpt = new("--no-cache-specials")
-			{
-
-				Description = "Don't cache special actions' results (causes performance hit).",
-				DefaultValueFactory = _ => false
-
-			};
-
-			cacheSpecialActionsOpt.Aliases.Add("-C");
-
 			evaluateCmd.Options.Add(machineOpt);
 			evaluateCmd.Options.Add(filepathOpt);
-			evaluateCmd.Options.Add(cacheSpecialActionsOpt);
 			evaluateCmd.Options.Add(disableAnsiOpt);
 
 			evaluateCmd.SetAction(result =>
@@ -376,6 +388,7 @@ namespace RSML.CLI
 					string data = filepath is null ? Console.In.ReadToEnd() : File.ReadAllText(filepath);
 
 					LocalMachine machine;
+
 					try
 					{
 
@@ -395,9 +408,9 @@ namespace RSML.CLI
 					}
 
 					if (disableAnsi)
-						Evaluate_NoPretty(data, machine, !result.GetValue(cacheSpecialActionsOpt));
+						Evaluate_NoPretty(data, machine);
 					else
-						Evaluate_Pretty(data, machine, !result.GetValue(cacheSpecialActionsOpt));
+						Evaluate_Pretty(data, machine);
 
 					return 0;
 

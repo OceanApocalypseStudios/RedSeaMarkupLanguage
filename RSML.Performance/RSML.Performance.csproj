@@ -4,17 +4,14 @@
 		<TargetFramework>net8.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-
-		<!-- Native Publishing -->
-		<PublishAot>true</PublishAot>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 
 		<!-- NuGet Properties -->
-		<Title>RSML Native Interop</Title>
+		<Title>RSML Performance Pack</Title>
 		<Authors>OceanApocalypseStudios</Authors>
 		<Company>OceanApocalypseStudios</Company>
-		<Version>2.0.0-prerelease9</Version>
-		<Description>Native C-like interopability for RSML.</Description>
+		<Version>2.0.0-prerelease8</Version>
+		<Description>An extremely performant addon for the markup language designed for system-based logic paths in C#.</Description>
 		<Copyright>Copyright (c) 2025 OceanApocalypseStudios</Copyright>
 		<PackageProjectUrl>https://oceanapocalypsestudios.org/rsml-docs/2.0.0-prerelease8/</PackageProjectUrl>
 		<PackageLicenseUrl>https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/blob/v2.0.0-dev/LICENSE.txt</PackageLicenseUrl>
@@ -27,6 +24,17 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\RSML\RSML.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="..\Assets\Icon.png">
+			<Pack>True</Pack>
+			<Link>Icon.png</Link>
+		</None>
+		<None Update="Icon.png">
+		  <Pack>True</Pack>
+		  <PackagePath></PackagePath>
+		</None>
 	</ItemGroup>
 
 </Project>

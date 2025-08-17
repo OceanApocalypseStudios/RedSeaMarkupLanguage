@@ -1,10 +1,13 @@
 ﻿using System;
-using System.Diagnostics;
+using System.Collections.Generic;
 
+using RSML.Analyzer.Semantics;
+using RSML.Analyzer.Syntax;
 using RSML.CLI.Helpers;
 using RSML.Evaluation;
 using RSML.Exceptions;
 using RSML.Machine;
+using RSML.Reader;
 
 using Spectre.Console;
 
@@ -15,32 +18,75 @@ namespace RSML.CLI
 	internal partial class Program
 	{
 
-		public static void Evaluate_NoPretty(string data, LocalMachine machine, bool cacheActionResults = true) =>
-			Console.WriteLine(new Evaluator(data).Evaluate(machine, !cacheActionResults).MatchValue);
+		public static string Tokenize_NoPretty(string data)
+		{
 
-		public static void Evaluate_Pretty(string data, LocalMachine machine, bool cacheActionResults = true)
+			List<SyntaxToken> tokens = [ ];
+			RsmlReader reader = new(data);
+
+			while (reader.TryTokenizeNextLine(out var rawTokens))
+				tokens.AddRange(Normalizer.NormalizeLine(rawTokens, out _));
+
+			return String.Join(Environment.NewLine, tokens);
+
+		}
+
+		public static void Evaluate_NoPretty(string data, LocalMachine machine)
+		{
+
+			try
+			{
+				Console.WriteLine(new Evaluator(data).Evaluate(machine).MatchValue);
+			}
+			catch (InvalidRsmlSyntax ex)
+			{
+				Console.WriteLine($"Invalid syntax: {ex.Message}");
+			}
+			catch (UserRaisedException)
+			{
+				Console.WriteLine("Error-throw operation used.");
+			}
+			catch (UndefinedActionException)
+			{
+				Console.WriteLine("An undefined action was used.");
+			}
+
+		}
+
+		public static void Evaluate_Pretty(string data, LocalMachine machine)
 		{
 
 			Evaluator evaluator = new(data);
+			EvaluationResult result;
 
-			var start = Stopwatch.GetTimestamp();
-			var result = evaluator.Evaluate(machine, !cacheActionResults);
-
-			if (data.Length <= 10000) // 10000 characters, not lines brother
+			try
+			{
+				result = evaluator.Evaluate(machine);
+			}
+			catch (UserRaisedException)
 			{
 
-				for (int i = 0; i < 10; i++)
-					_ = evaluator.Evaluate(machine, !cacheActionResults);
-				// average of several calls to avoid overhead of Stopwatch
+				AnsiConsole.Markup("[red]Error:[/] [white]The RSML document contains error-throw operations.[/]");
+
+				return;
 
 			}
+			catch (InvalidRsmlSyntax ex)
+			{
 
-			var end = Stopwatch.GetTimestamp();
+				AnsiConsole.Markup($"[red]Error:[/] [white]Invalid RSML syntax ({ex.Message})[/]");
 
-			var timeTaken = (end - start) * 1000 / Stopwatch.Frequency;
+				return;
 
-			if (data.Length <= 10000)
-				timeTaken /= 10; // iterations (or calls)
+			}
+			catch (UndefinedActionException)
+			{
+
+				AnsiConsole.Markup("[red]Error:[/] [white]An undefined action was used.[/]");
+
+				return;
+
+			}
 
 			AnsiConsole.Write(
 				new Columns(
@@ -56,10 +102,8 @@ namespace RSML.CLI
 					new Panel(
 						new Rows(
 							new Markup("[green]Statistics[/]").Centered(),
-							new Markup($"[white]Time elapsed [/][red](crude estimate)[/][white]:[/] [gray]{timeTaken} ms[/]"),
 							new Markup($"[white]Special actions loaded:[/] [gray]{evaluator.SpecialActions.Count + 1}[/]"),
 							new Markup($"[white]Middlewares loaded:[/] [gray]{evaluator.LoadedMiddlewaresCount}[/]"),
-							new Markup($"[white]Special action caching:[/] [gray]{cacheActionResults}[/]"),
 							new Markup($"[white]Amount of characters in document:[/] [gray]{data.Length}[/]")
 						)
 					).Expand()

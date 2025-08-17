@@ -35,6 +35,7 @@
  */
 
 using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -66,7 +67,7 @@ namespace RSML.Evaluation
 		private readonly Dictionary<MiddlewareRunnerLocation, ICollection<Middleware>> evaluatorMiddlewares = [ ];
 
 		private readonly Dictionary<string, SpecialAction> specialActions = [ ];
-		private readonly Dictionary<(string name, string arg), byte> cachedResults = [ ];
+		private FrozenDictionary<string, SpecialAction>? frozenSpecialActions;
 
 		/// <summary>
 		/// Creates a new instance of a RSML evaluator.
@@ -80,8 +81,13 @@ namespace RSML.Evaluation
 		/// <param name="content">The document</param>
 		public Evaluator(string content) { Content = content; }
 
+		/// <summary>
+		/// The amount of loaded middlewares.
+		/// </summary>
+		public int LoadedMiddlewaresCount => evaluatorMiddlewares.Values.Sum(midCol => midCol.Count);
+
 		/// <inheritdoc />
-		public SpecificationCompliance SpecificationCompliance => SpecificationCompliance.CreateFull(ApiVersion);
+		public static SpecificationCompliance SpecificationCompliance => SpecificationCompliance.CreateFull(ApiVersion);
 
 		/// <inheritdoc />
 		public string Content { get; set; }
@@ -89,57 +95,16 @@ namespace RSML.Evaluation
 		/// <inheritdoc />
 		public ReadOnlyDictionary<string, SpecialAction> SpecialActions => specialActions.AsReadOnly();
 
-		/// <summary>
-		/// The amount of loaded middlewares.
-		/// </summary>
-		public int LoadedMiddlewaresCount => evaluatorMiddlewares.Values.Sum(midCol => midCol.Count);
-
 		/// <inheritdoc />
 		public EvaluationResult Evaluate() => Evaluate(new());
 
 		/// <inheritdoc />
-		public EvaluationResult Evaluate(LocalMachine machineData) => Evaluate(machineData, null, null, null, null);
-
-		/// <summary>
-		/// Evaluates the RSML document with the specified machine data.
-		/// </summary>
-		/// <param name="machineData">The machine data</param>
-		/// <param name="avoidCache">Avoid caching anything</param>
-		/// <returns>A result</returns>
-		public EvaluationResult Evaluate(LocalMachine machineData, bool avoidCache) =>
-			Evaluate(
-				machineData, null, null, null, null,
-				avoidCache
-			);
+		public EvaluationResult Evaluate(LocalMachine machineData) => Evaluate(machineData, null);
 
 		/// <inheritdoc />
-		public EvaluationResult Evaluate(LocalMachine machineData, IReader? reader, ILexer? lexer, INormalizer? normalizer, IValidator? validator) =>
-			Evaluate(
-				machineData, reader, lexer, normalizer, validator,
-				false
-			);
-
-		/// <summary>
-		/// Evaluates a RSML document.
-		/// </summary>
-		/// <param name="machineData">The machine's data</param>
-		/// <param name="reader">A reader</param>
-		/// <param name="lexer">A lexer</param>
-		/// <param name="normalizer">A normalizer</param>
-		/// <param name="validator">A validator</param>
-		/// <param name="avoidCache"><c>true</c> if caching should not be done</param>
-		/// <returns>A result</returns>
-		/// <exception cref="ActionStandardErrorException">The action raised an error</exception>
-		/// <exception cref="ActionErrorException">The action raised an error (non-compliant way)</exception>
-		/// <exception cref="UserRaisedException">A user-raised excpetion was thrown</exception>
-		/// <exception cref="InvalidRsmlSyntax">The syntax is invalid</exception>
 		public EvaluationResult Evaluate(
 			LocalMachine machineData,
-			IReader? reader,
-			ILexer? lexer,
-			INormalizer? normalizer,
-			IValidator? validator,
-			bool avoidCache
+			IReader? reader
 		)
 		{
 
@@ -147,14 +112,14 @@ namespace RSML.Evaluation
 				return new();
 
 			reader ??= new RsmlReader(Content);
-			lexer ??= new Lexer();
-			validator ??= new Validator();
-			normalizer ??= new Normalizer();
+
+			if (specialActions.Count > 0)
+				FreezeSpecialActions();
 
 			if (evaluatorMiddlewares.Count == 0)
-				return Evaluate_NoMiddleware(machineData, lexer, reader, normalizer, validator, avoidCache);
+				return Evaluate_NoMiddleware(machineData, reader);
 
-			while (reader.TryTokenizeNextLine(lexer, out var rawTokens))
+			while (reader.TryTokenizeNextLine(out var rawTokens))
 			{
 
 				var syntaxTokens = rawTokens as SyntaxToken[] ?? rawTokens.ToArray();
@@ -162,13 +127,13 @@ namespace RSML.Evaluation
 				if (RunMiddlewares(MiddlewareRunnerLocation.BeforeNormalization, syntaxTokens) == MiddlewareResult.EndEvaluation)
 					return new();
 
-				var normalizedTokens = normalizer.NormalizeLine(syntaxTokens, out _);
+				var normalizedTokens = Normalizer.NormalizeLine(syntaxTokens, out _);
 				var tokens = normalizedTokens as SyntaxToken[] ?? normalizedTokens.ToArray();
 
 				if (RunMiddlewares(MiddlewareRunnerLocation.BeforeValidation, tokens) == MiddlewareResult.EndEvaluation)
 					return new();
 
-				validator.ValidateLine(tokens.AsSpan()); // line validation
+				Validator.ValidateLine(tokens.AsSpan()); // line validation
 
 				if (RunMiddlewares(MiddlewareRunnerLocation.BeforeEolRemoval, tokens) == MiddlewareResult.EndEvaluation)
 					return new();
@@ -210,7 +175,7 @@ namespace RSML.Evaluation
 						if (RunMiddlewares(MiddlewareRunnerLocation.ThreeLengthBeforeSpecialCall, tokens) == MiddlewareResult.EndEvaluation)
 							return new();
 
-						byte result = HandleSpecialActionCall(tokens[1].Value, tokens[2].Value, avoidCache);
+						byte result = HandleSpecialActionCall(tokens[1].Value, tokens[2].Value);
 
 						switch (result)
 						{
@@ -310,13 +275,13 @@ namespace RSML.Evaluation
 		}
 
 		/// <summary>
-		/// Invalidates saved cache.
+		/// Freezes special actions.
 		/// </summary>
 		/// <returns>Self (fluent API)</returns>
-		public Evaluator InvalidateCache()
+		public Evaluator FreezeSpecialActions()
 		{
 
-			cachedResults.Clear();
+			frozenSpecialActions = specialActions.ToFrozenDictionary();
 
 			return this;
 
@@ -370,21 +335,17 @@ namespace RSML.Evaluation
 		/// </summary>
 		private EvaluationResult Evaluate_NoMiddleware(
 			LocalMachine machineData,
-			ILexer lexer,
-			IReader reader,
-			INormalizer normalizer,
-			IValidator validator,
-			bool avoidCache
+			IReader reader
 		)
 		{
 
-			while (reader.TryTokenizeNextLine(lexer, out var rawTokens))
+			while (reader.TryTokenizeNextLine(out var rawTokens))
 			{
 
-				var normalizedTokens = normalizer.NormalizeLine(rawTokens, out _);
+				var normalizedTokens = Normalizer.NormalizeLine(rawTokens, out _);
 				var tokens = (normalizedTokens as SyntaxToken[] ?? normalizedTokens.ToArray()).AsSpan();
 
-				validator.ValidateLine(tokens); // line validation
+				Validator.ValidateLine(tokens); // line validation
 
 				if (tokens[^1].Kind == TokenKind.Eol)
 					tokens = tokens[..^1];
@@ -410,7 +371,7 @@ namespace RSML.Evaluation
 						if (tokens[1].Value == "EndAll")
 							continue;
 
-						byte result = HandleSpecialActionCall(tokens[1].Value, tokens[2].Value, avoidCache);
+						byte result = HandleSpecialActionCall(tokens[1].Value, tokens[2].Value);
 
 						switch (result)
 						{
@@ -481,24 +442,15 @@ namespace RSML.Evaluation
 				  .FirstOrDefault(result => result != MiddlewareResult.ContinueEvaluation)
 				: MiddlewareResult.ContinueEvaluation;
 
-		private byte HandleSpecialActionCall(string name, string arg, bool avoidCache = false)
+		private byte HandleSpecialActionCall(string name, string arg)
 		{
 
 			if (name == "EndAll")
 				return SpecialActionBehavior.StopEvaluation;
 
-			if (cachedResults.TryGetValue((name, arg), out var result) && !avoidCache)
-				return result;
-
-			if (!SpecialActions.TryGetValue(name, out var action))
-				throw new UndefinedActionException("Action is undefined but used");
-
-			if (avoidCache)
-				return action(this, arg);
-
-			cachedResults[(name, arg)] = action(this, arg);
-
-			return cachedResults[(name, arg)];
+			return frozenSpecialActions?.TryGetValue(name, out var action) ?? false
+					   ? action(this, arg)
+					   : throw new UndefinedActionException("Action is undefined but used");
 
 		}
 
