@@ -32,8 +32,8 @@
 			<Link>Icon.png</Link>
 		</None>
 		<None Update="Icon.png">
-		  <Pack>True</Pack>
-		  <PackagePath></PackagePath>
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
 		</None>
 	</ItemGroup>
 

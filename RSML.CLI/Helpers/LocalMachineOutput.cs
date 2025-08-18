@@ -13,6 +13,8 @@ namespace RSML.CLI.Helpers
 	internal static class LocalMachineOutput
 	{
 
+		private static string Quote(string? str) => str is null or "null" ? "null" : $"\"{str}\"";
+
 		public static LocalMachine FromJson(string? json)
 		{
 
@@ -26,8 +28,8 @@ namespace RSML.CLI.Helpers
 			int sysVersion = system.GetProperty("version").GetInt32();
 
 			var linuxDistro = document.RootElement.GetProperty("linuxDistro");
-			string? distroName = system.GetProperty("name").GetString();
-			string? distroFamily = system.GetProperty("family").GetString();
+			string? distroName = linuxDistro.GetProperty("name").GetString();
+			string? distroFamily = linuxDistro.GetProperty("family").GetString();
 
 			string? procArch = document.RootElement.GetProperty("processor").GetProperty("architecture").GetString();
 
@@ -41,20 +43,20 @@ namespace RSML.CLI.Helpers
 		public static string AsJson(LocalMachine machine)
 		{
 
-			string systemVersion = machine.SystemVersion == -1 ? "null" : machine.SystemVersion.ToString();
+			string systemVersion = machine.StringifiedSystemVersion ?? "null";
 
 			return $$"""
 					 {
 					 	"system": {
-					 		"name": "{{machine.SystemName ?? "null"}}",
+					 		"name": {{Quote(machine.SystemName ?? "null")}},
 					 		"version" : {{systemVersion}}
 					 	},
 					 	"linuxDistro": {
-					 		"name": "{{machine.DistroName ?? "null"}}",
-					 		"family": "{{machine.DistroFamily ?? "null"}}"
+					 		"name": {{Quote(machine.DistroName ?? "null")}},
+					 		"family": {{Quote(machine.DistroFamily ?? "null")}}
 					 	},
 					 	"processor": {
-					 		"architecture": "{{machine.ProcessorArchitecture ?? "null"}}"
+					 		"architecture": {{Quote(machine.ProcessorArchitecture ?? "null")}}
 					 	}
 					 }
 					 """;
@@ -69,12 +71,12 @@ namespace RSML.CLI.Helpers
 									   {
 
 										   6                  => "Vista",
-										   7 or 8 or 10 or 11 => machine.SystemVersion.ToString(),
+										   7 or 8 or 10 or 11 => machine.StringifiedSystemVersion!,
 										   9                  => "8.1",
 										   _                  => "Unknown"
 
 									   }
-									   : machine.SystemVersion.ToString();
+									   : machine.StringifiedSystemVersion ?? "Unknown";
 
 			if (machine.SystemVersion == -1)
 				systemVersion = "Unknown";
@@ -99,12 +101,12 @@ namespace RSML.CLI.Helpers
 									   {
 
 										   6                  => "Vista",
-										   7 or 8 or 10 or 11 => machine.SystemVersion.ToString(),
+										   7 or 8 or 10 or 11 => machine.StringifiedSystemVersion!,
 										   9                  => "8.1",
 										   _                  => "Unknown"
 
 									   }
-									   : machine.SystemVersion.ToString();
+									   : machine.StringifiedSystemVersion ?? "Unknown";
 
 			if (machine.SystemVersion == -1)
 				systemVersion = "Unknown";

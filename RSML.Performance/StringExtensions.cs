@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Immutable;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -164,6 +165,21 @@ namespace RSML.Performance
 			}
 
 			return true;
+
+		}
+
+		internal static bool IsAsciiEqualsIgnoreCase(this ReadOnlySpan<char> chars, ImmutableHashSet<string> set)
+		{
+
+			foreach (string str in set)
+			{
+
+				if (chars.IsAsciiEqualsIgnoreCase(str))
+					return true;
+
+			}
+
+			return false;
 
 		}
 

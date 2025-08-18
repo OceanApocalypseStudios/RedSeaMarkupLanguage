@@ -17,6 +17,8 @@ namespace RSML.Machine
 	public partial struct LocalMachine
 	{
 
+		private string? systemVersionStr = null;
+
 		/// <summary>
 		/// The system's name or <c>null</c> if undetected.
 		/// </summary>
@@ -36,6 +38,24 @@ namespace RSML.Machine
 		/// The system's version or <c>-1</c> if undetected.
 		/// </summary>
 		public int SystemVersion { get; private set; } = -1;
+
+		/// <summary>
+		/// The system version, as a string.
+		/// </summary>
+		public string? StringifiedSystemVersion
+		{
+
+			get
+			{
+
+				if (systemVersionStr is null && SystemVersion != -1)
+					systemVersionStr = SystemVersion.ToString();
+
+				return systemVersionStr;
+
+			}
+
+		}
 
 		/// <summary>
 		/// The architecture in which the OS runs at.

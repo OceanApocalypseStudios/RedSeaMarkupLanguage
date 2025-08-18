@@ -474,7 +474,7 @@ namespace RSML.Evaluation
 
 				TokenKind.WildcardKeyword => true,
 				TokenKind.DefinedKeyword  => machine.SystemVersion != -1,
-				_                         => machine.SystemVersion.ToString() == tokens[2].Value
+				_                         => machine.StringifiedSystemVersion == tokens[2].Value
 
 			};
 
@@ -514,12 +514,12 @@ namespace RSML.Evaluation
 			{
 
 				case TokenKind.Equals:
-					systemVersionMatches = machine.SystemVersion.ToString() == tokens[3].Value;
+					systemVersionMatches = machine.StringifiedSystemVersion == tokens[3].Value;
 
 					break;
 
 				case TokenKind.Different:
-					systemVersionMatches = machine.SystemVersion.ToString() != tokens[3].Value;
+					systemVersionMatches = machine.StringifiedSystemVersion != tokens[3].Value;
 
 					break;
 
@@ -586,7 +586,7 @@ namespace RSML.Evaluation
 
 				TokenKind.WildcardKeyword => true,
 				TokenKind.DefinedKeyword  => machine.SystemVersion != -1,
-				_                         => machine.SystemVersion.ToString() == tokens[2].Value
+				_                         => machine.StringifiedSystemVersion == tokens[2].Value
 
 			};
 
@@ -625,12 +625,12 @@ namespace RSML.Evaluation
 			{
 
 				case TokenKind.Equals:
-					systemVersionMatches = machine.SystemVersion.ToString() == tokens[3].Value;
+					systemVersionMatches = machine.StringifiedSystemVersion == tokens[3].Value;
 
 					break;
 
 				case TokenKind.Different:
-					systemVersionMatches = machine.SystemVersion.ToString() != tokens[3].Value;
+					systemVersionMatches = machine.StringifiedSystemVersion != tokens[3].Value;
 
 					break;
 

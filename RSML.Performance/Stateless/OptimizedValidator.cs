@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Linq;
 
 using RSML.Analyzer.Semantics;
 using RSML.Analyzer.Syntax;
 using RSML.Exceptions;
+using RSML.Performance.Value;
 using RSML.Toolchain.Compliance;
 
 
-namespace RSML.Performance.Value
+namespace RSML.Performance.Stateless
 {
 
 	/// <summary>
@@ -29,11 +29,15 @@ namespace RSML.Performance.Value
 		public static void ValidateLine(SyntaxLine line)
 		{
 
-			if (line.Length == 0)
+			int len = line.Length;
+
+			if (len == 0)
 				throw new InvalidRsmlSyntax("Empty token sequence.");
 
-			if (line.Length != 1 && line[line.Last()].Kind == TokenKind.Eol)
+			if (len != 1 && line[line.Last()].Kind == TokenKind.Eol)
 				line.Remove(line.Last()); // removes last
+
+			len = line.Length; // recalculate cuz it changed
 
 			switch (line[0].Kind)
 			{
@@ -41,7 +45,7 @@ namespace RSML.Performance.Value
 				case TokenKind.Eol or TokenKind.Eof:
 					return; // we're done here
 
-				case TokenKind.CommentSymbol when line.Length != 2:
+				case TokenKind.CommentSymbol when len != 2:
 					throw new InvalidRsmlSyntax(
 						"A comment must be 2 tokens long."
 					); // even if you have a comment with no text not even spaces, you'll have 2 tokens
@@ -55,7 +59,7 @@ namespace RSML.Performance.Value
 				case TokenKind.CommentSymbol:
 					return;
 
-				case TokenKind.SpecialActionSymbol when line.Length != 3:
+				case TokenKind.SpecialActionSymbol when len != 3:
 					throw new InvalidRsmlSyntax("A special action must be 3 tokens long."); // even with no arg, you'll have 3 tokens
 
 				case TokenKind.SpecialActionSymbol when !line[0].Value.IsEquals("@"):
@@ -78,7 +82,7 @@ namespace RSML.Performance.Value
 			if (!line[0].Value.IsEquals("!>") && !line[0].Value.IsEquals("->"))
 				throw new InvalidRsmlSyntax("Operator must be one of !> or ->.");
 
-			switch (line.Length)
+			switch (len)
 			{
 
 				case 2:
@@ -94,15 +98,13 @@ namespace RSML.Performance.Value
 						line[2].Kind != TokenKind.LogicPathValue)
 						throw new InvalidRsmlSyntax("A 3 token long logic path must be a *Operator + SystemName + LogicPathValue overload.");
 
-					string sysName1 = line[1].Value.ToString();
-
 					if (!line[1].Value.IsEquals("any") && line[1].Kind == TokenKind.WildcardKeyword)
 						throw new InvalidRsmlSyntax("A token of type WildcardKeyword must have a value of 'any'.");
 
 					if (!line[1].Value.IsEquals("defined") && line[1].Kind == TokenKind.DefinedKeyword)
 						throw new InvalidRsmlSyntax("A token of type DefinedKeyword must have a value of 'defined'.");
 
-					if (!Validator.ValidSystems.Any(s => sysName1.Equals(s, StringComparison.OrdinalIgnoreCase)) &&
+					if (!line[1].Value.IsAsciiEqualsIgnoreCase(Validator.ValidSystems) &&
 						line[1].Kind == TokenKind.SystemName)
 						throw new InvalidRsmlSyntax("Invalid system name as of v2.0.0.");
 
@@ -122,9 +124,6 @@ namespace RSML.Performance.Value
 						);
 					}
 
-					string sysName2 = line[1].Value.ToString();
-					string archName1 = line[2].Value.ToString();
-
 					if (!line[1].Value.IsEquals("any") && line[1].Kind == TokenKind.WildcardKeyword)
 						throw new InvalidRsmlSyntax("A token of type WildcardKeyword must have a value of 'any'.");
 
@@ -137,12 +136,11 @@ namespace RSML.Performance.Value
 					if (!line[2].Value.IsEquals("defined") && line[2].Kind == TokenKind.DefinedKeyword)
 						throw new InvalidRsmlSyntax("A token of type DefinedKeyword must have a value of 'defined'.");
 
-					if (!Validator.ValidSystems.Any(s => sysName2.Equals(s, StringComparison.OrdinalIgnoreCase)) &&
-						line[1].Kind == TokenKind.SystemName)
+					if (!line[1].Value.IsAsciiEqualsIgnoreCase(Validator.ValidSystems) && line[1].Kind == TokenKind.SystemName)
 						throw new InvalidRsmlSyntax("Invalid system name as of v2.0.0.");
 
-					if (!Validator.ValidArchitectures.Any(s => archName1.Equals(s, StringComparison.OrdinalIgnoreCase)) &&
-						line[2].Kind == TokenKind.ArchitectureIdentifier)
+					// ReSharper disable once InvertIf
+					if (!line[2].Value.IsAsciiEqualsIgnoreCase(Validator.ValidArchitectures) && line[2].Kind == TokenKind.ArchitectureIdentifier)
 						throw new InvalidRsmlSyntax("Invalid architecture identifier as of v2.0.0.");
 
 					return;
@@ -164,10 +162,6 @@ namespace RSML.Performance.Value
 						);
 					}
 
-					string sysName3 = line[1].Value.ToString();
-					string major1 = line[2].Value.ToString();
-					string archName2 = line[3].Value.ToString();
-
 					if (!line[1].Value.IsEquals("any") && line[1].Kind == TokenKind.WildcardKeyword)
 						throw new InvalidRsmlSyntax("A token of type WildcardKeyword must have a value of 'any'.");
 
@@ -186,15 +180,13 @@ namespace RSML.Performance.Value
 					if (!line[3].Value.IsEquals("defined") && line[3].Kind == TokenKind.DefinedKeyword)
 						throw new InvalidRsmlSyntax("A token of type DefinedKeyword must have a value of 'defined'.");
 
-					if (!Validator.ValidSystems.Any(s => sysName3.Equals(s, StringComparison.OrdinalIgnoreCase)) &&
-						line[1].Kind == TokenKind.SystemName)
-						throw new InvalidRsmlSyntax($"Invalid system name ({sysName3}) as of v2.0.0.");
+					if (!line[1].Value.IsAsciiEqualsIgnoreCase(Validator.ValidSystems) && line[1].Kind == TokenKind.SystemName)
+						throw new InvalidRsmlSyntax("Invalid system name as of v2.0.0.");
 
-					if (!Validator.ValidArchitectures.Any(s => archName2.Equals(s, StringComparison.OrdinalIgnoreCase)) &&
-						line[3].Kind == TokenKind.ArchitectureIdentifier)
+					if (!line[3].Value.IsAsciiEqualsIgnoreCase(Validator.ValidArchitectures) && line[3].Kind == TokenKind.ArchitectureIdentifier)
 						throw new InvalidRsmlSyntax("Invalid architecture identifier as of v2.0.0.");
 
-					if (!Int32.TryParse(major1, out _) && line[2].Kind == TokenKind.MajorVersionId)
+					if (!Int32.TryParse(line[2].Value, out _) && line[2].Kind == TokenKind.MajorVersionId)
 						throw new InvalidRsmlSyntax("The major version must be a valid integer");
 
 					return;
@@ -222,11 +214,6 @@ namespace RSML.Performance.Value
 						);
 					}
 
-					string sysName4 = line[1].Value.ToString();
-					string comp = line[2].Value.ToString();
-					string major2 = line[3].Value.ToString();
-					string archName3 = line[4].Value.ToString();
-
 					if (!line[1].Value.IsEquals("any") && line[1].Kind == TokenKind.WildcardKeyword)
 						throw new InvalidRsmlSyntax("A token of type WildcardKeyword must have a value of 'any'.");
 
@@ -239,18 +226,16 @@ namespace RSML.Performance.Value
 					if (!line[4].Value.IsEquals("defined") && line[4].Kind == TokenKind.DefinedKeyword)
 						throw new InvalidRsmlSyntax("A token of type DefinedKeyword must have a value of 'defined'.");
 
-					if (!Validator.ValidSystems.Any(s => sysName4.Equals(s, StringComparison.OrdinalIgnoreCase)) &&
-						line[1].Kind == TokenKind.SystemName)
+					if (!line[1].Value.IsAsciiEqualsIgnoreCase(Validator.ValidSystems) && line[1].Kind == TokenKind.SystemName)
 						throw new InvalidRsmlSyntax("Invalid system name as of v2.0.0.");
 
-					if (!Validator.ValidArchitectures.Any(s => archName3.Equals(s, StringComparison.OrdinalIgnoreCase)) &&
-						line[1].Kind == TokenKind.ArchitectureIdentifier)
+					if (!line[4].Value.IsAsciiEqualsIgnoreCase(Validator.ValidArchitectures) && line[4].Kind == TokenKind.ArchitectureIdentifier)
 						throw new InvalidRsmlSyntax("Invalid architecture identifier as of v2.0.0.");
 
-					if (!Validator.ValidComparators.Any(s => comp.Equals(s, StringComparison.OrdinalIgnoreCase)))
+					if (!line[2].Value.IsAsciiEqualsIgnoreCase(Validator.ValidComparators))
 						throw new InvalidRsmlSyntax("Invalid comparator.");
 
-					if (!Int32.TryParse(major2, out _))
+					if (!Int32.TryParse(line[3].Value, out _))
 						throw new InvalidRsmlSyntax("The major version must be a valid integer. Wildcards are not compatible with comparators.");
 
 					return;

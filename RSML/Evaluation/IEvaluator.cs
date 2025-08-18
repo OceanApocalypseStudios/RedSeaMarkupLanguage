@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 
 using RSML.Actions;
-using RSML.Analyzer.Syntax;
 using RSML.Machine;
 using RSML.Reader;
 using RSML.Toolchain;

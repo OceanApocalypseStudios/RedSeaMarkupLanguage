@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 
 using RSML.Actions;
-using RSML.Analyzer.Semantics;
 using RSML.Analyzer.Syntax;
 using RSML.Evaluation;
 using RSML.Exceptions;
@@ -170,7 +169,7 @@ namespace RSML.Performance.Stateless
 
 				TokenKind.WildcardKeyword => true,
 				TokenKind.DefinedKeyword  => machine.SystemVersion != -1,
-				_                         => tokens[2].Value.IsEquals(machine.SystemVersion.ToString())
+				_                         => tokens[2].Value.IsEquals(machine.StringifiedSystemVersion)
 
 			};
 
@@ -210,12 +209,12 @@ namespace RSML.Performance.Stateless
 			{
 
 				case TokenKind.Equals:
-					systemVersionMatches = tokens[3].Value.IsEquals(machine.SystemVersion.ToString());
+					systemVersionMatches = tokens[3].Value.IsEquals(machine.StringifiedSystemVersion);
 
 					break;
 
 				case TokenKind.Different:
-					systemVersionMatches = !tokens[3].Value.IsEquals(machine.SystemVersion.ToString());
+					systemVersionMatches = !tokens[3].Value.IsEquals(machine.StringifiedSystemVersion);
 
 					break;
 
@@ -282,7 +281,7 @@ namespace RSML.Performance.Stateless
 
 				TokenKind.WildcardKeyword => true,
 				TokenKind.DefinedKeyword  => machine.SystemVersion != -1,
-				_                         => tokens[2].Value.IsEquals(machine.SystemVersion.ToString())
+				_                         => tokens[2].Value.IsEquals(machine.StringifiedSystemVersion)
 
 			};
 
@@ -321,12 +320,12 @@ namespace RSML.Performance.Stateless
 			{
 
 				case TokenKind.Equals:
-					systemVersionMatches = tokens[3].Value.IsEquals(machine.SystemVersion.ToString());
+					systemVersionMatches = tokens[3].Value.IsEquals(machine.StringifiedSystemVersion);
 
 					break;
 
 				case TokenKind.Different:
-					systemVersionMatches = !tokens[3].Value.IsEquals(machine.SystemVersion.ToString());
+					systemVersionMatches = !tokens[3].Value.IsEquals(machine.StringifiedSystemVersion);
 
 					break;
 

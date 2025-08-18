@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Immutable;
-using System.Linq;
 
 using RSML.Analyzer.Syntax;
 using RSML.Exceptions;
@@ -106,15 +105,13 @@ namespace RSML.Analyzer.Semantics
 						actualTokens[2].Kind != TokenKind.LogicPathValue)
 						throw new InvalidRsmlSyntax("A 3 token long logic path must be a *Operator + SystemName + LogicPathValue overload.");
 
-					string sysName1 = actualTokens[1].Value;
-
 					if (actualTokens[1].Value != "any" && actualTokens[1].Kind == TokenKind.WildcardKeyword)
 						throw new InvalidRsmlSyntax("A token of type WildcardKeyword must have a value of 'any'.");
 
 					if (actualTokens[1].Value != "defined" && actualTokens[1].Kind == TokenKind.DefinedKeyword)
 						throw new InvalidRsmlSyntax("A token of type DefinedKeyword must have a value of 'defined'.");
 
-					if (!ValidSystems.Any(s => sysName1.Equals(s, StringComparison.OrdinalIgnoreCase)) &&
+					if (!actualTokens[1].Value.AsSpan().IsAsciiEqualsIgnoreCase(ValidSystems) &&
 						actualTokens[1].Kind == TokenKind.SystemName)
 						throw new InvalidRsmlSyntax("Invalid system name as of v2.0.0.");
 
@@ -134,9 +131,6 @@ namespace RSML.Analyzer.Semantics
 						);
 					}
 
-					string sysName2 = actualTokens[1].Value;
-					string archName1 = actualTokens[2].Value;
-
 					if (actualTokens[1].Value != "any" && actualTokens[1].Kind == TokenKind.WildcardKeyword)
 						throw new InvalidRsmlSyntax("A token of type WildcardKeyword must have a value of 'any'.");
 
@@ -149,11 +143,12 @@ namespace RSML.Analyzer.Semantics
 					if (actualTokens[2].Value != "defined" && actualTokens[2].Kind == TokenKind.DefinedKeyword)
 						throw new InvalidRsmlSyntax("A token of type DefinedKeyword must have a value of 'defined'.");
 
-					if (!ValidSystems.Any(s => sysName2.Equals(s, StringComparison.OrdinalIgnoreCase)) &&
+					if (!actualTokens[1].Value.AsSpan().IsAsciiEqualsIgnoreCase(ValidSystems) &&
 						actualTokens[1].Kind == TokenKind.SystemName)
 						throw new InvalidRsmlSyntax("Invalid system name as of v2.0.0.");
 
-					if (!ValidArchitectures.Any(s => archName1.Equals(s, StringComparison.OrdinalIgnoreCase)) &&
+					// ReSharper disable once InvertIf
+					if (!actualTokens[2].Value.AsSpan().IsAsciiEqualsIgnoreCase(ValidArchitectures) &&
 						actualTokens[2].Kind == TokenKind.ArchitectureIdentifier)
 						throw new InvalidRsmlSyntax("Invalid architecture identifier as of v2.0.0.");
 
@@ -176,10 +171,6 @@ namespace RSML.Analyzer.Semantics
 						);
 					}
 
-					string sysName3 = actualTokens[1].Value;
-					string major1 = actualTokens[2].Value;
-					string archName2 = actualTokens[3].Value;
-
 					if (actualTokens[1].Value != "any" && actualTokens[1].Kind == TokenKind.WildcardKeyword)
 						throw new InvalidRsmlSyntax("A token of type WildcardKeyword must have a value of 'any'.");
 
@@ -198,15 +189,15 @@ namespace RSML.Analyzer.Semantics
 					if (actualTokens[3].Value != "defined" && actualTokens[3].Kind == TokenKind.DefinedKeyword)
 						throw new InvalidRsmlSyntax("A token of type DefinedKeyword must have a value of 'defined'.");
 
-					if (!ValidSystems.Any(s => sysName3.Equals(s, StringComparison.OrdinalIgnoreCase)) &&
+					if (!actualTokens[1].Value.AsSpan().IsAsciiEqualsIgnoreCase(ValidSystems) &&
 						actualTokens[1].Kind == TokenKind.SystemName)
-						throw new InvalidRsmlSyntax($"Invalid system name ({sysName3}) as of v2.0.0.");
+						throw new InvalidRsmlSyntax("Invalid system name as of v2.0.0.");
 
-					if (!ValidArchitectures.Any(s => archName2.Equals(s, StringComparison.OrdinalIgnoreCase)) &&
+					if (!actualTokens[3].Value.AsSpan().IsAsciiEqualsIgnoreCase(ValidArchitectures) &&
 						actualTokens[3].Kind == TokenKind.ArchitectureIdentifier)
 						throw new InvalidRsmlSyntax("Invalid architecture identifier as of v2.0.0.");
 
-					if (!Int32.TryParse(major1, out _) && actualTokens[2].Kind == TokenKind.MajorVersionId)
+					if (!Int32.TryParse(actualTokens[2].Value, out _) && actualTokens[2].Kind == TokenKind.MajorVersionId)
 						throw new InvalidRsmlSyntax("The major version must be a valid integer");
 
 					return;
@@ -234,11 +225,6 @@ namespace RSML.Analyzer.Semantics
 						);
 					}
 
-					string sysName4 = actualTokens[1].Value;
-					string comp = actualTokens[2].Value;
-					string major2 = actualTokens[3].Value;
-					string archName3 = actualTokens[4].Value;
-
 					if (actualTokens[1].Value != "any" && actualTokens[1].Kind == TokenKind.WildcardKeyword)
 						throw new InvalidRsmlSyntax("A token of type WildcardKeyword must have a value of 'any'.");
 
@@ -251,18 +237,17 @@ namespace RSML.Analyzer.Semantics
 					if (actualTokens[4].Value != "defined" && actualTokens[4].Kind == TokenKind.DefinedKeyword)
 						throw new InvalidRsmlSyntax("A token of type DefinedKeyword must have a value of 'defined'.");
 
-					if (!ValidSystems.Any(s => sysName4.Equals(s, StringComparison.OrdinalIgnoreCase)) &&
-						actualTokens[1].Kind == TokenKind.SystemName)
+					if (!actualTokens[1].Value.AsSpan().IsAsciiEqualsIgnoreCase(ValidSystems) && actualTokens[1].Kind == TokenKind.SystemName)
 						throw new InvalidRsmlSyntax("Invalid system name as of v2.0.0.");
 
-					if (!ValidArchitectures.Any(s => archName3.Equals(s, StringComparison.OrdinalIgnoreCase)) &&
-						actualTokens[1].Kind == TokenKind.ArchitectureIdentifier)
+					if (!actualTokens[4].Value.AsSpan().IsAsciiEqualsIgnoreCase(ValidArchitectures) &&
+						actualTokens[4].Kind == TokenKind.ArchitectureIdentifier)
 						throw new InvalidRsmlSyntax("Invalid architecture identifier as of v2.0.0.");
 
-					if (!ValidComparators.Any(s => comp.Equals(s, StringComparison.OrdinalIgnoreCase)))
+					if (!actualTokens[2].Value.AsSpan().IsAsciiEqualsIgnoreCase(ValidComparators))
 						throw new InvalidRsmlSyntax("Invalid comparator.");
 
-					if (!Int32.TryParse(major2, out _))
+					if (!Int32.TryParse(actualTokens[3].Value, out _))
 						throw new InvalidRsmlSyntax("The major version must be a valid integer. Wildcards are not compatible with comparators.");
 
 					return;

@@ -1,10 +1,11 @@
 ﻿using System;
 
 using RSML.Analyzer.Syntax;
+using RSML.Performance.Value;
 using RSML.Toolchain.Compliance;
 
 
-namespace RSML.Performance.Value
+namespace RSML.Performance.Stateless
 {
 
 	/// <summary>

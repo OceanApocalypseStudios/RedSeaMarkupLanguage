@@ -23,14 +23,14 @@ namespace RSML.Tests
 		{
 
 			StatelessEvaluator.SpecialActions["MyAwesomeAction"] = (_, argument) =>
-				{
+			{
 
-					Debug.WriteLine("@MyAwesomeAction was ran.");
-					Assert.Equal(String.Empty, argument);
+				Debug.WriteLine("@MyAwesomeAction was ran.");
+				Assert.Equal(String.Empty, argument);
 
-					return SpecialActionBehavior.Success;
+				return SpecialActionBehavior.Success;
 
-				};
+			};
 
 			Assert.Null(StatelessEvaluator.Evaluate("@MyAwesomeAction", debianUnknownVersionX86).MatchValue);
 

@@ -15,29 +15,27 @@ namespace RSML.Benchmarks
 {
 
 	[MemoryDiagnoser]
-	[SimpleJob(RuntimeMoniker.Net80, warmupCount: 2, iterationCount: 3)]
+	[SimpleJob(RuntimeMoniker.Net80, warmupCount: 10, iterationCount: 50)]
 	[HideColumns("Job", "StdDev")]
 	[GroupBenchmarksBy(BenchmarkLogicalGroupRule.ByCategory)]
 	[SuppressMessage("Performance", "CA1822:Mark members as static")]
 	public class EvaluatorBenchmarks
 	{
 
+		private const string SmallContent = "-> windows \"value\"\n@SpecialAction arg\n# Comment";
+
 		private readonly LocalMachine ubuntu = new("ubuntu", null, null);
 
 		private string? complexContent1;
 		private string? complexContent2;
 
-		private const string SmallContent = "-> windows \"value\"\n@SpecialAction arg\n# Comment";
-		private string? mediumContent;
-		private string? largeContent;
-
 		private Evaluator? complexEvaluator1;
 		private Evaluator? complexEvaluator2;
 		private Evaluator? complexEvaluator3;
-
-		private Evaluator? smallEvaluator;
-		private Evaluator? mediumEvaluator;
+		private string? largeContent;
 		private Evaluator? largeEvaluator;
+		private string? mediumContent;
+		private Evaluator? mediumEvaluator;
 
 		private Evaluator? primitiveEvaluatorAction;
 		private Evaluator? primitiveEvaluatorComment;
@@ -45,6 +43,8 @@ namespace RSML.Benchmarks
 
 		private Evaluator? primitiveEvaluatorLogic;
 		private Evaluator? primitiveEvaluatorNewlines;
+
+		private Evaluator? smallEvaluator;
 
 		[GlobalSetup]
 		public void Setup()

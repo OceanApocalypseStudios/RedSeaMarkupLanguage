@@ -53,6 +53,7 @@ namespace RSML.Machine
 				case "5.1":
 					// ReSharper disable once CommentTypo
 					SystemVersion = 5; // WINDOWS XPPPPPP LESGOOOOOOOO
+
 					return;
 
 				case "6.0":
