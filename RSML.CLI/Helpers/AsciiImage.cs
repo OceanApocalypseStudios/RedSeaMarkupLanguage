@@ -7,7 +7,7 @@ using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
 
 
-namespace RSML.CLI.Helpers
+namespace OceanApocalypseStudios.RSML.CLI.Helpers
 {
 
 	public class AsciiImage(

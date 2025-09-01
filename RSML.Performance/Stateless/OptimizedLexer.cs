@@ -1,11 +1,11 @@
 ﻿using System;
 
-using RSML.Analyzer.Syntax;
-using RSML.Performance.Value;
-using RSML.Toolchain.Compliance;
+using OceanApocalypseStudios.RSML.Analyzer.Syntax;
+using OceanApocalypseStudios.RSML.Performance.Value;
+using OceanApocalypseStudios.RSML.Toolchain.Compliance;
 
 
-namespace RSML.Performance.Stateless
+namespace OceanApocalypseStudios.RSML.Performance.Stateless
 {
 
 	/// <summary>

@@ -5,13 +5,14 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-using RSML.CLI.Helpers;
-using RSML.Machine;
+using OceanApocalypseStudios.RSML.CLI.Helpers;
 
 using Spectre.Console;
 
+using LocalMachine = OceanApocalypseStudios.RSML.Machine.LocalMachine;
 
-namespace RSML.CLI
+
+namespace OceanApocalypseStudios.RSML.CLI
 {
 
 	internal partial class Program

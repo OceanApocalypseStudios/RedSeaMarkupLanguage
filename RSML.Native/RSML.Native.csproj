@@ -4,6 +4,7 @@
 		<TargetFramework>net8.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<RootNamespace>OceanApocalypseStudios.RSML.Native</RootNamespace>
 
 		<!-- Native Publishing -->
 		<PublishAot>true</PublishAot>
@@ -11,6 +12,7 @@
 
 		<!-- NuGet Properties -->
 		<Title>RSML Native Interop</Title>
+		<PackageId>OceanApocalypseStudios.RSML.Native</PackageId>
 		<Authors>OceanApocalypseStudios</Authors>
 		<Company>OceanApocalypseStudios</Company>
 		<Version>2.0.0-prerelease9</Version>

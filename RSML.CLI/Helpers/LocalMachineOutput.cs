@@ -2,12 +2,12 @@
 using System.Text;
 using System.Text.Json;
 
-using RSML.Machine;
-
 using Spectre.Console;
 
+using LocalMachine = OceanApocalypseStudios.RSML.Machine.LocalMachine;
 
-namespace RSML.CLI.Helpers
+
+namespace OceanApocalypseStudios.RSML.CLI.Helpers
 {
 
 	internal static class LocalMachineOutput

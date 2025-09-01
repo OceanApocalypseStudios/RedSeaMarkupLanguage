@@ -6,12 +6,13 @@ using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Jobs;
 
-using RSML.Evaluation;
-using RSML.Machine;
-using RSML.Performance.Stateless;
+using OceanApocalypseStudios.RSML.Evaluation;
+using OceanApocalypseStudios.RSML.Performance.Stateless;
+
+using LocalMachine = OceanApocalypseStudios.RSML.Machine.LocalMachine;
 
 
-namespace RSML.Benchmarks
+namespace OceanApocalypseStudios.RSML.Benchmarks
 {
 
 	[MemoryDiagnoser]

@@ -1,7 +1,7 @@
-﻿using RSML.Evaluation;
+﻿using OceanApocalypseStudios.RSML.Evaluation;
 
 
-namespace RSML.Actions
+namespace OceanApocalypseStudios.RSML.Actions
 {
 
 	/// <summary>

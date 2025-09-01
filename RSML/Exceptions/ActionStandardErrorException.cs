@@ -1,9 +1,9 @@
 ﻿using System;
 
-using RSML.Actions;
+using OceanApocalypseStudios.RSML.Actions;
 
 
-namespace RSML.Exceptions
+namespace OceanApocalypseStudios.RSML.Exceptions
 {
 
 	/// <summary>

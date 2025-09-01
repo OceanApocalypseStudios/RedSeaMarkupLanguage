@@ -1,7 +1,7 @@
-﻿using RSML.Toolchain.Compliance;
+﻿using OceanApocalypseStudios.RSML.Toolchain.Compliance;
 
 
-namespace RSML.Toolchain
+namespace OceanApocalypseStudios.RSML.Toolchain
 {
 
 	/// <summary>

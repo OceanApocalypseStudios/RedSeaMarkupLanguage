@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using RSML.Analyzer.Semantics;
-using RSML.Analyzer.Syntax;
-using RSML.CLI.Helpers;
-using RSML.Evaluation;
-using RSML.Exceptions;
-using RSML.Machine;
-using RSML.Reader;
+using OceanApocalypseStudios.RSML.Analyzer.Semantics;
+using OceanApocalypseStudios.RSML.Analyzer.Syntax;
+using OceanApocalypseStudios.RSML.CLI.Helpers;
+using OceanApocalypseStudios.RSML.Evaluation;
+using OceanApocalypseStudios.RSML.Exceptions;
+using OceanApocalypseStudios.RSML.Reader;
 
 using Spectre.Console;
 
+using LocalMachine = OceanApocalypseStudios.RSML.Machine.LocalMachine;
 
-namespace RSML.CLI
+
+namespace OceanApocalypseStudios.RSML.CLI
 {
 
 	internal partial class Program

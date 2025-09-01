@@ -6,7 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 using Microsoft.Win32;
 
 
-namespace RSML.Machine
+namespace OceanApocalypseStudios.RSML.Machine
 {
 
 	[SuppressMessage("Interoperability", "CA1416:Validate platform compatibility")] // this only compiles on windows there's no problem

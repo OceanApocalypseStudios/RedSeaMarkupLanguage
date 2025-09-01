@@ -2,12 +2,12 @@
 using System.Linq;
 using System.Runtime.CompilerServices;
 
-using RSML.Analyzer.Syntax;
-using RSML.Toolchain;
-using RSML.Toolchain.Compliance;
+using OceanApocalypseStudios.RSML.Analyzer.Syntax;
+using OceanApocalypseStudios.RSML.Toolchain;
+using OceanApocalypseStudios.RSML.Toolchain.Compliance;
 
 
-namespace RSML.Analyzer.Semantics
+namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 {
 
 	/// <summary>

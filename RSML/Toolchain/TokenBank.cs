@@ -1,9 +1,9 @@
 ﻿using System;
 
-using RSML.Analyzer.Syntax;
+using OceanApocalypseStudios.RSML.Analyzer.Syntax;
 
 
-namespace RSML.Toolchain
+namespace OceanApocalypseStudios.RSML.Toolchain
 {
 
 	internal static class TokenBank

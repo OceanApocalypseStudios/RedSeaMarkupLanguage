@@ -1,7 +1,7 @@
-﻿using RSML.Analyzer.Syntax;
+﻿using OceanApocalypseStudios.RSML.Analyzer.Syntax;
 
 
-namespace RSML.Middlewares
+namespace OceanApocalypseStudios.RSML.Middlewares
 {
 
 	/// <summary>

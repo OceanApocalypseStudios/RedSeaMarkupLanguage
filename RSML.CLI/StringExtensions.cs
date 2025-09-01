@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace RSML.CLI
+namespace OceanApocalypseStudios.RSML.CLI
 {
 
 	internal static class StringExtensions

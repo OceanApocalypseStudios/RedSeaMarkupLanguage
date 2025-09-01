@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 
-namespace RSML
+namespace OceanApocalypseStudios.RSML
 {
 
 	internal static class StringExtensions

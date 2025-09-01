@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 
-using RSML.Analyzer.Syntax;
-using RSML.Evaluation;
-using RSML.Machine;
-using RSML.Reader;
+using OceanApocalypseStudios.RSML.Analyzer.Syntax;
+using OceanApocalypseStudios.RSML.Evaluation;
+using OceanApocalypseStudios.RSML.Reader;
+
+using LocalMachine = OceanApocalypseStudios.RSML.Machine.LocalMachine;
 
 
-namespace RSML.Toolchain
+namespace OceanApocalypseStudios.RSML.Toolchain
 {
 
 	/// <summary>

@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 // ReSharper disable UnusedAutoPropertyAccessor.Global
 
 
-namespace RSML.Machine
+namespace OceanApocalypseStudios.RSML.Machine
 {
 
 	/// <summary>

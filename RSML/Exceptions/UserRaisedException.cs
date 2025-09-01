@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace RSML.Exceptions
+namespace OceanApocalypseStudios.RSML.Exceptions
 {
 
 	/// <summary>

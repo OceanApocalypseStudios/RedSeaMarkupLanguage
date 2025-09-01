@@ -1,4 +1,4 @@
-﻿namespace RSML.Actions
+﻿namespace OceanApocalypseStudios.RSML.Actions
 {
 
 	/// <summary>

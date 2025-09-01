@@ -1,4 +1,4 @@
-﻿namespace RSML.Middlewares
+﻿namespace OceanApocalypseStudios.RSML.Middlewares
 {
 
 	/// <summary>

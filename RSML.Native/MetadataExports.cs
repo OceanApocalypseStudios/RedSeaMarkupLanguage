@@ -2,7 +2,7 @@
 using System.Text;
 
 
-namespace RSML.Native
+namespace OceanApocalypseStudios.RSML.Native
 {
 
 	/// <summary>

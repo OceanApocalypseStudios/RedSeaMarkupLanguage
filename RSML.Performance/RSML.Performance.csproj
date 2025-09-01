@@ -5,13 +5,15 @@
 		<Nullable>enable</Nullable>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<RootNamespace>OceanApocalypseStudios.RSML.Performance</RootNamespace>
 
 		<!-- NuGet Properties -->
-		<Title>RSML Performance Pack</Title>
+		<Title>RSML Performance Add-ons</Title>
+		<PackageId>OceanApocalypseStudios.RSML.Performance</PackageId>
 		<Authors>OceanApocalypseStudios</Authors>
 		<Company>OceanApocalypseStudios</Company>
 		<Version>2.0.0-prerelease8</Version>
-		<Description>An extremely performant addon for the markup language designed for system-based logic paths in C#.</Description>
+		<Description>An extremely performant series of add-ons for the markup language designed for system-based logic paths in C#.</Description>
 		<Copyright>Copyright (c) 2025 OceanApocalypseStudios</Copyright>
 		<PackageProjectUrl>https://oceanapocalypsestudios.org/rsml-docs/2.0.0-prerelease8/</PackageProjectUrl>
 		<PackageLicenseUrl>https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/blob/v2.0.0-dev/LICENSE.txt</PackageLicenseUrl>
@@ -33,6 +35,7 @@
 		</None>
 		<None Update="Icon.png">
 			<Pack>True</Pack>
+			<!--suppress CheckTagEmptyBody -->
 			<PackagePath></PackagePath>
 		</None>
 	</ItemGroup>

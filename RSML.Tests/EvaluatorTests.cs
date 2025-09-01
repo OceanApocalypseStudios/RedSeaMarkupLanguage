@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Diagnostics;
 
-using RSML.Actions;
-using RSML.Evaluation;
-using RSML.Exceptions;
-using RSML.Machine;
+using OceanApocalypseStudios.RSML.Actions;
+using OceanApocalypseStudios.RSML.Evaluation;
+using OceanApocalypseStudios.RSML.Exceptions;
+
+using LocalMachine = OceanApocalypseStudios.RSML.Machine.LocalMachine;
 
 
-namespace RSML.Tests
+namespace OceanApocalypseStudios.RSML.Tests
 {
 
 	public class EvaluatorTests

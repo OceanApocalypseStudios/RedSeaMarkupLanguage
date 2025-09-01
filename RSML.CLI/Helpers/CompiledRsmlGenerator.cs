@@ -1,7 +1,7 @@
 ﻿using System.Text;
 
 
-namespace RSML.CLI.Helpers
+namespace OceanApocalypseStudios.RSML.CLI.Helpers
 {
 
 	internal static class CompiledRsmlGenerator

@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 
 
-namespace RSML.Native
+namespace OceanApocalypseStudios.RSML.Native
 {
 
 	/// <summary>

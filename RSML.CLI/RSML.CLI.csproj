@@ -11,6 +11,7 @@
 		<Authors>OceanApocalypseStudios</Authors>
 		<Description>The official RSML CLI.</Description>
 		<Company>OceanApocalypseStudios</Company>
+		<RootNamespace>OceanApocalypseStudios.RSML.CLI</RootNamespace>
 	</PropertyGroup>
 
 	<ItemGroup>

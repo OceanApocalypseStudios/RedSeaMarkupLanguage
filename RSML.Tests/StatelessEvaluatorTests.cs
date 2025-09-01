@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Diagnostics;
 
-using RSML.Actions;
-using RSML.Exceptions;
-using RSML.Machine;
-using RSML.Performance.Stateless;
+using OceanApocalypseStudios.RSML.Actions;
+using OceanApocalypseStudios.RSML.Exceptions;
+using OceanApocalypseStudios.RSML.Performance.Stateless;
+
+using LocalMachine = OceanApocalypseStudios.RSML.Machine.LocalMachine;
 
 
-namespace RSML.Tests
+namespace OceanApocalypseStudios.RSML.Tests
 {
 
 	public class StatelessEvaluatorTests

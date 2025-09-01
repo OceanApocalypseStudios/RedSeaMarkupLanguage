@@ -39,17 +39,18 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-using RSML.Actions;
-using RSML.Analyzer.Semantics;
-using RSML.Analyzer.Syntax;
-using RSML.Exceptions;
-using RSML.Machine;
-using RSML.Middlewares;
-using RSML.Reader;
-using RSML.Toolchain.Compliance;
+using OceanApocalypseStudios.RSML.Actions;
+using OceanApocalypseStudios.RSML.Analyzer.Semantics;
+using OceanApocalypseStudios.RSML.Analyzer.Syntax;
+using OceanApocalypseStudios.RSML.Exceptions;
+using OceanApocalypseStudios.RSML.Middlewares;
+using OceanApocalypseStudios.RSML.Reader;
+using OceanApocalypseStudios.RSML.Toolchain.Compliance;
+
+using LocalMachine = OceanApocalypseStudios.RSML.Machine.LocalMachine;
 
 
-namespace RSML.Evaluation
+namespace OceanApocalypseStudios.RSML.Evaluation
 {
 
 	/// <summary>

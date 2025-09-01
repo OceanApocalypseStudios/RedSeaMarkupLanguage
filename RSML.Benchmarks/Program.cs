@@ -1,7 +1,7 @@
 ﻿using BenchmarkDotNet.Running;
 
 
-namespace RSML.Benchmarks
+namespace OceanApocalypseStudios.RSML.Benchmarks
 {
 
 	internal class Program

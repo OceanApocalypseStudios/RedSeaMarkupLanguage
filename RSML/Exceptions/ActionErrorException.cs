@@ -1,12 +1,14 @@
 ﻿using System;
 
+using OceanApocalypseStudios.RSML.Actions;
 
-namespace RSML.Exceptions
+
+namespace OceanApocalypseStudios.RSML.Exceptions
 {
 
 	/// <summary>
 	/// Exception that's thrown when an action returns an error type that's not
-	/// <see cref="Actions.SpecialActionBehavior.Error" />.
+	/// <see cref="SpecialActionBehavior.Error" />.
 	/// </summary>
 	public class ActionErrorException : UserRaisedException
 	{

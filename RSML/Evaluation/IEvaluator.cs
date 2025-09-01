@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 
-using RSML.Actions;
-using RSML.Machine;
-using RSML.Reader;
-using RSML.Toolchain;
+using OceanApocalypseStudios.RSML.Actions;
+using OceanApocalypseStudios.RSML.Reader;
+using OceanApocalypseStudios.RSML.Toolchain;
+
+using LocalMachine = OceanApocalypseStudios.RSML.Machine.LocalMachine;
 
 
-namespace RSML.Evaluation
+namespace OceanApocalypseStudios.RSML.Evaluation
 {
 
 	/// <summary>

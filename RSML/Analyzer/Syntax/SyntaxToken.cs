@@ -2,7 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 
 
-namespace RSML.Analyzer.Syntax
+namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 {
 
 	/// <summary>

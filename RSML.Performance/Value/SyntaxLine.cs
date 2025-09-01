@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using RSML.Analyzer.Syntax;
+using OceanApocalypseStudios.RSML.Analyzer.Syntax;
 
 
-namespace RSML.Performance.Value
+namespace OceanApocalypseStudios.RSML.Performance.Value
 {
 
 	/// <summary>

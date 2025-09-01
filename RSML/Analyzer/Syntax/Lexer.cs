@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-using RSML.Toolchain.Compliance;
+using OceanApocalypseStudios.RSML.Toolchain.Compliance;
 
 
-namespace RSML.Analyzer.Syntax
+namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 {
 
 	/// <summary>

@@ -1,13 +1,13 @@
 ﻿using System;
 
-using RSML.Analyzer.Semantics;
-using RSML.Analyzer.Syntax;
-using RSML.Exceptions;
-using RSML.Performance.Value;
-using RSML.Toolchain.Compliance;
+using OceanApocalypseStudios.RSML.Analyzer.Semantics;
+using OceanApocalypseStudios.RSML.Analyzer.Syntax;
+using OceanApocalypseStudios.RSML.Exceptions;
+using OceanApocalypseStudios.RSML.Performance.Value;
+using OceanApocalypseStudios.RSML.Toolchain.Compliance;
 
 
-namespace RSML.Performance.Stateless
+namespace OceanApocalypseStudios.RSML.Performance.Stateless
 {
 
 	/// <summary>

@@ -5,7 +5,7 @@ using System.CommandLine.Invocation;
 using Spectre.Console;
 
 
-namespace RSML.CLI.Helpers
+namespace OceanApocalypseStudios.RSML.CLI.Helpers
 {
 
 	public class AsciiHelp(

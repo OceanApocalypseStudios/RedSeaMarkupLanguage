@@ -1,4 +1,4 @@
-﻿namespace RSML.Toolchain.Compliance
+﻿namespace OceanApocalypseStudios.RSML.Toolchain.Compliance
 {
 
 	/// <summary>

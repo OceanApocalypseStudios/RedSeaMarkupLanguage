@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Immutable;
 
-using RSML.Analyzer.Syntax;
-using RSML.Exceptions;
-using RSML.Toolchain.Compliance;
+using OceanApocalypseStudios.RSML.Analyzer.Syntax;
+using OceanApocalypseStudios.RSML.Exceptions;
+using OceanApocalypseStudios.RSML.Toolchain.Compliance;
 
 
-namespace RSML.Analyzer.Semantics
+namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 {
 
 	/// <summary>

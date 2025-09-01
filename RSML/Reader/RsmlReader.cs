@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using RSML.Analyzer.Syntax;
-using RSML.Toolchain;
-using RSML.Toolchain.Compliance;
+using OceanApocalypseStudios.RSML.Analyzer.Syntax;
+using OceanApocalypseStudios.RSML.Toolchain;
+using OceanApocalypseStudios.RSML.Toolchain.Compliance;
 
 
-namespace RSML.Reader
+namespace OceanApocalypseStudios.RSML.Reader
 {
 
 	/// <summary>

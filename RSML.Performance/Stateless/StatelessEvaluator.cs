@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using RSML.Actions;
-using RSML.Analyzer.Syntax;
-using RSML.Evaluation;
-using RSML.Exceptions;
-using RSML.Machine;
-using RSML.Performance.Value;
-using RSML.Toolchain.Compliance;
+using OceanApocalypseStudios.RSML.Actions;
+using OceanApocalypseStudios.RSML.Analyzer.Syntax;
+using OceanApocalypseStudios.RSML.Evaluation;
+using OceanApocalypseStudios.RSML.Exceptions;
+using OceanApocalypseStudios.RSML.Performance.Value;
+using OceanApocalypseStudios.RSML.Toolchain.Compliance;
+
+using LocalMachine = OceanApocalypseStudios.RSML.Machine.LocalMachine;
 
 
-namespace RSML.Performance.Stateless
+namespace OceanApocalypseStudios.RSML.Performance.Stateless
 {
 
 	/// <summary>
