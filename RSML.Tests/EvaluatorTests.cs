@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Linq;
 
 using RSML.Actions;
-using RSML.Analyzer.Syntax;
 using RSML.Evaluation;
 using RSML.Exceptions;
 using RSML.Machine;
-using RSML.Middlewares;
 
 
 namespace RSML.Tests
@@ -51,29 +48,6 @@ namespace RSML.Tests
 		[InlineData("    # Still a comment")]
 		[InlineData("                                            #")]
 		public void Evaluator_IsComment(string input) => Assert.True(Evaluator.IsComment(input));
-
-		[Fact]
-		public void Evaluate_CommentWithNoTextIsStillComment()
-		{
-
-			var result = new Evaluator("#").BindMiddleware(
-											   MiddlewareRunnerLocation.TwoLength, tokens =>
-											   {
-
-												   var t = tokens.ToArray();
-												   Debug.WriteLine($"Middleware ran: {t.Length}");
-												   Assert.Equal(TokenKind.CommentSymbol, t[0].Kind);
-												   Assert.Equal(String.Empty, t[1].Value);
-
-												   return MiddlewareResult.ContinueEvaluation;
-
-											   }
-										   )
-										   .Evaluate(debianUnknownVersionX86);
-
-			Assert.Null(result.MatchValue);
-
-		}
 
 		[Theory]
 		[InlineData(

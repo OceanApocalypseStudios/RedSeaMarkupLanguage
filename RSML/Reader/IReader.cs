@@ -14,6 +14,12 @@ namespace RSML.Reader
 	{
 
 		/// <summary>
+		/// The current index in the read buffer.
+		/// Could be off by a few units or dozens, in certain scenarios.
+		/// </summary>
+		int CurrentBufferIndex { get; }
+
+		/// <summary>
 		/// Tries to tokenize the next line in the buffer.
 		/// </summary>
 		/// <param name="tokens">The output tokens</param>

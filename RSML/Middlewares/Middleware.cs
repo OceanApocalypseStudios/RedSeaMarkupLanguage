@@ -1,14 +1,9 @@
-﻿using System.Collections.Generic;
-
-using RSML.Analyzer.Syntax;
-
-
-namespace RSML.Middlewares
+﻿namespace RSML.Middlewares
 {
 
 	/// <summary>
-	/// A middleware that is given some tokens and returns a <see cref="MiddlewareResult" />.
+	/// A middleware that is given a context and stops execution or allows it.
 	/// </summary>
-	public delegate MiddlewareResult Middleware(IEnumerable<SyntaxToken> tokens);
+	public delegate bool Middleware(MiddlewareContext context);
 
 }

@@ -20,8 +20,6 @@ namespace RSML.Reader
 		private readonly SyntaxToken[] eolToken = [ TokenBank.eolToken ];
 		private readonly string source;
 
-		private int curIndex;
-
 		/// <summary>
 		/// Initializes a RSML reader.
 		/// </summary>
@@ -38,10 +36,13 @@ namespace RSML.Reader
 		public static SpecificationCompliance SpecificationCompliance => SpecificationCompliance.CreateFull(ApiVersion);
 
 		/// <inheritdoc />
+		public int CurrentBufferIndex { get; private set; }
+
+		/// <inheritdoc />
 		public bool TryTokenizeNextLine(out IEnumerable<SyntaxToken> tokens)
 		{
 
-			if (curIndex < 0 || curIndex >= source.Length)
+			if (CurrentBufferIndex < 0 || CurrentBufferIndex >= source.Length)
 			{
 
 				tokens = eofToken;
@@ -50,7 +51,7 @@ namespace RSML.Reader
 
 			}
 
-			var span = source.AsSpan(curIndex);
+			var span = source.AsSpan(CurrentBufferIndex);
 			int nextNewline = span.IndexOfNewline(out byte newlineLen);
 
 			ReadOnlySpan<char> lineSpan;
@@ -71,7 +72,7 @@ namespace RSML.Reader
 
 			}
 
-			curIndex += advancedBy;
+			CurrentBufferIndex += advancedBy;
 
 			if (lineSpan.IsEmpty)
 			{

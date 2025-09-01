@@ -35,7 +35,6 @@
  */
 
 using System;
-using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -64,10 +63,9 @@ namespace RSML.Evaluation
 		/// <summary>
 		/// The loaded middlewares.
 		/// </summary>
-		private readonly Dictionary<MiddlewareRunnerLocation, ICollection<Middleware>> evaluatorMiddlewares = [ ];
+		private readonly List<Middleware> evaluatorMiddlewares = [ ];
 
 		private readonly Dictionary<string, SpecialAction> specialActions = [ ];
-		private FrozenDictionary<string, SpecialAction>? frozenSpecialActions;
 
 		/// <summary>
 		/// Creates a new instance of a RSML evaluator.
@@ -84,7 +82,7 @@ namespace RSML.Evaluation
 		/// <summary>
 		/// The amount of loaded middlewares.
 		/// </summary>
-		public int LoadedMiddlewaresCount => evaluatorMiddlewares.Values.Sum(midCol => midCol.Count);
+		public int LoadedMiddlewaresCount => evaluatorMiddlewares.Count;
 
 		/// <inheritdoc />
 		public static SpecificationCompliance SpecificationCompliance => SpecificationCompliance.CreateFull(ApiVersion);
@@ -113,9 +111,6 @@ namespace RSML.Evaluation
 
 			reader ??= new RsmlReader(Content);
 
-			if (specialActions.Count > 0)
-				FreezeSpecialActions();
-
 			if (evaluatorMiddlewares.Count == 0)
 				return Evaluate_NoMiddleware(machineData, reader);
 
@@ -124,22 +119,24 @@ namespace RSML.Evaluation
 
 				var syntaxTokens = rawTokens as SyntaxToken[] ?? rawTokens.ToArray();
 
-				if (RunMiddlewares(MiddlewareRunnerLocation.BeforeNormalization, syntaxTokens) == MiddlewareResult.EndEvaluation)
-					return new();
-
 				var normalizedTokens = Normalizer.NormalizeLine(syntaxTokens, out _);
 				var tokens = normalizedTokens as SyntaxToken[] ?? normalizedTokens.ToArray();
 
-				if (RunMiddlewares(MiddlewareRunnerLocation.BeforeValidation, tokens) == MiddlewareResult.EndEvaluation)
-					return new();
-
 				Validator.ValidateLine(tokens.AsSpan()); // line validation
 
-				if (RunMiddlewares(MiddlewareRunnerLocation.BeforeEolRemoval, tokens) == MiddlewareResult.EndEvaluation)
-					return new();
-
 				if (tokens[^1].Kind == TokenKind.Eol)
-					tokens = tokens[..^1];
+					tokens = tokens.AsSpan()[..^1].ToArray();
+
+				MiddlewareContext ctx = new(reader.CurrentBufferIndex, tokens, syntaxTokens, null);
+
+				// ReSharper disable once ForeachCanBeConvertedToQueryUsingAnotherGetEnumerator
+				foreach (var middleware in evaluatorMiddlewares)
+				{
+
+					if (!middleware(ctx))
+						return new(); // stop loop
+
+				}
 
 				// we basically do length-based checks
 				/*
@@ -151,30 +148,18 @@ namespace RSML.Evaluation
 				 *
 				 */
 
-				if (RunMiddlewares(MiddlewareRunnerLocation.BeforeLengthCheck, tokens) == MiddlewareResult.EndEvaluation)
-					return new();
-
 				switch (tokens.Length)
 				{
 
 					case 0:
 						// literally nothing
-						if (RunMiddlewares(MiddlewareRunnerLocation.ZeroLength, tokens) == MiddlewareResult.EndEvaluation)
-							return new();
-
 						continue;
 
 					case 2:
 						// comment, ignore it
-						if (RunMiddlewares(MiddlewareRunnerLocation.TwoLength, tokens) == MiddlewareResult.EndEvaluation)
-							return new();
-
 						continue;
 
 					case 3:
-						if (RunMiddlewares(MiddlewareRunnerLocation.ThreeLengthBeforeSpecialCall, tokens) == MiddlewareResult.EndEvaluation)
-							return new();
-
 						byte result = HandleSpecialActionCall(tokens[1].Value, tokens[2].Value);
 
 						switch (result)
@@ -202,14 +187,8 @@ namespace RSML.Evaluation
 						}
 
 					case 5:
-						if (RunMiddlewares(MiddlewareRunnerLocation.FiveLengthBeforeHandling, tokens) == MiddlewareResult.EndEvaluation)
-							return new();
-
 						if (HandleLogicPath_Simple(tokens, machineData, machineData.SystemName == "linux"))
 						{
-
-							if (RunMiddlewares(MiddlewareRunnerLocation.FiveLengthAfterHandling, tokens) == MiddlewareResult.EndEvaluation)
-								return new();
 
 							return tokens[0].Kind == TokenKind.ThrowErrorOperator
 									   ? throw new UserRaisedException("Error-throw operator used.")
@@ -220,14 +199,8 @@ namespace RSML.Evaluation
 						continue;
 
 					case 6:
-						if (RunMiddlewares(MiddlewareRunnerLocation.SixLengthBeforeHandling, tokens) == MiddlewareResult.EndEvaluation)
-							return new();
-
 						if (HandleLogicPath_Complex(tokens, machineData, machineData.SystemName == "linux"))
 						{
-
-							if (RunMiddlewares(MiddlewareRunnerLocation.SixLengthAfterHandling, tokens) == MiddlewareResult.EndEvaluation)
-								return new();
 
 							return tokens[0].Kind == TokenKind.ThrowErrorOperator
 									   ? throw new UserRaisedException("Error-throw operator used.")
@@ -238,9 +211,6 @@ namespace RSML.Evaluation
 						continue;
 
 					default:
-						if (RunMiddlewares(MiddlewareRunnerLocation.AnyLengthBeforeCommentCheck, tokens) == MiddlewareResult.EndEvaluation)
-							return new();
-
 						if (tokens[0].Kind == TokenKind.CommentSymbol)
 							continue; // it's somehow a comment
 
@@ -275,54 +245,29 @@ namespace RSML.Evaluation
 		}
 
 		/// <summary>
-		/// Freezes special actions.
+		/// Binds a middleware to the evaluator.
 		/// </summary>
-		/// <returns>Self (fluent API)</returns>
-		public Evaluator FreezeSpecialActions()
+		/// <param name="middleware">The middleware</param>
+		/// <returns>The evaluator (fluent API)</returns>
+		public Evaluator BindMiddleware(Middleware middleware)
 		{
 
-			frozenSpecialActions = specialActions.ToFrozenDictionary();
+			evaluatorMiddlewares.Add(middleware);
 
 			return this;
 
 		}
 
 		/// <summary>
-		/// Binds a middleware to a runner location.
+		/// Unbinds a middleware from the evaluator.
 		/// </summary>
-		/// <param name="runnerLocation">The runner location</param>
 		/// <param name="middleware">The middleware</param>
+		/// <param name="removed"><c>true</c> if successful, <c>false</c> if failed or middleware was not bound</param>
 		/// <returns>The evaluator (fluent API)</returns>
-		public Evaluator BindMiddleware(MiddlewareRunnerLocation runnerLocation, Middleware middleware)
+		public Evaluator UnbindMiddleware(Middleware middleware, out bool removed)
 		{
 
-			if (!evaluatorMiddlewares.TryGetValue(runnerLocation, out var value))
-			{
-
-				value = [ middleware ];
-				evaluatorMiddlewares.Add(runnerLocation, value);
-
-				return this;
-
-			}
-
-			value.Add(middleware);
-
-			return this;
-
-		}
-
-		/// <summary>
-		/// Unbinds a middleware from a runner location.
-		/// </summary>
-		/// <param name="runnerLocation">The runner location</param>
-		/// <param name="middleware">The middleware</param>
-		/// <returns>The evaluator (fluent API)</returns>
-		public Evaluator UnbindMiddleware(MiddlewareRunnerLocation runnerLocation, Middleware middleware)
-		{
-
-			if (evaluatorMiddlewares.TryGetValue(runnerLocation, out var value))
-				_ = value.Remove(middleware);
+			removed = evaluatorMiddlewares.Remove(middleware);
 
 			return this;
 
@@ -435,20 +380,13 @@ namespace RSML.Evaluation
 
 		}
 
-		private MiddlewareResult RunMiddlewares(MiddlewareRunnerLocation location, IEnumerable<SyntaxToken> tokens) =>
-			evaluatorMiddlewares.TryGetValue(location, out var value)
-				? value
-				  .Select(middleware => middleware.Invoke(tokens))
-				  .FirstOrDefault(result => result != MiddlewareResult.ContinueEvaluation)
-				: MiddlewareResult.ContinueEvaluation;
-
 		private byte HandleSpecialActionCall(string name, string arg)
 		{
 
 			if (name == "EndAll")
 				return SpecialActionBehavior.StopEvaluation;
 
-			return frozenSpecialActions?.TryGetValue(name, out var action) ?? false
+			return specialActions.TryGetValue(name, out var action)
 					   ? action(this, arg)
 					   : throw new UndefinedActionException("Action is undefined but used");
 
