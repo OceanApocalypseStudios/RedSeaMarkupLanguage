@@ -37,19 +37,21 @@ namespace OceanApocalypseStudios.RSML.CLI
 
 			try
 			{
+
 				Console.WriteLine(new Evaluator(data).Evaluate(machine).MatchValue);
+
 			}
 			catch (InvalidRsmlSyntax ex)
 			{
+
 				Console.WriteLine($"Invalid syntax: {ex.Message}");
+
 			}
 			catch (UserRaisedException)
 			{
+
 				Console.WriteLine("Error-throw operation used.");
-			}
-			catch (UndefinedActionException)
-			{
-				Console.WriteLine("An undefined action was used.");
+
 			}
 
 		}
@@ -80,14 +82,6 @@ namespace OceanApocalypseStudios.RSML.CLI
 				return;
 
 			}
-			catch (UndefinedActionException)
-			{
-
-				AnsiConsole.Markup("[red]Error:[/] [white]An undefined action was used.[/]");
-
-				return;
-
-			}
 
 			AnsiConsole.Write(
 				new Columns(
@@ -103,7 +97,6 @@ namespace OceanApocalypseStudios.RSML.CLI
 					new Panel(
 						new Rows(
 							new Markup("[green]Statistics[/]").Centered(),
-							new Markup($"[white]Special actions loaded:[/] [gray]{evaluator.SpecialActions.Count + 1}[/]"),
 							new Markup($"[white]Middlewares loaded:[/] [gray]{evaluator.LoadedMiddlewaresCount}[/]"),
 							new Markup($"[white]Amount of characters in document:[/] [gray]{data.Length}[/]")
 						)

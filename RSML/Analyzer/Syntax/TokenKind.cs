@@ -41,12 +41,12 @@
 		/// <summary>
 		/// The equals keyword (<c>==</c>).
 		/// </summary>
-		Equals,
+		EqualTo,
 
 		/// <summary>
 		/// The different keyword (<c>!=</c>).
 		/// </summary>
-		Different,
+		NotEqualTo,
 
 		/// <summary>
 		/// The greater-than keyword (<c>&gt;</c>).
@@ -59,14 +59,14 @@
 		LessThan,
 
 		/// <summary>
-		/// The greater-than keyword (<c>&gt;=</c>).
+		/// The greater-than or equals to keyword (<c>&gt;=</c>).
 		/// </summary>
-		GreaterOrEqualsThan,
+		GreaterThanOrEqualTo,
 
 		/// <summary>
 		/// The less-than or equals to keyword (<c>&lt;=</c>).
 		/// </summary>
-		LessOrEqualsThan,
+		LessThanOrEqualTo,
 
 		/// <summary>
 		/// The value token. This is the argument passed to an operator.

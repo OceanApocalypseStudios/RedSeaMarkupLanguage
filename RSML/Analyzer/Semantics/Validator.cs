@@ -34,6 +34,9 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 		];
 
 		/// <inheritdoc />
+		public static ImmutableHashSet<string> ValidSpecialActionNames => [ "Void", "ThrowError", "EndAll" ];
+
+		/// <inheritdoc />
 		public static void ValidateLine(ReadOnlySpan<SyntaxToken> tokens)
 		{
 
@@ -72,8 +75,11 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 				case TokenKind.SpecialActionSymbol when actualTokens[0].Value != "@":
 					throw new InvalidRsmlSyntax($"Expected SpecialActionSymbol of value '@', but received {actualTokens[0].Value} instead.");
 
-				case TokenKind.SpecialActionSymbol when actualTokens[1].Kind != TokenKind.SpecialActionName:
-					throw new InvalidRsmlSyntax($"Expected SpecialActionName, but received {actualTokens[1].Kind} instead.");
+				case TokenKind.SpecialActionSymbol when (actualTokens[1].Kind != TokenKind.SpecialActionName ||
+														 !ValidSpecialActionNames.Contains(actualTokens[1].Value)):
+					throw new InvalidRsmlSyntax(
+						$"Expected a valid SpecialActionName, but received {actualTokens[1].Kind} with value {actualTokens[1].Value} instead."
+					);
 
 				case TokenKind.SpecialActionSymbol when actualTokens[2].Kind != TokenKind.SpecialActionArgument:
 					throw new InvalidRsmlSyntax($"Expected SpecialActionArgument, but received {actualTokens[2].Kind} instead.");
@@ -206,12 +212,12 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 					if ((actualTokens[1].Kind != TokenKind.SystemName &&
 						 actualTokens[1].Kind != TokenKind.DefinedKeyword &&
 						 actualTokens[1].Kind != TokenKind.WildcardKeyword) ||
-						(actualTokens[2].Kind != TokenKind.Equals &&
-						 actualTokens[2].Kind != TokenKind.Different &&
+						(actualTokens[2].Kind != TokenKind.EqualTo &&
+						 actualTokens[2].Kind != TokenKind.NotEqualTo &&
 						 actualTokens[2].Kind != TokenKind.GreaterThan &&
 						 actualTokens[2].Kind != TokenKind.LessThan &&
-						 actualTokens[2].Kind != TokenKind.GreaterOrEqualsThan &&
-						 actualTokens[2].Kind != TokenKind.LessOrEqualsThan) ||
+						 actualTokens[2].Kind != TokenKind.GreaterThanOrEqualTo &&
+						 actualTokens[2].Kind != TokenKind.LessThanOrEqualTo) ||
 						(actualTokens[3].Kind != TokenKind.MajorVersionId &&
 						 actualTokens[3].Kind != TokenKind.DefinedKeyword &&
 						 actualTokens[3].Kind != TokenKind.WildcardKeyword) ||

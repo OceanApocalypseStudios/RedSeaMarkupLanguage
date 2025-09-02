@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using OceanApocalypseStudios.RSML.Actions;
 using OceanApocalypseStudios.RSML.Analyzer.Syntax;
 using OceanApocalypseStudios.RSML.Evaluation;
 using OceanApocalypseStudios.RSML.Exceptions;
@@ -26,18 +25,12 @@ namespace OceanApocalypseStudios.RSML.Performance.Stateless
 		public static SpecificationCompliance SpecificationCompliance => SpecificationCompliance.CreateFull("2.0.0");
 
 		/// <summary>
-		/// The evaluator's special action.
-		/// </summary>
-		public static Dictionary<string, SpecialAction> SpecialActions { get; } = [ ];
-
-		/// <summary>
 		/// Evaluates a RSML buffer.
 		/// </summary>
 		/// <param name="buffer">The buffer</param>
 		/// <param name="machineData">The machine to use</param>
 		/// <returns>An evaluation result</returns>
-		/// <exception cref="ActionStandardErrorException">An action threw an error code 1</exception>
-		/// <exception cref="ActionErrorException">An action threw a non-1 error code OR a throw-error operator was used</exception>
+		/// <exception cref="ActionErrorException">An action threw an error or a throw-error operator was used</exception>
 		/// <exception cref="InvalidRsmlSyntax">The RSML syntax is invalid</exception>
 		public static EvaluationResult Evaluate(ReadOnlySpan<char> buffer, LocalMachine machineData)
 		{
@@ -71,32 +64,20 @@ namespace OceanApocalypseStudios.RSML.Performance.Stateless
 						continue;
 
 					case 3:
-						if (tokens[1].Value.IsEquals("EndAll"))
-							continue;
-
-						byte result = HandleSpecialActionCall(tokens[1].Value.ToString(), tokens[2].Value.ToString());
-
-						switch (result)
+						switch (tokens[1].Value)
 						{
 
-							case SpecialActionBehavior.NoBehavior:
+							case "Void":
 								continue;
 
-							case SpecialActionBehavior.Error:
-								throw new ActionStandardErrorException("A special action returned error code 1.");
+							case "ThrowError":
+								throw new ActionErrorException("A special action returned an error code.");
 
-							case SpecialActionBehavior.StopEvaluation:
+							case "EndAll":
 								return new();
 
-							case SpecialActionBehavior.ResetSpecials:
-								SpecialActions.Clear();
-
-								continue;
-
 							default:
-								throw new ActionErrorException(
-									$"A special action returned error code {result}. In the future, please use 1 to signal errors."
-								);
+								throw new ActionErrorException("Unrecognized special action.");
 
 						}
 
@@ -135,18 +116,6 @@ namespace OceanApocalypseStudios.RSML.Performance.Stateless
 			}
 
 			return new(); // no matches
-
-		}
-
-		private static byte HandleSpecialActionCall(string name, string arg)
-		{
-
-			if (name == "EndAll")
-				return SpecialActionBehavior.StopEvaluation;
-
-			return SpecialActions.TryGetValue(name, out var action)
-					   ? action(null, arg)
-					   : throw new UndefinedActionException("Action is undefined but used");
 
 		}
 
@@ -209,23 +178,23 @@ namespace OceanApocalypseStudios.RSML.Performance.Stateless
 			switch (tokens[2].Kind)
 			{
 
-				case TokenKind.Equals:
+				case TokenKind.EqualTo:
 					systemVersionMatches = tokens[3].Value.IsEquals(machine.StringifiedSystemVersion);
 
 					break;
 
-				case TokenKind.Different:
+				case TokenKind.NotEqualTo:
 					systemVersionMatches = !tokens[3].Value.IsEquals(machine.StringifiedSystemVersion);
 
 					break;
 
-				case TokenKind.GreaterOrEqualsThan:
+				case TokenKind.GreaterThanOrEqualTo:
 					if (Int32.TryParse(tokens[3].Value, out versionNum))
 						systemVersionMatches = machine.SystemVersion >= versionNum;
 
 					break;
 
-				case TokenKind.LessOrEqualsThan:
+				case TokenKind.LessThanOrEqualTo:
 					if (Int32.TryParse(tokens[3].Value, out versionNum))
 						systemVersionMatches = machine.SystemVersion <= versionNum;
 
@@ -320,23 +289,23 @@ namespace OceanApocalypseStudios.RSML.Performance.Stateless
 			switch (tokens[2].Kind)
 			{
 
-				case TokenKind.Equals:
+				case TokenKind.EqualTo:
 					systemVersionMatches = tokens[3].Value.IsEquals(machine.StringifiedSystemVersion);
 
 					break;
 
-				case TokenKind.Different:
+				case TokenKind.NotEqualTo:
 					systemVersionMatches = !tokens[3].Value.IsEquals(machine.StringifiedSystemVersion);
 
 					break;
 
-				case TokenKind.GreaterOrEqualsThan:
+				case TokenKind.GreaterThanOrEqualTo:
 					if (Int32.TryParse(tokens[3].Value, out versionNum))
 						systemVersionMatches = machine.SystemVersion >= versionNum;
 
 					break;
 
-				case TokenKind.LessOrEqualsThan:
+				case TokenKind.LessThanOrEqualTo:
 					if (Int32.TryParse(tokens[3].Value, out versionNum))
 						systemVersionMatches = machine.SystemVersion <= versionNum;
 

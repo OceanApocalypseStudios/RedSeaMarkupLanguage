@@ -39,7 +39,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-using OceanApocalypseStudios.RSML.Actions;
 using OceanApocalypseStudios.RSML.Analyzer.Semantics;
 using OceanApocalypseStudios.RSML.Analyzer.Syntax;
 using OceanApocalypseStudios.RSML.Exceptions;
@@ -66,8 +65,6 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 		/// </summary>
 		private readonly List<Middleware> evaluatorMiddlewares = [ ];
 
-		private readonly Dictionary<string, SpecialAction> specialActions = [ ];
-
 		/// <summary>
 		/// Creates a new instance of a RSML evaluator.
 		/// </summary>
@@ -92,9 +89,6 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 		public string Content { get; set; }
 
 		/// <inheritdoc />
-		public ReadOnlyDictionary<string, SpecialAction> SpecialActions => specialActions.AsReadOnly();
-
-		/// <inheritdoc />
 		public EvaluationResult Evaluate() => Evaluate(new());
 
 		/// <inheritdoc />
@@ -111,9 +105,6 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 				return new();
 
 			reader ??= new RsmlReader(Content);
-
-			if (evaluatorMiddlewares.Count == 0)
-				return Evaluate_NoMiddleware(machineData, reader);
 
 			while (reader.TryTokenizeNextLine(out var rawTokens))
 			{
@@ -161,29 +152,20 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 						continue;
 
 					case 3:
-						byte result = HandleSpecialActionCall(tokens[1].Value, tokens[2].Value);
-
-						switch (result)
+						switch (tokens[1].Value)
 						{
 
-							case SpecialActionBehavior.NoBehavior:
+							case "Void":
 								continue;
 
-							case SpecialActionBehavior.Error:
-								throw new ActionStandardErrorException("A special action returned error code 1.");
+							case "ThrowError":
+								throw new ActionErrorException("A special action returned an error code.");
 
-							case SpecialActionBehavior.StopEvaluation:
+							case "EndAll":
 								return new();
 
-							case SpecialActionBehavior.ResetSpecials:
-								specialActions.Clear();
-
-								continue;
-
 							default:
-								throw new ActionErrorException(
-									$"A special action returned error code {result}. In the future, please use 1 to signal errors."
-								);
+								throw new ActionErrorException("Unrecognized special action.");
 
 						}
 
@@ -232,19 +214,6 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 		/// <inheritdoc />
 		public static bool IsComment(string line) => IsComment(line.AsSpan());
 
-		/// <inheritdoc />
-		public IEvaluator RegisterSpecialAction(string name, SpecialAction action)
-		{
-
-			if (name.StartsWith('@') || name.StartsWith('#') || name == "EndAll")
-				throw new ArgumentException("The name of the special action must not be EndAll or start with @ or #.", nameof(name));
-
-			specialActions[name] = action;
-
-			return this;
-
-		}
-
 		/// <summary>
 		/// Binds a middleware to the evaluator.
 		/// </summary>
@@ -271,125 +240,6 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 			removed = evaluatorMiddlewares.Remove(middleware);
 
 			return this;
-
-		}
-
-		/// <summary>
-		/// Evaluates RSML with no middleware interference.
-		/// Middlewares are slow so this is the best solution.
-		/// This method is automatically ran instead of the default one if there are no middlewares.
-		/// </summary>
-		private EvaluationResult Evaluate_NoMiddleware(
-			LocalMachine machineData,
-			IReader reader
-		)
-		{
-
-			while (reader.TryTokenizeNextLine(out var rawTokens))
-			{
-
-				var normalizedTokens = Normalizer.NormalizeLine(rawTokens, out _);
-				var tokens = (normalizedTokens as SyntaxToken[] ?? normalizedTokens.ToArray()).AsSpan();
-
-				Validator.ValidateLine(tokens); // line validation
-
-				if (tokens[^1].Kind == TokenKind.Eol)
-					tokens = tokens[..^1];
-
-				// we basically do length-based checks
-				/*
-				 * Possible Lengths of tokens:
-				 *	2 - Comment (#, Text)
-				 *	3 - Special Action (@, Name, Arg)
-				 *	5 - Logic Path (Op, Sys, Version Major = ANY, Arch, RetVal)
-				 *	6 - Logic Path (Op, Sys, Version Major, Arch, RetVal)
-				 *
-				 */
-
-				switch (tokens.Length)
-				{
-
-					case 0:
-					case 2:
-						continue;
-
-					case 3:
-						if (tokens[1].Value == "EndAll")
-							continue;
-
-						byte result = HandleSpecialActionCall(tokens[1].Value, tokens[2].Value);
-
-						switch (result)
-						{
-
-							case SpecialActionBehavior.NoBehavior:
-								continue;
-
-							case SpecialActionBehavior.Error:
-								throw new ActionStandardErrorException("A special action returned error code 1.");
-
-							case SpecialActionBehavior.StopEvaluation:
-								return new();
-
-							case SpecialActionBehavior.ResetSpecials:
-								specialActions.Clear();
-
-								continue;
-
-							default:
-								throw new ActionErrorException(
-									$"A special action returned error code {result}. In the future, please use 1 to signal errors."
-								);
-
-						}
-
-					case 5:
-						if (HandleLogicPath_Simple(tokens, machineData, machineData.SystemName == "linux"))
-						{
-
-							return tokens[0].Kind == TokenKind.ThrowErrorOperator
-									   ? throw new UserRaisedException("Error-throw operator used.")
-									   : new(tokens[4].Value);
-
-						}
-
-						continue;
-
-					case 6:
-						if (HandleLogicPath_Complex(tokens, machineData, machineData.SystemName == "linux"))
-						{
-
-							return tokens[0].Kind == TokenKind.ThrowErrorOperator
-									   ? throw new UserRaisedException("Error-throw operator used.")
-									   : new(tokens[5].Value);
-
-						}
-
-						continue;
-
-					default:
-						if (tokens[0].Kind == TokenKind.CommentSymbol)
-							continue; // it's somehow a comment
-
-						throw new InvalidRsmlSyntax("Unexpected error: invalid line tokenized successfully.");
-
-				}
-
-			}
-
-			return new(); // no matches
-
-		}
-
-		private byte HandleSpecialActionCall(string name, string arg)
-		{
-
-			if (name == "EndAll")
-				return SpecialActionBehavior.StopEvaluation;
-
-			return specialActions.TryGetValue(name, out var action)
-					   ? action(this, arg)
-					   : throw new UndefinedActionException("Action is undefined but used");
 
 		}
 
@@ -452,23 +302,23 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 			switch (tokens[2].Kind)
 			{
 
-				case TokenKind.Equals:
+				case TokenKind.EqualTo:
 					systemVersionMatches = machine.StringifiedSystemVersion == tokens[3].Value;
 
 					break;
 
-				case TokenKind.Different:
+				case TokenKind.NotEqualTo:
 					systemVersionMatches = machine.StringifiedSystemVersion != tokens[3].Value;
 
 					break;
 
-				case TokenKind.GreaterOrEqualsThan:
+				case TokenKind.GreaterThanOrEqualTo:
 					if (Int32.TryParse(tokens[3].Value, out versionNum))
 						systemVersionMatches = machine.SystemVersion >= versionNum;
 
 					break;
 
-				case TokenKind.LessOrEqualsThan:
+				case TokenKind.LessThanOrEqualTo:
 					if (Int32.TryParse(tokens[3].Value, out versionNum))
 						systemVersionMatches = machine.SystemVersion <= versionNum;
 
@@ -563,23 +413,23 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 			switch (tokens[2].Kind)
 			{
 
-				case TokenKind.Equals:
+				case TokenKind.EqualTo:
 					systemVersionMatches = machine.StringifiedSystemVersion == tokens[3].Value;
 
 					break;
 
-				case TokenKind.Different:
+				case TokenKind.NotEqualTo:
 					systemVersionMatches = machine.StringifiedSystemVersion != tokens[3].Value;
 
 					break;
 
-				case TokenKind.GreaterOrEqualsThan:
+				case TokenKind.GreaterThanOrEqualTo:
 					if (Int32.TryParse(tokens[3].Value, out versionNum))
 						systemVersionMatches = machine.SystemVersion >= versionNum;
 
 					break;
 
-				case TokenKind.LessOrEqualsThan:
+				case TokenKind.LessThanOrEqualTo:
 					if (Int32.TryParse(tokens[3].Value, out versionNum))
 						systemVersionMatches = machine.SystemVersion <= versionNum;
 

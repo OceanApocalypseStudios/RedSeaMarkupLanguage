@@ -30,6 +30,11 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 		static abstract ImmutableHashSet<string> ValidSystems { get; }
 
 		/// <summary>
+		/// Valid special action names. Case-sensitive.
+		/// </summary>
+		static abstract ImmutableHashSet<string> ValidSpecialActionNames { get; }
+
+		/// <summary>
 		/// Validates a RSML buffer from its tokens.
 		/// </summary>
 		/// <param name="bufferTokens">The buffer's tokens</param>

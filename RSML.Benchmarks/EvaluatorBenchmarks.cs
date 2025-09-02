@@ -23,7 +23,7 @@ namespace OceanApocalypseStudios.RSML.Benchmarks
 	public class EvaluatorBenchmarks
 	{
 
-		private const string SmallContent = "-> windows \"value\"\n@SpecialAction arg\n# Comment";
+		private const string SmallContent = "-> windows \"value\"\n@Void arg\n# Comment";
 
 		private readonly LocalMachine ubuntu = new("ubuntu", null, null);
 
@@ -56,13 +56,11 @@ namespace OceanApocalypseStudios.RSML.Benchmarks
 				"Dataset"
 			);
 
-			StatelessEvaluator.SpecialActions["SpecialAction"] = (_, _) => 0;
-
 			primitiveEvaluatorComment = CreateConfiguredParser("# comment");
 			primitiveEvaluatorCommentWs = CreateConfiguredParser("                       # comment");
 			primitiveEvaluatorNewlines = CreateConfiguredParser("\n\n\n\n\n\n\n\n");
 			primitiveEvaluatorLogic = CreateConfiguredParser("-> windows 10 x64 \"Some random value\"");
-			primitiveEvaluatorAction = CreateConfiguredParser("@SpecialAction\n@SpecialAction\n@EndAll");
+			primitiveEvaluatorAction = CreateConfiguredParser("@Void\n@Void\n@EndAll");
 
 			mediumContent = File.ReadAllText(Path.Join(datasetPath, "medium_content.rsea"));
 			largeContent = File.ReadAllText(Path.Join(datasetPath, "large_content.rsea"));
@@ -80,15 +78,7 @@ namespace OceanApocalypseStudios.RSML.Benchmarks
 
 		}
 
-		internal static Evaluator CreateConfiguredParser(string content)
-		{
-
-			var evaluator = new Evaluator(content);
-			evaluator.RegisterSpecialAction("SpecialAction", (_, _) => 0);
-
-			return evaluator;
-
-		}
+		internal static Evaluator CreateConfiguredParser(string content) => new(content);
 
 		[Benchmark]
 		[BenchmarkCategory("Primitives")]

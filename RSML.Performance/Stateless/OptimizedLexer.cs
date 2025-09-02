@@ -68,19 +68,18 @@ namespace OceanApocalypseStudios.RSML.Performance.Stateless
 				{
 
 					pos++; // ignore the double quote
-					var retVal = ReadQuotedString(line, ref pos);
 
-					logicLine.Add(new(TokenKind.LogicPathValue, retVal.ToString()));
+					logicLine.Add(new(TokenKind.LogicPathValue, ReadQuotedString(line, pos, out pos)));
 					logicLine.Add(new(TokenKind.Eol, Environment.NewLine));
 
 					break;
 
 				}
 
-				var token = TokenizeLogicPathComponent(line, ref pos);
+				logicLine.Add(TokenizeLogicPathComponent(line, pos, out pos));
 
-				if (!token.IsEmpty())
-					logicLine.Add(new(token.Kind, token.Value.ToString()));
+				if (logicLine[logicLine.Last()].IsEmpty())
+					logicLine.Remove(logicLine.Last());
 
 			}
 
@@ -93,12 +92,13 @@ namespace OceanApocalypseStudios.RSML.Performance.Stateless
 		/// </summary>
 		/// <param name="line">The line</param>
 		/// <param name="pos">The index position</param>
+		/// <param name="position">The position of the index, after it's assigned</param>
 		/// <returns>A token</returns>
-		public static ValueToken TokenizeLogicPathComponent(ReadOnlySpan<char> line, ref int pos)
+		public static ValueToken TokenizeLogicPathComponent(ReadOnlySpan<char> line, int pos, out int position)
 		{
 
 			SkipWhitespace(line, ref pos);
-			int currentPosVal = pos;
+			position = pos;
 			var chars = ReadUntilWhitespaceOrEol(line, ref pos);
 
 			if (chars.IsEquals("any"))
@@ -107,17 +107,19 @@ namespace OceanApocalypseStudios.RSML.Performance.Stateless
 			if (chars.IsEquals("defined"))
 				return new(TokenKind.DefinedKeyword, "defined");
 
+			var str = chars.ToString();
+
+			if (Int32.TryParse(chars, out int result))
+				return new(TokenKind.MajorVersionId, result.ToString());
+
 			if (chars.IsAsciiEqualsIgnoreCase_10(
 					"windows", "osx", "linux", "freebsd", "debian",
 					"ubuntu", "archlinux", "fedora"
 				))
-				return new(TokenKind.SystemName, chars);
+				return new(TokenKind.SystemName, str);
 
 			if (chars.IsAsciiEqualsIgnoreCase_5("x64", "x86", "arm32", "arm64", "loongarch64"))
-				return new(TokenKind.ArchitectureIdentifier, chars);
-
-			if (Int32.TryParse(chars, out int result))
-				return new(TokenKind.MajorVersionId, result.ToString());
+				return new(TokenKind.ArchitectureIdentifier, str);
 
 			if (chars.IsEquals_8(
 					"==", "!=", "<", ">", "<=",
@@ -126,41 +128,38 @@ namespace OceanApocalypseStudios.RSML.Performance.Stateless
 			{
 
 				if (chars.IsEquals("=="))
-					return new(TokenKind.Equals, chars);
+					return new(TokenKind.EqualTo, str);
 
 				if (chars.IsEquals("!="))
-					return new(TokenKind.Different, chars);
+					return new(TokenKind.NotEqualTo, str);
 
 				if (chars.IsEquals(">"))
-					return new(TokenKind.GreaterThan, chars);
+					return new(TokenKind.GreaterThan, str);
 
 				if (chars.IsEquals("<"))
-					return new(TokenKind.LessThan, chars);
+					return new(TokenKind.LessThan, str);
 
 				if (chars.IsEquals(">="))
-					return new(TokenKind.GreaterOrEqualsThan, chars);
+					return new(TokenKind.GreaterThanOrEqualTo, str);
 
 				if (chars.IsEquals("<="))
-					return new(TokenKind.LessOrEqualsThan, chars);
+					return new(TokenKind.LessThanOrEqualTo, str);
 
 			}
 
-			if (chars[0] != '"')
-				return new(TokenKind.UndefinedToken, chars);
-
-			pos = currentPosVal;
-
-			return ValueToken.Empty;
+			return chars[0] != '"' ? new(TokenKind.UndefinedToken, str) : ValueToken.Empty;
 
 		}
 
 		#region Helpers
 
-		private static ReadOnlySpan<char> ReadQuotedString(ReadOnlySpan<char> line, ref int pos)
+		private static ReadOnlySpan<char> ReadQuotedString(ReadOnlySpan<char> line, int pos, out int position)
 		{
 
 			int start = pos;
 			int finalQuoteIndex = line[pos..].LastIndexOf('"');
+
+			position = start;
 
 			if (finalQuoteIndex == -1)
 				return "";
@@ -177,7 +176,8 @@ namespace OceanApocalypseStudios.RSML.Performance.Stateless
 
 			}
 
-			return line[start..pos]; // ignores last double quote
+			position = pos;
+			return line[start..position]; // ignores last double quote
 
 		}
 

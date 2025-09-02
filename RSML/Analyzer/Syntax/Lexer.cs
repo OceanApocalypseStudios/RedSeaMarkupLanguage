@@ -174,10 +174,10 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 			{
 
 				if (chars.IsEquals("=="))
-					return new(TokenKind.Equals, chars);
+					return new(TokenKind.EqualTo, chars);
 
 				if (chars.IsEquals("!="))
-					return new(TokenKind.Different, chars);
+					return new(TokenKind.NotEqualTo, chars);
 
 				if (chars.IsEquals(">"))
 					return new(TokenKind.GreaterThan, chars);
@@ -186,10 +186,10 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 					return new(TokenKind.LessThan, chars);
 
 				if (chars.IsEquals(">="))
-					return new(TokenKind.GreaterOrEqualsThan, chars);
+					return new(TokenKind.GreaterThanOrEqualTo, chars);
 
 				if (chars.IsEquals("<="))
-					return new(TokenKind.LessOrEqualsThan, chars);
+					return new(TokenKind.LessThanOrEqualTo, chars);
 
 			}
 

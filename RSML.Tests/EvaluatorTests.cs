@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 
-using OceanApocalypseStudios.RSML.Actions;
 using OceanApocalypseStudios.RSML.Evaluation;
 using OceanApocalypseStudios.RSML.Exceptions;
 
@@ -18,27 +17,6 @@ namespace OceanApocalypseStudios.RSML.Tests
 		private static readonly LocalMachine ubuntu22Arm64 = new("ubuntu", "debian", "x64", 22);
 		private static readonly LocalMachine debianUnknownVersionX86 = new("debian", "debian", "x86", null);
 		private static readonly LocalMachine osxUnknownVersionUnknownArch = new("osx", null, null);
-
-		[Fact]
-		public void Evaluate_SpecialActionNoArgument_ImplicitEmptyString()
-		{
-
-			var result = new Evaluator("@MyAwesomeAction").RegisterSpecialAction(
-															  "MyAwesomeAction", (_, argument) =>
-															  {
-
-																  Debug.WriteLine("@MyAwesomeAction was ran.");
-																  Assert.Equal(String.Empty, argument);
-
-																  return SpecialActionBehavior.Success;
-
-															  }
-														  )
-														  .Evaluate(win10X64);
-
-			Assert.Null(result.MatchValue);
-
-		}
 
 		[Theory]
 		[InlineData("#")]

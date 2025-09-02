@@ -65,8 +65,11 @@ namespace OceanApocalypseStudios.RSML.Performance.Stateless
 				case TokenKind.SpecialActionSymbol when !line[0].Value.IsEquals("@"):
 					throw new InvalidRsmlSyntax($"Expected SpecialActionSymbol of value '@', but received {line[0].Value} instead.");
 
-				case TokenKind.SpecialActionSymbol when line[1].Kind != TokenKind.SpecialActionName:
-					throw new InvalidRsmlSyntax($"Expected SpecialActionName, but received {line[1].Kind} instead.");
+				case TokenKind.SpecialActionSymbol when (line[1].Kind != TokenKind.SpecialActionName ||
+														 !Validator.ValidSpecialActionNames.Contains(line[1].Value.ToString())):
+					throw new InvalidRsmlSyntax(
+						$"Expected a valid SpecialActionName, but received {line[1].Kind} with value {line[1].Value} instead."
+					);
 
 				case TokenKind.SpecialActionSymbol when line[2].Kind != TokenKind.SpecialActionArgument:
 					throw new InvalidRsmlSyntax($"Expected SpecialActionArgument, but received {line[2].Kind} instead.");
@@ -195,12 +198,12 @@ namespace OceanApocalypseStudios.RSML.Performance.Stateless
 					if ((line[1].Kind != TokenKind.SystemName &&
 						 line[1].Kind != TokenKind.DefinedKeyword &&
 						 line[1].Kind != TokenKind.WildcardKeyword) ||
-						(line[2].Kind != TokenKind.Equals &&
-						 line[2].Kind != TokenKind.Different &&
+						(line[2].Kind != TokenKind.EqualTo &&
+						 line[2].Kind != TokenKind.NotEqualTo &&
 						 line[2].Kind != TokenKind.GreaterThan &&
 						 line[2].Kind != TokenKind.LessThan &&
-						 line[2].Kind != TokenKind.GreaterOrEqualsThan &&
-						 line[2].Kind != TokenKind.LessOrEqualsThan) ||
+						 line[2].Kind != TokenKind.GreaterThanOrEqualTo &&
+						 line[2].Kind != TokenKind.LessThanOrEqualTo) ||
 						(line[3].Kind != TokenKind.MajorVersionId &&
 						 line[3].Kind != TokenKind.DefinedKeyword &&
 						 line[3].Kind != TokenKind.WildcardKeyword) ||

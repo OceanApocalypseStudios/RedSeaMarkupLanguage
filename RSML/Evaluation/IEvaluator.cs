@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 
-using OceanApocalypseStudios.RSML.Actions;
 using OceanApocalypseStudios.RSML.Reader;
 using OceanApocalypseStudios.RSML.Toolchain;
 
@@ -22,10 +20,6 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 		/// </summary>
 		string Content { get; set; }
 
-		/// <summary>
-		/// The special actions in use.
-		/// </summary>
-		ReadOnlyDictionary<string, SpecialAction> SpecialActions { get; }
 
 		/// <summary>
 		/// Checks if a given line of RSML is a comment.
@@ -63,14 +57,6 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 		/// <param name="reader">The custom reader</param>
 		/// <returns></returns>
 		EvaluationResult Evaluate(LocalMachine machineData, IReader? reader);
-
-		/// <summary>
-		/// Registers a special action.
-		/// </summary>
-		/// <param name="name">The name of the action</param>
-		/// <param name="action">The action to register</param>
-		/// <returns>Self. Fluent API.</returns>
-		IEvaluator RegisterSpecialAction(string name, SpecialAction action);
 
 	}
 
