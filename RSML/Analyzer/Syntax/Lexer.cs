@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 
 using OceanApocalypseStudios.RSML.Toolchain.Compliance;
@@ -15,24 +14,28 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 	{
 
 		private const string ApiVersion = "2.0.0";
+		private const string QUOTE = "\"";
 
 		/// <inheritdoc />
 		public static SpecificationCompliance SpecificationCompliance => SpecificationCompliance.CreateFull(ApiVersion);
 
 		/// <inheritdoc />
-		public static string CreateDocumentFromTokens(IEnumerable<SyntaxToken> tokens)
+		public static string CreateDocumentFromTokens(in SyntaxLine line, DualTextBuffer context)
 		{
 
 			StringBuilder builder = new();
 
-			foreach (var t in tokens)
+			for (int i = 0; i < 8; i++)
 			{
 
-				if (t.Kind == TokenKind.Eof)
+				if (line[i].IsEmpty)
+					continue;
+
+				if (line[i].Kind == TokenKind.Eof)
 					break;
 
 				// ReSharper disable once SwitchStatementHandlesSomeKnownEnumValuesWithDefault
-				switch (t.Kind)
+				switch (line[i].Kind)
 				{
 
 					case TokenKind.Eol:
@@ -45,16 +48,19 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 
 						continue;
 
-					case TokenKind.LogicPathValue:
-						_ = builder.Append(t.Value);
+					case TokenKind.LogicPathValue when !line[i].IsOffLimits:
+						_ = builder.Append(context[line[i].BufferRange]);
 
 						continue;
 
 					default:
-						_ = builder.Append(t.Value);
+						if (line[i].IsOffLimits)
+							continue;
+
+						_ = builder.Append(context[line[i].BufferRange]);
 						_ = builder.Append(' ');
 
-						break;
+						continue;
 
 				}
 
@@ -65,107 +71,113 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 		}
 
 		/// <inheritdoc />
-		public static IEnumerable<SyntaxToken> TokenizeLine(string line)
+		public static SyntaxLine TokenizeLine(DualTextBuffer buffer)
 		{
 
-			int pos = 0;
-			SkipWhitespace(line, ref pos);
+			buffer.SkipWhitespace();
+			int pos = buffer.CaretPosition;
 
-			if (pos >= line.Length)
-			{
+			if (buffer.CaretPosition >= buffer.Length)
+				return new(new(TokenKind.Eol, ^1, 0));
 
-				yield return new(TokenKind.Eol, Environment.NewLine);
-
-				yield break;
-
-			}
-
-			switch (line[pos])
+			switch (buffer[buffer.CaretPosition])
 			{
 
 				case '#':
-					yield return new(TokenKind.CommentSymbol, '#');
-					yield return new(TokenKind.CommentText, line.AsSpan()[++pos..]);
-					yield return new(TokenKind.Eol, Environment.NewLine);
-
-					yield break;
+					return new(
+						new(TokenKind.CommentSymbol, pos, pos++),
+						new(TokenKind.CommentText, pos, buffer.Length),
+						new(TokenKind.Eol, ^1, 0)
+					);
 
 				case '@':
-					yield return new(TokenKind.SpecialActionSymbol, '@');
+					_ = buffer.Read();
+					_ = buffer.ReadUntilWhitespace(false);
+					int beforeWhitespaceRemoval = buffer.CaretPosition;
 
-					++pos; // advance to ignore the #
-					var actionName = ReadUntilWhitespaceOrEol(line, ref pos);
+					buffer.SkipWhitespace();
 
-					yield return new(TokenKind.SpecialActionName, actionName);
+					int argumentNameStartIdx = buffer.CaretPosition;
+					_ = buffer.ReadUntilWhitespace(false);
+					int argumentNameEndIdx = buffer.CaretPosition;
 
-					var argument = ReadUntilWhitespaceOrEol(line, ref pos);
-
-					yield return new(TokenKind.SpecialActionArgument, argument);
-
-					yield return new(TokenKind.Eol, Environment.NewLine);
-
-					yield break;
+					return new(
+						new(TokenKind.SpecialActionSymbol, pos, pos + 1),
+						new(TokenKind.SpecialActionName, pos + 1, beforeWhitespaceRemoval),
+						new(TokenKind.SpecialActionArgument, argumentNameStartIdx, argumentNameEndIdx),
+						new(TokenKind.Eol, ^1, 0),
+						SyntaxToken.Empty
+					);
 
 			}
 
-			var op = ReadUntilWhitespaceOrEol(line, ref pos);
+			var op = buffer.ReadUntilWhitespace(false);
+			SyntaxLine line = new();
+			line.Clear();
 
 			if (op.IsEquals("->"))
-				yield return new(TokenKind.ReturnOperator, op);
+				line.Add(new(TokenKind.ReturnOperator, pos, buffer.CaretPosition));
 
 			else if (op.IsEquals("!>"))
-				yield return new(TokenKind.ThrowErrorOperator, op);
+				line.Add(new(TokenKind.ThrowErrorOperator, pos, buffer.CaretPosition));
 
-			while (pos < line.Length)
+			while (buffer.CaretPosition < buffer.Length)
 			{
 
-				if (line[pos] == '"')
+				if (buffer[buffer.CaretPosition] == '"' || (buffer[buffer.CaretPosition] == ' ' && buffer[buffer.CaretPosition + 1] == '"'))
 				{
 
-					pos++; // ignore the double quote
-					var retVal = ReadQuotedString(line, ref pos);
+					if (buffer[buffer.CaretPosition] != '"')
+						_ = buffer.Read();
 
-					yield return new(TokenKind.LogicPathValue, retVal);
-					yield return new(TokenKind.Eol, Environment.NewLine);
+					_ = buffer.Read();
 
-					yield break;
+					var retValRange = ReadQuotedString(buffer);
+
+					line.Add(new(TokenKind.LogicPathValue, retValRange));
+					line.Add(new(TokenKind.Eol, ^1, 0));
+
+					break;
 
 				}
 
-				var token = TokenizeLogicPathComponent(line, ref pos);
+				var token = TokenizeLogicPathComponent(buffer);
 
 				if (token is not null)
-					yield return (SyntaxToken)token;
+					line.Add((SyntaxToken)token);
 
 			}
+
+			return line;
 
 		}
 
 		/// <inheritdoc />
-		public static SyntaxToken? TokenizeLogicPathComponent(ReadOnlySpan<char> line, ref int pos)
+		public static SyntaxToken? TokenizeLogicPathComponent(DualTextBuffer buffer)
 		{
 
-			SkipWhitespace(line, ref pos);
-			int currentPosVal = pos;
-			var chars = ReadUntilWhitespaceOrEol(line, ref pos);
+			buffer.SkipWhitespace();
+			int startIndex = buffer.CaretPosition;
+			var chars = buffer.ReadUntilWhitespace(false);
+			int curPos = buffer.CaretPosition;
 
 			if (chars.IsEquals("any"))
-				return new(TokenKind.WildcardKeyword, "any");
+				return new(TokenKind.WildcardKeyword, startIndex, curPos);
 
 			if (chars.IsEquals("defined"))
-				return new(TokenKind.DefinedKeyword, "defined");
+				return new(TokenKind.DefinedKeyword, startIndex, curPos);
 
 			if (chars.IsAsciiEqualsIgnoreCase_10(
 					"windows", "osx", "linux", "freebsd", "debian",
 					"ubuntu", "archlinux", "fedora"
 				))
-				return new(TokenKind.SystemName, chars);
+				return new(TokenKind.SystemName, startIndex, curPos);
 
 			if (chars.IsAsciiEqualsIgnoreCase_5("x64", "x86", "arm32", "arm64", "loongarch64"))
-				return new(TokenKind.ArchitectureIdentifier, chars);
+				return new(TokenKind.ArchitectureIdentifier, startIndex, curPos);
 
-			if (Int32.TryParse(chars, out int result))
-				return new(TokenKind.MajorVersionId, result.ToString());
+			if (Int32.TryParse(chars.Span, out _))
+				return new(TokenKind.MajorVersionId, startIndex, curPos);
 
 			if (chars.IsEquals_8(
 					"==", "!=", "<", ">", "<=",
@@ -174,29 +186,27 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 			{
 
 				if (chars.IsEquals("=="))
-					return new(TokenKind.EqualTo, chars);
+					return new(TokenKind.EqualTo, startIndex, curPos);
 
 				if (chars.IsEquals("!="))
-					return new(TokenKind.NotEqualTo, chars);
+					return new(TokenKind.NotEqualTo, startIndex, curPos);
 
 				if (chars.IsEquals(">"))
-					return new(TokenKind.GreaterThan, chars);
+					return new(TokenKind.GreaterThan, startIndex, curPos);
 
 				if (chars.IsEquals("<"))
-					return new(TokenKind.LessThan, chars);
+					return new(TokenKind.LessThan, startIndex, curPos);
 
 				if (chars.IsEquals(">="))
-					return new(TokenKind.GreaterThanOrEqualTo, chars);
+					return new(TokenKind.GreaterThanOrEqualTo, startIndex, curPos);
 
 				if (chars.IsEquals("<="))
-					return new(TokenKind.LessThanOrEqualTo, chars);
+					return new(TokenKind.LessThanOrEqualTo, startIndex, curPos);
 
 			}
 
-			if (chars[0] != '"')
-				return new(TokenKind.UndefinedToken, chars);
-
-			pos = currentPosVal;
+			if (!chars.Span.TrimStart().StartsWith(QUOTE))
+				return SyntaxToken.Empty;
 
 			return null;
 
@@ -204,48 +214,28 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 
 		#region Helpers
 
-		private static ReadOnlySpan<char> ReadQuotedString(ReadOnlySpan<char> line, ref int pos)
+		private static Range ReadQuotedString(DualTextBuffer buffer)
 		{
 
-			int start = pos;
-			int finalQuoteIndex = line[pos..].LastIndexOf('"');
+			int start = buffer.CaretPosition;
+			int finalQuoteIndex = buffer.Text.Span[buffer.CaretPosition..].LastIndexOf('"');
 
 			if (finalQuoteIndex == -1)
-				return "";
+				return new(^1, 0);
 
-			finalQuoteIndex += pos; // absolute count
+			finalQuoteIndex += buffer.CaretPosition; // absolute count
 
-			while (pos < line.Length)
+			while (buffer.CaretPosition < buffer.Length)
 			{
 
-				if (pos == finalQuoteIndex)
+				if (buffer.CaretPosition == finalQuoteIndex)
 					break;
 
-				pos++;
+				_ = buffer.Read();
 
 			}
 
-			return line[start..pos]; // ignores last double quote
-
-		}
-
-		private static ReadOnlySpan<char> ReadUntilWhitespaceOrEol(ReadOnlySpan<char> line, ref int pos)
-		{
-
-			int start = pos;
-
-			while (pos < line.Length && !Char.IsWhiteSpace(line[pos]))
-				pos++;
-
-			return line[start..pos];
-
-		}
-
-		private static void SkipWhitespace(ReadOnlySpan<char> chars, ref int pos)
-		{
-
-			while (pos < chars.Length && Char.IsWhiteSpace(chars[pos]))
-				pos++;
+			return new(start, buffer.CaretPosition); // ignores last double quote
 
 		}
 

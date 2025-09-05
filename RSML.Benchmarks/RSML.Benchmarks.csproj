@@ -21,7 +21,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\RSML.Performance\RSML.Performance.csproj" />
 		<ProjectReference Include="..\RSML\RSML.csproj" />
 	</ItemGroup>
 

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using OceanApocalypseStudios.RSML.Analyzer;
 using OceanApocalypseStudios.RSML.Analyzer.Semantics;
 using OceanApocalypseStudios.RSML.Analyzer.Syntax;
 using OceanApocalypseStudios.RSML.CLI.Helpers;
 using OceanApocalypseStudios.RSML.Evaluation;
 using OceanApocalypseStudios.RSML.Exceptions;
-using OceanApocalypseStudios.RSML.Reader;
 
 using Spectre.Console;
 
@@ -19,16 +19,39 @@ namespace OceanApocalypseStudios.RSML.CLI
 	internal partial class Program
 	{
 
-		public static string Tokenize_NoPretty(string data)
+		public static string? CompileRsml_NoPretty(string rsml, string language, string moduleName)
 		{
 
-			List<SyntaxToken> tokens = [ ];
-			RsmlReader reader = new(data);
+			EvaluationResult result;
 
-			while (reader.TryTokenizeNextLine(out var rawTokens))
-				tokens.AddRange(Normalizer.NormalizeLine(rawTokens, out _));
+			try
+			{
 
-			return String.Join(Environment.NewLine, tokens);
+				result = new Evaluator(rsml).Evaluate();
+
+			}
+			catch (UserRaisedException)
+			{
+
+				return null;
+
+			}
+			catch (InvalidRsmlSyntax)
+			{
+
+				return null;
+
+			}
+
+			return language switch
+			{
+
+				"C#" => CompiledRsmlGenerator.GenerateCSharp(moduleName, result.WasMatchFound ? $"(\"{result.MatchValue!}\")" : "()"),
+				"F#" => CompiledRsmlGenerator.GenerateFSharp(moduleName, result.WasMatchFound ? $"(\"{result.MatchValue!}\")" : "()"),
+				"VB" => CompiledRsmlGenerator.GenerateVisualBasic(moduleName, result.WasMatchFound ? $"(\"{result.MatchValue!}\")" : "()"),
+				_    => null
+
+			};
 
 		}
 
@@ -130,8 +153,6 @@ namespace OceanApocalypseStudios.RSML.CLI
 
 		}
 
-		public static void LocalMachineInfo_Pretty(LocalMachine machine) => LocalMachineOutput.AsPrettyText(machine);
-
 		public static string? LocalMachineInfo_NoPretty(LocalMachine machine, string outputFormat) =>
 			outputFormat switch
 			{
@@ -142,41 +163,7 @@ namespace OceanApocalypseStudios.RSML.CLI
 
 			};
 
-		public static string? CompileRsml_NoPretty(string rsml, string language, string moduleName)
-		{
-
-			EvaluationResult result;
-
-			try
-			{
-
-				result = new Evaluator(rsml).Evaluate();
-
-			}
-			catch (UserRaisedException)
-			{
-
-				return null;
-
-			}
-			catch (InvalidRsmlSyntax)
-			{
-
-				return null;
-
-			}
-
-			return language switch
-			{
-
-				"C#" => CompiledRsmlGenerator.GenerateCSharp(moduleName, result.WasMatchFound ? $"(\"{result.MatchValue!}\")" : "()"),
-				"F#" => CompiledRsmlGenerator.GenerateFSharp(moduleName, result.WasMatchFound ? $"(\"{result.MatchValue!}\")" : "()"),
-				"VB" => CompiledRsmlGenerator.GenerateVisualBasic(moduleName, result.WasMatchFound ? $"(\"{result.MatchValue!}\")" : "()"),
-				_    => null
-
-			};
-
-		}
+		public static void LocalMachineInfo_Pretty(LocalMachine machine) => LocalMachineOutput.AsPrettyText(machine);
 
 		public static int SpecificationSupport_NoPretty()
 		{
@@ -224,6 +211,34 @@ namespace OceanApocalypseStudios.RSML.CLI
 			AnsiConsole.Write(tree);
 
 			return 0;
+
+		}
+
+		public static string Tokenize_NoPretty(string data)
+		{
+
+			DualTextBuffer buffer = new(data);
+			List<SyntaxToken> tokens = [ ];
+
+			while (buffer.CaretPosition < buffer.Length || buffer.BufferNumber == 2) // dont stop just cuz we swap buffers
+			{
+
+				var line = buffer.ReadLine();
+
+				if (line.IsEmpty)
+					continue;
+
+				buffer.SwapBuffer();
+				buffer.Text = line;
+
+				var rawTokens = Lexer.TokenizeLine(buffer);
+				Normalizer.NormalizeLine(ref rawTokens, out _);
+
+				tokens.AddRange(rawTokens.ToList());
+
+			}
+
+			return String.Join(Environment.NewLine, tokens);
 
 		}
 

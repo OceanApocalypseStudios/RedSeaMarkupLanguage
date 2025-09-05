@@ -15,36 +15,31 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 	{
 
 		/// <summary>
-		/// Valid version number comparators.
-		/// </summary>
-		static abstract ImmutableHashSet<string> ValidComparators { get; }
-
-		/// <summary>
 		/// Valid architecture identifiers. Case-insensitive.
 		/// </summary>
-		static abstract ImmutableHashSet<string> ValidArchitectures { get; }
+		static abstract ImmutableArray<ReadOnlyMemory<char>> ValidArchitectures { get; }
 
 		/// <summary>
-		/// Valid system names. Case-insensitive.
+		/// Valid version number comparators.
 		/// </summary>
-		static abstract ImmutableHashSet<string> ValidSystems { get; }
+		static abstract ImmutableArray<ReadOnlyMemory<char>> ValidComparators { get; }
 
 		/// <summary>
 		/// Valid special action names. Case-sensitive.
 		/// </summary>
-		static abstract ImmutableHashSet<string> ValidSpecialActionNames { get; }
+		static abstract ImmutableArray<ReadOnlyMemory<char>> ValidSpecialActionNames { get; }
 
 		/// <summary>
-		/// Validates a RSML buffer from its tokens.
+		/// Valid system names. Case-insensitive.
 		/// </summary>
-		/// <param name="bufferTokens">The buffer's tokens</param>
-		static abstract void ValidateBuffer(ReadOnlySpan<SyntaxToken> bufferTokens);
+		static abstract ImmutableArray<ReadOnlyMemory<char>> ValidSystems { get; }
 
 		/// <summary>
 		/// Validates a single line of RSML from its tokens.
 		/// </summary>
-		/// <param name="tokens">The line's tokens</param>
-		static abstract void ValidateLine(ReadOnlySpan<SyntaxToken> tokens);
+		/// <param name="line">A collection of tokens</param>
+		/// <param name="context">The buffer</param>
+		static abstract void ValidateLine(SyntaxLine line, DualTextBuffer context);
 
 	}
 

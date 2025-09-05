@@ -1,6 +1,4 @@
-﻿using System;
-
-using OceanApocalypseStudios.RSML.Analyzer.Syntax;
+﻿using OceanApocalypseStudios.RSML.Analyzer.Syntax;
 
 
 namespace OceanApocalypseStudios.RSML.Toolchain
@@ -9,10 +7,8 @@ namespace OceanApocalypseStudios.RSML.Toolchain
 	internal static class TokenBank
 	{
 
-		public static SyntaxToken eolToken = new(TokenKind.Eol, Environment.NewLine);
-		public static SyntaxToken eofToken = new(TokenKind.Eof, '\0');
-		public static SyntaxToken wildcardToken = new(TokenKind.WildcardKeyword, "any");
-		public static SyntaxToken commentToken = new(TokenKind.CommentSymbol, '#');
+		public static SyntaxToken eolToken = new(TokenKind.Eol, ^1, 0);
+		public static SyntaxToken wildcardToken = new(TokenKind.WildcardKeyword, ^1, 0);
 
 	}
 

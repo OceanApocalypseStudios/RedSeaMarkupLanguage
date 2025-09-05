@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using OceanApocalypseStudios.RSML.Analyzer.Syntax;
+﻿using OceanApocalypseStudios.RSML.Analyzer.Syntax;
 using OceanApocalypseStudios.RSML.Toolchain;
 
 
@@ -14,12 +12,11 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 	{
 
 		/// <summary>
-		/// Normalizes tokens.
+		/// Normalizes a line of tokens.
 		/// </summary>
-		/// <param name="tokens">The tokens to semantically normalize</param>
-		/// <param name="length">The amount of tokens output</param>
-		/// <returns>Normalized tokens</returns>
-		public static abstract IEnumerable<SyntaxToken> NormalizeLine(IEnumerable<SyntaxToken> tokens, out int length);
+		/// <param name="line">The line to normalize</param>
+		/// <param name="tokenCount">The amount of tokens output</param>
+		public static abstract void NormalizeLine(ref SyntaxLine line, out int tokenCount);
 
 	}
 

@@ -19,9 +19,9 @@ namespace OceanApocalypseStudios.RSML.CLI
 	{
 
 		public const string LanguageVersion = "v2.0.0";
+		public static string? cSharpLogo;
 
 		public static string? fSharpLogo;
-		public static string? cSharpLogo;
 		public static string? visualBasicLogo;
 
 		private static async Task<int> Main(string[] args)

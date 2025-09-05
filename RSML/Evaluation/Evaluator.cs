@@ -36,14 +36,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 
+using OceanApocalypseStudios.RSML.Analyzer;
 using OceanApocalypseStudios.RSML.Analyzer.Semantics;
 using OceanApocalypseStudios.RSML.Analyzer.Syntax;
 using OceanApocalypseStudios.RSML.Exceptions;
 using OceanApocalypseStudios.RSML.Middlewares;
-using OceanApocalypseStudios.RSML.Reader;
 using OceanApocalypseStudios.RSML.Toolchain.Compliance;
 
 using LocalMachine = OceanApocalypseStudios.RSML.Machine.LocalMachine;
@@ -69,13 +67,40 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 		/// Creates a new instance of a RSML evaluator.
 		/// </summary>
 		/// <param name="content">The document</param>
-		public Evaluator(ReadOnlySpan<char> content) { Content = content.ToString(); }
+		public Evaluator(ReadOnlySpan<char> content) { Content = new(content); }
 
 		/// <summary>
 		/// Creates a new instance of a RSML evaluator.
 		/// </summary>
 		/// <param name="content">The document</param>
-		public Evaluator(string content) { Content = content; }
+		public Evaluator(string content) { Content = new(content); }
+
+		/// <summary>
+		/// Creates a new instance of a RSML evaluator.
+		/// </summary>
+		/// <param name="content">The document</param>
+		public Evaluator(char[] content) { Content = new(content); }
+
+		/// <summary>
+		/// Creates a new instance of a RSML evaluator.
+		/// </summary>
+		/// <param name="content">The document</param>
+		public Evaluator(ReadOnlyMemory<char> content) { Content = new(content); }
+
+		/// <summary>
+		/// Creates a new instance of a RSML evaluator.
+		/// </summary>
+		/// <param name="content">The document</param>
+		public Evaluator(ReadOnlySpan<byte> content) { Content = new(content); }
+
+		/// <summary>
+		/// Creates a new instance of a RSML evaluator.
+		/// </summary>
+		/// <param name="content">The document</param>
+		public Evaluator(byte[] content) { Content = new(content); }
+
+		/// <inheritdoc />
+		public DualTextBuffer Content { get; }
 
 		/// <summary>
 		/// The amount of loaded middlewares.
@@ -86,40 +111,58 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 		public static SpecificationCompliance SpecificationCompliance => SpecificationCompliance.CreateFull(ApiVersion);
 
 		/// <inheritdoc />
-		public string Content { get; set; }
+		public static bool IsComment(ReadOnlySpan<char> line) =>
+			line.TrimStart()[0] == '#' && !(line.IsEmpty || line.IsWhiteSpace() || line.IsNewLinesOnly());
+
+		/// <inheritdoc />
+		public static bool IsComment(string line) => IsComment(line.AsSpan());
+
+		/// <summary>
+		/// Binds a middleware to the evaluator.
+		/// </summary>
+		/// <param name="middleware">The middleware</param>
+		/// <returns>The evaluator (fluent API)</returns>
+		public Evaluator BindMiddleware(Middleware middleware)
+		{
+
+			evaluatorMiddlewares.Add(middleware);
+
+			return this;
+
+		}
 
 		/// <inheritdoc />
 		public EvaluationResult Evaluate() => Evaluate(new());
 
 		/// <inheritdoc />
-		public EvaluationResult Evaluate(LocalMachine machineData) => Evaluate(machineData, null);
-
-		/// <inheritdoc />
-		public EvaluationResult Evaluate(
-			LocalMachine machineData,
-			IReader? reader
-		)
+		public EvaluationResult Evaluate(LocalMachine machineData)
 		{
 
 			if (Content.Length == 0)
 				return new();
 
-			reader ??= new RsmlReader(Content);
-
-			while (reader.TryTokenizeNextLine(out var rawTokens))
+			while (Content.CaretPosition < Content.Length || Content.BufferNumber == 2) // dont stop just cuz we swap buffers
 			{
 
-				var syntaxTokens = rawTokens as SyntaxToken[] ?? rawTokens.ToArray();
+				var line = Content.ReadLine();
 
-				var normalizedTokens = Normalizer.NormalizeLine(syntaxTokens, out _);
-				var tokens = normalizedTokens as SyntaxToken[] ?? normalizedTokens.ToArray();
+				if (line.IsEmpty)
+					continue;
 
-				Validator.ValidateLine(tokens.AsSpan()); // line validation
+				Content.SwapBuffer();
+				Content.Text = line;
 
-				if (tokens[^1].Kind == TokenKind.Eol)
-					tokens = tokens.AsSpan()[..^1].ToArray();
+				var tokens = Lexer.TokenizeLine(Content);
+				Normalizer.NormalizeLine(ref tokens, out _);
+				Validator.ValidateLine(tokens, Content);
 
-				MiddlewareContext ctx = new(reader.CurrentBufferIndex, tokens, syntaxTokens, null);
+				if (tokens[tokens.Last()].Kind == TokenKind.Eol)
+					tokens.Remove(tokens.Last());
+
+				Content.SwapBuffer();
+				int i = Content.CaretPosition;
+				Content.SwapBuffer();
+				MiddlewareContext ctx = new(i, tokens, Content.Text);
 
 				// ReSharper disable once ForeachCanBeConvertedToQueryUsingAnotherGetEnumerator
 				foreach (var middleware in evaluatorMiddlewares)
@@ -145,18 +188,18 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 
 					case 0:
 						// literally nothing
-						continue;
+						break;
 
 					case 2:
 						// comment, ignore it
-						continue;
+						break;
 
 					case 3:
-						switch (tokens[1].Value)
+						switch (Content[tokens[1].BufferRange].Span)
 						{
 
 							case "Void":
-								continue;
+								break;
 
 							case "ThrowError":
 								throw new ActionErrorException("A special action returned an error code.");
@@ -169,62 +212,45 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 
 						}
 
+						break;
+
 					case 5:
-						if (HandleLogicPath_Simple(tokens, machineData, machineData.SystemName == "linux"))
+						if (HandleLogicPath_Simple(tokens, Content, machineData, machineData.SystemName == "linux"))
 						{
 
 							return tokens[0].Kind == TokenKind.ThrowErrorOperator
 									   ? throw new UserRaisedException("Error-throw operator used.")
-									   : new(tokens[4].Value);
+									   : new(Content[tokens[4].BufferRange].Span.ToString());
 
 						}
 
-						continue;
+						break;
 
 					case 6:
-						if (HandleLogicPath_Complex(tokens, machineData, machineData.SystemName == "linux"))
+						if (HandleLogicPath_Complex(tokens, Content, machineData, machineData.SystemName == "linux"))
 						{
 
 							return tokens[0].Kind == TokenKind.ThrowErrorOperator
 									   ? throw new UserRaisedException("Error-throw operator used.")
-									   : new(tokens[5].Value);
+									   : new(Content[tokens[5].BufferRange].Span.ToString());
 
 						}
 
-						continue;
+						break;
 
 					default:
 						if (tokens[0].Kind == TokenKind.CommentSymbol)
-							continue; // it's somehow a comment
+							break; // it's somehow a comment
 
 						throw new InvalidRsmlSyntax("Unexpected error: invalid line tokenized successfully.");
 
 				}
 
+				Content.SwapBuffer(); // back to buffer 1 so we don't infinite loop, and we don't operate on the same line everytime lol
+
 			}
 
 			return new(); // no matches
-
-		}
-
-		/// <inheritdoc />
-		public static bool IsComment(ReadOnlySpan<char> line) =>
-			line.TrimStart()[0] == '#' && !(line.IsEmpty || line.IsWhiteSpace() || line.IsNewLinesOnly());
-
-		/// <inheritdoc />
-		public static bool IsComment(string line) => IsComment(line.AsSpan());
-
-		/// <summary>
-		/// Binds a middleware to the evaluator.
-		/// </summary>
-		/// <param name="middleware">The middleware</param>
-		/// <returns>The evaluator (fluent API)</returns>
-		public Evaluator BindMiddleware(Middleware middleware)
-		{
-
-			evaluatorMiddlewares.Add(middleware);
-
-			return this;
 
 		}
 
@@ -243,55 +269,18 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 
 		}
 
-		private static bool HandleLogicPath_Simple(ReadOnlySpan<SyntaxToken> tokens, in LocalMachine machine, bool isLinux)
+		private static bool HandleLogicPath_Complex(SyntaxLine tokens, DualTextBuffer context, in LocalMachine machine, bool isLinux)
 		{
 
 			if (isLinux)
-				return HandleLogicPath_Simple_Linux(tokens, machine);
+				return HandleLogicPath_Complex_Linux(tokens, context, machine);
 
 			bool systemNameMatches = tokens[1].Kind switch
 			{
 
 				TokenKind.WildcardKeyword => true,
 				TokenKind.DefinedKeyword  => machine.SystemName is not null,
-				_                         => machine.SystemName == tokens[1].Value
-
-			};
-
-			bool systemVersionMatches = tokens[2].Kind switch
-			{
-
-				TokenKind.WildcardKeyword => true,
-				TokenKind.DefinedKeyword  => machine.SystemVersion != -1,
-				_                         => machine.StringifiedSystemVersion == tokens[2].Value
-
-			};
-
-			bool architectureMatches = tokens[3].Kind switch
-			{
-
-				TokenKind.WildcardKeyword => true,
-				TokenKind.DefinedKeyword  => machine.ProcessorArchitecture is not null,
-				_                         => machine.ProcessorArchitecture == tokens[3].Value
-
-			};
-
-			return systemNameMatches && systemVersionMatches && architectureMatches;
-
-		}
-
-		private static bool HandleLogicPath_Complex(ReadOnlySpan<SyntaxToken> tokens, in LocalMachine machine, bool isLinux)
-		{
-
-			if (isLinux)
-				return HandleLogicPath_Complex_Linux(tokens, machine);
-
-			bool systemNameMatches = tokens[1].Kind switch
-			{
-
-				TokenKind.WildcardKeyword => true,
-				TokenKind.DefinedKeyword  => machine.SystemName is not null,
-				_                         => machine.SystemName == tokens[1].Value
+				_                         => context[tokens[1].BufferRange].IsAsciiEqualsIgnoreCase(machine.SystemName)
 
 			};
 
@@ -303,35 +292,35 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 			{
 
 				case TokenKind.EqualTo:
-					systemVersionMatches = machine.StringifiedSystemVersion == tokens[3].Value;
+					systemVersionMatches = context[tokens[3].BufferRange].IsEquals(machine.StringifiedSystemVersion);
 
 					break;
 
 				case TokenKind.NotEqualTo:
-					systemVersionMatches = machine.StringifiedSystemVersion != tokens[3].Value;
+					systemVersionMatches = !context[tokens[3].BufferRange].IsEquals(machine.StringifiedSystemVersion);
 
 					break;
 
 				case TokenKind.GreaterThanOrEqualTo:
-					if (Int32.TryParse(tokens[3].Value, out versionNum))
+					if (Int32.TryParse(context[tokens[3].BufferRange].Span, out versionNum))
 						systemVersionMatches = machine.SystemVersion >= versionNum;
 
 					break;
 
 				case TokenKind.LessThanOrEqualTo:
-					if (Int32.TryParse(tokens[3].Value, out versionNum))
+					if (Int32.TryParse(context[tokens[3].BufferRange].Span, out versionNum))
 						systemVersionMatches = machine.SystemVersion <= versionNum;
 
 					break;
 
 				case TokenKind.GreaterThan:
-					if (Int32.TryParse(tokens[3].Value, out versionNum))
+					if (Int32.TryParse(context[tokens[3].BufferRange].Span, out versionNum))
 						systemVersionMatches = machine.SystemVersion > versionNum;
 
 					break;
 
 				case TokenKind.LessThan:
-					if (Int32.TryParse(tokens[3].Value, out versionNum))
+					if (Int32.TryParse(context[tokens[3].BufferRange].Span, out versionNum))
 						systemVersionMatches = machine.SystemVersion < versionNum;
 
 					break;
@@ -348,7 +337,7 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 
 				TokenKind.WildcardKeyword => true,
 				TokenKind.DefinedKeyword  => machine.ProcessorArchitecture is not null,
-				_                         => machine.ProcessorArchitecture == tokens[3].Value
+				_                         => context[tokens[4].BufferRange].IsAsciiEqualsIgnoreCase(machine.StringifiedSystemVersion)
 
 			};
 
@@ -356,7 +345,7 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 
 		}
 
-		private static bool HandleLogicPath_Simple_Linux(ReadOnlySpan<SyntaxToken> tokens, in LocalMachine machine)
+		private static bool HandleLogicPath_Complex_Linux(SyntaxLine tokens, DualTextBuffer context, in LocalMachine machine)
 		{
 
 			bool systemNameMatches = tokens[1].Kind switch
@@ -364,45 +353,9 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 
 				TokenKind.WildcardKeyword => true,
 				TokenKind.DefinedKeyword  => machine.DistroName is not null,
-				_ => machine.SystemName == tokens[1].Value ||
-					 machine.DistroName == tokens[1].Value ||
-					 machine.DistroFamily == tokens[1].Value
-
-			};
-
-			bool systemVersionMatches = tokens[2].Kind switch
-			{
-
-				TokenKind.WildcardKeyword => true,
-				TokenKind.DefinedKeyword  => machine.SystemVersion != -1,
-				_                         => machine.StringifiedSystemVersion == tokens[2].Value
-
-			};
-
-			bool architectureMatches = tokens[3].Kind switch
-			{
-
-				TokenKind.WildcardKeyword => true,
-				TokenKind.DefinedKeyword  => machine.ProcessorArchitecture is not null,
-				_                         => machine.ProcessorArchitecture == tokens[3].Value
-
-			};
-
-			return systemNameMatches && systemVersionMatches && architectureMatches;
-
-		}
-
-		private static bool HandleLogicPath_Complex_Linux(ReadOnlySpan<SyntaxToken> tokens, in LocalMachine machine)
-		{
-
-			bool systemNameMatches = tokens[1].Kind switch
-			{
-
-				TokenKind.WildcardKeyword => true,
-				TokenKind.DefinedKeyword  => machine.DistroName is not null,
-				_ => machine.SystemName == tokens[1].Value ||
-					 machine.DistroName == tokens[1].Value ||
-					 machine.DistroFamily == tokens[1].Value
+				_ => context[tokens[1].BufferRange].IsAsciiEqualsIgnoreCase(machine.SystemName) ||
+					 context[tokens[1].BufferRange].IsAsciiEqualsIgnoreCase(machine.DistroName) ||
+					 context[tokens[1].BufferRange].IsAsciiEqualsIgnoreCase(machine.DistroFamily)
 
 			};
 
@@ -414,35 +367,35 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 			{
 
 				case TokenKind.EqualTo:
-					systemVersionMatches = machine.StringifiedSystemVersion == tokens[3].Value;
+					systemVersionMatches = context[tokens[3].BufferRange].IsEquals(machine.StringifiedSystemVersion);
 
 					break;
 
 				case TokenKind.NotEqualTo:
-					systemVersionMatches = machine.StringifiedSystemVersion != tokens[3].Value;
+					systemVersionMatches = !context[tokens[3].BufferRange].IsEquals(machine.StringifiedSystemVersion);
 
 					break;
 
 				case TokenKind.GreaterThanOrEqualTo:
-					if (Int32.TryParse(tokens[3].Value, out versionNum))
+					if (Int32.TryParse(context[tokens[3].BufferRange].Span, out versionNum))
 						systemVersionMatches = machine.SystemVersion >= versionNum;
 
 					break;
 
 				case TokenKind.LessThanOrEqualTo:
-					if (Int32.TryParse(tokens[3].Value, out versionNum))
+					if (Int32.TryParse(context[tokens[3].BufferRange].Span, out versionNum))
 						systemVersionMatches = machine.SystemVersion <= versionNum;
 
 					break;
 
 				case TokenKind.GreaterThan:
-					if (Int32.TryParse(tokens[3].Value, out versionNum))
+					if (Int32.TryParse(context[tokens[3].BufferRange].Span, out versionNum))
 						systemVersionMatches = machine.SystemVersion > versionNum;
 
 					break;
 
 				case TokenKind.LessThan:
-					if (Int32.TryParse(tokens[3].Value, out versionNum))
+					if (Int32.TryParse(context[tokens[3].BufferRange].Span, out versionNum))
 						systemVersionMatches = machine.SystemVersion < versionNum;
 
 					break;
@@ -460,7 +413,80 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 
 				TokenKind.WildcardKeyword => true,
 				TokenKind.DefinedKeyword  => machine.ProcessorArchitecture is not null,
-				_                         => machine.ProcessorArchitecture == tokens[3].Value
+				_                         => context[tokens[4].BufferRange].IsAsciiEqualsIgnoreCase(machine.ProcessorArchitecture)
+
+			};
+
+			return systemNameMatches && systemVersionMatches && architectureMatches;
+
+		}
+
+		private static bool HandleLogicPath_Simple(SyntaxLine tokens, DualTextBuffer context, in LocalMachine machine, bool isLinux)
+		{
+
+			if (isLinux)
+				return HandleLogicPath_Simple_Linux(tokens, context, machine);
+
+			bool systemNameMatches = tokens[1].Kind switch
+			{
+
+				TokenKind.WildcardKeyword => true,
+				TokenKind.DefinedKeyword  => machine.SystemName is not null,
+				_                         => context[tokens[1].BufferRange].IsAsciiEqualsIgnoreCase(machine.SystemName)
+
+			};
+
+			bool systemVersionMatches = tokens[2].Kind switch
+			{
+
+				TokenKind.WildcardKeyword => true,
+				TokenKind.DefinedKeyword  => machine.SystemVersion != -1,
+				_                         => context[tokens[2].BufferRange].IsEquals(machine.StringifiedSystemVersion)
+
+			};
+
+			bool architectureMatches = tokens[3].Kind switch
+			{
+
+				TokenKind.WildcardKeyword => true,
+				TokenKind.DefinedKeyword  => machine.ProcessorArchitecture is not null,
+				_                         => context[tokens[3].BufferRange].IsAsciiEqualsIgnoreCase(machine.ProcessorArchitecture)
+
+			};
+
+			return systemNameMatches && systemVersionMatches && architectureMatches;
+
+		}
+
+		private static bool HandleLogicPath_Simple_Linux(SyntaxLine tokens, DualTextBuffer context, in LocalMachine machine)
+		{
+
+			bool systemNameMatches = tokens[1].Kind switch
+			{
+
+				TokenKind.WildcardKeyword => true,
+				TokenKind.DefinedKeyword  => machine.DistroName is not null,
+				_ => context[tokens[1].BufferRange].IsAsciiEqualsIgnoreCase(machine.SystemName) ||
+					 context[tokens[1].BufferRange].IsAsciiEqualsIgnoreCase(machine.DistroName) ||
+					 context[tokens[1].BufferRange].IsAsciiEqualsIgnoreCase(machine.DistroFamily)
+
+			};
+
+			bool systemVersionMatches = tokens[2].Kind switch
+			{
+
+				TokenKind.WildcardKeyword => true,
+				TokenKind.DefinedKeyword  => machine.SystemVersion != -1,
+				_                         => context[tokens[2].BufferRange].IsEquals(machine.StringifiedSystemVersion)
+
+			};
+
+			bool architectureMatches = tokens[3].Kind switch
+			{
+
+				TokenKind.WildcardKeyword => true,
+				TokenKind.DefinedKeyword  => machine.ProcessorArchitecture is not null,
+				_                         => context[tokens[3].BufferRange].IsAsciiEqualsIgnoreCase(machine.ProcessorArchitecture)
 
 			};
 

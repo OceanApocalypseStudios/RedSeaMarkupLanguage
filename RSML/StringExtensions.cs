@@ -12,45 +12,18 @@ namespace OceanApocalypseStudios.RSML
 
 		internal const byte AsciiCaseBit = 0x20;
 
-		internal static unsafe bool IsNewLinesOnly(this ReadOnlySpan<char> chars)
+		internal static bool ContainsMemory(this ImmutableArray<ReadOnlyMemory<char>> memories, ReadOnlyMemory<char> memory)
 		{
 
-			int len = chars.Length;
-
-			if (len == 0)
-				return false; // technically the line does not have any newlines
-
-			fixed (char* start = &MemoryMarshal.GetReference(chars))
+			foreach (var m in memories)
 			{
 
-				char* pos = start;
-				char* end = start + len;
-				bool crDetected = false;
-
-				while (pos < end)
-				{
-
-					char c = *pos++;
-
-					if (c == '\r' && !crDetected)
-					{
-
-						crDetected = true;
-
-						continue;
-
-					}
-
-					if (c != '\n')
-						return false;
-
-					crDetected = false;
-
-				}
+				if (m.IsEquals(memory))
+					return true;
 
 			}
 
-			return true;
+			return false;
 
 		}
 
@@ -92,54 +65,6 @@ namespace OceanApocalypseStudios.RSML
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static bool IsEquals(this ReadOnlySpan<char> chars, string str) => chars.SequenceEqual(str);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static bool IsEquals(this ReadOnlyMemory<char> chars, string? str) => str is not null && chars.Span.IsEquals(str);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static bool IsEquals(this ReadOnlyMemory<char> chars, ReadOnlyMemory<char> memory) => chars.Span.SequenceEqual(memory.Span);
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static bool IsEquals_8(
-			this ReadOnlySpan<char> chars,
-			string strA,
-			string strB,
-			string? strC = null,
-			string? strD = null,
-			string? strE = null,
-			string? strF = null,
-			string? strG = null,
-			string? strH = null
-		)
-		{
-
-			if (chars.IsEquals(strA))
-				return true;
-
-			if (chars.IsEquals(strB))
-				return true;
-
-			if (strC is not null && chars.IsEquals(strC))
-				return true;
-
-			if (strD is not null && chars.IsEquals(strD))
-				return true;
-
-			if (strE is not null && chars.IsEquals(strE))
-				return true;
-
-			if (strF is not null && chars.IsEquals(strF))
-				return true;
-
-			if (strG is not null && chars.IsEquals(strG))
-				return true;
-
-			return strH is not null && chars.IsEquals(strH);
-
-		}
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static unsafe bool IsAsciiEqualsIgnoreCase(this ReadOnlySpan<char> chars, string str)
 		{
 
@@ -174,13 +99,89 @@ namespace OceanApocalypseStudios.RSML
 
 		}
 
-		internal static bool IsAsciiEqualsIgnoreCase(this ReadOnlySpan<char> chars, ImmutableHashSet<string> set)
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static unsafe bool IsAsciiEqualsIgnoreCase(this ReadOnlyMemory<char> chars, string? str)
 		{
 
-			foreach (string str in set)
+			if (str is null)
+				return false;
+
+			if (chars.Length != str.Length)
+				return false;
+
+			fixed (char* spanPtr = &MemoryMarshal.GetReference(chars.Span))
+			fixed (char* strPtr = str)
 			{
 
-				if (chars.IsAsciiEqualsIgnoreCase(str))
+				char* ptrToSpan = spanPtr;
+				char* ptrToStr = strPtr;
+				int len = chars.Length;
+
+				for (int i = 0; i < len; i++)
+				{
+
+					char spanChar = *ptrToSpan++;
+					char strChar = *ptrToStr++;
+
+					spanChar |= spanChar is >= 'A' and <= 'Z' ? (char)AsciiCaseBit : (char)0;
+					strChar |= strChar is >= 'A' and <= 'Z' ? (char)AsciiCaseBit : (char)0;
+
+					if (spanChar != strChar)
+						return false;
+
+				}
+
+			}
+
+			return true;
+
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static unsafe bool IsAsciiEqualsIgnoreCase(this ReadOnlyMemory<char> chars, ReadOnlyMemory<char> str)
+		{
+
+			if (chars.Length != str.Length)
+				return false;
+
+			fixed (char* spanPtr = &MemoryMarshal.GetReference(chars.Span))
+			fixed (char* strPtr = &MemoryMarshal.GetReference(str.Span))
+			{
+
+				char* ptrToSpan = spanPtr;
+				char* ptrToStr = strPtr;
+				int len = chars.Length;
+
+				for (int i = 0; i < len; i++)
+				{
+
+					char spanChar = *ptrToSpan++;
+					char strChar = *ptrToStr++;
+
+					spanChar |= spanChar is >= 'A' and <= 'Z' ? (char)AsciiCaseBit : (char)0;
+					strChar |= strChar is >= 'A' and <= 'Z' ? (char)AsciiCaseBit : (char)0;
+
+					if (spanChar != strChar)
+						return false;
+
+				}
+
+			}
+
+			return true;
+
+		}
+
+		internal static bool IsAsciiEqualsIgnoreCase(this ReadOnlyMemory<char> chars, ImmutableArray<ReadOnlyMemory<char>> arr)
+		{
+
+			// i want performance, not linq ass
+			// ReSharper disable once ForCanBeConvertedToForeach
+			// ReSharper disable once LoopCanBeConvertedToQuery
+			for (int i = 0; i < arr.Length; i++)
+			{
+
+				if (chars.IsAsciiEqualsIgnoreCase(arr[i]))
 					return true;
 
 			}
@@ -197,7 +198,7 @@ namespace OceanApocalypseStudios.RSML
 		/// </summary>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static bool IsAsciiEqualsIgnoreCase_10(
-			this ReadOnlySpan<char> chars,
+			this ReadOnlyMemory<char> chars,
 			string strA,
 			string strB,
 			string strC,
@@ -250,7 +251,7 @@ namespace OceanApocalypseStudios.RSML
 		/// </summary>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static bool IsAsciiEqualsIgnoreCase_5(
-			this ReadOnlySpan<char> chars,
+			this ReadOnlyMemory<char> chars,
 			string strA,
 			string strB,
 			string strC,
@@ -269,6 +270,96 @@ namespace OceanApocalypseStudios.RSML
 				return true;
 
 			return chars.IsAsciiEqualsIgnoreCase(strD) || chars.IsAsciiEqualsIgnoreCase(strE);
+
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static bool IsEquals(this ReadOnlySpan<char> chars, string str) => chars.SequenceEqual(str);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static bool IsEquals(this ReadOnlyMemory<char> chars, string? str) => str is not null && chars.Span.IsEquals(str);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static bool IsEquals(this ReadOnlyMemory<char> chars, ReadOnlyMemory<char> memory) => chars.Span.SequenceEqual(memory.Span);
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		internal static bool IsEquals_8(
+			this ReadOnlyMemory<char> chars,
+			string strA,
+			string strB,
+			string? strC = null,
+			string? strD = null,
+			string? strE = null,
+			string? strF = null,
+			string? strG = null,
+			string? strH = null
+		)
+		{
+
+			if (chars.IsEquals(strA))
+				return true;
+
+			if (chars.IsEquals(strB))
+				return true;
+
+			if (strC is not null && chars.IsEquals(strC))
+				return true;
+
+			if (strD is not null && chars.IsEquals(strD))
+				return true;
+
+			if (strE is not null && chars.IsEquals(strE))
+				return true;
+
+			if (strF is not null && chars.IsEquals(strF))
+				return true;
+
+			if (strG is not null && chars.IsEquals(strG))
+				return true;
+
+			return strH is not null && chars.IsEquals(strH);
+
+		}
+
+		internal static unsafe bool IsNewLinesOnly(this ReadOnlySpan<char> chars)
+		{
+
+			int len = chars.Length;
+
+			if (len == 0)
+				return false; // technically the line does not have any newlines
+
+			fixed (char* start = &MemoryMarshal.GetReference(chars))
+			{
+
+				char* pos = start;
+				char* end = start + len;
+				bool crDetected = false;
+
+				while (pos < end)
+				{
+
+					char c = *pos++;
+
+					if (c == '\r' && !crDetected)
+					{
+
+						crDetected = true;
+
+						continue;
+
+					}
+
+					if (c != '\n')
+						return false;
+
+					crDetected = false;
+
+				}
+
+			}
+
+			return true;
 
 		}
 

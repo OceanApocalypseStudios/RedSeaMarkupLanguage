@@ -26,28 +26,6 @@ namespace OceanApocalypseStudios.RSML.Native
 		private static readonly byte[] utf8ApiVersion = Encoding.UTF8.GetBytes("change me"); // todo
 
 		/// <summary>
-		/// Writes the API version to a supplied buffer.
-		/// </summary>
-		/// <param name="buffer">The buffer to write to</param>
-		/// <param name="bufferSize">The size of the given buffer</param>
-		/// <returns>The length of the API version string or <c>-1</c> if the given buffer wasn't big enough.</returns>
-		[UnmanagedCallersOnly(EntryPoint = "rsml_get_api_version")]
-		public static int GetApiVersion(byte* buffer, int bufferSize)
-		{
-
-			int len = utf8ApiVersion.Length;
-
-			if (bufferSize < len)
-				return -1;
-
-			for (int i = 0; i < len; i++)
-				buffer[i] = utf8ApiVersion[i];
-
-			return len;
-
-		}
-
-		/// <summary>
 		/// Writes the name of the creator (and lead maintainer) of RSML's API to a supplied buffer.
 		/// </summary>
 		/// <param name="buffer">The buffer to write to</param>
@@ -84,6 +62,28 @@ namespace OceanApocalypseStudios.RSML.Native
 				buffer[i] = docsLink[i];
 
 			return docsLink.Length;
+
+		}
+
+		/// <summary>
+		/// Writes the API version to a supplied buffer.
+		/// </summary>
+		/// <param name="buffer">The buffer to write to</param>
+		/// <param name="bufferSize">The size of the given buffer</param>
+		/// <returns>The length of the API version string or <c>-1</c> if the given buffer wasn't big enough.</returns>
+		[UnmanagedCallersOnly(EntryPoint = "rsml_get_api_version")]
+		public static int GetApiVersion(byte* buffer, int bufferSize)
+		{
+
+			int len = utf8ApiVersion.Length;
+
+			if (bufferSize < len)
+				return -1;
+
+			for (int i = 0; i < len; i++)
+				buffer[i] = utf8ApiVersion[i];
+
+			return len;
 
 		}
 

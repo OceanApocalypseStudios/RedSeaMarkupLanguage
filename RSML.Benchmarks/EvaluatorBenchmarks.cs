@@ -7,7 +7,6 @@ using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Jobs;
 
 using OceanApocalypseStudios.RSML.Evaluation;
-using OceanApocalypseStudios.RSML.Performance.Stateless;
 
 using LocalMachine = OceanApocalypseStudios.RSML.Machine.LocalMachine;
 
@@ -47,6 +46,72 @@ namespace OceanApocalypseStudios.RSML.Benchmarks
 
 		private Evaluator? smallEvaluator;
 
+		[Benchmark]
+		[BenchmarkCategory("Evaluator")]
+		public void Evaluate_ComplexContent_1() => complexEvaluator1!.Evaluate(ubuntu);
+
+		[Benchmark]
+		[BenchmarkCategory("Evaluator")]
+		public void Evaluate_ComplexContent_2() => complexEvaluator2!.Evaluate(ubuntu);
+
+		[Benchmark]
+		[BenchmarkCategory("Evaluator")]
+		public void Evaluate_ComplexContent_3() => complexEvaluator3!.Evaluate(ubuntu);
+
+		[Benchmark]
+		[BenchmarkCategory("Evaluator")]
+		public void Evaluate_LargeContent() => largeEvaluator!.Evaluate(ubuntu);
+
+		[Benchmark]
+		[BenchmarkCategory("Evaluator")]
+		public void Evaluate_MediumContent() => mediumEvaluator!.Evaluate(ubuntu);
+
+		[Benchmark]
+		[BenchmarkCategory("Primitives")]
+		public void Evaluate_PrimitiveAction() => primitiveEvaluatorAction!.Evaluate(ubuntu);
+
+		[Benchmark]
+		[BenchmarkCategory("Primitives")]
+		public void Evaluate_PrimitiveComment() => primitiveEvaluatorComment!.Evaluate(ubuntu);
+
+		[Benchmark]
+		[BenchmarkCategory("Primitives")]
+		public void Evaluate_PrimitiveCommentWhitespace() => primitiveEvaluatorCommentWs!.Evaluate(ubuntu);
+
+		[Benchmark]
+		[BenchmarkCategory("Primitives")]
+		public void Evaluate_PrimitiveLogic() => primitiveEvaluatorLogic!.Evaluate(ubuntu);
+
+		[Benchmark]
+		[BenchmarkCategory("Primitives")]
+		public void Evaluate_PrimitiveNewlines() => primitiveEvaluatorNewlines!.Evaluate(ubuntu);
+
+		[Benchmark]
+		[BenchmarkCategory("Evaluator")]
+		public void Evaluate_SmallContent() => smallEvaluator!.Evaluate(ubuntu);
+
+		[Benchmark]
+		[BenchmarkCategory("IsComment")]
+		public void IsComment_False_Medium() =>
+			Evaluator.IsComment(
+				"             * One day, I hope this string is no longer  spaced in  a weird way, but it'll let us test the IsComment() method of the     RsParser class located    in the namespace known as RSML.Parser.RsParser. Interesting,  right?"
+			);
+
+		[Benchmark]
+		[BenchmarkCategory("IsComment")]
+		public void IsComment_False_Small() => Evaluator.IsComment("not a comment");
+
+		[Benchmark]
+		[BenchmarkCategory("IsComment")]
+		public void IsComment_True_Medium() =>
+			Evaluator.IsComment(
+				"# This is not a big comment, but also not really a small one. Either ways, this will let us test the method and benchmark it somewhat accurately."
+			);
+
+		[Benchmark]
+		[BenchmarkCategory("IsComment")]
+		public void IsComment_True_Small() => Evaluator.IsComment("# small");
+
 		[GlobalSetup]
 		public void Setup()
 		{
@@ -79,92 +144,6 @@ namespace OceanApocalypseStudios.RSML.Benchmarks
 		}
 
 		internal static Evaluator CreateConfiguredParser(string content) => new(content);
-
-		[Benchmark]
-		[BenchmarkCategory("Primitives")]
-		public void Evaluate_PrimitiveLogic() => primitiveEvaluatorLogic!.Evaluate(ubuntu);
-
-		[Benchmark]
-		[BenchmarkCategory("Primitives")]
-		public void Evaluate_PrimitiveAction() => primitiveEvaluatorAction!.Evaluate(ubuntu);
-
-		[Benchmark]
-		[BenchmarkCategory("Primitives")]
-		public void Evaluate_PrimitiveComment() => primitiveEvaluatorComment!.Evaluate(ubuntu);
-
-		[Benchmark]
-		[BenchmarkCategory("Primitives")]
-		public void Evaluate_PrimitiveCommentWhitespace() => primitiveEvaluatorCommentWs!.Evaluate(ubuntu);
-
-		[Benchmark]
-		[BenchmarkCategory("Primitives")]
-		public void Evaluate_PrimitiveNewlines() => primitiveEvaluatorNewlines!.Evaluate(ubuntu);
-
-		[Benchmark]
-		[BenchmarkCategory("StatelessEvaluator")]
-		public void Evaluate_Stateless_SmallContent() => StatelessEvaluator.Evaluate(SmallContent, ubuntu);
-
-		[Benchmark]
-		[BenchmarkCategory("StatelessEvaluator")]
-		public void Evaluate_Stateless_MediumContent() => StatelessEvaluator.Evaluate(mediumContent, ubuntu);
-
-		[Benchmark]
-		[BenchmarkCategory("StatelessEvaluator")]
-		public void Evaluate_Stateless_LargeContent() => StatelessEvaluator.Evaluate(largeContent, ubuntu);
-
-		[Benchmark]
-		[BenchmarkCategory("StatelessEvaluator")]
-		public void Evaluate_Stateless_ComplexContent_1() => StatelessEvaluator.Evaluate(complexContent1, ubuntu);
-
-		[Benchmark]
-		[BenchmarkCategory("StatelessEvaluator")]
-		public void Evaluate_Stateless_ComplexContent_2() => StatelessEvaluator.Evaluate(complexContent2, ubuntu);
-
-		[Benchmark]
-		[BenchmarkCategory("Evaluator")]
-		public void Evaluate_SmallContent() => smallEvaluator!.Evaluate(ubuntu);
-
-		[Benchmark]
-		[BenchmarkCategory("Evaluator")]
-		public void Evaluate_MediumContent() => mediumEvaluator!.Evaluate(ubuntu);
-
-		[Benchmark]
-		[BenchmarkCategory("Evaluator")]
-		public void Evaluate_LargeContent() => largeEvaluator!.Evaluate(ubuntu);
-
-		[Benchmark]
-		[BenchmarkCategory("Evaluator")]
-		public void Evaluate_ComplexContent_1() => complexEvaluator1!.Evaluate(ubuntu);
-
-		[Benchmark]
-		[BenchmarkCategory("Evaluator")]
-		public void Evaluate_ComplexContent_2() => complexEvaluator2!.Evaluate(ubuntu);
-
-		[Benchmark]
-		[BenchmarkCategory("Evaluator")]
-		public void Evaluate_ComplexContent_3() => complexEvaluator3!.Evaluate(ubuntu);
-
-		[Benchmark]
-		[BenchmarkCategory("IsComment")]
-		public void IsComment_True_Medium() =>
-			Evaluator.IsComment(
-				"# This is not a big comment, but also not really a small one. Either ways, this will let us test the method and benchmark it somewhat accurately."
-			);
-
-		[Benchmark]
-		[BenchmarkCategory("IsComment")]
-		public void IsComment_True_Small() => Evaluator.IsComment("# small");
-
-		[Benchmark]
-		[BenchmarkCategory("IsComment")]
-		public void IsComment_False_Medium() =>
-			Evaluator.IsComment(
-				"             * One day, I hope this string is no longer  spaced in  a weird way, but it'll let us test the IsComment() method of the     RsParser class located    in the namespace known as RSML.Parser.RsParser. Interesting,  right?"
-			);
-
-		[Benchmark]
-		[BenchmarkCategory("IsComment")]
-		public void IsComment_False_Small() => Evaluator.IsComment("not a comment");
 
 	}
 

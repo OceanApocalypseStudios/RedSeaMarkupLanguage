@@ -1,4 +1,6 @@
-﻿using OceanApocalypseStudios.RSML.Analyzer.Syntax;
+﻿using System;
+
+using OceanApocalypseStudios.RSML.Analyzer.Syntax;
 
 
 namespace OceanApocalypseStudios.RSML.Middlewares
@@ -13,12 +15,23 @@ namespace OceanApocalypseStudios.RSML.Middlewares
 		/// <summary>
 		/// Creates a middleware context.
 		/// </summary>
-		public MiddlewareContext(int bufferIndex, SyntaxToken[]? validatedLine, SyntaxToken[]? rawLine, string? line)
+		public MiddlewareContext(int bufferIndex, SyntaxLine validatedLine, string? line)
 		{
 
 			BufferIndex = bufferIndex;
 			ValidatedLine = validatedLine;
-			RawLine = rawLine;
+			Line = line?.AsMemory() ?? ReadOnlyMemory<char>.Empty;
+
+		}
+
+		/// <summary>
+		/// Creates a middleware context.
+		/// </summary>
+		public MiddlewareContext(int bufferIndex, SyntaxLine validatedLine, ReadOnlyMemory<char> line)
+		{
+
+			BufferIndex = bufferIndex;
+			ValidatedLine = validatedLine;
 			Line = line;
 
 		}
@@ -31,22 +44,17 @@ namespace OceanApocalypseStudios.RSML.Middlewares
 		/// <summary>
 		/// The amount of tokens in the validated line.
 		/// </summary>
-		public int ValidatedLineLength => ValidatedLine?.Length ?? 0;
+		public int ValidatedLineLength => ValidatedLine.Length;
 
 		/// <summary>
-		/// The validated line, as tokens.
+		/// The validated line, in tokens.
 		/// </summary>
-		public SyntaxToken[]? ValidatedLine { get; } = null;
-
-		/// <summary>
-		/// The raw line, as tokens.
-		/// </summary>
-		public SyntaxToken[]? RawLine { get; } = null;
+		public SyntaxLine ValidatedLine { get; } = new();
 
 		/// <summary>
 		/// The line, as a string.
 		/// </summary>
-		public string? Line { get; } = null;
+		public ReadOnlyMemory<char> Line { get; }
 
 	}
 

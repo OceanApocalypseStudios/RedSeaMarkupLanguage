@@ -13,33 +13,6 @@ namespace OceanApocalypseStudios.RSML.CLI.Helpers
 	internal static class LocalMachineOutput
 	{
 
-		private static string Quote(string? str) => str is null or "null" ? "null" : $"\"{str}\"";
-
-		public static LocalMachine FromJson(string? json)
-		{
-
-			if (json is null)
-				return new();
-
-			using var document = JsonDocument.Parse(json);
-
-			var system = document.RootElement.GetProperty("system");
-			string? sysName = system.GetProperty("name").GetString();
-			int sysVersion = system.GetProperty("version").GetInt32();
-
-			var linuxDistro = document.RootElement.GetProperty("linuxDistro");
-			string? distroName = linuxDistro.GetProperty("name").GetString();
-			string? distroFamily = linuxDistro.GetProperty("family").GetString();
-
-			string? procArch = document.RootElement.GetProperty("processor").GetProperty("architecture").GetString();
-
-			if (sysName == "linux")
-				return new(distroName, distroFamily, procArch, sysVersion);
-
-			return new(sysName, procArch, sysVersion);
-
-		}
-
 		public static string AsJson(LocalMachine machine)
 		{
 
@@ -158,6 +131,33 @@ namespace OceanApocalypseStudios.RSML.CLI.Helpers
 			);
 
 		}
+
+		public static LocalMachine FromJson(string? json)
+		{
+
+			if (json is null)
+				return new();
+
+			using var document = JsonDocument.Parse(json);
+
+			var system = document.RootElement.GetProperty("system");
+			string? sysName = system.GetProperty("name").GetString();
+			int sysVersion = system.GetProperty("version").GetInt32();
+
+			var linuxDistro = document.RootElement.GetProperty("linuxDistro");
+			string? distroName = linuxDistro.GetProperty("name").GetString();
+			string? distroFamily = linuxDistro.GetProperty("family").GetString();
+
+			string? procArch = document.RootElement.GetProperty("processor").GetProperty("architecture").GetString();
+
+			if (sysName == "linux")
+				return new(distroName, distroFamily, procArch, sysVersion);
+
+			return new(sysName, procArch, sysVersion);
+
+		}
+
+		private static string Quote(string? str) => str is null or "null" ? "null" : $"\"{str}\"";
 
 	}
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-using OceanApocalypseStudios.RSML.Reader;
+using OceanApocalypseStudios.RSML.Analyzer;
 using OceanApocalypseStudios.RSML.Toolchain;
 
 using LocalMachine = OceanApocalypseStudios.RSML.Machine.LocalMachine;
@@ -18,8 +18,7 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 		/// <summary>
 		/// The content loaded into the evaluator.
 		/// </summary>
-		string Content { get; set; }
-
+		DualTextBuffer Content { get; }
 
 		/// <summary>
 		/// Checks if a given line of RSML is a comment.
@@ -47,16 +46,6 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 		/// <param name="machineData">The machine data</param>
 		/// <returns>A result</returns>
 		EvaluationResult Evaluate(LocalMachine machineData);
-
-		/// <summary>
-		/// Evaluates the RSML document with the specified machine data and a reader.
-		/// Note that the above-mentioned toolchain components should have the same standardized version as the evaluator itself,
-		/// when using the official evaluator.
-		/// </summary>
-		/// <param name="machineData">The machine data</param>
-		/// <param name="reader">The custom reader</param>
-		/// <returns></returns>
-		EvaluationResult Evaluate(LocalMachine machineData, IReader? reader);
 
 	}
 

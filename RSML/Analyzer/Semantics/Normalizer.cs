@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-
-using OceanApocalypseStudios.RSML.Analyzer.Syntax;
+﻿using OceanApocalypseStudios.RSML.Analyzer.Syntax;
 using OceanApocalypseStudios.RSML.Toolchain;
 using OceanApocalypseStudios.RSML.Toolchain.Compliance;
 
@@ -17,9 +13,9 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 	{
 
 		private const string ApiVersion = "2.0.0";
+		private static readonly SyntaxToken eol = TokenBank.eolToken;
 
 		private static readonly SyntaxToken wildcard = TokenBank.wildcardToken;
-		private static readonly SyntaxToken eol = TokenBank.eolToken;
 
 		/// <summary>
 		/// Creates a new Normalizer instance.
@@ -30,80 +26,167 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 		public static SpecificationCompliance SpecificationCompliance => SpecificationCompliance.CreateFull(ApiVersion);
 
 		/// <inheritdoc />
-		public static IEnumerable<SyntaxToken> NormalizeLine(IEnumerable<SyntaxToken> tokens, out int length)
+		public static void NormalizeLine(ref SyntaxLine line, out int tokenCount)
 		{
 
-			var actualTokens = tokens.ToArray();
-
-			if (actualTokens.Length == 0)
+			if (line.Length == 0)
 			{
 
-				length = 0;
+				tokenCount = 0;
+				line.Clear();
 
-				return [ ];
+				return;
 
 			}
 
 			// ReSharper disable once SwitchStatementHandlesSomeKnownEnumValuesWithDefault
-			switch (actualTokens[0].Kind)
+			switch (line[0].Kind)
 			{
 
-				case TokenKind.Eol when actualTokens.Length == 1:
-				case TokenKind.Eof when actualTokens.Length == 1:
-					length = 1;
+				case TokenKind.Eol when line.Length == 1:
+				case TokenKind.Eof when line.Length == 1:
+					tokenCount = 1;
 
-					return actualTokens;
+					return;
 
 				case TokenKind.CommentSymbol:
-					return actualTokens.Length switch
+					switch (line.Length)
 					{
-						2 => ReturnHelper([ actualTokens[0], new(TokenKind.CommentText, ""), eol ], out length),
-						3 => ReturnHelper(actualTokens, out length),
-						_ => ReturnHelper([ ], out length)
-					};
+
+						case 2:
+							line[1] = new(TokenKind.CommentText, ^1, 0);
+							line[2] = eol;
+							line[3] = SyntaxToken.Empty;
+							line[4] = SyntaxToken.Empty;
+							line[5] = SyntaxToken.Empty;
+							line[6] = SyntaxToken.Empty;
+							line[7] = SyntaxToken.Empty;
+
+							tokenCount = 3;
+
+							break;
+
+						case 3:
+							tokenCount = 3;
+
+							break;
+
+						default:
+							line.Clear();
+							tokenCount = 0;
+
+							break;
+
+					}
+
+					return;
 
 				case TokenKind.SpecialActionSymbol:
-					return actualTokens.Length switch
+					switch (line.Length)
 					{
-						3 => ReturnHelper([ actualTokens[0], actualTokens[1], new(TokenKind.SpecialActionArgument, ""), eol ], out length),
-						4 => ReturnHelper(actualTokens, out length),
-						_ => ReturnHelper([ ], out length)
-					};
+
+						case 3:
+							line[2] = new(TokenKind.SpecialActionArgument, ^1, 0);
+							line[3] = eol;
+							line[4] = SyntaxToken.Empty;
+							line[5] = SyntaxToken.Empty;
+							line[6] = SyntaxToken.Empty;
+							line[7] = SyntaxToken.Empty;
+
+							tokenCount = 4;
+
+							break;
+
+						case 4:
+							tokenCount = 4;
+
+							break;
+
+						default:
+							line.Clear();
+							tokenCount = 0;
+
+							break;
+
+					}
+
+					return;
 
 				case TokenKind.ReturnOperator:
 				case TokenKind.ThrowErrorOperator:
-					return actualTokens.Length switch
+					switch (line.Length)
 					{
 						// eol matters
-						3 => ReturnHelper([ actualTokens[0], wildcard, wildcard, wildcard, actualTokens[1], eol ], out length),
-						4 => ReturnHelper([ actualTokens[0], actualTokens[1], wildcard, wildcard, actualTokens[2], eol ], out length),
-						5 => ReturnHelper([ actualTokens[0], actualTokens[1], wildcard, actualTokens[2], actualTokens[3], eol ], out length),
-						6 => ReturnHelper([ actualTokens[0], actualTokens[1], actualTokens[2], actualTokens[3], actualTokens[4], eol ], out length),
-						7 => ReturnHelper(
-							[
-								actualTokens[0], actualTokens[1], actualTokens[2], actualTokens[3], actualTokens[4], actualTokens[5],
-								eol
-							], out length
-						),
-						_ => ReturnHelper([ ], out length)
-					};
+						case 3:
+							line[4] = line[1];
+							line[1] = line[2] = line[3] = wildcard;
+							line[5] = eol;
+							line[6] = SyntaxToken.Empty;
+							line[7] = SyntaxToken.Empty;
+
+							tokenCount = 6;
+
+							break;
+
+						case 4:
+							line[4] = line[2];
+							line[2] = line[3] = wildcard;
+							line[5] = eol;
+							line[6] = SyntaxToken.Empty;
+							line[7] = SyntaxToken.Empty;
+
+							tokenCount = 6;
+
+							break;
+
+						case 5:
+							line[4] = line[3];
+							line[3] = line[2];
+							line[2] = wildcard;
+							line[5] = eol;
+							line[6] = SyntaxToken.Empty;
+							line[7] = SyntaxToken.Empty;
+
+							tokenCount = 6;
+
+							break;
+
+						case 6:
+							line[5] = eol;
+							line[6] = SyntaxToken.Empty;
+							line[7] = SyntaxToken.Empty;
+
+							tokenCount = 6;
+
+							break;
+
+						case 7:
+							/*
+							 line[6] = eol;
+							line[7] = SyntaxToken.Empty;
+							*/
+
+							tokenCount = 7;
+
+							break;
+
+						default:
+							line.Clear();
+							tokenCount = 0;
+
+							break;
+
+					}
+
+					return;
 
 				default:
-					length = 0;
+					line.Clear();
+					tokenCount = 0;
 
-					return [ ];
+					return;
 
 			}
-
-		}
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		private static SyntaxToken[] ReturnHelper(SyntaxToken[] tokens, out int len)
-		{
-
-			len = tokens.Length;
-
-			return tokens;
 
 		}
 

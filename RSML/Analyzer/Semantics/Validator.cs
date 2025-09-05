@@ -21,239 +21,200 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 		public static SpecificationCompliance SpecificationCompliance => SpecificationCompliance.CreateFull(ApiVersion);
 
 		/// <inheritdoc />
-		public static ImmutableHashSet<string> ValidComparators => [ "==", "!=", "<", ">", "<=", ">=" ];
-
-		/// <inheritdoc />
-		public static ImmutableHashSet<string> ValidArchitectures => [ "x64", "x86", "arm64", "arm32", "loongarch64" ];
-
-		/// <inheritdoc />
-		public static ImmutableHashSet<string> ValidSystems =>
+		public static ImmutableArray<ReadOnlyMemory<char>> ValidArchitectures =>
 		[
-			"windows", "osx", "linux", "freebsd", "debian", "ubuntu",
-			"archlinux", "fedora"
+			"x64".AsMemory(), "x86".AsMemory(), "arm64".AsMemory(), "arm32".AsMemory(), "loongarch64".AsMemory()
 		];
 
 		/// <inheritdoc />
-		public static ImmutableHashSet<string> ValidSpecialActionNames => [ "Void", "ThrowError", "EndAll" ];
+		public static ImmutableArray<ReadOnlyMemory<char>> ValidComparators =>
+		[
+			"==".AsMemory(), "!=".AsMemory(), "<".AsMemory(), ">".AsMemory(), "<=".AsMemory(), ">=".AsMemory()
+		];
 
 		/// <inheritdoc />
-		public static void ValidateLine(ReadOnlySpan<SyntaxToken> tokens)
+		public static ImmutableArray<ReadOnlyMemory<char>> ValidSpecialActionNames =>
+		[
+			"Void".AsMemory(), "ThrowError".AsMemory(), "EndAll".AsMemory()
+		];
+
+		/// <inheritdoc />
+		public static ImmutableArray<ReadOnlyMemory<char>> ValidSystems =>
+		[
+			"windows".AsMemory(), "osx".AsMemory(), "linux".AsMemory(), "freebsd".AsMemory(), "debian".AsMemory(), "ubuntu".AsMemory(),
+			"archlinux".AsMemory(), "fedora".AsMemory()
+		];
+
+		/// <inheritdoc />
+		public static void ValidateLine(SyntaxLine line, DualTextBuffer context)
 		{
 
-			if (tokens.IsEmpty)
+			if (line.IsEmpty)
 				throw new InvalidRsmlSyntax("Empty token sequence.");
 
-			var actualTokens = tokens.Length == 1
-								   ? tokens
-								   : tokens[^1].Kind == TokenKind.Eol
-									   ? tokens[..^1]
-									   : tokens;
+			if (line.Length > 1 && line[^1].Kind == TokenKind.Eol)
+				line.Remove(line.Last());
 
-			switch (actualTokens[0].Kind)
+			switch (line[0].Kind)
 			{
 
 				case TokenKind.Eol or TokenKind.Eof:
 					return; // we're done here
 
-				case TokenKind.CommentSymbol when actualTokens.Length != 2:
+				case TokenKind.CommentSymbol when line.Length != 2:
 					throw new InvalidRsmlSyntax(
 						"A comment must be 2 tokens long."
 					); // even if you have a comment with no text not even spaces, you'll have 2 tokens
 
-				case TokenKind.CommentSymbol when actualTokens[0].Value != "#":
-					throw new InvalidRsmlSyntax($"Expected CommentSymbol of value '#', but received {actualTokens[0].Value} instead.");
-
-				case TokenKind.CommentSymbol when actualTokens[1].Kind != TokenKind.CommentText:
-					throw new InvalidRsmlSyntax($"Expected CommentText, but received {actualTokens[1].Kind} instead.");
+				case TokenKind.CommentSymbol when line[1].Kind != TokenKind.CommentText:
+					throw new InvalidRsmlSyntax($"Expected CommentText, but received {line[1].Kind} instead.");
 
 				case TokenKind.CommentSymbol:
 					return;
 
-				case TokenKind.SpecialActionSymbol when actualTokens.Length != 3:
+				case TokenKind.SpecialActionSymbol when line.Length != 3:
 					throw new InvalidRsmlSyntax("A special action must be 3 tokens long."); // even with no arg, you'll have 3 tokens
 
-				case TokenKind.SpecialActionSymbol when actualTokens[0].Value != "@":
-					throw new InvalidRsmlSyntax($"Expected SpecialActionSymbol of value '@', but received {actualTokens[0].Value} instead.");
+				case TokenKind.SpecialActionSymbol when line[1].IsOffLimits ||
+														line[1].Kind != TokenKind.SpecialActionName ||
+														!ValidSpecialActionNames.ContainsMemory(context[line[1].BufferRange]):
+					throw new InvalidRsmlSyntax($"Expected a valid SpecialActionName, but received {line[1].Kind} with wrong value instead.");
 
-				case TokenKind.SpecialActionSymbol when (actualTokens[1].Kind != TokenKind.SpecialActionName ||
-														 !ValidSpecialActionNames.Contains(actualTokens[1].Value)):
-					throw new InvalidRsmlSyntax(
-						$"Expected a valid SpecialActionName, but received {actualTokens[1].Kind} with value {actualTokens[1].Value} instead."
-					);
-
-				case TokenKind.SpecialActionSymbol when actualTokens[2].Kind != TokenKind.SpecialActionArgument:
-					throw new InvalidRsmlSyntax($"Expected SpecialActionArgument, but received {actualTokens[2].Kind} instead.");
+				case TokenKind.SpecialActionSymbol when line[2].Kind != TokenKind.SpecialActionArgument:
+					throw new InvalidRsmlSyntax($"Expected SpecialActionArgument, but received {line[2].Kind} instead.");
 
 				case TokenKind.SpecialActionSymbol:
 					return;
 
 			}
 
-			if (actualTokens[0].Kind is not (TokenKind.ReturnOperator or TokenKind.ThrowErrorOperator))
+			if (line[0].Kind is not (TokenKind.ReturnOperator or TokenKind.ThrowErrorOperator) || line[0].IsOffLimits)
 				throw new InvalidRsmlSyntax("Unrecognized start-of-line token.");
 
-			if (actualTokens[0].Value is not ("!>" or "->"))
+			if (!context[line[0].BufferRange].IsEquals("!>") && !context[line[0].BufferRange].IsEquals("->"))
 				throw new InvalidRsmlSyntax("Operator must be one of !> or ->.");
 
-			switch (actualTokens.Length)
+			switch (line.Length)
 			{
 
 				case 2:
-					if (actualTokens[1].Kind != TokenKind.LogicPathValue)
+					if (line[1].Kind != TokenKind.LogicPathValue)
 						throw new InvalidRsmlSyntax("A 2 token long logic path must be a *Operator + LogicPathValue overload.");
 
 					return;
 
 				case 3:
-					if ((actualTokens[1].Kind != TokenKind.SystemName &&
-						 actualTokens[1].Kind != TokenKind.DefinedKeyword &&
-						 actualTokens[1].Kind != TokenKind.WildcardKeyword) ||
-						actualTokens[2].Kind != TokenKind.LogicPathValue)
+					if ((line[1].Kind != TokenKind.SystemName &&
+						 line[1].Kind != TokenKind.DefinedKeyword &&
+						 line[1].Kind != TokenKind.WildcardKeyword) ||
+						line[2].Kind != TokenKind.LogicPathValue)
 						throw new InvalidRsmlSyntax("A 3 token long logic path must be a *Operator + SystemName + LogicPathValue overload.");
 
-					if (actualTokens[1].Value != "any" && actualTokens[1].Kind == TokenKind.WildcardKeyword)
-						throw new InvalidRsmlSyntax("A token of type WildcardKeyword must have a value of 'any'.");
-
-					if (actualTokens[1].Value != "defined" && actualTokens[1].Kind == TokenKind.DefinedKeyword)
-						throw new InvalidRsmlSyntax("A token of type DefinedKeyword must have a value of 'defined'.");
-
-					if (!actualTokens[1].Value.AsSpan().IsAsciiEqualsIgnoreCase(ValidSystems) &&
-						actualTokens[1].Kind == TokenKind.SystemName)
+					if (!line[1].IsOffLimits &&
+						!context[line[1].BufferRange].IsAsciiEqualsIgnoreCase(ValidSystems) &&
+						line[1].Kind == TokenKind.SystemName)
 						throw new InvalidRsmlSyntax("Invalid system name as of v2.0.0.");
 
 					return;
 
 				case 4:
-					if ((actualTokens[1].Kind != TokenKind.SystemName &&
-						 actualTokens[1].Kind != TokenKind.DefinedKeyword &&
-						 actualTokens[1].Kind != TokenKind.WildcardKeyword) ||
-						(actualTokens[2].Kind != TokenKind.ArchitectureIdentifier &&
-						 actualTokens[2].Kind != TokenKind.DefinedKeyword &&
-						 actualTokens[2].Kind != TokenKind.WildcardKeyword) ||
-						actualTokens[3].Kind != TokenKind.LogicPathValue)
+					if ((line[1].Kind != TokenKind.SystemName &&
+						 line[1].Kind != TokenKind.DefinedKeyword &&
+						 line[1].Kind != TokenKind.WildcardKeyword) ||
+						(line[2].Kind != TokenKind.ArchitectureIdentifier &&
+						 line[2].Kind != TokenKind.DefinedKeyword &&
+						 line[2].Kind != TokenKind.WildcardKeyword) ||
+						line[3].Kind != TokenKind.LogicPathValue)
 					{
 						throw new InvalidRsmlSyntax(
 							"A 4 token long logic path must be a *Operator + SystemName + ArchitectureIdentifier + LogicPathValue overload."
 						);
 					}
 
-					if (actualTokens[1].Value != "any" && actualTokens[1].Kind == TokenKind.WildcardKeyword)
-						throw new InvalidRsmlSyntax("A token of type WildcardKeyword must have a value of 'any'.");
-
-					if (actualTokens[1].Value != "defined" && actualTokens[1].Kind == TokenKind.DefinedKeyword)
-						throw new InvalidRsmlSyntax("A token of type DefinedKeyword must have a value of 'defined'.");
-
-					if (actualTokens[2].Value != "any" && actualTokens[2].Kind == TokenKind.WildcardKeyword)
-						throw new InvalidRsmlSyntax("A token of type WildcardKeyword must have a value of 'any'.");
-
-					if (actualTokens[2].Value != "defined" && actualTokens[2].Kind == TokenKind.DefinedKeyword)
-						throw new InvalidRsmlSyntax("A token of type DefinedKeyword must have a value of 'defined'.");
-
-					if (!actualTokens[1].Value.AsSpan().IsAsciiEqualsIgnoreCase(ValidSystems) &&
-						actualTokens[1].Kind == TokenKind.SystemName)
+					if (!line[1].IsOffLimits &&
+						!context[line[1].BufferRange].IsAsciiEqualsIgnoreCase(ValidSystems) &&
+						line[1].Kind == TokenKind.SystemName)
 						throw new InvalidRsmlSyntax("Invalid system name as of v2.0.0.");
 
 					// ReSharper disable once InvertIf
-					if (!actualTokens[2].Value.AsSpan().IsAsciiEqualsIgnoreCase(ValidArchitectures) &&
-						actualTokens[2].Kind == TokenKind.ArchitectureIdentifier)
+					if (!line[2].IsOffLimits &&
+						!context[line[2].BufferRange].IsAsciiEqualsIgnoreCase(ValidArchitectures) &&
+						line[2].Kind == TokenKind.ArchitectureIdentifier)
 						throw new InvalidRsmlSyntax("Invalid architecture identifier as of v2.0.0.");
 
 					return;
 
 				case 5:
-					if ((actualTokens[1].Kind != TokenKind.SystemName &&
-						 actualTokens[1].Kind != TokenKind.DefinedKeyword &&
-						 actualTokens[1].Kind != TokenKind.WildcardKeyword) ||
-						(actualTokens[2].Kind != TokenKind.MajorVersionId &&
-						 actualTokens[2].Kind != TokenKind.DefinedKeyword &&
-						 actualTokens[2].Kind != TokenKind.WildcardKeyword) ||
-						(actualTokens[3].Kind != TokenKind.ArchitectureIdentifier &&
-						 actualTokens[3].Kind != TokenKind.DefinedKeyword &&
-						 actualTokens[3].Kind != TokenKind.WildcardKeyword) ||
-						actualTokens[4].Kind != TokenKind.LogicPathValue)
+					if ((line[1].Kind != TokenKind.SystemName &&
+						 line[1].Kind != TokenKind.DefinedKeyword &&
+						 line[1].Kind != TokenKind.WildcardKeyword) ||
+						(line[2].Kind != TokenKind.MajorVersionId &&
+						 line[2].Kind != TokenKind.DefinedKeyword &&
+						 line[2].Kind != TokenKind.WildcardKeyword) ||
+						(line[3].Kind != TokenKind.ArchitectureIdentifier &&
+						 line[3].Kind != TokenKind.DefinedKeyword &&
+						 line[3].Kind != TokenKind.WildcardKeyword) ||
+						line[4].Kind != TokenKind.LogicPathValue)
 					{
 						throw new InvalidRsmlSyntax(
 							"A 5 token long logic path must be a *Operator + SystemName + MajorVersionId + ArchitectureIdentifier + LogicPathValue overload."
 						);
 					}
 
-					if (actualTokens[1].Value != "any" && actualTokens[1].Kind == TokenKind.WildcardKeyword)
-						throw new InvalidRsmlSyntax("A token of type WildcardKeyword must have a value of 'any'.");
 
-					if (actualTokens[1].Value != "defined" && actualTokens[1].Kind == TokenKind.DefinedKeyword)
-						throw new InvalidRsmlSyntax("A token of type DefinedKeyword must have a value of 'defined'.");
-
-					if (actualTokens[2].Value != "any" && actualTokens[2].Kind == TokenKind.WildcardKeyword)
-						throw new InvalidRsmlSyntax("A token of type WildcardKeyword must have a value of 'any'.");
-
-					if (actualTokens[2].Value != "defined" && actualTokens[2].Kind == TokenKind.DefinedKeyword)
-						throw new InvalidRsmlSyntax("A token of type DefinedKeyword must have a value of 'defined'.");
-
-					if (actualTokens[3].Value != "any" && actualTokens[3].Kind == TokenKind.WildcardKeyword)
-						throw new InvalidRsmlSyntax("A token of type WildcardKeyword must have a value of 'any'.");
-
-					if (actualTokens[3].Value != "defined" && actualTokens[3].Kind == TokenKind.DefinedKeyword)
-						throw new InvalidRsmlSyntax("A token of type DefinedKeyword must have a value of 'defined'.");
-
-					if (!actualTokens[1].Value.AsSpan().IsAsciiEqualsIgnoreCase(ValidSystems) &&
-						actualTokens[1].Kind == TokenKind.SystemName)
+					if (!line[1].IsOffLimits &&
+						!context[line[1].BufferRange].IsAsciiEqualsIgnoreCase(ValidSystems) &&
+						line[1].Kind == TokenKind.SystemName)
 						throw new InvalidRsmlSyntax("Invalid system name as of v2.0.0.");
 
-					if (!actualTokens[3].Value.AsSpan().IsAsciiEqualsIgnoreCase(ValidArchitectures) &&
-						actualTokens[3].Kind == TokenKind.ArchitectureIdentifier)
+					if (!line[3].IsOffLimits &&
+						!context[line[3].BufferRange].IsAsciiEqualsIgnoreCase(ValidArchitectures) &&
+						line[3].Kind == TokenKind.ArchitectureIdentifier)
 						throw new InvalidRsmlSyntax("Invalid architecture identifier as of v2.0.0.");
 
-					if (!Int32.TryParse(actualTokens[2].Value, out _) && actualTokens[2].Kind == TokenKind.MajorVersionId)
+					if (!line[2].IsOffLimits && !Int32.TryParse(context[line[2].BufferRange].Span, out _) && line[2].Kind == TokenKind.MajorVersionId)
 						throw new InvalidRsmlSyntax("The major version must be a valid integer");
 
 					return;
 
 				case 6:
-					if ((actualTokens[1].Kind != TokenKind.SystemName &&
-						 actualTokens[1].Kind != TokenKind.DefinedKeyword &&
-						 actualTokens[1].Kind != TokenKind.WildcardKeyword) ||
-						(actualTokens[2].Kind != TokenKind.EqualTo &&
-						 actualTokens[2].Kind != TokenKind.NotEqualTo &&
-						 actualTokens[2].Kind != TokenKind.GreaterThan &&
-						 actualTokens[2].Kind != TokenKind.LessThan &&
-						 actualTokens[2].Kind != TokenKind.GreaterThanOrEqualTo &&
-						 actualTokens[2].Kind != TokenKind.LessThanOrEqualTo) ||
-						(actualTokens[3].Kind != TokenKind.MajorVersionId &&
-						 actualTokens[3].Kind != TokenKind.DefinedKeyword &&
-						 actualTokens[3].Kind != TokenKind.WildcardKeyword) ||
-						(actualTokens[4].Kind != TokenKind.ArchitectureIdentifier &&
-						 actualTokens[4].Kind != TokenKind.DefinedKeyword &&
-						 actualTokens[4].Kind != TokenKind.WildcardKeyword) ||
-						actualTokens[5].Kind != TokenKind.LogicPathValue)
+					if ((line[1].Kind != TokenKind.SystemName &&
+						 line[1].Kind != TokenKind.DefinedKeyword &&
+						 line[1].Kind != TokenKind.WildcardKeyword) ||
+						(line[2].Kind != TokenKind.EqualTo &&
+						 line[2].Kind != TokenKind.NotEqualTo &&
+						 line[2].Kind != TokenKind.GreaterThan &&
+						 line[2].Kind != TokenKind.LessThan &&
+						 line[2].Kind != TokenKind.GreaterThanOrEqualTo &&
+						 line[2].Kind != TokenKind.LessThanOrEqualTo) ||
+						(line[3].Kind != TokenKind.MajorVersionId &&
+						 line[3].Kind != TokenKind.DefinedKeyword &&
+						 line[3].Kind != TokenKind.WildcardKeyword) ||
+						(line[4].Kind != TokenKind.ArchitectureIdentifier &&
+						 line[4].Kind != TokenKind.DefinedKeyword &&
+						 line[4].Kind != TokenKind.WildcardKeyword) ||
+						line[5].Kind != TokenKind.LogicPathValue)
 					{
 						throw new InvalidRsmlSyntax(
 							"A 5 token long logic path must be a *Operator + SystemName + |Comparator| + MajorVersionId + ArchitectureIdentifier + LogicPathValue overload."
 						);
 					}
 
-					if (actualTokens[1].Value != "any" && actualTokens[1].Kind == TokenKind.WildcardKeyword)
-						throw new InvalidRsmlSyntax("A token of type WildcardKeyword must have a value of 'any'.");
-
-					if (actualTokens[1].Value != "defined" && actualTokens[1].Kind == TokenKind.DefinedKeyword)
-						throw new InvalidRsmlSyntax("A token of type DefinedKeyword must have a value of 'defined'.");
-
-					if (actualTokens[4].Value != "any" && actualTokens[4].Kind == TokenKind.WildcardKeyword)
-						throw new InvalidRsmlSyntax("A token of type WildcardKeyword must have a value of 'any'.");
-
-					if (actualTokens[4].Value != "defined" && actualTokens[4].Kind == TokenKind.DefinedKeyword)
-						throw new InvalidRsmlSyntax("A token of type DefinedKeyword must have a value of 'defined'.");
-
-					if (!actualTokens[1].Value.AsSpan().IsAsciiEqualsIgnoreCase(ValidSystems) && actualTokens[1].Kind == TokenKind.SystemName)
+					if (!line[1].IsOffLimits &&
+						!context[line[1].BufferRange].IsAsciiEqualsIgnoreCase(ValidSystems) &&
+						line[1].Kind == TokenKind.SystemName)
 						throw new InvalidRsmlSyntax("Invalid system name as of v2.0.0.");
 
-					if (!actualTokens[4].Value.AsSpan().IsAsciiEqualsIgnoreCase(ValidArchitectures) &&
-						actualTokens[4].Kind == TokenKind.ArchitectureIdentifier)
+					if (!line[4].IsOffLimits &&
+						!context[line[4].BufferRange].IsAsciiEqualsIgnoreCase(ValidArchitectures) &&
+						line[4].Kind == TokenKind.ArchitectureIdentifier)
 						throw new InvalidRsmlSyntax("Invalid architecture identifier as of v2.0.0.");
 
-					if (!actualTokens[2].Value.AsSpan().IsAsciiEqualsIgnoreCase(ValidComparators))
+					if (!line[2].IsOffLimits &&
+						!context[line[2].BufferRange].IsAsciiEqualsIgnoreCase(ValidComparators))
 						throw new InvalidRsmlSyntax("Invalid comparator.");
 
-					if (!Int32.TryParse(actualTokens[3].Value, out _))
+					if (!line[3].IsOffLimits && !Int32.TryParse(context[line[3].BufferRange].Span, out _))
 						throw new InvalidRsmlSyntax("The major version must be a valid integer. Wildcards are not compatible with comparators.");
 
 					return;
@@ -264,67 +225,6 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 			}
 
 		}
-
-		/// <inheritdoc />
-		public static void ValidateBuffer(ReadOnlySpan<SyntaxToken> bufferTokens)
-		{
-
-			if (bufferTokens.IsEmpty)
-				throw new InvalidRsmlSyntax("Empty token sequence.");
-
-			int pos = 0;
-
-			while (pos < bufferTokens.Length)
-			{
-
-				bool eofHit = SkipNewlines(bufferTokens, ref pos);
-
-				if (eofHit)
-					return;
-
-				var line = ReadUntilEolOrEof(bufferTokens, ref pos);
-
-				if (line.IsEmpty)
-					continue;
-
-				ValidateLine(line);
-
-			}
-
-		}
-
-		#region Helpers
-
-		private static ReadOnlySpan<SyntaxToken> ReadUntilEolOrEof(ReadOnlySpan<SyntaxToken> tokens, ref int pos)
-		{
-
-			int start = pos;
-
-			while (pos < tokens.Length && tokens[pos].Kind != TokenKind.Eol && tokens[pos].Kind != TokenKind.Eof)
-				pos++;
-
-			return tokens[start..pos];
-
-		}
-
-		private static bool SkipNewlines(ReadOnlySpan<SyntaxToken> tokens, ref int pos)
-		{
-
-			while (pos < tokens.Length && tokens[pos].Kind == TokenKind.Eol)
-			{
-
-				pos++;
-
-				if (tokens[pos].Kind == TokenKind.Eof)
-					return false; // eof hit
-
-			}
-
-			return true;
-
-		}
-
-		#endregion
 
 	}
 
