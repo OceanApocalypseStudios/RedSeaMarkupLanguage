@@ -18,16 +18,21 @@
 		<Title>Red Sea Markup Language</Title>
 		<Authors>OceanApocalypseStudios</Authors>
 		<Company>OceanApocalypseStudios</Company>
-		<Version>2.0.0-prerelease8</Version>
+		<Version>2.0.0</Version>
 		<Description>An extremely performant markup language for designing system-based logic paths in C#.</Description>
 		<Copyright>Copyright (c) 2025 OceanApocalypseStudios</Copyright>
-		<PackageProjectUrl>https://oceanapocalypsestudios.org/rsml-docs/2.0.0-prerelease8/</PackageProjectUrl>
-		<PackageLicenseUrl>https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/blob/v2.0.0-dev/LICENSE.txt</PackageLicenseUrl>
+		<PackageProjectUrl>https://oceanapocalypsestudios.org/rsml-docs/2.0.0/</PackageProjectUrl>
+		<PackageLicenseUrl>https://mit-license.org</PackageLicenseUrl>
 		<PackageIcon>Icon.png</PackageIcon>
 		<RepositoryUrl>https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>markup</PackageTags>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<PackageReleaseNotes>RSML v2.0.0 is here!
+
+🚀Increased performance and memory usage.
+✅Better middleware API.
+🔡Namespace structure taking into consideration our studio's name.</PackageReleaseNotes>
 	</PropertyGroup>
 
 	<!-- Windows only -->
