@@ -16,24 +16,6 @@ namespace OceanApocalypseStudios.RSML.Tests
 
 		private static readonly LocalMachine win10X64 = new("windows", "x64", 10);
 
-		[Theory]
-		[InlineData("@Void")]
-		[InlineData("@Void\n")]
-		[InlineData("@Void\n# Comment")]
-		[InlineData("@Void\n# Comment\n")]
-		[InlineData("@Void \n")]
-		[InlineData("@Void ")]
-		[InlineData("@Void Argument")]
-		[InlineData("@EndAll\n-> linux \"Result C\"")]
-		[InlineData("@EndAll\n-> linux \"Result C\"\n")]
-		public void Evaluate_SpecialActionWorks(string input)
-		{
-
-			Evaluator evaluator = new(input);
-			Assert.Null(evaluator.Evaluate(debianUnknownVersionX86).MatchValue);
-
-		}
-
 		[Fact]
 		public void Evaluate_AnyWorksEvenIfUnknown()
 		{
@@ -96,6 +78,24 @@ namespace OceanApocalypseStudios.RSML.Tests
 			Evaluator evaluator = new("-> linux \"This is the output...\"\n-> debian \"...not this.\"");
 			string? evaluationStr = evaluator.Evaluate(debianUnknownVersionX86).MatchValue;
 			Assert.Equal("This is the output...", evaluationStr);
+
+		}
+
+		[Theory]
+		[InlineData("@Void")]
+		[InlineData("@Void\n")]
+		[InlineData("@Void\n# Comment")]
+		[InlineData("@Void\n# Comment\n")]
+		[InlineData("@Void \n")]
+		[InlineData("@Void ")]
+		[InlineData("@Void Argument")]
+		[InlineData("@EndAll\n-> linux \"Result C\"")]
+		[InlineData("@EndAll\n-> linux \"Result C\"\n")]
+		public void Evaluate_SpecialActionWorks(string input)
+		{
+
+			Evaluator evaluator = new(input);
+			Assert.Null(evaluator.Evaluate(debianUnknownVersionX86).MatchValue);
 
 		}
 

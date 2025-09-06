@@ -30,9 +30,10 @@
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<PackageReleaseNotes>RSML v2.0.0 is here!
 
-🚀Increased performance and memory usage.
-✅Better middleware API.
-🔡Namespace structure taking into consideration our studio's name.</PackageReleaseNotes>
+			🚀Increased performance and memory usage.
+			✅Better middleware API.
+			🔡Namespace structure taking into consideration our studio's name.
+		</PackageReleaseNotes>
 	</PropertyGroup>
 
 	<!-- Windows only -->
