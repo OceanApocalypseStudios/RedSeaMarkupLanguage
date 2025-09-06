@@ -92,13 +92,13 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 
 				case '@':
 					_ = buffer.Read();
-					_ = buffer.ReadUntilWhitespace(false);
+					_ = buffer.ReadUntilWhitespace();
 					int beforeWhitespaceRemoval = buffer.CaretPosition;
 
 					buffer.SkipWhitespace();
 
 					int argumentNameStartIdx = buffer.CaretPosition;
-					_ = buffer.ReadUntilWhitespace(false);
+					_ = buffer.ReadUntilWhitespace();
 					int argumentNameEndIdx = buffer.CaretPosition;
 
 					return new(

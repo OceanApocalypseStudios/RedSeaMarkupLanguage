@@ -15,7 +15,7 @@ namespace OceanApocalypseStudios.RSML.Benchmarks
 {
 
 	[MemoryDiagnoser]
-	[SimpleJob(RuntimeMoniker.Net80, warmupCount: 10, iterationCount: 50)]
+	[SimpleJob(RuntimeMoniker.Net80, warmupCount: 2, iterationCount: 3)]
 	[HideColumns("Job", "StdDev")]
 	[GroupBenchmarksBy(BenchmarkLogicalGroupRule.ByCategory)]
 	[SuppressMessage("Performance", "CA1822:Mark members as static")]
