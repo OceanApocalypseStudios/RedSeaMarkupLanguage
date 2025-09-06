@@ -1,67 +1,70 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+	<!-- General Properties -->
 	<PropertyGroup>
+		<!-- Language-related -->
 		<TargetFramework>net8.0</TargetFramework>
 		<Nullable>enable</Nullable>
-		<GenerateDocumentationFile>True</GenerateDocumentationFile>
-		<Title>Red Sea Markup Language</Title>
-		<Authors>Matthew</Authors>
-		<Company>OceanApocalypseStudios</Company>
-		<Description>
-			The modern, more robust fork on MF's CrossRoad for C#.
-			Its syntax is simple, easy-to-learn and the language is, altogether, a pretty good alternative to MFRoad.
-		</Description>
-		<Copyright>Copyright (c) 2025 OceanApocalypseStudios</Copyright>
-		<PackageIcon>Icon.png</PackageIcon>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<RepositoryUrl>https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage</RepositoryUrl>
-		<PackageTags>Markup;Crossroad</PackageTags>
-		<PackageLicenseFile>LICENSE</PackageLicenseFile>
-		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-		
-		<!-- WHEN CHANGING THE VERSION
-		DON'T FORGET TO ALSO CHANGE IN THE CLI
-		Program.cs > Program > const PKG_VERSION
-		FOR THE LOVE OF GOD DON'T FORGET
-		PLEAAAAAAASE -->
-		<Version>1.0.5</Version>
-		
-		<FileVersion>1.0.0.5</FileVersion>
-		<InformationalVersion>$(Version)</InformationalVersion>
+		<LangVersion>12</LangVersion>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 
-		<!-- no source revision thank you -->
-		<SourceRevisionId></SourceRevisionId>
-		<Platforms>AnyCPU;x64;x86</Platforms>
-		<PackageReleaseNotes>
-			# 🚀 v$(Version) is now available
-			- CLI is now AOT-compatible
+		<!-- Maintainability-related -->
+		<RootNamespace>OceanApocalypseStudios.RSML</RootNamespace>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<NeutralLanguage>en</NeutralLanguage>
+
+		<!-- NuGet Properties -->
+		<PackageId>OceanApocalypseStudios.RSML</PackageId>
+		<Title>Red Sea Markup Language</Title>
+		<Authors>OceanApocalypseStudios</Authors>
+		<Company>OceanApocalypseStudios</Company>
+		<Version>2.0.0</Version>
+		<Description>An extremely performant markup language for designing system-based logic paths in C#.</Description>
+		<Copyright>Copyright (c) 2025 OceanApocalypseStudios</Copyright>
+		<PackageProjectUrl>https://oceanapocalypsestudios.org/rsml-docs/2.0.0/</PackageProjectUrl>
+		<PackageLicenseUrl>https://mit-license.org</PackageLicenseUrl>
+		<PackageIcon>Icon.png</PackageIcon>
+		<RepositoryUrl>https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>markup</PackageTags>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<PackageReleaseNotes>RSML v2.0.0 is here!
+
+			🚀Increased performance and memory usage.
+			✅Better middleware API.
+			🔡Namespace structure taking into consideration our studio's name.
 		</PackageReleaseNotes>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	<!-- Windows only -->
+	<PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
+		<DefineConstants>WINDOWS;$(DefineConstants)</DefineConstants>
+	</PropertyGroup>
+
+	<!-- Not Windows -->
+	<PropertyGroup Condition="'$(OS)' != 'Windows_NT'">
+		<DefineConstants>NOT_WINDOWS;$(DefineConstants)</DefineConstants>
+	</PropertyGroup>
+
+	<!-- Debug -->
+	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+		<DebugType>full</DebugType>
+	</PropertyGroup>
+
+	<!-- Release -->
+	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
 		<DebugType>none</DebugType>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
-		<DebugType>none</DebugType>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-		<DebugType>none</DebugType>
-	</PropertyGroup>
-
+	<!-- Items -->
 	<ItemGroup>
 		<None Include="..\Assets\Icon.png">
 			<Pack>True</Pack>
-			<PackagePath>\</PackagePath>
+			<Link>Icon.png</Link>
 		</None>
-		<None Include="..\LICENSE">
+		<None Update="Icon.png">
 			<Pack>True</Pack>
-			<PackagePath>\</PackagePath>
-		</None>
-		<None Include="..\README.md">
-			<Pack>True</Pack>
-			<PackagePath>\</PackagePath>
+			<PackagePath></PackagePath>
 		</None>
 	</ItemGroup>
 

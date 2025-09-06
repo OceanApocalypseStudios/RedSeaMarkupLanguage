@@ -1,281 +1,488 @@
 ﻿using System;
-using System.Threading.Tasks;
-using System.Linq;
-using System.Runtime.InteropServices;
-
 using System.CommandLine;
+using System.CommandLine.Help;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
-using RSML.Parser;
-using RSML.Exceptions;
+using OceanApocalypseStudios.RSML.CLI.Helpers;
+
+using Spectre.Console;
+
+using LocalMachine = OceanApocalypseStudios.RSML.Machine.LocalMachine;
 
 
-namespace RSML.CLI
+namespace OceanApocalypseStudios.RSML.CLI
 {
 
-	internal class Program
+	internal partial class Program
 	{
 
-		/// <summary>
-		/// The current version of the API.
-		/// </summary>
-		const string PKG_VERSION = "v1.0.5";
+		public const string LanguageVersion = "v2.0.0";
+		public static string? cSharpLogo;
 
-		/// <summary>
-		/// The color randomizer to use and discard.
-		/// </summary>
-		static readonly Random? randomizer = new();
+		public static string? fSharpLogo;
+		public static string? visualBasicLogo;
 
-		/// <summary>
-		/// The CLI ASCII art title.
-		/// </summary>
-		const string ASCII_ART = @"    _      ______  _____ ___  ___ _         _____  _      _____       _    
- /\| |/\   | ___ \/  ___||  \/  || |       /  __ \| |    |_   _|   /\| |/\ 
- \ ` ' /   | |_/ /\ `--. | .  . || |       | /  \/| |      | |     \ ` ' / 
-|_     _|  |    /  `--. \| |\/| || |       | |    | |      | |    |_     _|
- / , . \   | |\ \ /\__/ /| |  | || |____ _ | \__/\| |____ _| |_    / , . \ 
- \/|_|\/   \_| \_|\____/ \_|  |_/\_____/(_) \____/\_____/ \___/    \/|_|\/ 
-                                                                           
-																																";
-
-		static async Task Main(string[] args)
+		private static async Task<int> Main(string[] args)
 		{
 
-			RootCommand rootCommand = new("The CLI for the Red Sea Markup Language");
+			#region Global Options
 
-			if (!args.Contains("--no-pretty")) // don't pretty print
+			Option<bool> versionOpt = new("--version")
 			{
 
-				PrettyPrintAsciiArtAndCopyright();
-				Console.WriteLine();
+				Description = "The RSML language version the CLI is made for",
+				DefaultValueFactory = _ => false
 
-			}
+			};
 
-			var noPrettyOption = new Option<bool>(
-				aliases: ["--no-pretty"],
-				description: "Don't output ASCII art, copyright messages or colored output",
-				getDefaultValue: () => false
-			);
-
-			rootCommand.AddGlobalOption(noPrettyOption);
-
-			//// VERSION COMMAND ////
-			// not really a command - it kind of a trick
-			Command versionCommand = new("--rsml-version", "Get the current version of RSML");
-
-			versionCommand.SetHandler(void () =>
+			Option<bool> specSupportOpt = new("--specification-support")
 			{
 
-				Console.WriteLine($"You're currently running RSML {PKG_VERSION}.\nGoodbye!");
-				Environment.Exit(0);
+				Description = "CLI support for the Language Specification of the current version",
+				DefaultValueFactory = _ => false
 
-			});
+			};
 
-			versionCommand.AddAlias("-V");
-			versionCommand.AddAlias("--formatted-version");
-			versionCommand.AddAlias("-v");
+			specSupportOpt.Aliases.Add("--spec-support");
+			specSupportOpt.Aliases.Add("-S");
 
-			//// EVALUATE COMMAND ////
-			Command evaluateCommand = new("evaluate", "Evaluate a Red Sea Markup Language document");
-
-			var printOnlyPrimaryOption = new Option<bool>(
-				aliases: ["--primary-only", "-p"],
-				description: "Output only the primary results: useful if you need to pipe this result",
-				getDefaultValue: () => false
-			);
-			var fallbackForNullOption = new Option<string?>(
-				aliases: ["--antinull-fallback", "-f"],
-				description: "Fallback for no-match scenarios",
-				getDefaultValue: () => null
-			);
-			var fallbackForErrorOption = new Option<string?>(
-				aliases: ["--antierror-fallback", "-F"],
-				description: "Fallback for error scenarios",
-				getDefaultValue: () => null
-			);
-			var customRidOption = new Option<string?>(
-				aliases: ["--custom-rid", "-r", "--rid"],
-				description: "Custom RID to check against",
-				getDefaultValue: () => null
-			);
-			var expandAnyOption = new Option<bool>(
-				aliases: ["--expand-any", "-x"],
-				description: "Expands the any RID",
-				getDefaultValue: () => false
-			);
-
-			evaluateCommand.AddOption(printOnlyPrimaryOption);
-			evaluateCommand.AddOption(customRidOption);
-			evaluateCommand.AddOption(expandAnyOption);
-			evaluateCommand.AddOption(fallbackForErrorOption);
-			evaluateCommand.AddOption(fallbackForNullOption);
-
-			evaluateCommand.SetHandler(void (primaryOnly, nullFallback, errorFallback, customRid, expandAny) =>
+			Option<bool> disableAnsiOpt = new("--disable-ansi")
 			{
 
-				string? currentInState = Console.In.ReadToEnd();
+				Description = "Disables colored output and advanced rendering",
+				DefaultValueFactory = _ => false
 
-				if (currentInState is null)
+			};
+
+			disableAnsiOpt.Aliases.Add("--no-colors");
+
+			Option<FileInfo?> filepathOpt = new("--filepath")
+			{
+
+				Description = "The file to load RSML from, instead of the stdin.",
+				DefaultValueFactory = _ => null
+
+			};
+
+			filepathOpt.Aliases.Add("-f");
+
+			#endregion
+
+			#region RootCommand Setup
+
+			RootCommand rootCommand = new("Red Sea Markup Language CLI");
+
+			var helpVersionOpt = rootCommand.Options.FirstOrDefault(o => o is HelpOption);
+
+			if (helpVersionOpt is not null)
+				helpVersionOpt.Action = new AsciiHelp((HelpAction)helpVersionOpt.Action!);
+
+			var defaultVersionOpt =
+				rootCommand.Options.FirstOrDefault(o => o is VersionOption || o.Name == "--version" || o.Aliases.Contains("--version"));
+
+			if (defaultVersionOpt is not null)
+				_ = rootCommand.Options.Remove(defaultVersionOpt);
+
+			rootCommand.Options.Add(specSupportOpt);
+			rootCommand.Options.Add(disableAnsiOpt);
+			rootCommand.Options.Add(versionOpt);
+
+			#endregion
+
+			#region Machine Command
+
+			Command machineCmd = new("machine", "Handles machines");
+
+			Command createMachineCmd = new("create", "Creates a new machine");
+			Command getMachineDataCmd = new("get", "Gets the current machine");
+
+			var outputFormatMOpt = new Option<string>("--output-format")
+			{
+
+				Description = "The format to output as.",
+				DefaultValueFactory = _ => "PlainText"
+
+			}.AcceptOnlyFromAmong("PlainText", "JSON");
+
+			outputFormatMOpt.Aliases.Add("--format");
+			outputFormatMOpt.Aliases.Add("-o");
+
+			Option<string?> systemNameOpt = new("--system-name")
+			{
+
+				Description = "The name of the operating system.",
+				DefaultValueFactory = _ => null
+
+			};
+
+			systemNameOpt.Aliases.Add("-S");
+
+			Option<string?> linuxNameOpt = new("--distro-name")
+			{
+
+				Description = "The name of the Linux distribution.",
+				DefaultValueFactory = _ => null
+
+			};
+
+			linuxNameOpt.Aliases.Add("-D");
+
+			Option<string?> linuxFamilyOpt = new("--distro-family")
+			{
+
+				Description = "The family of the Linux distribution.",
+				DefaultValueFactory = _ => null
+
+			};
+
+			linuxFamilyOpt.Aliases.Add("-F");
+
+			Option<string?> procArchOpt = new("--processor-architecture")
+			{
+
+				Description = "The architecture of the processor.",
+				DefaultValueFactory = _ => null
+
+			};
+
+			procArchOpt.Aliases.Add("-P");
+
+			Option<int> sysVersionOpt = new("--system-version")
+			{
+
+				Description = "The operating system's version.",
+				DefaultValueFactory = _ => -1
+
+			};
+
+			sysVersionOpt.Aliases.Add("-V");
+
+			createMachineCmd.Options.Add(disableAnsiOpt);
+			createMachineCmd.Options.Add(systemNameOpt);
+			createMachineCmd.Options.Add(sysVersionOpt);
+			createMachineCmd.Options.Add(linuxNameOpt);
+			createMachineCmd.Options.Add(linuxFamilyOpt);
+			createMachineCmd.Options.Add(procArchOpt);
+			createMachineCmd.Options.Add(outputFormatMOpt);
+
+			getMachineDataCmd.Options.Add(outputFormatMOpt);
+			getMachineDataCmd.Options.Add(disableAnsiOpt);
+
+			createMachineCmd.SetAction(result =>
 				{
 
-					Console.WriteLine((errorFallback ?? "") == "" ? "[ERROR] Could not parse piped input." : errorFallback!);
-					Environment.Exit(1);
+					string? distroName = result.GetValue(linuxNameOpt);
+					string? sysName = distroName is not null ? "linux" : result.GetValue(systemNameOpt);
+
+					string? distroFamily = sysName?.Equals("linux", StringComparison.OrdinalIgnoreCase) ?? false
+											   ? result.GetValue(linuxFamilyOpt)
+											   : null;
+
+					string? processorArch = result.GetValue(procArchOpt);
+					int sysVersion = result.GetValue(sysVersionOpt);
+
+					return GetMachine(
+						sysName?.Equals("linux", StringComparison.OrdinalIgnoreCase) ?? false
+							? new(distroName, distroFamily, processorArch, sysVersion)
+							: new(sysName, processorArch, sysVersion),
+						result.GetValue(disableAnsiOpt), result.GetValue(outputFormatMOpt)
+					);
 
 				}
+			);
 
-				RSParser parser;
+			getMachineDataCmd.SetAction(result => GetMachine(new(), result.GetValue(disableAnsiOpt), result.GetValue(outputFormatMOpt)));
 
-				if (primaryOnly)
+			machineCmd.SetAction(_ =>
 				{
 
-					parser = new(currentInState);
-					parser.RegisterAction(OperatorType.Secondary, (_, _) => { });
-					parser.RegisterAction(OperatorType.Tertiary, (_, _) => { });
+					Console.WriteLine("Use one of machine command's subcommands.");
+
+					return 1;
 
 				}
-				else
+			);
+
+			machineCmd.Add(createMachineCmd);
+			machineCmd.Add(getMachineDataCmd);
+			rootCommand.Add(machineCmd);
+
+			#endregion
+
+			#region Generate Command
+
+			Command generateCmd = new("generate", "Generate \"compiled\" RSML for C#, F# or Visual Basic");
+
+			var languageOpt = new Option<string>("--language")
+			{
+
+				Description = "The language to generate for.",
+				DefaultValueFactory = _ => "C#"
+
+			}.AcceptOnlyFromAmong("C#", "F#", "VB");
+
+			languageOpt.Aliases.Add("--dotnet-lang");
+			languageOpt.Aliases.Add("-l");
+
+			Option<string> moduleNameOpt = new("--module-name")
+			{
+
+				Description = "The name of the static class (C#) or module (VB/F#) that will contain the generated code.",
+				DefaultValueFactory = _ => "GeneratedRsml"
+
+			};
+
+			moduleNameOpt.Aliases.Add("--class-name");
+			moduleNameOpt.Aliases.Add("-M");
+
+			generateCmd.Options.Add(languageOpt);
+			generateCmd.Options.Add(moduleNameOpt);
+			generateCmd.Options.Add(disableAnsiOpt);
+
+			generateCmd.SetAction(result =>
 				{
 
-					parser = ReadyToGoParser.CreateNew(currentInState);
+					bool disableAnsi = result.GetValue(disableAnsiOpt);
+					string? language = result.GetValue(languageOpt);
 
-				}
+					string compilerOutput = CompileRsml_NoPretty(
+												Console.In.ReadToEnd(), language ?? "InvalidValue", result.GetValue(moduleNameOpt) ?? "GeneratedRsml"
+											) ??
+											"//Failed to generate compiled RSML!";
 
-				RSDocument document = new(parser);
-
-				try
-				{
-
-					if (customRid is not null)
+					if (language is not null && !disableAnsi)
 					{
 
-						Console.WriteLine(
-							(document.EvaluateDocument(customRid, expandAny)) ??
-								((nullFallback is null)
-									? "[WARNING] No match was found."
-									: nullFallback));
+						int colWidth = (Console.BufferWidth - 8) / 2;
+
+						switch (language)
+						{
+
+							case "C#":
+								if (cSharpLogo is null)
+								{
+									using AsciiImage img = new(Path.Join(AppContext.BaseDirectory, "InternalAssets", "csharp-logo.png"));
+
+									cSharpLogo = img.GetRenderable(60, 50);
+
+								}
+
+								var grid1 = new Grid()
+											.AddColumns(new GridColumn().Width(colWidth), new GridColumn().Width(colWidth))
+											.AddRow(
+												new Markup(cSharpLogo).Centered(),
+												new Text(compilerOutput)
+											)
+											.Expand();
+
+								AnsiConsole.Write(grid1);
+
+								return 0;
+
+							case "F#":
+								if (fSharpLogo is null)
+								{
+
+									using AsciiImage img = new(Path.Join(AppContext.BaseDirectory, "InternalAssets", "fsharp-logo.png"));
+
+									fSharpLogo = img.GetRenderable(60, 50);
+
+								}
+
+								var grid2 = new Grid()
+											.AddColumns(new GridColumn().Width(colWidth), new GridColumn().Width(colWidth))
+											.AddRow(
+												new Markup(fSharpLogo).Centered(),
+												new Text(compilerOutput)
+											)
+											.Expand();
+
+								AnsiConsole.Write(grid2);
+
+								return 0;
+
+							case "VB":
+								if (visualBasicLogo is null)
+								{
+
+									using AsciiImage img = new(Path.Join(AppContext.BaseDirectory, "InternalAssets", "vbnet-logo.png"));
+
+									visualBasicLogo = img.GetRenderable(60, 50);
+
+								}
+
+								var grid3 = new Grid()
+											.AddColumns(new GridColumn().Width(colWidth), new GridColumn().Width(colWidth))
+											.AddRow(
+												new Markup(visualBasicLogo).Centered(),
+												new Text(compilerOutput)
+											)
+											.Expand();
+
+								AnsiConsole.Write(grid3);
+
+								return 0;
+
+						}
 
 					}
+
+					Console.WriteLine(compilerOutput);
+
+					return 0;
+
+				}
+			);
+
+			rootCommand.Add(generateCmd);
+
+			#endregion
+
+			#region Tokenize Command
+
+			Command tokenizeCmd = new("tokenize", "Tokenizes a RSML document");
+
+			tokenizeCmd.Options.Add(filepathOpt);
+
+			tokenizeCmd.SetAction(result =>
+				{
+
+					string? filepath = result.GetValue(filepathOpt)?.FullName;
+					string data = filepath is null ? Console.In.ReadToEnd() : File.ReadAllText(filepath);
+
+					Console.WriteLine(Tokenize_NoPretty(data));
+
+					return 0;
+
+				}
+			);
+
+			rootCommand.Add(tokenizeCmd);
+
+			#endregion
+
+			#region Evaluate Command
+
+			Command evaluateCmd = new("evaluate", "Evaluates a RSML document");
+
+			Option<string?> machineOpt = new("--machine")
+			{
+
+				Description = "The machine, in JSON, to evaluate from.",
+				DefaultValueFactory = _ => null
+
+			};
+
+			machineOpt.Aliases.Add("-m");
+
+			evaluateCmd.Options.Add(machineOpt);
+			evaluateCmd.Options.Add(filepathOpt);
+			evaluateCmd.Options.Add(disableAnsiOpt);
+
+			evaluateCmd.SetAction(result =>
+				{
+
+					bool disableAnsi = result.GetValue(disableAnsiOpt);
+					string? filepath = result.GetValue(filepathOpt)?.FullName;
+					string data = filepath is null ? Console.In.ReadToEnd() : File.ReadAllText(filepath);
+
+					LocalMachine machine;
+
+					try
+					{
+
+						machine = LocalMachineOutput.FromJson(result.GetValue(machineOpt));
+
+					}
+					catch (Exception ex)
+					{
+
+						if (disableAnsi)
+							Console.WriteLine($"JSON Error: {ex.Message}");
+						else
+							AnsiConsole.Markup($"[red]JSON Error on Machine load[/] {ex.Message}");
+
+						return 2; // json error
+
+					}
+
+					if (disableAnsi)
+						Evaluate_NoPretty(data, machine);
 					else
+						Evaluate_Pretty(data, machine);
+
+					return 0;
+
+				}
+			);
+
+			rootCommand.Add(evaluateCmd);
+
+			#endregion
+
+			rootCommand.SetAction(result =>
+				{
+
+					bool disableAnsi = result.GetValue(disableAnsiOpt);
+
+					#region --version
+
+					if (result.GetValue(versionOpt)) // --version is greedy
 					{
 
-						Console.WriteLine(
-							(document.EvaluateDocument(expandAny)) ??
-								((nullFallback is null)
-									? "[WARNING] No match was found."
-									: nullFallback));
+						if (!disableAnsi)
+						{
+
+							AnsiConsole.Markup($"[red]Red[/] [cyan]Sea[/] [white]Markup Language[/] [yellow]{LanguageVersion}[/]");
+
+							return 0;
+
+						}
+
+						Console.WriteLine($"Red Sea Markup Language {LanguageVersion}");
+
+						return 0;
 
 					}
 
-				}
-				catch (RSMLRuntimeException ex)
-				{
+					#endregion
 
-					Console.WriteLine((errorFallback ?? "") == "" ? $"[ERROR] User-triggered error occured -> {ex.Message}" : errorFallback!);
-					Environment.Exit(3);
+					#region --specification-support
 
-				}
+					if (result.GetValue(specSupportOpt))
+					{
 
-				Environment.Exit(0);
+						if (!disableAnsi)
+							return SpecificationSupport_NoPretty();
 
-			}, printOnlyPrimaryOption, fallbackForNullOption, fallbackForErrorOption, customRidOption, expandAnyOption);
+						Console.Write($"The {specSupportOpt.Name} option cannot be used alongside {disableAnsiOpt.Name}.");
 
-			evaluateCommand.AddAlias("eval");
-			evaluateCommand.AddAlias("parse");
+						return 1;
 
-			//// REPOSITORY COMMAND ////
-			Command repoCommand = new("repository", "Outputs the link to RSML's GitHub repository");
+					}
 
-			repoCommand.SetHandler(void () =>
-			{
+					#endregion
 
-				Console.WriteLine("Visit the repository at: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage");
-				Environment.Exit(0);
+					#region Default Output
 
-			});
+					if (disableAnsi)
+						Console.WriteLine("Red Sea Markup Language CLI");
+					else
+						AnsiConsole.Markup("[red]Red[/] [cyan]Sea[/] [white]Markup Language[/] CLI");
 
-			repoCommand.AddAlias("repo");
-			repoCommand.AddAlias("github");
-			repoCommand.AddAlias("about");
-			repoCommand.AddAlias("online");
+					#endregion
 
-			//// GET-RID COMMAND ////
-			Command ridCommand = new("get-rid", "Gets the Runtime Identifier for this system as specified by MSBuild");
-
-			ridCommand.SetHandler(void () =>
-			{
-
-				Console.WriteLine($"The MSBuild RID for this system is: {RuntimeInformation.RuntimeIdentifier}.\nRemember RSML is compatible with Regex!");
-				Environment.Exit(0);
-
-			});
-
-			ridCommand.AddAlias("get-runtime-id");
-			ridCommand.AddAlias("get-runtime-identifier");
-			ridCommand.AddAlias("rid-get");
-
-			//// MFROAD-LIKE COMMAND ////
-			Command mfroadCommand = new("emulate-mfroad", "Emulates a MFRoad-like syntax in RSML; not actually MFRoad - it's still RSML");
-
-			mfroadCommand.SetHandler(void () =>
-			{
-
-				string? currentInState = Console.In.ReadToEnd();
-
-				if (currentInState is null)
-				{
-
-					Console.WriteLine("[ERROR] Could not parse piped input.");
-					Environment.Exit(1);
+					return 0;
 
 				}
+			);
 
-				RSParser parser = ReadyToGoParser.CreateMFRoadLike(currentInState);
-				RSDocument document = new(parser);
+			var result = rootCommand.Parse(args);
+			int retCode = await result.InvokeAsync();
 
-				try
-				{
-
-					Console.WriteLine(document.EvaluateDocument() ?? "[WARNING] No match was found.");
-
-				}
-				catch (RSMLRuntimeException ex)
-				{
-
-					Console.WriteLine($"[ERROR] User-triggered error occured -> {ex.Message}");
-					Environment.Exit(3);
-
-				}
-				Environment.Exit(0);
-
-			});
-
-			mfroadCommand.AddAlias("mfroad-like");
-			mfroadCommand.AddAlias("roadlike");
-
-			//// ROOT COMMAND ////
-			rootCommand.SetHandler((_) => { }, noPrettyOption);
-
-			rootCommand.AddCommand(evaluateCommand);
-			rootCommand.AddCommand(mfroadCommand);
-			rootCommand.AddCommand(ridCommand);
-			rootCommand.AddCommand(repoCommand);
-			rootCommand.AddCommand(versionCommand);
-
-#pragma warning disable IDE0058 // expression value is never used
-			await rootCommand.InvokeAsync(args);
-#pragma warning restore
-
-		}
-
-		/// <summary>
-		/// Pretty prints the ASCII art and the copyright message.
-		/// </summary>
-		static void PrettyPrintAsciiArtAndCopyright()
-		{
-
-			Console.Write($"\u001b[38;5;{randomizer!.Next(18, 233)}m");
-			Console.WriteLine(ASCII_ART);
-			Console.WriteLine("Copyright(c) 2025 OceanApocalypseStudios");
-			Console.Write("\u001b[0m");
+			return retCode;
 
 		}
 
