@@ -11,19 +11,12 @@ namespace OceanApocalypseStudios.RSML.Native
 	public static unsafe class MetadataExports
 	{
 
+		private const string ApiVersion = "2.0.0";
 		private const byte ApiAuthorNameLen = 16;
 
-		private static readonly byte[] authorName =
-		[
-			0x4F, 0x63, 0x65, 0x61, 0x6E, 0x41,
-			0x70, 0x6F, 0x63, 0x61, 0x6C, 0x79,
-			0x70, 0x73, 0x65, 0x53, 0x74, 0x75,
-			0x64, 0x69, 0x6F, 0x73
-		]; // OceanApocalypseStudios
-
-		private static readonly byte[] docsLink = Encoding.UTF8.GetBytes($"https://oceanapocalypsestudios.org/rsml-docs/{"change me"}/"); // todo
-
-		private static readonly byte[] utf8ApiVersion = Encoding.UTF8.GetBytes("change me"); // todo
+		private static readonly byte[] authorName = "OceanApocalypseStudios"u8.ToArray();
+		private static readonly byte[] docsLink = Encoding.UTF8.GetBytes($"https://oceanapocalypsestudios.org/rsml-docs/{ApiVersion}/");
+		private static readonly byte[] utf8ApiVersion = Encoding.UTF8.GetBytes(ApiVersion);
 
 		/// <summary>
 		/// Writes the name of the creator (and lead maintainer) of RSML's API to a supplied buffer.
