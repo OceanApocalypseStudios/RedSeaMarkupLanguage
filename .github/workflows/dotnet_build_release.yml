@@ -11,10 +11,12 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [windows-latest, ubuntu-latest, macos-latest]
-        arch: [x64, x86]
+        os: [ windows-latest, ubuntu-latest, macos-latest ]
+        arch: [ x64, x86 ]
         exclude:
           - os: macos-latest
+            arch: x86
+          - os: windows-latest
             arch: x86
 
     steps:
@@ -72,7 +74,7 @@ jobs:
           zip -r ../RSML.CLI-${{ matrix.os }}-${{ matrix.arch }}.zip .
           tar -czf ../RSML.CLI-${{ matrix.os }}-${{ matrix.arch }}.tar.gz .
           cd ..
-       
+
       - name: Upload CLI artifacts (Windows)
         if: matrix.os == 'windows-latest' && matrix.arch == 'x64'
         uses: actions/upload-artifact@v4
@@ -81,7 +83,7 @@ jobs:
           path: |
             RSML.CLI-windows-latest-${{ matrix.arch }}.zip
             RSML.CLI-windows-latest-${{ matrix.arch }}.tar.gz
-      
+
       - name: Upload CLI artifacts (Linux/macOS)
         if: matrix.os != 'windows-latest'
         uses: actions/upload-artifact@v4
@@ -90,12 +92,12 @@ jobs:
           path: |
             RSML.CLI-${{ matrix.os }}-${{ matrix.arch }}.zip
             RSML.CLI-${{ matrix.os }}-${{ matrix.arch }}.tar.gz
-          
+
       - uses: actions/checkout@v4
-      
+
   release:
     name: Create GitHub Release
-    needs: [build]
+    needs: [ build ]
     runs-on: ubuntu-latest
 
     steps:
@@ -119,5 +121,5 @@ jobs:
             ./release-assets/**/**/*.tar.gz
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
+
       - uses: actions/checkout@v4
