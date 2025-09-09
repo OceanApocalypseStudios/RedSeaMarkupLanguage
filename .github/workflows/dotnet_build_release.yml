@@ -12,12 +12,10 @@ jobs:
     strategy:
       matrix:
         os: [windows-latest, ubuntu-latest, macos-latest]
-        arch: [x64, x86, arm64]
+        arch: [x64, x86]
         exclude:
           - os: macos-latest
             arch: x86
-          - os: windows-latest
-            arch: arm64
 
     steps:
       # Checkout the repo
@@ -68,11 +66,7 @@ jobs:
         if: matrix.os != 'windows-latest'
         shell: bash
         run: |
-          if [[ "${{ matrix.arch }}" == "arm64" ]]; then
-            RID="${{ matrix.os == 'ubuntu-latest' && 'linux-arm64' || 'osx-arm64' }}"
-          else
-            RID="${{ matrix.os == 'ubuntu-latest' && 'linux-x64' || 'osx-x64' }}"
-          fi
+          RID="${{ matrix.os == 'ubuntu-latest' && 'linux-x64' || 'osx-x64' }}"
           dotnet publish ./RSML.CLI/RSML.CLI.csproj -c Release -r $RID --self-contained true -o publish
           cd publish
           zip -r ../RSML.CLI-${{ matrix.os }}-${{ matrix.arch }}.zip .
