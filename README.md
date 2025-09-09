@@ -11,21 +11,52 @@
 
 > The modern fork of [MF's Crossroad](https://github.com/MF366-Coding/MFRoad) we're sure you'll love.
 
-<hr />
+---
 
-## Coming Soon*er*: RSML v2.0.0
-> [!NOTE]
-> RSML v2.0.0 is coming first as a `prerelease`. To be exact, this will be `prerelease8` with no native interop support
-> yet.
+## RSML v2.0.0 is here. What's next?
+- [ ] Finishing a stable version of `RSML.Native`
+- [ ] Creating a Python package for RSML
+- [ ] Creating documentation
 
-**Red Sea Markup Language v2.0.0** is currently **in the making** and will be a huge release, bringing native binding
-support into the table _(this also means AOT "friendliness")_, which will let you use RSML in Python, Go, Rust _(if
-you're about that)_, wherever you want, really _(that supports native interop)_.
+---
 
-RSML v2.0.0 will also improve the current API **a lot**, as v1.0.5 still has its fair share of issues, not to
-mention [RSML for Python](https://github.com/OceanApocalypseStudios/RSML.Python)'s ones.
+## CLI v2.0.0: An Improved Experience
+The CLI now has a **lot** more power. You can evaluate and tokenize RSML directly from the commandline and adjust things like what machine it's evaluating for, via JSON.
 
-<hr />
+---
+
+## Shells and JSON (CLI Issue)
+We encountered issues with JSON parsing via commandline arguments in certain shells, where even escaping quotes failed.
+
+We present the solutions to said issues here.
+
+Speaking of JSON, the schema for **local-machine parsing** can be found [**here**](https://oceanapocalypsestudios.org/schemas/rsml_cli_machine_schema.json).
+
+### Bash
+Bash did not present any issues.
+
+```bash
+./RSML.CLI.exe evaluate -m "{ \"processor\": { \"architecture\": \"arm64\" } }"
+```
+
+### PowerShell
+PowerShell presented a weird issue, where the quotes enveloping the property names seemed to vanish. Even escaping or introducing a here-string failed.
+
+The solution was a weird one, since usually escaping via `""` is done on CMD only.
+
+```powershell
+.\RSML.CLI.exe evaluate -m '{ ""test"": ""value"" }'
+```
+
+### CMD
+The CMD did not present any issues.
+
+```batch
+.\RSML.CLI.exe evaluate -m "{ ""test"": ""value"" }"
+```
+
+---
+
 
 ## See Also
 <ul>

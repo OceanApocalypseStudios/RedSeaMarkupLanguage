@@ -175,7 +175,7 @@ namespace OceanApocalypseStudios.RSML
 		internal static bool IsAsciiEqualsIgnoreCase(this ReadOnlyMemory<char> chars, ImmutableArray<ReadOnlyMemory<char>> arr)
 		{
 
-			// i want performance, not linq ass
+			// I want performance, not linq ass
 			// ReSharper disable once ForCanBeConvertedToForeach
 			// ReSharper disable once LoopCanBeConvertedToQuery
 			for (int i = 0; i < arr.Length; i++)

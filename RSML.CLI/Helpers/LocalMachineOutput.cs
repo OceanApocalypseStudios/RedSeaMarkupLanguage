@@ -140,20 +140,47 @@ namespace OceanApocalypseStudios.RSML.CLI.Helpers
 
 			using var document = JsonDocument.Parse(json);
 
-			var system = document.RootElement.GetProperty("system");
-			string? sysName = system.GetProperty("name").GetString();
-			int sysVersion = system.GetProperty("version").GetInt32();
+			string? systemName = null!;
+			int systemVersion = -1;
 
-			var linuxDistro = document.RootElement.GetProperty("linuxDistro");
-			string? distroName = linuxDistro.GetProperty("name").GetString();
-			string? distroFamily = linuxDistro.GetProperty("family").GetString();
+			string? distroName = null!;
+			string? distroFamily = null!;
 
-			string? procArch = document.RootElement.GetProperty("processor").GetProperty("architecture").GetString();
+			string? processorArchitecture = null!;
 
-			if (sysName == "linux")
-				return new(distroName, distroFamily, procArch, sysVersion);
+			if (document.RootElement.TryGetProperty("system", out var system))
+			{
 
-			return new(sysName, procArch, sysVersion);
+				if (system.TryGetProperty("name", out var systemNameProperty))
+					systemName = systemNameProperty.GetString();
+
+				if (system.TryGetProperty("version", out var systemVersionProperty) && systemVersionProperty.TryGetInt32(out systemVersion)) { }
+
+			}
+
+			if (document.RootElement.TryGetProperty("linuxDistro", out var linuxDistro))
+			{
+
+				if (linuxDistro.TryGetProperty("name", out var distroNameProperty))
+					distroName = distroNameProperty.GetString();
+
+				if (linuxDistro.TryGetProperty("family", out var distroFamilyProperty))
+					distroFamily = distroFamilyProperty.GetString();
+
+			}
+
+			if (document.RootElement.TryGetProperty("processor", out var processor))
+			{
+
+				if (processor.TryGetProperty("architecture", out var processorArchitectureProperty))
+					processorArchitecture = processorArchitectureProperty.GetString();
+
+			}
+
+			if (systemName is not null && systemName.Equals("linux", StringComparison.OrdinalIgnoreCase))
+				return new(distroName, distroFamily, processorArchitecture, systemVersion);
+
+			return new(systemName, processorArchitecture, systemVersion);
 
 		}
 

@@ -12,10 +12,12 @@ jobs:
     strategy:
       matrix:
         os: [windows-latest, ubuntu-latest, macos-latest]
-        arch: [x64, x86]
+        arch: [x64, x86, arm64]
         exclude:
           - os: macos-latest
             arch: x86
+          - os: windows-latest
+            arch: arm64
 
     steps:
       # Checkout the repo
@@ -34,9 +36,8 @@ jobs:
         if: matrix.os != 'windows-latest'
         run: dotnet build RedSeaMarkupLanguage.sln -c Release -p:Platform=${{ matrix.arch }}
 
-      # to uncomment if I add unit testing
-      #- name: Run tests
-      #  run: dotnet test ./RSML.Tests/RSML.Tests.csproj --no-build
+      - name: Run tests
+        run: dotnet test ./RSML.Tests/RSML.Tests.csproj --no-build
 
       - name: Pack & push to NuGet
         if: github.event_name == 'push' && matrix.os == 'windows-latest' && matrix.arch == 'x64'
@@ -55,26 +56,28 @@ jobs:
 
       - name: Publish CLI archives (Windows)
         if: matrix.os == 'windows-latest' && matrix.arch == 'x64'
+        shell: pwsh
         run: |
           dotnet publish ./RSML.CLI/RSML.CLI.csproj -c Release -r win-${{ matrix.arch }} --self-contained true -o publish
-          
           cd publish
           Compress-Archive -Path * -DestinationPath ../RSML.CLI-windows-latest-${{ matrix.arch }}.zip
           tar -czf ../RSML.CLI-windows-latest-${{ matrix.arch }}.tar.gz *
           cd ..
-        shell: pwsh
 
       - name: Publish CLI archives (Linux and MacOS)
         if: matrix.os != 'windows-latest'
+        shell: bash
         run: |
-          dotnet publish ./RSML.CLI/RSML.CLI.csproj -c Release -r ${{ matrix.os == 'ubuntu-latest' && 'linux-x64' || 'osx-x64' }} --self-contained true -o publish
-
+          if [[ "${{ matrix.arch }}" == "arm64" ]]; then
+            RID="${{ matrix.os == 'ubuntu-latest' && 'linux-arm64' || 'osx-arm64' }}"
+          else
+            RID="${{ matrix.os == 'ubuntu-latest' && 'linux-x64' || 'osx-x64' }}"
+          fi
+          dotnet publish ./RSML.CLI/RSML.CLI.csproj -c Release -r $RID --self-contained true -o publish
           cd publish
           zip -r ../RSML.CLI-${{ matrix.os }}-${{ matrix.arch }}.zip .
           tar -czf ../RSML.CLI-${{ matrix.os }}-${{ matrix.arch }}.tar.gz .
           cd ..
-          
-      # maybe build docs here???
        
       - name: Upload CLI artifacts (Windows)
         if: matrix.os == 'windows-latest' && matrix.arch == 'x64'
@@ -120,7 +123,6 @@ jobs:
           files: |
             ./release-assets/**/**/*.zip
             ./release-assets/**/**/*.tar.gz
-            ./release-assets/**/**/*.nupkg
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
