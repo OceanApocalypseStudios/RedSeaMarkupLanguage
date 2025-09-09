@@ -35,7 +35,7 @@ jobs:
         run: dotnet build RedSeaMarkupLanguage.sln -c Release -p:Platform=${{ matrix.arch }}
 
       - name: Run tests
-        run: dotnet test ./RSML.Tests/RSML.Tests.csproj --no-build
+        run: dotnet test ./RSML.Tests/RSML.Tests.csproj -c Release --no-build
 
       - name: Pack & push to NuGet
         if: github.event_name == 'push' && matrix.os == 'windows-latest' && matrix.arch == 'x64'
