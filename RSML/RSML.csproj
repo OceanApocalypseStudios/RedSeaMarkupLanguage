@@ -26,14 +26,10 @@
 		<PackageIcon>Icon.png</PackageIcon>
 		<RepositoryUrl>https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<PackageTags>markup</PackageTags>
+		<PackageTags>markup;language;logic;logic-path;system</PackageTags>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-		<PackageReleaseNotes>RSML v2.0.0 is here!
-
-			🚀Increased performance and memory usage.
-			✅Better middleware API.
-			🔡Namespace structure taking into consideration our studio's name.
-		</PackageReleaseNotes>
+		<PackageReleaseNotes>RSML v2.0.0 is here!</PackageReleaseNotes>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 
 	<!-- Windows only -->
@@ -55,16 +51,19 @@
 	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
 		<DebugType>none</DebugType>
 	</PropertyGroup>
+	<ItemGroup>
+	  <None Include="..\Assets\Icon.png" />
+	  <None Include="..\README.md">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	</ItemGroup>
 
 	<!-- Items -->
 	<ItemGroup>
-		<None Include="..\Assets\Icon.png">
+		<None Update="..\Assets\Icon.png">
 			<Pack>True</Pack>
-			<Link>Icon.png</Link>
-		</None>
-		<None Update="Icon.png">
-			<Pack>True</Pack>
-			<PackagePath></PackagePath>
+			<PackagePath>\</PackagePath>
 		</None>
 	</ItemGroup>
 
