@@ -20,7 +20,7 @@ def generate_complex_content(lines: int) -> str:
             content += f'-> windows {i} x64 "value{i}"\n'
 
         elif v == 4:
-            content += f'# Comment\n'
+            content += '# Comment\n'
 
         else:
             content += '    # Comment\n'

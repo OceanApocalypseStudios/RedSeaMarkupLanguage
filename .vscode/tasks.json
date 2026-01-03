@@ -1,0 +1,20 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build Docs",
+            "type": "shell",
+            "command": "mkdocs build --strict"
+        },
+        {
+            "label": "Clean Docs",
+            "type": "shell",
+            "command": "mkdocs build --strict --clean"
+        },
+        {
+            "label": "Serve Docs (Clean)",
+            "type": "shell",
+            "command": "mkdocs serve -s -c -o"
+        }
+    ]
+}

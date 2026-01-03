@@ -1,0 +1,13 @@
+/* add whatever is necessary later on here */
+
+/* Default (mobile) */
+.md-header__button.md-logo img {
+    height: auto;
+}
+
+/* Desktop only: logo grow big */
+@media screen and (min-width: 768px) {
+    .md-header__button.md-logo img {
+        height: 36px !important;
+    }
+}

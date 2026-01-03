@@ -368,3 +368,30 @@ FodyWeavers.xsd
 _ReSharper*/
 *.[Rr]e[Ss]harper
 *.DotSettings.user
+
+
+
+### MY ADDITIONS ###
+# Backups
+[Bb]ackup/
+*__NOTYET
+
+# Configs
+.vscode/*
+!.vscode/tasks.json
+!.vscode/enable.settings.jsonc
+.idea/
+.vs/
+
+# Site (on main)
+site/
+
+# Material Cache
+.cache/
+
+# Python Environment
+.venv/
+
+# Reminders
+ADMONITION.md
+

@@ -51,8 +51,8 @@
 		<DebugType>none</DebugType>
 	</PropertyGroup>
 	<ItemGroup>
-	  <None Include="..\Assets\Icon.png" />
-	  <None Include="..\README.md">
+	  <None Include="..\..\Assets\Icon.png" />
+	  <None Include="..\..\README.md">
 	    <Pack>True</Pack>
 	    <PackagePath>\</PackagePath>
 	  </None>
@@ -60,7 +60,7 @@
 
 	<!-- Items -->
 	<ItemGroup>
-		<None Update="..\Assets\Icon.png">
+		<None Update="..\..\Assets\Icon.png">
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
 		</None>
