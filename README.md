@@ -1,6 +1,6 @@
 ﻿# Red Sea Markup Language
 <!--suppress HtmlDeprecatedAttribute -->
-<img src="Assets/FullSizeLogo.png" alt="RSML Logo" align="right" width="100">
+<img src="Assets/FullSizeLogo.png" alt="RSML Logo" align="right" width="115">
 
 [![NuGet Version](https://img.shields.io/nuget/v/OceanApocalypseStudios.RSML?style=for-the-badge&logo=nuget&logoColor=white&logoSize=auto&label=Available%20on%20NuGet&labelColor=%231265fb&color=%2308317b)](https://www.nuget.org/packages/OceanApocalypseStudios.RSML)
 [![GitHub Release](https://img.shields.io/github/v/release/OceanApocalypseStudios/RedSeaMarkupLanguage?sort=semver&display_name=tag&style=for-the-badge&logo=github&logoColor=white&logoSize=auto&label=Latest&labelColor=%23161616&color=%23000308)](https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/releases/latest)
