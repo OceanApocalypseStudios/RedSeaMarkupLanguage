@@ -64,7 +64,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 		public static SyntaxToken Empty => new(TokenKind.UndefinedToken, ^1, 0);
 
 		/// <inheritdoc />
-		public override string ToString() => $"SyntaxToken({Kind.ToString()}, {BufferRange.Start}, {BufferRange.End})";
+		public override string ToString() => $"SyntaxToken({Kind}, {BufferRange.Start}, {BufferRange.End})";
 
 		/// <summary>
 		/// Checks if this instance of a token is equals to an object. Requires boxing.

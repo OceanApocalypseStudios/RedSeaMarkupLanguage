@@ -25,7 +25,7 @@ namespace OceanApocalypseStudios.RSML.Benchmarks
 		private const string SmallContent = "-> windows \"value\"\n@Void arg\n# Comment";
 
 		private readonly LocalMachine ubuntu = new("ubuntu", null, null);
-
+		
 		private string? complexContent1;
 		private string? complexContent2;
 
