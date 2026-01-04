@@ -4,7 +4,9 @@
 
 [![NuGet Version](https://img.shields.io/nuget/v/OceanApocalypseStudios.RSML?style=for-the-badge&logo=nuget&logoColor=white&logoSize=auto&label=Available%20on%20NuGet&labelColor=%231265fb&color=%2308317b)](https://www.nuget.org/packages/OceanApocalypseStudios.RSML)
 [![GitHub Release](https://img.shields.io/github/v/release/OceanApocalypseStudios/RedSeaMarkupLanguage?sort=semver&display_name=tag&style=for-the-badge&logo=github&logoColor=white&logoSize=auto&label=Latest&labelColor=%23161616&color=%23000308)](https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/releases/latest)
-[![GitHub License](https://img.shields.io/github/license/OceanApocalypseStudios/RedSeaMarkupLanguage?style=for-the-badge&logo=opensourceinitiative&logoColor=white&logoSize=auto&labelColor=%23496300&color=%232b3c00)](https://raw.githubusercontent.com/OceanApocalypseStudios/RedSeaMarkupLanguage/main/LICENSE)
+[![GitHub Dual-License](https://img.shields.io/badge/ignored-dual--license-ignored?style=for-the-badge&logo=opensourceinitiative&logoColor=white&logoSize=auto&label=repository%20licensing&labelColor=%23496300&color=%232b3c00)](https://raw.githubusercontent.com/OceanApocalypseStudios/RedSeaMarkupLanguage/main/COPYING.txt)
+[![GitHub Code License](https://img.shields.io/badge/ignored-mit-ignored?style=for-the-badge&logo=opensourceinitiative&logoColor=white&logoSize=auto&label=code%20license&labelColor=%23496300&color=%232b3c00)](https://raw.githubusercontent.com/OceanApocalypseStudios/RedSeaMarkupLanguage/main/LICENSE-MIT.txt)
+[![GitHub Documentation License](https://img.shields.io/badge/ignored-gfdl--1.3-ignored?style=for-the-badge&logo=opensourceinitiative&logoColor=white&logoSize=auto&label=documentation%20license&labelColor=%23496300&color=%232b3c00)](https://raw.githubusercontent.com/OceanApocalypseStudios/RedSeaMarkupLanguage/main/LICENSE-GFDL.txt)
 ![GitHub top language](https://img.shields.io/github/languages/top/OceanApocalypseStudios/RedSeaMarkupLanguage?style=for-the-badge&logo=dotnet&logoColor=white&logoSize=auto&label=%20&labelColor=%234929ca&color=%234929ca)
 ![GitHub Repo stars](https://img.shields.io/github/stars/OceanApocalypseStudios/RedSeaMarkupLanguage?style=for-the-badge&logo=star&logoColor=black&logoSize=auto&labelColor=%2379610b&color=%23413405)
 ![NuGet Downloads - Modern](https://img.shields.io/nuget/dt/OceanApocalypseStudios.RSML?style=for-the-badge&logo=nuget&logoColor=white&logoSize=auto&label=downloads%20(modern)&labelColor=%234929ca&color=%2327156f)
@@ -19,6 +21,15 @@
 - [ ] Finishing a stable version of `RSML.Native`
 - [ ] Creating a Python package for RSML
 - [ ] Creating documentation
+
+---
+
+## RSML on NuGet Trends
+> [!NOTE]
+> In the image below, **RSML** refers to Legacy RSML (RSML v1.x.x), while **OceanApocalypseStudios.RSML** refers to Modern RSML (RSML v2.0.0).
+> In any other context, RSML and OceanApocalypseStudios.RSML have the exact same meaning.
+
+[![RSML on NuGet Trends](extras/NuGetTrends_January26.png)](https://nugettrends.com/packages?ids=RSML&ids=OceanApocalypseStudios.RSML&months=168)
 
 ---
 
