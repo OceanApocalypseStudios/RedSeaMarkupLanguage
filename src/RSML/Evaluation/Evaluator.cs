@@ -63,44 +63,44 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 		/// </summary>
 		private readonly List<Middleware> evaluatorMiddlewares = [ ];
 
-		/// <summary>
-		/// Creates a new instance of a RSML evaluator.
-		/// </summary>
-		/// <param name="content">The document</param>
-		public Evaluator(ReadOnlySpan<char> content) { Content = new(content); }
+        /// <summary>
+        /// Creates a new instance of a RSML evaluator.
+        /// </summary>
+        /// <param name="content">The document</param>
+        public Evaluator(ReadOnlySpan<char> content) => Content = new(content);
 
-		/// <summary>
-		/// Creates a new instance of a RSML evaluator.
-		/// </summary>
-		/// <param name="content">The document</param>
-		public Evaluator(string content) { Content = new(content); }
+        /// <summary>
+        /// Creates a new instance of a RSML evaluator.
+        /// </summary>
+        /// <param name="content">The document</param>
+        public Evaluator(string content) => Content = new(content);
 
-		/// <summary>
-		/// Creates a new instance of a RSML evaluator.
-		/// </summary>
-		/// <param name="content">The document</param>
-		public Evaluator(char[] content) { Content = new(content); }
+        /// <summary>
+        /// Creates a new instance of a RSML evaluator.
+        /// </summary>
+        /// <param name="content">The document</param>
+        public Evaluator(char[] content) => Content = new(content);
 
-		/// <summary>
-		/// Creates a new instance of a RSML evaluator.
-		/// </summary>
-		/// <param name="content">The document</param>
-		public Evaluator(ReadOnlyMemory<char> content) { Content = new(content); }
+        /// <summary>
+        /// Creates a new instance of a RSML evaluator.
+        /// </summary>
+        /// <param name="content">The document</param>
+        public Evaluator(ReadOnlyMemory<char> content) => Content = new(content);
 
-		/// <summary>
-		/// Creates a new instance of a RSML evaluator.
-		/// </summary>
-		/// <param name="content">The document</param>
-		public Evaluator(ReadOnlySpan<byte> content) { Content = new(content); }
+        /// <summary>
+        /// Creates a new instance of a RSML evaluator.
+        /// </summary>
+        /// <param name="content">The document</param>
+        public Evaluator(ReadOnlySpan<byte> content) => Content = new(content);
 
-		/// <summary>
-		/// Creates a new instance of a RSML evaluator.
-		/// </summary>
-		/// <param name="content">The document</param>
-		public Evaluator(byte[] content) { Content = new(content); }
+        /// <summary>
+        /// Creates a new instance of a RSML evaluator.
+        /// </summary>
+        /// <param name="content">The document</param>
+        public Evaluator(byte[] content) => Content = new(content);
 
-		/// <inheritdoc />
-		public DualTextBuffer Content { get; }
+        /// <inheritdoc />
+        public DualTextBuffer Content { get; }
 
 		/// <summary>
 		/// The amount of loaded middlewares.

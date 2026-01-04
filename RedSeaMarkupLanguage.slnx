@@ -1,0 +1,19 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path=".gitignore" />
+    <File Path="Assets/FullSizeLogo.png" />
+    <File Path="LICENSE.txt" />
+    <File Path="README.md" />
+  </Folder>
+  <Project Path="src/RSML.Benchmarks/RSML.Benchmarks.csproj" />
+  <Project Path="src/RSML.CLI/RSML.CLI.csproj" />
+  <Project Path="src/RSML.Native/RSML.Native.csproj" />
+  <Project Path="src/RSML/RSML.csproj" />
+  <Project Path="tests/RSML.Tests.csproj" />
+</Solution>

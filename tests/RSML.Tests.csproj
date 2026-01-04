@@ -21,7 +21,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\RSML\RSML.csproj" />
+		<ProjectReference Include="..\src\RSML\RSML.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
