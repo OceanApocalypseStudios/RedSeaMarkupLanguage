@@ -137,7 +137,7 @@ class Badges:
     @staticmethod
     def get_badge_for_utility(text: str, page: Page, files: Files):
         icon = "material-package-variant"
-        href = _resolve_path("conventions.md#-utility", page, files)
+        href = _resolve_path("conventions.md#-external-utility", page, files)
         return Badges.create_badge(
             icon = f"[:{icon}:]({href} 'Third-party utility')",
             text = text
@@ -180,7 +180,7 @@ class Badges:
     @staticmethod
     def get_badge_for_experimental_feature(page: Page, files: Files):
         icon = "material-flask-outline"
-        href = _resolve_path("conventions.md#-experimental", page, files)
+        href = _resolve_path("conventions.md#-experimental-feature", page, files)
         return Badges.create_badge(
             icon = f"[:{icon}:]({href} 'Experimental')"
         )
