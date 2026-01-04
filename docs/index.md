@@ -31,7 +31,7 @@ RSML *(short for Red Sea Markup Language)* can currently be used in C# and Pytho
 
 
 
--   :material-new-box:{ .lg .middle } **RSML v2.0.0+**
+-   :material-new-box:{ .lg .middle } **RSML v2.0.0+** (Modern)
     
     ---
     :material-language-csharp: Made in C#
@@ -55,7 +55,7 @@ RSML *(short for Red Sea Markup Language)* can currently be used in C# and Pytho
     :material-check-all: Extremely Performant
 
 
--   :material-numeric-1-circle:{ .lg .middle } **RSML v1.x.x**
+-   :material-numeric-1-circle:{ .lg .middle } **RSML v1.x.x** (Legacy)
 
     ---
     :material-language-csharp: Made in C#
@@ -78,7 +78,7 @@ RSML *(short for Red Sea Markup Language)* can currently be used in C# and Pytho
 
     :octicons-x-12: Slower and allocates a lot more memory
 
--   :fontawesome-solid-road:{ .lg .middle } **MF's CrossRoad Solution**
+-   :fontawesome-solid-road:{ .lg .middle } **MF's CrossRoad Solution** (Deprecated)
 
     ---
 
