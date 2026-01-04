@@ -15,6 +15,11 @@
             "label": "Serve Docs (Clean)",
             "type": "shell",
             "command": "mkdocs serve -s -c -o"
+        },
+        {
+            "label": "Serve Docs (Dirty)",
+            "type": "shell",
+            "command": "mkdocs serve -s --dirty -o"
         }
     ]
 }

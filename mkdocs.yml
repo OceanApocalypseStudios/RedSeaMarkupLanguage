@@ -86,7 +86,6 @@ theme:
     - navigation.indexes
     # - navigation.instant
     # - navigation.instant.prefetch
-    - navigation.instant.preview
     # - navigation.instant.progress
     # - navigation.prune
     - navigation.sections
@@ -222,7 +221,6 @@ markdown_extensions:
               - cli/*
               - language/*
               - contributing.md
-              - index.md
 
 
 # Navigation
@@ -230,6 +228,9 @@ markdown_extensions:
   # here, as otherwise, it won't be built!!
 nav:
   - Home: index.md
+  - Why use RSML?:
+    - Why RSML?: why/index.md
+    - Alternatives to RSML: why/alternatives.md
   - Language:
     - RSML as a Language: language/index.md
     - Standards:
