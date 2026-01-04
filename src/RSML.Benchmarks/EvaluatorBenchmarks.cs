@@ -1,50 +1,37 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
-using System.IO;
+﻿using System.Diagnostics.CodeAnalysis;
 
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Configs;
-using BenchmarkDotNet.Jobs;
 
 using OceanApocalypseStudios.RSML.Evaluation;
-
-using LocalMachine = OceanApocalypseStudios.RSML.Machine.LocalMachine;
+using OceanApocalypseStudios.RSML.Machine;
 
 
 namespace OceanApocalypseStudios.RSML.Benchmarks
 {
 
 	[MemoryDiagnoser]
-	[SimpleJob(RuntimeMoniker.Net80, warmupCount: 2, iterationCount: 3)]
 	[HideColumns("Job", "StdDev")]
 	[GroupBenchmarksBy(BenchmarkLogicalGroupRule.ByCategory)]
 	[SuppressMessage("Performance", "CA1822:Mark members as static")]
 	public class EvaluatorBenchmarks
 	{
 
-		private const string SmallContent = "-> windows \"value\"\n@Void arg\n# Comment";
-
 		private readonly LocalMachine ubuntu = new("ubuntu", null, null);
-		
-		private string? complexContent1;
-		private string? complexContent2;
 
 		private Evaluator? complexEvaluator1;
 		private Evaluator? complexEvaluator2;
 		private Evaluator? complexEvaluator3;
-		private string? largeContent;
-		private Evaluator? largeEvaluator;
-		private string? mediumContent;
+
+		private Evaluator? smallEvaluator;
 		private Evaluator? mediumEvaluator;
+		private Evaluator? largeEvaluator;
 
 		private Evaluator? primitiveEvaluatorAction;
 		private Evaluator? primitiveEvaluatorComment;
 		private Evaluator? primitiveEvaluatorCommentWs;
-
 		private Evaluator? primitiveEvaluatorLogic;
 		private Evaluator? primitiveEvaluatorNewlines;
-
-		private Evaluator? smallEvaluator;
 
 		[Benchmark]
 		[BenchmarkCategory("Evaluator")]
@@ -116,30 +103,19 @@ namespace OceanApocalypseStudios.RSML.Benchmarks
 		public void Setup()
 		{
 
-			string datasetPath = Path.Join(
-				Environment.CurrentDirectory, "..", "..", "..", "..",
-				"Dataset"
-			);
-
+			primitiveEvaluatorAction = CreateConfiguredParser("@Void\n@Void\n@EndAll");
 			primitiveEvaluatorComment = CreateConfiguredParser("# comment");
 			primitiveEvaluatorCommentWs = CreateConfiguredParser("                       # comment");
-			primitiveEvaluatorNewlines = CreateConfiguredParser("\n\n\n\n\n\n\n\n");
 			primitiveEvaluatorLogic = CreateConfiguredParser("-> windows 10 x64 \"Some random value\"");
-			primitiveEvaluatorAction = CreateConfiguredParser("@Void\n@Void\n@EndAll");
+			primitiveEvaluatorNewlines = CreateConfiguredParser("\n\n\n\n\n\n\n\n");
 
-			mediumContent = File.ReadAllText(Path.Join(datasetPath, "medium_content.rsea"));
-			largeContent = File.ReadAllText(Path.Join(datasetPath, "large_content.rsea"));
+			smallEvaluator = CreateConfiguredParser("-> windows \"value\"\n@Void arg\n# Comment");
+			mediumEvaluator = CreateConfiguredParser(Dataset.MediumContent.Data);
+			largeEvaluator = CreateConfiguredParser(Dataset.LargeContent.Data);
 
-			complexContent1 = File.ReadAllText(Path.Join(datasetPath, "complex_content_1.rsea"));
-			complexContent2 = File.ReadAllText(Path.Join(datasetPath, "complex_content_2.rsea"));
-
-			smallEvaluator = CreateConfiguredParser(SmallContent);
-			mediumEvaluator = CreateConfiguredParser(mediumContent);
-			largeEvaluator = CreateConfiguredParser(largeContent);
-
-			complexEvaluator1 = CreateConfiguredParser(complexContent1);
-			complexEvaluator2 = CreateConfiguredParser(complexContent2);
-			complexEvaluator3 = CreateConfiguredParser(File.ReadAllText(Path.Join(datasetPath, "complex_content_3.rsea")));
+			complexEvaluator1 = CreateConfiguredParser(Dataset.ComplexContent1.Data);
+			complexEvaluator2 = CreateConfiguredParser(Dataset.ComplexContent2.Data);
+			complexEvaluator3 = CreateConfiguredParser(Dataset.ComplexContent3.Data);
 
 		}
 
