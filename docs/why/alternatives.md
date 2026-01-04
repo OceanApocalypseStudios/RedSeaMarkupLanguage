@@ -1,5 +1,7 @@
-## RSML vs The Alternatives
-< class="grid cards" markdown>
+# RSML vs its alternatives
+There are multiple alternatives to RSML that provide its base funcionality, each with their own benefits and drawbacks. Below is a comparison table of RSML against its alternatives, showcasing why RSML is the best choice for machine-dependent logic evaluation in your projects.
+
+<div class="grid cards" markdown>
 
 
 
@@ -84,3 +86,5 @@
 
 
 </div>
+
+In summary, as shwon above, RSML v2.0.0+ stands out as the most modern, efficient, and user-friendly solution for machine-dependent logic evaluation compared to its alternatives. Its logic-first design, simple pattern matching syntax, cross-platform support, and high performance make it the ideal choice for developers looking to implement robust logic evaluation in their applications.
