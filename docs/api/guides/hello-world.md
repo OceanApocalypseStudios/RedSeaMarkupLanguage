@@ -1,7 +1,7 @@
 # Hello, World! Guide
 This guide will teach you the very basics of evaluating RSML via a programming language.
 
-This guide assumes you're familiar with your language of choice and already [setup RSML for it](../index.md).
+This guide assumes you're familiar with your language of choice and already [setup RSML for it](../index.md#getting-started).
 
 ## The actual RSML
 To keep things simple, we will store our RSML as a `string`.

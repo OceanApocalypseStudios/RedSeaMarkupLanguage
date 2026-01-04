@@ -103,7 +103,11 @@ def _resolve_path(path: str, page: Page, files: Files):
 
 def _resolve(file: File, page: Page):
     path = os.path.relpath(file.src_uri, page.file.src_uri)
-    return os.pathsep.join(path.split(os.pathsep)[1:])
+    
+    print(f'DEBUG: {file.src_uri} & {page.file.src_uri}')
+    print(f'DEBUG: path sep is {os.pathsep}; {os.sep}')
+    
+    return os.sep.join(path.split(os.sep)[1:])
 
 
 class Badges:
@@ -124,16 +128,16 @@ class Badges:
 
         # Return badge
         icon = "material-tag-outline"
-        href = _resolve_path("conventions.md#version", page, files)
+        href = _resolve_path("conventions.md#-version", page, files)
         return Badges.create_badge(
             icon = f"[:{icon}:]({href} 'Minimum version')",
-            text = f"[{text}]({_resolve_path(path, page, files)})" if spec else ""
+            text = f"[{text}]({_resolve_path(path, page, files)}){'{ data-preview  }'}" if spec else ""
         )
 
     @staticmethod
     def get_badge_for_utility(text: str, page: Page, files: Files):
         icon = "material-package-variant"
-        href = _resolve_path("conventions.md#utility", page, files)
+        href = _resolve_path("conventions.md#-utility", page, files)
         return Badges.create_badge(
             icon = f"[:{icon}:]({href} 'Third-party utility')",
             text = text
@@ -176,7 +180,7 @@ class Badges:
     @staticmethod
     def get_badge_for_experimental_feature(page: Page, files: Files):
         icon = "material-flask-outline"
-        href = _resolve_path("conventions.md#experimental", page, files)
+        href = _resolve_path("conventions.md#-experimental", page, files)
         return Badges.create_badge(
             icon = f"[:{icon}:]({href} 'Experimental')"
         )

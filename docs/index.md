@@ -153,8 +153,4 @@ To further enhance your experience with RSML, we offer a list of useful links in
 
 </div>
 
-## Just a freaky test
-<!-- md:version 1.0.1 -->
-<!-- md:version 2.0.0-prerelease8 -->
-<!-- md:experimental -->
-<!-- md:utility ripgrep -->
+<!-- md:version 1.0.5 -->

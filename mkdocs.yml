@@ -86,6 +86,7 @@ theme:
     - navigation.indexes
     # - navigation.instant
     # - navigation.instant.prefetch
+    - navigation.instant.preview
     # - navigation.instant.progress
     # - navigation.prune
     - navigation.sections
@@ -221,7 +222,11 @@ markdown_extensions:
       configurations:
         - targets:
             include:
+              - api/*
+              - cli/*
               - language/*
+              - contributing.md
+              - index.md
 
 
 # Navigation
