@@ -1,3 +1,8 @@
+---
+hide:
+  - navigation
+---
+
 # Changelog
 ## Red Sea Markup Language (v2.0.0+)
 
@@ -7,7 +12,6 @@
 - Improved the CLI
 - Further developed the C ABI
 - Implemented the `DualTextBuffer` class for performant buffering
-- 
 - Closes #11: Rewrite Middleware logic
 - Closes #12: Benchmark further and locate badly optimized spots
 - Closes #15: Change namespaces to match studio's naming scheme

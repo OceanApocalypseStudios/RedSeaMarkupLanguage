@@ -152,3 +152,9 @@ To further enhance your experience with RSML, we offer a list of useful links in
     [:octicons-arrow-right-24: Visit the repository](https://github.com/OceanApocalypseStudios/rsml-docs/)
 
 </div>
+
+## Just a freaky test
+<!-- md:version 1.0.1 -->
+<!-- md:version 2.0.0-prerelease8 -->
+<!-- md:experimental -->
+<!-- md:utility ripgrep -->

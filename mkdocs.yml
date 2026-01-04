@@ -4,23 +4,35 @@
 # or any later version published by the Free Software Foundation;
 # with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
 
-# Global site Setup
-site_url: https://oceanapocalypsestudios.github.io/rsml-docs/
+
+# Project information
 site_name: Red Sea Markup Language
+site_url: https://oceanapocalypsestudios.github.io/rsml/
+site_author: OceanApocalypseStudios
+site_description: >-
+  The modern and robust language for defining OS-dependent logic paths.
+
+
+# Repository
+repo_name: OceanApocalypseStudios/RedSeaMarkupLanguage
+repo_url: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/ 
+
 
 # Copyright
 copyright: Copyright &copy; 2025  OceanApocalypseStudios
 
-# Linking to repo
-repo_url: https://github.com/OceanApocalypseStudios/rsml/
 
-# Theming
+# Configuration
 theme:
   name: material
-  custom_dir: overrides
+  custom_dir: material/overrides
+
+  # Fonts
   font:
     text: Roboto
     code: Roboto Mono
+
+  # Colors
   palette:
     # Palette toggle for automatic mode
     - media: "(prefers-color-scheme)"
@@ -46,114 +58,72 @@ theme:
         icon: material/brightness-7
         name: Switch to system preference mode
   
+  # Language
   language: en
+
+  # Features
   features:
-    # Footer
-    - navigation.footer
-
-    # Search sharing
-    - search.share
-    - search.suggest
-    - search.highlight
-
-    # Back to top button
-    # Back to top seems to break on mobile
-    # Making the page look wider than it is
-    # It's weird and looks ugly so begone
-    #- navigation.top
-
-    # Tabs instead of a huge ToC
-    - navigation.tabs
-
-    # Linked tabs
-    - content.tabs.link
-
-    # Instant navigation
-    - navigation.instant
-    - navigation.instant.progress
-
-    # Navigation expanded by default
-    - navigation.expand
-
-    # Show navigation path
-    - navigation.path
+    # Content actions and code related
+    - content.action.edit
+    - content.action.view
+    - content.code.annotate
+    - content.code.copy
+    # - content.code.select
 
     # Tooltips
     - content.tooltips
+    # - content.footnote.tooltips
 
-    # Code blocks
-    - content.code.copy # for stealing code :)
-    - content.code.annotate
+    # Header
+    # - header.autohide
+    
+    # Linked tabs for blocks
+    - content.tabs.link
+
+    # Navigation
+    # - navigation.expand
+    - navigation.footer
+    - navigation.indexes
+    # - navigation.instant
+    # - navigation.instant.prefetch
+    # - navigation.instant.progress
+    # - navigation.prune
+    - navigation.sections
+    - navigation.tabs
+    # - navigation.tabs.sticky
+    - navigation.top
+    - navigation.tracking
+    - navigation.path
+
+    # Search
+    - search.highlight
+    - search.share
+    - search.suggest
+
+    # ToC
+    - toc.follow
+    # - toc.integrate
   
+  # Logo and Iconography
   logo: img/logo.png
   favicon: img/favicon.ico
   icon:
     top: fontawesome/solid/angles-up
     repo: fontawesome/brands/github
 
+
 # Material Plugins
 plugins:
-  - social # Embeds, basically 
+  - social # Social cards - embeds 
   - search # Global docs searching
 
-# Navigation
-# All documentation must be included here, as otherwise,
-# it won't be built!!
-nav:
-  - Home: index.md
-  - Language:
-    - RSML as a Language: language/index.md
-    - Standards:
-      - About Language Standards: language/standards/index.md
-      - Official 25: language/standards/official-25.md
-      - Road-Like: language/standards/roadlike.md
-  - API:
-    - RSML as an API: api/index.md
-    - Guides:
-      - About our Guides: api/guides/index.md
-      - Easy:
-        - Hello, World!: api/guides/hello-world.md
-    - Usage Demos: api/demos.md 
-    - C#:
-      - Getting Started: api/csharp/index.md
-      - Reference:
-        - Overview: api/csharp/reference/index.md
-        - RSML:
-          - Namespace Overview: api/csharp/reference/RSML/index.md
-          - RSDocument: api/csharp/reference/RSML/RSDocument.md
-        - RSML.Exceptions:
-          - Namespace Overview: api/csharp/reference/RSML.Exceptions/index.md
-          - ImmutableActionException: api/csharp/reference/RSML.Exceptions/ImmutableActionException.md
-          - RSMLRuntimeException: api/csharp/reference/RSML.Exceptions/RSMLRuntimeException.md
-          - UndefinedActionException: api/csharp/reference/RSML.Exceptions/UndefinedActionException.md
-          - UndefinedSpecialException: api/csharp/reference/RSML.Exceptions/UndefinedSpecialException.md
-        - RSML.Parser:
-          - Namespace Overview: api/csharp/reference/RSML.Parser/index.md
-          - OperatorType: api/csharp/reference/RSML.Parser/OperatorType.md
-          - ReadyToGoParser: api/csharp/reference/RSML.Parser/ReadyToGoParser.md
-          - RSParser: api/csharp/reference/RSML.Parser/RSParser.md
-    - Python:
-      - Getting Started: api/python/index.md
-      - Reference:
-        - RedSeaCLIExecutable: api/python/RedSeaCLIExecutable.md
-        - RedSeaDocument: api/python/RedSeaDocument.md
-    #- C++:
-      #- Getting Started: api/cpp/index.md
-      #- Reference: api/cpp/reference.md
-  - CLI:
-    - RSML as a CLI: cli/index.md
-    - Commands: cli/commands.md
-    - Real-world usage: cli/examples.md
-  - Contributing: contributing.md
-  - Changelog: changelog.md
 
 # Extras that should be built, but aren't docs
 extra:
-  # Material does not use native favicons.
-  # Refer to 'theme' section.
+  # Material does not use native favicons
   favicon: img/favicon.ico
 
-  # Versioning
+  # Versioning with mike - pip install mike
   version:
     provider: mike
 
@@ -162,15 +132,23 @@ extra:
     - icon: fontawesome/brands/github
       link: https://github.com/OceanApocalypseStudios
     - icon: material/web
-      link: https://oceanapocalypsestudios.github.io/
+      link: https://oceanapocalypsestudios.org/
+
 
 # CSS for advanced customization
 extra_css:
   - stylesheets/extra.css
 
+
 # Folders to watch for (outside docs)
 watch:
   - includes
+
+
+# Hooks
+hooks:
+  - material/overrides/hooks/shortcodes.py
+
 
 # Markdown extensions
 markdown_extensions:
@@ -244,6 +222,60 @@ markdown_extensions:
         - targets:
             include:
               - language/*
+
+
+# Navigation
+  # Small reminder that all documentation must be included
+  # here, as otherwise, it won't be built!!
+nav:
+  - Home: index.md
+  - Language:
+    - RSML as a Language: language/index.md
+    - Standards:
+      - About Language Standards: language/standards/index.md
+      - Official 25: language/standards/official-25.md
+      - Road-Like: language/standards/roadlike.md
+  - API:
+    - RSML as an API: api/index.md
+    - Guides:
+      - About our Guides: api/guides/index.md
+      - Easy:
+        - Hello, World!: api/guides/hello-world.md
+    - Usage Demos: api/demos.md 
+    - C#:
+      - Getting Started: api/csharp/index.md
+      - Reference:
+        - Overview: api/csharp/reference/index.md
+        - RSML:
+          - Namespace Overview: api/csharp/reference/RSML/index.md
+          - RSDocument: api/csharp/reference/RSML/RSDocument.md
+        - RSML.Exceptions:
+          - Namespace Overview: api/csharp/reference/RSML.Exceptions/index.md
+          - ImmutableActionException: api/csharp/reference/RSML.Exceptions/ImmutableActionException.md
+          - RSMLRuntimeException: api/csharp/reference/RSML.Exceptions/RSMLRuntimeException.md
+          - UndefinedActionException: api/csharp/reference/RSML.Exceptions/UndefinedActionException.md
+          - UndefinedSpecialException: api/csharp/reference/RSML.Exceptions/UndefinedSpecialException.md
+        - RSML.Parser:
+          - Namespace Overview: api/csharp/reference/RSML.Parser/index.md
+          - OperatorType: api/csharp/reference/RSML.Parser/OperatorType.md
+          - ReadyToGoParser: api/csharp/reference/RSML.Parser/ReadyToGoParser.md
+          - RSParser: api/csharp/reference/RSML.Parser/RSParser.md
+    - Python:
+      - Getting Started: api/python/index.md
+      - Reference:
+        - RedSeaCLIExecutable: api/python/RedSeaCLIExecutable.md
+        - RedSeaDocument: api/python/RedSeaDocument.md
+    #- C++:
+      #- Getting Started: api/cpp/index.md
+      #- Reference: api/cpp/reference.md
+  - CLI:
+    - RSML as a CLI: cli/index.md
+    - Commands: cli/commands.md
+    - Real-world usage: cli/examples.md
+  - Contributing: contributing.md
+  - Changelog: changelog.md
+  - Conventions: conventions.md
+
 
 # Copyright (c)  2025  OceanApocalypseStudios
 # Permission is granted to copy, distribute and/or modify this document
