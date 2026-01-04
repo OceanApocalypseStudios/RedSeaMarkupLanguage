@@ -124,10 +124,6 @@ extra:
   # Material does not use native favicons
   favicon: img/favicon.ico
 
-  # Versioning with mike - pip install mike
-  version:
-    provider: mike
-
   # Social links
   social:
     - icon: fontawesome/brands/github
