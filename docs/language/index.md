@@ -6,86 +6,81 @@
 
 
 # RSML as a Language
-??? note
-    To make RSML easier to understand for beginners, this page starts with the _"easiest"_ details of the language.
 
-## Files
-The official standard file extension for **Red Sea Markup Language** files is `.rsea`, to avoid it being confused with other languages that also use the RSML abbreviation.
+## Abstract
+**Red Sea Markup Language** (RSML) is a simple declarative markup language created for the purpose of following logic paths based on the host's operating system and CPU architecture.
 
-The `.rsml` file extension is also fine, but `.rsea` is preferred.
+It is a better altenative to scripting languages because of its simplicity, ease of use, and the fact it's not necessary to package a whole interpreter.
 
 ## Evaluation
-The _"evaluation"_ is the act of going through every **logic path** and **special action** and evaluate the first, while running the second.
+The __"evaluation"__ is the act of going through every line of RSML and evaluating the ones that match the **logic path** syntax, while running the ones that match the **special action** syntax.
 
-If an evaluation encounters a **primary operator** _([see Operators](#operators))_ in a true logic path, its value is returned and evaluation ends there.
-
-## Use of MSBuild RIDs
-[MSBuild Runtime Identifiers](https://learn.microsoft.com/en-us/dotnet/core/rid-catalog) are used for identifying systems and CPU architectures in Red Sea.
-
-You'll need to know them in order to write RSML.
-
-Here's a short example with common RIDs.
-
-| RID         | Meaning                                                               | Example Usage in RSML (`official-25`)           |
-| ----------- | --------------------------------------------------------------------- | ----------------------------------------------- |
-| win-x64     | :fontawesome-brands-windows: Windows, 64-bit (based on x86)           | `win-x64 -> "Windows on x86-64"`                |
-| linux-x64   | :fontawesome-brands-linux: Linux, 64-bit (based on x86)               | `linux-x64 || "Glad to see Linux getting love"` |
-| linux-x86   | :fontawesome-brands-linux: Linux, 32-bit (based on x86)               | `linux-x86 ^! "32-bit Linux not supported"`     |
-| osx-arm64   | :fontawesome-brands-apple: macOS, ARM 64-bit (based on Apple Silicon) | `osx-arm64 -> "An apple a day..."`              |
-| win-arm64   | :fontawesome-brands-windows: Windows, ARM 64-bit                      | `win-arm64 || "Windows on ARM... Interesting."` |
-| linux-arm64 | :fontawesome-brands-linux: Linux, ARM 64-bit                          | `linux-arm64 -> "Tux is happy"`                 |
-| linux-arm   | :fontawesome-brands-linux: Linux, ARM 32-bit                          | `linux-arm || "Detected Linux on ARM32"`        |
-
-## Use of Regex in RSML
-!!! tip
-    RSML uses Regex at its core, so it might be worth learning Regex first, even if only the basics.
-
-RSML makes use of **regular expressions** to match [MSBuild RIDs](https://learn.microsoft.com/en-us/dotnet/core/rid-catalog) for different operating systems and CPU architectures.
-
-This means you can write flexible patterns to match a wide range of platforms with few characters.
-
-```python title="Usage of Regex in RSML"
-win.+ -> "This logic path matches any Windows system" # (1)!
-```
-
-1. Or, to be precise, this logic path matches `win-x86`, `win-x64`, `win-arm64`, `win-arm`, etc.
+If an evaluation encounters the **return operator** _([see Operators](#operators))_ in a logic path that evaluates as `true`, its value is returned and evaluation ends there.
 
 ## Language Specification
-!!! warning "Non-standardized"
-    Red Sea is **not** a [standardized](standards/index.md) language. **For the sake of examplifying without getting too technical**, **we'll be using the [**official-25**](standards/official-25.md) standard** in most of the documentation, as it's the closest to an official specification.
+!!! note
+    Starting with version <!-- md:version 2.0.0 -->, RSML is a standardized language, in order to ensure consistency across different implementations. This also allows for less confusion when it comes to the language's features and syntax.
 
-**Red Sea** is quite a simple language, **but the lack of an official specification** means behavior may vary across developer's implementations.
+Below are the main concepts of RSML as a language.
+- **Logic Path:** The interactive part of RSML, responsible for returning values based on machine matches.
+- **Special Action:** Actions that are executed during evaluation, responsible for modifying real-time aspects of how RSML is evaluated. There are only 3 as of now.
+- **Comments:** Lines that are ignored by the parser.
 
-### Static Functionality (Standardized :green_circle:)
-The following features are fully standardized and ==cannot be altered in any way by any language standards==.
+## Logic Path
+A logic path is a line in RSML that contains several expressions, an operator and a value to return. If the expression matches the host's OS/architecture, the evaluator returns the value (if the operator is the return operator) or executes the operator's functionality.
 
-* The use of **double quotes** for **enclosing values in logic path lines** being **mandatory** and no standard being able to modify that.
-* The use of MSBuild **Runtime Identifiers**.
-* The use of **standard Regex**.
-* **Comment symbol** (`#!python #`).
-* **Invalid lines** being **comments**.
+### Operators
+In RSML, there are two operators, named **return** and **throw-error**.
 
-### Extensible Functionality (Partially Standardized :yellow_circle:)
-The following features are partially standardized. For each feature, it's explained which part is standardized and which one isn't.
+Below is a table with the operators, their tokens and what they actually do.
 
-* **[Special Actions.](#special-actions)** Special actions can be added and customized by language standards, but the built-in one (`#!python @EndAll`) cannot be removed or changed in *any* way.
-* **[Operators](#operators).** Language standards can pick which tokens (including common words) they wish to use as operators, but operators are still partially standardized as there must always be **three operators** and only the behaviors for the secondary and tertiary can be altered - the **primary operator** will **always** be the return operator.
+| Operator Name | Operator Token | Functionality _(triggered if the logic path matches the machine)_                  |
+| ------------- | -------------- | ---------------------------------------------------------------------------------- |
+| Return        | `->`           | Returns the logic path's value and ends evaluation.                                |
+| Throw-Error   | `!>`           | Throws an error (error message set to the logic path's value) and ends evaluation. | 
 
-### Implementation-specific Functionality (Non-Standardized :red_circle:)
-The following features are not standardized at all and can be customized at free will.
+### Syntax
+The syntax for logic paths is extremely simple.
+It has **two** overloads: one where you can't specify a version and one where you can.
 
-* **Tokens used by operators.** Each language standard can customize which tokens represent operators. **Example:** `official-25` uses operators `->`, `||`, `^!`.
+=== "Without version specification"
+    ```rsea
+    <operator> [<system-name>] [<system-major-version> = any] [<cpu-architecture>] <value>
+    ```
 
-## Operators
-In RSML, there are always **three operators**, named **primary**, **secondary** and **tertiary**.
+=== "With version specification"
+    ```rsea
+    <operator> [<system-name>] [<system-major-version-comparison-symbol>] [<system-major-version>] [<cpu-architecture>] <value>
+    ```
 
-Below is a table with the operators, their [tokens](#extensible-functionality-partially-standardized) in `official-25` and what they actually do. For all of these, consider `val` as the argument they're passed.
+#### Parameters
+The parameters in the syntax, although complex at first glance, are quite simple. However, they must appear in the exact order shown above (depending on the overload used).
 
-| Operator Name | Operator Token (according to `official-25`) | Functionality                                                           | Functionality (according to `official-25`)                          |
-| ------------- | ------------------------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| Primary       | `->`                                        | Returns `val` _(standards can't change this operator's functionality)_. | Returns `val`.                                                      |
-| Secondary     | `||`                                        | Non-standardized.                                                       | Outputs `val` to the `stdout`.                                      |
-| Tertiary      | `^!`                                        | Non-standardized.                                                       | Throws an error _(error message set to `val`)_ and ends evaluation. |
+`operator`
+
+: The operator to use. This is **mandatory**.
+
+`system-name`
+
+: The operating system name to match against. This is **optional**; but must be specified if you want to specify the argument that comes next in order. Can be set to `any` to match all operating systems as well. Can, additionally, be set to `defined` to match all operating systems as long as the OS is recognized by the RSML implementation.
+
+`system-major-version-comparison-symbol`
+
+: The comparison symbol to use for the system major version. This is **optional**; but must be specified if you want to specify the argument that comes next in order; if not specified, it defaults to `==`. Can be one of the following: `==`, `!=`, `<`, `>`, `<=`, `>=`. It cannot be set to `any` or `defined`. If not specified, `system-major-version` must also not be specified (or set to `any`).
+
+`system-major-version`
+
+: The major version of the operating system to match against. This is **optional**; but must be specified if you want to specify the argument that comes next in order; if not specified, it matches all versions. Can be set to `any` to match all versions as well. Can, additionally, be set to `defined` to match all versions as long as the OS version is recognized by the RSML implementation. If `system-major-version-comparison-symbol` is specified, this parameter must also be specified (and vice-versa).
+
+`cpu-architecture`
+
+: The CPU architecture to match against. This is **optional**. Can be set to `any` to match all CPU architectures as well. Can, additionally, be set to `defined` to match all CPU architectures as long as the architecture is recognized by the RSML implementation.
+
+`value`
+
+: The value to return or use as an error message, depending on the operator used. This is **mandatory** and **must** be enclosed in double quotes (`"`).
+
+<!-- todo: keep working on this -->
 
 ## Evaluation Process Flow
 !!! tip "See also"

@@ -18,7 +18,7 @@ hide:
 - Merged #16: Release v2.0.0
 
 ### 2.0.0-prerelease8 <small>August 18, 2025</small> { id="2.0.0-prerelease8" }
-!!! warning
+!!! warning "Pre-release"
     This is a pre-release. Use at your own risk.
 
 - Completely redesigned the language from scratch
@@ -41,10 +41,13 @@ hide:
 
 
 ## Red Sea Markup Language (Legacy)
-!!! warning
-    The releases in this section are considered **deprecated** and are largely out of support.
+!!! warning "Legacy"
+    The releases in this section are considered **deprecated** and are largely out of support. Albeit stable and documentation being available, users are strongly encouraged to migrate to the latest RSML version, as not only the API changed, but also the language itself.
 
 ### 1.0.4 &amp; 1.0.5 <small>June 21, 2025</small> { id="1.0.5" }
+!!! info "Skipped Version"
+    1.0.4 was skipped due to a bug in a GitHub Actions workflow - still available on NuGet, but has the exact same codebase as 1.0.5.
+
 - Removed reflection entirely, in order to produce an AOT-compatible CLI
 - Set the project to be trimmed on build
 - Moved from `RSML.Docs.vbproj` to `mkdocs` (Material theme)
@@ -68,13 +71,17 @@ hide:
 - Improved the documentation building process using the custom `RSML.Docs.vbproj`
 
 ### 1.0.0 <small>May 28, 2025</small> { id="1.0.0" }
-- Initial RSML Release
+!!! bug "Critical Bug"
+    This release contains a critical bug where the parser does not restrict the system name Regex, essentially breaking partial matching (e.g.: `win` would not match `win-x64`). Fixed in version [1.0.1].
+
+- Initial Red Sea Markup Language Release
 
 
-## MF's Crossroad Solution
+## MF's CrossRoad Solution
 
 ### MF1.0 <small>Apr 19, 2025</small> { id="MF1.0" }
-!!! warning
+!!! warning "Deprecated"
     MFRoad is no longer supported and has been publicly archived.
 
+- Initial public solo release of MFRoad
 - Separated MFRoad from dying project ContenterX and archived it

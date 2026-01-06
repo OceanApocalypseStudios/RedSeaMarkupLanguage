@@ -3,8 +3,6 @@ There are multiple alternatives to RSML that provide its base funcionality, each
 
 <div class="grid cards" markdown>
 
-
-
 -   :material-new-box:{ .lg .middle } **RSML v2.0.0+** (Modern)
     
     ---
