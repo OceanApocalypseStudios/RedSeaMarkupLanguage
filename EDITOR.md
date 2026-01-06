@@ -73,7 +73,7 @@ Editors and IDEs with RSML support natively or via plugins.
 	</tr>
 	<tr>
 		<td>
-			<img src="https://code.visualstudio.com/assets/images/code-stable.png" alt="Visual Studio Code" width="75" />
+			<img src="https://raw.githubusercontent.com/OceanApocalypseStudios/RedSeaMarkupLanguage/refs/heads/main/.github/others/code-logo.png" alt="Visual Studio Code" width="75" />
 		</td>
 		<td>
 			Coming soon.
@@ -95,7 +95,7 @@ Editors and IDEs with RSML support natively or via plugins.
 	</tr>
 	<tr>
 		<td>
-			<img src="https://raw.githubusercontent.com/neovim/neovim.github.io/refs/heads/master/logos/neovim-mark.svg" alt="Neovim" width="70" />
+			<img src="https://raw.githubusercontent.com/neovim/neovim.github.io/refs/heads/master/static/logos/neovim-mark.svg" alt="Neovim" width="70" />
 		</td>
 		<td>
 			Not planned.
@@ -139,7 +139,7 @@ Editors and IDEs with RSML support natively or via plugins.
 	</tr>
 	<tr>
 		<td>
-			<img src="https://upload.wikimedia.org/wikipedia/commons/6/69/Notepad%2B%2B_Logo.svg" alt="Notepad++" width="75" />
+			<img src="https://notepad-plus-plus.org/images/logo.svg" alt="Notepad++" width="75" />
 		</td>
 		<td>
 			Offers syntax highlighting.
@@ -151,10 +151,10 @@ Editors and IDEs with RSML support natively or via plugins.
 			🟢
 		</td>
 		<td>
-			<a href="https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/blob/v2.0.0-dev/Language/SyntaxHighlighting/RSML_NotepadPlusPlus.xml"><img src="https://avatars.githubusercontent.com/u/9919?s=200&v=4" alt="GitHub" width="75" /></a>
+			<a href="https://raw.githubusercontent.com/OceanApocalypseStudios/RedSeaMarkupLanguage/refs/heads/main/tools/RSML_NotepadPlusPlus.xml"><img src="https://avatars.githubusercontent.com/u/9919?s=200&v=4" alt="GitHub" width="75" /></a>
 		</td>
 		<td>
-			<a href="https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/blob/v2.0.0-dev/Language/SyntaxHighlighting/RSML_NotepadPlusPlus.xml"><img src="https://avatars.githubusercontent.com/u/9919?s=200&v=4" alt="GitHub" width="75" /></a>
+			<a href="https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/blob/main/tools/RSML_NotepadPlusPlus.xml"><img src="https://avatars.githubusercontent.com/u/9919?s=200&v=4" alt="GitHub" width="75" /></a>
 		</td>
 	</tr>
 </table>
