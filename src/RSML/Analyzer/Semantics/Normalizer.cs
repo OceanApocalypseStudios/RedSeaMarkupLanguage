@@ -71,6 +71,9 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 
 							break;
 
+						// i was gonna say make this stricter, but it's just a comment sooo no change on this one
+						// i think it's a good idea - im full of them :))
+						// also jerry what the fuck??
 						default:
 							line.Clear();
 							tokenCount = 0;
@@ -102,6 +105,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 
 							break;
 
+						// todo: make this stricter (error throw instead of silent clear)
 						default:
 							line.Clear();
 							tokenCount = 0;
@@ -114,12 +118,21 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 
 				case TokenKind.ReturnOperator:
 				case TokenKind.ThrowErrorOperator:
+					// eol matters
 					switch (line.Length)
 					{
-						// eol matters
+
+						// operator + value + eol
+						// becomes
+						// operator + any(name) + any(version) + any(arch) + value + eol
 						case 3:
+							// value
 							line[4] = line[1];
+
+							// name, version and arch become "any"
 							line[1] = line[2] = line[3] = wildcard;
+
+							// eol and clear
 							line[5] = eol;
 							line[6] = SyntaxToken.Empty;
 							line[7] = SyntaxToken.Empty;
@@ -128,9 +141,17 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 
 							break;
 
+						// operator + name + value + eol
+						// becomes
+						// operator + name + any(version) + any(arch) + value + eol
 						case 4:
+							// value
 							line[4] = line[2];
+
+							// version and arch become "any"
 							line[2] = line[3] = wildcard;
+
+							// eol and clear
 							line[5] = eol;
 							line[6] = SyntaxToken.Empty;
 							line[7] = SyntaxToken.Empty;
@@ -139,10 +160,20 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 
 							break;
 
+						// operator + name + arch + value + eol
+						// becomes
+						// operator + name + arch + any(version) + value + eol
 						case 5:
+							// value
 							line[4] = line[3];
+
+							// arch
 							line[3] = line[2];
+
+							// version becomes "any"
 							line[2] = wildcard;
+
+							// eol and clear
 							line[5] = eol;
 							line[6] = SyntaxToken.Empty;
 							line[7] = SyntaxToken.Empty;
@@ -151,6 +182,9 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 
 							break;
 
+						// operator + name + version + arch + value + eol
+						// is already normalized
+						// eol and clear
 						case 6:
 							line[5] = eol;
 							line[6] = SyntaxToken.Empty;
@@ -160,6 +194,9 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 
 							break;
 
+						// operator + name + comparison symbol + version + arch + value + eol
+						// is already normalized
+						// no need for eol and clear (it's already eol)
 						case 7:
 							/*
 							 line[6] = eol;
@@ -170,6 +207,8 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 
 							break;
 
+						// not a valid form
+						// todo: make this stricter (error throw instead of silent clear)
 						default:
 							line.Clear();
 							tokenCount = 0;
@@ -180,6 +219,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 
 					return;
 
+				// todo: make this stricter (error throw instead of silent clear)
 				default:
 					line.Clear();
 					tokenCount = 0;

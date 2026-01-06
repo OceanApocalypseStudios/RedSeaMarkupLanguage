@@ -12,13 +12,17 @@ jobs:
     strategy:
       matrix:
         os: [ windows-latest, ubuntu-latest, macos-latest ]
-        arch: [ x64, x86 ]
+        arch: [ x64, x86, arm64 ]
         exclude:
           - os: macos-latest
             arch: x86
           - os: windows-latest
             arch: x86
-
+          - os: ubuntu-latest
+            arch: x86
+          - os: ubuntu-latest
+            arch: arm64
+        
     steps:
       # Checkout the repo
       - uses: actions/checkout@v4
@@ -26,25 +30,25 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.x'
+          dotnet-version: '10.0.x'
 
       - name: Build solution (Windows)
         if: matrix.os == 'windows-latest' && matrix.arch == 'x64'
-        run: dotnet build RedSeaMarkupLanguage.sln -c Release -p:Platform=${{ matrix.arch }}
+        run: dotnet build RedSeaMarkupLanguage.slnx -c Release -p:Platform=${{ matrix.arch }}
 
       - name: Build solution (Linux and MacOS)
         if: matrix.os != 'windows-latest'
-        run: dotnet build RedSeaMarkupLanguage.sln -c Release -p:Platform=${{ matrix.arch }}
+        run: dotnet build RedSeaMarkupLanguage.slnx -c Release -p:Platform=${{ matrix.arch }}
 
       - name: Run tests
-        run: dotnet test ./RSML.Tests/RSML.Tests.csproj -c Release --no-build
+        run: dotnet test ./tests/RSML.Tests.csproj -c Release --no-build
 
       - name: Pack & push to NuGet
         if: github.event_name == 'push' && matrix.os == 'windows-latest' && matrix.arch == 'x64'
         shell: pwsh
         run: |
           ls .
-          dotnet pack ./RSML/RSML.csproj -c Release -o ./nupkg
+          dotnet pack ./src/RSML/RSML.csproj -c Release -o ./nupkg
           ls .
           ls ./nupkg/
           Get-ChildItem -Path ./nupkg -Filter *.nupkg | ForEach-Object {
@@ -58,7 +62,7 @@ jobs:
         if: matrix.os == 'windows-latest' && matrix.arch == 'x64'
         shell: pwsh
         run: |
-          dotnet publish ./RSML.CLI/RSML.CLI.csproj -c Release -r win-${{ matrix.arch }} --self-contained true -o publish
+          dotnet publish ./src/RSML.CLI/RSML.CLI.csproj -c Release -r win-${{ matrix.arch }} --self-contained true -o publish
           cd publish
           Compress-Archive -Path * -DestinationPath ../RSML.CLI-windows-latest-${{ matrix.arch }}.zip
           tar -czf ../RSML.CLI-windows-latest-${{ matrix.arch }}.tar.gz *
@@ -68,8 +72,12 @@ jobs:
         if: matrix.os != 'windows-latest'
         shell: bash
         run: |
-          RID="${{ matrix.os == 'ubuntu-latest' && 'linux-x64' || 'osx-x64' }}"
-          dotnet publish ./RSML.CLI/RSML.CLI.csproj -c Release -r $RID --self-contained true -o publish
+          if [[ "${{ matrix.os }}" == "ubuntu-latest" ]]; then
+            RID="linux-${{ matrix.arch }}"
+          elif [[ "${{ matrix.os }}" == "macos-latest" ]]; then
+            RID="osx-${{ matrix.arch }}"
+          fi
+          dotnet publish ./src/RSML.CLI/RSML.CLI.csproj -c Release -r $RID --self-contained true -o publish
           cd publish
           zip -r ../RSML.CLI-${{ matrix.os }}-${{ matrix.arch }}.zip .
           tar -czf ../RSML.CLI-${{ matrix.os }}-${{ matrix.arch }}.tar.gz .
@@ -114,7 +122,7 @@ jobs:
       - name: Upload release artifacts
         uses: softprops/action-gh-release@v2
         with:
-          name: RSML ${{ github.ref_name }}
+          name: Red Sea Markup Language ${{ github.ref_name }}
           generate_release_notes: true
           files: |
             ./release-assets/**/**/*.zip
