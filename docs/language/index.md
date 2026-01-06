@@ -340,7 +340,7 @@ These are built into the language and cannot be changed whatsoever _(unless you 
     <!-- md:version 2.0.0-prerelease8 --> Note how the `ThrowError` special action is practically the same as `!> any any any "<message>"` logic path. The difference is internal only and quite neggligible for most use cases. Some will argue the first is clearer, while others will argue the second is clearer. Choose whichever you prefer!
 
 ## Evaluation Process Flow
-??? info "Strictly markup"
+!!! info "Strictly markup"
     Despite the usage of wording such as _"return"_ and _"interpret"_, RSML is **purely declarative** - it can**not** execute, compile or transpile code.
 
 RSML is evaluated from **start to finish** _([see Advanced Representation of the Process Flow](#advanced-representation))_, meaning that the **very first** logic path **with a return operator in it** that matches will be used and the evaluation ends there. All the logic beyond that point is ignored completely, including comments and special actions.
@@ -415,7 +415,7 @@ The recommended file extension for RSML files is `.rsea`, but other extensions m
 ## Syntax Reference
 This is a quick reference sheet on RSML's syntax.
 
-??? example "Quick syntax reference"
+???+ example "Quick syntax reference"
     ```rsea
     # This is a comment
 
