@@ -1,3 +1,8 @@
+---
+hide:
+  - toc
+---
+
 # RSML vs its alternatives
 There are multiple alternatives to RSML that provide its base funcionality, each with their own benefits and drawbacks. Below is a comparison table of RSML against its alternatives, showcasing why RSML is the best choice for machine-dependent logic evaluation in your projects.
 

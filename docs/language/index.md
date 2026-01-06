@@ -445,7 +445,7 @@ This is a quick reference sheet on RSML's syntax.
 ## What might be coming soon?
 Well, you haven't heard this from me, but there are plans to add more features to RSML in future versions, such as:
 
-- **Logical AND/OR operators** in logic paths, to allow for more complex matching conditions.
+- **Logical INBETWEEN/OR operators** in logic paths, to allow for more complex matching conditions.
 - **Line-NOT and Argument-NOT operators** to negate matches.
 - **Support for more operating systems and CPU architectures** as they become relevant.
 - **Enhanced error handling and reporting** for better debugging.
