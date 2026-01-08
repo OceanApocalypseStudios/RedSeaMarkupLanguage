@@ -63,7 +63,7 @@
 #*.RTF   diff=astextplain
 
 # Projet files
-*.rsea linguist-language=RSEA
+*.rsea linguist-vendored
 *.slnx linguist-language=C#
 *.csproj linguist-language=C#
 *.vbproj linguist-language=Visual Basic
