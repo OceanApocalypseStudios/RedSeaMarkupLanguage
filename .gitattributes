@@ -70,3 +70,6 @@
 *.fsproj linguist-language=F#
 *.pyproj linguist-language=Python
 *.sqlproj linguist-language=SQL
+
+*.md linguist-documentation
+*.st linguist-vendored
