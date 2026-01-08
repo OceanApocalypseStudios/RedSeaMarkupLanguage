@@ -233,10 +233,7 @@ nav:
     - Alternatives to RSML: why/alternatives.md
   - Language:
     - RSML as a Language: language/index.md
-    - Standards:
-      - About Language Standards: language/standards/index.md
-      - Official 25: language/standards/official-25.md
-      - Road-Like: language/standards/roadlike.md
+    - RSML Implementations: language/implementations.md
   - API:
     - RSML as an API: api/index.md
     - Guides:
