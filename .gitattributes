@@ -73,3 +73,5 @@
 
 *.md linguist-documentation
 *.st linguist-vendored
+
+site/** linguist-vendored
