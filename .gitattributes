@@ -64,6 +64,7 @@
 
 # Projet files
 *.rsea linguist-language=Text
+*.rsml linguist-language=Text
 *.slnx linguist-language=C#
 *.csproj linguist-language=C#
 *.vbproj linguist-language=Visual Basic
