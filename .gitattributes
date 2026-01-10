@@ -65,12 +65,17 @@
 # Projet files
 *.rsea linguist-language=Text
 *.rsml linguist-language=Text
-*.slnx linguist-language=C#
+*.slnx linguist-language=Visual Studio Solution
 *.csproj linguist-language=C#
 *.vbproj linguist-language=Visual Basic
 *.fsproj linguist-language=F#
 *.pyproj linguist-language=Python
 *.sqlproj linguist-language=SQL
+
+# The RSML dataset (C# format) was being detected
+# as Smalltalk for whatever reason.
+# This should fix it.
+*.cs linguist-language=C#
 
 *.md linguist-documentation
 *.st linguist-vendored
