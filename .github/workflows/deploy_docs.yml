@@ -24,8 +24,4 @@ jobs:
           restore-keys: |
             mkdocs-material-
       - run: pip install -r requirements-docs.txt
-      # This is commented out because I don't think
-      # we have to force push but just in case...
-      #- run: mkdocs gh-deploy --force
-      - run: mkdocs gh-deploy
-      # ^ comment this if we end up force pushing
+      - run: mkdocs gh-deploy --force
