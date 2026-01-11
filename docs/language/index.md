@@ -10,7 +10,7 @@
 ## Abstract
 **Red Sea Markup Language** (RSML) is a simple declarative markup language created for the purpose of following logic paths based on the host's operating system and CPU architecture.
 
-It is a better altenative to scripting languages because of its simplicity, ease of use, and the fact it's not necessary to package a whole interpreter.
+It is a better alternative to scripting languages because of its simplicity, ease of use, and the fact it's not necessary to package a whole interpreter.
 
 ## Evaluation
 The __"evaluation"__ is the act of going through every line of RSML and evaluating the ones that match the **logic path** syntax, while running the ones that match the **special action** syntax.
@@ -250,8 +250,8 @@ The parameters in the syntax, although complex at first glance, are quite simple
     # it's because there's no overload with only system name and system major version
     # hence we having to use the cpu-architecture argument as well
 
-    # the only alternative in this acse was going with the full overload
-    # some might say full with "any" is clearer cuz the docujment becomes structured
+    # the only alternative in this case was going with the full overload
+    # some might say full with "any" is clearer cuz the document becomes structured
     # with a column-like look and it's easier to read and interpret what each argument is
     # however, some will say simplicity is key
     # here it goes, anyhoo:
@@ -272,7 +272,7 @@ The parameters in the syntax, although complex at first glance, are quite simple
 === "Throwing an error"
     ```rsea
     !> any any any "This error is thrown on any OS and architecture"
-    # this can be done at the end of the file if you want to ensure the machien can't just let it pass as "null" (this way, it forces evaluation to always end with an error if no other logic path matched)
+    # this can be done at the end of the file if you want to ensure the machine can't just let it pass as "null" (this way, it forces evaluation to always end with an error if no other logic path matched)
     # if you do it at the start of the file, well... good luck reaching any other logic path :D
     # isn't that right, Jerry?
     ```
@@ -337,7 +337,7 @@ These are built into the language and cannot be changed whatsoever _(unless you 
 | ThrowError  | Mandatory            | Throws an error with the given message.         | <!-- md:version 2.0.0-prerelease8 --> |
 
 ???+ tip "ThrowError vs `!>` operator"
-    <!-- md:version 2.0.0-prerelease8 --> Note how the `ThrowError` special action is practically the same as `!> any any any "<message>"` logic path. The difference is internal only and quite neggligible for most use cases. Some will argue the first is clearer, while others will argue the second is clearer. Choose whichever you prefer!
+    <!-- md:version 2.0.0-prerelease8 --> Note how the `ThrowError` special action is practically the same as `!> any any any "<message>"` logic path. The difference is internal only and quite negligible for most use cases. Some will argue the first is clearer, while others will argue the second is clearer. Choose whichever you prefer!
 
 ## Evaluation Process Flow
 !!! info "Strictly markup"
@@ -388,7 +388,7 @@ flowchart LR
 ```
 
 ## Comments
-We chose to talk about comments after the evalaution process, because, oh well, big surprise!, comments are ignored by the parser!
+We chose to talk about comments after the evaluation process, because, oh well, big surprise!, comments are ignored by the parser!
 
 <!-- md:version 1.0.0 --> **Comments are quite simple in RSML.** If a `#!python #` character is at the start of a line, that line is considered a comment and will be fully ignored by the parser.
 
