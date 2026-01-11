@@ -5,7 +5,7 @@
 <!-- with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts. -->
 
 
-# RSML as a Language
+# RSML, the Language
 
 ## Abstract
 **Red Sea Markup Language** (RSML) is a simple declarative markup language created for the purpose of following logic paths based on the host's operating system and CPU architecture.
@@ -345,7 +345,9 @@ These are built into the language and cannot be changed whatsoever _(unless you 
 
 RSML is evaluated from **start to finish** _([see Advanced Representation of the Process Flow](#advanced-representation))_, meaning that the **very first** logic path **with a return operator in it** that matches will be used and the evaluation ends there. All the logic beyond that point is ignored completely, including comments and special actions.
 
-### Simplified Representation <!-- md:version 2.0.0-prerelease8 -->
+### Simplified Representation
+Valid as of <!-- md:version 2.0.0-prerelease8 -->.
+
 ``` mermaid
 ---
 title: Simplified Representation of the Evaluation Process Flow
@@ -360,7 +362,9 @@ flowchart LR
   E -->B;
 ```
 
-### Advanced Representation <!-- md:version 2.0.0-prerelease8 -->
+### Advanced Representation
+Valid as of <!-- md:version 2.0.0-prerelease8 -->.
+
 ``` mermaid
 ---
 title: Advanced Representation of the Evaluation Process Flow
@@ -415,7 +419,7 @@ The recommended file extension for RSML files is `.rsea`, but other extensions m
 ## Syntax Reference
 This is a quick reference sheet on RSML's syntax.
 
-???+ example "Quick syntax reference"
+!!! example "Quick syntax reference"
     ```rsea
     # This is a comment
 
@@ -445,7 +449,7 @@ This is a quick reference sheet on RSML's syntax.
 ## What might be coming soon?
 Well, you haven't heard this from me, but there are plans to add more features to RSML in future versions, such as:
 
-- **Logical INBETWEEN operator** in logic paths, to allow for more complex matching conditions.
+- **Logical `INBETWEEN` operator** in logic paths, to allow for more complex matching conditions.
 - **Line-NOT and Argument-NOT operators** to negate matches.
 - **Support for more operating systems and CPU architectures** as they become relevant.
 - **Enhanced error handling and reporting** for better debugging.

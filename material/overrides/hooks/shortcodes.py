@@ -61,6 +61,8 @@ def on_page_markdown(
         # Otherwise, raise an error
         raise RuntimeError(f"Unknown shortcode: {type}")
 
+    print(f"DEBUG: path sep is {os.sep}")
+
     # Find and replace all external asset URLs in current page
     return re.sub(
         r"<!-- md:(\w+)(.*?) -->",
@@ -93,21 +95,35 @@ def get_linkable_setting(type: str) -> str:
 
 
 def _resolve_path(path: str, page: Page, files: Files):
-    path, anchor, *_ = f"{path}#".split("#")
-    
-    print(f"DEBUG: {path} ({anchor})")
-    
-    path = _resolve(files.get_file_from_path(path), page)
-    return "#".join([path, anchor]) if anchor else path
+    path_part, sep, anchor = path.partition("#")
+    anchor = anchor if sep else None
+
+    print(f"DEBUG: {path_part} ({anchor})")
+
+    resolved = _resolve(files.get_file_from_path(path_part), page)
+
+    print(f"DEBUG [new]: {resolved}")
+
+    return f"{resolved}#{anchor}" if anchor is not None else resolved
 
 
 def _resolve(file: File, page: Page):
-    path = os.path.relpath(file.src_uri, page.file.src_uri)
+    print(f"DEBUG file.src_uri ==> {file.src_uri}")
+    print(f"DEBUG page.file.src_uri ==> {page.file.src_uri}")
+
+    src = os.path.abspath(file.src_uri)
+    page_src = os.path.abspath(page.file.src_uri)
+    rel = os.path.relpath(src, start=os.path.dirname(page_src))
+
+    print(f"DEBUG: {file.src_uri} & {page.file.src_uri} || {src} & {page_src}")
+    print(f"DEBUG: path sep is {os.pathsep}")
+    print(f"DEBUG: relpath ==> {rel}")
+    print(f"DEBUG: ext ==> {os.path.extsep}")
     
-    print(f'DEBUG: {file.src_uri} & {page.file.src_uri}')
-    print(f'DEBUG: path sep is {os.pathsep}; {os.sep}')
+    norm = os.path.normpath(rel)
+    print(f"DEBUG: norm ==> {norm}")
     
-    return os.sep.join(path.split(os.sep)[1:])
+    return os.path.extsep.join(norm.split(os.path.extsep)[:-1]) if os.path.extsep in norm else norm
 
 
 class Badges:

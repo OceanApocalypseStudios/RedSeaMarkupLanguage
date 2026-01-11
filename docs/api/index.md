@@ -4,7 +4,7 @@
 <!-- or any later version published by the Free Software Foundation; -->
 <!-- with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts. -->
 
-# RSML as an API
+# RSML's API
 !!! tip
     It's recommended to know the actual [language](../language/index.md) itself before learning how to use RSML programmatically.
 

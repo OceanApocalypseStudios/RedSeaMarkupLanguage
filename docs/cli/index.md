@@ -1,5 +1,5 @@
-# RSML directly in your Terminal
-Red Sea's CLI (`RSML.CLI`) was made with the intention of serving as a quick, easy-to-use and simple way to evaluate RSML files using the [`official-25`](../language/standards/official-25.md) and [`roadlike`](../language/standards/roadlike.md) [language standards](../language/standards/index.md).
+# RSML's CLI
+Red Sea Markup Language's CLI (`RSML.CLI`) was made with the intention of serving as a quick, easy-to-use and simple way to evaluate RSML files using the [`official-25`](../language/standards/official-25.md) and [`roadlike`](../language/standards/roadlike.md) [language standards](../language/standards/index.md).
 
 It is used by [RSML for Python](../api/python/index.md) to simulate using the actual RSML DLL, even though that's not what actually happens. At least, not directly via Python.
 

@@ -8,35 +8,40 @@ RSML can be installed in 2 ways: **package reference** (via NuGet) or **project 
 Installing RSML via its NuGet package is the recommended way to install RSML, as it guarantees stability.
 
 === ".NET CLI"
-    Simply run the following line in the terminal.
-
     ```bash
-    dotnet add package RSML --version 1.0.5
+    dotnet add package OceanApocalypseStudios.RSML --version 2.0.0
     ```
 
 === "Project File"
-    To install RSML via your project file, simply ass the following line to an `#!xml <ItemGroup>`.
-
-    ```xml
-    <PackageReference Include="RSML" Version="1.0.5" />
+    ```xml title="ItemGroup"
+    <PackageReference Include="OceanApocalypseStudios.RSML" Version="2.0.0" />
     ```
 
 === "Visual Studio (PMC)"
-    If you use Visual Studio, you can instead run the following line in the builtin **Package Manager Console**.
+    ```powershell title="VS Package Manager Console"
+    NuGet\Install-Package OceanApocalypseStudios.RSML -Version 2.0.0
+    ```
 
-    ```powershell
-    NuGet\Install-Package RSML -Version 1.0.5
+=== "Central Package Management (CPM)"
+    ```xml title="Directory.Packages.props"
+    <PackageVersion Include="OceanApocalypseStudios.RSML" Version="2.0.0" />
+    ```
+
+    ```xml title="Project File"
+    <PackageReference Include="OceanApocalypseStudios.RSML" />
     ```
 
 ### Project Reference _(Not recommended)_
 If, for whatever reason, you need the latest nightly updates, you may also add the RSML project to your solution.
 
-Please keep in mind that not all nightly updates are guaranteed to be bug-free or stable. Nightly updates are also not documented, only stable versions are.
+!!! warning
+    Please keep in mind that not all nightly updates are guaranteed to be bug-free or stable. Nightly updates are also not documented, only stable versions are.
 
 ```bash
-cd YourSolution/YourProject/
-# Assuming you've got the RSML project at YourSolution/RSML/
-dotnet add reference ../RSML/RSML.csproj
+# Adapt this to your solution structure
+cd src/MyAwesomeProject/
+dotnet add reference ../../include/RSML/
 ```
 
-1. If your solution is included in a `git` repository already, consider using [Git Submodules](https://git-scm.com/docs/git-submodule) instead.
+???+ tip "Git Submodules"
+    If your solution is included in a `git` repository already, consider using [Git Submodules](https://git-scm.com/docs/git-submodule) instead.

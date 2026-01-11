@@ -10,7 +10,7 @@
 # default for csharp files.
 # Note: This is only used by command line
 ###############################################################################
-#*.cs     diff=csharp
+*.cs     diff=csharp
 
 ###############################################################################
 # Set the merge driver for project and solution files
@@ -77,7 +77,9 @@
 # This should fix it.
 *.cs linguist-language=C#
 
+# Documentation
 *.md linguist-documentation
-*.st linguist-vendored
+*.html linguist-documentation
 
-site/** linguist-vendored
+# Throwback to when github thought this repo contained 74% smalltalk
+*.st linguist-vendored
