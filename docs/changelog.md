@@ -7,9 +7,6 @@ hide:
 ## Red Sea Markup Language (v2.0.0+)
 
 ### 2.0.0 <small>September 9, 2025</small> { id="2.0.0" }
-!!! bug "Critical Bug"
-    This release contains a critical bug where RSML seems to ignore and mismatch comparison operators in certain edge cases. A hotfix is being worked on and will be released as soon as possible.
-
 - Retired `RSML.Performance` for not being needed anymore
 - Improved performance: as of this release, RSML is more than **100** times faster
 - Improved the CLI
@@ -24,8 +21,8 @@ hide:
 !!! warning "Pre-release"
     This is a pre-release. Use at your own risk.
 
-    !!! bug "Critical Bug"
-        This release contains a critical bug where RSML seems to ignore and mismatch comparison operators in certain edge cases. A hotfix is being worked on and will be released as soon as possible (not fixed in v2.0.0 as well).
+    !!! warning
+        [v2.0.0-prerelease8](#2.0.0-prerelease8) is known to have serious performance issues.
 
 - Completely redesigned the language from scratch
 - Removed the use of Regex for performance and simplicity reasons

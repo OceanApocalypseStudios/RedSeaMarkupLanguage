@@ -142,6 +142,10 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 		/// </summary>
 		/// <param name="index">The index of the token to remove</param>
 		public void Remove(int index) => this[index] = SyntaxToken.Empty;
+		// todo: ^ Remove(int) leaves gaps
+		// maybe make it automatically bump the ones below up??
+		// problem with this is that we'd have to check if this wouldn't blow the whole codebase up
+		// todo: maybe reusable Compact() method for this thing
 
 		/// <summary>
 		/// Converts the line into a list of tokens.
@@ -187,6 +191,8 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 		public byte First()
 		{
 
+			// todo: maybe actually return the token itself??
+
 			if (!Item1.IsEmpty)
 				return 0;
 
@@ -216,6 +222,8 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 		public byte Last()
 		{
 
+			// todo: maybe actually return the token itself??
+
 			if (!Item8.IsEmpty)
 				return 7;
 
@@ -243,6 +251,10 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 		/// </summary>
 		public int Length
 		{
+
+			// todo: length is O(8)
+			// maybe cache length on operations??
+			// to make this shite even faster??
 
 			get
 			{
