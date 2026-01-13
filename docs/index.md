@@ -3,12 +3,6 @@ hide:
   - navigation
 ---
 
-<!-- Copyright (c)  2025  OceanApocalypseStudios -->
-<!-- Permission is granted to copy, distribute and/or modify this document -->
-<!-- under the terms of the GNU Free Documentation License, Version 1.3 -->
-<!-- or any later version published by the Free Software Foundation; -->
-<!-- with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts. -->
-
 # Red Sea Markup Language
 ??? warning "Breaking API and Language Changes"
     This documentation refers to RSML v2.0.0+. RSML has changed a **lot** from v1.x.x *(a.k.a. Legacy RSML)* to v2.0.0.
@@ -47,11 +41,9 @@ To further enhance your experience with RSML, we offer a list of useful links in
 </div>
 
 ## Documentation License
-> **This documentation is licensed under the [GFDL](https://www.gnu.org/licenses/fdl-1.3.html).**
->
-> Copyright &copy; 2025  OceanApocalypseStudios
-> 
-> Permission is granted to copy, distribute and/or modify this document
-> under the terms of the GNU Free Documentation License, Version 1.3
-> or any later version published by the Free Software Foundation;
-> with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
+> _**“Freedom is nothing else but a chance to be better.”**_
+> - Albert Camus
+
+At OceanApocalypseStudios, we value **freedom**, and that's exactly why we're freeing this project's documentation from the outdated GFDL: **hello, Public Domain**.
+
+This documentation is licensed under the [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/) license.
