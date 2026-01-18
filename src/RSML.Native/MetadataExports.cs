@@ -11,11 +11,11 @@ namespace OceanApocalypseStudios.RSML.Native
 	public static unsafe class MetadataExports
 	{
 
-		private const string ApiVersion = "2.0.0";
+		private const string ApiVersion = "2.1.0";
 		private const byte ApiAuthorNameLen = 16;
 
 		private static readonly byte[] authorName = "OceanApocalypseStudios"u8.ToArray();
-		private static readonly byte[] docsLink = Encoding.UTF8.GetBytes($"https://oceanapocalypsestudios.org/rsml-docs/{ApiVersion}/");
+		private static readonly byte[] docsLink = Encoding.UTF8.GetBytes($"https://oceanapocalypsestudios.org/RedSeaMarkupLanguage/");
 		private static readonly byte[] utf8ApiVersion = Encoding.UTF8.GetBytes(ApiVersion);
 
 		/// <summary>

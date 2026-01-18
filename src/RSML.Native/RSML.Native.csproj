@@ -9,6 +9,9 @@
 		<!-- Native Publishing -->
 		<PublishAot>true</PublishAot>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<NativeLib>true</NativeLib>
+		<InvariantGlobalization>true</InvariantGlobalization>
+		<TieredCompilation>true</TieredCompilation>
 
 		<!-- NuGet Properties -->
 		<Title>RSML Native Interop</Title>
