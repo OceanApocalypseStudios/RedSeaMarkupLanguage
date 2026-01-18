@@ -252,7 +252,8 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 		public int Length
 		{
 
-			// todo: length is O(8)
+			// todo: see #26
+			// length is O(8)
 			// maybe cache length on operations??
 			// to make this shite even faster??
 

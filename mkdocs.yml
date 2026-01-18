@@ -222,13 +222,13 @@ markdown_extensions:
 nav:
   - Home: index.md
   - Why use RSML?:
-    - _: why/index.md
+    - Why use RSML?: why/index.md
     - Alternatives to RSML: why/alternatives.md
   - Language:
-    - _: language/index.md
+    - RSML, the Language: language/index.md
     - RSML Implementations: language/implementations.md
   - API:
-    - _: api/index.md
+    - RSML's API: api/index.md
     - Guides:
       - About our Guides: api/guides/index.md
       - Easy:
@@ -261,7 +261,7 @@ nav:
       #- Getting Started: api/cpp/index.md
       #- Reference: api/cpp/reference.md
   - CLI:
-    - _: cli/index.md
+    - RSML's CLI: cli/index.md
     - Commands: cli/commands.md
     - Real-world usage: cli/examples.md
   - Contributing: contributing.md

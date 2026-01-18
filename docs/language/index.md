@@ -12,7 +12,7 @@ If an evaluation encounters the **return operator** _([see Operators](#operators
 
 ## Language Specification
 !!! note
-    Starting with version <!-- md:version 2.0.0 -->, RSML is a standardized language, in order to ensure consistency across different implementations. This also allows for less confusion when it comes to the language's features and syntax.
+    Starting with version <!-- md:version 2.0.0-prerelease8 -->, RSML is a standardized language, in order to ensure consistency across different implementations. This also allows for less confusion when it comes to the language's features and syntax.
 
 Below are the main concepts of RSML as a language.
 
