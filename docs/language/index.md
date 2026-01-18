@@ -1,10 +1,3 @@
-<!-- Copyright (c)  2025  OceanApocalypseStudios -->
-<!-- Permission is granted to copy, distribute and/or modify this document -->
-<!-- under the terms of the GNU Free Documentation License, Version 1.3 -->
-<!-- or any later version published by the Free Software Foundation; -->
-<!-- with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts. -->
-
-
 # RSML, the Language
 
 ## Abstract
@@ -19,7 +12,7 @@ If an evaluation encounters the **return operator** _([see Operators](#operators
 
 ## Language Specification
 !!! note
-    Starting with version <!-- md:version 2.0.0 -->, RSML is a standardized language, in order to ensure consistency across different implementations. This also allows for less confusion when it comes to the language's features and syntax.
+    Starting with version <!-- md:version 2.0.0-prerelease8 -->, RSML is a standardized language, in order to ensure consistency across different implementations. This also allows for less confusion when it comes to the language's features and syntax.
 
 Below are the main concepts of RSML as a language.
 

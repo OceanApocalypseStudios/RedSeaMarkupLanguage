@@ -14,8 +14,8 @@
     <File Path="DOCUMENTATION_TEMPLATE.md" />
     <File Path="EDITOR.md" />
     <File Path="LANGUAGES.md" />
-    <File Path="LICENSE-GFDL.txt" />
-    <File Path="LICENSE-MIT.txt" />
+    <File Path="LICENSE-DOCS.txt" />
+    <File Path="LICENSE.txt" />
     <File Path="mkdocs.yml" />
     <File Path="README.md" />
   </Folder>

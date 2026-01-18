@@ -7,6 +7,10 @@
 # Credits to: https://github.com/squidfunk/mkdocs-material/blob/master/material/overrides/hooks/shortcodes.py (MIT License)
 ################################################################################################################################
 
+# This file is licensed under the MIT License, in order to respect
+# Material for mkdocs' licensing.
+
+################################################################################################################################
 
 import os
 import re

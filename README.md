@@ -1,12 +1,12 @@
 ﻿# Red Sea Markup Language
 <!--suppress HtmlDeprecatedAttribute -->
-<img src="assets/FullSizeLogo.png" alt="RSML Logo" align="right" width="115">
+<img src="assets/FullSizeLogo.png" alt="RSML Logo" align="right" width="100">
 
 [![NuGet Version](https://img.shields.io/nuget/v/OceanApocalypseStudios.RSML?style=for-the-badge&logo=nuget&logoColor=white&logoSize=auto&label=Available%20on%20NuGet&labelColor=%231265fb&color=%2308317b)](https://www.nuget.org/packages/OceanApocalypseStudios.RSML)
 [![GitHub Release](https://img.shields.io/github/v/release/OceanApocalypseStudios/RedSeaMarkupLanguage?sort=semver&display_name=tag&style=for-the-badge&logo=github&logoColor=white&logoSize=auto&label=Latest&labelColor=%23161616&color=%23000308)](https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/releases/latest)
-[![GitHub Dual-License](https://img.shields.io/badge/ignored-dual--license-ignored?style=for-the-badge&logo=opensourceinitiative&logoColor=white&logoSize=auto&label=repository%20licensing&labelColor=%23496300&color=%232b3c00)](https://raw.githubusercontent.com/OceanApocalypseStudios/RedSeaMarkupLanguage/main/COPYING.txt)
-[![GitHub Code License](https://img.shields.io/badge/ignored-mit-ignored?style=for-the-badge&logo=opensourceinitiative&logoColor=white&logoSize=auto&label=code%20license&labelColor=%23496300&color=%232b3c00)](https://raw.githubusercontent.com/OceanApocalypseStudios/RedSeaMarkupLanguage/main/LICENSE-MIT.txt)
-[![GitHub Documentation License](https://img.shields.io/badge/ignored-gfdl--1.3-ignored?style=for-the-badge&logo=opensourceinitiative&logoColor=white&logoSize=auto&label=documentation%20license&labelColor=%23496300&color=%232b3c00)](https://raw.githubusercontent.com/OceanApocalypseStudios/RedSeaMarkupLanguage/main/LICENSE-GFDL.txt)
+[![GitHub License Code-Docs](https://img.shields.io/badge/ignored-Custom_clause-ignored?style=for-the-badge&logo=opensourceinitiative&logoColor=white&logoSize=auto&label=repository%20licensing&labelColor=%23496300&color=%232b3c00)](COPYING.txt)
+[![GitHub Code License](https://img.shields.io/badge/ignored-mit-ignored?style=for-the-badge&logo=opensourceinitiative&logoColor=white&logoSize=auto&label=code%20license&labelColor=%23496300&color=%232b3c00)](LICENSE.txt)
+[![GitHub Documentation License](https://img.shields.io/badge/ignored-cc0_1.0_universal-ignored?style=for-the-badge&logo=opensourceinitiative&logoColor=white&logoSize=auto&label=documentation%20license&labelColor=%23496300&color=%232b3c00)](LICENSE-DOCS.txt)
 ![GitHub top language](https://img.shields.io/github/languages/top/OceanApocalypseStudios/RedSeaMarkupLanguage?style=for-the-badge&logo=dotnet&logoColor=white&logoSize=auto&label=%20&labelColor=%234929ca&color=%234929ca)
 ![GitHub Repo stars](https://img.shields.io/github/stars/OceanApocalypseStudios/RedSeaMarkupLanguage?style=for-the-badge&logo=star&logoColor=black&logoSize=auto&labelColor=%2379610b&color=%23413405)
 ![NuGet Downloads - Modern](https://img.shields.io/nuget/dt/OceanApocalypseStudios.RSML?style=for-the-badge&logo=nuget&logoColor=white&logoSize=auto&label=downloads%20(modern)&labelColor=%234929ca&color=%2327156f)
