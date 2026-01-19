@@ -4,9 +4,6 @@
     public class MachineTests
     {
 
-		[Theory]
-		public void 
-
     }
 
 }

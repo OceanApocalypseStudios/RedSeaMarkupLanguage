@@ -38,7 +38,7 @@ namespace OceanApocalypseStudios.RSML.Native
 		};
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static SyntaxToken FromNativeToManagedSyntaxToken(RsmlToken token) => new((TokenKind)token->kind, token->startIndex, token->endIndex);
+		internal static SyntaxToken FromNativeToManagedSyntaxToken(RsmlToken token) => new((TokenKind)token.kind, token.startIndex, token.endIndex);
 		internal static SyntaxLine FromNativeToManagedSyntaxLine(RsmlLine* line) => new(
 				FromNativeToManagedSyntaxToken(line->item1),
 				FromNativeToManagedSyntaxToken(line->item2),
