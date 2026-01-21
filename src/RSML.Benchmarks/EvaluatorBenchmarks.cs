@@ -99,7 +99,7 @@ namespace OceanApocalypseStudios.RSML.Benchmarks
 				"# This is not a big comment, but also not really a small one. Either ways, this will let us test the method and benchmark it somewhat accurately."
 			);
 
-		[GlobalSetup]
+		[IterationSetup]
 		public void Setup()
 		{
 
