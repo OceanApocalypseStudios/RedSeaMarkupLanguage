@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>OceanApocalypseStudios.RSML.Benchmarks.EvaluatorBenchmarks-20260121-212425</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet v0.15.8, Windows 10 (10.0.19045.6466/22H2/2022Update)
+Intel Core i7-5500U CPU 2.40GHz (Broadwell), 1 CPU, 4 logical and 2 physical cores
+.NET SDK 10.0.102
+  [Host]         : .NET 10.0.2 (10.0.2, 10.0.225.61305), X64 RyuJIT x86-64-v3
+  .NET 10.0      : .NET 10.0.2 (10.0.2, 10.0.225.61305), X64 RyuJIT x86-64-v3
+  NativeAOT 10.0 : .NET 10.0.2, X64 NativeAOT x86-64-v3
+</code></pre>
+<pre><code>InvocationCount=1  UnrollFactor=1  
+</code></pre>
+
+<table>
+<thead><tr><th>Method                       </th><th>Runtime </th><th>Mean    </th><th>Error  </th><th>Median  </th><th>Ratio</th><th>RatioSD</th><th>Allocated</th><th>Alloc Ratio</th>
+</tr>
+</thead><tbody><tr><td>Evaluate_ComplexContent_1</td><td>.NET 10.0</td><td>2,185,204.2 ns</td><td>444,076.33 ns</td><td>1,708,000.0 ns</td><td>4.90</td><td>3.05</td><td>58848 B</td><td>19.21</td>
+</tr><tr><td>Evaluate_ComplexContent_2</td><td>.NET 10.0</td><td>1,786,833.5 ns</td><td>285,440.44 ns</td><td>1,601,850.0 ns</td><td>4.01</td><td>1.96</td><td>67936 B</td><td>22.17</td>
+</tr><tr><td>Evaluate_ComplexContent_3</td><td>.NET 10.0</td><td>1,848,370.7 ns</td><td>303,637.27 ns</td><td>1,698,550.0 ns</td><td>4.14</td><td>2.09</td><td>62064 B</td><td>20.26</td>
+</tr><tr><td>Evaluate_LargeContent</td><td>.NET 10.0</td><td>8,384,125.3 ns</td><td>246,755.78 ns</td><td>8,336,200.0 ns</td><td>18.80</td><td>3.82</td><td>304024 B</td><td>99.22</td>
+</tr><tr><td>Evaluate_MediumContent</td><td>.NET 10.0</td><td>458,868.8 ns</td><td>26,955.49 ns</td><td>476,050.0 ns</td><td>1.03</td><td>0.25</td><td>3064 B</td><td>1.00</td>
+</tr><tr><td>Evaluate_SmallContent</td><td>.NET 10.0</td><td>53,715.8 ns</td><td>4,453.38 ns</td><td>57,400.0 ns</td><td>0.12</td><td>0.04</td><td>248 B</td><td>0.08</td>
+</tr><tr><td>Evaluate_ComplexContent_1</td><td>NativeAOT 10.0</td><td>778,949.0 ns</td><td>75,406.80 ns</td><td>819,150.0 ns</td><td>7.22</td><td>3.06</td><td>58896 B</td><td>18.93</td>
+</tr><tr><td>Evaluate_ComplexContent_2</td><td>NativeAOT 10.0</td><td>851,332.5 ns</td><td>25,806.68 ns</td><td>860,150.0 ns</td><td>7.89</td><td>2.50</td><td>68320 B</td><td>21.95</td>
+</tr><tr><td>Evaluate_ComplexContent_3</td><td>NativeAOT 10.0</td><td>1,058,785.6 ns</td><td>30,354.34 ns</td><td>1,074,400.0 ns</td><td>9.81</td><td>3.09</td><td>62448 B</td><td>20.07</td>
+</tr><tr><td>Evaluate_LargeContent</td><td>NativeAOT 10.0</td><td>7,020,540.0 ns</td><td>547,228.01 ns</td><td>7,012,850.0 ns</td><td>65.04</td><td>25.09</td><td>304408 B</td><td>97.82</td>
+</tr><tr><td>Evaluate_MediumContent</td><td>NativeAOT 10.0</td><td>116,192.8 ns</td><td>9,989.56 ns</td><td>117,900.0 ns</td><td>1.08</td><td>0.43</td><td>3112 B</td><td>1.00</td>
+</tr><tr><td>Evaluate_SmallContent</td><td>NativeAOT 10.0</td><td>18,603.5 ns</td><td>1,353.39 ns</td><td>17,650.0 ns</td><td>0.17</td><td>0.06</td><td>632 B</td><td>0.20</td>
+</tr><tr><td>IsComment_False_Medium</td><td>.NET 10.0</td><td>707.7 ns</td><td>83.59 ns</td><td>700.0 ns</td><td>0.55</td><td>0.26</td><td>-</td><td>NA</td>
+</tr><tr><td>IsComment_False_Small</td><td>.NET 10.0</td><td>668.1 ns</td><td>95.50 ns</td><td>600.0 ns</td><td>0.52</td><td>0.28</td><td>-</td><td>NA</td>
+</tr><tr><td>IsComment_True_Medium</td><td>.NET 10.0</td><td>1,329.3 ns</td><td>124.66 ns</td><td>1,300.0 ns</td><td>1.04</td><td>0.44</td><td>-</td><td>NA</td>
+</tr><tr><td>IsComment_True_Small</td><td>.NET 10.0</td><td>1,407.5 ns</td><td>155.60 ns</td><td>1,400.0 ns</td><td>1.10</td><td>0.50</td><td>-</td><td>NA</td>
+</tr><tr><td>IsComment_False_Medium</td><td>NativeAOT 10.0</td><td>598.9 ns</td><td>113.89 ns</td><td>500.0 ns</td><td>0.59</td><td>0.43</td><td>-</td><td>NA</td>
+</tr><tr><td>IsComment_False_Small</td><td>NativeAOT 10.0</td><td>595.7 ns</td><td>87.31 ns</td><td>600.0 ns</td><td>0.59</td><td>0.37</td><td>-</td><td>NA</td>
+</tr><tr><td>IsComment_True_Medium</td><td>NativeAOT 10.0</td><td>814.0 ns</td><td>129.27 ns</td><td>800.0 ns</td><td>0.80</td><td>0.53</td><td>-</td><td>NA</td>
+</tr><tr><td>IsComment_True_Small</td><td>NativeAOT 10.0</td><td>1,174.4 ns</td><td>146.40 ns</td><td>1,200.0 ns</td><td>1.16</td><td>0.66</td><td>-</td><td>NA</td>
+</tr><tr><td>Evaluate_PrimitiveAction</td><td>.NET 10.0</td><td>27,271.3 ns</td><td>4,049.08 ns</td><td>20,950.0 ns</td><td>?</td><td>?</td><td>240 B</td><td>?</td>
+</tr><tr><td>Evaluate_PrimitiveComment</td><td>.NET 10.0</td><td>11,566.2 ns</td><td>1,492.49 ns</td><td>10,150.0 ns</td><td>?</td><td>?</td><td>24 B</td><td>?</td>
+</tr><tr><td>Evaluate_PrimitiveCommentWhitespace</td><td>.NET 10.0</td><td>14,467.7 ns</td><td>2,352.82 ns</td><td>11,500.0 ns</td><td>?</td><td>?</td><td>24 B</td><td>?</td>
+</tr><tr><td>Evaluate_PrimitiveLogic</td><td>.NET 10.0</td><td>31,157.9 ns</td><td>2,881.08 ns</td><td>27,200.0 ns</td><td>?</td><td>?</td><td>280 B</td><td>?</td>
+</tr><tr><td>Evaluate_PrimitiveNewlines</td><td>.NET 10.0</td><td>35,028.4 ns</td><td>2,216.70 ns</td><td>32,800.0 ns</td><td>?</td><td>?</td><td>24 B</td><td>?</td>
+</tr><tr><td>Evaluate_PrimitiveAction</td><td>NativeAOT 10.0</td><td>8,024.2 ns</td><td>1,101.56 ns</td><td>6,700.0 ns</td><td>?</td><td>?</td><td>528 B</td><td>?</td>
+</tr><tr><td>Evaluate_PrimitiveComment</td><td>NativeAOT 10.0</td><td>4,857.0 ns</td><td>680.71 ns</td><td>4,000.0 ns</td><td>?</td><td>?</td><td>24 B</td><td>?</td>
+</tr><tr><td>Evaluate_PrimitiveCommentWhitespace</td><td>NativeAOT 10.0</td><td>6,204.4 ns</td><td>693.23 ns</td><td>5,450.0 ns</td><td>?</td><td>?</td><td>408 B</td><td>?</td>
+</tr><tr><td>Evaluate_PrimitiveLogic</td><td>NativeAOT 10.0</td><td>13,147.1 ns</td><td>1,391.19 ns</td><td>12,100.0 ns</td><td>?</td><td>?</td><td>952 B</td><td>?</td>
+</tr><tr><td>Evaluate_PrimitiveNewlines</td><td>NativeAOT 10.0</td><td>9,511.6 ns</td><td>1,743.13 ns</td><td>7,200.0 ns</td><td>?</td><td>?</td><td>696 B</td><td>?</td>
+</tr></tbody></table>
+</body>
+</html>
