@@ -8,11 +8,15 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<None Remove="results\*\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="BenchmarkDotNet" Version="0.15.8" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\RSML\RSML.csproj" />
+		<ProjectReference Include="..\src\RSML\RSML.csproj" />
 	</ItemGroup>
 
 </Project>

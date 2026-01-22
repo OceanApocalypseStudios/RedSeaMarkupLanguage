@@ -6,10 +6,9 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using OceanApocalypseStudios.RSML.CLI.Helpers;
+using OceanApocalypseStudios.RSML.Machine;
 
 using Spectre.Console;
-
-using LocalMachine = OceanApocalypseStudios.RSML.Machine.LocalMachine;
 
 
 namespace OceanApocalypseStudios.RSML.CLI
@@ -18,7 +17,8 @@ namespace OceanApocalypseStudios.RSML.CLI
 	internal partial class Program
 	{
 
-		public const string LanguageVersion = "v2.0.0";
+		// xxx: change this later
+		public const string LanguageVersion = "v2.1.0-dev";
 		public static string? cSharpLogo;
 
 		public static string? fSharpLogo;
