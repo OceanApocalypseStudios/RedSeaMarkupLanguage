@@ -2,10 +2,12 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Xml.Serialization;
+
+using OceanApocalypseStudios.RSML.Analyzer;
 using OceanApocalypseStudios.RSML.Analyzer.Semantics;
 using OceanApocalypseStudios.RSML.Analyzer.Syntax;
 using OceanApocalypseStudios.RSML.Evaluation;
+using OceanApocalypseStudios.RSML.Exceptions;
 
 
 namespace OceanApocalypseStudios.RSML.Native
@@ -17,15 +19,20 @@ namespace OceanApocalypseStudios.RSML.Native
 	public static unsafe class ToolchainExports
 	{
 
+		private static DualTextBuffer? buffer = null;
+		private static nint lastErrorMessage = IntPtr.Zero;
+
+		#region Conversion Helpers
+
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static RsmlToken FromManagedToNativeSyntaxToken(SyntaxToken token) => new()
+		internal static NativeRsmlToken FromManagedToNativeSyntaxToken(SyntaxToken token) => new()
 		{
 			kind = (byte)token.Kind,
 			startIndex = token.BufferRange.Start.IsFromEnd ? (0 - token.BufferRange.Start.Value) : token.BufferRange.Start.Value,
 			endIndex = token.BufferRange.End.IsFromEnd ? (0 - token.BufferRange.End.Value) : token.BufferRange.End.Value
 		};
 
-		internal static RsmlLine FromManagedToNativeSyntaxLine(SyntaxLine line) => new()
+		internal static NativeRsmlLine FromManagedToNativeSyntaxLine(SyntaxLine line) => new()
 		{
 			item1 = FromManagedToNativeSyntaxToken(line.Item1),
 			item2 = FromManagedToNativeSyntaxToken(line.Item2),
@@ -38,8 +45,8 @@ namespace OceanApocalypseStudios.RSML.Native
 		};
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static SyntaxToken FromNativeToManagedSyntaxToken(RsmlToken token) => new((TokenKind)token.kind, token.startIndex, token.endIndex);
-		internal static SyntaxLine FromNativeToManagedSyntaxLine(RsmlLine* line) => new(
+		internal static SyntaxToken FromNativeToManagedSyntaxToken(NativeRsmlToken token) => new((TokenKind)token.kind, token.startIndex, token.endIndex);
+		internal static SyntaxLine FromNativeToManagedSyntaxLine(NativeRsmlLine* line) => new(
 				FromNativeToManagedSyntaxToken(line->item1),
 				FromNativeToManagedSyntaxToken(line->item2),
 				FromNativeToManagedSyntaxToken(line->item3),
@@ -49,6 +56,52 @@ namespace OceanApocalypseStudios.RSML.Native
 				FromNativeToManagedSyntaxToken(line->item7),
 				FromNativeToManagedSyntaxToken(line->item8)
 			);
+
+		#endregion
+
+		/// <summary>
+		/// Allocates a buffer to be public to all RSML toolchain tools.
+		/// </summary>
+		/// <param name="input">The buffer's contents</param>
+		/// <returns>
+		/// <list type="bullet"><c>-3:</c> Unknown error<br /></list>
+		/// <list type="bullet"><c>-2:</c> The input line is empty<br /></list>
+		/// <list type="bullet"><c>-1:</c> The given pointer is null (<c>IntPtr.Zero</c>)<br /></list>
+		/// <list type="bullet"><c>0:</c> Success<br /></list>
+		/// </returns>
+		[UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl) }, EntryPoint = "rsml_alloc_buffer")]
+		public static int AllocRsmlBuffer(nint input)
+		{
+
+			try
+			{
+
+				System.Diagnostics.Debug.Assert(sizeof(NativeRsmlToken) == 12);
+				System.Diagnostics.Debug.Assert(sizeof(NativeRsmlLine) == 96);
+
+				if (input == IntPtr.Zero)
+					return -1;
+
+				var data = Marshal.PtrToStringAuto(input);
+
+				if (String.IsNullOrEmpty(data))
+					return -2;
+
+				buffer = new(data);
+
+				return 0;
+
+			}
+			catch { return -3; }
+
+		}
+
+		/// <summary>
+		/// Returns the last saved error message. Can be a null pointer (<c>IntPtr.Zero</c>).
+		/// </summary>
+		/// <returns>The pointer to the error message</returns>
+		[UnmanagedCallersOnly(EntryPoint = "rsml_get_last_error_message")]
+		public static nint GetLastErrorMessage() => lastErrorMessage;
 
 		/// <summary>
 		/// Normalizes a line of RSML.
@@ -69,13 +122,13 @@ namespace OceanApocalypseStudios.RSML.Native
 			try
 			{
 
-				System.Diagnostics.Debug.Assert(sizeof(RsmlToken) == 12);
-				System.Diagnostics.Debug.Assert(sizeof(RsmlLine) == 96);
+				System.Diagnostics.Debug.Assert(sizeof(NativeRsmlToken) == 12);
+				System.Diagnostics.Debug.Assert(sizeof(NativeRsmlLine) == 96);
 
 				if (inputLine == IntPtr.Zero || outputLine == IntPtr.Zero)
 					return -1;
 
-				var src = (RsmlLine*)inputLine.ToPointer();
+				var src = (NativeRsmlLine*)inputLine.ToPointer();
 				var line = FromNativeToManagedSyntaxLine(src);
 
 				if (line.IsEmpty)
@@ -86,7 +139,7 @@ namespace OceanApocalypseStudios.RSML.Native
 				if (tokenCount > 8)
 					return -4;
 
-				var dst = (RsmlLine*)outputLine.ToPointer();
+				var dst = (NativeRsmlLine*)outputLine.ToPointer();
 				*dst = *src;
 
 				dst->item1 = FromManagedToNativeSyntaxToken(line.Item1);
@@ -104,6 +157,69 @@ namespace OceanApocalypseStudios.RSML.Native
 			catch { return -3; }
 
 		}
+
+		/// <summary>
+		/// Validates a line of RSML.
+		/// </summary>
+		/// <param name="inputLine">The line to validate</param>
+		/// <returns>
+		/// <list type="bullet"><c>-4:</c> There's no allocated buffer or allocated buffer is empty<br /></list>
+		/// <list type="bullet"><c>-3:</c> Unknown error<br /></list>
+		/// <list type="bullet"><c>-2:</c> The input line is empty<br /></list>
+		/// <list type="bullet"><c>-1:</c> The given pointer is null (<c>IntPtr.Zero</c>)<br /></list>
+		/// <list type="bullet"><c>0:</c> Success and line is valid<br /></list>
+		/// <list type="bullet"><c>1:</c> Success but line is invalid (error message is saved to internal data)<br /></list>
+		/// </returns>
+		[UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl) }, EntryPoint = "rsml_validate_line")]
+		public static nint ValidateRsmlLine(nint inputLine)
+		{
+
+			try
+			{
+
+				System.Diagnostics.Debug.Assert(sizeof(NativeRsmlToken) == 12);
+				System.Diagnostics.Debug.Assert(sizeof(NativeRsmlLine) == 96);
+
+				if (buffer is null || buffer.IsEmpty)
+					return -4;
+
+				if (inputLine == IntPtr.Zero)
+					return -1;
+
+				var src = (NativeRsmlLine*)inputLine.ToPointer();
+				var line = FromNativeToManagedSyntaxLine(src);
+
+				if (line.IsEmpty)
+					return -2;
+
+				Validator.ValidateLine(line, buffer);
+
+
+				return 0;
+
+			}
+			catch (InvalidRsmlSyntax ex)
+			{
+
+				try
+				{
+
+					if (lastErrorMessage != IntPtr.Zero)
+						Marshal.FreeHGlobal(lastErrorMessage);
+
+					lastErrorMessage = Marshal.StringToHGlobalAuto(ex.Message);
+
+				}
+				catch { return -3; }
+
+				return 1;
+
+			}
+			catch { return -3; }
+
+		}
+
+		// todo: export other toolchain tools
 
 		/// <summary>
 		/// Evaluates a RSML document from the local machine.

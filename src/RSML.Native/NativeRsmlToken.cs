@@ -5,7 +5,7 @@ namespace OceanApocalypseStudios.RSML.Native
 {
 
 	[StructLayout(LayoutKind.Sequential)]
-	public struct RsmlToken
+	public struct NativeRsmlToken
     {
 
 		public byte kind;
