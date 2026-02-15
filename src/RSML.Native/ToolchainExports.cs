@@ -104,6 +104,57 @@ namespace OceanApocalypseStudios.RSML.Native
 		public static nint GetLastErrorMessage() => lastErrorMessage;
 
 		/// <summary>
+		/// Tokenizes a line of RSML.
+		/// </summary>
+		/// <param name="outputLine">The tokenized line</param>
+		/// <returns>
+		/// <list type="bullet"><c>-5:</c> There's no allocated buffer<br /></list>
+		/// <list type="bullet"><c>-4:</c> Output token count exceeds 8<br /></list>
+		/// <list type="bullet"><c>-3:</c> An error occured while tokenizing the line<br /></list>
+		/// <list type="bullet"><c>-2:</c> The line is empty<br /></list>
+		/// <list type="bullet"><c>-1:</c> The given pointer is null (<c>IntPtr.Zero</c>)<br /></list>
+		/// <list type="bullet"><c>0:</c> Success<br /></list>
+		/// </returns>
+		[UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl) }, EntryPoint = "rsml_tokenize_line")]
+		public static int TokenizeRsmlLine(nint outputLine)
+		{
+
+			try
+			{
+
+				System.Diagnostics.Debug.Assert(sizeof(NativeRsmlToken) == 12);
+				System.Diagnostics.Debug.Assert(sizeof(NativeRsmlLine) == 96);
+
+				if (buffer is null || buffer.IsEmpty)
+					return -5;
+
+				if (outputLine == IntPtr.Zero)
+					return -1;
+
+				var line = Lexer.TokenizeLine(buffer);
+
+				if (line.Length > 8)
+					return -4;
+
+				var dst = (NativeRsmlLine*)outputLine.ToPointer();
+
+				dst->item1 = FromManagedToNativeSyntaxToken(line.Item1);
+				dst->item2 = FromManagedToNativeSyntaxToken(line.Item2);
+				dst->item3 = FromManagedToNativeSyntaxToken(line.Item3);
+				dst->item4 = FromManagedToNativeSyntaxToken(line.Item4);
+				dst->item5 = FromManagedToNativeSyntaxToken(line.Item5);
+				dst->item6 = FromManagedToNativeSyntaxToken(line.Item6);
+				dst->item7 = FromManagedToNativeSyntaxToken(line.Item7);
+				dst->item8 = FromManagedToNativeSyntaxToken(line.Item8);
+
+				return 0;
+
+			}
+			catch { return -3; }
+
+		}
+
+		/// <summary>
 		/// Normalizes a line of RSML.
 		/// </summary>
 		/// <param name="inputLine">The line to normalize</param>
@@ -219,26 +270,24 @@ namespace OceanApocalypseStudios.RSML.Native
 
 		}
 
-		// todo: export other toolchain tools
-
 		/// <summary>
 		/// Evaluates a RSML document from the local machine.
 		/// </summary>
-		/// <param name="document">The document to evaluate</param>
-		/// <param name="documentLength">The length of the document</param>
 		/// <param name="resultBuffer">The buffer in which to store the evaluation result</param>
-		/// <param name="resultBufferLength">The length of the result buffer</param>
 		/// <returns>
 		/// <c>-1:</c> An error occured while evaluating the document OR the result buffer is too small to hold the result<br />
-		/// <c>0:</c> No matches were found (result buffer unassigned)<br />
-		/// <c>1:</c> A match was found (result buffer assigned)<br />
+		/// <c>0:</c> A match was found (result buffer assigned)<br />
+		/// <c>1:</c> No matches were found (result buffer unassigned)<br />
 		/// </returns>
 		[UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl) }, EntryPoint = "rsml_evaluate_document")]
-		public static int EvaluateRsmlDocument(byte* document, int documentLength, byte* resultBuffer, int resultBufferLength)
+		public static int EvaluateRsmlDocument(nint resultBuffer)
 		{
 
 			// fixme: fix this method
 			// todo: ensure each error has its own return code instead of a "-1 catch all"
+
+			// xxx: check if buffer is allocated
+			// xxx: check if the resultBuffer is not IntPtr.Zero
 
 			ReadOnlySpan<byte> span = new(document, documentLength);
 			Evaluator evaluator = new(span);
