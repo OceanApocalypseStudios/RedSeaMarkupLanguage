@@ -391,6 +391,7 @@ site/
 
 # Python Environment
 .venv/
+venv/
 
 # Reminders
 ADMONITION.md
