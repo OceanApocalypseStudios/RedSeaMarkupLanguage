@@ -8,6 +8,9 @@ using OceanApocalypseStudios.RSML.Analyzer.Semantics;
 using OceanApocalypseStudios.RSML.Analyzer.Syntax;
 using OceanApocalypseStudios.RSML.Evaluation;
 using OceanApocalypseStudios.RSML.Exceptions;
+using OceanApocalypseStudios.RSML.Machine;
+
+using OceanApocalypseStudios.RSML.Native.Structures;
 
 
 namespace OceanApocalypseStudios.RSML.Native
@@ -21,6 +24,7 @@ namespace OceanApocalypseStudios.RSML.Native
 
 		private static DualTextBuffer? buffer = null;
 		private static nint lastErrorMessage = IntPtr.Zero;
+		private static nint evaluationResult = IntPtr.Zero;
 
 		#region Conversion Helpers
 
@@ -102,6 +106,13 @@ namespace OceanApocalypseStudios.RSML.Native
 		/// <returns>The pointer to the error message</returns>
 		[UnmanagedCallersOnly(EntryPoint = "rsml_get_last_error_message")]
 		public static nint GetLastErrorMessage() => lastErrorMessage;
+
+		/// <summary>
+		/// Returns the last saved evaluation result. Can be a null pointer (<c>IntPtr.Zero</c>).
+		/// </summary>
+		/// <returns>The pointer to the evaluation result</returns>
+		[UnmanagedCallersOnly(EntryPoint = "rsml_get_last_evaluation_result")]
+		public static nint GetLastEvaluationResult() => evaluationResult;		
 
 		/// <summary>
 		/// Tokenizes a line of RSML.
@@ -271,49 +282,103 @@ namespace OceanApocalypseStudios.RSML.Native
 		}
 
 		/// <summary>
-		/// Evaluates a RSML document from the local machine.
+		/// Evaluates a RSML document given a machine.
 		/// </summary>
-		/// <param name="resultBuffer">The buffer in which to store the evaluation result</param>
+		/// <param name="systemName">The machine's system name - use a nullptr to leave it undefined</param>
+		/// <param name="distroName">The machine's Linux distro name - use only if Linux; nullptr for undefined</param>
+		/// <param name="distroFamily">The machine's Linux distro family - use only if Linux; nullptr for undefined</param>
+		/// <param name="systemVersion">The machine's system version - use <c>-1</c> for undefined</param>
+		/// <param name="processorArchitecture">The machine's processor architecture - nullptr if undefined</param>
 		/// <returns>
+		/// <c>-4:</c> Input buffer is empty or unassigned
+		/// <c>-3:</c> An unknown error occured
+		/// <c>-2:</c> An error occured while assigning the result (evaluation might or might have not found matches)
 		/// <c>-1:</c> An error occured while evaluating the document OR the result buffer is too small to hold the result<br />
-		/// <c>0:</c> A match was found (result buffer assigned)<br />
-		/// <c>1:</c> No matches were found (result buffer unassigned)<br />
+		/// <c>0:</c> A match was found (result assigned)<br />
+		/// <c>1:</c> No matches were found (result unassigned)<br />
 		/// </returns>
 		[UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl) }, EntryPoint = "rsml_evaluate_document")]
-		public static int EvaluateRsmlDocument(nint resultBuffer)
+		public static int EvaluateRsmlDocument(nint systemName, nint distroName, nint distroFamily, int systemVersion, nint processorArchitecture)
 		{
-
-			// fixme: fix this method
-			// todo: ensure each error has its own return code instead of a "-1 catch all"
-
-			// xxx: check if buffer is allocated
-			// xxx: check if the resultBuffer is not IntPtr.Zero
-
-			ReadOnlySpan<byte> span = new(document, documentLength);
-			Evaluator evaluator = new(span);
-			EvaluationResult result;
 
 			try
 			{
-				result = evaluator.Evaluate();
+
+				System.Diagnostics.Debug.Assert(sizeof(NativeRsmlToken) == 12);
+				System.Diagnostics.Debug.Assert(sizeof(NativeRsmlLine) == 96);
+
+				if (buffer is null || buffer.IsEmpty)
+					return -4;
+
+				LocalMachine machine;
+				string? actualSystemName;
+				string? actualDistroName;
+				string? actualDistroFamily;
+				string? actualProcessorArchitecture;
+
+				if (systemName != IntPtr.Zero)
+					actualSystemName = null;
+				else
+					actualSystemName = Marshal.PtrToStringAuto(systemName);
+
+				if (distroName != IntPtr.Zero)
+					actualDistroName = null;
+				else
+					actualDistroName = Marshal.PtrToStringAuto(distroName);
+
+				if (distroFamily != IntPtr.Zero)
+					actualDistroFamily = null;
+				else
+					actualDistroFamily = Marshal.PtrToStringAuto(distroFamily);
+
+				if (processorArchitecture != IntPtr.Zero)
+					actualProcessorArchitecture = null;
+				else
+					actualProcessorArchitecture = Marshal.PtrToStringAuto(processorArchitecture);
+
+				if (actualDistroFamily is not null || actualDistroName is not null)
+					machine = new(actualDistroName, actualDistroFamily, actualProcessorArchitecture, systemVersion);
+				else if (actualSystemName is null && actualDistroFamily is null && actualDistroName is null && actualProcessorArchitecture is null && systemVersion == -1)
+					machine = new(); // uses a default machine :)
+				else
+					machine = new(actualSystemName, actualProcessorArchitecture, systemVersion);
+
+				Evaluator evaluator = new(buffer.Text); 
+
+				var result = evaluator.Evaluate(machine);
+
+				try
+				{
+
+					if (evaluationResult != IntPtr.Zero)
+						Marshal.FreeHGlobal(evaluationResult);
+
+					evaluationResult = Marshal.StringToHGlobalAuto(result.MatchValue);
+
+				}
+				catch { return -2; }
+
+				return result.WasMatchFound ? 0 : 1;
+
 			}
-			catch (Exception)
+			catch (InvalidRsmlSyntax ex)
 			{
-				return -1;
+
+				try
+				{
+
+					if (lastErrorMessage != IntPtr.Zero)
+						Marshal.FreeHGlobal(lastErrorMessage);
+
+					lastErrorMessage = Marshal.StringToHGlobalAuto(ex.Message);
+
+				}
+				catch { return -3; }
+
+				return 1;
+
 			}
-
-			if (!result.WasMatchFound)
-				return 0;
-
-			if (resultBufferLength > result.MatchValue!.Length)
-				return -1;
-
-			var asBytes = Encoding.UTF8.GetBytes(result.MatchValue!);
-
-			for (int i = 0; i < asBytes.Length; i++)
-				resultBuffer[i] = asBytes[i];
-
-			return 1;
+			catch { return -3; }
 
 		}
 
