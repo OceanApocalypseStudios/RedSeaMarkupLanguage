@@ -5,8 +5,8 @@ namespace OceanApocalypseStudios.RSML.Native
 {
 
 	[StructLayout(LayoutKind.Sequential)]
-    public struct NativeRsmlLine
-    {
+	public struct NativeRsmlLine
+	{
 
 		public NativeRsmlToken item1;
 		public NativeRsmlToken item2;

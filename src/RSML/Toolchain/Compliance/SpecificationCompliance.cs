@@ -13,7 +13,7 @@ namespace OceanApocalypseStudios.RSML.Toolchain.Compliance
 		/// <summary>
 		/// The level of compliance per RSML feature.
 		/// </summary>
-		public Dictionary<Feature, ComplianceLevel> CompliancePerFeature { get; } = [ ];
+		public Dictionary<Feature, ComplianceLevel> CompliancePerFeature { get; } = [];
 
 		/// <summary>
 		/// The version of the RSML Language Specification a toolchain component implements.
@@ -24,7 +24,7 @@ namespace OceanApocalypseStudios.RSML.Toolchain.Compliance
 		/// Creates a new instance of a <see cref="SpecificationCompliance" /> struct.
 		/// </summary>
 		/// <param name="specificationVersion">The version of the RSML Language Specification a toolchain component implements</param>
-		public SpecificationCompliance(string? specificationVersion) { SpecificationVersion = specificationVersion; }
+		public SpecificationCompliance(string? specificationVersion) => SpecificationVersion = specificationVersion;
 
 		/// <summary>
 		/// Creates a new instance of a <see cref="SpecificationCompliance" /> struct with no support for any RSML feature.

@@ -49,7 +49,7 @@ namespace OceanApocalypseStudios.RSML.CLI
 				"C#" => CompiledRsmlGenerator.GenerateCSharp(moduleName, result.WasMatchFound ? $"(\"{result.MatchValue!}\")" : "()"),
 				"F#" => CompiledRsmlGenerator.GenerateFSharp(moduleName, result.WasMatchFound ? $"(\"{result.MatchValue!}\")" : "()"),
 				"VB" => CompiledRsmlGenerator.GenerateVisualBasic(moduleName, result.WasMatchFound ? $"(\"{result.MatchValue!}\")" : "()"),
-				_    => null
+				_ => null
 
 			};
 
@@ -158,8 +158,8 @@ namespace OceanApocalypseStudios.RSML.CLI
 			{
 
 				"PlainText" => LocalMachineOutput.AsPlainText(machine),
-				"JSON"      => LocalMachineOutput.AsJson(machine),
-				_           => null
+				"JSON" => LocalMachineOutput.AsJson(machine),
+				_ => null
 
 			};
 
@@ -218,7 +218,7 @@ namespace OceanApocalypseStudios.RSML.CLI
 		{
 
 			DualTextBuffer buffer = new(data);
-			List<SyntaxToken> tokens = [ ];
+			List<SyntaxToken> tokens = [];
 
 			while (buffer.CaretPosition < buffer.Length || buffer.BufferNumber == 2) // dont stop just cuz we swap buffers
 			{

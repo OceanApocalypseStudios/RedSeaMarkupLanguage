@@ -55,7 +55,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 		/// Creates a new syntax line.
 		/// </summary>
 		/// <param name="token">A token</param>
-		public SyntaxLine(SyntaxToken token) { Item1 = token; }
+		public SyntaxLine(SyntaxToken token) => Item1 = token;
 
 		/// <summary>
 		/// Creates a new syntax line.
@@ -154,7 +154,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 		public List<SyntaxToken> ToList()
 		{
 
-			List<SyntaxToken> tokens = [ ];
+			List<SyntaxToken> tokens = [];
 
 			if (!Item1.IsEmpty)
 				tokens.Add(Item1);

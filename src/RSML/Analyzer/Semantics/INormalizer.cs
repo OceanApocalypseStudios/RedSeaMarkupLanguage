@@ -16,7 +16,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 		/// </summary>
 		/// <param name="line">The line to normalize</param>
 		/// <param name="tokenCount">The amount of tokens output</param>
-		public static abstract void NormalizeLine(ref SyntaxLine line, out int tokenCount);
+		static abstract void NormalizeLine(ref SyntaxLine line, out int tokenCount);
 
 	}
 

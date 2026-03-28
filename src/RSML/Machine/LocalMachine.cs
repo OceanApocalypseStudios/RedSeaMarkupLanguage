@@ -115,12 +115,12 @@ namespace OceanApocalypseStudios.RSML.Machine
 			ProcessorArchitecture = RuntimeInformation.OSArchitecture switch
 			{
 
-				Architecture.Arm         => "arm32",
-				Architecture.Arm64       => "arm64",
-				Architecture.X64         => "x64",
-				Architecture.X86         => "x86",
+				Architecture.Arm => "arm32",
+				Architecture.Arm64 => "arm64",
+				Architecture.X64 => "x64",
+				Architecture.X86 => "x86",
 				Architecture.LoongArch64 => "loongarch64",
-				_                        => null
+				_ => null
 
 			};
 
@@ -165,7 +165,7 @@ namespace OceanApocalypseStudios.RSML.Machine
 			try
 			{
 
-				using var unameR = Process.Start(
+				using Process? unameR = Process.Start(
 					new ProcessStartInfo
 					{
 
@@ -198,7 +198,7 @@ namespace OceanApocalypseStudios.RSML.Machine
 			try
 			{
 
-				using var proc = Process.Start(
+				using Process? proc = Process.Start(
 					new ProcessStartInfo
 					{
 
@@ -225,14 +225,12 @@ namespace OceanApocalypseStudios.RSML.Machine
 
 		}
 
-		private void InitializeVersionData()
-		{
+		private void InitializeVersionData() =>
 
-			#if WINDOWS
+#if WINDOWS
 
 			InitializeVersionData_Windows();
-
-			#else
+#else
 			switch (SystemName)
 			{
 
@@ -248,10 +246,8 @@ namespace OceanApocalypseStudios.RSML.Machine
 
 			}
 
-			#endif
+#endif
 
-
-		}
 
 		private void InitializeSystemName()
 		{
@@ -272,6 +268,19 @@ namespace OceanApocalypseStudios.RSML.Machine
 				SystemName = null; // no system name data
 
 		}
+
+		/// <summary>
+		/// The machine RSML is running on.
+		/// </summary>
+		public static LocalMachine CurrentMachine { get; } = new();
+
+		public static LocalMachine Merge(LocalMachine @this, LocalMachine other) => other.SystemName.IsAsciiEqualsIgnoreCase("linux") || other.DistroName is not null || other.DistroFamily is not null
+				? new(other.DistroName ?? @this.DistroName, other.DistroFamily ?? @this.DistroFamily, other.ProcessorArchitecture ?? @this.ProcessorArchitecture, other.SystemVersion == -1 ? @this.SystemVersion : -1)
+				: new(other.SystemName ?? @this.SystemName, other.ProcessorArchitecture ?? @this.ProcessorArchitecture, other.SystemVersion == -1 ? @this.SystemVersion : -1);
+
+		public LocalMachine Merge(LocalMachine other) => Merge(this, other);
+
+		public LocalMachine ReverseMerge(LocalMachine other) => Merge(other, this);
 
 		/// <summary>
 		/// Creates a new struct of system attributes for a Linux distribution.

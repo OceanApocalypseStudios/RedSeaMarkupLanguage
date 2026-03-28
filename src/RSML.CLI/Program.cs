@@ -76,8 +76,7 @@ namespace OceanApocalypseStudios.RSML.CLI
 
 			var helpVersionOpt = rootCommand.Options.FirstOrDefault(o => o is HelpOption);
 
-			if (helpVersionOpt is not null)
-				helpVersionOpt.Action = new AsciiHelp((HelpAction)helpVersionOpt.Action!);
+			helpVersionOpt?.Action = new AsciiHelp((HelpAction)helpVersionOpt.Action!);
 
 			var defaultVersionOpt =
 				rootCommand.Options.FirstOrDefault(o => o is VersionOption || o.Name == "--version" || o.Aliases.Contains("--version"));

@@ -61,46 +61,46 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 		/// <summary>
 		/// The loaded middlewares.
 		/// </summary>
-		private readonly List<Middleware> evaluatorMiddlewares = [ ];
+		private readonly List<Middleware> evaluatorMiddlewares = [];
 
-        /// <summary>
-        /// Creates a new instance of a RSML evaluator.
-        /// </summary>
-        /// <param name="content">The document</param>
-        public Evaluator(ReadOnlySpan<char> content) => Content = new(content);
+		/// <summary>
+		/// Creates a new instance of a RSML evaluator.
+		/// </summary>
+		/// <param name="content">The document</param>
+		public Evaluator(ReadOnlySpan<char> content) => Content = new(content);
 
-        /// <summary>
-        /// Creates a new instance of a RSML evaluator.
-        /// </summary>
-        /// <param name="content">The document</param>
-        public Evaluator(string content) => Content = new(content);
+		/// <summary>
+		/// Creates a new instance of a RSML evaluator.
+		/// </summary>
+		/// <param name="content">The document</param>
+		public Evaluator(string content) => Content = new(content);
 
-        /// <summary>
-        /// Creates a new instance of a RSML evaluator.
-        /// </summary>
-        /// <param name="content">The document</param>
-        public Evaluator(char[] content) => Content = new(content);
+		/// <summary>
+		/// Creates a new instance of a RSML evaluator.
+		/// </summary>
+		/// <param name="content">The document</param>
+		public Evaluator(char[] content) => Content = new(content);
 
-        /// <summary>
-        /// Creates a new instance of a RSML evaluator.
-        /// </summary>
-        /// <param name="content">The document</param>
-        public Evaluator(ReadOnlyMemory<char> content) => Content = new(content);
+		/// <summary>
+		/// Creates a new instance of a RSML evaluator.
+		/// </summary>
+		/// <param name="content">The document</param>
+		public Evaluator(ReadOnlyMemory<char> content) => Content = new(content);
 
-        /// <summary>
-        /// Creates a new instance of a RSML evaluator.
-        /// </summary>
-        /// <param name="content">The document</param>
-        public Evaluator(ReadOnlySpan<byte> content) => Content = new(content);
+		/// <summary>
+		/// Creates a new instance of a RSML evaluator.
+		/// </summary>
+		/// <param name="content">The document</param>
+		public Evaluator(ReadOnlySpan<byte> content) => Content = new(content);
 
-        /// <summary>
-        /// Creates a new instance of a RSML evaluator.
-        /// </summary>
-        /// <param name="content">The document</param>
-        public Evaluator(byte[] content) => Content = new(content);
+		/// <summary>
+		/// Creates a new instance of a RSML evaluator.
+		/// </summary>
+		/// <param name="content">The document</param>
+		public Evaluator(byte[] content) => Content = new(content);
 
-        /// <inheritdoc />
-        public DualTextBuffer Content { get; }
+		/// <inheritdoc />
+		public DualTextBuffer Content { get; }
 
 		/// <summary>
 		/// The amount of loaded middlewares.
@@ -279,8 +279,8 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 			{
 
 				TokenKind.WildcardKeyword => true,
-				TokenKind.DefinedKeyword  => machine.SystemName is not null,
-				_                         => context[tokens[1].BufferRange].IsAsciiEqualsIgnoreCase(machine.SystemName)
+				TokenKind.DefinedKeyword => machine.SystemName is not null,
+				_ => context[tokens[1].BufferRange].IsAsciiEqualsIgnoreCase(machine.SystemName)
 
 			};
 
@@ -336,8 +336,8 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 			{
 
 				TokenKind.WildcardKeyword => true,
-				TokenKind.DefinedKeyword  => machine.ProcessorArchitecture is not null,
-				_                         => context[tokens[4].BufferRange].IsAsciiEqualsIgnoreCase(machine.StringifiedSystemVersion)
+				TokenKind.DefinedKeyword => machine.ProcessorArchitecture is not null,
+				_ => context[tokens[4].BufferRange].IsAsciiEqualsIgnoreCase(machine.StringifiedSystemVersion)
 
 			};
 
@@ -352,7 +352,7 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 			{
 
 				TokenKind.WildcardKeyword => true,
-				TokenKind.DefinedKeyword  => machine.DistroName is not null,
+				TokenKind.DefinedKeyword => machine.DistroName is not null,
 				_ => context[tokens[1].BufferRange].IsAsciiEqualsIgnoreCase(machine.SystemName) ||
 					 context[tokens[1].BufferRange].IsAsciiEqualsIgnoreCase(machine.DistroName) ||
 					 context[tokens[1].BufferRange].IsAsciiEqualsIgnoreCase(machine.DistroFamily)
@@ -412,8 +412,8 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 			{
 
 				TokenKind.WildcardKeyword => true,
-				TokenKind.DefinedKeyword  => machine.ProcessorArchitecture is not null,
-				_                         => context[tokens[4].BufferRange].IsAsciiEqualsIgnoreCase(machine.ProcessorArchitecture)
+				TokenKind.DefinedKeyword => machine.ProcessorArchitecture is not null,
+				_ => context[tokens[4].BufferRange].IsAsciiEqualsIgnoreCase(machine.ProcessorArchitecture)
 
 			};
 
@@ -431,8 +431,8 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 			{
 
 				TokenKind.WildcardKeyword => true,
-				TokenKind.DefinedKeyword  => machine.SystemName is not null,
-				_                         => context[tokens[1].BufferRange].IsAsciiEqualsIgnoreCase(machine.SystemName)
+				TokenKind.DefinedKeyword => machine.SystemName is not null,
+				_ => context[tokens[1].BufferRange].IsAsciiEqualsIgnoreCase(machine.SystemName)
 
 			};
 
@@ -440,8 +440,8 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 			{
 
 				TokenKind.WildcardKeyword => true,
-				TokenKind.DefinedKeyword  => machine.SystemVersion != -1,
-				_                         => context[tokens[2].BufferRange].IsEquals(machine.StringifiedSystemVersion)
+				TokenKind.DefinedKeyword => machine.SystemVersion != -1,
+				_ => context[tokens[2].BufferRange].IsEquals(machine.StringifiedSystemVersion)
 
 			};
 
@@ -449,8 +449,8 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 			{
 
 				TokenKind.WildcardKeyword => true,
-				TokenKind.DefinedKeyword  => machine.ProcessorArchitecture is not null,
-				_                         => context[tokens[3].BufferRange].IsAsciiEqualsIgnoreCase(machine.ProcessorArchitecture)
+				TokenKind.DefinedKeyword => machine.ProcessorArchitecture is not null,
+				_ => context[tokens[3].BufferRange].IsAsciiEqualsIgnoreCase(machine.ProcessorArchitecture)
 
 			};
 
@@ -465,7 +465,7 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 			{
 
 				TokenKind.WildcardKeyword => true,
-				TokenKind.DefinedKeyword  => machine.DistroName is not null,
+				TokenKind.DefinedKeyword => machine.DistroName is not null,
 				_ => context[tokens[1].BufferRange].IsAsciiEqualsIgnoreCase(machine.SystemName) ||
 					 context[tokens[1].BufferRange].IsAsciiEqualsIgnoreCase(machine.DistroName) ||
 					 context[tokens[1].BufferRange].IsAsciiEqualsIgnoreCase(machine.DistroFamily)
@@ -476,8 +476,8 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 			{
 
 				TokenKind.WildcardKeyword => true,
-				TokenKind.DefinedKeyword  => machine.SystemVersion != -1,
-				_                         => context[tokens[2].BufferRange].IsEquals(machine.StringifiedSystemVersion)
+				TokenKind.DefinedKeyword => machine.SystemVersion != -1,
+				_ => context[tokens[2].BufferRange].IsEquals(machine.StringifiedSystemVersion)
 
 			};
 
@@ -485,8 +485,8 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 			{
 
 				TokenKind.WildcardKeyword => true,
-				TokenKind.DefinedKeyword  => machine.ProcessorArchitecture is not null,
-				_                         => context[tokens[3].BufferRange].IsAsciiEqualsIgnoreCase(machine.ProcessorArchitecture)
+				TokenKind.DefinedKeyword => machine.ProcessorArchitecture is not null,
+				_ => context[tokens[3].BufferRange].IsAsciiEqualsIgnoreCase(machine.ProcessorArchitecture)
 
 			};
 

@@ -43,10 +43,10 @@ namespace OceanApocalypseStudios.RSML.CLI.Helpers
 									   ? machine.SystemVersion switch
 									   {
 
-										   6                  => "Vista",
+										   6 => "Vista",
 										   7 or 8 or 10 or 11 => machine.StringifiedSystemVersion!,
-										   9                  => "8.1",
-										   _                  => "Unknown"
+										   9 => "8.1",
+										   _ => "Unknown"
 
 									   }
 									   : machine.StringifiedSystemVersion ?? "Unknown";
@@ -73,10 +73,10 @@ namespace OceanApocalypseStudios.RSML.CLI.Helpers
 									   ? machine.SystemVersion switch
 									   {
 
-										   6                  => "Vista",
+										   6 => "Vista",
 										   7 or 8 or 10 or 11 => machine.StringifiedSystemVersion!,
-										   9                  => "8.1",
-										   _                  => "Unknown"
+										   9 => "8.1",
+										   _ => "Unknown"
 
 									   }
 									   : machine.StringifiedSystemVersion ?? "Unknown";
@@ -138,7 +138,7 @@ namespace OceanApocalypseStudios.RSML.CLI.Helpers
 			if (json is null)
 				return new();
 
-			using var document = JsonDocument.Parse(json);
+			using JsonDocument document = JsonDocument.Parse(json);
 
 			string? systemName = null!;
 			int systemVersion = -1;
@@ -154,7 +154,8 @@ namespace OceanApocalypseStudios.RSML.CLI.Helpers
 				if (system.TryGetProperty("name", out var systemNameProperty))
 					systemName = systemNameProperty.GetString();
 
-				if (system.TryGetProperty("version", out var systemVersionProperty) && systemVersionProperty.TryGetInt32(out systemVersion)) { }
+				if (system.TryGetProperty("version", out var systemVersionProperty) && systemVersionProperty.TryGetInt32(out systemVersion))
+				{ }
 
 			}
 

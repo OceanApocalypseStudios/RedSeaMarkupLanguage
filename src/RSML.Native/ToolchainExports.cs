@@ -8,6 +8,7 @@ using OceanApocalypseStudios.RSML.Analyzer.Semantics;
 using OceanApocalypseStudios.RSML.Analyzer.Syntax;
 using OceanApocalypseStudios.RSML.Evaluation;
 using OceanApocalypseStudios.RSML.Exceptions;
+using OceanApocalypseStudios.RSML.Machine;
 
 
 namespace OceanApocalypseStudios.RSML.Native
@@ -82,7 +83,7 @@ namespace OceanApocalypseStudios.RSML.Native
 				if (input == IntPtr.Zero)
 					return -1;
 
-				var data = Marshal.PtrToStringAuto(input);
+				string? data = Marshal.PtrToStringAuto(input);
 
 				if (String.IsNullOrEmpty(data))
 					return -2;
@@ -136,7 +137,7 @@ namespace OceanApocalypseStudios.RSML.Native
 				if (line.Length > 8)
 					return -4;
 
-				var dst = (NativeRsmlLine*)outputLine.ToPointer();
+				NativeRsmlLine* dst = (NativeRsmlLine*)outputLine.ToPointer();
 
 				dst->item1 = FromManagedToNativeSyntaxToken(line.Item1);
 				dst->item2 = FromManagedToNativeSyntaxToken(line.Item2);
@@ -179,7 +180,7 @@ namespace OceanApocalypseStudios.RSML.Native
 				if (inputLine == IntPtr.Zero || outputLine == IntPtr.Zero)
 					return -1;
 
-				var src = (NativeRsmlLine*)inputLine.ToPointer();
+				NativeRsmlLine* src = (NativeRsmlLine*)inputLine.ToPointer();
 				var line = FromNativeToManagedSyntaxLine(src);
 
 				if (line.IsEmpty)
@@ -190,7 +191,7 @@ namespace OceanApocalypseStudios.RSML.Native
 				if (tokenCount > 8)
 					return -4;
 
-				var dst = (NativeRsmlLine*)outputLine.ToPointer();
+				NativeRsmlLine* dst = (NativeRsmlLine*)outputLine.ToPointer();
 				*dst = *src;
 
 				dst->item1 = FromManagedToNativeSyntaxToken(line.Item1);
@@ -237,7 +238,7 @@ namespace OceanApocalypseStudios.RSML.Native
 				if (inputLine == IntPtr.Zero)
 					return -1;
 
-				var src = (NativeRsmlLine*)inputLine.ToPointer();
+				NativeRsmlLine* src = (NativeRsmlLine*)inputLine.ToPointer();
 				var line = FromNativeToManagedSyntaxLine(src);
 
 				if (line.IsEmpty)
@@ -280,22 +281,67 @@ namespace OceanApocalypseStudios.RSML.Native
 		/// <c>1:</c> No matches were found (result buffer unassigned)<br />
 		/// </returns>
 		[UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl) }, EntryPoint = "rsml_evaluate_document")]
-		public static int EvaluateRsmlDocument(nint resultBuffer)
+		public static int EvaluateRsmlDocument(nint resultBuffer, int systemOrDistroName, int distroFamilyNameOrNull, int systemOrDistroMajorVersion, int processorArchitecture)
 		{
+
+			#region Converting values to LocalMachine-compatible
+
+			string? actualSystemName = systemOrDistroName switch
+			{
+
+				0 => null,
+				1 => "windows",
+				2 => "osx",
+				3 => "freebsd",
+				201 => "debian",
+				202 => "fedora",
+				203 => "ubuntu",
+				204 => "archlinux",
+				_ => "UNKNOWN"
+
+			};
+
+			string? actualDistroFamily = (systemOrDistroName is >= 201 and <= 204) ? distroFamilyNameOrNull switch
+			{
+
+				0 => null,
+				201 => "debian",
+				202 => "fedora",
+				203 => "ubuntu",
+				204 => "archlinux",
+				_ => "UNKNOWN"
+
+			} : null;
+
+			string? actualProcessorArchitecture = processorArchitecture switch
+			{
+
+				0 => null,
+				1 => "arm32", // also known as simply "ARM"
+				2 => "arm64",
+				3 => "x64",
+				4 => "x86",
+				5 => "loongarch64",
+				_ => "UNKNOWN"
+
+			};
+
+			LocalMachine actualMachine = LocalMachine.Merge(LocalMachine.CurrentMachine, (systemOrDistroName is >= 201 and <= 204) ? LocalMachine.Linux(actualSystemName, actualDistroFamily, actualProcessorArchitecture, systemOrDistroMajorVersion) : new(actualSystemName, actualProcessorArchitecture, systemOrDistroMajorVersion));
+
+			#endregion
+
 
 			// fixme: fix this method
 			// todo: ensure each error has its own return code instead of a "-1 catch all"
 
 			// xxx: check if buffer is allocated
 			// xxx: check if the resultBuffer is not IntPtr.Zero
-
-			ReadOnlySpan<byte> span = new(document, documentLength);
 			Evaluator evaluator = new(span);
 			EvaluationResult result;
 
 			try
 			{
-				result = evaluator.Evaluate();
+				result = evaluator.Evaluate()
 			}
 			catch (Exception)
 			{
@@ -308,7 +354,7 @@ namespace OceanApocalypseStudios.RSML.Native
 			if (resultBufferLength > result.MatchValue!.Length)
 				return -1;
 
-			var asBytes = Encoding.UTF8.GetBytes(result.MatchValue!);
+			byte[] asBytes = Encoding.UTF8.GetBytes(result.MatchValue!);
 
 			for (int i = 0; i < asBytes.Length; i++)
 				resultBuffer[i] = asBytes[i];
@@ -316,6 +362,8 @@ namespace OceanApocalypseStudios.RSML.Native
 			return 1;
 
 		}
+
+		// todo: add the Lexer "tokens-to-RSML" method here
 
 	}
 

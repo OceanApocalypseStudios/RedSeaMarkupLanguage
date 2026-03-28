@@ -23,55 +23,55 @@ namespace OceanApocalypseStudios.RSML.Analyzer
 		/// <summary>
 		/// Creates an empty text buffer.
 		/// </summary>
-		public DualTextBuffer() { primary = ReadOnlyMemory<char>.Empty; }
+		public DualTextBuffer() => primary = ReadOnlyMemory<char>.Empty;
 
 		/// <summary>
 		/// Creates a text buffer from memory.
 		/// </summary>
 		/// <param name="text"></param>
-		public DualTextBuffer(ReadOnlyMemory<char> text) { primary = text; }
+		public DualTextBuffer(ReadOnlyMemory<char> text) => primary = text;
 
 		/// <summary>
 		/// Creates a text buffer from a string.
 		/// </summary>
 		/// <param name="text"></param>
-		public DualTextBuffer(string text) { primary = text.AsMemory(); }
+		public DualTextBuffer(string text) => primary = text.AsMemory();
 
 		/// <summary>
 		/// Creates a text buffer from a string reader.
 		/// </summary>
 		/// <param name="reader"></param>
-		public DualTextBuffer(StringReader reader) { primary = reader.ReadToEnd().AsMemory(); }
+		public DualTextBuffer(StringReader reader) => primary = reader.ReadToEnd().AsMemory();
 
 		/// <summary>
 		/// Creates a text buffer from an enumerable of strings.
 		/// </summary>
 		/// <param name="lines">The lines</param>
-		public DualTextBuffer(IEnumerable<string> lines) { primary = String.Join('\n', lines).AsMemory(); }
+		public DualTextBuffer(IEnumerable<string> lines) => primary = String.Join('\n', lines).AsMemory();
 
 		/// <summary>
 		/// Creates a text buffer from an array of characters.
 		/// </summary>
 		/// <param name="characters">UTF-16 characters</param>
-		public DualTextBuffer(char[] characters) { primary = new(characters); }
+		public DualTextBuffer(char[] characters) => primary = new(characters);
 
 		/// <summary>
 		/// Creates a text buffer from an array of characters.
 		/// </summary>
 		/// <param name="characters">UTF-8 characters</param>
-		public DualTextBuffer(byte[] characters) { primary = Encoding.UTF8.GetString(characters).AsMemory(); }
+		public DualTextBuffer(byte[] characters) => primary = Encoding.UTF8.GetString(characters).AsMemory();
 
 		/// <summary>
 		/// Creates a text buffer from a span of characters.
 		/// </summary>
 		/// <param name="characters">UTF-8 characters</param>
-		public DualTextBuffer(ReadOnlySpan<byte> characters) { primary = Encoding.UTF8.GetString(characters).AsMemory(); }
+		public DualTextBuffer(ReadOnlySpan<byte> characters) => primary = Encoding.UTF8.GetString(characters).AsMemory();
 
 		/// <summary>
 		/// Creates a text buffer from a span of characters.
 		/// </summary>
 		/// <param name="text">The text</param>
-		public DualTextBuffer(ReadOnlySpan<char> text) { primary = text.ToString().AsMemory(); }
+		public DualTextBuffer(ReadOnlySpan<char> text) => primary = text.ToString().AsMemory();
 
 		/// <summary>
 		/// The number of the buffer that is currently in use.
