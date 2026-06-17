@@ -21,77 +21,30 @@ namespace OceanApocalypseStudios.RSML.Machine
 			if (key is null)
 				return;
 
-			string? buildNumStr = key.GetValue("CurrentBuildNumber") as string;
+			if (!Int32.TryParse(key.GetValue("CurrentBuildNumber") as string, out int buildNum))
+				return;
 
-			if (Int32.TryParse(buildNumStr, out int buildNum) && buildNum >= 22000)
+			SystemVersion = buildNum switch
 			{
 
-				SystemVersion = 11; // Windows 11
+				// Windows 11
+				>= 22000 => 11,
+				// Windows 10
+				>= 10240 => 10,
+				// Windows 8.1 (has to be called 9 so operators work in rsml)
+				>= 9257 => 9,
+				// Windows 8
+				>= 7652 => 8,
+				// Windows 7
+				>= 6427 => 7,
+				// Windows Vista (since first Longhorn build)
+				>= 3663 => 6,
+				// Windows XP
+				>= 2196 => 5,
+				// Prior to XP
+				_ => 4
 
-				return;
-
-			}
-
-			object? majorVersionObj = key.GetValue("CurrentMajorVersionNumber");
-
-			if (majorVersionObj is int majorVersion)
-			{
-
-				SystemVersion = majorVersion; // Windows 10, most likely
-
-				return;
-
-			}
-
-			// fallback
-			if (key.GetValue("CurrentVersion") is not string version)
-				return;
-
-			switch (version)
-			{
-
-				case "5.1":
-					// ReSharper disable once CommentTypo
-					SystemVersion = 5; // WINDOWS XPPPPPP LESGOOOOOOOO
-
-					return;
-
-				case "6.0":
-					// this is Windows Vista
-					// but like we don't take strings soooo
-					// number 6 it'll be
-					SystemVersion = 6;
-
-					return; // cursed af
-
-				case "6.3":
-					// this technically can also be Windows 10
-					// but Windows 10 usually has CurrentMajorVersionNumber, so THAT has greater priority
-
-					SystemVersion = 9; // yes, Windows 8.1 will be 9 in this case, cuz no decimals
-
-					return;
-
-			}
-
-			string[] parts = version.Split('.');
-
-			if (parts.Length < 2)
-				return;
-
-			/*
-			 * Something funny that happens is:
-			 * - Windows 7 => 6.1
-			 * - Windows 8 => 6.2
-			 *
-			 * Notice it?
-			 * For 7 and 8, it's [0] + [1].
-			 */
-
-			if (!Int32.TryParse(parts[0], out int ver1) || !Int32.TryParse(parts[1], out int ver2))
-				return;
-
-			SystemVersion = ver1 + ver2;
+			};
 
 		}
 
