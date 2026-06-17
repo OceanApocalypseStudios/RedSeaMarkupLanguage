@@ -152,6 +152,7 @@ The parameters in the syntax, although complex at first glance, are quite simple
 
     | Windows Version Name | `system-major-version` Value | Last Changed                          |
     | -------------------- | ---------------------------- | ------------------------------------- |
+    | Prior to Windows XP  | 4                            | <!-- md:version 2.0.1 -->             |
     | Windows XP           | 5                            | <!-- md:version 2.0.0-prerelease8 --> |
     | Windows Vista        | 6                            | <!-- md:version 2.0.0-prerelease8 --> |
     | Windows 7            | 7                            | <!-- md:version 2.0.0-prerelease8 --> |
@@ -163,14 +164,16 @@ The parameters in the syntax, although complex at first glance, are quite simple
     ???+ info "How OS versions are determined internally"
         <!-- md:version 2.0.0-prerelease8 --> We use our own implementation to determine the OS version, as to avoid relying on inaccurate methods such as `Environment.OSVersion`, which is known to return wrong values on Windows 8.1 and later.
 
-        <!-- md:version 2.0.0-prerelease8 --> On Windows, we use the `SOFTWARE\Microsoft\Windows NT\CurrentVersion` registry key. Inside it, we read `CurrentBuildNumber` and, if that's above 22000, we consider it Windows 11 (Windows 11 has its major set to 10, so this is necessary). Otherwise, we read `CurrentMajorVersionNumber` for the major version (which, most likely will be 10 - since Windows 11 is handled before this check, you can be sure this "10" will always be Windows 10 and not Windows 11). Lastly, we fallback to `CurrentVersion`, where we consider the system version to be:
+        <!-- md:version 2.0.1 --> On Windows, we use the `SOFTWARE\Microsoft\Windows NT\CurrentVersion` registry key. Inside it, we read `CurrentBuildNumber` and, based on existing intervals, associate each one to a major version of Windows.
 
-        - <!-- md:version 2.0.0-prerelease8 --> `5` for **Windows XP** (if `CurrentVersion` is `5.1`)
-        - <!-- md:version 2.0.0-prerelease8 --> `6` for **Windows Vista** (if `CurrentVersion` is `6.0`)
-        - <!-- md:version 2.0.0-prerelease8 --> `7` for **Windows 7** (if `CurrentVersion` is `6.1`)
-        - <!-- md:version 2.0.0-prerelease8 --> `8` for **Windows 8** (if `CurrentVersion` is `6.2`)
-        - <!-- md:version 2.0.0-prerelease8 --> `9` for **Windows 8.1** (if `CurrentVersion` is `6.3`; in a future version, this will likely be changed to `81` to avoid confusion - we tried going with `8.1` but the `system-major-version` argument must be an integer)
-        - <!-- md:version 2.0.0-prerelease8 --> `x + y` for all others (where `x` and `y` are such that `CurrentVersion` is `x.y` - to be fixed in a future version to only consider `x` for all other Windows versions)
+        - <!-- md:version 2.0.1 --> `4` for any version prior to **Windows XP**
+        - <!-- md:version 2.0.1 --> `5` for **Windows XP** (minimum build number is 2196)
+        - <!-- md:version 2.0.1 --> `6` for **Windows Vista** (minimum build number is 3663; we include the Longhorn era here)
+        - <!-- md:version 2.0.1 --> `7` for **Windows 7** (minimum build number is 6427)
+        - <!-- md:version 2.0.1 --> `8` for **Windows 8** (minimum build number is 7652)
+        - <!-- md:version 2.0.1 --> `9` for **Windows 8.1** (minimum build number is 9257)
+        - <!-- md:version 2.0.1 --> `10` for **Windows 10** (minimum build number is 10240)
+        - <!-- md:version 2.0.1 --> `11` for **Windows 11** (minimum build number is 22000)
 
         <!-- md:version 2.0.0-prerelease8 --> On Linux, we read `/etc/os-release` to determine the version. We read the `VERSION_ID` field to get the version. The major version is considered to be the integer part before the first dot (`.`). If there's no dot, the whole value is considered the major version. If `VERSION_ID` is not present, the version is `null`, meaning using `any` won't match, but `defined` will.
 

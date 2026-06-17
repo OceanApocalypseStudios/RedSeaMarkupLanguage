@@ -6,6 +6,13 @@ hide:
 # Changelog
 ## Red Sea Markup Language (v2.0.0+)
 
+### 2.0.1 <small>TBD</small> { id="2.0.1" }
+!!! warning "In development"
+    Currently in development. Use at your own risk.
+
+- Fully exported the C ABI
+<!-- todo: add more content here -->
+
 ### 2.0.0 <small>September 9, 2025</small> { id="2.0.0" }
 - Retired `RSML.Performance` for not being needed anymore
 - Improved performance: as of this release, RSML is more than **100** times faster
