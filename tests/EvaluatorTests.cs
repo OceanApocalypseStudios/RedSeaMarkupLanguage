@@ -1,7 +1,7 @@
 ﻿using OceanApocalypseStudios.RSML.Evaluation;
 using OceanApocalypseStudios.RSML.Exceptions;
 
-using LocalMachine = OceanApocalypseStudios.RSML.Machine.LocalMachine;
+using OceanApocalypseStudios.RSML.Machine;
 
 
 namespace OceanApocalypseStudios.RSML.Tests

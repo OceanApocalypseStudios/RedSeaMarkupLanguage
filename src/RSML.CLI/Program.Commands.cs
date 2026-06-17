@@ -120,7 +120,6 @@ namespace OceanApocalypseStudios.RSML.CLI
 					new Panel(
 						new Rows(
 							new Markup("[green]Statistics[/]").Centered(),
-							new Markup($"[white]Middlewares loaded:[/] [gray]{evaluator.LoadedMiddlewaresCount}[/]"),
 							new Markup($"[white]Amount of characters in document:[/] [gray]{data.Length}[/]")
 						)
 					).Expand()

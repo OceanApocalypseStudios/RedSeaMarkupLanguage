@@ -41,7 +41,6 @@ using OceanApocalypseStudios.RSML.Analyzer;
 using OceanApocalypseStudios.RSML.Analyzer.Semantics;
 using OceanApocalypseStudios.RSML.Analyzer.Syntax;
 using OceanApocalypseStudios.RSML.Exceptions;
-using OceanApocalypseStudios.RSML.Middlewares;
 using OceanApocalypseStudios.RSML.Toolchain.Compliance;
 
 using LocalMachine = OceanApocalypseStudios.RSML.Machine.LocalMachine;
@@ -57,11 +56,6 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 	{
 
 		private const string ApiVersion = "2.0.0";
-
-		/// <summary>
-		/// The loaded middlewares.
-		/// </summary>
-		private readonly List<Middleware> evaluatorMiddlewares = [];
 
 		/// <summary>
 		/// Creates a new instance of a RSML evaluator.
@@ -102,11 +96,6 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 		/// <inheritdoc />
 		public DualTextBuffer Content { get; }
 
-		/// <summary>
-		/// The amount of loaded middlewares.
-		/// </summary>
-		public int LoadedMiddlewaresCount => evaluatorMiddlewares.Count;
-
 		/// <inheritdoc />
 		public static SpecificationCompliance SpecificationCompliance => SpecificationCompliance.CreateFull(ApiVersion);
 
@@ -116,20 +105,6 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 
 		/// <inheritdoc />
 		public static bool IsComment(string line) => IsComment(line.AsSpan());
-
-		/// <summary>
-		/// Binds a middleware to the evaluator.
-		/// </summary>
-		/// <param name="middleware">The middleware</param>
-		/// <returns>The evaluator (fluent API)</returns>
-		public Evaluator BindMiddleware(Middleware middleware)
-		{
-
-			evaluatorMiddlewares.Add(middleware);
-
-			return this;
-
-		}
 
 		/// <inheritdoc />
 		public EvaluationResult Evaluate() => Evaluate(new());
@@ -162,16 +137,6 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 				Content.SwapBuffer();
 				int i = Content.CaretPosition;
 				Content.SwapBuffer();
-				MiddlewareContext ctx = new(i, tokens, Content.Text);
-
-				// ReSharper disable once ForeachCanBeConvertedToQueryUsingAnotherGetEnumerator
-				foreach (var middleware in evaluatorMiddlewares)
-				{
-
-					if (!middleware(ctx))
-						return new(); // stop loop
-
-				}
 
 				// we basically do length-based checks
 				/*
@@ -251,21 +216,6 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 			}
 
 			return new(); // no matches
-
-		}
-
-		/// <summary>
-		/// Unbinds a middleware from the evaluator.
-		/// </summary>
-		/// <param name="middleware">The middleware</param>
-		/// <param name="removed"><c>true</c> if successful, <c>false</c> if failed or middleware was not bound</param>
-		/// <returns>The evaluator (fluent API)</returns>
-		public Evaluator UnbindMiddleware(Middleware middleware, out bool removed)
-		{
-
-			removed = evaluatorMiddlewares.Remove(middleware);
-
-			return this;
 
 		}
 

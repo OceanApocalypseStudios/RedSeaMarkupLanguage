@@ -17,8 +17,6 @@ namespace OceanApocalypseStudios.RSML.Machine
 	public partial struct LocalMachine
 	{
 
-		private string? systemVersionStr = null;
-
 		/// <summary>
 		/// The system's name or <c>null</c> if undetected.
 		/// </summary>
@@ -48,14 +46,14 @@ namespace OceanApocalypseStudios.RSML.Machine
 			get
 			{
 
-				if (systemVersionStr is null && SystemVersion != -1)
-					systemVersionStr = SystemVersion.ToString();
+				if (field is null && SystemVersion != -1)
+					field = SystemVersion.ToString();
 
-				return systemVersionStr;
+				return field;
 
 			}
 
-		}
+		} = null;
 
 		/// <summary>
 		/// The architecture in which the OS runs at.
@@ -274,13 +272,32 @@ namespace OceanApocalypseStudios.RSML.Machine
 		/// </summary>
 		public static LocalMachine CurrentMachine { get; } = new();
 
-		public static LocalMachine Merge(LocalMachine @this, LocalMachine other) => other.SystemName.IsAsciiEqualsIgnoreCase("linux") || other.DistroName is not null || other.DistroFamily is not null
-				? new(other.DistroName ?? @this.DistroName, other.DistroFamily ?? @this.DistroFamily, other.ProcessorArchitecture ?? @this.ProcessorArchitecture, other.SystemVersion == -1 ? @this.SystemVersion : -1)
-				: new(other.SystemName ?? @this.SystemName, other.ProcessorArchitecture ?? @this.ProcessorArchitecture, other.SystemVersion == -1 ? @this.SystemVersion : -1);
+		/// <summary>
+		/// Merges two <see cref="LocalMachine" /> instances,
+		/// using the latter as fallback for the first.
+		/// </summary>
+		/// <param name="main">The machine whose non-null attributes are used over the fallback's</param>
+		/// <param name="fallback">The machine that serves as the fallback for <paramref name="main"/>'s null attributes</param>
+		/// <returns>A new instance of a <see cref="LocalMachine"/></returns>
+		public static LocalMachine MergeWithFallback(LocalMachine main, LocalMachine fallback) => main.SystemName.IsAsciiEqualsIgnoreCase("linux") || main.DistroName is not null || main.DistroFamily is not null
+				? new(main.DistroName ?? fallback.DistroName, main.DistroFamily ?? fallback.DistroFamily, main.ProcessorArchitecture ?? fallback.ProcessorArchitecture, main.SystemVersion == -1 ? fallback.SystemVersion : -1)
+				: new(main.SystemName ?? fallback.SystemName, main.ProcessorArchitecture ?? fallback.ProcessorArchitecture, main.SystemVersion == -1 ? fallback.SystemVersion : -1);
 
-		public LocalMachine Merge(LocalMachine other) => Merge(this, other);
+		/// <summary>
+		/// Merges this <see cref="LocalMachine"/> instance
+		/// with another one, which is treated as a fallback.
+		/// </summary>
+		/// <param name="fallback">The machine that serves as the fallback for this instance's null attributes</param>
+		/// <returns>A new instance of a <see cref="LocalMachine"/></returns>
+		public LocalMachine MergeWithFallback(LocalMachine fallback) => MergeWithFallback(this, fallback);
 
-		public LocalMachine ReverseMerge(LocalMachine other) => Merge(other, this);
+		/// <summary>
+		/// Merges an instance of <see cref="LocalMachine"/> with
+		/// this one, which is treated as a fallback.
+		/// </summary>
+		/// <param name="main">The machine whose non-null attributes are used over this instance's</param>
+		/// <returns>A new instance of a <see cref="LocalMachine"/></returns>
+		public LocalMachine MergeAsFallback(LocalMachine main) => MergeWithFallback(main, this);
 
 		/// <summary>
 		/// Creates a new struct of system attributes for a Linux distribution.

@@ -288,7 +288,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer
 		/// <summary>
 		/// Swaps buffer from primary to secondary (hold) and back.
 		/// </summary>
-		public void SwapBuffer() => usesPrimary ^= true;
+		public void SwapBuffer() => usesPrimary = !usesPrimary;
 
 		/// <summary>
 		/// Returns character at given index.

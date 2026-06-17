@@ -2,6 +2,7 @@ using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Xml;
 
 using OceanApocalypseStudios.RSML.Analyzer;
 using OceanApocalypseStudios.RSML.Analyzer.Semantics;
@@ -24,7 +25,6 @@ namespace OceanApocalypseStudios.RSML.Native
 
 		private static DualTextBuffer? buffer = null;
 		private static nint lastErrorMessage = IntPtr.Zero;
-		private static nint evaluationResult = IntPtr.Zero;
 
 		#region Conversion Helpers
 
@@ -105,14 +105,7 @@ namespace OceanApocalypseStudios.RSML.Native
 		/// </summary>
 		/// <returns>The pointer to the error message</returns>
 		[UnmanagedCallersOnly(EntryPoint = "rsml_get_last_error_message")]
-		public static nint GetLastErrorMessage() => lastErrorMessage;
-
-		/// <summary>
-		/// Returns the last saved evaluation result. Can be a null pointer (<c>IntPtr.Zero</c>).
-		/// </summary>
-		/// <returns>The pointer to the evaluation result</returns>
-		[UnmanagedCallersOnly(EntryPoint = "rsml_get_last_evaluation_result")]
-		public static nint GetLastEvaluationResult() => evaluationResult;		
+		public static nint GetLastErrorMessage() => lastErrorMessage;	
 
 		/// <summary>
 		/// Tokenizes a line of RSML.
@@ -284,104 +277,161 @@ namespace OceanApocalypseStudios.RSML.Native
 		/// <summary>
 		/// Evaluates a RSML document given a machine.
 		/// </summary>
-		/// <param name="systemName">The machine's system name - use a nullptr to leave it undefined</param>
-		/// <param name="distroName">The machine's Linux distro name - use only if Linux; nullptr for undefined</param>
-		/// <param name="distroFamily">The machine's Linux distro family - use only if Linux; nullptr for undefined</param>
-		/// <param name="systemVersion">The machine's system version - use <c>-1</c> for undefined</param>
+		/// <param name="output">The result details</param>
+		/// <param name="systemOrDistroName">The machine's system name (or distro name if Linux) - use a nullptr to leave it undefined</param>
+		/// <param name="distroFamilyNameOrNull">The machine's Linux distro family - use only if Linux; nullptr for undefined or not Linux</param>
+		/// <param name="systemOrDistroMajorVersion">The machine's system version (or distro version if Linux) - use <c>-1</c> for undefined</param>
 		/// <param name="processorArchitecture">The machine's processor architecture - nullptr if undefined</param>
 		/// <returns>
-		/// <c>-4:</c> Input buffer is empty or unassigned
-		/// <c>-3:</c> An unknown error occured
-		/// <c>-2:</c> An error occured while assigning the result (evaluation might or might have not found matches)
-		/// <c>-1:</c> An error occured while evaluating the document OR the result buffer is too small to hold the result<br />
-		/// <c>0:</c> A match was found (result assigned)<br />
-		/// <c>1:</c> No matches were found (result unassigned)<br />
+		/// <list type="bullet"><c>-10:</c> Unknown error during the whole process</list>
+		/// <list type="bullet"><c>-9:</c> Unknown error during evaluation</list>
+		/// <list type="bullet"><c>-8:</c> No pointer was given for the result details</list>
+		/// <list type="bullet"><c>-7:</c> There's no allocated buffer or allocated buffer is empty</list>
+		/// <list type="bullet"><c>-6:</c> User Raised Exception (failed to register error message)</list>
+		/// <list type="bullet"><c>-5:</c> User Raised Exception</list>
+		/// <list type="bullet"><c>-4:</c> Action Error (failed to register error message)</list>
+		/// <list type="bullet"><c>-3:</c> Action Error</list>
+		/// <list type="bullet"><c>-2:</c> Invalid RSML Syntax (failed to register error message)</list>
+		/// <list type="bullet"><c>-1:</c> Invalid RSML Syntax</list>
+		/// <list type="bullet"><c>0:</c> A match was found</list>
+		/// <list type="bullet"><c>1:</c> No matches were found</list>
 		/// </returns>
 		[UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl) }, EntryPoint = "rsml_evaluate_document")]
-		public static int EvaluateRsmlDocument(nint resultBuffer, int systemOrDistroName, int distroFamilyNameOrNull, int systemOrDistroMajorVersion, int processorArchitecture)
+		public static int EvaluateRsmlDocument(nint output, int systemOrDistroName, int distroFamilyNameOrNull, int systemOrDistroMajorVersion, int processorArchitecture)
 		{
-
-			#region Converting values to LocalMachine-compatible
-
-			string? actualSystemName = systemOrDistroName switch
-			{
-
-				0 => null,
-				1 => "windows",
-				2 => "osx",
-				3 => "freebsd",
-				201 => "debian",
-				202 => "fedora",
-				203 => "ubuntu",
-				204 => "archlinux",
-				_ => "UNKNOWN"
-
-			};
-
-			string? actualDistroFamily = (systemOrDistroName is >= 201 and <= 204) ? distroFamilyNameOrNull switch
-			{
-
-				0 => null,
-				201 => "debian",
-				202 => "fedora",
-				203 => "ubuntu",
-				204 => "archlinux",
-				_ => "UNKNOWN"
-
-			} : null;
-
-			string? actualProcessorArchitecture = processorArchitecture switch
-			{
-
-				0 => null,
-				1 => "arm32", // also known as simply "ARM"
-				2 => "arm64",
-				3 => "x64",
-				4 => "x86",
-				5 => "loongarch64",
-				_ => "UNKNOWN"
-
-			};
-
-			LocalMachine actualMachine = LocalMachine.Merge(LocalMachine.CurrentMachine, (systemOrDistroName is >= 201 and <= 204) ? LocalMachine.Linux(actualSystemName, actualDistroFamily, actualProcessorArchitecture, systemOrDistroMajorVersion) : new(actualSystemName, actualProcessorArchitecture, systemOrDistroMajorVersion));
-
-			#endregion
-
-
-			// fixme: fix this method
-			// todo: ensure each error has its own return code instead of a "-1 catch all"
-
-			// xxx: check if buffer is allocated
-			// xxx: check if the resultBuffer is not IntPtr.Zero
-			Evaluator evaluator = new(span);
-			EvaluationResult result;
-
 			try
 			{
-				result = evaluator.Evaluate()
-			}
-			catch (InvalidRsmlSyntax ex)
-			{
+
+				#region Converting values to LocalMachine-compatible
+
+				string? actualSystemName = systemOrDistroName switch
+				{
+
+					0 => null,
+					1 => "windows",
+					2 => "osx",
+					3 => "freebsd",
+					4 => "linux",
+					201 => "debian",
+					202 => "fedora",
+					203 => "ubuntu",
+					204 => "archlinux",
+					_ => "UNKNOWN"
+
+				};
+
+				string? actualDistroFamily = (systemOrDistroName is >= 201 and <= 204) ? distroFamilyNameOrNull switch
+				{
+
+					0 => null,
+					201 => "debian",
+					202 => "fedora",
+					203 => "ubuntu",
+					204 => "archlinux",
+					_ => "UNKNOWN"
+
+				} : null;
+
+				string? actualProcessorArchitecture = processorArchitecture switch
+				{
+
+					0 => null,
+					1 => "arm32",
+					2 => "arm64",
+					3 => "x64",
+					4 => "x86",
+					5 => "loongarch64",
+					_ => "UNKNOWN"
+
+				};
+
+				LocalMachine actualMachine = LocalMachine.MergeWithFallback(LocalMachine.CurrentMachine, (systemOrDistroName is >= 201 and <= 204) ? LocalMachine.Linux(actualSystemName, actualDistroFamily, actualProcessorArchitecture, systemOrDistroMajorVersion) : new(actualSystemName, actualProcessorArchitecture, systemOrDistroMajorVersion));
+
+				#endregion
+
+				// fixme: fix this method
+
+				if (buffer is null || buffer.IsEmpty)
+					return -7;
+
+				if (output == IntPtr.Zero)
+					return -8;
+
+				EvaluationResult result = null!;
+				ReadOnlyMemory<char> content = buffer.ReadUntil((_, _) => false); // this reads everything
+				Evaluator evaluator = new(content);
 
 				try
 				{
+					result = evaluator.Evaluate(actualMachine);
+				}
+				catch (InvalidRsmlSyntax irs) // yeah it's the fucking IRS
+				{
 
-					if (lastErrorMessage != IntPtr.Zero)
-						Marshal.FreeHGlobal(lastErrorMessage);
+					try
+					{
 
-			byte[] asBytes = Encoding.UTF8.GetBytes(result.MatchValue!);
+						if (lastErrorMessage != IntPtr.Zero)
+							Marshal.FreeHGlobal(lastErrorMessage);
+
+						lastErrorMessage = Marshal.StringToHGlobalAuto(irs.Message);
+
+					}
+					catch { return -2; }
+
+					return -1;
 
 				}
-				catch { return -3; }
+				catch (ActionErrorException aee)
+				{
 
-				return 1;
+					try
+					{
+
+						if (lastErrorMessage != IntPtr.Zero)
+							Marshal.FreeHGlobal(lastErrorMessage);
+
+						lastErrorMessage = Marshal.StringToHGlobalAuto(aee.Message);
+
+					}
+					catch { return -4; }
+
+					return -3;
+
+				}
+				catch (UserRaisedException ure)
+				{
+
+					try
+					{
+
+						if (lastErrorMessage != IntPtr.Zero)
+							Marshal.FreeHGlobal(lastErrorMessage);
+
+						lastErrorMessage = Marshal.StringToHGlobalAuto(ure.Message);
+
+					}
+					catch { return -6; }
+
+					return -5;
+
+				}
+				catch { return -9; }
+
+				NativeEvaluationResult* dst = (NativeEvaluationResult*)output.ToPointer();
+
+				int startIndex = result.WasMatchFound ? content.Span.IndexOf(result.MatchValue!) : -1;
+
+				dst->wasMatchFound = (byte)(result.WasMatchFound ? 1 : 0);
+				dst->matchValueStart = startIndex;
+				dst->matchValueEnd = result.WasMatchFound ? (startIndex + result.MatchValue!.Length) : -1;
+
+				return result.WasMatchFound ? 0 : 1;
 
 			}
-			catch { return -3; }
+			catch { return -10; }
 
 		}
-
-		// todo: add the Lexer "tokens-to-RSML" method here
 
 	}
 
