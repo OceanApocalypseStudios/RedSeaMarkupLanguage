@@ -1,5 +1,4 @@
 ﻿using System.Runtime.InteropServices;
-using System.Text;
 
 
 namespace OceanApocalypseStudios.RSML.Native
@@ -11,12 +10,9 @@ namespace OceanApocalypseStudios.RSML.Native
 	public static unsafe class MetadataExports
 	{
 
-		private const string ApiVersion = "2.1.0";
-		private const byte ApiAuthorNameLen = 16;
-
-		private static readonly byte[] authorName = "OceanApocalypseStudios"u8.ToArray();
-		private static readonly byte[] docsLink = Encoding.UTF8.GetBytes($"https://oceanapocalypsestudios.org/RedSeaMarkupLanguage/");
-		private static readonly byte[] utf8ApiVersion = Encoding.UTF8.GetBytes(ApiVersion);
+		private static readonly byte[] authorName = "OceanApocalypseStudios\0\0"u8.ToArray();
+		private static readonly byte[] docsLink = "https://oceanapocalypsestudios.org/RedSeaMarkupLanguage/"u8.ToArray();
+		private static readonly byte[] apiVersion = "2.1.0"u8.ToArray();
 
 		/// <summary>
 		/// Writes the name of the creator (and lead maintainer) of RSML's API to a supplied buffer.
@@ -28,13 +24,13 @@ namespace OceanApocalypseStudios.RSML.Native
 		public static int GetApiAuthorName(byte* buffer, int bufferSize)
 		{
 
-			if (bufferSize < ApiAuthorNameLen)
+			if (bufferSize < authorName.Length)
 				return -1;
 
-			for (int i = 0; i < ApiAuthorNameLen; i++)
+			for (int i = 0; i < authorName.Length; i++)
 				buffer[i] = authorName[i];
 
-			return ApiAuthorNameLen;
+			return authorName.Length;
 
 		}
 
@@ -68,15 +64,13 @@ namespace OceanApocalypseStudios.RSML.Native
 		public static int GetApiVersion(byte* buffer, int bufferSize)
 		{
 
-			int len = utf8ApiVersion.Length;
-
-			if (bufferSize < len)
+			if (bufferSize < apiVersion.Length)
 				return -1;
 
-			for (int i = 0; i < len; i++)
-				buffer[i] = utf8ApiVersion[i];
+			for (int i = 0; i < apiVersion.Length; i++)
+				buffer[i] = apiVersion[i];
 
-			return len;
+			return apiVersion.Length;
 
 		}
 

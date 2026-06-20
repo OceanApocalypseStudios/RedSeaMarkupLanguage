@@ -6,6 +6,7 @@
 		<TargetFramework>net10.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<OutputType>Library</OutputType>
 
 		<!-- Maintainability-related -->
 		<RootNamespace>OceanApocalypseStudios.RSML</RootNamespace>

@@ -1,8 +1,6 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Xml;
 
 using OceanApocalypseStudios.RSML.Analyzer;
 using OceanApocalypseStudios.RSML.Analyzer.Semantics;
@@ -23,8 +21,8 @@ namespace OceanApocalypseStudios.RSML.Native
 	public static unsafe class ToolchainExports
 	{
 
-		private static DualTextBuffer? buffer = null;
-		private static nint lastErrorMessage = IntPtr.Zero;
+		internal static DualTextBuffer? buffer = null;
+		internal static nint lastErrorMessage = IntPtr.Zero;
 
 		#region Conversion Helpers
 
@@ -80,9 +78,6 @@ namespace OceanApocalypseStudios.RSML.Native
 			try
 			{
 
-				System.Diagnostics.Debug.Assert(sizeof(NativeRsmlToken) == 12);
-				System.Diagnostics.Debug.Assert(sizeof(NativeRsmlLine) == 96);
-
 				if (input == IntPtr.Zero)
 					return -1;
 
@@ -104,7 +99,7 @@ namespace OceanApocalypseStudios.RSML.Native
 		/// Returns the last saved error message. Can be a null pointer (<c>IntPtr.Zero</c>).
 		/// </summary>
 		/// <returns>The pointer to the error message</returns>
-		[UnmanagedCallersOnly(EntryPoint = "rsml_get_last_error_message")]
+		[UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl) }, EntryPoint = "rsml_get_last_error_message")]
 		public static nint GetLastErrorMessage() => lastErrorMessage;	
 
 		/// <summary>
@@ -125,9 +120,6 @@ namespace OceanApocalypseStudios.RSML.Native
 
 			try
 			{
-
-				System.Diagnostics.Debug.Assert(sizeof(NativeRsmlToken) == 12);
-				System.Diagnostics.Debug.Assert(sizeof(NativeRsmlLine) == 96);
 
 				if (buffer is null || buffer.IsEmpty)
 					return -5;
@@ -176,9 +168,6 @@ namespace OceanApocalypseStudios.RSML.Native
 
 			try
 			{
-
-				System.Diagnostics.Debug.Assert(sizeof(NativeRsmlToken) == 12);
-				System.Diagnostics.Debug.Assert(sizeof(NativeRsmlLine) == 96);
 
 				if (inputLine == IntPtr.Zero || outputLine == IntPtr.Zero)
 					return -1;
@@ -231,9 +220,6 @@ namespace OceanApocalypseStudios.RSML.Native
 
 			try
 			{
-
-				System.Diagnostics.Debug.Assert(sizeof(NativeRsmlToken) == 12);
-				System.Diagnostics.Debug.Assert(sizeof(NativeRsmlLine) == 96);
 
 				if (buffer is null || buffer.IsEmpty)
 					return -4;

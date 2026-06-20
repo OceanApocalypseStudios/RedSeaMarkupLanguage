@@ -5,13 +5,15 @@
 		<Nullable>enable</Nullable>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<RootNamespace>OceanApocalypseStudios.RSML.Native</RootNamespace>
+		<OutputType>Library</OutputType>
 
 		<!-- Native Publishing -->
 		<PublishAot>true</PublishAot>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-		<NativeLib>true</NativeLib>
+		<NativeLib>Shared</NativeLib>
 		<InvariantGlobalization>true</InvariantGlobalization>
 		<TieredCompilation>true</TieredCompilation>
+		<PublishSingleFile>false</PublishSingleFile>
 
 		<!-- NuGet Properties -->
 		<Title>RSML Native Interop</Title>
