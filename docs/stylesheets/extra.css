@@ -1,3 +1,7 @@
+:root {
+    font-feature-settings: "'calt', 'tnum', 'ss02'";
+}
+
 /* Default (mobile) */
 .md-header__button.md-logo img {
     height: auto;

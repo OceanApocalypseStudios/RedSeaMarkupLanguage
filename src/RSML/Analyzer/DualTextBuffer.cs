@@ -202,7 +202,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer
 
 			CaretPosition += advanceBy;
 
-			return Text[startIndex..CaretPosition];
+			return Text[startIndex..(CaretPosition - newlineLen)];
 
 		}
 
