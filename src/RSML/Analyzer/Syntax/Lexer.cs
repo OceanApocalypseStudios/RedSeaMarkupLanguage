@@ -78,7 +78,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 			int pos = buffer.CaretPosition;
 
 			if (buffer.CaretPosition >= buffer.Length)
-				return new(new(TokenKind.Eol, ^1, 0));
+				return new(new SyntaxToken(TokenKind.Eol, ^1, 0));
 
 			switch (buffer[buffer.CaretPosition])
 			{
@@ -171,7 +171,9 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 					"windows", "osx", "linux", "freebsd", "debian",
 					"ubuntu", "archlinux", "fedora"
 				))
+			{
 				return new(TokenKind.SystemName, startIndex, curPos);
+			}
 
 			if (chars.IsAsciiEqualsIgnoreCase_5("x64", "x86", "arm32", "arm64", "loongarch64"))
 				return new(TokenKind.ArchitectureIdentifier, startIndex, curPos);

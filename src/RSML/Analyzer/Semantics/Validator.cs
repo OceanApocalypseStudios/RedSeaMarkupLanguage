@@ -53,7 +53,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 				throw new InvalidRsmlSyntax("Empty token sequence.");
 
 			if (line.Length > 1 && line[^1].Kind == TokenKind.Eol)
-				line.Remove(line.Last());
+				line.Remove(line.IndexOfLast);
 
 			switch (line[0].Kind)
 			{
@@ -108,12 +108,16 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 						 line[1].Kind != TokenKind.DefinedKeyword &&
 						 line[1].Kind != TokenKind.WildcardKeyword) ||
 						line[2].Kind != TokenKind.LogicPathValue)
+					{
 						throw new InvalidRsmlSyntax("A 3 token long logic path must be a *Operator + SystemName + LogicPathValue overload.");
+					}
 
 					if (!line[1].IsOffLimits &&
 						!context[line[1].BufferRange].IsAsciiEqualsIgnoreCase(ValidSystems) &&
 						line[1].Kind == TokenKind.SystemName)
+					{
 						throw new InvalidRsmlSyntax("Invalid system name as of v2.0.0.");
+					}
 
 					return;
 
@@ -134,13 +138,17 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 					if (!line[1].IsOffLimits &&
 						!context[line[1].BufferRange].IsAsciiEqualsIgnoreCase(ValidSystems) &&
 						line[1].Kind == TokenKind.SystemName)
+					{
 						throw new InvalidRsmlSyntax("Invalid system name as of v2.0.0.");
+					}
 
 					// ReSharper disable once InvertIf
 					if (!line[2].IsOffLimits &&
 						!context[line[2].BufferRange].IsAsciiEqualsIgnoreCase(ValidArchitectures) &&
 						line[2].Kind == TokenKind.ArchitectureIdentifier)
+					{
 						throw new InvalidRsmlSyntax("Invalid architecture identifier as of v2.0.0.");
+					}
 
 					return;
 
@@ -165,12 +173,16 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 					if (!line[1].IsOffLimits &&
 						!context[line[1].BufferRange].IsAsciiEqualsIgnoreCase(ValidSystems) &&
 						line[1].Kind == TokenKind.SystemName)
+					{
 						throw new InvalidRsmlSyntax("Invalid system name as of v2.0.0.");
+					}
 
 					if (!line[3].IsOffLimits &&
 						!context[line[3].BufferRange].IsAsciiEqualsIgnoreCase(ValidArchitectures) &&
 						line[3].Kind == TokenKind.ArchitectureIdentifier)
+					{
 						throw new InvalidRsmlSyntax("Invalid architecture identifier as of v2.0.0.");
+					}
 
 					if (!line[2].IsOffLimits && !Int32.TryParse(context[line[2].BufferRange].Span, out _) && line[2].Kind == TokenKind.MajorVersionId)
 						throw new InvalidRsmlSyntax("The major version must be a valid integer");
@@ -203,16 +215,22 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 					if (!line[1].IsOffLimits &&
 						!context[line[1].BufferRange].IsAsciiEqualsIgnoreCase(ValidSystems) &&
 						line[1].Kind == TokenKind.SystemName)
+					{
 						throw new InvalidRsmlSyntax("Invalid system name as of v2.0.0.");
+					}
 
 					if (!line[4].IsOffLimits &&
 						!context[line[4].BufferRange].IsAsciiEqualsIgnoreCase(ValidArchitectures) &&
 						line[4].Kind == TokenKind.ArchitectureIdentifier)
+					{
 						throw new InvalidRsmlSyntax("Invalid architecture identifier as of v2.0.0.");
+					}
 
 					if (!line[2].IsOffLimits &&
 						!context[line[2].BufferRange].IsAsciiEqualsIgnoreCase(ValidComparators))
+					{
 						throw new InvalidRsmlSyntax("Invalid comparator.");
+					}
 
 					if (!line[3].IsOffLimits && !Int32.TryParse(context[line[3].BufferRange].Span, out _))
 						throw new InvalidRsmlSyntax("The major version must be a valid integer. Wildcards are not compatible with comparators.");

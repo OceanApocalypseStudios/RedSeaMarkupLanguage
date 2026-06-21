@@ -7,7 +7,11 @@ namespace OceanApocalypseStudios.RSML.Toolchain.Compliance
 	/// <summary>
 	/// Compliance with the specification.
 	/// </summary>
-	public struct SpecificationCompliance
+	/// <remarks>
+	/// Creates a new instance of a <see cref="SpecificationCompliance" /> struct.
+	/// </remarks>
+	/// <param name="specificationVersion">The version of the RSML Language Specification a toolchain component implements</param>
+	public struct SpecificationCompliance(string? specificationVersion)
 	{
 
 		/// <summary>
@@ -18,13 +22,7 @@ namespace OceanApocalypseStudios.RSML.Toolchain.Compliance
 		/// <summary>
 		/// The version of the RSML Language Specification a toolchain component implements.
 		/// </summary>
-		public string? SpecificationVersion { get; set; } = null;
-
-		/// <summary>
-		/// Creates a new instance of a <see cref="SpecificationCompliance" /> struct.
-		/// </summary>
-		/// <param name="specificationVersion">The version of the RSML Language Specification a toolchain component implements</param>
-		public SpecificationCompliance(string? specificationVersion) => SpecificationVersion = specificationVersion;
+		public string? SpecificationVersion { get; set; } = specificationVersion;
 
 		/// <summary>
 		/// Creates a new instance of a <see cref="SpecificationCompliance" /> struct with no support for any RSML feature.

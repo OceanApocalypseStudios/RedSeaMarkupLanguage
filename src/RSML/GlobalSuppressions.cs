@@ -5,15 +5,9 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-
-[assembly:
-	SuppressMessage(
-		"Style", "IDE0046:Convert to conditional expression", Justification = "<Pending>", Scope = "member",
-		Target =
-			"~M:RSML.Evaluation.Evaluator.Evaluate(RSML.Machine.LocalMachine,RSML.Reader.IReader,RSML.Analyzer.Syntax.ILexer,RSML.Analyzer.Semantics.INormalizer,RSML.Analyzer.Semantics.IValidator)~RSML.Evaluation.EvaluationResult"
-	)]
-[assembly:
-	SuppressMessage(
-		"Style", "IDE0046:Convert to conditional expression", Justification = "<Pending>", Scope = "member",
-		Target = "~M:RSML.Evaluation.Evaluator.HandleSpecialActionCall(System.String,System.String)~System.Byte"
-	)]
+[assembly: SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "<Pending>", Scope = "member", Target = "~M:OceanApocalypseStudios.RSML.Analyzer.Syntax.Lexer.TokenizeLogicPathComponent(OceanApocalypseStudios.RSML.Analyzer.DualTextBuffer)~System.Nullable{OceanApocalypseStudios.RSML.Analyzer.Syntax.SyntaxToken}")]
+[assembly: SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "<Pending>", Scope = "member", Target = "~M:OceanApocalypseStudios.RSML.Analyzer.Syntax.SyntaxLine.Equals(System.Object)~System.Boolean")]
+[assembly: SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "<Pending>", Scope = "member", Target = "~M:OceanApocalypseStudios.RSML.Analyzer.Syntax.SyntaxLine.GetFirst~OceanApocalypseStudios.RSML.Analyzer.Syntax.SyntaxToken")]
+[assembly: SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "<Pending>", Scope = "member", Target = "~M:OceanApocalypseStudios.RSML.Analyzer.Syntax.SyntaxLine.GetLast~OceanApocalypseStudios.RSML.Analyzer.Syntax.SyntaxToken")]
+[assembly: SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "<Pending>", Scope = "member", Target = "~P:OceanApocalypseStudios.RSML.Analyzer.Syntax.SyntaxLine.IndexOfFirst")]
+[assembly: SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "<Pending>", Scope = "member", Target = "~P:OceanApocalypseStudios.RSML.Analyzer.Syntax.SyntaxLine.IndexOfLast")]

@@ -289,7 +289,7 @@ namespace OceanApocalypseStudios.RSML.Machine
 		/// </summary>
 		/// <param name="fallback">The machine that serves as the fallback for this instance's null attributes</param>
 		/// <returns>A new instance of a <see cref="LocalMachine"/></returns>
-		public LocalMachine MergeWithFallback(LocalMachine fallback) => MergeWithFallback(this, fallback);
+		public readonly LocalMachine MergeWithFallback(LocalMachine fallback) => MergeWithFallback(this, fallback);
 
 		/// <summary>
 		/// Merges an instance of <see cref="LocalMachine"/> with
@@ -297,7 +297,7 @@ namespace OceanApocalypseStudios.RSML.Machine
 		/// </summary>
 		/// <param name="main">The machine whose non-null attributes are used over this instance's</param>
 		/// <returns>A new instance of a <see cref="LocalMachine"/></returns>
-		public LocalMachine MergeAsFallback(LocalMachine main) => MergeWithFallback(main, this);
+		public readonly LocalMachine MergeAsFallback(LocalMachine main) => MergeWithFallback(main, this);
 
 		/// <summary>
 		/// Creates a new struct of system attributes for a Linux distribution.

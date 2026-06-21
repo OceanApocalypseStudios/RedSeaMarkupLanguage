@@ -131,12 +131,8 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 				Normalizer.NormalizeLine(ref tokens, out _);
 				Validator.ValidateLine(tokens, Content);
 
-				if (tokens[tokens.Last()].Kind == TokenKind.Eol)
-					tokens.Remove(tokens.Last());
-
-				Content.SwapBuffer();
-				int i = Content.CaretPosition;
-				Content.SwapBuffer();
+				if (tokens.GetLast().Kind == TokenKind.Eol)
+					tokens.Remove(tokens.IndexOfLast);
 
 				// we basically do length-based checks
 				/*
