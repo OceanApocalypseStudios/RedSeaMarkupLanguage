@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 
 namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
@@ -100,7 +101,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 		/// <summary>
 		/// Checks if the line is empty.
 		/// </summary>
-		public bool IsEmpty => Length <= 0;
+		public readonly bool IsEmpty => Length <= 0;
 
 		/// <summary>
 		/// Creates a new syntax line.
@@ -138,6 +139,50 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 		}
 
 		/// <summary>
+		/// Creates a new syntax line.
+		/// </summary>
+		/// <param name="tokens">An array of tokens with at least 8 tokens</param>
+		/// <exception cref="ArgumentOutOfRangeException">The array has less than 8 tokens</exception>
+		public SyntaxLine(SyntaxToken[] tokens)
+		{
+
+			if (tokens.Length < 8)
+				throw new ArgumentOutOfRangeException(nameof(tokens), "A syntax line as array must have at least 8 tokens");
+
+			Item1 = tokens[0];
+			Item2 = tokens[1];
+			Item3 = tokens[2];
+			Item4 = tokens[3];
+			Item5 = tokens[4];
+			Item6 = tokens[5];
+			Item7 = tokens[6];
+			Item8 = tokens[7];
+
+		}
+
+		/// <summary>
+		/// Creates a new syntax line.
+		/// </summary>
+		/// <param name="tokens">A list of tokens with at least 8 tokens</param>
+		/// <exception cref="ArgumentOutOfRangeException">The list has less than 8 tokens</exception>
+		public SyntaxLine(IList<SyntaxToken> tokens)
+		{
+
+			if (tokens.Count < 8)
+				throw new ArgumentOutOfRangeException(nameof(tokens), "A syntax line as array must have at least 8 tokens");
+
+			Item1 = tokens[0];
+			Item2 = tokens[1];
+			Item3 = tokens[2];
+			Item4 = tokens[3];
+			Item5 = tokens[4];
+			Item6 = tokens[5];
+			Item7 = tokens[6];
+			Item8 = tokens[7];
+
+		}
+
+		/// <summary>
 		/// Removes a token at index.
 		/// </summary>
 		/// <param name="index">The index of the token to remove</param>
@@ -151,7 +196,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 		/// Converts the line into a list of tokens.
 		/// </summary>
 		/// <returns>The tokens</returns>
-		public List<SyntaxToken> ToList()
+		public readonly List<SyntaxToken> ToList()
 		{
 
 			List<SyntaxToken> tokens = [];
@@ -187,69 +232,133 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 		/// <summary>
 		/// Returns the first non-empty token's index.
 		/// </summary>
-		/// <returns>The index</returns>
-		public byte First()
+		/// <returns>The token's index</returns>
+		public readonly byte IndexOfFirst
 		{
 
-			// todo: maybe actually return the token itself??
+			get
+			{
 
-			if (!Item1.IsEmpty)
-				return 0;
+				if (!Item1.IsEmpty)
+					return 0;
 
-			if (!Item2.IsEmpty)
-				return 1;
+				if (!Item2.IsEmpty)
+					return 1;
 
-			if (!Item3.IsEmpty)
-				return 2;
+				if (!Item3.IsEmpty)
+					return 2;
 
-			if (!Item4.IsEmpty)
-				return 3;
+				if (!Item4.IsEmpty)
+					return 3;
 
-			if (!Item5.IsEmpty)
-				return 4;
+				if (!Item5.IsEmpty)
+					return 4;
 
-			if (!Item6.IsEmpty)
-				return 5;
+				if (!Item6.IsEmpty)
+					return 5;
 
-			return !Item7.IsEmpty ? (byte)6 : (byte)7;
+				return (byte)(!Item7.IsEmpty ? 6 : 7);
+
+			}
 
 		}
 
 		/// <summary>
 		/// Returns the last non-empty token's index.
 		/// </summary>
-		/// <returns>The token</returns>
-		public byte Last()
+		/// <returns>The token's index</returns>
+		public readonly byte IndexOfLast
 		{
 
-			// todo: maybe actually return the token itself??
+			get
+			{
 
-			if (!Item8.IsEmpty)
-				return 7;
+				if (!Item8.IsEmpty)
+					return 7;
 
-			if (!Item7.IsEmpty)
-				return 6;
+				if (!Item7.IsEmpty)
+					return 6;
 
-			if (!Item6.IsEmpty)
-				return 5;
+				if (!Item6.IsEmpty)
+					return 5;
 
-			if (!Item5.IsEmpty)
-				return 4;
+				if (!Item5.IsEmpty)
+					return 4;
 
-			if (!Item4.IsEmpty)
-				return 3;
+				if (!Item4.IsEmpty)
+					return 3;
+
+				if (!Item3.IsEmpty)
+					return 2;
+
+				return (byte)(!Item2.IsEmpty ? 1 : 0);
+
+			}
+
+		}
+
+		/// <summary>
+		/// Returns the first non-empty token.
+		/// </summary>
+		/// <returns>The token</returns>
+		public readonly SyntaxToken GetFirst()
+		{
+
+			if (!Item1.IsEmpty)
+				return Item1;
+
+			if (!Item2.IsEmpty)
+				return Item2;
 
 			if (!Item3.IsEmpty)
-				return 2;
+				return Item3;
 
-			return !Item2.IsEmpty ? (byte)1 : (byte)0;
+			if (!Item4.IsEmpty)
+				return Item4;
+
+			if (!Item5.IsEmpty)
+				return Item5;
+
+			if (!Item6.IsEmpty)
+				return Item6;
+
+			return !Item7.IsEmpty ? Item7 : Item8;
+
+		}
+
+		/// <summary>
+		/// Returns the last non-empty token.
+		/// </summary>
+		/// <returns>The token</returns>
+		public readonly SyntaxToken GetLast()
+		{
+
+			if (!Item8.IsEmpty)
+				return Item8;
+
+			if (!Item7.IsEmpty)
+				return Item7;
+
+			if (!Item6.IsEmpty)
+				return Item6;
+
+			if (!Item5.IsEmpty)
+				return Item5;
+
+			if (!Item4.IsEmpty)
+				return Item4;
+
+			if (!Item3.IsEmpty)
+				return Item3;
+
+			return !Item2.IsEmpty ? Item2 : Item1;
 
 		}
 
 		/// <summary>
 		/// The amount of non-empty tokens.
 		/// </summary>
-		public int Length
+		public readonly int Length
 		{
 
 			// todo: see #26
@@ -382,7 +491,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 		public SyntaxToken this[int index]
 		{
 
-			get =>
+			readonly get =>
 				index switch
 				{
 					0 => Item1,
@@ -449,6 +558,62 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 			}
 
 		}
+
+		/// <inheritdoc/>
+		public override readonly bool Equals([NotNullWhen(true)] object? obj)
+		{
+
+			if (obj is SyntaxLine line)
+				return Equals(line);
+
+			if (obj is SyntaxToken[] array)
+				return Equals(new SyntaxLine(array));
+
+			if (obj is IList<SyntaxToken> list)
+				return Equals(new SyntaxLine(list));
+
+			return false;
+
+		}
+
+		/// <summary>
+		/// Checks whether two objects of type <see cref="SyntaxLine"/>
+		/// are equal.
+		/// </summary>
+		/// <param name="line">The line to check against</param>
+		/// <returns>True if equal, false if not</returns>
+		public readonly bool Equals(SyntaxLine line) =>
+			Item1.Equals(line.Item1) &&
+			Item2.Equals(line.Item2) &&
+			Item3.Equals(line.Item3) &&
+			Item4.Equals(line.Item4) &&
+			Item5.Equals(line.Item5) &&
+			Item6.Equals(line.Item6) &&
+			Item7.Equals(line.Item7) &&
+			Item8.Equals(line.Item8);
+
+		/// <summary>
+		/// Checks whether two objects of type <see cref="SyntaxLine"/>
+		/// are equal.
+		/// </summary>
+		/// <param name="line1">One of the lines</param>
+		/// <param name="line2">One of the lines</param>
+		/// <returns>True if equal, false if different</returns>
+		public static bool operator ==(SyntaxLine line1, SyntaxLine line2) =>
+			line1.Equals(line2);
+
+		/// <summary>
+		/// Checks whether two objects of type <see cref="SyntaxLine"/>
+		/// are different.
+		/// </summary>
+		/// <param name="line1">One of the lines</param>
+		/// <param name="line2">One of the lines</param>
+		/// <returns>True if different, false if equal</returns>
+		public static bool operator !=(SyntaxLine line1, SyntaxLine line2) =>
+			!line1.Equals(line2);
+
+		/// <inheritdoc/>
+		public override readonly int GetHashCode() => HashCode.Combine(Item1, Item2, Item3, Item4, Item5, Item6, Item7, Item8);
 
 	}
 

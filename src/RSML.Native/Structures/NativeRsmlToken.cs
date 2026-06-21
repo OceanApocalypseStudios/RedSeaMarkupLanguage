@@ -1,4 +1,8 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.InteropServices;
+
+using OceanApocalypseStudios.RSML.Analyzer.Syntax;
 
 
 namespace OceanApocalypseStudios.RSML.Native.Structures
@@ -26,6 +30,45 @@ namespace OceanApocalypseStudios.RSML.Native.Structures
 		/// </summary>
 		public int endIndex;
 
-    }
+		/// <inheritdoc/>
+		public override readonly bool Equals([NotNullWhen(true)] object? obj) => obj is SyntaxToken token && Equals(token);
+
+		/// <inheritdoc/>
+		public override readonly int GetHashCode() => HashCode.Combine(kind, startIndex, endIndex);
+
+		/// <summary>
+		/// Checks whether two native tokens are equals.
+		/// </summary>
+		/// <param name="token">The other token</param>
+		/// <returns>True if equals</returns>
+		public readonly bool Equals(NativeRsmlToken token) => kind == token.kind && startIndex == token.startIndex && endIndex == token.endIndex;
+
+		/// <summary>
+		/// Checks whether this native token is equals to a given managed token.
+		/// </summary>
+		/// <param name="managedToken">The managed token</param>
+		/// <returns>True if equals</returns>
+		public readonly bool Equals(SyntaxToken managedToken) =>
+			kind == (byte)managedToken.Kind &&
+			startIndex == (managedToken.BufferRange.Start.IsFromEnd ? ~managedToken.BufferRange.Start.Value : managedToken.BufferRange.Start.Value) &&
+			endIndex == (managedToken.BufferRange.End.IsFromEnd ? ~managedToken.BufferRange.End.Value : managedToken.BufferRange.End.Value);
+
+		/// <summary>
+		/// Checks if 2 native tokens are the same.
+		/// </summary>
+		/// <param name="left">One of the tokens</param>
+		/// <param name="right">One of the tokens</param>
+		/// <returns><c>true</c> if they're equals</returns>
+		public static bool operator ==(NativeRsmlToken left, NativeRsmlToken right) => left.Equals(right);
+
+		/// <summary>
+		/// Checks if 2 native tokens are different.
+		/// </summary>
+		/// <param name="left">One of the tokens</param>
+		/// <param name="right">One of the tokens</param>
+		/// <returns><c>true</c> if they're different</returns>
+		public static bool operator !=(NativeRsmlToken left, NativeRsmlToken right) => !(left == right);
+
+	}
 
 }
