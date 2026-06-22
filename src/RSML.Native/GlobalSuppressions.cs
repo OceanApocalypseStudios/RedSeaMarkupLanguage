@@ -6,3 +6,4 @@
 using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "<Pending>", Scope = "member", Target = "~M:OceanApocalypseStudios.RSML.Native.Structures.NativeLine.Equals(System.Object)~System.Boolean")]
+[assembly: SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "<Pending>", Scope = "member", Target = "~M:OceanApocalypseStudios.RSML.Native.Structures.NativeToken.Equals(System.Object)~System.Boolean")]
