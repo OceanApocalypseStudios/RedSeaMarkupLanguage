@@ -2,19 +2,18 @@
 using System.Runtime.CompilerServices;
 
 using OceanApocalypseStudios.RSML.Analyzer.Syntax;
-using OceanApocalypseStudios.RSML.Native.Structures;
 
 
-namespace OceanApocalypseStudios.RSML.Native
+namespace OceanApocalypseStudios.RSML.Native.Structures
 {
 
 	/// <summary>
 	/// Extensions to ease the conversions between
 	/// <see cref="SyntaxToken"/> and <see cref="SyntaxLine"/> and
-	/// their native counterparts (<see cref="NativeRsmlToken"/>
-	/// and <see cref="NativeRsmlLine"/>).
+	/// their native counterparts (<see cref="NativeToken"/>
+	/// and <see cref="NativeLine"/>).
 	/// </summary>
-	public static class NativeStructExtensions
+	public static class SyntaxExtensions
 	{
 
 		/// <summary>
@@ -24,7 +23,7 @@ namespace OceanApocalypseStudios.RSML.Native
 		/// <param name="token">The token to convert</param>
 		/// <returns>A native token</returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static NativeRsmlToken ToNativeToken(this SyntaxToken token) => new()
+		public static NativeToken ToNativeToken(this SyntaxToken token) => new()
 		{
 
 			kind = (byte)token.Kind,
@@ -39,7 +38,7 @@ namespace OceanApocalypseStudios.RSML.Native
 		/// </summary>
 		/// <param name="line">The line to convert</param>
 		/// <returns>A native line</returns>
-		public static NativeRsmlLine ToNativeLine(this SyntaxLine line) => new()
+		public static NativeLine ToNativeLine(this SyntaxLine line) => new()
 		{
 
 			item1 = line.Item1.ToNativeToken(),
@@ -60,7 +59,7 @@ namespace OceanApocalypseStudios.RSML.Native
 		/// <param name="token">The native token to convert</param>
 		/// <returns>A managed (regular) token</returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static SyntaxToken ToToken(this NativeRsmlToken token) => new((TokenKind)token.kind, new(Math.Abs(token.startIndex), token.startIndex < 0), new(Math.Abs(token.endIndex), token.endIndex < 0));
+		public static SyntaxToken ToToken(this NativeToken token) => new((TokenKind)token.kind, new(Math.Abs(token.startIndex), token.startIndex < 0), new(Math.Abs(token.endIndex), token.endIndex < 0));
 
 		/// <summary>
 		/// Converts a <strong>native</strong> RSML syntax line to
@@ -68,7 +67,7 @@ namespace OceanApocalypseStudios.RSML.Native
 		/// </summary>
 		/// <param name="line">The native line to convert</param>
 		/// <returns>A managed (regular) line</returns>
-		public static SyntaxLine ToLine(this NativeRsmlLine line) => new(
+		public static SyntaxLine ToLine(this NativeLine line) => new(
 				line.item1.ToToken(),
 				line.item2.ToToken(),
 				line.item3.ToToken(),
@@ -86,7 +85,7 @@ namespace OceanApocalypseStudios.RSML.Native
 		/// </summary>
 		/// <param name="linePtr">A pointer to the native line to convert</param>
 		/// <returns>A managed (regular) line</returns>
-		public unsafe static SyntaxLine PtrToLine(NativeRsmlLine* linePtr) => new(
+		public unsafe static SyntaxLine PtrToLine(NativeLine* linePtr) => new(
 				linePtr->item1.ToToken(),
 				linePtr->item2.ToToken(),
 				linePtr->item3.ToToken(),
@@ -103,7 +102,7 @@ namespace OceanApocalypseStudios.RSML.Native
 		/// </summary>
 		/// <param name="line">The line to copy</param>
 		/// <param name="linePtr">A pointer referencing the output</param>
-		public unsafe static void CopyToNative(this SyntaxLine line, NativeRsmlLine* linePtr) => *linePtr = line.ToNativeLine();
+		public unsafe static void CopyToNative(this SyntaxLine line, NativeLine* linePtr) => *linePtr = line.ToNativeLine();
 
 	}
 

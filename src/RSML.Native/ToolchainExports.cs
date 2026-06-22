@@ -99,7 +99,7 @@ namespace OceanApocalypseStudios.RSML.Native
 		/// <summary>
 		/// Tokenizes a line of RSML.
 		/// </summary>
-		/// <param name="outputLinePtr">A pointer to the <see cref="NativeRsmlLine"/> instance this method will write to</param>
+		/// <param name="outputLinePtr">A pointer to the <see cref="NativeLine"/> instance this method will write to</param>
 		/// <returns>
 		/// <list type="bullet"><c>-5:</c> There's no allocated buffer<br /></list>
 		/// <list type="bullet"><c>-4:</c> Output token count exceeds 8<br /></list>
@@ -126,7 +126,7 @@ namespace OceanApocalypseStudios.RSML.Native
 				if (line.Length > 8)
 					return -4;
 
-				NativeRsmlLine* dst = (NativeRsmlLine*)outputLinePtr.ToPointer();
+				NativeLine* dst = (NativeLine*)outputLinePtr.ToPointer();
 				line.CopyToNative(dst);
 
 				return 0;
@@ -139,8 +139,8 @@ namespace OceanApocalypseStudios.RSML.Native
 		/// <summary>
 		/// Normalizes a line of RSML.
 		/// </summary>
-		/// <param name="inputLinePtr">A pointer to the <see cref="NativeRsmlLine"/> instance this method will normalize (without writing to input)</param>
-		/// <param name="outputLinePtr">A pointer to the <see cref="NativeRsmlLine"/> instance this method will write to</param>
+		/// <param name="inputLinePtr">A pointer to the <see cref="NativeLine"/> instance this method will normalize (without writing to input)</param>
+		/// <param name="outputLinePtr">A pointer to the <see cref="NativeLine"/> instance this method will write to</param>
 		/// <returns>
 		/// <list type="bullet"><c>-4:</c> Output token count exceeds 8<br /></list>
 		/// <list type="bullet"><c>-3:</c> An error occured while normalizing the input line<br /></list>
@@ -158,8 +158,8 @@ namespace OceanApocalypseStudios.RSML.Native
 				if (inputLinePtr == IntPtr.Zero || outputLinePtr == IntPtr.Zero)
 					return -1;
 
-				NativeRsmlLine* src = (NativeRsmlLine*)inputLinePtr.ToPointer();
-				var line = NativeStructExtensions.PtrToLine(src);
+				NativeLine* src = (NativeLine*)inputLinePtr.ToPointer();
+				var line = SyntaxExtensions.PtrToLine(src);
 
 				if (line.IsEmpty)
 					return -2;
@@ -169,7 +169,7 @@ namespace OceanApocalypseStudios.RSML.Native
 				if (tokenCount > 8)
 					return -4;
 
-				NativeRsmlLine* dst = (NativeRsmlLine*)outputLinePtr.ToPointer();
+				NativeLine* dst = (NativeLine*)outputLinePtr.ToPointer();
 				line.CopyToNative(dst);
 
 				return 0;
@@ -182,7 +182,7 @@ namespace OceanApocalypseStudios.RSML.Native
 		/// <summary>
 		/// Validates a line of RSML.
 		/// </summary>
-		/// <param name="inputLinePtr">A pointer to the <see cref="NativeRsmlLine"/> instance this method will validate</param>
+		/// <param name="inputLinePtr">A pointer to the <see cref="NativeLine"/> instance this method will validate</param>
 		/// <returns>
 		/// <list type="bullet"><c>-4:</c> There's no allocated buffer or allocated buffer is empty<br /></list>
 		/// <list type="bullet"><c>-3:</c> Unknown error<br /></list>
@@ -204,8 +204,8 @@ namespace OceanApocalypseStudios.RSML.Native
 				if (inputLinePtr == IntPtr.Zero)
 					return -1;
 
-				NativeRsmlLine* src = (NativeRsmlLine*)inputLinePtr.ToPointer();
-				var line = NativeStructExtensions.PtrToLine(src);
+				NativeLine* src = (NativeLine*)inputLinePtr.ToPointer();
+				var line = SyntaxExtensions.PtrToLine(src);
 
 				if (line.IsEmpty)
 					return -2;

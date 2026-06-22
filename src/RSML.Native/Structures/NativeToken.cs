@@ -12,7 +12,7 @@ namespace OceanApocalypseStudios.RSML.Native.Structures
 	/// A native-friendly RSML token.
 	/// </summary>
 	[StructLayout(LayoutKind.Sequential)]
-	public struct NativeRsmlToken
+	public struct NativeToken
     {
 
 		/// <summary>
@@ -41,7 +41,7 @@ namespace OceanApocalypseStudios.RSML.Native.Structures
 		/// </summary>
 		/// <param name="token">The other token</param>
 		/// <returns>True if equals</returns>
-		public readonly bool Equals(NativeRsmlToken token) => kind == token.kind && startIndex == token.startIndex && endIndex == token.endIndex;
+		public readonly bool Equals(NativeToken token) => kind == token.kind && startIndex == token.startIndex && endIndex == token.endIndex;
 
 		/// <summary>
 		/// Checks whether this native token is equals to a given managed token.
@@ -50,8 +50,8 @@ namespace OceanApocalypseStudios.RSML.Native.Structures
 		/// <returns>True if equals</returns>
 		public readonly bool Equals(SyntaxToken managedToken) =>
 			kind == (byte)managedToken.Kind &&
-			startIndex == (managedToken.BufferRange.Start.IsFromEnd ? ~managedToken.BufferRange.Start.Value : managedToken.BufferRange.Start.Value) &&
-			endIndex == (managedToken.BufferRange.End.IsFromEnd ? ~managedToken.BufferRange.End.Value : managedToken.BufferRange.End.Value);
+			startIndex == (managedToken.BufferRange.Start.IsFromEnd ? -managedToken.BufferRange.Start.Value : managedToken.BufferRange.Start.Value) &&
+			endIndex == (managedToken.BufferRange.End.IsFromEnd ? -managedToken.BufferRange.End.Value : managedToken.BufferRange.End.Value);
 
 		/// <summary>
 		/// Checks if 2 native tokens are the same.
@@ -59,7 +59,7 @@ namespace OceanApocalypseStudios.RSML.Native.Structures
 		/// <param name="left">One of the tokens</param>
 		/// <param name="right">One of the tokens</param>
 		/// <returns><c>true</c> if they're equals</returns>
-		public static bool operator ==(NativeRsmlToken left, NativeRsmlToken right) => left.Equals(right);
+		public static bool operator ==(NativeToken left, NativeToken right) => left.Equals(right);
 
 		/// <summary>
 		/// Checks if 2 native tokens are different.
@@ -67,7 +67,7 @@ namespace OceanApocalypseStudios.RSML.Native.Structures
 		/// <param name="left">One of the tokens</param>
 		/// <param name="right">One of the tokens</param>
 		/// <returns><c>true</c> if they're different</returns>
-		public static bool operator !=(NativeRsmlToken left, NativeRsmlToken right) => !(left == right);
+		public static bool operator !=(NativeToken left, NativeToken right) => !(left == right);
 
 	}
 

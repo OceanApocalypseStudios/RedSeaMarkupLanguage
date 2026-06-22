@@ -12,54 +12,54 @@ namespace OceanApocalypseStudios.RSML.Native.Structures
 	/// A native-friendly line of RSML containing at most 8 tokens.
 	/// </summary>
 	[StructLayout(LayoutKind.Sequential)]
-	public struct NativeRsmlLine
+	public struct NativeLine
 	{
 
 		/// <summary>
 		/// Token 1.
 		/// </summary>
-		public NativeRsmlToken item1;
+		public NativeToken item1;
 
 		/// <summary>
 		/// Token 2.
 		/// </summary>
-		public NativeRsmlToken item2;
+		public NativeToken item2;
 
 		/// <summary>
 		/// Token 3.
 		/// </summary>
-		public NativeRsmlToken item3;
+		public NativeToken item3;
 
 		/// <summary>
 		/// Token 4.
 		/// </summary>
-		public NativeRsmlToken item4;
+		public NativeToken item4;
 
 		/// <summary>
 		/// Token 5.
 		/// </summary>
-		public NativeRsmlToken item5;
+		public NativeToken item5;
 
 		/// <summary>
 		/// Token 6.
 		/// </summary>
-		public NativeRsmlToken item6;
+		public NativeToken item6;
 
 		/// <summary>
 		/// Token 7.
 		/// </summary>
-		public NativeRsmlToken item7;
+		public NativeToken item7;
 
 		/// <summary>
 		/// Token 8.
 		/// </summary>
-		public NativeRsmlToken item8;
+		public NativeToken item8;
 
 		/// <inheritdoc/>
 		public override readonly bool Equals([NotNullWhen(true)] object? obj)
 		{
 
-			if (obj is NativeRsmlLine nativeLine)
+			if (obj is NativeLine nativeLine)
 				return Equals(nativeLine);
 
 			if (obj is SyntaxLine managedLine)
@@ -77,7 +77,7 @@ namespace OceanApocalypseStudios.RSML.Native.Structures
 		/// </summary>
 		/// <param name="line">The other line</param>
 		/// <returns>True if equals</returns>
-		public readonly bool Equals(NativeRsmlLine line) =>
+		public readonly bool Equals(NativeLine line) =>
 			item1 == line.item1 &&
 			item2 == line.item2 &&
 			item3 == line.item3 &&
@@ -108,7 +108,7 @@ namespace OceanApocalypseStudios.RSML.Native.Structures
 		/// <param name="left">One of the lines</param>
 		/// <param name="right">One of the lines</param>
 		/// <returns><c>true</c> if they're equals</returns>
-		public static bool operator ==(NativeRsmlLine left, NativeRsmlLine right) => left.Equals(right);
+		public static bool operator ==(NativeLine left, NativeLine right) => left.Equals(right);
 
 		/// <summary>
 		/// Checks if 2 native lines are different.
@@ -116,7 +116,7 @@ namespace OceanApocalypseStudios.RSML.Native.Structures
 		/// <param name="left">One of the lines</param>
 		/// <param name="right">One of the lines</param>
 		/// <returns><c>true</c> if they're different</returns>
-		public static bool operator !=(NativeRsmlLine left, NativeRsmlLine right) => !(left == right);
+		public static bool operator !=(NativeLine left, NativeLine right) => !(left == right);
 
 	}
 
