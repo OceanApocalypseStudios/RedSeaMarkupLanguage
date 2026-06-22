@@ -122,6 +122,7 @@ namespace OceanApocalypseStudios.RSML.Tests.Native
 			{
 				Assert.Equal(-2, alloc(data, -2));
 			}
+
 			nint secondErrorMessagePtr = ToolchainExports.lastErrorMessage;
 			Assert.NotEqual(IntPtr.Zero, secondErrorMessagePtr);
 			string? secondErrorMessage = Marshal.PtrToStringAuto(secondErrorMessagePtr);
