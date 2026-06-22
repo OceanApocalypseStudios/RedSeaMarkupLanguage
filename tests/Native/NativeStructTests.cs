@@ -126,7 +126,7 @@ namespace OceanApocalypseStudios.RSML.Tests.Native
 		}
 
 		[Fact]
-		public void NativeToken_EqualsOperator_NativeToken()
+		public void NativeToken_EqualsOperator1_NativeToken()
 		{
 
 			NativeToken nativeToken1 = new()
@@ -144,6 +144,82 @@ namespace OceanApocalypseStudios.RSML.Tests.Native
 			};
 
 			Assert.True(nativeToken1 == nativeToken2);
+
+		}
+
+		[Fact]
+		public void NativeLine_NotEqualsOperator_NativeLine()
+		{
+
+			NativeLine nativeLine1 = new()
+			{
+				item1 = new() { kind = 018, startIndex = 04, endIndex = 008 },
+				item2 = new() { kind = 015, startIndex = 07, endIndex = 010 },
+				item3 = new() { kind = 003, startIndex = -4, endIndex = -01 },
+				item4 = new() { kind = 005, startIndex = 02, endIndex = 007 },
+				item5 = SyntaxToken.Empty.ToNativeToken(),
+				item6 = SyntaxToken.Empty.ToNativeToken(),
+				item7 = SyntaxToken.Empty.ToNativeToken(),
+				item8 = SyntaxToken.Empty.ToNativeToken()
+			};
+
+			NativeLine nativeLine2 = new()
+			{
+				item1 = new() { kind = 015, startIndex = 07, endIndex = 010 },
+				item2 = SyntaxToken.Empty.ToNativeToken(),
+				item3 = new() { kind = 018, startIndex = 04, endIndex = 008 },
+				item4 = new() { kind = 005, startIndex = 02, endIndex = 007 },
+				item5 = SyntaxToken.Empty.ToNativeToken(),
+				item6 = new() { kind = 003, startIndex = -4, endIndex = -01 },
+				item7 = SyntaxToken.Empty.ToNativeToken(),
+				item8 = SyntaxToken.Empty.ToNativeToken()
+			};
+
+			Assert.True(nativeLine1 != nativeLine2);
+
+		}
+
+		[Fact]
+		public void NativeToken_NotEqualsOperator2_NativeToken()
+		{
+
+			NativeToken nativeToken1 = new()
+			{
+				kind = 254,
+				startIndex = -26,
+				endIndex = -1
+			};
+
+			NativeToken nativeToken2 = new()
+			{
+				kind = 254,
+				startIndex = -26,
+				endIndex = -1
+			};
+
+			Assert.False(nativeToken1 != nativeToken2);
+
+		}
+
+		[Fact]
+		public void NativeToken_NotEqualsOperator_NativeToken()
+		{
+
+			NativeToken nativeToken1 = new()
+			{
+				kind = 24,
+				startIndex = 62,
+				endIndex = -1
+			};
+
+			NativeToken nativeToken2 = new()
+			{
+				kind = 254,
+				startIndex = -26,
+				endIndex = 1
+			};
+
+			Assert.True(nativeToken1 != nativeToken2);
 
 		}
 

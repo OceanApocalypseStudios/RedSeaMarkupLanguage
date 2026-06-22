@@ -31,7 +31,18 @@ namespace OceanApocalypseStudios.RSML.Native.Structures
 		public int endIndex;
 
 		/// <inheritdoc/>
-		public override readonly bool Equals([NotNullWhen(true)] object? obj) => obj is SyntaxToken token && Equals(token);
+		public override readonly bool Equals([NotNullWhen(true)] object? obj)
+		{
+
+			if (obj is NativeToken nativeToken)
+				return Equals(nativeToken);
+
+			if (obj is SyntaxToken managedToken)
+				return Equals(managedToken);
+
+			return false;
+
+		}
 
 		/// <inheritdoc/>
 		public override readonly int GetHashCode() => HashCode.Combine(kind, startIndex, endIndex);
