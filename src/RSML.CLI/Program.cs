@@ -17,7 +17,7 @@ namespace OceanApocalypseStudios.RSML.CLI
 	internal partial class Program
 	{
 
-		// xxx: change this later
+		// todo: change this later
 		public const string LanguageVersion = "v2.1.0-dev";
 		public static string? cSharpLogo;
 

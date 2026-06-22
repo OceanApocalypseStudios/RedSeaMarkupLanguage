@@ -1,4 +1,5 @@
 ﻿using OceanApocalypseStudios.RSML.Analyzer.Syntax;
+using OceanApocalypseStudios.RSML.Exceptions;
 using OceanApocalypseStudios.RSML.Toolchain;
 using OceanApocalypseStudios.RSML.Toolchain.Compliance;
 
@@ -105,12 +106,8 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 
 							break;
 
-						// todo: make this stricter (error throw instead of silent clear)
 						default:
-							line.Clear();
-							tokenCount = 0;
-
-							break;
+							throw new InvalidRsmlSyntax("A special action must have either 3 or 4 tokens (EOL included), where the first is the SpecialActionSymbol (@)");
 
 					}
 
@@ -199,7 +196,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 						// no need for eol and clear (it's already eol)
 						case 7:
 							/*
-							 line[6] = eol;
+							line[6] = eol;
 							line[7] = SyntaxToken.Empty;
 							*/
 
@@ -207,24 +204,17 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 
 							break;
 
-						// not a valid form
-						// todo: make this stricter (error throw instead of silent clear)
+						// invalid syntax
 						default:
-							line.Clear();
-							tokenCount = 0;
-
-							break;
+							throw new InvalidRsmlSyntax("A logic path must have between 3 and 7 tokens (EOL included), where the first is one of the allowed operators");
 
 					}
 
 					return;
 
-				// todo: make this stricter (error throw instead of silent clear)
+				// not a valid syntax (non-specific error)
 				default:
-					line.Clear();
-					tokenCount = 0;
-
-					return;
+					throw new InvalidRsmlSyntax("Line syntax does not match any of the allowed syntaxes");
 
 			}
 

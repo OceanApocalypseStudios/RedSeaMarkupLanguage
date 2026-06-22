@@ -112,6 +112,8 @@ namespace OceanApocalypseStudios.RSML.Native
 		public static int TokenizeRsmlLine(nint outputLinePtr)
 		{
 
+			// todo: write tests for this method up next (follow coverage order)
+
 			try
 			{
 

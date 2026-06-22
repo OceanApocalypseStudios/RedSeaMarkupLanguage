@@ -190,7 +190,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 		// todo: ^ Remove(int) leaves gaps
 		// maybe make it automatically bump the ones below up??
 		// problem with this is that we'd have to check if this wouldn't blow the whole codebase up
-		// todo: maybe reusable Compact() method for this thing
+		// xxx: maybe reusable Compact() method for this thing
 
 		/// <summary>
 		/// Converts the line into a list of tokens.
