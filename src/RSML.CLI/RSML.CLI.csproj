@@ -13,7 +13,7 @@
 		<Company>OceanApocalypseStudios</Company>
 		<RootNamespace>OceanApocalypseStudios.RSML.CLI</RootNamespace>
 	</PropertyGroup>
-
+	
 	<ItemGroup>
 		<PackageReference Include="SixLabors.ImageSharp" Version="3.1.11" />
 		<PackageReference Include="Spectre.Console" Version="0.50.1-preview.0.24" />

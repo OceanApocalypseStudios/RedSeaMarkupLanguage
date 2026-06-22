@@ -163,13 +163,13 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 								break;
 
 							case "ThrowError":
-								throw new ActionErrorException("A special action returned an error code.");
+								throw new ActionErrorException("Special action returned error code");
 
 							case "EndAll":
 								return new();
 
 							default:
-								throw new ActionErrorException("Unrecognized special action.");
+								throw new ActionErrorException("Unrecognized special action (possibly a non-standard action)");
 
 						}
 
@@ -180,7 +180,7 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 						{
 
 							return tokens[0].Kind == TokenKind.ThrowErrorOperator
-									   ? throw new UserRaisedException("Error-throw operator used.")
+									   ? throw new UserRaisedException("Error-throwing operator was used")
 									   : new(Content[tokens[4].BufferRange].Span.ToString());
 
 						}
@@ -192,7 +192,7 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 						{
 
 							return tokens[0].Kind == TokenKind.ThrowErrorOperator
-									   ? throw new UserRaisedException("Error-throw operator used.")
+									   ? throw new UserRaisedException("Error-throwing operator was used")
 									   : new(Content[tokens[5].BufferRange].Span.ToString());
 
 						}
@@ -203,7 +203,7 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 						if (tokens[0].Kind == TokenKind.CommentSymbol)
 							break; // it's somehow a comment
 
-						throw new InvalidRsmlSyntax("Unexpected error: invalid line tokenized successfully.");
+						throw new InvalidRsmlSyntax("Invalid line was tokenized successfully");
 
 				}
 
