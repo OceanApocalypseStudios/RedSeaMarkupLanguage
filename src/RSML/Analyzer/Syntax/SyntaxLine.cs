@@ -432,6 +432,9 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 			else if (Item8.IsEmpty)
 				Item8 = token;
 
+			else
+				throw new ArgumentOutOfRangeException(nameof(token), "Maximum length was reached (8)");
+
 		}
 
 		/// <summary>
@@ -462,7 +465,11 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 			else if (Item2.IsEmpty)
 				Item2 = token;
 
-			Item1 = token;
+			else if (Item1.IsEmpty)
+				Item1 = token;
+
+			else
+				throw new ArgumentOutOfRangeException(nameof(token), "Maximum length was reached (8)");
 
 		}
 
