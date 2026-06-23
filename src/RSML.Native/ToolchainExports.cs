@@ -101,10 +101,11 @@ namespace OceanApocalypseStudios.RSML.Native
 		/// </summary>
 		/// <param name="outputLinePtr">A pointer to the <see cref="NativeLine"/> instance this method will write to</param>
 		/// <returns>
-		/// <list type="bullet"><c>-5:</c> There's no allocated buffer<br /></list>
-		/// <list type="bullet"><c>-4:</c> Output token count exceeds 8<br /></list>
-		/// <list type="bullet"><c>-3:</c> An error occured while tokenizing the line<br /></list>
-		/// <list type="bullet"><c>-2:</c> The line is empty<br /></list>
+		/// <list type="bullet"><c>-6:</c> Output token count exceeds 8 (failed to save error message)<br /></list>
+		/// <list type="bullet"><c>-5:</c> Output token count exceeds 8 (error message was saved)<br /></list>
+		/// <list type="bullet"><c>-4:</c> An error occured while tokenizing the line (failed to save error message)<br /></list>
+		/// <list type="bullet"><c>-3:</c> An error occured while tokenizing the line (error message was saved)<br /></list>
+		/// <list type="bullet"><c>-2:</c> There's no allocated buffer or it is empty<br /></list>
 		/// <list type="bullet"><c>-1:</c> The given pointer is null (<c>IntPtr.Zero</c>)<br /></list>
 		/// <list type="bullet"><c>0:</c> Success<br /></list>
 		/// </returns>
@@ -112,21 +113,16 @@ namespace OceanApocalypseStudios.RSML.Native
 		public static int TokenizeRsmlLine(nint outputLinePtr)
 		{
 
-			// todo: write tests for this method up next (follow coverage order)
-
 			try
 			{
 
-				if (buffer is null || buffer.IsEmpty)
-					return -5;
+				if (buffer?.IsEmpty is true or null)
+					return -2;
 
 				if (outputLinePtr == IntPtr.Zero)
 					return -1;
 
 				var line = Lexer.TokenizeLine(buffer);
-
-				if (line.Length > 8)
-					return -4;
 
 				NativeLine* dst = (NativeLine*)outputLinePtr.ToPointer();
 				line.CopyToNative(dst);
@@ -134,7 +130,40 @@ namespace OceanApocalypseStudios.RSML.Native
 				return 0;
 
 			}
-			catch { return -3; }
+			catch (ArgumentOutOfRangeException aoo)
+			{
+
+				try
+				{
+
+					if (lastErrorMessage != IntPtr.Zero)
+						Marshal.FreeHGlobal(lastErrorMessage);
+
+					lastErrorMessage = Marshal.StringToHGlobalAuto(aoo.Message);
+
+				}
+				catch { return -6; }
+
+				return -5;
+
+			}
+			catch (Exception ex)
+			{
+
+				try
+				{
+
+					if (lastErrorMessage != IntPtr.Zero)
+						Marshal.FreeHGlobal(lastErrorMessage);
+
+					lastErrorMessage = Marshal.StringToHGlobalAuto(ex.Message);
+
+				}
+				catch { return -4; }
+
+				return -3;
+
+			}
 
 		}
 
@@ -144,8 +173,9 @@ namespace OceanApocalypseStudios.RSML.Native
 		/// <param name="inputLinePtr">A pointer to the <see cref="NativeLine"/> instance this method will normalize (without writing to input)</param>
 		/// <param name="outputLinePtr">A pointer to the <see cref="NativeLine"/> instance this method will write to</param>
 		/// <returns>
+		/// <list type="bullet"><c>-5:</c> An error occured while normalizing the input line (failed to save error message)<br /></list>
 		/// <list type="bullet"><c>-4:</c> Output token count exceeds 8<br /></list>
-		/// <list type="bullet"><c>-3:</c> An error occured while normalizing the input line<br /></list>
+		/// <list type="bullet"><c>-3:</c> An error occured while normalizing the input line (error message was saved)<br /></list>
 		/// <list type="bullet"><c>-2:</c> The input line is empty<br /></list>
 		/// <list type="bullet"><c>-1:</c> At least one of the given pointers is null (<c>IntPtr.Zero</c>)<br /></list>
 		/// <list type="bullet"><c>0:</c> Success<br /></list>
@@ -177,7 +207,23 @@ namespace OceanApocalypseStudios.RSML.Native
 				return 0;
 
 			}
-			catch { return -3; }
+			catch (Exception ex)
+			{
+
+				try
+				{
+
+					if (lastErrorMessage != IntPtr.Zero)
+						Marshal.FreeHGlobal(lastErrorMessage);
+
+					lastErrorMessage = Marshal.StringToHGlobalAuto(ex.Message);
+
+				}
+				catch { return -5; }
+
+				return -3;
+
+			}
 
 		}
 
@@ -200,7 +246,7 @@ namespace OceanApocalypseStudios.RSML.Native
 			try
 			{
 
-				if (buffer is null || buffer.IsEmpty)
+				if (buffer?.IsEmpty is true or null)
 					return -4;
 
 				if (inputLinePtr == IntPtr.Zero)
@@ -314,7 +360,7 @@ namespace OceanApocalypseStudios.RSML.Native
 
 				#endregion
 
-				if (buffer is null || buffer.IsEmpty)
+				if (buffer?.IsEmpty is true or null)
 					return -7;
 
 				if (outputResultPtr == IntPtr.Zero)
