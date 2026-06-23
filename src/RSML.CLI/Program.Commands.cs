@@ -46,9 +46,9 @@ namespace OceanApocalypseStudios.RSML.CLI
 			return language switch
 			{
 
-				"C#" => CompiledRsmlGenerator.GenerateCSharp(moduleName, result.WasMatchFound ? $"(\"{result.MatchValue!}\")" : "()"),
-				"F#" => CompiledRsmlGenerator.GenerateFSharp(moduleName, result.WasMatchFound ? $"(\"{result.MatchValue!}\")" : "()"),
-				"VB" => CompiledRsmlGenerator.GenerateVisualBasic(moduleName, result.WasMatchFound ? $"(\"{result.MatchValue!}\")" : "()"),
+				"C#" => CompiledRsmlGenerator.GenerateCSharp(moduleName, result.WasMatchFound ? $"(\"{result.MatchValue}\")" : "()"),
+				"F#" => CompiledRsmlGenerator.GenerateFSharp(moduleName, result.WasMatchFound ? $"(\"{result.MatchValue}\")" : "()"),
+				"VB" => CompiledRsmlGenerator.GenerateVisualBasic(moduleName, result.WasMatchFound ? $"(\"{result.MatchValue}\")" : "()"),
 				_ => null
 
 			};
@@ -131,7 +131,7 @@ namespace OceanApocalypseStudios.RSML.CLI
 		public static int GetMachine(LocalMachine machine, bool disableAnsi, string? format)
 		{
 
-			if (disableAnsi || format == "JSON")
+			if (disableAnsi || format != "PlainText")
 			{
 
 				string? x = LocalMachineInfo_NoPretty(machine, format ?? "InvalidValue");
@@ -158,6 +158,8 @@ namespace OceanApocalypseStudios.RSML.CLI
 
 				"PlainText" => LocalMachineOutput.AsPlainText(machine),
 				"JSON" => LocalMachineOutput.AsJson(machine),
+				"Dotnet" => LocalMachineOutput.AsDotnet(machine),
+				"CSharp" => LocalMachineOutput.AsCSharp(machine),
 				_ => null
 
 			};
