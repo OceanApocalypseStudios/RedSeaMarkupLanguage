@@ -13,6 +13,14 @@ namespace OceanApocalypseStudios.RSML.CLI.Helpers
 	internal static class LocalMachineOutput
 	{
 
+		public static string AsDotnet(LocalMachine machine) => machine.DistroName is null
+				? $"new LocalMachine(\"{machine.SystemName}\", \"{machine.ProcessorArchitecture}\", {machine.SystemVersion})"
+				: $"new LocalMachine(\"{machine.DistroName}\", \"{machine.DistroFamily}\", \"{machine.ProcessorArchitecture}\", {machine.SystemVersion})";
+
+		public static string AsCSharp(LocalMachine machine) => machine.DistroName is null
+				? $"new LocalMachine(\"{machine.SystemName}\", \"{machine.ProcessorArchitecture}\", {machine.SystemVersion})"
+				: $"LocalMachine.Linux(\"{machine.DistroName}\", \"{machine.DistroFamily}\", \"{machine.ProcessorArchitecture}\", {machine.SystemVersion})";
+
 		public static string AsJson(LocalMachine machine)
 		{
 

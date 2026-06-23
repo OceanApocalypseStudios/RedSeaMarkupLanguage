@@ -103,7 +103,7 @@ namespace OceanApocalypseStudios.RSML.CLI
 				Description = "The format to output as.",
 				DefaultValueFactory = _ => "PlainText"
 
-			}.AcceptOnlyFromAmong("PlainText", "JSON");
+			}.AcceptOnlyFromAmong("PlainText", "JSON", "Dotnet", "CSharp");
 
 			outputFormatMOpt.Aliases.Add("--format");
 			outputFormatMOpt.Aliases.Add("-o");
