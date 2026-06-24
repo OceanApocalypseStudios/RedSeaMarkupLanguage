@@ -16,7 +16,10 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 		/// <param name="line">The tokens</param>
 		/// <param name="context">The context for the tokens</param>
 		/// <returns>A RSML document</returns>
-		static abstract string CreateDocumentFromTokens(in SyntaxLine line, DualTextBuffer context);
+		static abstract string CreateDocumentFromTokens(
+			in SyntaxLine line,
+			DualTextBuffer context
+		);
 
 		/// <summary>
 		/// Tokenizes a RSML line.

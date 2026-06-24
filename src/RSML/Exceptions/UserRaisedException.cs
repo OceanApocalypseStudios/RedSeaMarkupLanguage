@@ -12,16 +12,16 @@ namespace OceanApocalypseStudios.RSML.Exceptions
 	{
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="UserRaisedException" /> class.
-		/// </summary>
-		protected UserRaisedException() { }
-
-		/// <summary>
 		/// Initializes a new instance of the <see cref="UserRaisedException" />
 		/// with a custom error message.
 		/// </summary>
 		/// <param name="message">The custom error message</param>
 		protected internal UserRaisedException(string message) : base(message) { }
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="UserRaisedException" /> class.
+		/// </summary>
+		protected UserRaisedException() { }
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="UserRaisedException" />
@@ -30,7 +30,10 @@ namespace OceanApocalypseStudios.RSML.Exceptions
 		/// </summary>
 		/// <param name="message"></param>
 		/// <param name="innerException"></param>
-		protected UserRaisedException(string? message, Exception? innerException) : base(message, innerException) { }
+		protected UserRaisedException(
+			string? message,
+			Exception? innerException
+		) : base(message, innerException) { }
 
 	}
 

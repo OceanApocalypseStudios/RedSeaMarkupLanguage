@@ -10,10 +10,6 @@ namespace OceanApocalypseStudios.RSML.Native
 	public static unsafe class MetadataExports
 	{
 
-		private static readonly byte[] authorName = "OceanApocalypseStudios\0\0"u8.ToArray();
-		private static readonly byte[] docsLink = "https://oceanapocalypsestudios.org/RedSeaMarkupLanguage/"u8.ToArray();
-		private static readonly byte[] apiVersion = "2.1.0"u8.ToArray();
-
 		/// <summary>
 		/// Writes the name of the creator (and lead maintainer) of RSML's API to a supplied buffer.
 		/// </summary>
@@ -21,7 +17,10 @@ namespace OceanApocalypseStudios.RSML.Native
 		/// <param name="bufferSize">The size of the given buffer</param>
 		/// <returns>The length of the author name or <c>-1</c> if the given buffer wasn't big enough.</returns>
 		[UnmanagedCallersOnly(EntryPoint = "rsml_get_api_author_name")]
-		public static int GetApiAuthorName(byte* buffer, int bufferSize)
+		public static int GetApiAuthorName(
+			byte* buffer,
+			int bufferSize
+		)
 		{
 
 			if (bufferSize < authorName.Length)
@@ -41,7 +40,10 @@ namespace OceanApocalypseStudios.RSML.Native
 		/// <param name="bufferSize">The size of the given buffer</param>
 		/// <returns>The length of the author name or <c>-1</c> if the given buffer wasn't big enough</returns>
 		[UnmanagedCallersOnly(EntryPoint = "rsml_get_api_documentation_url")]
-		public static int GetApiDocumentationUrl(byte* buffer, int bufferSize)
+		public static int GetApiDocumentationUrl(
+			byte* buffer,
+			int bufferSize
+		)
 		{
 
 			if (bufferSize < docsLink.Length)
@@ -61,7 +63,10 @@ namespace OceanApocalypseStudios.RSML.Native
 		/// <param name="bufferSize">The size of the given buffer</param>
 		/// <returns>The length of the API version string or <c>-1</c> if the given buffer wasn't big enough.</returns>
 		[UnmanagedCallersOnly(EntryPoint = "rsml_get_api_version")]
-		public static int GetApiVersion(byte* buffer, int bufferSize)
+		public static int GetApiVersion(
+			byte* buffer,
+			int bufferSize
+		)
 		{
 
 			if (bufferSize < apiVersion.Length)
@@ -73,6 +78,12 @@ namespace OceanApocalypseStudios.RSML.Native
 			return apiVersion.Length;
 
 		}
+
+		private static readonly byte[] apiVersion = "2.1.0"u8.ToArray();
+
+		private static readonly byte[] authorName = "OceanApocalypseStudios\0\0"u8.ToArray();
+
+		private static readonly byte[] docsLink = "https://oceanapocalypsestudios.org/RedSeaMarkupLanguage/"u8.ToArray();
 
 	}
 

@@ -13,13 +13,6 @@ namespace OceanApocalypseStudios.RSML.Analyzer
 	public sealed class DualTextBuffer
 	{
 
-		private ReadOnlyMemory<char> primary;
-
-		private int primaryCaretPos;
-		private ReadOnlyMemory<char> secondary = ReadOnlyMemory<char>.Empty;
-		private int secondaryCaretPos;
-		private bool usesPrimary = true;
-
 		/// <summary>
 		/// Creates an empty text buffer.
 		/// </summary>
@@ -76,7 +69,10 @@ namespace OceanApocalypseStudios.RSML.Analyzer
 		/// <summary>
 		/// The number of the buffer that is currently in use.
 		/// </summary>
-		public byte BufferNumber => (byte)(usesPrimary ? 1 : 2);
+		public byte BufferNumber =>
+			(byte)(usesPrimary
+					   ? 1
+					   : 2);
 
 		/// <summary>
 		/// The current caret position in the current buffer. Make sure to check against length.
@@ -84,7 +80,10 @@ namespace OceanApocalypseStudios.RSML.Analyzer
 		public int CaretPosition
 		{
 
-			get => usesPrimary ? primaryCaretPos : secondaryCaretPos;
+			get =>
+				usesPrimary
+					? primaryCaretPos
+					: secondaryCaretPos;
 
 			private set
 			{
@@ -104,6 +103,24 @@ namespace OceanApocalypseStudios.RSML.Analyzer
 		public bool IsEmpty => Text.IsEmpty;
 
 		/// <summary>
+		/// Returns character at given index.
+		/// </summary>
+		/// <param name="index">The index</param>
+		public char this[int index] => Text.Span[index];
+
+		/// <summary>
+		/// Returns character at given index.
+		/// </summary>
+		/// <param name="index">The index</param>
+		public char this[Index index] => Text.Span[index];
+
+		/// <summary>
+		/// Returns character at given range.
+		/// </summary>
+		/// <param name="range">The range</param>
+		public ReadOnlyMemory<char> this[Range range] => Text[range];
+
+		/// <summary>
 		/// The length of the buffer.
 		/// </summary>
 		public int Length => Text.Length;
@@ -114,7 +131,10 @@ namespace OceanApocalypseStudios.RSML.Analyzer
 		public ReadOnlyMemory<char> Text
 		{
 
-			get => usesPrimary ? primary : secondary;
+			get =>
+				usesPrimary
+					? primary
+					: secondary;
 
 			set
 			{
@@ -226,7 +246,9 @@ namespace OceanApocalypseStudios.RSML.Analyzer
 
 			}
 
-			return startIndex == CaretPosition ? ReadOnlyMemory<char>.Empty : Text[startIndex..CaretPosition];
+			return startIndex == CaretPosition
+					   ? ReadOnlyMemory<char>.Empty
+					   : Text[startIndex..CaretPosition];
 
 		}
 
@@ -257,7 +279,9 @@ namespace OceanApocalypseStudios.RSML.Analyzer
 
 			}
 
-			return startIndex == CaretPosition ? ReadOnlyMemory<char>.Empty : Text[startIndex..CaretPosition];
+			return startIndex == CaretPosition
+					   ? ReadOnlyMemory<char>.Empty
+					   : Text[startIndex..CaretPosition];
 
 		}
 
@@ -290,23 +314,15 @@ namespace OceanApocalypseStudios.RSML.Analyzer
 		/// </summary>
 		public void SwapBuffer() => usesPrimary = !usesPrimary;
 
-		/// <summary>
-		/// Returns character at given index.
-		/// </summary>
-		/// <param name="index">The index</param>
-		public char this[int index] => Text.Span[index];
+		private ReadOnlyMemory<char> primary;
 
-		/// <summary>
-		/// Returns character at given index.
-		/// </summary>
-		/// <param name="index">The index</param>
-		public char this[Index index] => Text.Span[index];
+		private int primaryCaretPos;
 
-		/// <summary>
-		/// Returns character at given range.
-		/// </summary>
-		/// <param name="range">The range</param>
-		public ReadOnlyMemory<char> this[Range range] => Text[range];
+		private ReadOnlyMemory<char> secondary = ReadOnlyMemory<char>.Empty;
+
+		private int secondaryCaretPos;
+
+		private bool usesPrimary = true;
 
 	}
 

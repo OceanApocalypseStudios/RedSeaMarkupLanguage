@@ -29,7 +29,10 @@ namespace OceanApocalypseStudios.RSML.Exceptions
 		/// </summary>
 		/// <param name="message"></param>
 		/// <param name="innerException"></param>
-		public InvalidRsmlSyntax(string? message, Exception? innerException) : base(message, innerException) { }
+		public InvalidRsmlSyntax(
+			string? message,
+			Exception? innerException
+		) : base(message, innerException) { }
 
 		/// <summary>
 		/// Throws a new syntax exception.
@@ -38,8 +41,16 @@ namespace OceanApocalypseStudios.RSML.Exceptions
 		/// <param name="message1">The message containing a reference to line number</param>
 		/// <param name="message2">A reference-free message</param>
 		/// <exception cref="InvalidRsmlSyntax">The exception</exception>
-		protected internal static void Throw(int lineNum, string message1, string message2) =>
-			throw new InvalidRsmlSyntax(lineNum > 0 ? message1 : message2);
+		protected internal static void Throw(
+			int lineNum,
+			string message1,
+			string message2
+		) =>
+			throw new InvalidRsmlSyntax(
+				lineNum > 0
+					? message1
+					: message2
+			);
 
 	}
 

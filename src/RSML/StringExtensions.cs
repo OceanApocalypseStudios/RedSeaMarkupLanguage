@@ -12,7 +12,10 @@ namespace OceanApocalypseStudios.RSML
 
 		internal const byte AsciiCaseBit = 0x20;
 
-		internal static bool ContainsMemory(this ImmutableArray<ReadOnlyMemory<char>> memories, ReadOnlyMemory<char> memory)
+		internal static bool ContainsMemory(
+			this ImmutableArray<ReadOnlyMemory<char>> memories,
+			ReadOnlyMemory<char> memory
+		)
 		{
 
 			foreach (var m in memories)
@@ -27,35 +30,10 @@ namespace OceanApocalypseStudios.RSML
 
 		}
 
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		private static int CrLfCheck(ReadOnlySpan<char> chars, int index, out byte length)
-		{
-
-			if (index == -1)
-			{
-
-				length = 0;
-
-				return -1;
-
-			}
-
-			if (index != 0 && chars[index - 1] == '\r')
-			{
-
-				length = 2;
-
-				return index - 1;
-
-			}
-
-			length = 1;
-
-			return index;
-
-		}
-
-		internal static int IndexOfNewline(this ReadOnlySpan<char> chars, out byte length)
+		internal static int IndexOfNewline(
+			this ReadOnlySpan<char> chars,
+			out byte length
+		)
 		{
 
 			int nextNewline = chars.IndexOf('\n');
@@ -65,7 +43,10 @@ namespace OceanApocalypseStudios.RSML
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static unsafe bool IsAsciiEqualsIgnoreCase(this ReadOnlySpan<char> chars, string str)
+		internal static unsafe bool IsAsciiEqualsIgnoreCase(
+			this ReadOnlySpan<char> chars,
+			string str
+		)
 		{
 
 			if (chars.Length != str.Length)
@@ -85,8 +66,13 @@ namespace OceanApocalypseStudios.RSML
 					char spanChar = *ptrToSpan++;
 					char strChar = *ptrToStr++;
 
-					spanChar |= spanChar is >= 'A' and <= 'Z' ? (char)AsciiCaseBit : (char)0;
-					strChar |= strChar is >= 'A' and <= 'Z' ? (char)AsciiCaseBit : (char)0;
+					spanChar |= spanChar is >= 'A' and <= 'Z'
+									? (char)AsciiCaseBit
+									: (char)0;
+
+					strChar |= strChar is >= 'A' and <= 'Z'
+								   ? (char)AsciiCaseBit
+								   : (char)0;
 
 					if (spanChar != strChar)
 						return false;
@@ -100,7 +86,10 @@ namespace OceanApocalypseStudios.RSML
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static unsafe bool IsAsciiEqualsIgnoreCase(this ReadOnlyMemory<char> chars, string? str)
+		internal static unsafe bool IsAsciiEqualsIgnoreCase(
+			this ReadOnlyMemory<char> chars,
+			string? str
+		)
 		{
 
 			if (str is null)
@@ -123,8 +112,13 @@ namespace OceanApocalypseStudios.RSML
 					char spanChar = *ptrToSpan++;
 					char strChar = *ptrToStr++;
 
-					spanChar |= spanChar is >= 'A' and <= 'Z' ? (char)AsciiCaseBit : (char)0;
-					strChar |= strChar is >= 'A' and <= 'Z' ? (char)AsciiCaseBit : (char)0;
+					spanChar |= spanChar is >= 'A' and <= 'Z'
+									? (char)AsciiCaseBit
+									: (char)0;
+
+					strChar |= strChar is >= 'A' and <= 'Z'
+								   ? (char)AsciiCaseBit
+								   : (char)0;
 
 					if (spanChar != strChar)
 						return false;
@@ -138,7 +132,10 @@ namespace OceanApocalypseStudios.RSML
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static unsafe bool IsAsciiEqualsIgnoreCase(this ReadOnlyMemory<char> chars, ReadOnlyMemory<char> str)
+		internal static unsafe bool IsAsciiEqualsIgnoreCase(
+			this ReadOnlyMemory<char> chars,
+			ReadOnlyMemory<char> str
+		)
 		{
 
 			if (chars.Length != str.Length)
@@ -158,8 +155,13 @@ namespace OceanApocalypseStudios.RSML
 					char spanChar = *ptrToSpan++;
 					char strChar = *ptrToStr++;
 
-					spanChar |= spanChar is >= 'A' and <= 'Z' ? (char)AsciiCaseBit : (char)0;
-					strChar |= strChar is >= 'A' and <= 'Z' ? (char)AsciiCaseBit : (char)0;
+					spanChar |= spanChar is >= 'A' and <= 'Z'
+									? (char)AsciiCaseBit
+									: (char)0;
+
+					strChar |= strChar is >= 'A' and <= 'Z'
+								   ? (char)AsciiCaseBit
+								   : (char)0;
 
 					if (spanChar != strChar)
 						return false;
@@ -172,7 +174,10 @@ namespace OceanApocalypseStudios.RSML
 
 		}
 
-		internal static bool IsAsciiEqualsIgnoreCase(this ReadOnlyMemory<char> chars, ImmutableArray<ReadOnlyMemory<char>> arr)
+		internal static bool IsAsciiEqualsIgnoreCase(
+			this ReadOnlyMemory<char> chars,
+			ImmutableArray<ReadOnlyMemory<char>> arr
+		)
 		{
 
 			// I want performance, not linq ass
@@ -274,13 +279,25 @@ namespace OceanApocalypseStudios.RSML
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static bool IsEquals(this ReadOnlySpan<char> chars, string str) => chars.SequenceEqual(str);
+		internal static bool IsEquals(
+			this ReadOnlySpan<char> chars,
+			string str
+		) =>
+			chars.SequenceEqual(str);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static bool IsEquals(this ReadOnlyMemory<char> chars, string? str) => str is not null && chars.Span.IsEquals(str);
+		internal static bool IsEquals(
+			this ReadOnlyMemory<char> chars,
+			string? str
+		) =>
+			str is not null && chars.Span.IsEquals(str);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		internal static bool IsEquals(this ReadOnlyMemory<char> chars, ReadOnlyMemory<char> memory) => chars.Span.SequenceEqual(memory.Span);
+		internal static bool IsEquals(
+			this ReadOnlyMemory<char> chars,
+			ReadOnlyMemory<char> memory
+		) =>
+			chars.Span.SequenceEqual(memory.Span);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static bool IsEquals_8(
@@ -360,6 +377,38 @@ namespace OceanApocalypseStudios.RSML
 			}
 
 			return true;
+
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		private static int CrLfCheck(
+			ReadOnlySpan<char> chars,
+			int index,
+			out byte length
+		)
+		{
+
+			if (index == -1)
+			{
+
+				length = 0;
+
+				return -1;
+
+			}
+
+			if (index != 0 && chars[index - 1] == '\r')
+			{
+
+				length = 2;
+
+				return index - 1;
+
+			}
+
+			length = 1;
+
+			return index;
 
 		}
 

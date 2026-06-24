@@ -3,7 +3,9 @@ using System.Runtime.CompilerServices;
 
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Configs;
+using BenchmarkDotNet.Jobs;
 
+using OceanApocalypseStudios.RSML.Benchmarks.Dataset;
 using OceanApocalypseStudios.RSML.Evaluation;
 using OceanApocalypseStudios.RSML.Machine;
 
@@ -11,31 +13,18 @@ using OceanApocalypseStudios.RSML.Machine;
 namespace OceanApocalypseStudios.RSML.Benchmarks
 {
 
-	[MemoryDiagnoser(true)]
-	[SimpleJob(BenchmarkDotNet.Jobs.RuntimeMoniker.Net10_0)]
-	[SimpleJob(BenchmarkDotNet.Jobs.RuntimeMoniker.NativeAot10_0)]
+	[MemoryDiagnoser]
+	[SimpleJob(RuntimeMoniker.Net10_0)]
+	[SimpleJob(RuntimeMoniker.NativeAot10_0)]
 	[GroupBenchmarksBy(BenchmarkLogicalGroupRule.ByCategory)]
 	[HideColumns("Job", "StdDev")]
-	[MarkdownExporter, HtmlExporter, CsvExporter, RPlotExporter]
+	[MarkdownExporter]
+	[HtmlExporter]
+	[CsvExporter]
+	[RPlotExporter]
 	[SuppressMessage("Performance", "CA1822:Mark members as static")]
 	public class EvaluatorBenchmarks
 	{
-
-		private readonly LocalMachine ubuntu = new("ubuntu", null, null);
-
-		private Evaluator complexEvaluator1 = null!;
-		private Evaluator complexEvaluator2 = null!;
-		private Evaluator complexEvaluator3 = null!;
-
-		private Evaluator smallEvaluator = null!;
-		private Evaluator mediumEvaluator = null!;
-		private Evaluator largeEvaluator = null!;
-
-		private Evaluator primitiveEvaluatorAction = null!;
-		private Evaluator primitiveEvaluatorComment = null!;
-		private Evaluator primitiveEvaluatorCommentWs = null!;
-		private Evaluator primitiveEvaluatorLogic = null!;
-		private Evaluator primitiveEvaluatorNewlines = null!;
 
 		[Benchmark]
 		[BenchmarkCategory("Evaluator")]
@@ -99,17 +88,21 @@ namespace OceanApocalypseStudios.RSML.Benchmarks
 				"# This is not a big comment, but also not really a small one. Either ways, this will let us test the method and benchmark it somewhat accurately."
 			);
 
+		[Benchmark(Baseline = true)]
+		[BenchmarkCategory("IsComment")]
+		public void IsComment_True_Small() => Evaluator.IsComment("# small");
+
 		[IterationSetup]
 		public void Setup()
 		{
 
-			complexEvaluator1 = CreateConfiguredParser(Dataset.ComplexContent1.Data);
-			complexEvaluator2 = CreateConfiguredParser(Dataset.ComplexContent2.Data);
-			complexEvaluator3 = CreateConfiguredParser(Dataset.ComplexContent3.Data);
+			complexEvaluator1 = CreateConfiguredParser(ComplexContent1.Data);
+			complexEvaluator2 = CreateConfiguredParser(ComplexContent2.Data);
+			complexEvaluator3 = CreateConfiguredParser(ComplexContent3.Data);
 
 			smallEvaluator = CreateConfiguredParser("-> windows \"value\"\n@Void arg\n# Comment");
-			mediumEvaluator = CreateConfiguredParser(Dataset.MediumContent.Data);
-			largeEvaluator = CreateConfiguredParser(Dataset.LargeContent.Data);
+			mediumEvaluator = CreateConfiguredParser(MediumContent.Data);
+			largeEvaluator = CreateConfiguredParser(LargeContent.Data);
 
 			primitiveEvaluatorAction = CreateConfiguredParser("@Void\n@Void\n@EndAll");
 			primitiveEvaluatorComment = CreateConfiguredParser("# comment");
@@ -119,9 +112,29 @@ namespace OceanApocalypseStudios.RSML.Benchmarks
 
 		}
 
-		[Benchmark(Baseline = true)]
-		[BenchmarkCategory("IsComment")]
-		public void IsComment_True_Small() => Evaluator.IsComment("# small");
+		private readonly LocalMachine ubuntu = new("ubuntu", null, null);
+
+		private Evaluator complexEvaluator1 = null!;
+
+		private Evaluator complexEvaluator2 = null!;
+
+		private Evaluator complexEvaluator3 = null!;
+
+		private Evaluator largeEvaluator = null!;
+
+		private Evaluator mediumEvaluator = null!;
+
+		private Evaluator primitiveEvaluatorAction = null!;
+
+		private Evaluator primitiveEvaluatorComment = null!;
+
+		private Evaluator primitiveEvaluatorCommentWs = null!;
+
+		private Evaluator primitiveEvaluatorLogic = null!;
+
+		private Evaluator primitiveEvaluatorNewlines = null!;
+
+		private Evaluator smallEvaluator = null!;
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static Evaluator CreateConfiguredParser(string content) => new(content);

@@ -13,46 +13,6 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 	{
 
 		/// <summary>
-		/// First token.
-		/// </summary>
-		public SyntaxToken Item1 { get; set; } = SyntaxToken.Empty;
-
-		/// <summary>
-		/// Second token.
-		/// </summary>
-		public SyntaxToken Item2 { get; set; } = SyntaxToken.Empty;
-
-		/// <summary>
-		/// Third token.
-		/// </summary>
-		public SyntaxToken Item3 { get; set; } = SyntaxToken.Empty;
-
-		/// <summary>
-		/// Fourth token.
-		/// </summary>
-		public SyntaxToken Item4 { get; set; } = SyntaxToken.Empty;
-
-		/// <summary>
-		/// Fifth token.
-		/// </summary>
-		public SyntaxToken Item5 { get; set; } = SyntaxToken.Empty;
-
-		/// <summary>
-		/// Sixth token.
-		/// </summary>
-		public SyntaxToken Item6 { get; set; } = SyntaxToken.Empty;
-
-		/// <summary>
-		/// Seventh token.
-		/// </summary>
-		public SyntaxToken Item7 { get; set; } = SyntaxToken.Empty;
-
-		/// <summary>
-		/// Eighth token.
-		/// </summary>
-		public SyntaxToken Item8 { get; set; } = SyntaxToken.Empty;
-
-		/// <summary>
 		/// Creates a new syntax line.
 		/// </summary>
 		/// <param name="token">A token</param>
@@ -64,7 +24,11 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 		/// <param name="token1"></param>
 		/// <param name="token2"></param>
 		/// <param name="token3"></param>
-		public SyntaxLine(SyntaxToken token1, SyntaxToken token2, SyntaxToken token3)
+		public SyntaxLine(
+			SyntaxToken token1,
+			SyntaxToken token2,
+			SyntaxToken token3
+		)
 		{
 
 			Item1 = token1;
@@ -97,11 +61,6 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 			Item5 = token5;
 
 		}
-
-		/// <summary>
-		/// Checks if the line is empty.
-		/// </summary>
-		public readonly bool IsEmpty => Length <= 0;
 
 		/// <summary>
 		/// Creates a new syntax line.
@@ -183,53 +142,6 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 		}
 
 		/// <summary>
-		/// Removes a token at index.
-		/// </summary>
-		/// <param name="index">The index of the token to remove</param>
-		public void Remove(int index) => this[index] = SyntaxToken.Empty;
-		// todo: ^ Remove(int) leaves gaps
-		// maybe make it automatically bump the ones below up??
-		// problem with this is that we'd have to check if this wouldn't blow the whole codebase up
-		// xxx: maybe reusable Compact() method for this thing
-
-		/// <summary>
-		/// Converts the line into a list of tokens.
-		/// </summary>
-		/// <returns>The tokens</returns>
-		public readonly List<SyntaxToken> ToList()
-		{
-
-			List<SyntaxToken> tokens = [];
-
-			if (!Item1.IsEmpty)
-				tokens.Add(Item1);
-
-			if (!Item2.IsEmpty)
-				tokens.Add(Item2);
-
-			if (!Item3.IsEmpty)
-				tokens.Add(Item3);
-
-			if (!Item4.IsEmpty)
-				tokens.Add(Item4);
-
-			if (!Item5.IsEmpty)
-				tokens.Add(Item5);
-
-			if (!Item6.IsEmpty)
-				tokens.Add(Item6);
-
-			if (!Item7.IsEmpty)
-				tokens.Add(Item7);
-
-			if (!Item8.IsEmpty)
-				tokens.Add(Item8);
-
-			return tokens;
-
-		}
-
-		/// <summary>
 		/// Returns the first non-empty token's index.
 		/// </summary>
 		/// <returns>The token's index</returns>
@@ -257,7 +169,9 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 				if (!Item6.IsEmpty)
 					return 5;
 
-				return (byte)(!Item7.IsEmpty ? 6 : 7);
+				return (byte)(!Item7.IsEmpty
+								  ? 6
+								  : 7);
 
 			}
 
@@ -291,69 +205,134 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 				if (!Item3.IsEmpty)
 					return 2;
 
-				return (byte)(!Item2.IsEmpty ? 1 : 0);
+				return (byte)(!Item2.IsEmpty
+								  ? 1
+								  : 0);
 
 			}
 
 		}
 
 		/// <summary>
-		/// Returns the first non-empty token.
+		/// Checks if the line is empty.
 		/// </summary>
-		/// <returns>The token</returns>
-		public readonly SyntaxToken GetFirst()
+		public readonly bool IsEmpty => Length <= 0;
+
+		/// <summary>
+		/// Accesses a token.
+		/// </summary>
+		/// <param name="index">The index of the token</param>
+		/// <exception cref="IndexOutOfRangeException">The index exceeds the amount of tokens</exception>
+		public SyntaxToken this[int index]
 		{
 
-			if (!Item1.IsEmpty)
-				return Item1;
+			readonly get =>
+				index switch
+				{
+					0 => Item1,
+					1 => Item2,
+					2 => Item3,
+					3 => Item4,
+					4 => Item5,
+					5 => Item6,
+					6 => Item7,
+					7 => Item8,
+					_ => throw new IndexOutOfRangeException("No such item.")
+				};
 
-			if (!Item2.IsEmpty)
-				return Item2;
+			set
+			{
 
-			if (!Item3.IsEmpty)
-				return Item3;
+				switch (index)
+				{
+					case 0:
+						Item1 = value;
 
-			if (!Item4.IsEmpty)
-				return Item4;
+						break;
 
-			if (!Item5.IsEmpty)
-				return Item5;
+					case 1:
+						Item2 = value;
 
-			if (!Item6.IsEmpty)
-				return Item6;
+						break;
 
-			return !Item7.IsEmpty ? Item7 : Item8;
+					case 2:
+						Item3 = value;
+
+						break;
+
+					case 3:
+						Item4 = value;
+
+						break;
+
+					case 4:
+						Item5 = value;
+
+						break;
+
+					case 5:
+						Item6 = value;
+
+						break;
+
+					case 6:
+						Item7 = value;
+
+						break;
+
+					case 7:
+						Item8 = value;
+
+						break;
+
+					default:
+						throw new IndexOutOfRangeException("No such item.");
+
+				}
+
+			}
 
 		}
 
 		/// <summary>
-		/// Returns the last non-empty token.
+		/// First token.
 		/// </summary>
-		/// <returns>The token</returns>
-		public readonly SyntaxToken GetLast()
-		{
+		public SyntaxToken Item1 { get; set; } = SyntaxToken.Empty;
 
-			if (!Item8.IsEmpty)
-				return Item8;
+		/// <summary>
+		/// Second token.
+		/// </summary>
+		public SyntaxToken Item2 { get; set; } = SyntaxToken.Empty;
 
-			if (!Item7.IsEmpty)
-				return Item7;
+		/// <summary>
+		/// Third token.
+		/// </summary>
+		public SyntaxToken Item3 { get; set; } = SyntaxToken.Empty;
 
-			if (!Item6.IsEmpty)
-				return Item6;
+		/// <summary>
+		/// Fourth token.
+		/// </summary>
+		public SyntaxToken Item4 { get; set; } = SyntaxToken.Empty;
 
-			if (!Item5.IsEmpty)
-				return Item5;
+		/// <summary>
+		/// Fifth token.
+		/// </summary>
+		public SyntaxToken Item5 { get; set; } = SyntaxToken.Empty;
 
-			if (!Item4.IsEmpty)
-				return Item4;
+		/// <summary>
+		/// Sixth token.
+		/// </summary>
+		public SyntaxToken Item6 { get; set; } = SyntaxToken.Empty;
 
-			if (!Item3.IsEmpty)
-				return Item3;
+		/// <summary>
+		/// Seventh token.
+		/// </summary>
+		public SyntaxToken Item7 { get; set; } = SyntaxToken.Empty;
 
-			return !Item2.IsEmpty ? Item2 : Item1;
-
-		}
+		/// <summary>
+		/// Eighth token.
+		/// </summary>
+		public SyntaxToken Item8 { get; set; } = SyntaxToken.Empty;
 
 		/// <summary>
 		/// The amount of non-empty tokens.
@@ -400,6 +379,32 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 			}
 
 		}
+
+		/// <summary>
+		/// Checks whether two objects of type <see cref="SyntaxLine" />
+		/// are equal.
+		/// </summary>
+		/// <param name="line1">One of the lines</param>
+		/// <param name="line2">One of the lines</param>
+		/// <returns>True if equal, false if different</returns>
+		public static bool operator ==(
+			SyntaxLine line1,
+			SyntaxLine line2
+		) =>
+			line1.Equals(line2);
+
+		/// <summary>
+		/// Checks whether two objects of type <see cref="SyntaxLine" />
+		/// are different.
+		/// </summary>
+		/// <param name="line1">One of the lines</param>
+		/// <param name="line2">One of the lines</param>
+		/// <returns>True if different, false if equal</returns>
+		public static bool operator !=(
+			SyntaxLine line1,
+			SyntaxLine line2
+		) =>
+			!line1.Equals(line2);
 
 		/// <summary>
 		/// Adds a token to the start of the line.
@@ -490,101 +495,25 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 
 		}
 
-		/// <summary>
-		/// Accesses a token.
-		/// </summary>
-		/// <param name="index">The index of the token</param>
-		/// <exception cref="IndexOutOfRangeException">The index exceeds the amount of tokens</exception>
-		public SyntaxToken this[int index]
-		{
-
-			readonly get =>
-				index switch
-				{
-					0 => Item1,
-					1 => Item2,
-					2 => Item3,
-					3 => Item4,
-					4 => Item5,
-					5 => Item6,
-					6 => Item7,
-					7 => Item8,
-					_ => throw new IndexOutOfRangeException("No such item.")
-				};
-
-			set
-			{
-
-				switch (index)
-				{
-					case 0:
-						Item1 = value;
-
-						break;
-
-					case 1:
-						Item2 = value;
-
-						break;
-
-					case 2:
-						Item3 = value;
-
-						break;
-
-					case 3:
-						Item4 = value;
-
-						break;
-
-					case 4:
-						Item5 = value;
-
-						break;
-
-					case 5:
-						Item6 = value;
-
-						break;
-
-					case 6:
-						Item7 = value;
-
-						break;
-
-					case 7:
-						Item8 = value;
-
-						break;
-
-					default:
-						throw new IndexOutOfRangeException("No such item.");
-
-				}
-
-			}
-
-		}
-
-		/// <inheritdoc/>
-		public override readonly bool Equals([NotNullWhen(true)] object? obj)
+		/// <inheritdoc />
+		public readonly override bool Equals([NotNullWhen(true)] object? obj)
 		{
 
 			if (obj is SyntaxLine line)
 				return Equals(line);
 
 			if (obj is SyntaxToken[] array)
-				return Equals(new SyntaxLine(array));
+				return Equals(new(array));
 
 			if (obj is IList<SyntaxToken> list)
-				return Equals(new SyntaxLine(list));
+				return Equals(new(list));
 
 			return false;
 
 		}
 
 		/// <summary>
-		/// Checks whether two objects of type <see cref="SyntaxLine"/>
+		/// Checks whether two objects of type <see cref="SyntaxLine" />
 		/// are equal.
 		/// </summary>
 		/// <param name="line">The line to check against</param>
@@ -600,27 +529,121 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 			Item8.Equals(line.Item8);
 
 		/// <summary>
-		/// Checks whether two objects of type <see cref="SyntaxLine"/>
-		/// are equal.
+		/// Returns the first non-empty token.
 		/// </summary>
-		/// <param name="line1">One of the lines</param>
-		/// <param name="line2">One of the lines</param>
-		/// <returns>True if equal, false if different</returns>
-		public static bool operator ==(SyntaxLine line1, SyntaxLine line2) =>
-			line1.Equals(line2);
+		/// <returns>The token</returns>
+		public readonly SyntaxToken GetFirst()
+		{
+
+			if (!Item1.IsEmpty)
+				return Item1;
+
+			if (!Item2.IsEmpty)
+				return Item2;
+
+			if (!Item3.IsEmpty)
+				return Item3;
+
+			if (!Item4.IsEmpty)
+				return Item4;
+
+			if (!Item5.IsEmpty)
+				return Item5;
+
+			if (!Item6.IsEmpty)
+				return Item6;
+
+			return !Item7.IsEmpty
+					   ? Item7
+					   : Item8;
+
+		}
+
+		/// <inheritdoc />
+		public readonly override int GetHashCode() =>
+			HashCode.Combine(
+				Item1, Item2, Item3, Item4, Item5,
+				Item6, Item7, Item8
+			);
 
 		/// <summary>
-		/// Checks whether two objects of type <see cref="SyntaxLine"/>
-		/// are different.
+		/// Returns the last non-empty token.
 		/// </summary>
-		/// <param name="line1">One of the lines</param>
-		/// <param name="line2">One of the lines</param>
-		/// <returns>True if different, false if equal</returns>
-		public static bool operator !=(SyntaxLine line1, SyntaxLine line2) =>
-			!line1.Equals(line2);
+		/// <returns>The token</returns>
+		public readonly SyntaxToken GetLast()
+		{
 
-		/// <inheritdoc/>
-		public override readonly int GetHashCode() => HashCode.Combine(Item1, Item2, Item3, Item4, Item5, Item6, Item7, Item8);
+			if (!Item8.IsEmpty)
+				return Item8;
+
+			if (!Item7.IsEmpty)
+				return Item7;
+
+			if (!Item6.IsEmpty)
+				return Item6;
+
+			if (!Item5.IsEmpty)
+				return Item5;
+
+			if (!Item4.IsEmpty)
+				return Item4;
+
+			if (!Item3.IsEmpty)
+				return Item3;
+
+			return !Item2.IsEmpty
+					   ? Item2
+					   : Item1;
+
+		}
+
+		/// <summary>
+		/// Removes a token at index.
+		/// </summary>
+		/// <param name="index">The index of the token to remove</param>
+		public void Remove(int index) => this[index] = SyntaxToken.Empty;
+
+		// todo: ^ Remove(int) leaves gaps
+		// maybe make it automatically bump the ones below up??
+		// problem with this is that we'd have to check if this wouldn't blow the whole codebase up
+		// xxx: maybe reusable Compact() method for this thing
+
+		/// <summary>
+		/// Converts the line into a list of tokens.
+		/// </summary>
+		/// <returns>The tokens</returns>
+		public readonly List<SyntaxToken> ToList()
+		{
+
+			List<SyntaxToken> tokens = [ ];
+
+			if (!Item1.IsEmpty)
+				tokens.Add(Item1);
+
+			if (!Item2.IsEmpty)
+				tokens.Add(Item2);
+
+			if (!Item3.IsEmpty)
+				tokens.Add(Item3);
+
+			if (!Item4.IsEmpty)
+				tokens.Add(Item4);
+
+			if (!Item5.IsEmpty)
+				tokens.Add(Item5);
+
+			if (!Item6.IsEmpty)
+				tokens.Add(Item6);
+
+			if (!Item7.IsEmpty)
+				tokens.Add(Item7);
+
+			if (!Item8.IsEmpty)
+				tokens.Add(Item8);
+
+			return tokens;
+
+		}
 
 	}
 

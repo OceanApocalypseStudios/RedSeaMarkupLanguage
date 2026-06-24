@@ -29,7 +29,10 @@ namespace OceanApocalypseStudios.RSML.Exceptions
 		/// </summary>
 		/// <param name="message"></param>
 		/// <param name="innerException"></param>
-		public ActionErrorException(string? message, Exception? innerException) : base(message, innerException) { }
+		public ActionErrorException(
+			string? message,
+			Exception? innerException
+		) : base(message, innerException) { }
 
 	}
 

@@ -1,9 +1,6 @@
 ﻿namespace OceanApocalypseStudios.RSML.Tests
 {
 
-	public class MachineTests
-	{
-
-	}
+	public class MachineTests { }
 
 }

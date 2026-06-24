@@ -13,11 +13,6 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 	public sealed class Normalizer : INormalizer
 	{
 
-		private const string ApiVersion = "2.0.0";
-		private static readonly SyntaxToken eol = TokenBank.eolToken;
-
-		private static readonly SyntaxToken wildcard = TokenBank.wildcardToken;
-
 		/// <summary>
 		/// Creates a new Normalizer instance.
 		/// </summary>
@@ -27,7 +22,10 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 		public static SpecificationCompliance SpecificationCompliance => SpecificationCompliance.CreateFull(ApiVersion);
 
 		/// <inheritdoc />
-		public static void NormalizeLine(ref SyntaxLine line, out int tokenCount)
+		public static void NormalizeLine(
+			ref SyntaxLine line,
+			out int tokenCount
+		)
 		{
 
 			if (line.Length == 0)
@@ -107,7 +105,9 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 							break;
 
 						default:
-							throw new InvalidRsmlSyntax("A special action must have either 3 or 4 tokens (EOL included), where the first is the SpecialActionSymbol (@)");
+							throw new InvalidRsmlSyntax(
+								"A special action must have either 3 or 4 tokens (EOL included), where the first is the SpecialActionSymbol (@)"
+							);
 
 					}
 
@@ -206,7 +206,9 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 
 						// invalid syntax
 						default:
-							throw new InvalidRsmlSyntax("A logic path must have between 3 and 7 tokens (EOL included), where the first is one of the allowed operators");
+							throw new InvalidRsmlSyntax(
+								"A logic path must have between 3 and 7 tokens (EOL included), where the first is one of the allowed operators"
+							);
 
 					}
 
@@ -219,6 +221,12 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 			}
 
 		}
+
+		private const string ApiVersion = "2.0.0";
+
+		private static readonly SyntaxToken eol = TokenBank.eolToken;
+
+		private static readonly SyntaxToken wildcard = TokenBank.wildcardToken;
 
 	}
 

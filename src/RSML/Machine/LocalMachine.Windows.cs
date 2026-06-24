@@ -29,18 +29,25 @@ namespace OceanApocalypseStudios.RSML.Machine
 
 				// Windows 11
 				>= 22000 => 11,
+
 				// Windows 10
 				>= 10240 => 10,
+
 				// Windows 8.1 (has to be called 9 so operators work in rsml)
 				>= 9257 => 9,
+
 				// Windows 8
 				>= 7652 => 8,
+
 				// Windows 7
 				>= 6427 => 7,
+
 				// Windows Vista (since first Longhorn build)
 				>= 3663 => 6,
+
 				// Windows XP
 				>= 2196 => 5,
+
 				// Prior to XP
 				_ => 4
 
