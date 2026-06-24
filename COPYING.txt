@@ -4,6 +4,6 @@ This project is dual-licensed under the following terms:
 * Documentation (files in docs/ and its HTML render): Creative Commons 0 1.0 Universal (see LICENSE-DOCS.txt)
 
 The CC0 License does not apply to code, and the MIT License does not apply to documentation.
-NuGet-hosted documentation is not covered by CC0, rather falling into the code category.
+NuGet-hosted XML documentation is not covered by CC0, rather falling into the code category.
 
 Any code snippets found inside the documentation are licensed under the MIT License unless otherwise noted.

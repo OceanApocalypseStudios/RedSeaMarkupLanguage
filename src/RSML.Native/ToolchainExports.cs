@@ -32,7 +32,7 @@ namespace OceanApocalypseStudios.RSML.Native
 		/// <list type="bullet"><c>-1:</c> The given pointer is null or the input buffer is null<br /></list>
 		/// <list type="bullet"><c>0:</c> Success<br /></list>
 		/// </returns>
-		[UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl) }, EntryPoint = "rsml_alloc_buffer")]
+		[UnmanagedCallersOnly(CallConvs = [ typeof(CallConvCdecl) ], EntryPoint = "rsml_alloc_buffer")]
 		public static int AllocRsmlBuffer(
 			byte* content,
 			int byteCount
@@ -92,7 +92,7 @@ namespace OceanApocalypseStudios.RSML.Native
 		/// Destroys memory that is no longer necessary but still in use by RSML.
 		/// </summary>
 		/// <returns><c>0</c> if successful; <c>-1</c> if not successful</returns>
-		[UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl) }, EntryPoint = "rsml_cleanup")]
+		[UnmanagedCallersOnly(CallConvs = [ typeof(CallConvCdecl) ], EntryPoint = "rsml_cleanup")]
 		public static int Cleanup()
 		{
 
@@ -147,7 +147,7 @@ namespace OceanApocalypseStudios.RSML.Native
 		/// <list type="bullet"><c>0:</c> A match was found</list>
 		/// <list type="bullet"><c>1:</c> No matches were found</list>
 		/// </returns>
-		[UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl) }, EntryPoint = "rsml_evaluate_document")]
+		[UnmanagedCallersOnly(CallConvs = [ typeof(CallConvCdecl) ], EntryPoint = "rsml_evaluate_document")]
 		public static int EvaluateRsmlDocument(
 			nint outputResultPtr,
 			int systemOrDistroName,
@@ -331,7 +331,7 @@ namespace OceanApocalypseStudios.RSML.Native
 		/// Returns the last saved error message. Can be a null pointer (<c>IntPtr.Zero</c>).
 		/// </summary>
 		/// <returns>The pointer to the error message</returns>
-		[UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl) }, EntryPoint = "rsml_get_last_error_message")]
+		[UnmanagedCallersOnly(CallConvs = [ typeof(CallConvCdecl) ], EntryPoint = "rsml_get_last_error_message")]
 		public static nint GetLastErrorMessage() => lastErrorMessage;
 
 		/// <summary>
@@ -351,7 +351,7 @@ namespace OceanApocalypseStudios.RSML.Native
 		/// <list type="bullet"><c>-1:</c> At least one of the given pointers is null (<c>IntPtr.Zero</c>)<br /></list>
 		/// <list type="bullet"><c>0:</c> Success<br /></list>
 		/// </returns>
-		[UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl) }, EntryPoint = "rsml_normalize_line")]
+		[UnmanagedCallersOnly(CallConvs = [ typeof(CallConvCdecl) ], EntryPoint = "rsml_normalize_line")]
 		public static int NormalizeRsmlLine(
 			nint inputLinePtr,
 			nint outputLinePtr
@@ -417,7 +417,7 @@ namespace OceanApocalypseStudios.RSML.Native
 		/// <list type="bullet"><c>-1:</c> The given pointer is null (<c>IntPtr.Zero</c>)<br /></list>
 		/// <list type="bullet"><c>0:</c> Success<br /></list>
 		/// </returns>
-		[UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl) }, EntryPoint = "rsml_tokenize_line")]
+		[UnmanagedCallersOnly(CallConvs = [ typeof(CallConvCdecl) ], EntryPoint = "rsml_tokenize_line")]
 		public static int TokenizeRsmlLine(nint outputLinePtr)
 		{
 
@@ -486,22 +486,24 @@ namespace OceanApocalypseStudios.RSML.Native
 		/// </summary>
 		/// <param name="inputLinePtr">A pointer to the <see cref="NativeLine" /> instance this method will validate</param>
 		/// <returns>
-		/// <list type="bullet"><c>-4:</c> There's no allocated buffer or allocated buffer is empty<br /></list>
-		/// <list type="bullet"><c>-3:</c> Unknown error<br /></list>
+		/// <list type="bullet"><c>-6:</c> Unknown error (failed to save error message)<br /></list>
+		/// <list type="bullet"><c>-5:</c> Unknown error (error message was saved)<br /></list>
+		/// <list type="bullet"><c>-4:</c> Success but line is invalid (failed to save error message)<br /></list>
+		/// <list type="bullet"><c>-3:</c> There's no allocated buffer or allocated buffer is empty<br /></list>
 		/// <list type="bullet"><c>-2:</c> The input line is empty<br /></list>
 		/// <list type="bullet"><c>-1:</c> The given pointer is null (<c>IntPtr.Zero</c>)<br /></list>
 		/// <list type="bullet"><c>0:</c> Success and line is valid<br /></list>
-		/// <list type="bullet"><c>1:</c> Success but line is invalid (error message is saved to internal data)<br /></list>
+		/// <list type="bullet"><c>1:</c> Success but line is invalid (error message was saved)<br /></list>
 		/// </returns>
-		[UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl) }, EntryPoint = "rsml_validate_line")]
-		public static nint ValidateRsmlLine(nint inputLinePtr)
+		[UnmanagedCallersOnly(CallConvs = [ typeof(CallConvCdecl) ], EntryPoint = "rsml_validate_line")]
+		public static int ValidateRsmlLine(nint inputLinePtr)
 		{
 
 			try
 			{
 
 				if (buffer?.IsEmpty is true or null)
-					return -4;
+					return -3;
 
 				if (inputLinePtr == IntPtr.Zero)
 					return -1;
@@ -518,7 +520,27 @@ namespace OceanApocalypseStudios.RSML.Native
 				return 0;
 
 			}
-			catch (InvalidRsmlSyntax ex)
+			catch (InvalidRsmlSyntax irs) // the fucking IRS again
+			{
+
+				try
+				{
+
+					if (lastErrorMessage != IntPtr.Zero)
+						Marshal.FreeHGlobal(lastErrorMessage);
+
+					lastErrorMessage = Marshal.StringToHGlobalAuto(irs.Message);
+
+				}
+				catch
+				{
+					return -4;
+				}
+
+				return 1;
+
+			}
+			catch (Exception ex)
 			{
 
 				try
@@ -532,15 +554,11 @@ namespace OceanApocalypseStudios.RSML.Native
 				}
 				catch
 				{
-					return -3;
+					return -6;
 				}
 
-				return 1;
+				return -5;
 
-			}
-			catch
-			{
-				return -3;
 			}
 
 		}
