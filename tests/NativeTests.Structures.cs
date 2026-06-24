@@ -7,7 +7,7 @@ using OceanApocalypseStudios.RSML.Native.Structures;
 namespace OceanApocalypseStudios.RSML.Tests.Native
 {
 
-	public class NativeStructTests
+	public partial class NativeTests
 	{
 
 		[Theory]

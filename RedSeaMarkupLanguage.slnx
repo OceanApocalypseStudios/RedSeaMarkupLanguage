@@ -4,7 +4,8 @@
         <Platform Name="x64" />
         <Platform Name="x86" />
     </Configurations>
-    <Folder Name="/Solution Items/">
+    
+    <Folder Name="/0 - Items/">
         <File Path=".editorconfig" />
         <File Path=".gitignore" />
         <File Path="ADMONITION.md" />
@@ -19,9 +20,17 @@
         <File Path="mkdocs.yml" />
         <File Path="README.md" />
     </Folder>
-    <Project Path="benchmarks/RSML.Benchmarks.csproj" />
-    <Project Path="src/RSML.CLI/RSML.CLI.csproj" />
-    <Project Path="src/RSML.Native/RSML.Native.csproj" />
+    
     <Project Path="src/RSML/RSML.csproj" />
-    <Project Path="tests/RSML.Tests.csproj" />
+    <Project Path="src/RSML.Native/RSML.Native.csproj" />
+    <Project Path="src/RSML.CLI/RSML.CLI.csproj" />
+    
+    <Folder Name="/1 - Tests/">
+        <Project Path="tests/RSML.Tests.csproj" />
+    </Folder>
+    
+    <Folder Name="/2 - Benchmarks/">
+        <Project Path="benchmarks/RSML.Benchmarks.csproj" />
+    </Folder>
+    
 </Solution>
