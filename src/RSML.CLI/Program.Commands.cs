@@ -19,7 +19,11 @@ namespace OceanApocalypseStudios.RSML.CLI
 	internal partial class Program
 	{
 
-		public static string? CompileRsml_NoPretty(string rsml, string language, string moduleName)
+		public static string? CompileRsml_NoPretty(
+			string rsml,
+			string language,
+			string moduleName
+		)
 		{
 
 			EvaluationResult result;
@@ -46,16 +50,31 @@ namespace OceanApocalypseStudios.RSML.CLI
 			return language switch
 			{
 
-				"C#" => CompiledRsmlGenerator.GenerateCSharp(moduleName, result.WasMatchFound ? $"(\"{result.MatchValue}\")" : "()"),
-				"F#" => CompiledRsmlGenerator.GenerateFSharp(moduleName, result.WasMatchFound ? $"(\"{result.MatchValue}\")" : "()"),
-				"VB" => CompiledRsmlGenerator.GenerateVisualBasic(moduleName, result.WasMatchFound ? $"(\"{result.MatchValue}\")" : "()"),
+				"C#" => CompiledRsmlGenerator.GenerateCSharp(
+					moduleName, result.WasMatchFound
+									? $"(\"{result.MatchValue}\")"
+									: "()"
+				),
+				"F#" => CompiledRsmlGenerator.GenerateFSharp(
+					moduleName, result.WasMatchFound
+									? $"(\"{result.MatchValue}\")"
+									: "()"
+				),
+				"VB" => CompiledRsmlGenerator.GenerateVisualBasic(
+					moduleName, result.WasMatchFound
+									? $"(\"{result.MatchValue}\")"
+									: "()"
+				),
 				_ => null
 
 			};
 
 		}
 
-		public static void Evaluate_NoPretty(string data, LocalMachine machine)
+		public static void Evaluate_NoPretty(
+			string data,
+			LocalMachine machine
+		)
 		{
 
 			try
@@ -79,7 +98,10 @@ namespace OceanApocalypseStudios.RSML.CLI
 
 		}
 
-		public static void Evaluate_Pretty(string data, LocalMachine machine)
+		public static void Evaluate_Pretty(
+			string data,
+			LocalMachine machine
+		)
 		{
 
 			Evaluator evaluator = new(data);
@@ -112,9 +134,15 @@ namespace OceanApocalypseStudios.RSML.CLI
 						new Rows(
 							new Markup("[yellow]Evaluation Result[/]").Centered(),
 							new Markup(
-								result.WasMatchFound ? "[green]Match found![/]" : "[red]No matches found.[/]", new(null, null, Decoration.Italic)
+								result.WasMatchFound
+									? "[green]Match found![/]"
+									: "[red]No matches found.[/]", new(null, null, Decoration.Italic)
 							),
-							new Markup(result.WasMatchFound ? result.MatchValue! : "", new(Color.White))
+							new Markup(
+								result.WasMatchFound
+									? result.MatchValue!
+									: "", new(Color.White)
+							)
 						).Expand()
 					).Expand(),
 					new Panel(
@@ -128,7 +156,11 @@ namespace OceanApocalypseStudios.RSML.CLI
 
 		}
 
-		public static int GetMachine(LocalMachine machine, bool disableAnsi, string? format)
+		public static int GetMachine(
+			LocalMachine machine,
+			bool disableAnsi,
+			string? format
+		)
 		{
 
 			if (disableAnsi || format != "PlainText")
@@ -139,7 +171,9 @@ namespace OceanApocalypseStudios.RSML.CLI
 				if (x is not null)
 					Console.WriteLine(x);
 
-				return x is not null ? 0 : 1;
+				return x is not null
+						   ? 0
+						   : 1;
 
 			}
 
@@ -152,15 +186,18 @@ namespace OceanApocalypseStudios.RSML.CLI
 
 		}
 
-		public static string? LocalMachineInfo_NoPretty(LocalMachine machine, string outputFormat) =>
+		public static string? LocalMachineInfo_NoPretty(
+			LocalMachine machine,
+			string outputFormat
+		) =>
 			outputFormat switch
 			{
 
 				"PlainText" => LocalMachineOutput.AsPlainText(machine),
-				"JSON" => LocalMachineOutput.AsJson(machine),
-				"Dotnet" => LocalMachineOutput.AsDotnet(machine),
-				"CSharp" => LocalMachineOutput.AsCSharp(machine),
-				_ => null
+				"JSON"      => LocalMachineOutput.AsJson(machine),
+				"Dotnet"    => LocalMachineOutput.AsDotnet(machine),
+				"CSharp"    => LocalMachineOutput.AsCSharp(machine),
+				_           => null
 
 			};
 
@@ -219,7 +256,7 @@ namespace OceanApocalypseStudios.RSML.CLI
 		{
 
 			DualTextBuffer buffer = new(data);
-			List<SyntaxToken> tokens = [];
+			List<SyntaxToken> tokens = [ ];
 
 			while (buffer.CaretPosition < buffer.Length || buffer.BufferNumber == 2) // dont stop just cuz we swap buffers
 			{

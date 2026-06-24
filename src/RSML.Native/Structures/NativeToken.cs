@@ -13,7 +13,12 @@ namespace OceanApocalypseStudios.RSML.Native.Structures
 	/// </summary>
 	[StructLayout(LayoutKind.Sequential)]
 	public struct NativeToken
-    {
+	{
+
+		/// <summary>
+		/// The index of the buffer at which the occurence ends.
+		/// </summary>
+		public int endIndex;
 
 		/// <summary>
 		/// The kind of token.
@@ -26,12 +31,31 @@ namespace OceanApocalypseStudios.RSML.Native.Structures
 		public int startIndex;
 
 		/// <summary>
-		/// The index of the buffer at which the occurence ends.
+		/// Checks if 2 native tokens are the same.
 		/// </summary>
-		public int endIndex;
+		/// <param name="left">One of the tokens</param>
+		/// <param name="right">One of the tokens</param>
+		/// <returns><c>true</c> if they're equals</returns>
+		public static bool operator ==(
+			NativeToken left,
+			NativeToken right
+		) =>
+			left.Equals(right);
 
-		/// <inheritdoc/>
-		public override readonly bool Equals([NotNullWhen(true)] object? obj)
+		/// <summary>
+		/// Checks if 2 native tokens are different.
+		/// </summary>
+		/// <param name="left">One of the tokens</param>
+		/// <param name="right">One of the tokens</param>
+		/// <returns><c>true</c> if they're different</returns>
+		public static bool operator !=(
+			NativeToken left,
+			NativeToken right
+		) =>
+			!(left == right);
+
+		/// <inheritdoc />
+		public readonly override bool Equals([NotNullWhen(true)] object? obj)
 		{
 
 			if (obj is NativeToken nativeToken)
@@ -43,9 +67,6 @@ namespace OceanApocalypseStudios.RSML.Native.Structures
 			return false;
 
 		}
-
-		/// <inheritdoc/>
-		public override readonly int GetHashCode() => HashCode.Combine(kind, startIndex, endIndex);
 
 		/// <summary>
 		/// Checks whether two native tokens are equals.
@@ -61,24 +82,17 @@ namespace OceanApocalypseStudios.RSML.Native.Structures
 		/// <returns>True if equals</returns>
 		public readonly bool Equals(SyntaxToken managedToken) =>
 			kind == (byte)managedToken.Kind &&
-			startIndex == (managedToken.BufferRange.Start.IsFromEnd ? -managedToken.BufferRange.Start.Value : managedToken.BufferRange.Start.Value) &&
-			endIndex == (managedToken.BufferRange.End.IsFromEnd ? -managedToken.BufferRange.End.Value : managedToken.BufferRange.End.Value);
+			startIndex ==
+			(managedToken.BufferRange.Start.IsFromEnd
+				 ? -managedToken.BufferRange.Start.Value
+				 : managedToken.BufferRange.Start.Value) &&
+			endIndex ==
+			(managedToken.BufferRange.End.IsFromEnd
+				 ? -managedToken.BufferRange.End.Value
+				 : managedToken.BufferRange.End.Value);
 
-		/// <summary>
-		/// Checks if 2 native tokens are the same.
-		/// </summary>
-		/// <param name="left">One of the tokens</param>
-		/// <param name="right">One of the tokens</param>
-		/// <returns><c>true</c> if they're equals</returns>
-		public static bool operator ==(NativeToken left, NativeToken right) => left.Equals(right);
-
-		/// <summary>
-		/// Checks if 2 native tokens are different.
-		/// </summary>
-		/// <param name="left">One of the tokens</param>
-		/// <param name="right">One of the tokens</param>
-		/// <returns><c>true</c> if they're different</returns>
-		public static bool operator !=(NativeToken left, NativeToken right) => !(left == right);
+		/// <inheritdoc />
+		public readonly override int GetHashCode() => HashCode.Combine(kind, startIndex, endIndex);
 
 	}
 

@@ -1,6 +1,5 @@
 ﻿using OceanApocalypseStudios.RSML.Evaluation;
 using OceanApocalypseStudios.RSML.Exceptions;
-
 using OceanApocalypseStudios.RSML.Machine;
 
 
@@ -9,12 +8,6 @@ namespace OceanApocalypseStudios.RSML.Tests
 
 	public class EvaluatorTests
 	{
-
-		private static readonly LocalMachine debianUnknownVersionX86 = new("debian", "debian", "x86", null);
-		private static readonly LocalMachine osxUnknownVersionUnknownArch = new("osx", null, null);
-		private static readonly LocalMachine ubuntu22Arm64 = new("ubuntu", "debian", "x64", 22);
-
-		private static readonly LocalMachine win10X64 = new("windows", "x64", 10);
 
 		[Fact]
 		public void Evaluate_AnyWorksEvenIfUnknown()
@@ -42,7 +35,10 @@ namespace OceanApocalypseStudios.RSML.Tests
 		[InlineData(">", "Result B")]
 		[InlineData("<", "Result B")]
 		[InlineData("!=", "Result B")]
-		public void Evaluate_ComparatorWorks(string input, string? expected)
+		public void Evaluate_ComparatorWorks(
+			string input,
+			string? expected
+		)
 		{
 
 			Evaluator evaluator = new($"-> windows {input} 10 defined \"Result A\"\n-> windows == 10 defined \"Result B\"\r\n");
@@ -104,7 +100,10 @@ namespace OceanApocalypseStudios.RSML.Tests
 		[InlineData("-> any any any \"Being explicit is good too\"\n", "Being explicit is good too")]
 		[InlineData("-> \"this will always return\"\n", "this will always return")]
 		[InlineData("", null)] // whitespace
-		public void Evaluate_Ubuntu22_Arm64_CorrectValue(string data, string? expected)
+		public void Evaluate_Ubuntu22_Arm64_CorrectValue(
+			string data,
+			string? expected
+		)
 		{
 
 			Evaluator parser = new(data);
@@ -121,7 +120,10 @@ namespace OceanApocalypseStudios.RSML.Tests
 		[InlineData("-> \"Being implicit is bad sometimes\"\n", "Being implicit is bad sometimes")]
 		[InlineData("-> \"this will always return\"\r\n", "this will always return")]
 		[InlineData("# comment", null)]
-		public void Evaluate_Windows10_X64_CorrectValue(string data, string? expected)
+		public void Evaluate_Windows10_X64_CorrectValue(
+			string data,
+			string? expected
+		)
 		{
 
 			Evaluator parser = new(data);
@@ -139,6 +141,14 @@ namespace OceanApocalypseStudios.RSML.Tests
 		[InlineData("    # Still a comment")]
 		[InlineData("                                            #")]
 		public void Evaluator_IsComment(string input) => Assert.True(Evaluator.IsComment(input));
+
+		private static readonly LocalMachine debianUnknownVersionX86 = new("debian", "debian", "x86", null);
+
+		private static readonly LocalMachine osxUnknownVersionUnknownArch = new("osx", null, null);
+
+		private static readonly LocalMachine ubuntu22Arm64 = new("ubuntu", "debian", "x64", 22);
+
+		private static readonly LocalMachine win10X64 = new("windows", "x64", 10);
 
 	}
 

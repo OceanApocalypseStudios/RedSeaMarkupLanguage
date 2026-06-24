@@ -13,14 +13,14 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 	public sealed class Lexer : ILexer
 	{
 
-		private const string ApiVersion = "2.0.0";
-		private const string QUOTE = "\"";
-
 		/// <inheritdoc />
 		public static SpecificationCompliance SpecificationCompliance => SpecificationCompliance.CreateFull(ApiVersion);
 
 		/// <inheritdoc />
-		public static string CreateDocumentFromTokens(in SyntaxLine line, DualTextBuffer context)
+		public static string CreateDocumentFromTokens(
+			in SyntaxLine line,
+			DualTextBuffer context
+		)
 		{
 
 			StringBuilder builder = new();
@@ -171,9 +171,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 					"windows", "osx", "linux", "freebsd", "debian",
 					"ubuntu", "archlinux", "fedora"
 				))
-			{
 				return new(TokenKind.SystemName, startIndex, curPos);
-			}
 
 			if (chars.IsAsciiEqualsIgnoreCase_5("x64", "x86", "arm32", "arm64", "loongarch64"))
 				return new(TokenKind.ArchitectureIdentifier, startIndex, curPos);
@@ -207,14 +205,16 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 
 			}
 
-			if (!chars.Span.TrimStart().StartsWith(QUOTE))
+			if (!chars.Span.TrimStart().StartsWith(Quote))
 				return SyntaxToken.Empty;
 
 			return null;
 
 		}
 
-		#region Helpers
+		private const string ApiVersion = "2.0.0";
+
+		private const string Quote = "\"";
 
 		private static Range ReadQuotedString(DualTextBuffer buffer)
 		{
@@ -240,8 +240,6 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 			return new(start, buffer.CaretPosition); // ignores last double quote
 
 		}
-
-		#endregion
 
 	}
 

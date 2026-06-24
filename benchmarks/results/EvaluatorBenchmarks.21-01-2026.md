@@ -10,8 +10,9 @@ Intel Core i7-5500U CPU 2.40GHz (Broadwell), 1 CPU, 4 logical and 2 physical cor
 InvocationCount=1  UnrollFactor=1  
 
 ```
-| Method                              | Runtime        | Mean           | Error         | Median         | Ratio | RatioSD | Allocated | Alloc Ratio |
-|------------------------------------ |--------------- |---------------:|--------------:|---------------:|------:|--------:|----------:|------------:|
+
+| Method                              | Runtime        |           Mean |         Error |         Median | Ratio | RatioSD | Allocated | Alloc Ratio |
+|-------------------------------------|----------------|---------------:|--------------:|---------------:|------:|--------:|----------:|------------:|
 | Evaluate_ComplexContent_1           | .NET 10.0      | 2,185,204.2 ns | 444,076.33 ns | 1,708,000.0 ns |  4.90 |    3.05 |   58848 B |       19.21 |
 | Evaluate_ComplexContent_2           | .NET 10.0      | 1,786,833.5 ns | 285,440.44 ns | 1,601,850.0 ns |  4.01 |    1.96 |   67936 B |       22.17 |
 | Evaluate_ComplexContent_3           | .NET 10.0      | 1,848,370.7 ns | 303,637.27 ns | 1,698,550.0 ns |  4.14 |    2.09 |   62064 B |       20.26 |

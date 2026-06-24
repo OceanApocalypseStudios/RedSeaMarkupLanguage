@@ -39,7 +39,10 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 		/// </summary>
 		/// <param name="line">A collection of tokens</param>
 		/// <param name="context">The buffer</param>
-		static abstract void ValidateLine(SyntaxLine line, DualTextBuffer context);
+		static abstract void ValidateLine(
+			SyntaxLine line,
+			DualTextBuffer context
+		);
 
 	}
 

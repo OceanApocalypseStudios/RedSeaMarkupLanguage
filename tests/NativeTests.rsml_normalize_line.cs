@@ -6,7 +6,7 @@ using OceanApocalypseStudios.RSML.Native;
 using OceanApocalypseStudios.RSML.Native.Structures;
 
 
-namespace OceanApocalypseStudios.RSML.Tests.Native
+namespace OceanApocalypseStudios.RSML.Tests
 {
 
 	public unsafe partial class NativeTests
@@ -47,6 +47,7 @@ namespace OceanApocalypseStudios.RSML.Tests.Native
 					item7 = SyntaxToken.Empty.ToNativeToken(),
 					item8 = SyntaxToken.Empty.ToNativeToken()
 				};
+
 				NativeLine normalizedLine = new()
 				{
 					item1 = SyntaxToken.Empty.ToNativeToken(),
@@ -58,15 +59,16 @@ namespace OceanApocalypseStudios.RSML.Tests.Native
 					item7 = SyntaxToken.Empty.ToNativeToken(),
 					item8 = SyntaxToken.Empty.ToNativeToken()
 				};
-				NativeLine* nativeLinePtr = &nativeLine;
-				NativeLine* normalizedLinePtr = &normalizedLine;
+
+				var nativeLinePtr = &nativeLine;
+				var normalizedLinePtr = &normalizedLine;
 
 				tokenize((nint)nativeLinePtr);
 
 				#endregion
 
 				// normalization happens here
-				var errorCode = normalize((nint)nativeLinePtr, (nint)normalizedLinePtr);
+				int errorCode = normalize((nint)nativeLinePtr, (nint)normalizedLinePtr);
 				Assert.Equal(0, errorCode);
 				var convertedNormalizedLine = SyntaxExtensions.PtrToLine(normalizedLinePtr);
 

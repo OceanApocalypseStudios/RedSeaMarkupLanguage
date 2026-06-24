@@ -26,7 +26,8 @@
 
 ## RSML on NuGet Trends
 > [!NOTE]
-> In the image below, **RSML** refers to Legacy RSML (RSML v1.x.x), while **OceanApocalypseStudios.RSML** refers to Modern RSML (RSML v2.0.0).
+> In the image below, **RSML** refers to Legacy RSML (RSML v1.x.x), while **OceanApocalypseStudios.RSML** refers to
+> Modern RSML (RSML v2.0.0).
 > In any other context, RSML and OceanApocalypseStudios.RSML have the exact same meaning.
 
 [![RSML on NuGet Trends](extras/NuGetTrends_January26.png)](https://nugettrends.com/packages?ids=RSML&ids=OceanApocalypseStudios.RSML&months=168)

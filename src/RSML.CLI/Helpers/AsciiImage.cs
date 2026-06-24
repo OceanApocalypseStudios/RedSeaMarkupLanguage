@@ -15,9 +15,6 @@ namespace OceanApocalypseStudios.RSML.CLI.Helpers
 	) : IDisposable
 	{
 
-		private const string CHARS = "@%#*+=-:. ";
-		private readonly Image<Rgba32> image = Image.Load<Rgba32>(imagePath);
-
 		public AsciiImage(FileInfo file) : this(file.FullName) { }
 
 		/// <inheritdoc />
@@ -29,7 +26,11 @@ namespace OceanApocalypseStudios.RSML.CLI.Helpers
 
 		}
 
-		public string GetRenderable(int width, int height, bool adjustForFontAspect = true)
+		public string GetRenderable(
+			int width,
+			int height,
+			bool adjustForFontAspect = true
+		)
 		{
 
 			if (adjustForFontAspect)
@@ -48,7 +49,7 @@ namespace OceanApocalypseStudios.RSML.CLI.Helpers
 
 					var pixel = image[x, y];
 					int gray = (pixel.R + pixel.G + pixel.B) / 3;
-					int index = gray * (CHARS.Length - 1) / 255;
+					int index = gray * (Chars.Length - 1) / 255;
 
 					builder.Append("[rgb(")
 						   .Append(pixel.R)
@@ -58,7 +59,7 @@ namespace OceanApocalypseStudios.RSML.CLI.Helpers
 						   .Append(pixel.B)
 						   .Append(')')
 						   .Append(']')
-						   .Append(CHARS[index])
+						   .Append(Chars[index])
 						   .Append("[/]");
 
 				}
@@ -70,6 +71,10 @@ namespace OceanApocalypseStudios.RSML.CLI.Helpers
 			return builder.ToString();
 
 		}
+
+		private const string Chars = "@%#*+=-:. ";
+
+		private readonly Image<Rgba32> image = Image.Load<Rgba32>(imagePath);
 
 	}
 

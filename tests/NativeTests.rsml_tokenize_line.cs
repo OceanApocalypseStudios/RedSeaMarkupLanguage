@@ -5,7 +5,8 @@ using OceanApocalypseStudios.RSML.Analyzer.Syntax;
 using OceanApocalypseStudios.RSML.Native;
 using OceanApocalypseStudios.RSML.Native.Structures;
 
-namespace OceanApocalypseStudios.RSML.Tests.Native
+
+namespace OceanApocalypseStudios.RSML.Tests
 {
 
 	public unsafe partial class NativeTests
@@ -43,9 +44,10 @@ namespace OceanApocalypseStudios.RSML.Tests.Native
 					item7 = SyntaxToken.Empty.ToNativeToken(),
 					item8 = SyntaxToken.Empty.ToNativeToken()
 				};
-				NativeLine* outputPtr = &output;
 
-				var errorCode = tokenize((nint)outputPtr);
+				var outputPtr = &output;
+
+				int errorCode = tokenize((nint)outputPtr);
 				var managedLine = SyntaxExtensions.PtrToLine(outputPtr);
 				var managedTokens = Lexer.TokenizeLine(new(data));
 
@@ -63,7 +65,10 @@ namespace OceanApocalypseStudios.RSML.Tests.Native
 		[InlineData(null, -2)]
 		[InlineData("", -2)]
 		[InlineData("!> windows linux defined any x64 x86 arm64 \"Failure\"\r\n", -5)]
-		public void TokenizeRsml_ThrowsErrorCodeCorrectly(string? data, int errorCode)
+		public void TokenizeRsml_ThrowsErrorCodeCorrectly(
+			string? data,
+			int errorCode
+		)
 		{
 
 			var alloc = (delegate* unmanaged[Cdecl]<byte*, int, int>)&ToolchainExports.AllocRsmlBuffer;
@@ -85,9 +90,10 @@ namespace OceanApocalypseStudios.RSML.Tests.Native
 					item7 = SyntaxToken.Empty.ToNativeToken(),
 					item8 = SyntaxToken.Empty.ToNativeToken()
 				};
-				NativeLine* outputPtr = &output;
 
-				var actualErrorCode = tokenize((nint)outputPtr);
+				var outputPtr = &output;
+
+				int actualErrorCode = tokenize((nint)outputPtr);
 				Assert.Equal(errorCode, actualErrorCode);
 
 				return;
@@ -110,10 +116,16 @@ namespace OceanApocalypseStudios.RSML.Tests.Native
 					item7 = SyntaxToken.Empty.ToNativeToken(),
 					item8 = SyntaxToken.Empty.ToNativeToken()
 				};
-				NativeLine* outputPtr = &output;
+
+				var outputPtr = &output;
 
 				// if error code is -1 simulate a nullptr (IntPtr.Zero) - cuz test
-				var actualErrorCode = tokenize(errorCode == -1 ? IntPtr.Zero : ((nint)outputPtr));
+				int actualErrorCode = tokenize(
+					errorCode == -1
+						? IntPtr.Zero
+						: (nint)outputPtr
+				);
+
 				Assert.Equal(errorCode, actualErrorCode);
 
 			}

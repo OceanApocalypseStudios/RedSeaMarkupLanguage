@@ -9,7 +9,10 @@ namespace OceanApocalypseStudios.RSML.CLI
 
 		internal static string Capitalize(this string str) =>
 			String.Create(
-				str.Length, str, (span, src) =>
+				str.Length, str, (
+					span,
+					src
+				) =>
 				{
 
 					for (int i = 1; i < src.Length; i++)

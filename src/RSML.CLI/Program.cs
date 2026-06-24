@@ -19,9 +19,11 @@ namespace OceanApocalypseStudios.RSML.CLI
 
 		// todo: change this later
 		public const string LanguageVersion = "v2.1.0-dev";
+
 		public static string? cSharpLogo;
 
 		public static string? fSharpLogo;
+
 		public static string? visualBasicLogo;
 
 		private static async Task<int> Main(string[] args)
@@ -173,7 +175,10 @@ namespace OceanApocalypseStudios.RSML.CLI
 				{
 
 					string? distroName = result.GetValue(linuxNameOpt);
-					string? sysName = distroName is not null ? "linux" : result.GetValue(systemNameOpt);
+
+					string? sysName = distroName is not null
+										  ? "linux"
+										  : result.GetValue(systemNameOpt);
 
 					string? distroFamily = sysName?.Equals("linux", StringComparison.OrdinalIgnoreCase) ?? false
 											   ? result.GetValue(linuxFamilyOpt)
@@ -349,7 +354,10 @@ namespace OceanApocalypseStudios.RSML.CLI
 				{
 
 					string? filepath = result.GetValue(filepathOpt)?.FullName;
-					string data = filepath is null ? Console.In.ReadToEnd() : File.ReadAllText(filepath);
+
+					string data = filepath is null
+									  ? Console.In.ReadToEnd()
+									  : File.ReadAllText(filepath);
 
 					Console.WriteLine(Tokenize_NoPretty(data));
 
@@ -385,7 +393,10 @@ namespace OceanApocalypseStudios.RSML.CLI
 
 					bool disableAnsi = result.GetValue(disableAnsiOpt);
 					string? filepath = result.GetValue(filepathOpt)?.FullName;
-					string data = filepath is null ? Console.In.ReadToEnd() : File.ReadAllText(filepath);
+
+					string data = filepath is null
+									  ? Console.In.ReadToEnd()
+									  : File.ReadAllText(filepath);
 
 					LocalMachine machine;
 

@@ -7,7 +7,6 @@ using System.Runtime.InteropServices;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Global
 
-
 namespace OceanApocalypseStudios.RSML.Machine
 {
 
@@ -82,7 +81,11 @@ namespace OceanApocalypseStudios.RSML.Machine
 		/// <param name="osName">The OS name or null if undefined</param>
 		/// <param name="processorArchitecture">The processor architecture or null if undefined</param>
 		/// <param name="osMajorVersion">The OS's major version or null or -1 if undefined</param>
-		public LocalMachine(string? osName, string? processorArchitecture, int? osMajorVersion)
+		public LocalMachine(
+			string? osName,
+			string? processorArchitecture,
+			int? osMajorVersion
+		)
 		{
 
 			SystemName = osName;
@@ -98,7 +101,12 @@ namespace OceanApocalypseStudios.RSML.Machine
 		/// <param name="distroFamily">The distro's family or null if undefined</param>
 		/// <param name="processorArchitecture">The processor architecture or null if undefined</param>
 		/// <param name="distroMajorVersion">The OS's major version or null or -1 if undefined</param>
-		public LocalMachine(string? distroName, string? distroFamily, string? processorArchitecture, int? distroMajorVersion)
+		public LocalMachine(
+			string? distroName,
+			string? distroFamily,
+			string? processorArchitecture,
+			int? distroMajorVersion
+		)
 		{
 
 			SystemName = "linux";
@@ -113,12 +121,12 @@ namespace OceanApocalypseStudios.RSML.Machine
 			ProcessorArchitecture = RuntimeInformation.OSArchitecture switch
 			{
 
-				Architecture.Arm => "arm32",
-				Architecture.Arm64 => "arm64",
-				Architecture.X64 => "x64",
-				Architecture.X86 => "x86",
+				Architecture.Arm         => "arm32",
+				Architecture.Arm64       => "arm64",
+				Architecture.X64         => "x64",
+				Architecture.X86         => "x86",
 				Architecture.LoongArch64 => "loongarch64",
-				_ => null
+				_                        => null
 
 			};
 
@@ -163,7 +171,7 @@ namespace OceanApocalypseStudios.RSML.Machine
 			try
 			{
 
-				using Process? unameR = Process.Start(
+				using var unameR = Process.Start(
 					new ProcessStartInfo
 					{
 
@@ -196,7 +204,7 @@ namespace OceanApocalypseStudios.RSML.Machine
 			try
 			{
 
-				using Process? proc = Process.Start(
+				using var proc = Process.Start(
 					new ProcessStartInfo
 					{
 
@@ -225,10 +233,9 @@ namespace OceanApocalypseStudios.RSML.Machine
 
 		private void InitializeVersionData() =>
 
-#if WINDOWS
-
+			#if WINDOWS
 			InitializeVersionData_Windows();
-#else
+		#else
 			switch (SystemName)
 			{
 
@@ -244,8 +251,7 @@ namespace OceanApocalypseStudios.RSML.Machine
 
 			}
 
-#endif
-
+		#endif
 
 		private void InitializeSystemName()
 		{
@@ -277,26 +283,39 @@ namespace OceanApocalypseStudios.RSML.Machine
 		/// using the latter as fallback for the first.
 		/// </summary>
 		/// <param name="main">The machine whose non-null attributes are used over the fallback's</param>
-		/// <param name="fallback">The machine that serves as the fallback for <paramref name="main"/>'s null attributes</param>
-		/// <returns>A new instance of a <see cref="LocalMachine"/></returns>
-		public static LocalMachine MergeWithFallback(LocalMachine main, LocalMachine fallback) => main.SystemName.IsAsciiEqualsIgnoreCase("linux") || main.DistroName is not null || main.DistroFamily is not null
-				? new(main.DistroName ?? fallback.DistroName, main.DistroFamily ?? fallback.DistroFamily, main.ProcessorArchitecture ?? fallback.ProcessorArchitecture, main.SystemVersion == -1 ? fallback.SystemVersion : -1)
-				: new(main.SystemName ?? fallback.SystemName, main.ProcessorArchitecture ?? fallback.ProcessorArchitecture, main.SystemVersion == -1 ? fallback.SystemVersion : -1);
+		/// <param name="fallback">The machine that serves as the fallback for <paramref name="main" />'s null attributes</param>
+		/// <returns>A new instance of a <see cref="LocalMachine" /></returns>
+		public static LocalMachine MergeWithFallback(
+			LocalMachine main,
+			LocalMachine fallback
+		) =>
+			main.SystemName.IsAsciiEqualsIgnoreCase("linux") || main.DistroName is not null || main.DistroFamily is not null
+				? new(
+					main.DistroName ?? fallback.DistroName, main.DistroFamily ?? fallback.DistroFamily,
+					main.ProcessorArchitecture ?? fallback.ProcessorArchitecture, main.SystemVersion == -1
+																					  ? fallback.SystemVersion
+																					  : -1
+				)
+				: new(
+					main.SystemName ?? fallback.SystemName, main.ProcessorArchitecture ?? fallback.ProcessorArchitecture, main.SystemVersion == -1
+																															  ? fallback.SystemVersion
+																															  : -1
+				);
 
 		/// <summary>
-		/// Merges this <see cref="LocalMachine"/> instance
+		/// Merges this <see cref="LocalMachine" /> instance
 		/// with another one, which is treated as a fallback.
 		/// </summary>
 		/// <param name="fallback">The machine that serves as the fallback for this instance's null attributes</param>
-		/// <returns>A new instance of a <see cref="LocalMachine"/></returns>
+		/// <returns>A new instance of a <see cref="LocalMachine" /></returns>
 		public readonly LocalMachine MergeWithFallback(LocalMachine fallback) => MergeWithFallback(this, fallback);
 
 		/// <summary>
-		/// Merges an instance of <see cref="LocalMachine"/> with
+		/// Merges an instance of <see cref="LocalMachine" /> with
 		/// this one, which is treated as a fallback.
 		/// </summary>
 		/// <param name="main">The machine whose non-null attributes are used over this instance's</param>
-		/// <returns>A new instance of a <see cref="LocalMachine"/></returns>
+		/// <returns>A new instance of a <see cref="LocalMachine" /></returns>
 		public readonly LocalMachine MergeAsFallback(LocalMachine main) => MergeWithFallback(main, this);
 
 		/// <summary>
@@ -306,7 +325,12 @@ namespace OceanApocalypseStudios.RSML.Machine
 		/// <param name="distroFamily">The distro's family or null if undefined</param>
 		/// <param name="processorArchitecture">The processor architecture or null if undefined</param>
 		/// <param name="distroMajorVersion">The OS's major version or null or -1 if undefined</param>
-		public static LocalMachine Linux(string? distroName, string? distroFamily, string? processorArchitecture, int? distroMajorVersion) =>
+		public static LocalMachine Linux(
+			string? distroName,
+			string? distroFamily,
+			string? processorArchitecture,
+			int? distroMajorVersion
+		) =>
 			new(distroName, distroFamily, processorArchitecture, distroMajorVersion);
 
 	}

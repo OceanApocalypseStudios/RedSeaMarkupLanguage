@@ -12,9 +12,9 @@ namespace OceanApocalypseStudios.RSML.Native.Structures
 	{
 
 		/// <summary>
-		/// Whether a match was found. Boolean.
+		/// The end index for the match value.
 		/// </summary>
-		public byte wasMatchFound;
+		public int matchValueEnd;
 
 		/// <summary>
 		/// The start index for the match value.
@@ -22,9 +22,9 @@ namespace OceanApocalypseStudios.RSML.Native.Structures
 		public int matchValueStart;
 
 		/// <summary>
-		/// The end index for the match value.
+		/// Whether a match was found. Boolean.
 		/// </summary>
-		public int matchValueEnd;
+		public byte wasMatchFound;
 
 	}
 

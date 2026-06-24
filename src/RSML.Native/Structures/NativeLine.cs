@@ -55,8 +55,32 @@ namespace OceanApocalypseStudios.RSML.Native.Structures
 		/// </summary>
 		public NativeToken item8;
 
-		/// <inheritdoc/>
-		public override readonly bool Equals([NotNullWhen(true)] object? obj)
+		/// <summary>
+		/// Checks if 2 native lines are the same.
+		/// </summary>
+		/// <param name="left">One of the lines</param>
+		/// <param name="right">One of the lines</param>
+		/// <returns><c>true</c> if they're equals</returns>
+		public static bool operator ==(
+			NativeLine left,
+			NativeLine right
+		) =>
+			left.Equals(right);
+
+		/// <summary>
+		/// Checks if 2 native lines are different.
+		/// </summary>
+		/// <param name="left">One of the lines</param>
+		/// <param name="right">One of the lines</param>
+		/// <returns><c>true</c> if they're different</returns>
+		public static bool operator !=(
+			NativeLine left,
+			NativeLine right
+		) =>
+			!(left == right);
+
+		/// <inheritdoc />
+		public readonly override bool Equals([NotNullWhen(true)] object? obj)
 		{
 
 			if (obj is NativeLine nativeLine)
@@ -68,9 +92,6 @@ namespace OceanApocalypseStudios.RSML.Native.Structures
 			return false;
 
 		}
-
-		/// <inheritdoc/>
-		public override readonly int GetHashCode() => HashCode.Combine(item1, item2, item3, item4, item5, item6, item7, item8);
 
 		/// <summary>
 		/// Checks whether two native lines are equals.
@@ -102,21 +123,12 @@ namespace OceanApocalypseStudios.RSML.Native.Structures
 			item7.Equals(managedLine.Item7) &&
 			item8.Equals(managedLine.Item8);
 
-		/// <summary>
-		/// Checks if 2 native lines are the same.
-		/// </summary>
-		/// <param name="left">One of the lines</param>
-		/// <param name="right">One of the lines</param>
-		/// <returns><c>true</c> if they're equals</returns>
-		public static bool operator ==(NativeLine left, NativeLine right) => left.Equals(right);
-
-		/// <summary>
-		/// Checks if 2 native lines are different.
-		/// </summary>
-		/// <param name="left">One of the lines</param>
-		/// <param name="right">One of the lines</param>
-		/// <returns><c>true</c> if they're different</returns>
-		public static bool operator !=(NativeLine left, NativeLine right) => !(left == right);
+		/// <inheritdoc />
+		public readonly override int GetHashCode() =>
+			HashCode.Combine(
+				item1, item2, item3, item4, item5,
+				item6, item7, item8
+			);
 
 	}
 

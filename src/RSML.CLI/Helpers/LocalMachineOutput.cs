@@ -13,13 +13,15 @@ namespace OceanApocalypseStudios.RSML.CLI.Helpers
 	internal static class LocalMachineOutput
 	{
 
-		public static string AsDotnet(LocalMachine machine) => machine.DistroName is null
-				? $"new LocalMachine(\"{machine.SystemName}\", \"{machine.ProcessorArchitecture}\", {machine.SystemVersion})"
-				: $"new LocalMachine(\"{machine.DistroName}\", \"{machine.DistroFamily}\", \"{machine.ProcessorArchitecture}\", {machine.SystemVersion})";
-
-		public static string AsCSharp(LocalMachine machine) => machine.DistroName is null
+		public static string AsCSharp(LocalMachine machine) =>
+			machine.DistroName is null
 				? $"new LocalMachine(\"{machine.SystemName}\", \"{machine.ProcessorArchitecture}\", {machine.SystemVersion})"
 				: $"LocalMachine.Linux(\"{machine.DistroName}\", \"{machine.DistroFamily}\", \"{machine.ProcessorArchitecture}\", {machine.SystemVersion})";
+
+		public static string AsDotnet(LocalMachine machine) =>
+			machine.DistroName is null
+				? $"new LocalMachine(\"{machine.SystemName}\", \"{machine.ProcessorArchitecture}\", {machine.SystemVersion})"
+				: $"new LocalMachine(\"{machine.DistroName}\", \"{machine.DistroFamily}\", \"{machine.ProcessorArchitecture}\", {machine.SystemVersion})";
 
 		public static string AsJson(LocalMachine machine)
 		{
@@ -51,10 +53,10 @@ namespace OceanApocalypseStudios.RSML.CLI.Helpers
 									   ? machine.SystemVersion switch
 									   {
 
-										   6 => "Vista",
+										   6                  => "Vista",
 										   7 or 8 or 10 or 11 => machine.StringifiedSystemVersion!,
-										   9 => "8.1",
-										   _ => "Unknown"
+										   9                  => "8.1",
+										   _                  => "Unknown"
 
 									   }
 									   : machine.StringifiedSystemVersion ?? "Unknown";
@@ -81,10 +83,10 @@ namespace OceanApocalypseStudios.RSML.CLI.Helpers
 									   ? machine.SystemVersion switch
 									   {
 
-										   6 => "Vista",
+										   6                  => "Vista",
 										   7 or 8 or 10 or 11 => machine.StringifiedSystemVersion!,
-										   9 => "8.1",
-										   _ => "Unknown"
+										   9                  => "8.1",
+										   _                  => "Unknown"
 
 									   }
 									   : machine.StringifiedSystemVersion ?? "Unknown";
@@ -146,7 +148,7 @@ namespace OceanApocalypseStudios.RSML.CLI.Helpers
 			if (json is null)
 				return new();
 
-			using JsonDocument document = JsonDocument.Parse(json);
+			using var document = JsonDocument.Parse(json);
 
 			string? systemName = null!;
 			int systemVersion = -1;
@@ -162,8 +164,7 @@ namespace OceanApocalypseStudios.RSML.CLI.Helpers
 				if (system.TryGetProperty("name", out var systemNameProperty))
 					systemName = systemNameProperty.GetString();
 
-				if (system.TryGetProperty("version", out var systemVersionProperty) && systemVersionProperty.TryGetInt32(out systemVersion))
-				{ }
+				if (system.TryGetProperty("version", out var systemVersionProperty) && systemVersionProperty.TryGetInt32(out systemVersion)) { }
 
 			}
 
@@ -193,7 +194,10 @@ namespace OceanApocalypseStudios.RSML.CLI.Helpers
 
 		}
 
-		private static string Quote(string? str) => str is null or "null" ? "null" : $"\"{str}\"";
+		private static string Quote(string? str) =>
+			str is null or "null"
+				? "null"
+				: $"\"{str}\"";
 
 	}
 
