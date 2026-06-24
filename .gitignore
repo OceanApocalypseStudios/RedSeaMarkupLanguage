@@ -354,7 +354,7 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
-# JetBrains Projecy Configuration
+# JetBrains Project Configuration
 .idea/**/*
 !.idea/.idea.RedSeaMarkupLanguage/.idea/encodings.xml
 
