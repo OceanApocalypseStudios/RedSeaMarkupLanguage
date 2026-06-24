@@ -380,8 +380,6 @@ _ReSharper*/
 .vscode/*
 !.vscode/tasks.json
 !.vscode/enable.settings.jsonc
-.idea/
-.vs/
 
 # Site (on main)
 site/
