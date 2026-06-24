@@ -6,13 +6,11 @@
 	</Configurations>
 
 	<Folder Name="/0 - Items/">
-		<File Path=".editorconfig" />
 		<File Path=".gitignore" />
 		<File Path="ADMONITION.md" />
 		<File Path="Assets/FullSizeLogo.png" />
 		<File Path="BENCHMARKS.md" />
 		<File Path="COPYING.txt" />
-		<File Path="DOCUMENTATION_TEMPLATE.md" />
 		<File Path="EDITOR.md" />
 		<File Path="LANGUAGES.md" />
 		<File Path="LICENSE-DOCS.txt" />
