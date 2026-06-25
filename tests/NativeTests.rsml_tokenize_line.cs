@@ -2,7 +2,6 @@
 using System.Text;
 
 using OceanApocalypseStudios.RSML.Analyzer.Syntax;
-using OceanApocalypseStudios.RSML.Native;
 using OceanApocalypseStudios.RSML.Native.Structures;
 
 
@@ -24,31 +23,17 @@ namespace OceanApocalypseStudios.RSML.Tests
 		public void TokenizeRsml_SameAsManagedTokenizer(string data)
 		{
 
-			var alloc = (delegate* unmanaged[Cdecl]<byte*, int, int>)&ToolchainExports.AllocRsmlBuffer;
-			var tokenize = (delegate* unmanaged[Cdecl]<nint, int>)&ToolchainExports.TokenizeRsmlLine;
-			var cleanup = (delegate* unmanaged[Cdecl]<int>)&ToolchainExports.Cleanup;
-
 			fixed (byte* buffer = Encoding.Default.GetBytes(data))
 			{
 
-				alloc(buffer, Encoding.Default.GetByteCount(data));
+				allocate(buffer, Encoding.Default.GetByteCount(data));
 
-				NativeLine output = new()
-				{
-					item1 = SyntaxToken.Empty.ToNativeToken(),
-					item2 = SyntaxToken.Empty.ToNativeToken(),
-					item3 = SyntaxToken.Empty.ToNativeToken(),
-					item4 = SyntaxToken.Empty.ToNativeToken(),
-					item5 = SyntaxToken.Empty.ToNativeToken(),
-					item6 = SyntaxToken.Empty.ToNativeToken(),
-					item7 = SyntaxToken.Empty.ToNativeToken(),
-					item8 = SyntaxToken.Empty.ToNativeToken()
-				};
+				NativeLine output = NativeLine.Empty;
 
 				var outputPtr = &output;
 
 				int errorCode = tokenize((nint)outputPtr);
-				var managedLine = SyntaxExtensions.PtrToLine(outputPtr);
+				var managedLine = NativeLine.PointerToLine(outputPtr);
 				var managedTokens = Lexer.TokenizeLine(new(data));
 
 				Assert.Equal(0, errorCode);
@@ -71,25 +56,11 @@ namespace OceanApocalypseStudios.RSML.Tests
 		)
 		{
 
-			var alloc = (delegate* unmanaged[Cdecl]<byte*, int, int>)&ToolchainExports.AllocRsmlBuffer;
-			var tokenize = (delegate* unmanaged[Cdecl]<nint, int>)&ToolchainExports.TokenizeRsmlLine;
-			var cleanup = (delegate* unmanaged[Cdecl]<int>)&ToolchainExports.Cleanup;
-
 			// simulate no-alloc (cuz test)
 			if (data is null && errorCode == -2)
 			{
 
-				NativeLine output = new()
-				{
-					item1 = SyntaxToken.Empty.ToNativeToken(),
-					item2 = SyntaxToken.Empty.ToNativeToken(),
-					item3 = SyntaxToken.Empty.ToNativeToken(),
-					item4 = SyntaxToken.Empty.ToNativeToken(),
-					item5 = SyntaxToken.Empty.ToNativeToken(),
-					item6 = SyntaxToken.Empty.ToNativeToken(),
-					item7 = SyntaxToken.Empty.ToNativeToken(),
-					item8 = SyntaxToken.Empty.ToNativeToken()
-				};
+				NativeLine output = NativeLine.Empty;
 
 				var outputPtr = &output;
 
@@ -103,19 +74,9 @@ namespace OceanApocalypseStudios.RSML.Tests
 			fixed (byte* buffer = Encoding.Default.GetBytes(data!))
 			{
 
-				alloc(buffer, Encoding.Default.GetByteCount(data!));
+				allocate(buffer, Encoding.Default.GetByteCount(data!));
 
-				NativeLine output = new()
-				{
-					item1 = SyntaxToken.Empty.ToNativeToken(),
-					item2 = SyntaxToken.Empty.ToNativeToken(),
-					item3 = SyntaxToken.Empty.ToNativeToken(),
-					item4 = SyntaxToken.Empty.ToNativeToken(),
-					item5 = SyntaxToken.Empty.ToNativeToken(),
-					item6 = SyntaxToken.Empty.ToNativeToken(),
-					item7 = SyntaxToken.Empty.ToNativeToken(),
-					item8 = SyntaxToken.Empty.ToNativeToken()
-				};
+				NativeLine output = NativeLine.Empty;
 
 				var outputPtr = &output;
 

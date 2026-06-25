@@ -4,10 +4,8 @@
 namespace OceanApocalypseStudios.RSML.Native
 {
 
-	/// <summary>
-	/// Exports for RSML metadata.
-	/// </summary>
-	public static unsafe class MetadataExports
+	// Metadata exports
+	public static unsafe partial class Exports
 	{
 
 		/// <summary>

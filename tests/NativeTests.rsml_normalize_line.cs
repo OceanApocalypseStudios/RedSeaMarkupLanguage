@@ -24,53 +24,23 @@ namespace OceanApocalypseStudios.RSML.Tests
 		public void NormalizeRsml_SameAsManagedNormalizer(string data)
 		{
 
-			var alloc = (delegate* unmanaged[Cdecl]<byte*, int, int>)&ToolchainExports.AllocRsmlBuffer;
-			var tokenize = (delegate* unmanaged[Cdecl]<nint, int>)&ToolchainExports.TokenizeRsmlLine;
-			var normalize = (delegate* unmanaged[Cdecl]<nint, nint, int>)&ToolchainExports.NormalizeRsmlLine;
-			var cleanup = (delegate* unmanaged[Cdecl]<int>)&ToolchainExports.Cleanup;
-
 			fixed (byte* buffer = Encoding.Default.GetBytes(data))
 			{
 
-				#region Setup
+				allocate(buffer, Encoding.Default.GetByteCount(data));
 
-				alloc(buffer, Encoding.Default.GetByteCount(data));
-
-				NativeLine nativeLine = new()
-				{
-					item1 = SyntaxToken.Empty.ToNativeToken(),
-					item2 = SyntaxToken.Empty.ToNativeToken(),
-					item3 = SyntaxToken.Empty.ToNativeToken(),
-					item4 = SyntaxToken.Empty.ToNativeToken(),
-					item5 = SyntaxToken.Empty.ToNativeToken(),
-					item6 = SyntaxToken.Empty.ToNativeToken(),
-					item7 = SyntaxToken.Empty.ToNativeToken(),
-					item8 = SyntaxToken.Empty.ToNativeToken()
-				};
-
-				NativeLine normalizedLine = new()
-				{
-					item1 = SyntaxToken.Empty.ToNativeToken(),
-					item2 = SyntaxToken.Empty.ToNativeToken(),
-					item3 = SyntaxToken.Empty.ToNativeToken(),
-					item4 = SyntaxToken.Empty.ToNativeToken(),
-					item5 = SyntaxToken.Empty.ToNativeToken(),
-					item6 = SyntaxToken.Empty.ToNativeToken(),
-					item7 = SyntaxToken.Empty.ToNativeToken(),
-					item8 = SyntaxToken.Empty.ToNativeToken()
-				};
+				NativeLine nativeLine = NativeLine.Empty;
+				NativeLine normalizedLine = NativeLine.Empty;
 
 				var nativeLinePtr = &nativeLine;
 				var normalizedLinePtr = &normalizedLine;
 
 				tokenize((nint)nativeLinePtr);
 
-				#endregion
-
 				// normalization happens here
 				int errorCode = normalize((nint)nativeLinePtr, (nint)normalizedLinePtr);
 				Assert.Equal(0, errorCode);
-				var convertedNormalizedLine = SyntaxExtensions.PtrToLine(normalizedLinePtr);
+				var convertedNormalizedLine = NativeLine.PointerToLine(normalizedLinePtr);
 
 				// managed normalization happens here - to be compared
 				var managedNormalizedLine = Lexer.TokenizeLine(new(data));

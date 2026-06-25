@@ -43,7 +43,7 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 		/// </summary>
 		/// <param name="host">The host data</param>
 		/// <returns>A result</returns>
-		EvaluationResult Evaluate(LocalHost host);
+		EvaluationResult Evaluate(Host host);
 
 	}
 

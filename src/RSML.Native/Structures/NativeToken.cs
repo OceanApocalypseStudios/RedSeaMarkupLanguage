@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 using OceanApocalypseStudios.RSML.Analyzer.Syntax;
+
+using JetBrains.Annotations;
 
 
 namespace OceanApocalypseStudios.RSML.Native.Structures
@@ -11,24 +14,43 @@ namespace OceanApocalypseStudios.RSML.Native.Structures
 	/// <summary>
 	/// A native-friendly RSML token.
 	/// </summary>
+	[NoReorder]
 	[StructLayout(LayoutKind.Sequential)]
-	public struct NativeToken
+	public readonly struct NativeToken(SyntaxToken token)
 	{
-
-		/// <summary>
-		/// The index of the buffer at which the occurence ends.
-		/// </summary>
-		public int endIndex;
 
 		/// <summary>
 		/// The kind of token.
 		/// </summary>
-		public byte kind;
+		public readonly byte kind = (byte)token.Kind;
 
 		/// <summary>
 		/// The index of the buffer at which the occurence starts.
 		/// </summary>
-		public int startIndex;
+		public readonly int startIndex = token.BufferRange.Start.IsFromEnd
+							? -token.BufferRange.Start.Value
+							: token.BufferRange.Start.Value;
+
+		/// <summary>
+		/// The index of the buffer at which the occurence ends.
+		/// </summary>
+		public readonly int endIndex = token.BufferRange.End.IsFromEnd
+							? -token.BufferRange.End.Value
+							: token.BufferRange.End.Value;
+
+		/// <summary>
+		/// Empty native token.
+		/// </summary>
+		public static NativeToken Empty => SyntaxToken.Empty;
+
+		/// <summary>
+		/// Converts the native RSML syntax token into a
+		/// <strong>managed</strong> RSML syntax token.
+		/// </summary>
+		/// <returns>A managed (regular) token</returns>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public readonly SyntaxToken ToToken() =>
+			new((TokenKind)kind, new(Math.Abs(startIndex), startIndex < 0), new(Math.Abs(endIndex), endIndex < 0));
 
 		/// <summary>
 		/// Checks if 2 native tokens are the same.
@@ -53,6 +75,12 @@ namespace OceanApocalypseStudios.RSML.Native.Structures
 			NativeToken right
 		) =>
 			!(left == right);
+
+		/// <summary>
+		/// Directly converts from <see cref="SyntaxToken"/> to <see cref="NativeToken"/>.
+		/// </summary>
+		/// <param name="token"></param>
+		public static implicit operator NativeToken(SyntaxToken token) => new(token);
 
 		/// <inheritdoc />
 		public readonly override bool Equals([NotNullWhen(true)] object? obj)

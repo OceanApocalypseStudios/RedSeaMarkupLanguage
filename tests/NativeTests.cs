@@ -10,17 +10,35 @@ namespace OceanApocalypseStudios.RSML.Tests
 	public unsafe partial class NativeTests
 	{
 
+		/// <inheritdoc cref="Exports.AllocRsmlBuffer(Byte*, Int32)" />
+		private static readonly delegate* unmanaged[Cdecl]<byte*, int, int> allocate = (delegate* unmanaged[Cdecl]<byte*, int, int>)&Exports.AllocRsmlBuffer;
+
+		/// <inheritdoc cref="Exports.TokenizeRsmlLine(IntPtr)" />
+		private static readonly delegate* unmanaged[Cdecl]<nint, int> tokenize = (delegate* unmanaged[Cdecl]<nint, int>)&Exports.TokenizeRsmlLine;
+
+		/// <inheritdoc cref="Exports.NormalizeRsmlLine(IntPtr, IntPtr)"/>
+		private static readonly delegate* unmanaged[Cdecl]<nint, nint, int> normalize = (delegate* unmanaged[Cdecl]<nint, nint, int>)&Exports.NormalizeRsmlLine;
+
+		/// <inheritdoc cref="Exports.ValidateRsmlLine(IntPtr)"/>
+		private static readonly delegate* unmanaged[Cdecl]<nint, int> validate = (delegate* unmanaged[Cdecl]<nint, int>)&Exports.ValidateRsmlLine;
+
+		/// <inheritdoc cref="Exports.EvaluateRsmlDocument(IntPtr, Int32, Int32, Int32, Int32)"/>
+		private static readonly delegate* unmanaged[Cdecl]<nint, int, int, int, int, byte, int> evaluate = (delegate* unmanaged[Cdecl]<nint, int, int, int, int, byte, int>)&Exports.EvaluateRsmlDocument;
+
+		/// <inheritdoc cref="Exports.Cleanup"/>
+		private static readonly delegate* unmanaged[Cdecl]<int> cleanup = (delegate* unmanaged[Cdecl]<int>)&Exports.Cleanup;
+
+		/// <inheritdoc cref="Exports.GetLastErrorMessage"/>
+		private static readonly delegate* unmanaged[Cdecl]<nint> getError = (delegate* unmanaged[Cdecl]<nint>)&Exports.GetLastErrorMessage;
+
 		[Fact]
 		public void Cleanup_WorksCorrectly()
 		{
 
-			var alloc = (delegate* unmanaged[Cdecl]<byte*, int, int>)&ToolchainExports.AllocRsmlBuffer;
-			var cleanup = (delegate* unmanaged[Cdecl]<int>)&ToolchainExports.Cleanup;
-
-			Assert.NotEqual(0, alloc(null, -4)); // allocate errors out here btw
-			Assert.NotEqual(IntPtr.Zero, ToolchainExports.lastErrorMessage);
+			Assert.NotEqual(0, allocate(null, -4)); // allocate errors out here btw
+			Assert.NotEqual(IntPtr.Zero, Exports.lastErrorMessage);
 			Assert.Equal(0, cleanup());
-			Assert.Equal(IntPtr.Zero, ToolchainExports.lastErrorMessage);
+			Assert.Equal(IntPtr.Zero, Exports.lastErrorMessage);
 
 		}
 
@@ -28,21 +46,27 @@ namespace OceanApocalypseStudios.RSML.Tests
 		public void GetLastErrorMessage_WorksCorrectly()
 		{
 
-			var allocCallback = (delegate* unmanaged[Cdecl]<byte*, int, int>)&ToolchainExports.AllocRsmlBuffer;
-			var errorCallback = (delegate* unmanaged[Cdecl]<nint>)&ToolchainExports.GetLastErrorMessage;
+			// please error out (first time im begging for an error)
+			Assert.NotEqual(0, allocate(null, -4));
 
-			Assert.NotEqual(0, allocCallback(null, -4));
+			// null pointer assertions
+			Assert.NotEqual(IntPtr.Zero, Exports.lastErrorMessage);
+			Assert.NotEqual(IntPtr.Zero, getError());
 
-			Assert.Equal(ToolchainExports.lastErrorMessage, errorCallback());
-			Assert.Equal(Marshal.PtrToStringAuto(ToolchainExports.lastErrorMessage), Marshal.PtrToStringAuto(errorCallback()));
+			// they point to the same mfing thing
+			Assert.Equal(Exports.lastErrorMessage, getError());
 
-			if (ToolchainExports.lastErrorMessage != IntPtr.Zero)
-			{
+			var lastErrorMessageStr = Marshal.PtrToStringAuto(Exports.lastErrorMessage);
+			var getErrorStr = Marshal.PtrToStringAuto(getError());
 
-				Marshal.FreeHGlobal(ToolchainExports.lastErrorMessage); // cleanup
-				ToolchainExports.lastErrorMessage = IntPtr.Zero;
+			// still null pointer assertions
+			Assert.NotNull(lastErrorMessageStr);
+			Assert.NotNull(getErrorStr);
 
-			}
+			// twins lmao
+			Assert.Equal(lastErrorMessageStr, getErrorStr);
+
+			cleanup();
 
 		}
 
