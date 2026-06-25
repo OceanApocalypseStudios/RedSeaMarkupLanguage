@@ -74,7 +74,7 @@ namespace OceanApocalypseStudios.RSML.CLI
 
 		public static void Evaluate_NoPretty(
 			string data,
-			LocalHost host
+			Host host
 		)
 		{
 
@@ -101,7 +101,7 @@ namespace OceanApocalypseStudios.RSML.CLI
 
 		public static void Evaluate_Pretty(
 			string data,
-			LocalHost host
+			Host host
 		)
 		{
 
@@ -160,7 +160,7 @@ namespace OceanApocalypseStudios.RSML.CLI
 		}
 
 		public static int GetMachine(
-			LocalHost host,
+			Host host,
 			bool disableAnsi,
 			string? format
 		)
@@ -190,21 +190,20 @@ namespace OceanApocalypseStudios.RSML.CLI
 		}
 
 		public static string? LocalMachineInfo_NoPretty(
-			LocalHost host,
+			Host host,
 			string outputFormat
 		) =>
 			outputFormat switch
 			{
 
-				"PlainText" => LocalHostOutput.AsPlainText(host),
-				"JSON"      => LocalHostOutput.AsJson(host),
-				"Dotnet"    => LocalHostOutput.AsDotnet(host),
-				"CSharp"    => LocalHostOutput.AsCSharp(host),
+				"PlainText" => HostOutput.AsPlainText(host),
+				"JSON"      => HostOutput.AsJson(host),
+				"Dotnet"    => HostOutput.AsDotnet(host),
 				_           => null
 
 			};
 
-		public static void LocalMachineInfo_Pretty(LocalHost host) => LocalHostOutput.AsPrettyText(host);
+		public static void LocalMachineInfo_Pretty(Host host) => HostOutput.AsPrettyText(host);
 
 		public static int SpecificationSupport_NoPretty()
 		{
