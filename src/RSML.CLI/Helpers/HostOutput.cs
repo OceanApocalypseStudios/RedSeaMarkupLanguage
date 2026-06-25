@@ -8,20 +8,15 @@ using Spectre.Console;
 namespace OceanApocalypseStudios.RSML.CLI.Helpers
 {
 
-	internal static class LocalHostOutput
+	internal static class HostOutput
 	{
 
-		public static string AsCSharp(LocalHost host) =>
-			host.DistroName is null
-				? $"new LocalHost(\"{host.SystemName}\", \"{host.ProcessorArchitecture}\", {host.SystemVersion})"
-				: $"LocalHost.Linux(\"{host.DistroName}\", \"{host.DistroFamily}\", \"{host.ProcessorArchitecture}\", {host.SystemVersion})";
+		public static string AsDotnet(Host host) =>
+			host.IsLinux
+				? $"new Host(\"{host.SystemName}\", \"{host.ProcessorArchitecture}\", {host.SystemVersion})"
+				: $"new Host(\"{host.DistroName}\", \"{host.DistroFamily}\", \"{host.ProcessorArchitecture}\", {host.SystemVersion})";
 
-		public static string AsDotnet(LocalHost host) =>
-			host.DistroName is null
-				? $"new LocalHost(\"{host.SystemName}\", \"{host.ProcessorArchitecture}\", {host.SystemVersion})"
-				: $"new LocalHost(\"{host.DistroName}\", \"{host.DistroFamily}\", \"{host.ProcessorArchitecture}\", {host.SystemVersion})";
-
-		public static string AsJson(LocalHost host)
+		public static string AsJson(Host host)
 		{
 
 			string systemVersion = host.StringifiedSystemVersion ?? "null";
@@ -44,7 +39,7 @@ namespace OceanApocalypseStudios.RSML.CLI.Helpers
 
 		}
 
-		public static string AsPlainText(LocalHost host)
+		public static string AsPlainText(Host host)
 		{
 
 			string systemVersion = host.SystemName?.Equals("windows", StringComparison.OrdinalIgnoreCase) ?? false
@@ -74,7 +69,7 @@ namespace OceanApocalypseStudios.RSML.CLI.Helpers
 
 		}
 
-		public static void AsPrettyText(LocalHost host)
+		public static void AsPrettyText(Host host)
 		{
 
 			string systemVersion = host.SystemName?.Equals("windows", StringComparison.OrdinalIgnoreCase) ?? false
@@ -108,19 +103,19 @@ namespace OceanApocalypseStudios.RSML.CLI.Helpers
 									new Rows(
 										new Markup(
 											"[green]Linux Distribution[/] [grey](if applicable)[/]",
-											host.SystemName?.Equals("linux", StringComparison.OrdinalIgnoreCase) ?? false
+											host.IsLinux
 												? null
 												: new(null, null, Decoration.Strikethrough)
 										),
 										new Markup(
 											$"[white]Family:[/] [grey]{(host.DistroFamily ?? "Unknown").Capitalize()}[/]",
-											host.SystemName?.Equals("linux", StringComparison.OrdinalIgnoreCase) ?? false
+											host.IsLinux
 												? null
 												: new(null, null, Decoration.Strikethrough)
 										),
 										new Markup(
 											$"[white]Name:[/] [grey]{(host.DistroName ?? "Unknown").Capitalize()}[/]",
-											host.SystemName?.Equals("linux", StringComparison.OrdinalIgnoreCase) ?? false
+											host.IsLinux
 												? null
 												: new(null, null, Decoration.Strikethrough)
 										)
@@ -140,7 +135,7 @@ namespace OceanApocalypseStudios.RSML.CLI.Helpers
 
 		}
 
-		public static LocalHost FromJson(string? json)
+		public static Host FromJson(string? json)
 		{
 
 			if (json is null)
@@ -186,12 +181,16 @@ namespace OceanApocalypseStudios.RSML.CLI.Helpers
 			}
 
 			if (systemName is not null && systemName.Equals("linux", StringComparison.OrdinalIgnoreCase))
+			{
+
 				return new(
 					distroName,
 					distroFamily,
 					processorArchitecture,
 					systemVersion
 				);
+
+			}
 
 			return new(systemName, processorArchitecture, systemVersion);
 

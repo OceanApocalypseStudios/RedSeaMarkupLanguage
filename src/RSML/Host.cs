@@ -11,22 +11,22 @@ namespace OceanApocalypseStudios.RSML
 {
 
 	/// <summary>
-	/// A representation of several attributes of a local host.
+	/// A representation of several attributes of an host.
 	/// </summary>
-	public partial struct LocalHost
+	public partial struct Host
 	{
 
 		/// <summary>
 		/// Collects data from the system and creates a new instance of the struct.
 		/// </summary>
-		public LocalHost()
+		public Host()
 		{
 
 			InitializeSystemName();
 			InitializeProcessorArch();
 			InitializeVersionData();
 
-			if (SystemName == "linux")
+			if (SystemName.IsAsciiEqualsIgnoreCase("linux"))
 				InitializeDistroData();
 
 		}
@@ -37,7 +37,7 @@ namespace OceanApocalypseStudios.RSML
 		/// <param name="osName">The OS name or null if undefined</param>
 		/// <param name="processorArchitecture">The processor architecture or null if undefined</param>
 		/// <param name="osMajorVersion">The OS's major version or null or -1 if undefined</param>
-		public LocalHost(
+		public Host(
 			string? osName,
 			string? processorArchitecture,
 			int? osMajorVersion
@@ -57,7 +57,7 @@ namespace OceanApocalypseStudios.RSML
 		/// <param name="distroFamily">The distro's family or null if undefined</param>
 		/// <param name="processorArchitecture">The processor architecture or null if undefined</param>
 		/// <param name="distroMajorVersion">The OS's major version or null or -1 if undefined</param>
-		public LocalHost(
+		public Host(
 			string? distroName,
 			string? distroFamily,
 			string? processorArchitecture,
@@ -76,7 +76,7 @@ namespace OceanApocalypseStudios.RSML
 		/// <summary>
 		/// The host RSML is running on.
 		/// </summary>
-		public static LocalHost CurrentHost { get; } = new();
+		public static Host CurrentHost => new();
 
 		/// <summary>
 		/// The name of the Linux distribution or <c>null</c> if undetected or not Linux.
@@ -87,6 +87,11 @@ namespace OceanApocalypseStudios.RSML
 		/// The name of the Linux distribution or <c>null</c> if undetected or not Linux.
 		/// </summary>
 		public string? DistroName { get; private set; } = null;
+
+		/// <summary>
+		/// Whether the host is running Linux.
+		/// </summary>
+		public readonly bool IsLinux => SystemName.IsAsciiEqualsIgnoreCase("linux");
 
 		/// <summary>
 		/// The architecture in which the OS runs at.
@@ -129,7 +134,8 @@ namespace OceanApocalypseStudios.RSML
 		/// <param name="distroFamily">The distro's family or null if undefined</param>
 		/// <param name="processorArchitecture">The processor architecture or null if undefined</param>
 		/// <param name="distroMajorVersion">The OS's major version or null or -1 if undefined</param>
-		public static LocalHost Linux(
+		[Obsolete("Use Host(string?, string?, string?, int?) instead")]
+		public static Host Linux(
 			string? distroName,
 			string? distroFamily,
 			string? processorArchitecture,
@@ -143,15 +149,15 @@ namespace OceanApocalypseStudios.RSML
 			);
 
 		/// <summary>
-		/// Merges two <see cref="LocalHost" /> instances,
+		/// Merges two <see cref="Host" /> instances,
 		/// using the latter as fallback for the first.
 		/// </summary>
 		/// <param name="main">The host whose non-null attributes are used over the fallback's</param>
 		/// <param name="fallback">The host that serves as the fallback for <paramref name="main" />'s null attributes</param>
-		/// <returns>A new instance of a <see cref="LocalHost" /></returns>
-		public static LocalHost MergeWithFallback(
-			LocalHost main,
-			LocalHost fallback
+		/// <returns>A new instance of a <see cref="Host" /></returns>
+		public static Host MergeWithFallback(
+			Host main,
+			Host fallback
 		) =>
 			main.SystemName.IsAsciiEqualsIgnoreCase("linux") || main.DistroName is not null || main.DistroFamily is not null
 				? new(
@@ -171,20 +177,20 @@ namespace OceanApocalypseStudios.RSML
 				);
 
 		/// <summary>
-		/// Merges an instance of <see cref="LocalHost" /> with
+		/// Merges an instance of <see cref="Host" /> with
 		/// this one, which is treated as a fallback.
 		/// </summary>
 		/// <param name="main">The host whose non-null attributes are used over this instance's</param>
-		/// <returns>A new instance of a <see cref="LocalHost" /></returns>
-		public readonly LocalHost MergeAsFallback(LocalHost main) => MergeWithFallback(main, this);
+		/// <returns>A new instance of a <see cref="Host" /></returns>
+		public readonly Host MergeAsFallback(Host main) => MergeWithFallback(main, this);
 
 		/// <summary>
-		/// Merges this <see cref="LocalHost" /> instance
+		/// Merges this <see cref="Host" /> instance
 		/// with another one, which is treated as a fallback.
 		/// </summary>
 		/// <param name="fallback">The host that serves as the fallback for this instance's null attributes</param>
-		/// <returns>A new instance of a <see cref="LocalHost" /></returns>
-		public readonly LocalHost MergeWithFallback(LocalHost fallback) => MergeWithFallback(this, fallback);
+		/// <returns>A new instance of a <see cref="Host" /></returns>
+		public readonly Host MergeWithFallback(Host fallback) => MergeWithFallback(this, fallback);
 
 		internal void InitializeVersionData_FreeBsd()
 		{
