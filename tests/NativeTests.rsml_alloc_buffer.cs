@@ -23,19 +23,17 @@ namespace OceanApocalypseStudios.RSML.Tests
 		public void AllocRsml_AllocatesBufferCorrectly_ReadAll(string content)
 		{
 
-			var callback = (delegate* unmanaged[Cdecl]<byte*, int, int>)&ToolchainExports.AllocRsmlBuffer;
-
 			fixed (byte* data = Encoding.Default.GetBytes(content))
 			{
 
 				int byteCount = Encoding.Default.GetByteCount(content);
 
-				Assert.Equal(0, callback(data, byteCount));
+				Assert.Equal(0, allocate(data, byteCount));
 
-				Assert.NotNull(ToolchainExports.buffer);
-				Assert.Equal(0, ToolchainExports.buffer.CaretPosition);
+				Assert.NotNull(Exports.buffer);
+				Assert.Equal(0, Exports.buffer.CaretPosition);
 
-				Assert.Equal(content, ToolchainExports.buffer.ReadUntil((_, _) => false).ToString());
+				Assert.Equal(content, Exports.buffer.ReadUntil((_, _) => false).ToString());
 
 			}
 
@@ -54,19 +52,18 @@ namespace OceanApocalypseStudios.RSML.Tests
 		)
 		{
 
-			var callback = (delegate* unmanaged[Cdecl]<byte*, int, int>)&ToolchainExports.AllocRsmlBuffer;
+			int byteCount = Encoding.Default.GetByteCount(content);
 
 			fixed (byte* data = Encoding.Default.GetBytes(content))
 			{
 
-				int byteCount = Encoding.Default.GetByteCount(content);
 
-				Assert.Equal(0, callback(data, byteCount));
+				Assert.Equal(0, allocate(data, byteCount));
 
-				Assert.NotNull(ToolchainExports.buffer);
-				Assert.Equal(0, ToolchainExports.buffer.CaretPosition);
+				Assert.NotNull(Exports.buffer);
+				Assert.Equal(0, Exports.buffer.CaretPosition);
 
-				Assert.Equal(firstLine ?? content, ToolchainExports.buffer.ReadLine().ToString());
+				Assert.Equal(firstLine ?? content, Exports.buffer.ReadLine().ToString());
 
 			}
 
@@ -76,29 +73,27 @@ namespace OceanApocalypseStudios.RSML.Tests
 		public void AllocRsml_CleansLastErrorBeforeAssigning()
 		{
 
-			var alloc = (delegate* unmanaged[Cdecl]<byte*, int, int>)&ToolchainExports.AllocRsmlBuffer;
-
-			Assert.Equal(-1, alloc(null, 2));
-			nint firstErrorMessagePtr = ToolchainExports.lastErrorMessage;
+			Assert.Equal(-1, allocate(null, 2));
+			nint firstErrorMessagePtr = Exports.lastErrorMessage;
 			Assert.NotEqual(IntPtr.Zero, firstErrorMessagePtr);
 			string? firstErrorMessage = Marshal.PtrToStringAuto(firstErrorMessagePtr);
 			Assert.NotNull(firstErrorMessage);
 
 			fixed (byte* data = Encoding.Default.GetBytes("Random content for testing purposes"))
-				Assert.Equal(-2, alloc(data, -2));
+				Assert.Equal(-2, allocate(data, -2));
 
-			nint secondErrorMessagePtr = ToolchainExports.lastErrorMessage;
+			nint secondErrorMessagePtr = Exports.lastErrorMessage;
 			Assert.NotEqual(IntPtr.Zero, secondErrorMessagePtr);
 			string? secondErrorMessage = Marshal.PtrToStringAuto(secondErrorMessagePtr);
 			Assert.NotNull(secondErrorMessage);
 
 			Assert.NotEqual(firstErrorMessage, secondErrorMessage);
 
-			if (ToolchainExports.lastErrorMessage != IntPtr.Zero)
+			if (Exports.lastErrorMessage != IntPtr.Zero)
 			{
 
-				Marshal.FreeHGlobal(ToolchainExports.lastErrorMessage); // cleanup
-				ToolchainExports.lastErrorMessage = IntPtr.Zero;
+				Marshal.FreeHGlobal(Exports.lastErrorMessage); // cleanup
+				Exports.lastErrorMessage = IntPtr.Zero;
 
 			}
 
@@ -116,8 +111,6 @@ namespace OceanApocalypseStudios.RSML.Tests
 		)
 		{
 
-			var callback = (delegate* unmanaged[Cdecl]<byte*, int, int>)&ToolchainExports.AllocRsmlBuffer;
-
 			fixed (byte* data = Encoding.Default.GetBytes(content ?? ""))
 			{
 
@@ -125,7 +118,7 @@ namespace OceanApocalypseStudios.RSML.Tests
 										  ? Encoding.Default.GetByteCount(content ?? "")
 										  : byteCount;
 
-				int outputErrorCode = callback(
+				int outputErrorCode = allocate(
 					content is null
 						? null
 						: data,
@@ -135,15 +128,15 @@ namespace OceanApocalypseStudios.RSML.Tests
 				Assert.Equal(errorCode, outputErrorCode);
 
 				if (errorCode != 0)
-					Assert.NotEqual(0, ToolchainExports.lastErrorMessage);
+					Assert.NotEqual(0, Exports.lastErrorMessage);
 				else
-					Assert.Equal(0, ToolchainExports.lastErrorMessage);
+					Assert.Equal(0, Exports.lastErrorMessage);
 
-				if (ToolchainExports.lastErrorMessage != IntPtr.Zero)
+				if (Exports.lastErrorMessage != IntPtr.Zero)
 				{
 
-					Marshal.FreeHGlobal(ToolchainExports.lastErrorMessage); // cleanup
-					ToolchainExports.lastErrorMessage = IntPtr.Zero;
+					Marshal.FreeHGlobal(Exports.lastErrorMessage); // cleanup
+					Exports.lastErrorMessage = IntPtr.Zero;
 
 				}
 

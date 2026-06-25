@@ -1,10 +1,7 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Text;
 
-using OceanApocalypseStudios.RSML;
-using OceanApocalypseStudios.RSML.Analyzer;
 using OceanApocalypseStudios.RSML.Analyzer.Semantics;
 using OceanApocalypseStudios.RSML.Analyzer.Syntax;
 using OceanApocalypseStudios.RSML.Evaluation;
@@ -15,109 +12,9 @@ using OceanApocalypseStudios.RSML.Native.Structures;
 namespace OceanApocalypseStudios.RSML.Native
 {
 
-	/// <summary>
-	/// C ABI exports for RSML toolchain components.
-	/// </summary>
-	public static unsafe class ToolchainExports
+	// toolchain exports
+	public static unsafe partial class Exports
 	{
-
-		/// <summary>
-		/// Allocates a buffer to be public to all RSML toolchain tools.
-		/// </summary>
-		/// <param name="content">The buffer's contents</param>
-		/// <param name="byteCount">The amount of bytes the content has</param>
-		/// <returns>
-		/// <list type="bullet"><c>-3:</c> Unknown error<br /></list>
-		/// <list type="bullet"><c>-2:</c> The given amount of bytes is less than 0<br /></list>
-		/// <list type="bullet"><c>-1:</c> The given pointer is null or the input buffer is null<br /></list>
-		/// <list type="bullet"><c>0:</c> Success<br /></list>
-		/// </returns>
-		[UnmanagedCallersOnly(CallConvs = [ typeof(CallConvCdecl) ], EntryPoint = "rsml_alloc_buffer")]
-		public static int AllocRsmlBuffer(
-			byte* content,
-			int byteCount
-		)
-		{
-
-			try
-			{
-
-				string data = Encoding.Default.GetString(content, byteCount);
-
-				if (data == "")
-					throw new ArgumentNullException(null, "String is empty");
-
-				buffer = new(data);
-
-				return 0;
-
-			}
-			catch (ArgumentNullException ane)
-			{
-
-				if (lastErrorMessage != IntPtr.Zero)
-					Marshal.FreeHGlobal(lastErrorMessage);
-
-				lastErrorMessage = Marshal.StringToHGlobalAuto(ane.Message);
-
-				return -1;
-
-			}
-			catch (ArgumentOutOfRangeException aoo)
-			{
-
-				if (lastErrorMessage != IntPtr.Zero)
-					Marshal.FreeHGlobal(lastErrorMessage);
-
-				lastErrorMessage = Marshal.StringToHGlobalAuto(aoo.Message);
-
-				return -2;
-
-			}
-			catch (Exception ex)
-			{
-
-				if (lastErrorMessage != IntPtr.Zero)
-					Marshal.FreeHGlobal(lastErrorMessage);
-
-				lastErrorMessage = Marshal.StringToHGlobalAuto(ex.Message);
-
-				return -3;
-
-			}
-
-		}
-
-		/// <summary>
-		/// Destroys memory that is no longer necessary but still in use by RSML.
-		/// </summary>
-		/// <returns><c>0</c> if successful; <c>-1</c> if not successful</returns>
-		[UnmanagedCallersOnly(CallConvs = [ typeof(CallConvCdecl) ], EntryPoint = "rsml_cleanup")]
-		public static int Cleanup()
-		{
-
-			try
-			{
-
-				if (lastErrorMessage != IntPtr.Zero)
-				{
-
-					Marshal.FreeHGlobal(lastErrorMessage);
-					lastErrorMessage = IntPtr.Zero;
-
-				}
-
-				buffer = null;
-
-				return 0;
-
-			}
-			catch (Exception)
-			{
-				return -1;
-			}
-
-		}
 
 		/// <summary>
 		/// Evaluates a RSML document given a host.
@@ -133,6 +30,7 @@ namespace OceanApocalypseStudios.RSML.Native
 		/// undefined
 		/// </param>
 		/// <param name="processorArchitecture">The host's processor architecture - nullptr if undefined</param>
+		/// <param name="currentHostFallback">Whether the current host should be used as fallback</param>
 		/// <returns>
 		/// <list type="bullet"><c>-10:</c> Unknown error during the whole process</list>
 		/// <list type="bullet"><c>-9:</c> Unknown error during evaluation</list>
@@ -153,13 +51,14 @@ namespace OceanApocalypseStudios.RSML.Native
 			int systemOrDistroName,
 			int distroFamily,
 			int systemOrDistroMajorVersion,
-			int processorArchitecture
+			int processorArchitecture,
+			byte currentHostFallback
 		)
 		{
 			try
 			{
 
-				#region Converting values to LocalMachine-compatible
+				#region Converting given values to Host-compatible values
 
 				string? actualSystemName = systemOrDistroName switch
 				{
@@ -167,25 +66,25 @@ namespace OceanApocalypseStudios.RSML.Native
 					0   => null,
 					1   => "windows",
 					2   => "osx",
-					3   => "freebsd",
-					4   => "linux",
-					201 => "debian",
-					202 => "fedora",
-					203 => "ubuntu",
-					204 => "archlinux",
+					3   => "linux",
+					4   => "freebsd",
+					101 => "debian",
+					102 => "fedora",
+					103 => "ubuntu",
+					104 => "archlinux",
 					_   => "UNKNOWN"
 
 				};
 
-				string? actualDistroFamily = systemOrDistroName is >= 201 and <= 204
+				string? actualDistroFamily = systemOrDistroName is (>= 101 and <= 104) or 3
 												 ? distroFamily switch
 												 {
 
 													 0   => null,
-													 201 => "debian",
-													 202 => "fedora",
-													 203 => "ubuntu",
-													 204 => "archlinux",
+													 1 => "debian",
+													 2 => "fedora",
+													 3 => "ubuntu",
+													 4 => "archlinux",
 													 _   => "UNKNOWN"
 
 												 }
@@ -195,7 +94,7 @@ namespace OceanApocalypseStudios.RSML.Native
 				{
 
 					0 => null,
-					1 => "arm32",
+					1 => "arm32", // arm
 					2 => "arm64",
 					3 => "x64",
 					4 => "x86",
@@ -204,17 +103,24 @@ namespace OceanApocalypseStudios.RSML.Native
 
 				};
 
-				var actualMachine = LocalHost.MergeWithFallback(
-					LocalHost.CurrentHost,
-					systemOrDistroName is >= 201 and <= 204
-						? LocalHost.Linux(
+				Host customHost =
+					systemOrDistroName is (>= 101 and <= 104) or 3
+						? new(
 							actualSystemName,
 							actualDistroFamily,
 							actualProcessorArchitecture,
 							systemOrDistroMajorVersion
 						)
-						: new(actualSystemName, actualProcessorArchitecture, systemOrDistroMajorVersion)
-				);
+						: new(
+							actualSystemName,
+							actualProcessorArchitecture,
+							systemOrDistroMajorVersion
+						);
+
+				Host actualHost =
+					currentHostFallback == 1
+						? Host.MergeWithFallback(customHost, Host.CurrentHost)
+						: customHost;
 
 				#endregion
 
@@ -226,17 +132,13 @@ namespace OceanApocalypseStudios.RSML.Native
 
 				EvaluationResult result = null!;
 
-				var content = buffer.ReadUntil((
-												   _,
-												   _
-											   ) => false
-				); // this reads everything
+				var content = buffer.ReadUntil((_, _) => false); // this reads everything
 
 				Evaluator evaluator = new(content);
 
 				try
 				{
-					result = evaluator.Evaluate(actualMachine);
+					result = evaluator.Evaluate(actualHost);
 				}
 				catch (InvalidRsmlSyntax irs) // yeah it's the fucking IRS
 				{
@@ -303,25 +205,10 @@ namespace OceanApocalypseStudios.RSML.Native
 					return -9;
 				}
 
-				var dst = (NativeEvaluationResult*)outputResultPtr.ToPointer();
 
-				int startIndex = result.WasMatchFound
-									 ? content.Span.IndexOf(result.MatchValue!)
-									 : -1;
+				*(NativeEvaluationResult*)outputResultPtr.ToPointer() = new(result, buffer);
 
-				dst->wasMatchFound = (byte)(result.WasMatchFound
-												? 1
-												: 0);
-
-				dst->matchValueStart = startIndex;
-
-				dst->matchValueEnd = result.WasMatchFound
-										 ? startIndex + result.MatchValue!.Length
-										 : -1;
-
-				return result.WasMatchFound
-						   ? 0
-						   : 1;
+				return result.WasMatchFound ? 0 : 1;
 
 			}
 			catch
@@ -330,13 +217,6 @@ namespace OceanApocalypseStudios.RSML.Native
 			}
 
 		}
-
-		/// <summary>
-		/// Returns the last saved error message. Can be a null pointer (<c>IntPtr.Zero</c>).
-		/// </summary>
-		/// <returns>The pointer to the error message</returns>
-		[UnmanagedCallersOnly(CallConvs = [ typeof(CallConvCdecl) ], EntryPoint = "rsml_get_last_error_message")]
-		public static nint GetLastErrorMessage() => lastErrorMessage;
 
 		/// <summary>
 		/// Normalizes a line of RSML.
@@ -368,8 +248,7 @@ namespace OceanApocalypseStudios.RSML.Native
 				if (inputLinePtr == IntPtr.Zero || outputLinePtr == IntPtr.Zero)
 					return -1;
 
-				var src = (NativeLine*)inputLinePtr.ToPointer();
-				var line = SyntaxExtensions.PtrToLine(src);
+				var line = (*(NativeLine*)inputLinePtr.ToPointer()).ToLine();
 
 				if (line.IsEmpty)
 					return -2;
@@ -379,8 +258,7 @@ namespace OceanApocalypseStudios.RSML.Native
 				if (tokenCount > 8)
 					return -4;
 
-				var dst = (NativeLine*)outputLinePtr.ToPointer();
-				line.CopyToNative(dst);
+				var dst = *(NativeLine*)outputLinePtr.ToPointer() = (NativeLine)line;
 
 				return 0;
 
@@ -436,8 +314,7 @@ namespace OceanApocalypseStudios.RSML.Native
 
 				var line = Lexer.TokenizeLine(buffer);
 
-				var dst = (NativeLine*)outputLinePtr.ToPointer();
-				line.CopyToNative(dst);
+				*(NativeLine*)outputLinePtr.ToPointer() = (NativeLine)line;
 
 				return 0;
 
@@ -512,8 +389,7 @@ namespace OceanApocalypseStudios.RSML.Native
 				if (inputLinePtr == IntPtr.Zero)
 					return -1;
 
-				var src = (NativeLine*)inputLinePtr.ToPointer();
-				var line = SyntaxExtensions.PtrToLine(src);
+				var line = (*(NativeLine*)inputLinePtr.ToPointer()).ToLine();
 
 				if (line.IsEmpty)
 					return -2;
@@ -566,10 +442,6 @@ namespace OceanApocalypseStudios.RSML.Native
 			}
 
 		}
-
-		internal static DualTextBuffer? buffer;
-
-		internal static nint lastErrorMessage = IntPtr.Zero;
 
 	}
 

@@ -104,7 +104,7 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 		public EvaluationResult Evaluate() => Evaluate(new());
 
 		/// <inheritdoc />
-		public EvaluationResult Evaluate(LocalHost host)
+		public EvaluationResult Evaluate(Host host)
 		{
 
 			if (Content.Length == 0)
@@ -174,7 +174,7 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 								tokens,
 								Content,
 								host,
-								host.SystemName == "linux"
+								host.IsLinux
 							))
 						{
 
@@ -191,7 +191,7 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 								tokens,
 								Content,
 								host,
-								host.SystemName == "linux"
+								host.IsLinux
 							))
 						{
 
@@ -224,7 +224,7 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 		private static bool HandleLogicPath_Complex(
 			SyntaxLine tokens,
 			DualTextBuffer context,
-			in LocalHost host,
+			in Host host,
 			bool isLinux
 		)
 		{
@@ -305,7 +305,7 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 		private static bool HandleLogicPath_Complex_Linux(
 			SyntaxLine tokens,
 			DualTextBuffer context,
-			in LocalHost host
+			in Host host
 		)
 		{
 
@@ -385,7 +385,7 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 		private static bool HandleLogicPath_Simple(
 			SyntaxLine tokens,
 			DualTextBuffer context,
-			in LocalHost host,
+			in Host host,
 			bool isLinux
 		)
 		{
@@ -427,7 +427,7 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 		private static bool HandleLogicPath_Simple_Linux(
 			SyntaxLine tokens,
 			DualTextBuffer context,
-			in LocalHost host
+			in Host host
 		)
 		{
 
