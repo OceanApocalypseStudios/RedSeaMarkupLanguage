@@ -3,8 +3,6 @@
 using OceanApocalypseStudios.RSML.Analyzer;
 using OceanApocalypseStudios.RSML.Toolchain;
 
-using LocalMachine = OceanApocalypseStudios.RSML.Machine.LocalMachine;
-
 
 namespace OceanApocalypseStudios.RSML.Evaluation
 {
@@ -35,17 +33,17 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 		static abstract bool IsComment(string line);
 
 		/// <summary>
-		/// Evaluates the RSML document with the machine's data.
+		/// Evaluates the RSML document with the host's data.
 		/// </summary>
 		/// <returns>A result</returns>
 		EvaluationResult Evaluate();
 
 		/// <summary>
-		/// Evaluates the RSML document with the specified machine data.
+		/// Evaluates the RSML document with the specified host's data.
 		/// </summary>
-		/// <param name="machineData">The machine data</param>
+		/// <param name="host">The host data</param>
 		/// <returns>A result</returns>
-		EvaluationResult Evaluate(LocalMachine machineData);
+		EvaluationResult Evaluate(LocalHost host);
 
 	}
 

@@ -31,10 +31,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 		];
 
 		/// <inheritdoc />
-		public static ImmutableArray<ReadOnlyMemory<char>> ValidSpecialActionNames =>
-		[
-			"Void".AsMemory(), "ThrowError".AsMemory(), "EndAll".AsMemory()
-		];
+		public static ImmutableArray<ReadOnlyMemory<char>> ValidSpecialActionNames => [ "Void".AsMemory(), "ThrowError".AsMemory(), "EndAll".AsMemory() ];
 
 		/// <inheritdoc />
 		public static ImmutableArray<ReadOnlyMemory<char>> ValidSystems =>
@@ -63,9 +60,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 					return; // we're done here
 
 				case TokenKind.CommentSymbol when line.Length != 2:
-					throw new InvalidRsmlSyntax(
-						"A comment must be 2 tokens long."
-					); // even if you have a comment with no text not even spaces, you'll have 2 tokens
+					throw new InvalidRsmlSyntax("A comment must be 2 tokens long."); // even if you have a comment with no text not even spaces, you'll have 2 tokens
 
 				case TokenKind.CommentSymbol when line[1].Kind != TokenKind.CommentText:
 					throw new InvalidRsmlSyntax($"Expected CommentText, but received {line[1].Kind} instead.");
@@ -126,11 +121,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 						 line[2].Kind != TokenKind.DefinedKeyword &&
 						 line[2].Kind != TokenKind.WildcardKeyword) ||
 						line[3].Kind != TokenKind.LogicPathValue)
-					{
-						throw new InvalidRsmlSyntax(
-							"A 4 token long logic path must be a *Operator + SystemName + ArchitectureIdentifier + LogicPathValue overload."
-						);
-					}
+						throw new InvalidRsmlSyntax("A 4 token long logic path must be a *Operator + SystemName + ArchitectureIdentifier + LogicPathValue overload.");
 
 					if (!line[1].IsOffLimits &&
 						!context[line[1].BufferRange].IsAsciiEqualsIgnoreCase(ValidSystems) &&

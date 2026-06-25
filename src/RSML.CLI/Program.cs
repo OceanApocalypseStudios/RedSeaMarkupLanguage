@@ -5,8 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
+using OceanApocalypseStudios.RSML;
 using OceanApocalypseStudios.RSML.CLI.Helpers;
-using OceanApocalypseStudios.RSML.Machine;
 
 using Spectre.Console;
 
@@ -80,8 +80,7 @@ namespace OceanApocalypseStudios.RSML.CLI
 
 			helpVersionOpt?.Action = new AsciiHelp((HelpAction)helpVersionOpt.Action!);
 
-			var defaultVersionOpt =
-				rootCommand.Options.FirstOrDefault(o => o is VersionOption || o.Name == "--version" || o.Aliases.Contains("--version"));
+			var defaultVersionOpt = rootCommand.Options.FirstOrDefault(o => o is VersionOption || o.Name == "--version" || o.Aliases.Contains("--version"));
 
 			if (defaultVersionOpt is not null)
 				_ = rootCommand.Options.Remove(defaultVersionOpt);
@@ -92,23 +91,28 @@ namespace OceanApocalypseStudios.RSML.CLI
 
 			#endregion
 
-			#region Machine Command
+			#region Host Command
 
-			Command machineCmd = new("machine", "Handles machines");
+			Command hostCmd = new("host", "Handles hosts");
 
-			Command createMachineCmd = new("create", "Creates a new machine");
-			Command getMachineDataCmd = new("get", "Gets the current machine");
+			Command createHostCmd = new("create", "Creates a new local host");
+			Command getHostCmd = new("get", "Gets the current host");
 
-			var outputFormatMOpt = new Option<string>("--output-format")
+			var hostOutputFormatOpt = new Option<string>("--output-format")
 			{
 
 				Description = "The format to output as.",
 				DefaultValueFactory = _ => "PlainText"
 
-			}.AcceptOnlyFromAmong("PlainText", "JSON", "Dotnet", "CSharp");
+			}.AcceptOnlyFromAmong(
+				"PlainText",
+				"JSON",
+				"Dotnet",
+				"CSharp"
+			);
 
-			outputFormatMOpt.Aliases.Add("--format");
-			outputFormatMOpt.Aliases.Add("-o");
+			hostOutputFormatOpt.Aliases.Add("--format");
+			hostOutputFormatOpt.Aliases.Add("-o");
 
 			Option<string?> systemNameOpt = new("--system-name")
 			{
@@ -160,18 +164,18 @@ namespace OceanApocalypseStudios.RSML.CLI
 
 			sysVersionOpt.Aliases.Add("-V");
 
-			createMachineCmd.Options.Add(disableAnsiOpt);
-			createMachineCmd.Options.Add(systemNameOpt);
-			createMachineCmd.Options.Add(sysVersionOpt);
-			createMachineCmd.Options.Add(linuxNameOpt);
-			createMachineCmd.Options.Add(linuxFamilyOpt);
-			createMachineCmd.Options.Add(procArchOpt);
-			createMachineCmd.Options.Add(outputFormatMOpt);
+			createHostCmd.Options.Add(disableAnsiOpt);
+			createHostCmd.Options.Add(systemNameOpt);
+			createHostCmd.Options.Add(sysVersionOpt);
+			createHostCmd.Options.Add(linuxNameOpt);
+			createHostCmd.Options.Add(linuxFamilyOpt);
+			createHostCmd.Options.Add(procArchOpt);
+			createHostCmd.Options.Add(hostOutputFormatOpt);
 
-			getMachineDataCmd.Options.Add(outputFormatMOpt);
-			getMachineDataCmd.Options.Add(disableAnsiOpt);
+			getHostCmd.Options.Add(hostOutputFormatOpt);
+			getHostCmd.Options.Add(disableAnsiOpt);
 
-			createMachineCmd.SetAction(result =>
+			createHostCmd.SetAction(result =>
 				{
 
 					string? distroName = result.GetValue(linuxNameOpt);
@@ -189,29 +193,35 @@ namespace OceanApocalypseStudios.RSML.CLI
 
 					return GetMachine(
 						sysName?.Equals("linux", StringComparison.OrdinalIgnoreCase) ?? false
-							? new(distroName, distroFamily, processorArch, sysVersion)
+							? new(
+								distroName,
+								distroFamily,
+								processorArch,
+								sysVersion
+							)
 							: new(sysName, processorArch, sysVersion),
-						result.GetValue(disableAnsiOpt), result.GetValue(outputFormatMOpt)
+						result.GetValue(disableAnsiOpt),
+						result.GetValue(hostOutputFormatOpt)
 					);
 
 				}
 			);
 
-			getMachineDataCmd.SetAction(result => GetMachine(new(), result.GetValue(disableAnsiOpt), result.GetValue(outputFormatMOpt)));
+			getHostCmd.SetAction(result => GetMachine(new(), result.GetValue(disableAnsiOpt), result.GetValue(hostOutputFormatOpt)));
 
-			machineCmd.SetAction(_ =>
+			hostCmd.SetAction(_ =>
 				{
 
-					Console.WriteLine("Use one of machine command's subcommands.");
+					Console.WriteLine("Use one of host command's subcommands.");
 
 					return 1;
 
 				}
 			);
 
-			machineCmd.Add(createMachineCmd);
-			machineCmd.Add(getMachineDataCmd);
-			rootCommand.Add(machineCmd);
+			hostCmd.Add(createHostCmd);
+			hostCmd.Add(getHostCmd);
+			rootCommand.Add(hostCmd);
 
 			#endregion
 
@@ -251,9 +261,7 @@ namespace OceanApocalypseStudios.RSML.CLI
 					bool disableAnsi = result.GetValue(disableAnsiOpt);
 					string? language = result.GetValue(languageOpt);
 
-					string compilerOutput = CompileRsml_NoPretty(
-												Console.In.ReadToEnd(), language ?? "InvalidValue", result.GetValue(moduleNameOpt) ?? "GeneratedRsml"
-											) ??
+					string compilerOutput = CompileRsml_NoPretty(Console.In.ReadToEnd(), language ?? "InvalidValue", result.GetValue(moduleNameOpt) ?? "GeneratedRsml") ??
 											"//Failed to generate compiled RSML!";
 
 					if (language is not null && !disableAnsi)
@@ -374,17 +382,17 @@ namespace OceanApocalypseStudios.RSML.CLI
 
 			Command evaluateCmd = new("evaluate", "Evaluates a RSML document");
 
-			Option<string?> machineOpt = new("--machine")
+			Option<string?> hostOpt = new("--host")
 			{
 
-				Description = "The machine, in JSON, to evaluate from.",
+				Description = "The host, in JSON, to evaluate from.",
 				DefaultValueFactory = _ => null
 
 			};
 
-			machineOpt.Aliases.Add("-m");
+			hostOpt.Aliases.Add("-m");
 
-			evaluateCmd.Options.Add(machineOpt);
+			evaluateCmd.Options.Add(hostOpt);
 			evaluateCmd.Options.Add(filepathOpt);
 			evaluateCmd.Options.Add(disableAnsiOpt);
 
@@ -398,12 +406,12 @@ namespace OceanApocalypseStudios.RSML.CLI
 									  ? Console.In.ReadToEnd()
 									  : File.ReadAllText(filepath);
 
-					LocalMachine machine;
+					LocalHost host;
 
 					try
 					{
 
-						machine = LocalMachineOutput.FromJson(result.GetValue(machineOpt));
+						host = LocalHostOutput.FromJson(result.GetValue(hostOpt));
 
 					}
 					catch (Exception ex)
@@ -412,16 +420,16 @@ namespace OceanApocalypseStudios.RSML.CLI
 						if (disableAnsi)
 							Console.WriteLine($"JSON Error: {ex.Message}");
 						else
-							AnsiConsole.Markup($"[red]JSON Error on Machine load[/] {ex.Message}");
+							AnsiConsole.Markup($"[red]JSON Error on Host load[/] {ex.Message}");
 
 						return 2; // json error
 
 					}
 
 					if (disableAnsi)
-						Evaluate_NoPretty(data, machine);
+						Evaluate_NoPretty(data, host);
 					else
-						Evaluate_Pretty(data, machine);
+						Evaluate_Pretty(data, host);
 
 					return 0;
 

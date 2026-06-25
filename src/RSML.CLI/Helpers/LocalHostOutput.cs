@@ -4,94 +4,92 @@ using System.Text.Json;
 
 using Spectre.Console;
 
-using LocalMachine = OceanApocalypseStudios.RSML.Machine.LocalMachine;
-
 
 namespace OceanApocalypseStudios.RSML.CLI.Helpers
 {
 
-	internal static class LocalMachineOutput
+	internal static class LocalHostOutput
 	{
 
-		public static string AsCSharp(LocalMachine machine) =>
-			machine.DistroName is null
-				? $"new LocalMachine(\"{machine.SystemName}\", \"{machine.ProcessorArchitecture}\", {machine.SystemVersion})"
-				: $"LocalMachine.Linux(\"{machine.DistroName}\", \"{machine.DistroFamily}\", \"{machine.ProcessorArchitecture}\", {machine.SystemVersion})";
+		public static string AsCSharp(LocalHost host) =>
+			host.DistroName is null
+				? $"new LocalHost(\"{host.SystemName}\", \"{host.ProcessorArchitecture}\", {host.SystemVersion})"
+				: $"LocalHost.Linux(\"{host.DistroName}\", \"{host.DistroFamily}\", \"{host.ProcessorArchitecture}\", {host.SystemVersion})";
 
-		public static string AsDotnet(LocalMachine machine) =>
-			machine.DistroName is null
-				? $"new LocalMachine(\"{machine.SystemName}\", \"{machine.ProcessorArchitecture}\", {machine.SystemVersion})"
-				: $"new LocalMachine(\"{machine.DistroName}\", \"{machine.DistroFamily}\", \"{machine.ProcessorArchitecture}\", {machine.SystemVersion})";
+		public static string AsDotnet(LocalHost host) =>
+			host.DistroName is null
+				? $"new LocalHost(\"{host.SystemName}\", \"{host.ProcessorArchitecture}\", {host.SystemVersion})"
+				: $"new LocalHost(\"{host.DistroName}\", \"{host.DistroFamily}\", \"{host.ProcessorArchitecture}\", {host.SystemVersion})";
 
-		public static string AsJson(LocalMachine machine)
+		public static string AsJson(LocalHost host)
 		{
 
-			string systemVersion = machine.StringifiedSystemVersion ?? "null";
+			string systemVersion = host.StringifiedSystemVersion ?? "null";
 
 			return $$"""
 					 {
 					 	"system": {
-					 		"name": {{Quote(machine.SystemName ?? "null")}},
+					 		"name": {{Quote(host.SystemName ?? "null")}},
 					 		"version" : {{systemVersion}}
 					 	},
 					 	"linuxDistro": {
-					 		"name": {{Quote(machine.DistroName ?? "null")}},
-					 		"family": {{Quote(machine.DistroFamily ?? "null")}}
+					 		"name": {{Quote(host.DistroName ?? "null")}},
+					 		"family": {{Quote(host.DistroFamily ?? "null")}}
 					 	},
 					 	"processor": {
-					 		"architecture": {{Quote(machine.ProcessorArchitecture ?? "null")}}
+					 		"architecture": {{Quote(host.ProcessorArchitecture ?? "null")}}
 					 	}
 					 }
 					 """;
 
 		}
 
-		public static string AsPlainText(LocalMachine machine)
+		public static string AsPlainText(LocalHost host)
 		{
 
-			string systemVersion = machine.SystemName?.Equals("windows", StringComparison.OrdinalIgnoreCase) ?? false
-									   ? machine.SystemVersion switch
+			string systemVersion = host.SystemName?.Equals("windows", StringComparison.OrdinalIgnoreCase) ?? false
+									   ? host.SystemVersion switch
 									   {
 
 										   6                  => "Vista",
-										   7 or 8 or 10 or 11 => machine.StringifiedSystemVersion!,
+										   7 or 8 or 10 or 11 => host.StringifiedSystemVersion!,
 										   9                  => "8.1",
 										   _                  => "Unknown"
 
 									   }
-									   : machine.StringifiedSystemVersion ?? "Unknown";
+									   : host.StringifiedSystemVersion ?? "Unknown";
 
-			if (machine.SystemVersion == -1)
+			if (host.SystemVersion == -1)
 				systemVersion = "Unknown";
 
 			return new StringBuilder()
-				   .AppendLine($"System Name: {(machine.SystemName ?? "Unknown").Capitalize()}")
+				   .AppendLine($"System Name: {(host.SystemName ?? "Unknown").Capitalize()}")
 				   .AppendLine($"System Version: {systemVersion}")
 				   .AppendLine()
-				   .AppendLine($"Distro Name: {(machine.DistroName ?? "Unknown").Capitalize()}")
-				   .AppendLine($"Distro Family: {(machine.DistroFamily ?? "Unknown").Capitalize()}")
+				   .AppendLine($"Distro Name: {(host.DistroName ?? "Unknown").Capitalize()}")
+				   .AppendLine($"Distro Family: {(host.DistroFamily ?? "Unknown").Capitalize()}")
 				   .AppendLine()
-				   .AppendLine($"Processor Architecture: {machine.ProcessorArchitecture ?? "Unknown"}")
+				   .AppendLine($"Processor Architecture: {host.ProcessorArchitecture ?? "Unknown"}")
 				   .ToString();
 
 		}
 
-		public static void AsPrettyText(LocalMachine machine)
+		public static void AsPrettyText(LocalHost host)
 		{
 
-			string systemVersion = machine.SystemName?.Equals("windows", StringComparison.OrdinalIgnoreCase) ?? false
-									   ? machine.SystemVersion switch
+			string systemVersion = host.SystemName?.Equals("windows", StringComparison.OrdinalIgnoreCase) ?? false
+									   ? host.SystemVersion switch
 									   {
 
 										   6                  => "Vista",
-										   7 or 8 or 10 or 11 => machine.StringifiedSystemVersion!,
+										   7 or 8 or 10 or 11 => host.StringifiedSystemVersion!,
 										   9                  => "8.1",
 										   _                  => "Unknown"
 
 									   }
-									   : machine.StringifiedSystemVersion ?? "Unknown";
+									   : host.StringifiedSystemVersion ?? "Unknown";
 
-			if (machine.SystemVersion == -1)
+			if (host.SystemVersion == -1)
 				systemVersion = "Unknown";
 
 			AnsiConsole.Write(
@@ -102,7 +100,7 @@ namespace OceanApocalypseStudios.RSML.CLI.Helpers
 								new Panel(
 									new Rows(
 										new Markup("[yellow]Operating System[/]"),
-										new Markup($"[white]Name:[/] [grey]{(machine.SystemName ?? "Unknown").Capitalize()}[/]"),
+										new Markup($"[white]Name:[/] [grey]{(host.SystemName ?? "Unknown").Capitalize()}[/]"),
 										new Markup($"[white]Version:[/] [grey]{systemVersion}[/]")
 									)
 								).Expand(),
@@ -110,19 +108,19 @@ namespace OceanApocalypseStudios.RSML.CLI.Helpers
 									new Rows(
 										new Markup(
 											"[green]Linux Distribution[/] [grey](if applicable)[/]",
-											machine.SystemName?.Equals("linux", StringComparison.OrdinalIgnoreCase) ?? false
+											host.SystemName?.Equals("linux", StringComparison.OrdinalIgnoreCase) ?? false
 												? null
 												: new(null, null, Decoration.Strikethrough)
 										),
 										new Markup(
-											$"[white]Family:[/] [grey]{(machine.DistroFamily ?? "Unknown").Capitalize()}[/]",
-											machine.SystemName?.Equals("linux", StringComparison.OrdinalIgnoreCase) ?? false
+											$"[white]Family:[/] [grey]{(host.DistroFamily ?? "Unknown").Capitalize()}[/]",
+											host.SystemName?.Equals("linux", StringComparison.OrdinalIgnoreCase) ?? false
 												? null
 												: new(null, null, Decoration.Strikethrough)
 										),
 										new Markup(
-											$"[white]Name:[/] [grey]{(machine.DistroName ?? "Unknown").Capitalize()}[/]",
-											machine.SystemName?.Equals("linux", StringComparison.OrdinalIgnoreCase) ?? false
+											$"[white]Name:[/] [grey]{(host.DistroName ?? "Unknown").Capitalize()}[/]",
+											host.SystemName?.Equals("linux", StringComparison.OrdinalIgnoreCase) ?? false
 												? null
 												: new(null, null, Decoration.Strikethrough)
 										)
@@ -133,7 +131,7 @@ namespace OceanApocalypseStudios.RSML.CLI.Helpers
 						new Panel(
 							new Rows(
 								new Markup("[cyan]Processor[/]"),
-								new Markup($"[white]Architecture:[/] [grey]{machine.ProcessorArchitecture ?? "Unknown"}[/]")
+								new Markup($"[white]Architecture:[/] [grey]{host.ProcessorArchitecture ?? "Unknown"}[/]")
 							)
 						).Expand()
 					)
@@ -142,7 +140,7 @@ namespace OceanApocalypseStudios.RSML.CLI.Helpers
 
 		}
 
-		public static LocalMachine FromJson(string? json)
+		public static LocalHost FromJson(string? json)
 		{
 
 			if (json is null)
@@ -188,7 +186,12 @@ namespace OceanApocalypseStudios.RSML.CLI.Helpers
 			}
 
 			if (systemName is not null && systemName.Equals("linux", StringComparison.OrdinalIgnoreCase))
-				return new(distroName, distroFamily, processorArchitecture, systemVersion);
+				return new(
+					distroName,
+					distroFamily,
+					processorArchitecture,
+					systemVersion
+				);
 
 			return new(systemName, processorArchitecture, systemVersion);
 

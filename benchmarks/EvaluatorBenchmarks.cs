@@ -5,9 +5,9 @@ using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Jobs;
 
+using OceanApocalypseStudios.RSML;
 using OceanApocalypseStudios.RSML.Benchmarks.Dataset;
 using OceanApocalypseStudios.RSML.Evaluation;
-using OceanApocalypseStudios.RSML.Machine;
 
 
 namespace OceanApocalypseStudios.RSML.Benchmarks
@@ -112,7 +112,7 @@ namespace OceanApocalypseStudios.RSML.Benchmarks
 
 		}
 
-		private readonly LocalMachine ubuntu = new("ubuntu", null, null);
+		private readonly LocalHost ubuntu = new("ubuntu", null, null);
 
 		private Evaluator complexEvaluator1 = null!;
 

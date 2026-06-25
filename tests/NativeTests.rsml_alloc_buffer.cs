@@ -35,14 +35,7 @@ namespace OceanApocalypseStudios.RSML.Tests
 				Assert.NotNull(ToolchainExports.buffer);
 				Assert.Equal(0, ToolchainExports.buffer.CaretPosition);
 
-				Assert.Equal(
-					content, ToolchainExports.buffer.ReadUntil((
-																   _,
-																   _
-															   ) => false
-											 )
-											 .ToString()
-				);
+				Assert.Equal(content, ToolchainExports.buffer.ReadUntil((_, _) => false).ToString());
 
 			}
 
@@ -50,9 +43,7 @@ namespace OceanApocalypseStudios.RSML.Tests
 
 		[Theory]
 		[InlineData("-> windows != 10 defined \"Result A\"\r\nthis is random content", "-> windows != 10 defined \"Result A\"")]
-		[InlineData(
-			"this is random buffer content because why not\r\n-> archlinux defined x86 \"Result C\"", "this is random buffer content because why not"
-		)]
+		[InlineData("this is random buffer content because why not\r\n-> archlinux defined x86 \"Result C\"", "this is random buffer content because why not")]
 		[InlineData("-> ubuntu >= 2 any \"Result B\"\r\ngoodbye\r\nhello", "-> ubuntu >= 2 any \"Result B\"")]
 		[InlineData("There's only one way this game can end", null)]
 		[InlineData("\r\nGoodbye!!", "")]
@@ -137,7 +128,8 @@ namespace OceanApocalypseStudios.RSML.Tests
 				int outputErrorCode = callback(
 					content is null
 						? null
-						: data, actualByteCount
+						: data,
+					actualByteCount
 				);
 
 				Assert.Equal(errorCode, outputErrorCode);

@@ -224,8 +224,11 @@ namespace OceanApocalypseStudios.RSML.Tests
 		{
 
 			var nativeLine = new SyntaxLine(
-				new(TokenKind.CommentSymbol, 4, 8), new(TokenKind.SpecialActionSymbol, 7, 10), new(TokenKind.SystemName, ^4, ^1),
-				new(TokenKind.MajorVersionId, 2, 7), new(TokenKind.Eol, 15, 140)
+				new(TokenKind.CommentSymbol, 4, 8),
+				new(TokenKind.SpecialActionSymbol, 7, 10),
+				new(TokenKind.SystemName, ^4, ^1),
+				new(TokenKind.MajorVersionId, 2, 7),
+				new(TokenKind.Eol, 15, 140)
 			).ToNativeLine();
 
 			NativeLine line = new()
