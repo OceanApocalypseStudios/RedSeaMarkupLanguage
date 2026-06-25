@@ -126,8 +126,14 @@ namespace OceanApocalypseStudios.RSML.Native.Structures
 		/// <inheritdoc />
 		public readonly override int GetHashCode() =>
 			HashCode.Combine(
-				item1, item2, item3, item4, item5,
-				item6, item7, item8
+				item1,
+				item2,
+				item3,
+				item4,
+				item5,
+				item6,
+				item7,
+				item8
 			);
 
 	}

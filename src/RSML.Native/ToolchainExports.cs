@@ -3,12 +3,12 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 
+using OceanApocalypseStudios.RSML;
 using OceanApocalypseStudios.RSML.Analyzer;
 using OceanApocalypseStudios.RSML.Analyzer.Semantics;
 using OceanApocalypseStudios.RSML.Analyzer.Syntax;
 using OceanApocalypseStudios.RSML.Evaluation;
 using OceanApocalypseStudios.RSML.Exceptions;
-using OceanApocalypseStudios.RSML.Machine;
 using OceanApocalypseStudios.RSML.Native.Structures;
 
 
@@ -120,19 +120,19 @@ namespace OceanApocalypseStudios.RSML.Native
 		}
 
 		/// <summary>
-		/// Evaluates a RSML document given a machine.
+		/// Evaluates a RSML document given a host.
 		/// </summary>
 		/// <param name="outputResultPtr">A pointer to the <see cref="NativeEvaluationResult" /> instance this method will write to</param>
 		/// <param name="systemOrDistroName">
-		/// The machine's system name (or distro name if Linux) - use a nullptr to leave it
+		/// The host's system name (or distro name if Linux) - use a nullptr to leave it
 		/// undefined
 		/// </param>
-		/// <param name="distroFamily">The machine's Linux distro family - use only if Linux; nullptr for undefined or not Linux</param>
+		/// <param name="distroFamily">The host's Linux distro family - use only if Linux; nullptr for undefined or not Linux</param>
 		/// <param name="systemOrDistroMajorVersion">
-		/// The machine's system version (or distro version if Linux) - use <c>-1</c> for
+		/// The host's system version (or distro version if Linux) - use <c>-1</c> for
 		/// undefined
 		/// </param>
-		/// <param name="processorArchitecture">The machine's processor architecture - nullptr if undefined</param>
+		/// <param name="processorArchitecture">The host's processor architecture - nullptr if undefined</param>
 		/// <returns>
 		/// <list type="bullet"><c>-10:</c> Unknown error during the whole process</list>
 		/// <list type="bullet"><c>-9:</c> Unknown error during evaluation</list>
@@ -204,12 +204,16 @@ namespace OceanApocalypseStudios.RSML.Native
 
 				};
 
-				var actualMachine = LocalMachine.MergeWithFallback(
-					LocalMachine.CurrentMachine, systemOrDistroName is >= 201 and <= 204
-													 ? LocalMachine.Linux(
-														 actualSystemName, actualDistroFamily, actualProcessorArchitecture, systemOrDistroMajorVersion
-													 )
-													 : new(actualSystemName, actualProcessorArchitecture, systemOrDistroMajorVersion)
+				var actualMachine = LocalHost.MergeWithFallback(
+					LocalHost.CurrentHost,
+					systemOrDistroName is >= 201 and <= 204
+						? LocalHost.Linux(
+							actualSystemName,
+							actualDistroFamily,
+							actualProcessorArchitecture,
+							systemOrDistroMajorVersion
+						)
+						: new(actualSystemName, actualProcessorArchitecture, systemOrDistroMajorVersion)
 				);
 
 				#endregion

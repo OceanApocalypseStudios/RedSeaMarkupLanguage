@@ -1,6 +1,6 @@
-﻿using OceanApocalypseStudios.RSML.Evaluation;
+﻿using OceanApocalypseStudios.RSML;
+using OceanApocalypseStudios.RSML.Evaluation;
 using OceanApocalypseStudios.RSML.Exceptions;
-using OceanApocalypseStudios.RSML.Machine;
 
 
 namespace OceanApocalypseStudios.RSML.Tests
@@ -113,9 +113,7 @@ namespace OceanApocalypseStudios.RSML.Tests
 		}
 
 		[Theory]
-		[InlineData(
-			"-> osx \"newlines are normalized\"\n-> osx \"are they really?\"\r\n-> windows 10 defined \"Win10 I guess\"\r\n", "Win10 I guess"
-		)]
+		[InlineData("-> osx \"newlines are normalized\"\n-> osx \"are they really?\"\r\n-> windows 10 defined \"Win10 I guess\"\r\n", "Win10 I guess")]
 		[InlineData("-> any any any \"Being explicit is good too\"\n", "Being explicit is good too")]
 		[InlineData("-> \"Being implicit is bad sometimes\"\n", "Being implicit is bad sometimes")]
 		[InlineData("-> \"this will always return\"\r\n", "this will always return")]
@@ -142,13 +140,23 @@ namespace OceanApocalypseStudios.RSML.Tests
 		[InlineData("                                            #")]
 		public void Evaluator_IsComment(string input) => Assert.True(Evaluator.IsComment(input));
 
-		private static readonly LocalMachine debianUnknownVersionX86 = new("debian", "debian", "x86", null);
+		private static readonly LocalHost debianUnknownVersionX86 = new(
+			"debian",
+			"debian",
+			"x86",
+			null
+		);
 
-		private static readonly LocalMachine osxUnknownVersionUnknownArch = new("osx", null, null);
+		private static readonly LocalHost osxUnknownVersionUnknownArch = new("osx", null, null);
 
-		private static readonly LocalMachine ubuntu22Arm64 = new("ubuntu", "debian", "x64", 22);
+		private static readonly LocalHost ubuntu22Arm64 = new(
+			"ubuntu",
+			"debian",
+			"x64",
+			22
+		);
 
-		private static readonly LocalMachine win10X64 = new("windows", "x64", 10);
+		private static readonly LocalHost win10X64 = new("windows", "x64", 10);
 
 	}
 

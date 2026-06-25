@@ -95,10 +95,7 @@ namespace OceanApocalypseStudios.RSML.Tests
 
 				}
 
-				if (isManagedLineValid !=
-					(errorCode == 0
-						 ? true
-						 : false))
+				if (isManagedLineValid != (errorCode == 0))
 					Assert.Fail("isManagedLineValid doesn't match boolean state of errorCode");
 
 			}

@@ -105,9 +105,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 							break;
 
 						default:
-							throw new InvalidRsmlSyntax(
-								"A special action must have either 3 or 4 tokens (EOL included), where the first is the SpecialActionSymbol (@)"
-							);
+							throw new InvalidRsmlSyntax("A special action must have either 3 or 4 tokens (EOL included), where the first is the SpecialActionSymbol (@)");
 
 					}
 
@@ -206,9 +204,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 
 						// invalid syntax
 						default:
-							throw new InvalidRsmlSyntax(
-								"A logic path must have between 3 and 7 tokens (EOL included), where the first is one of the allowed operators"
-							);
+							throw new InvalidRsmlSyntax("A logic path must have between 3 and 7 tokens (EOL included), where the first is one of the allowed operators");
 
 					}
 

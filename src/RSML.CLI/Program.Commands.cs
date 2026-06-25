@@ -10,8 +10,6 @@ using OceanApocalypseStudios.RSML.Exceptions;
 
 using Spectre.Console;
 
-using LocalMachine = OceanApocalypseStudios.RSML.Machine.LocalMachine;
-
 
 namespace OceanApocalypseStudios.RSML.CLI
 {
@@ -51,19 +49,22 @@ namespace OceanApocalypseStudios.RSML.CLI
 			{
 
 				"C#" => CompiledRsmlGenerator.GenerateCSharp(
-					moduleName, result.WasMatchFound
-									? $"(\"{result.MatchValue}\")"
-									: "()"
+					moduleName,
+					result.WasMatchFound
+						? $"(\"{result.MatchValue}\")"
+						: "()"
 				),
 				"F#" => CompiledRsmlGenerator.GenerateFSharp(
-					moduleName, result.WasMatchFound
-									? $"(\"{result.MatchValue}\")"
-									: "()"
+					moduleName,
+					result.WasMatchFound
+						? $"(\"{result.MatchValue}\")"
+						: "()"
 				),
 				"VB" => CompiledRsmlGenerator.GenerateVisualBasic(
-					moduleName, result.WasMatchFound
-									? $"(\"{result.MatchValue}\")"
-									: "()"
+					moduleName,
+					result.WasMatchFound
+						? $"(\"{result.MatchValue}\")"
+						: "()"
 				),
 				_ => null
 
@@ -73,14 +74,14 @@ namespace OceanApocalypseStudios.RSML.CLI
 
 		public static void Evaluate_NoPretty(
 			string data,
-			LocalMachine machine
+			LocalHost host
 		)
 		{
 
 			try
 			{
 
-				Console.WriteLine(new Evaluator(data).Evaluate(machine).MatchValue);
+				Console.WriteLine(new Evaluator(data).Evaluate(host).MatchValue);
 
 			}
 			catch (InvalidRsmlSyntax ex)
@@ -100,7 +101,7 @@ namespace OceanApocalypseStudios.RSML.CLI
 
 		public static void Evaluate_Pretty(
 			string data,
-			LocalMachine machine
+			LocalHost host
 		)
 		{
 
@@ -109,7 +110,7 @@ namespace OceanApocalypseStudios.RSML.CLI
 
 			try
 			{
-				result = evaluator.Evaluate(machine);
+				result = evaluator.Evaluate(host);
 			}
 			catch (UserRaisedException)
 			{
@@ -136,12 +137,14 @@ namespace OceanApocalypseStudios.RSML.CLI
 							new Markup(
 								result.WasMatchFound
 									? "[green]Match found![/]"
-									: "[red]No matches found.[/]", new(null, null, Decoration.Italic)
+									: "[red]No matches found.[/]",
+								new(null, null, Decoration.Italic)
 							),
 							new Markup(
 								result.WasMatchFound
 									? result.MatchValue!
-									: "", new(Color.White)
+									: "",
+								new(Color.White)
 							)
 						).Expand()
 					).Expand(),
@@ -157,7 +160,7 @@ namespace OceanApocalypseStudios.RSML.CLI
 		}
 
 		public static int GetMachine(
-			LocalMachine machine,
+			LocalHost host,
 			bool disableAnsi,
 			string? format
 		)
@@ -166,7 +169,7 @@ namespace OceanApocalypseStudios.RSML.CLI
 			if (disableAnsi || format != "PlainText")
 			{
 
-				string? x = LocalMachineInfo_NoPretty(machine, format ?? "InvalidValue");
+				string? x = LocalMachineInfo_NoPretty(host, format ?? "InvalidValue");
 
 				if (x is not null)
 					Console.WriteLine(x);
@@ -178,7 +181,7 @@ namespace OceanApocalypseStudios.RSML.CLI
 			}
 
 			if (format == "PlainText")
-				LocalMachineInfo_Pretty(machine); // eh eh
+				LocalMachineInfo_Pretty(host); // eh eh
 			else
 				return 1;
 
@@ -187,21 +190,21 @@ namespace OceanApocalypseStudios.RSML.CLI
 		}
 
 		public static string? LocalMachineInfo_NoPretty(
-			LocalMachine machine,
+			LocalHost host,
 			string outputFormat
 		) =>
 			outputFormat switch
 			{
 
-				"PlainText" => LocalMachineOutput.AsPlainText(machine),
-				"JSON"      => LocalMachineOutput.AsJson(machine),
-				"Dotnet"    => LocalMachineOutput.AsDotnet(machine),
-				"CSharp"    => LocalMachineOutput.AsCSharp(machine),
+				"PlainText" => LocalHostOutput.AsPlainText(host),
+				"JSON"      => LocalHostOutput.AsJson(host),
+				"Dotnet"    => LocalHostOutput.AsDotnet(host),
+				"CSharp"    => LocalHostOutput.AsCSharp(host),
 				_           => null
 
 			};
 
-		public static void LocalMachineInfo_Pretty(LocalMachine machine) => LocalMachineOutput.AsPrettyText(machine);
+		public static void LocalMachineInfo_Pretty(LocalHost host) => LocalHostOutput.AsPrettyText(host);
 
 		public static int SpecificationSupport_NoPretty()
 		{

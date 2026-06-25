@@ -168,19 +168,35 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 				return new(TokenKind.DefinedKeyword, startIndex, curPos);
 
 			if (chars.IsAsciiEqualsIgnoreCase_10(
-					"windows", "osx", "linux", "freebsd", "debian",
-					"ubuntu", "archlinux", "fedora"
+					"windows",
+					"osx",
+					"linux",
+					"freebsd",
+					"debian",
+					"ubuntu",
+					"archlinux",
+					"fedora"
 				))
 				return new(TokenKind.SystemName, startIndex, curPos);
 
-			if (chars.IsAsciiEqualsIgnoreCase_5("x64", "x86", "arm32", "arm64", "loongarch64"))
+			if (chars.IsAsciiEqualsIgnoreCase_5(
+					"x64",
+					"x86",
+					"arm32",
+					"arm64",
+					"loongarch64"
+				))
 				return new(TokenKind.ArchitectureIdentifier, startIndex, curPos);
 
 			if (Int32.TryParse(chars.Span, out _))
 				return new(TokenKind.MajorVersionId, startIndex, curPos);
 
 			if (chars.IsEquals_8(
-					"==", "!=", "<", ">", "<=",
+					"==",
+					"!=",
+					"<",
+					">",
+					"<=",
 					">="
 				))
 			{
