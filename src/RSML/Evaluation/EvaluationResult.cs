@@ -4,7 +4,7 @@
 	/// <summary>
 	/// The result of the evaluation of an RSML document.
 	/// </summary>
-	public class EvaluationResult
+	public sealed class EvaluationResult
 	{
 
 		/// <summary>

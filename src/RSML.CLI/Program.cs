@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-using OceanApocalypseStudios.RSML;
 using OceanApocalypseStudios.RSML.CLI.Helpers;
 
 using Spectre.Console;
@@ -95,7 +94,7 @@ namespace OceanApocalypseStudios.RSML.CLI
 
 			Command hostCmd = new("host", "Handles hosts");
 
-			Command createHostCmd = new("create", "Creates a new local host");
+			Command createHostCmd = new("create", "Creates a new host");
 			Command getHostCmd = new("get", "Gets the current host");
 
 			var hostOutputFormatOpt = new Option<string>("--output-format")
@@ -178,12 +177,10 @@ namespace OceanApocalypseStudios.RSML.CLI
 			createHostCmd.SetAction(result =>
 				{
 
-					string? distroName = result.GetValue(linuxNameOpt);
-
-					string? sysName = distroName is not null
-										  ? "linux"
-										  : result.GetValue(systemNameOpt);
-
+					string? sysName = result.GetValue(systemNameOpt);
+					string? distroName = sysName?.Equals("linux", StringComparison.OrdinalIgnoreCase) ?? false
+											   ? result.GetValue(linuxNameOpt)
+											   : null;
 					string? distroFamily = sysName?.Equals("linux", StringComparison.OrdinalIgnoreCase) ?? false
 											   ? result.GetValue(linuxFamilyOpt)
 											   : null;
@@ -406,12 +403,12 @@ namespace OceanApocalypseStudios.RSML.CLI
 									  ? Console.In.ReadToEnd()
 									  : File.ReadAllText(filepath);
 
-					LocalHost host;
+					Host host;
 
 					try
 					{
 
-						host = LocalHostOutput.FromJson(result.GetValue(hostOpt));
+						host = HostOutput.FromJson(result.GetValue(hostOpt));
 
 					}
 					catch (Exception ex)
