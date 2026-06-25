@@ -10,7 +10,7 @@ namespace OceanApocalypseStudios.RSML
 {
 
 	[SuppressMessage("Interoperability", "CA1416:Validate platform compatibility")] // this only compiles on windows there's no problem
-	public partial struct LocalHost
+	public partial struct Host
 	{
 
 		private void InitializeVersionData_Windows()
