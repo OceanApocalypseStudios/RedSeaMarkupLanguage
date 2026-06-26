@@ -11,17 +11,6 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 	{
 
 		/// <summary>
-		/// Forms a RSML document from a collection of tokens.
-		/// </summary>
-		/// <param name="line">The tokens</param>
-		/// <param name="context">The context for the tokens</param>
-		/// <returns>A RSML document</returns>
-		static abstract string CreateDocumentFromTokens(
-			in SyntaxLine line,
-			DualTextBuffer context
-		);
-
-		/// <summary>
 		/// Tokenizes a RSML line.
 		/// </summary>
 		/// <param name="buffer">The line to tokenize, as a buffer</param>
