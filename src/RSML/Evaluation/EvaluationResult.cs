@@ -1,4 +1,6 @@
-﻿namespace OceanApocalypseStudios.RSML.Evaluation
+﻿using System;
+
+namespace OceanApocalypseStudios.RSML.Evaluation
 {
 
 	/// <summary>
@@ -17,6 +19,12 @@
 		/// </summary>
 		/// <param name="matchValue">The found match's value</param>
 		public EvaluationResult(string matchValue) => MatchValue = matchValue;
+
+		/// <summary>
+		/// Initializes a new evaluation result with a found match.
+		/// </summary>
+		/// <param name="matchValue">The found match's value</param>
+		public EvaluationResult(ReadOnlySpan<char> matchValue) => MatchValue = matchValue.ToString();
 
 		/// <summary>
 		/// The match's value or <c>null</c> if none was found.

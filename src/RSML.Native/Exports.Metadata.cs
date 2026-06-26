@@ -1,4 +1,9 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Text;
+
+using OceanApocalypseStudios.RSML.Native.Structures;
 
 
 namespace OceanApocalypseStudios.RSML.Native
@@ -9,79 +14,136 @@ namespace OceanApocalypseStudios.RSML.Native
 	{
 
 		/// <summary>
-		/// Writes the name of the creator (and lead maintainer) of RSML's API to a supplied buffer.
+		/// Writes the name of the creator (and lead maintainer) of RSML's API to a buffer.
+		/// If the buffer's byte count is -1, the pointer is null and the error message was saved.
+		/// If the buffer's byte count is -2, the pointer is null and the error message was saved.
 		/// </summary>
-		/// <param name="buffer">The buffer to write to</param>
-		/// <param name="bufferSize">The size of the given buffer</param>
-		/// <returns>The length of the author name or <c>-1</c> if the given buffer wasn't big enough.</returns>
-		[UnmanagedCallersOnly(EntryPoint = "rsml_get_api_author_name")]
-		public static int GetApiAuthorName(
-			byte* buffer,
-			int bufferSize
-		)
+		/// <returns>The buffer and its byte count</returns>
+		[UnmanagedCallersOnly(CallConvs = [typeof(CallConvCdecl)], EntryPoint = "rsml_get_api_author_name")]
+		public static BufferResult GetApiAuthorName()
 		{
 
-			if (bufferSize < authorName.Length)
-				return -1;
+			try
+			{
 
-			for (int i = 0; i < authorName.Length; i++)
-				buffer[i] = authorName[i];
+				fixed (byte* data = authorNameBytes)
+					return new(data, authorNameByteCount);
 
-			return authorName.Length;
+			}
+			catch (Exception ex)
+			{
+
+				try
+				{
+
+					if (lastErrorMessage != IntPtr.Zero)
+						Marshal.FreeHGlobal(lastErrorMessage);
+
+					lastErrorMessage = Marshal.StringToHGlobalAuto(ex.Message);
+
+				}
+				catch
+				{
+					return new(null, -2);
+				}
+
+				return new(null, -1);
+
+			}
 
 		}
 
 		/// <summary>
-		/// Writes the URL to RSML's documentation to a supplied buffer.
+		/// Writes the URL to RSML's documentation to a buffer.
+		/// If the buffer's byte count is -1, the pointer is null and the error message was saved.
+		/// If the buffer's byte count is -2, the pointer is null and the error message was saved.
 		/// </summary>
-		/// <param name="buffer">The buffer to write to</param>
-		/// <param name="bufferSize">The size of the given buffer</param>
-		/// <returns>The length of the author name or <c>-1</c> if the given buffer wasn't big enough</returns>
-		[UnmanagedCallersOnly(EntryPoint = "rsml_get_api_documentation_url")]
-		public static int GetApiDocumentationUrl(
-			byte* buffer,
-			int bufferSize
-		)
+		/// <returns>The buffer and its byte count</returns>
+		[UnmanagedCallersOnly(CallConvs = [ typeof(CallConvCdecl) ], EntryPoint = "rsml_get_api_documentation_url")]
+		public static BufferResult GetApiDocumentationUrl()
 		{
 
-			if (bufferSize < docsLink.Length)
-				return -1;
+			try
+			{
 
-			for (int i = 0; i < docsLink.Length; i++)
-				buffer[i] = docsLink[i];
+				fixed (byte* data = documentationUrlBytes)
+					return new(data, documentationUrlByteCount);
 
-			return docsLink.Length;
+			}
+			catch (Exception ex)
+			{
+
+				try
+				{
+
+					if (lastErrorMessage != IntPtr.Zero)
+						Marshal.FreeHGlobal(lastErrorMessage);
+
+					lastErrorMessage = Marshal.StringToHGlobalAuto(ex.Message);
+
+				}
+				catch
+				{
+					return new(null, -2);
+				}
+
+				return new(null, -1);
+
+			}
 
 		}
 
 		/// <summary>
 		/// Writes the API version to a supplied buffer.
+		/// If the buffer's byte count is -1, the pointer is null and the error message was saved.
+		/// If the buffer's byte count is -2, the pointer is null and the error message was saved.
 		/// </summary>
-		/// <param name="buffer">The buffer to write to</param>
-		/// <param name="bufferSize">The size of the given buffer</param>
-		/// <returns>The length of the API version string or <c>-1</c> if the given buffer wasn't big enough.</returns>
-		[UnmanagedCallersOnly(EntryPoint = "rsml_get_api_version")]
-		public static int GetApiVersion(
-			byte* buffer,
-			int bufferSize
-		)
+		/// <returns>The buffer and its byte count</returns>
+		[UnmanagedCallersOnly(CallConvs = [ typeof(CallConvCdecl) ], EntryPoint = "rsml_get_api_version")]
+		public static BufferResult GetApiVersion()
 		{
 
-			if (bufferSize < apiVersion.Length)
-				return -1;
+			try
+			{
 
-			for (int i = 0; i < apiVersion.Length; i++)
-				buffer[i] = apiVersion[i];
+				fixed (byte* data = apiVersionBytes)
+					return new(data, apiVersionByteCount);
 
-			return apiVersion.Length;
+			}
+			catch (Exception ex)
+			{
+
+				try
+				{
+
+					if (lastErrorMessage != IntPtr.Zero)
+						Marshal.FreeHGlobal(lastErrorMessage);
+
+					lastErrorMessage = Marshal.StringToHGlobalAuto(ex.Message);
+
+				}
+				catch
+				{
+					return new(null, -2);
+				}
+
+				return new(null, -1);
+
+			}
 
 		}
 
-		private static readonly byte[] apiVersion = "2.1.0"u8.ToArray();
+		internal const string ApiVersion = "2.1.0";
+		internal const string AuthorName = "OceanApocalypseStudios";
+		internal const string DocumentationUrl = "https://oceanapocalypsestudios.org/RedSeaMarkupLanguage/";
 
-		private static readonly byte[] authorName = "OceanApocalypseStudios\0\0"u8.ToArray();
+		private readonly static byte[] apiVersionBytes = Encoding.Default.GetBytes(ApiVersion);
+		private readonly static byte[] authorNameBytes = Encoding.Default.GetBytes(AuthorName);
+		private readonly static byte[] documentationUrlBytes = Encoding.Default.GetBytes(DocumentationUrl);
 
-		private static readonly byte[] docsLink = "https://oceanapocalypsestudios.org/RedSeaMarkupLanguage/"u8.ToArray();
+		private readonly static int apiVersionByteCount = Encoding.Default.GetByteCount(ApiVersion);
+		private readonly static int authorNameByteCount = Encoding.Default.GetByteCount(AuthorName);
+		private readonly static int documentationUrlByteCount = Encoding.Default.GetByteCount(DocumentationUrl);
 
 	}
 

@@ -157,10 +157,16 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 								break;
 
 							case "ThrowError":
-								throw new ActionErrorException("Special action returned error code");
+								if (tokens[2].BufferRange.Start.Equals(^1) && tokens[2].BufferRange.End.Equals(0))
+									throw new ActionErrorException($"Special action returned error code");
+
+								throw new ActionErrorException($"Special action returned error code : {Content[tokens[2].BufferRange].Span}");
 
 							case "EndAll":
-								return new();
+								if (tokens[2].BufferRange.Start.Equals(^1) && tokens[2].BufferRange.End.Equals(0))
+									return new();
+
+								return Content[tokens[2].BufferRange].Span.IsEmpty ? new() : new(Content[tokens[2].BufferRange].Span);
 
 							default:
 								throw new ActionErrorException("Unrecognized special action (possibly a non-standard action)");

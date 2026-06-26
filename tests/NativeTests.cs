@@ -2,6 +2,7 @@
 using System.Runtime.InteropServices;
 
 using OceanApocalypseStudios.RSML.Native;
+using OceanApocalypseStudios.RSML.Native.Structures;
 
 
 namespace OceanApocalypseStudios.RSML.Tests
@@ -22,7 +23,7 @@ namespace OceanApocalypseStudios.RSML.Tests
 		/// <inheritdoc cref="Exports.ValidateRsmlLine(IntPtr)"/>
 		private static readonly delegate* unmanaged[Cdecl]<nint, int> validate = (delegate* unmanaged[Cdecl]<nint, int>)&Exports.ValidateRsmlLine;
 
-		/// <inheritdoc cref="Exports.EvaluateRsmlDocument(IntPtr, Int32, Int32, Int32, Int32)"/>
+		/// <inheritdoc cref="Exports.EvaluateRsmlDocument(IntPtr, Int32, Int32, Int32, Int32, Byte)"/>
 		private static readonly delegate* unmanaged[Cdecl]<nint, int, int, int, int, byte, int> evaluate = (delegate* unmanaged[Cdecl]<nint, int, int, int, int, byte, int>)&Exports.EvaluateRsmlDocument;
 
 		/// <inheritdoc cref="Exports.Cleanup"/>
@@ -30,6 +31,15 @@ namespace OceanApocalypseStudios.RSML.Tests
 
 		/// <inheritdoc cref="Exports.GetLastErrorMessage"/>
 		private static readonly delegate* unmanaged[Cdecl]<nint> getError = (delegate* unmanaged[Cdecl]<nint>)&Exports.GetLastErrorMessage;
+
+		/// <inheritdoc cref="Exports.GetApiAuthorName"/>
+		private static readonly delegate* unmanaged[Cdecl]<BufferResult> getApiAuthor = (delegate* unmanaged[Cdecl]<BufferResult>)&Exports.GetApiAuthorName;
+
+		/// <inheritdoc cref="Exports.GetApiDocumentationUrl"/>
+		private static readonly delegate* unmanaged[Cdecl]<BufferResult> getDocsUrl = (delegate* unmanaged[Cdecl]<BufferResult>)&Exports.GetApiDocumentationUrl;
+
+		/// <inheritdoc cref="Exports.GetApiVersion"/>
+		private static readonly delegate* unmanaged[Cdecl]<BufferResult> getApiVersion = (delegate* unmanaged[Cdecl]<BufferResult>)&Exports.GetApiVersion;
 
 		[Fact]
 		public void Cleanup_WorksCorrectly()

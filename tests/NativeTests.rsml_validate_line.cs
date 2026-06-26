@@ -4,7 +4,6 @@ using OceanApocalypseStudios.RSML.Analyzer;
 using OceanApocalypseStudios.RSML.Analyzer.Semantics;
 using OceanApocalypseStudios.RSML.Analyzer.Syntax;
 using OceanApocalypseStudios.RSML.Exceptions;
-using OceanApocalypseStudios.RSML.Native;
 using OceanApocalypseStudios.RSML.Native.Structures;
 
 
