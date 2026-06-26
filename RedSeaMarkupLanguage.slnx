@@ -4,10 +4,8 @@
 		<Platform Name="x64" />
 		<Platform Name="x86" />
 	</Configurations>
-
-	<Folder Name="/0 - Items/">
+	<Folder Name="/Solution Items/">
 		<File Path=".gitignore" />
-		<File Path="ADMONITION.md" />
 		<File Path="Assets/FullSizeLogo.png" />
 		<File Path="BENCHMARKS.md" />
 		<File Path="COPYING.txt" />
@@ -19,16 +17,12 @@
 		<File Path="README.md" />
 	</Folder>
 
-	<Project Path="src/RSML/RSML.csproj" />
-	<Project Path="src/RSML.Native/RSML.Native.csproj" />
-	<Project Path="src/RSML.CLI/RSML.CLI.csproj" />
-
-	<Folder Name="/1 - Tests/">
+	<Folder Name="/Tests and Benchmarks/">
+		<Project Path="benchmarks/RSML.Benchmarks.csproj" />
 		<Project Path="tests/RSML.Tests.csproj" />
 	</Folder>
-
-	<Folder Name="/2 - Benchmarks/">
-		<Project Path="benchmarks/RSML.Benchmarks.csproj" />
-	</Folder>
+	<Project Path="src/RSML.CLI/RSML.CLI.csproj" />
+	<Project Path="src/RSML.Native/RSML.Native.csproj" />
+	<Project Path="src/RSML/RSML.csproj" />
 
 </Solution>
