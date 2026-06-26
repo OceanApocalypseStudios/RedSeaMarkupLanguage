@@ -40,6 +40,7 @@ using OceanApocalypseStudios.RSML.Analyzer;
 using OceanApocalypseStudios.RSML.Analyzer.Semantics;
 using OceanApocalypseStudios.RSML.Analyzer.Syntax;
 using OceanApocalypseStudios.RSML.Exceptions;
+using OceanApocalypseStudios.RSML.Host;
 using OceanApocalypseStudios.RSML.Toolchain.Compliance;
 
 
@@ -104,7 +105,7 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 		public EvaluationResult Evaluate() => Evaluate(new());
 
 		/// <inheritdoc />
-		public EvaluationResult Evaluate(Host host)
+		public EvaluationResult Evaluate(HostInfo hostInfo)
 		{
 
 			if (Content.Length == 0)
@@ -179,8 +180,8 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 						if (HandleLogicPath_Simple(
 								tokens,
 								Content,
-								host,
-								host.IsLinux
+								hostInfo,
+								hostInfo.IsLinux
 							))
 						{
 
@@ -196,8 +197,8 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 						if (HandleLogicPath_Complex(
 								tokens,
 								Content,
-								host,
-								host.IsLinux
+								hostInfo,
+								hostInfo.IsLinux
 							))
 						{
 
@@ -230,20 +231,20 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 		private static bool HandleLogicPath_Complex(
 			SyntaxLine tokens,
 			DualTextBuffer context,
-			in Host host,
+			in HostInfo hostInfo,
 			bool isLinux
 		)
 		{
 
 			if (isLinux)
-				return HandleLogicPath_Complex_Linux(tokens, context, host);
+				return HandleLogicPath_Complex_Linux(tokens, context, hostInfo);
 
 			bool systemNameMatches = tokens[1].Kind switch
 			{
 
 				TokenKind.WildcardKeyword => true,
-				TokenKind.DefinedKeyword  => host.SystemName is not null,
-				_                         => context[tokens[1].BufferRange].IsAsciiEqualsIgnoreCase(host.SystemName)
+				TokenKind.DefinedKeyword  => hostInfo.SystemName is not null,
+				_                         => context[tokens[1].BufferRange].IsAsciiEqualsIgnoreCase(hostInfo.SystemName)
 
 			};
 
@@ -255,36 +256,36 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 			{
 
 				case TokenKind.EqualTo:
-					systemVersionMatches = context[tokens[3].BufferRange].IsEquals(host.StringifiedSystemVersion);
+					systemVersionMatches = context[tokens[3].BufferRange].IsEquals(hostInfo.StringifiedSystemVersion);
 
 					break;
 
 				case TokenKind.NotEqualTo:
-					systemVersionMatches = !context[tokens[3].BufferRange].IsEquals(host.StringifiedSystemVersion);
+					systemVersionMatches = !context[tokens[3].BufferRange].IsEquals(hostInfo.StringifiedSystemVersion);
 
 					break;
 
 				case TokenKind.GreaterThanOrEqualTo:
 					if (Int32.TryParse(context[tokens[3].BufferRange].Span, out versionNum))
-						systemVersionMatches = host.SystemVersion >= versionNum;
+						systemVersionMatches = hostInfo.SystemVersion >= versionNum;
 
 					break;
 
 				case TokenKind.LessThanOrEqualTo:
 					if (Int32.TryParse(context[tokens[3].BufferRange].Span, out versionNum))
-						systemVersionMatches = host.SystemVersion <= versionNum;
+						systemVersionMatches = hostInfo.SystemVersion <= versionNum;
 
 					break;
 
 				case TokenKind.GreaterThan:
 					if (Int32.TryParse(context[tokens[3].BufferRange].Span, out versionNum))
-						systemVersionMatches = host.SystemVersion > versionNum;
+						systemVersionMatches = hostInfo.SystemVersion > versionNum;
 
 					break;
 
 				case TokenKind.LessThan:
 					if (Int32.TryParse(context[tokens[3].BufferRange].Span, out versionNum))
-						systemVersionMatches = host.SystemVersion < versionNum;
+						systemVersionMatches = hostInfo.SystemVersion < versionNum;
 
 					break;
 
@@ -299,8 +300,8 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 			{
 
 				TokenKind.WildcardKeyword => true,
-				TokenKind.DefinedKeyword  => host.ProcessorArchitecture is not null,
-				_                         => context[tokens[4].BufferRange].IsAsciiEqualsIgnoreCase(host.StringifiedSystemVersion)
+				TokenKind.DefinedKeyword  => hostInfo.ProcessorArchitecture is not null,
+				_                         => context[tokens[4].BufferRange].IsAsciiEqualsIgnoreCase(hostInfo.StringifiedSystemVersion)
 
 			};
 
@@ -311,7 +312,7 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 		private static bool HandleLogicPath_Complex_Linux(
 			SyntaxLine tokens,
 			DualTextBuffer context,
-			in Host host
+			in HostInfo hostInfo
 		)
 		{
 
@@ -319,10 +320,10 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 			{
 
 				TokenKind.WildcardKeyword => true,
-				TokenKind.DefinedKeyword  => host.DistroName is not null,
-				_ => context[tokens[1].BufferRange].IsAsciiEqualsIgnoreCase(host.SystemName) ||
-					 context[tokens[1].BufferRange].IsAsciiEqualsIgnoreCase(host.DistroName) ||
-					 context[tokens[1].BufferRange].IsAsciiEqualsIgnoreCase(host.DistroFamily)
+				TokenKind.DefinedKeyword  => hostInfo.DistroName is not null,
+				_ => context[tokens[1].BufferRange].IsAsciiEqualsIgnoreCase(hostInfo.SystemName) ||
+					 context[tokens[1].BufferRange].IsAsciiEqualsIgnoreCase(hostInfo.DistroName) ||
+					 context[tokens[1].BufferRange].IsAsciiEqualsIgnoreCase(hostInfo.DistroFamily)
 
 			};
 
@@ -334,36 +335,36 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 			{
 
 				case TokenKind.EqualTo:
-					systemVersionMatches = context[tokens[3].BufferRange].IsEquals(host.StringifiedSystemVersion);
+					systemVersionMatches = context[tokens[3].BufferRange].IsEquals(hostInfo.StringifiedSystemVersion);
 
 					break;
 
 				case TokenKind.NotEqualTo:
-					systemVersionMatches = !context[tokens[3].BufferRange].IsEquals(host.StringifiedSystemVersion);
+					systemVersionMatches = !context[tokens[3].BufferRange].IsEquals(hostInfo.StringifiedSystemVersion);
 
 					break;
 
 				case TokenKind.GreaterThanOrEqualTo:
 					if (Int32.TryParse(context[tokens[3].BufferRange].Span, out versionNum))
-						systemVersionMatches = host.SystemVersion >= versionNum;
+						systemVersionMatches = hostInfo.SystemVersion >= versionNum;
 
 					break;
 
 				case TokenKind.LessThanOrEqualTo:
 					if (Int32.TryParse(context[tokens[3].BufferRange].Span, out versionNum))
-						systemVersionMatches = host.SystemVersion <= versionNum;
+						systemVersionMatches = hostInfo.SystemVersion <= versionNum;
 
 					break;
 
 				case TokenKind.GreaterThan:
 					if (Int32.TryParse(context[tokens[3].BufferRange].Span, out versionNum))
-						systemVersionMatches = host.SystemVersion > versionNum;
+						systemVersionMatches = hostInfo.SystemVersion > versionNum;
 
 					break;
 
 				case TokenKind.LessThan:
 					if (Int32.TryParse(context[tokens[3].BufferRange].Span, out versionNum))
-						systemVersionMatches = host.SystemVersion < versionNum;
+						systemVersionMatches = hostInfo.SystemVersion < versionNum;
 
 					break;
 
@@ -379,8 +380,8 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 			{
 
 				TokenKind.WildcardKeyword => true,
-				TokenKind.DefinedKeyword  => host.ProcessorArchitecture is not null,
-				_                         => context[tokens[4].BufferRange].IsAsciiEqualsIgnoreCase(host.ProcessorArchitecture)
+				TokenKind.DefinedKeyword  => hostInfo.ProcessorArchitecture is not null,
+				_                         => context[tokens[4].BufferRange].IsAsciiEqualsIgnoreCase(hostInfo.ProcessorArchitecture)
 
 			};
 
@@ -391,20 +392,20 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 		private static bool HandleLogicPath_Simple(
 			SyntaxLine tokens,
 			DualTextBuffer context,
-			in Host host,
+			in HostInfo hostInfo,
 			bool isLinux
 		)
 		{
 
 			if (isLinux)
-				return HandleLogicPath_Simple_Linux(tokens, context, host);
+				return HandleLogicPath_Simple_Linux(tokens, context, hostInfo);
 
 			bool systemNameMatches = tokens[1].Kind switch
 			{
 
 				TokenKind.WildcardKeyword => true,
-				TokenKind.DefinedKeyword  => host.SystemName is not null,
-				_                         => context[tokens[1].BufferRange].IsAsciiEqualsIgnoreCase(host.SystemName)
+				TokenKind.DefinedKeyword  => hostInfo.SystemName is not null,
+				_                         => context[tokens[1].BufferRange].IsAsciiEqualsIgnoreCase(hostInfo.SystemName)
 
 			};
 
@@ -412,8 +413,8 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 			{
 
 				TokenKind.WildcardKeyword => true,
-				TokenKind.DefinedKeyword  => host.SystemVersion != -1,
-				_                         => context[tokens[2].BufferRange].IsEquals(host.StringifiedSystemVersion)
+				TokenKind.DefinedKeyword  => hostInfo.SystemVersion != -1,
+				_                         => context[tokens[2].BufferRange].IsEquals(hostInfo.StringifiedSystemVersion)
 
 			};
 
@@ -421,8 +422,8 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 			{
 
 				TokenKind.WildcardKeyword => true,
-				TokenKind.DefinedKeyword  => host.ProcessorArchitecture is not null,
-				_                         => context[tokens[3].BufferRange].IsAsciiEqualsIgnoreCase(host.ProcessorArchitecture)
+				TokenKind.DefinedKeyword  => hostInfo.ProcessorArchitecture is not null,
+				_                         => context[tokens[3].BufferRange].IsAsciiEqualsIgnoreCase(hostInfo.ProcessorArchitecture)
 
 			};
 
@@ -433,7 +434,7 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 		private static bool HandleLogicPath_Simple_Linux(
 			SyntaxLine tokens,
 			DualTextBuffer context,
-			in Host host
+			in HostInfo hostInfo
 		)
 		{
 
@@ -441,10 +442,10 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 			{
 
 				TokenKind.WildcardKeyword => true,
-				TokenKind.DefinedKeyword  => host.DistroName is not null,
-				_ => context[tokens[1].BufferRange].IsAsciiEqualsIgnoreCase(host.SystemName) ||
-					 context[tokens[1].BufferRange].IsAsciiEqualsIgnoreCase(host.DistroName) ||
-					 context[tokens[1].BufferRange].IsAsciiEqualsIgnoreCase(host.DistroFamily)
+				TokenKind.DefinedKeyword  => hostInfo.DistroName is not null,
+				_ => context[tokens[1].BufferRange].IsAsciiEqualsIgnoreCase(hostInfo.SystemName) ||
+					 context[tokens[1].BufferRange].IsAsciiEqualsIgnoreCase(hostInfo.DistroName) ||
+					 context[tokens[1].BufferRange].IsAsciiEqualsIgnoreCase(hostInfo.DistroFamily)
 
 			};
 
@@ -452,8 +453,8 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 			{
 
 				TokenKind.WildcardKeyword => true,
-				TokenKind.DefinedKeyword  => host.SystemVersion != -1,
-				_                         => context[tokens[2].BufferRange].IsEquals(host.StringifiedSystemVersion)
+				TokenKind.DefinedKeyword  => hostInfo.SystemVersion != -1,
+				_                         => context[tokens[2].BufferRange].IsEquals(hostInfo.StringifiedSystemVersion)
 
 			};
 
@@ -461,8 +462,8 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 			{
 
 				TokenKind.WildcardKeyword => true,
-				TokenKind.DefinedKeyword  => host.ProcessorArchitecture is not null,
-				_                         => context[tokens[3].BufferRange].IsAsciiEqualsIgnoreCase(host.ProcessorArchitecture)
+				TokenKind.DefinedKeyword  => hostInfo.ProcessorArchitecture is not null,
+				_                         => context[tokens[3].BufferRange].IsAsciiEqualsIgnoreCase(hostInfo.ProcessorArchitecture)
 
 			};
 

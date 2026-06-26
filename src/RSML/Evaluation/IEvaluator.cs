@@ -1,6 +1,7 @@
 ﻿using System;
 
 using OceanApocalypseStudios.RSML.Analyzer;
+using OceanApocalypseStudios.RSML.Host;
 using OceanApocalypseStudios.RSML.Toolchain;
 
 
@@ -41,9 +42,9 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 		/// <summary>
 		/// Evaluates the RSML document with the specified host's data.
 		/// </summary>
-		/// <param name="host">The host data</param>
+		/// <param name="hostInfo">The host data</param>
 		/// <returns>A result</returns>
-		EvaluationResult Evaluate(Host host);
+		EvaluationResult Evaluate(HostInfo hostInfo);
 
 	}
 

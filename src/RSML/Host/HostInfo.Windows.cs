@@ -6,11 +6,11 @@ using System.Diagnostics.CodeAnalysis;
 using Microsoft.Win32;
 
 
-namespace OceanApocalypseStudios.RSML
+namespace OceanApocalypseStudios.RSML.Host
 {
 
 	[SuppressMessage("Interoperability", "CA1416:Validate platform compatibility")] // this only compiles on windows there's no problem
-	public partial struct Host
+	public partial struct HostInfo
 	{
 
 		private void InitializeVersionData_Windows()

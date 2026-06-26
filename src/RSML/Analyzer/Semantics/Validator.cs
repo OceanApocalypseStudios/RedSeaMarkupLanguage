@@ -12,7 +12,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 	/// <summary>
 	/// The officially maintained semantics validator for RSML.
 	/// </summary>
-	public sealed class Validator : IValidator
+	public class Validator : IValidator
 	{
 
 		/// <inheritdoc />
