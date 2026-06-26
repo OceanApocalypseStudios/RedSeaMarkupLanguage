@@ -17,60 +17,6 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 		public static SpecificationCompliance SpecificationCompliance => SpecificationCompliance.CreateFull(ApiVersion);
 
 		/// <inheritdoc />
-		public static string CreateDocumentFromTokens(
-			in SyntaxLine line,
-			DualTextBuffer context
-		)
-		{
-
-			StringBuilder builder = new();
-
-			for (int i = 0; i < 8; i++)
-			{
-
-				if (line[i].IsEmpty)
-					continue;
-
-				if (line[i].Kind == TokenKind.Eof)
-					break;
-
-				// ReSharper disable once SwitchStatementHandlesSomeKnownEnumValuesWithDefault
-				switch (line[i].Kind)
-				{
-
-					case TokenKind.Eol:
-						_ = builder.AppendLine();
-
-						continue;
-
-					case TokenKind.SpecialActionSymbol:
-						_ = builder.Append('@');
-
-						continue;
-
-					case TokenKind.LogicPathValue when !line[i].IsOffLimits:
-						_ = builder.Append(context[line[i].BufferRange]);
-
-						continue;
-
-					default:
-						if (line[i].IsOffLimits)
-							continue;
-
-						_ = builder.Append(context[line[i].BufferRange]);
-						_ = builder.Append(' ');
-
-						continue;
-
-				}
-
-			}
-
-			return builder.ToString();
-
-		}
-
-		/// <inheritdoc />
 		public static SyntaxLine TokenizeLine(DualTextBuffer buffer)
 		{
 
