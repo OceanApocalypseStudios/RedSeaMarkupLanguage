@@ -10,7 +10,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 	/// <summary>
 	/// The official RSML normalizer.
 	/// </summary>
-	public sealed class Normalizer : INormalizer
+	public class Normalizer : INormalizer
 	{
 
 		/// <summary>

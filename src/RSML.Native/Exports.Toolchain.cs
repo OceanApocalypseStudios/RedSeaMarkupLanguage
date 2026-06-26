@@ -6,6 +6,7 @@ using OceanApocalypseStudios.RSML.Analyzer.Semantics;
 using OceanApocalypseStudios.RSML.Analyzer.Syntax;
 using OceanApocalypseStudios.RSML.Evaluation;
 using OceanApocalypseStudios.RSML.Exceptions;
+using OceanApocalypseStudios.RSML.Host;
 using OceanApocalypseStudios.RSML.Native.Structures;
 
 
@@ -103,7 +104,7 @@ namespace OceanApocalypseStudios.RSML.Native
 
 				};
 
-				Host customHost =
+				HostInfo customHost =
 					systemOrDistroName is (>= 101 and <= 104) or 3
 						? new(
 							actualSystemName,
@@ -117,9 +118,9 @@ namespace OceanApocalypseStudios.RSML.Native
 							systemOrDistroMajorVersion
 						);
 
-				Host actualHost =
+				HostInfo actualHost =
 					currentHostFallback == 1
-						? Host.MergeWithFallback(customHost, Host.CurrentHost)
+						? HostInfo.MergeWithFallback(customHost, HostInfo.CurrentHost)
 						: customHost;
 
 				#endregion

@@ -7,6 +7,7 @@ using OceanApocalypseStudios.RSML.Analyzer.Syntax;
 using OceanApocalypseStudios.RSML.CLI.Helpers;
 using OceanApocalypseStudios.RSML.Evaluation;
 using OceanApocalypseStudios.RSML.Exceptions;
+using OceanApocalypseStudios.RSML.Host;
 
 using Spectre.Console;
 
@@ -74,14 +75,14 @@ namespace OceanApocalypseStudios.RSML.CLI
 
 		public static void Evaluate_NoPretty(
 			string data,
-			Host host
+			HostInfo hostInfo
 		)
 		{
 
 			try
 			{
 
-				Console.WriteLine(new Evaluator(data).Evaluate(host).MatchValue);
+				Console.WriteLine(new Evaluator(data).Evaluate(hostInfo).MatchValue);
 
 			}
 			catch (InvalidRsmlSyntax ex)
@@ -101,7 +102,7 @@ namespace OceanApocalypseStudios.RSML.CLI
 
 		public static void Evaluate_Pretty(
 			string data,
-			Host host
+			HostInfo hostInfo
 		)
 		{
 
@@ -110,7 +111,7 @@ namespace OceanApocalypseStudios.RSML.CLI
 
 			try
 			{
-				result = evaluator.Evaluate(host);
+				result = evaluator.Evaluate(hostInfo);
 			}
 			catch (UserRaisedException)
 			{
@@ -160,7 +161,7 @@ namespace OceanApocalypseStudios.RSML.CLI
 		}
 
 		public static int GetMachine(
-			Host host,
+			HostInfo hostInfo,
 			bool disableAnsi,
 			string? format
 		)
@@ -169,7 +170,7 @@ namespace OceanApocalypseStudios.RSML.CLI
 			if (disableAnsi || format != "PlainText")
 			{
 
-				string? x = LocalMachineInfo_NoPretty(host, format ?? "InvalidValue");
+				string? x = LocalMachineInfo_NoPretty(hostInfo, format ?? "InvalidValue");
 
 				if (x is not null)
 					Console.WriteLine(x);
@@ -181,7 +182,7 @@ namespace OceanApocalypseStudios.RSML.CLI
 			}
 
 			if (format == "PlainText")
-				LocalMachineInfo_Pretty(host); // eh eh
+				LocalMachineInfo_Pretty(hostInfo); // eh eh
 			else
 				return 1;
 
@@ -190,20 +191,20 @@ namespace OceanApocalypseStudios.RSML.CLI
 		}
 
 		public static string? LocalMachineInfo_NoPretty(
-			Host host,
+			HostInfo hostInfo,
 			string outputFormat
 		) =>
 			outputFormat switch
 			{
 
-				"PlainText" => HostOutput.AsPlainText(host),
-				"JSON"      => HostOutput.AsJson(host),
-				"Dotnet"    => HostOutput.AsDotnet(host),
+				"PlainText" => HostOutput.AsPlainText(hostInfo),
+				"JSON"      => HostOutput.AsJson(hostInfo),
+				"Dotnet"    => HostOutput.AsDotnet(hostInfo),
 				_           => null
 
 			};
 
-		public static void LocalMachineInfo_Pretty(Host host) => HostOutput.AsPrettyText(host);
+		public static void LocalMachineInfo_Pretty(HostInfo hostInfo) => HostOutput.AsPrettyText(hostInfo);
 
 		public static int SpecificationSupport_NoPretty()
 		{

@@ -9,7 +9,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 	/// <summary>
 	/// The officially maintained lexer/tokenizer for RSML v2.0.0.
 	/// </summary>
-	public sealed class Lexer : ILexer
+	public class Lexer : ILexer
 	{
 
 		/// <inheritdoc />

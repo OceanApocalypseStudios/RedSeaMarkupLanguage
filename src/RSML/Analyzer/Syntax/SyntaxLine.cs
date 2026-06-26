@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
@@ -9,7 +10,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 	/// <summary>
 	/// A performant syntax line.
 	/// </summary>
-	public struct SyntaxLine
+	public struct SyntaxLine : IEnumerable<SyntaxToken>, IEquatable<SyntaxLine>
 	{
 
 		/// <summary>
@@ -644,6 +645,37 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 			return tokens;
 
 		}
+
+		internal struct TokenEnumerator(SyntaxLine line) : IEnumerator<SyntaxToken>
+		{
+
+			private int index = -1;
+
+			public readonly SyntaxToken Current => line[index];
+
+			readonly object IEnumerator.Current => Current;
+
+			public void Dispose() => Reset();
+
+			public bool MoveNext()
+			{
+
+				if (index + 1 >= 8)
+					return false;
+
+				index++;
+				return true;
+
+			}
+
+			public void Reset() => index = -1;
+
+		}
+
+		/// <inheritdoc/>
+		public readonly IEnumerator<SyntaxToken> GetEnumerator() => new TokenEnumerator(this);
+
+		readonly IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
 	}
 

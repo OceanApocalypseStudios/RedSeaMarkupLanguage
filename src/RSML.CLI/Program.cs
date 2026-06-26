@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using OceanApocalypseStudios.RSML.CLI.Helpers;
+using OceanApocalypseStudios.RSML.Host;
 
 using Spectre.Console;
 
@@ -403,12 +404,12 @@ namespace OceanApocalypseStudios.RSML.CLI
 									  ? Console.In.ReadToEnd()
 									  : File.ReadAllText(filepath);
 
-					Host host;
+					HostInfo hostInfo;
 
 					try
 					{
 
-						host = HostOutput.FromJson(result.GetValue(hostOpt));
+						hostInfo = HostOutput.FromJson(result.GetValue(hostOpt));
 
 					}
 					catch (Exception ex)
@@ -417,16 +418,16 @@ namespace OceanApocalypseStudios.RSML.CLI
 						if (disableAnsi)
 							Console.WriteLine($"JSON Error: {ex.Message}");
 						else
-							AnsiConsole.Markup($"[red]JSON Error on Host load[/] {ex.Message}");
+							AnsiConsole.Markup($"[red]JSON Error on HostInfo load[/] {ex.Message}");
 
 						return 2; // json error
 
 					}
 
 					if (disableAnsi)
-						Evaluate_NoPretty(data, host);
+						Evaluate_NoPretty(data, hostInfo);
 					else
-						Evaluate_Pretty(data, host);
+						Evaluate_Pretty(data, hostInfo);
 
 					return 0;
 

@@ -71,3 +71,6 @@ using System.Diagnostics.CodeAnalysis;
 		Scope = "member",
 		Target = "~M:OceanApocalypseStudios.RSML.Analyzer.Syntax.SyntaxLine.Add(OceanApocalypseStudios.RSML.Analyzer.Syntax.SyntaxToken)"
 	)]
+[assembly: SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "<Pending>", Scope = "member", Target = "~M:OceanApocalypseStudios.RSML.Host.HostInfoConverter.FromJson(System.Text.Json.JsonDocument,System.Text.Json.JsonSerializerOptions)~System.Nullable{OceanApocalypseStudios.RSML.Host.HostInfo}")]
+[assembly: SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "<Pending>", Scope = "member", Target = "~M:OceanApocalypseStudios.RSML.Host.HostInfo.Equals(System.Object)~System.Boolean")]
+[assembly: SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "<Pending>", Scope = "member", Target = "~M:OceanApocalypseStudios.RSML.Host.HostInfoConverter.FromJson(System.ReadOnlySpan{System.Char},System.Text.Json.JsonSerializerOptions)~System.Nullable{OceanApocalypseStudios.RSML.Host.HostInfo}")]

@@ -1,5 +1,6 @@
 ﻿using OceanApocalypseStudios.RSML.Evaluation;
 using OceanApocalypseStudios.RSML.Exceptions;
+using OceanApocalypseStudios.RSML.Host;
 
 
 namespace OceanApocalypseStudios.RSML.Tests
@@ -139,23 +140,23 @@ namespace OceanApocalypseStudios.RSML.Tests
 		[InlineData("                                            #")]
 		public void Evaluator_IsComment(string input) => Assert.True(Evaluator.IsComment(input));
 
-		private static readonly Host debianUnknownVersionX86 = new(
+		private static readonly HostInfo debianUnknownVersionX86 = new(
 			"debian",
 			"debian",
 			"x86",
 			null
 		);
 
-		private static readonly Host osxUnknownVersionUnknownArch = new("osx", null, null);
+		private static readonly HostInfo osxUnknownVersionUnknownArch = new("osx", null, null);
 
-		private static readonly Host ubuntu22Arm64 = new(
+		private static readonly HostInfo ubuntu22Arm64 = new(
 			"ubuntu",
 			"debian",
 			"x64",
 			22
 		);
 
-		private static readonly Host win10X64 = new("windows", "x64", 10);
+		private static readonly HostInfo win10X64 = new("windows", "x64", 10);
 
 	}
 

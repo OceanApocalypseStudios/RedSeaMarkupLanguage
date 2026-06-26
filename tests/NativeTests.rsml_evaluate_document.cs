@@ -1,6 +1,7 @@
 ﻿using System.Text;
 
 using OceanApocalypseStudios.RSML.Evaluation;
+using OceanApocalypseStudios.RSML.Host;
 using OceanApocalypseStudios.RSML.Native.Structures;
 
 
@@ -193,7 +194,7 @@ namespace OceanApocalypseStudios.RSML.Tests
 
 		}
 
-		private static readonly Host ubuntu22Arm64 = new(
+		private static readonly HostInfo ubuntu22Arm64 = new(
 			"ubuntu",
 			"debian",
 			"x64",

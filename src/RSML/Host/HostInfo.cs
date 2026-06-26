@@ -1,25 +1,24 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 
 
-// ReSharper disable UnusedAutoPropertyAccessor.Global
-
-namespace OceanApocalypseStudios.RSML
+namespace OceanApocalypseStudios.RSML.Host
 {
 
 	/// <summary>
 	/// A representation of several attributes of an host.
 	/// </summary>
-	public partial struct Host
+	public partial struct HostInfo : IEquatable<HostInfo>
 	{
 
 		/// <summary>
 		/// Collects data from the system and creates a new instance of the struct.
 		/// </summary>
-		public Host()
+		public HostInfo()
 		{
 
 			InitializeSystemName();
@@ -37,7 +36,7 @@ namespace OceanApocalypseStudios.RSML
 		/// <param name="osName">The OS name or null if undefined</param>
 		/// <param name="processorArchitecture">The processor architecture or null if undefined</param>
 		/// <param name="osMajorVersion">The OS's major version or null or -1 if undefined</param>
-		public Host(
+		public HostInfo(
 			string? osName,
 			string? processorArchitecture,
 			int? osMajorVersion
@@ -57,7 +56,7 @@ namespace OceanApocalypseStudios.RSML
 		/// <param name="distroFamily">The distro's family or null if undefined</param>
 		/// <param name="processorArchitecture">The processor architecture or null if undefined</param>
 		/// <param name="distroMajorVersion">The OS's major version or null or -1 if undefined</param>
-		public Host(
+		public HostInfo(
 			string? distroName,
 			string? distroFamily,
 			string? processorArchitecture,
@@ -76,7 +75,7 @@ namespace OceanApocalypseStudios.RSML
 		/// <summary>
 		/// The host RSML is running on.
 		/// </summary>
-		public static Host CurrentHost => new();
+		public static HostInfo CurrentHost => new();
 
 		/// <summary>
 		/// The name of the Linux distribution or <c>null</c> if undetected or not Linux.
@@ -128,36 +127,15 @@ namespace OceanApocalypseStudios.RSML
 		public int SystemVersion { get; private set; } = -1;
 
 		/// <summary>
-		/// Creates a new struct of system attributes for a Linux distribution.
-		/// </summary>
-		/// <param name="distroName">The distro's name or null if undefined</param>
-		/// <param name="distroFamily">The distro's family or null if undefined</param>
-		/// <param name="processorArchitecture">The processor architecture or null if undefined</param>
-		/// <param name="distroMajorVersion">The OS's major version or null or -1 if undefined</param>
-		[Obsolete("Use Host(string?, string?, string?, int?) instead")]
-		public static Host Linux(
-			string? distroName,
-			string? distroFamily,
-			string? processorArchitecture,
-			int? distroMajorVersion
-		) =>
-			new(
-				distroName,
-				distroFamily,
-				processorArchitecture,
-				distroMajorVersion
-			);
-
-		/// <summary>
-		/// Merges two <see cref="Host" /> instances,
+		/// Merges two <see cref="HostInfo" /> instances,
 		/// using the latter as fallback for the first.
 		/// </summary>
 		/// <param name="main">The host whose non-null attributes are used over the fallback's</param>
 		/// <param name="fallback">The host that serves as the fallback for <paramref name="main" />'s null attributes</param>
-		/// <returns>A new instance of a <see cref="Host" /></returns>
-		public static Host MergeWithFallback(
-			Host main,
-			Host fallback
+		/// <returns>A new instance of a <see cref="HostInfo" /></returns>
+		public static HostInfo MergeWithFallback(
+			HostInfo main,
+			HostInfo fallback
 		) =>
 			main.SystemName.IsAsciiEqualsIgnoreCase("linux") || main.DistroName is not null || main.DistroFamily is not null
 				? new(
@@ -176,21 +154,60 @@ namespace OceanApocalypseStudios.RSML
 						: -1
 				);
 
+		/// <inheritdoc/>
+		public readonly override bool Equals([NotNullWhen(true)] object? obj)
+		{
+
+			if (obj is HostInfo hostInfo)
+				return Equals(hostInfo);
+
+			return false;
+
+		}
+
 		/// <summary>
-		/// Merges an instance of <see cref="Host" /> with
+		/// Checks whether two instances of <see cref="HostInfo"/> are equal to each other.
+		/// </summary>
+		/// <param name="other">The instance to check against</param>
+		/// <returns>True if equals</returns>
+		public readonly bool Equals(HostInfo other) =>
+			SystemName == other.SystemName &&
+			DistroName == other.DistroName &&
+			DistroFamily == other.DistroFamily &&
+			ProcessorArchitecture == other.ProcessorArchitecture &&
+			SystemVersion == other.SystemVersion;
+
+		/// <summary>
+		/// Checks whether two instances of <see cref="HostInfo"/> are equal to each other.
+		/// </summary>
+		/// <param name="left"></param>
+		/// <param name="right"></param>
+		/// <returns>True if equals</returns>
+		public static bool operator ==(HostInfo left, HostInfo right) => left.Equals(right);
+
+		/// <summary>
+		/// Checks whether two instances of <see cref="HostInfo"/> are different from each other.
+		/// </summary>
+		/// <param name="left"></param>
+		/// <param name="right"></param>
+		/// <returns>True if equals</returns>
+		public static bool operator !=(HostInfo left, HostInfo right) => !left.Equals(right);
+
+		/// <summary>
+		/// Merges an instance of <see cref="HostInfo" /> with
 		/// this one, which is treated as a fallback.
 		/// </summary>
 		/// <param name="main">The host whose non-null attributes are used over this instance's</param>
-		/// <returns>A new instance of a <see cref="Host" /></returns>
-		public readonly Host MergeAsFallback(Host main) => MergeWithFallback(main, this);
+		/// <returns>A new instance of a <see cref="HostInfo" /></returns>
+		public readonly HostInfo MergeAsFallback(HostInfo main) => MergeWithFallback(main, this);
 
 		/// <summary>
-		/// Merges this <see cref="Host" /> instance
+		/// Merges this <see cref="HostInfo" /> instance
 		/// with another one, which is treated as a fallback.
 		/// </summary>
 		/// <param name="fallback">The host that serves as the fallback for this instance's null attributes</param>
-		/// <returns>A new instance of a <see cref="Host" /></returns>
-		public readonly Host MergeWithFallback(Host fallback) => MergeWithFallback(this, fallback);
+		/// <returns>A new instance of a <see cref="HostInfo" /></returns>
+		public readonly HostInfo MergeWithFallback(HostInfo fallback) => MergeWithFallback(this, fallback);
 
 		internal void InitializeVersionData_FreeBsd()
 		{
@@ -350,6 +367,10 @@ namespace OceanApocalypseStudios.RSML
 
 		}
 
+		public override int GetHashCode()
+		{
+			throw new NotImplementedException();
+		}
 	}
 
 }
