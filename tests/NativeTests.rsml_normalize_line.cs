@@ -2,7 +2,6 @@
 
 using OceanApocalypseStudios.RSML.Analyzer.Semantics;
 using OceanApocalypseStudios.RSML.Analyzer.Syntax;
-using OceanApocalypseStudios.RSML.Native;
 using OceanApocalypseStudios.RSML.Native.Structures;
 
 

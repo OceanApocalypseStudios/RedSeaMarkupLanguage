@@ -103,6 +103,41 @@ namespace OceanApocalypseStudios.RSML.Tests
 		}
 
 		[Theory]
+		[InlineData("-> windows 10 x64 \"Test A\"", 0)]
+		[InlineData("-> windows 10 x86 \"Test B\"", 1)]
+		[InlineData("-> windows <= 7 defined \"Test C\"", 1)]
+		[InlineData("!> \"Test D\"", -5)]
+		[InlineData("-> ubuntu defined any \"Test E\"", 1)]
+		[InlineData("-> bindows =! -5 64arm \"Test F\"", -1)]
+		[InlineData("-> defined < 11 any \"Test G\"", 0)]
+		[InlineData("@ThrowError", -3)]
+		[InlineData("@NonExistingAction ThisIsInvalidSyntax", -1)]
+		[InlineData("@EndAll", 1)]
+		[InlineData("@EndAll MatchValue", 0)]
+		public void NativeEvaluator_ThrowsErrorCodesCorrectly(string buffer, int expected)
+		{
+
+			int byteCount = Encoding.Default.GetByteCount(buffer);
+
+			fixed (byte* bufferPtr = Encoding.Default.GetBytes(buffer))
+			{
+
+				var allocErrorCode = allocate(bufferPtr, byteCount);
+				Assert.Equal(0, allocErrorCode);
+
+			}
+
+			NativeEvaluationResult result = new();
+			NativeEvaluationResult* resultPtr = &result;
+
+			var errorCode = evaluate((nint)resultPtr, 1, 0, 10, 3, 0); // win 10 x64
+			Assert.Equal(expected, errorCode);
+
+			cleanup();
+
+		}
+
+		[Theory]
 		[InlineData("-> debian \"This is the output...\"\n-> ubuntu \"...not this.\"")]
 		[InlineData("@Void", true)]
 		[InlineData("@Void\n", true)]
