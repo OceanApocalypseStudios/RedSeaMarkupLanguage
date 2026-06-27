@@ -8,7 +8,7 @@
  * ###    ###  ########   ###       ### ##########
  *
  * OceanApocalypseStudios * C# * Lead Development by Matthew
- *												(MF366)
+ *													 (MF366)
  *
  * MIT License
  *
@@ -41,7 +41,6 @@ using OceanApocalypseStudios.RSML.Analyzer.Semantics;
 using OceanApocalypseStudios.RSML.Analyzer.Syntax;
 using OceanApocalypseStudios.RSML.Exceptions;
 using OceanApocalypseStudios.RSML.Host;
-using OceanApocalypseStudios.RSML.Toolchain.Compliance;
 
 
 namespace OceanApocalypseStudios.RSML.Evaluation
@@ -88,9 +87,6 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 		/// </summary>
 		/// <param name="content">The document</param>
 		public Evaluator(byte[] content) => Content = new(content);
-
-		/// <inheritdoc />
-		public static SpecificationCompliance SpecificationCompliance => SpecificationCompliance.CreateFull(ApiVersion);
 
 		/// <inheritdoc />
 		public DualTextBuffer Content { get; }
@@ -177,36 +173,56 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 						break;
 
 					case 5:
-						if (HandleLogicPath_Simple(
-								tokens,
-								Content,
-								hostInfo,
-								hostInfo.IsLinux
-							))
+						bool isMatchSimple = HandleLogicPath_Simple(tokens, Content, hostInfo, hostInfo.IsLinux);
+
+						if (isMatchSimple)
 						{
 
-							return tokens[0].Kind == TokenKind.ThrowErrorOperator
-									   ? throw new UserRaisedException("Error-throwing operator was used")
-									   : new(Content[tokens[4].BufferRange].Span.ToString());
+							switch (tokens[0].Kind)
+							{
+
+								case TokenKind.ReturnOperator:
+									return new(Content[tokens[4].BufferRange].Span.ToString());
+
+								case TokenKind.ThrowErrorOperator:
+									throw new UserRaisedException("Error-throwing operator was used");
+
+								case TokenKind.ReverseReturnOperator:
+									break; // do nothing
+
+							}
 
 						}
+
+						if (!isMatchSimple && tokens[0].Kind == TokenKind.ReverseReturnOperator) // HandleLogicPath_Simple returned false
+							return new(Content[tokens[4].BufferRange].Span.ToString());
 
 						break;
 
 					case 6:
-						if (HandleLogicPath_Complex(
-								tokens,
-								Content,
-								hostInfo,
-								hostInfo.IsLinux
-							))
+						bool isMatchComplex = HandleLogicPath_Complex(tokens, Content, hostInfo, hostInfo.IsLinux);
+						
+						if (isMatchComplex)
 						{
 
-							return tokens[0].Kind == TokenKind.ThrowErrorOperator
-									   ? throw new UserRaisedException("Error-throwing operator was used")
-									   : new(Content[tokens[5].BufferRange].Span.ToString());
+							switch (tokens[0].Kind)
+							{
+
+								case TokenKind.ReturnOperator:
+									return new(Content[tokens[5].BufferRange].Span.ToString());
+
+								case TokenKind.ThrowErrorOperator:
+									throw new UserRaisedException("Error-throwing operator was used");
+
+								case TokenKind.ReverseReturnOperator:
+									break; // do nothing
+
+							}
 
 						}
+
+						if (!isMatchComplex && tokens[0].Kind == TokenKind.ReverseReturnOperator) // HandleLogicPath_Complex returned false
+							return new(Content[tokens[5].BufferRange].Span.ToString());
 
 						break;
 
@@ -225,8 +241,6 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 			return new(); // no matches
 
 		}
-
-		private const string ApiVersion = "2.0.0";
 
 		private static bool HandleLogicPath_Complex(
 			SyntaxLine tokens,
@@ -289,6 +303,12 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 
 					break;
 
+				case TokenKind.MajorVersionId:
+					if (Int32.TryParse(context[tokens[2].BufferRange].Span, out int minVersionNum) && Int32.TryParse(context[tokens[3].BufferRange].Span, out int maxVersionNum))
+						systemVersionMatches = hostInfo.SystemVersion >= minVersionNum && hostInfo.SystemVersion <= maxVersionNum;
+
+					break;
+
 				default:
 					systemVersionMatches = false;
 
@@ -301,7 +321,7 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 
 				TokenKind.WildcardKeyword => true,
 				TokenKind.DefinedKeyword  => hostInfo.ProcessorArchitecture is not null,
-				_                         => context[tokens[4].BufferRange].IsAsciiEqualsIgnoreCase(hostInfo.StringifiedSystemVersion)
+				_                         => context[tokens[4].BufferRange].IsAsciiEqualsIgnoreCase(hostInfo.ProcessorArchitecture)
 
 			};
 
@@ -365,6 +385,12 @@ namespace OceanApocalypseStudios.RSML.Evaluation
 				case TokenKind.LessThan:
 					if (Int32.TryParse(context[tokens[3].BufferRange].Span, out versionNum))
 						systemVersionMatches = hostInfo.SystemVersion < versionNum;
+
+					break;
+
+				case TokenKind.MajorVersionId:
+					if (Int32.TryParse(context[tokens[2].BufferRange].Span, out int minVersionNum) && Int32.TryParse(context[tokens[3].BufferRange].Span, out int maxVersionNum))
+						systemVersionMatches = hostInfo.SystemVersion >= minVersionNum && hostInfo.SystemVersion <= maxVersionNum;
 
 					break;
 

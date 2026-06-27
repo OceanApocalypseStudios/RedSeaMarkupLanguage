@@ -213,12 +213,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer
 			int startIndex = CaretPosition;
 			var span = Text.Span[CaretPosition..];
 			int nextNewline = span.IndexOfNewline(out byte newlineLen);
-			int advanceBy;
-
-			if (nextNewline < 0)
-				advanceBy = span.Length;
-			else
-				advanceBy = nextNewline + newlineLen;
+			int advanceBy = nextNewline < 0 ? span.Length : nextNewline + newlineLen;
 
 			CaretPosition += advanceBy;
 

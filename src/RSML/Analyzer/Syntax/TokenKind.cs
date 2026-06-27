@@ -109,6 +109,11 @@
 		CommentText,
 
 		/// <summary>
+		/// The Reverse Operator, also known as the NOT line operator.
+		/// </summary>
+		ReverseReturnOperator,
+
+		/// <summary>
 		/// The end of line token.
 		/// </summary>
 		Eol = 254,

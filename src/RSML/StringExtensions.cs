@@ -262,21 +262,11 @@ namespace OceanApocalypseStudios.RSML
 			string strC,
 			string strD,
 			string strE
-		)
-		{
-
-			if (chars.IsAsciiEqualsIgnoreCase(strA))
-				return true;
-
-			if (chars.IsAsciiEqualsIgnoreCase(strB))
-				return true;
-
-			if (chars.IsAsciiEqualsIgnoreCase(strC))
-				return true;
-
-			return chars.IsAsciiEqualsIgnoreCase(strD) || chars.IsAsciiEqualsIgnoreCase(strE);
-
-		}
+		) => chars.IsAsciiEqualsIgnoreCase(strA)
+			|| chars.IsAsciiEqualsIgnoreCase(strB)
+			|| chars.IsAsciiEqualsIgnoreCase(strC)
+			|| chars.IsAsciiEqualsIgnoreCase(strD)
+			|| chars.IsAsciiEqualsIgnoreCase(strE);
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		internal static bool IsEquals(
@@ -310,33 +300,20 @@ namespace OceanApocalypseStudios.RSML
 			string? strF = null,
 			string? strG = null,
 			string? strH = null
-		)
-		{
-
-			if (chars.IsEquals(strA))
-				return true;
-
-			if (chars.IsEquals(strB))
-				return true;
-
-			if (strC is not null && chars.IsEquals(strC))
-				return true;
-
-			if (strD is not null && chars.IsEquals(strD))
-				return true;
-
-			if (strE is not null && chars.IsEquals(strE))
-				return true;
-
-			if (strF is not null && chars.IsEquals(strF))
-				return true;
-
-			if (strG is not null && chars.IsEquals(strG))
-				return true;
-
-			return strH is not null && chars.IsEquals(strH);
-
-		}
+		) => chars.IsEquals(strA)
+			|| chars.IsEquals(strB)
+			|| strC is not null
+			&& chars.IsEquals(strC)
+			|| strD is not null
+			&& chars.IsEquals(strD)
+			|| strE is not null
+			&& chars.IsEquals(strE)
+			|| strF is not null
+			&& chars.IsEquals(strF)
+			|| strG is not null
+			&& chars.IsEquals(strG)
+			|| strH is not null
+			&& chars.IsEquals(strH);
 
 		internal static unsafe bool IsNewLinesOnly(this ReadOnlySpan<char> chars)
 		{
