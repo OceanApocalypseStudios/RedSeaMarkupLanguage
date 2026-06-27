@@ -14,6 +14,11 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 	{
 
 		/// <summary>
+		/// The maximum amount of items this structure can have.
+		/// </summary>
+		public const int MaxLength = 8;
+
+		/// <summary>
 		/// Creates a new syntax line.
 		/// </summary>
 		/// <param name="token">A token</param>
@@ -101,13 +106,13 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 		/// <summary>
 		/// Creates a new syntax line.
 		/// </summary>
-		/// <param name="tokens">An array of tokens with at least 8 tokens</param>
-		/// <exception cref="ArgumentOutOfRangeException">The array has less than 8 tokens</exception>
+		/// <param name="tokens">An array of tokens with at least <see cref="MaxLength"/> tokens</param>
+		/// <exception cref="ArgumentOutOfRangeException">The array has less than <see cref="MaxLength"/> tokens</exception>
 		public SyntaxLine(SyntaxToken[] tokens)
 		{
 
-			if (tokens.Length < 8)
-				throw new ArgumentOutOfRangeException(nameof(tokens), "A syntax line as array must have at least 8 tokens");
+			if (tokens.Length < MaxLength)
+				throw new ArgumentOutOfRangeException(nameof(tokens), $"A syntax line as array must have at least {MaxLength} tokens");
 
 			Item1 = tokens[0];
 			Item2 = tokens[1];
@@ -123,13 +128,13 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 		/// <summary>
 		/// Creates a new syntax line.
 		/// </summary>
-		/// <param name="tokens">A list of tokens with at least 8 tokens</param>
-		/// <exception cref="ArgumentOutOfRangeException">The list has less than 8 tokens</exception>
+		/// <param name="tokens">A list of tokens with at least <see cref="MaxLength"/> tokens</param>
+		/// <exception cref="ArgumentOutOfRangeException">The list has less than <see cref="MaxLength"/> tokens</exception>
 		public SyntaxLine(IList<SyntaxToken> tokens)
 		{
 
-			if (tokens.Count < 8)
-				throw new ArgumentOutOfRangeException(nameof(tokens), "A syntax line as array must have at least 8 tokens");
+			if (tokens.Count < MaxLength)
+				throw new ArgumentOutOfRangeException(nameof(tokens), $"A syntax line as array must have at least {MaxLength} tokens");
 
 			Item1 = tokens[0];
 			Item2 = tokens[1];
@@ -146,7 +151,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 		/// Returns the first non-empty token's index.
 		/// </summary>
 		/// <returns>The token's index</returns>
-		public readonly byte IndexOfFirst
+		public readonly int IndexOfFirst
 		{
 
 			get
@@ -170,9 +175,53 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 				if (!Item6.IsEmpty)
 					return 5;
 
-				return (byte)(!Item7.IsEmpty
-								  ? 6
-								  : 7);
+				if (!Item7.IsEmpty)
+					return 6;
+
+				if (!Item8.IsEmpty)
+					return 7;
+
+				return -1;
+
+			}
+
+		}
+
+		/// <summary>
+		/// Returns the first empty token's index.
+		/// </summary>
+		/// <returns>The token's index</returns>
+		public readonly int IndexOfFirstEmpty
+		{
+
+			get
+			{
+
+				if (Item1.IsEmpty)
+					return 0;
+
+				if (Item2.IsEmpty)
+					return 1;
+
+				if (Item3.IsEmpty)
+					return 2;
+
+				if (Item4.IsEmpty)
+					return 3;
+
+				if (Item5.IsEmpty)
+					return 4;
+
+				if (Item6.IsEmpty)
+					return 5;
+
+				if (Item7.IsEmpty)
+					return 6;
+
+				if (Item8.IsEmpty)
+					return 7;
+
+				return -1;
 
 			}
 
@@ -182,7 +231,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 		/// Returns the last non-empty token's index.
 		/// </summary>
 		/// <returns>The token's index</returns>
-		public readonly byte IndexOfLast
+		public readonly int IndexOfLast
 		{
 
 			get
@@ -206,9 +255,53 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 				if (!Item3.IsEmpty)
 					return 2;
 
-				return (byte)(!Item2.IsEmpty
-								  ? 1
-								  : 0);
+				if (!Item2.IsEmpty)
+					return 1;
+
+				if (!Item1.IsEmpty)
+					return 0;
+
+				return -1;
+
+			}
+
+		}
+
+		/// <summary>
+		/// Returns the last empty token's index.
+		/// </summary>
+		/// <returns>The token's index</returns>
+		public readonly int IndexOfLastIndex
+		{
+
+			get
+			{
+
+				if (Item8.IsEmpty)
+					return 7;
+
+				if (Item7.IsEmpty)
+					return 6;
+
+				if (Item6.IsEmpty)
+					return 5;
+
+				if (Item5.IsEmpty)
+					return 4;
+
+				if (Item4.IsEmpty)
+					return 3;
+
+				if (Item3.IsEmpty)
+					return 2;
+
+				if (Item2.IsEmpty)
+					return 1;
+
+				if (Item1.IsEmpty)
+					return 0;
+
+				return -1;
 
 			}
 
@@ -341,15 +434,10 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 		public readonly int Length
 		{
 
-			// todo: see #26
-			// length is O(8)
-			// maybe cache length on operations??
-			// to make this shite even faster??
-
 			get
 			{
 
-				int len = 8;
+				int len = MaxLength;
 
 				if (Item8.IsEmpty)
 					len--;
@@ -439,7 +527,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 				Item8 = token;
 
 			else
-				throw new ArgumentOutOfRangeException(nameof(token), "Maximum length was reached (8)");
+				throw new ArgumentOutOfRangeException(nameof(token), $"Maximum length was reached ({MaxLength})");
 
 		}
 
@@ -475,7 +563,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 				Item1 = token;
 
 			else
-				throw new ArgumentOutOfRangeException(nameof(token), "Maximum length was reached (8)");
+				throw new ArgumentOutOfRangeException(nameof(token), $"Maximum length was reached ({MaxLength})");
 
 		}
 
@@ -604,10 +692,39 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 		/// <param name="index">The index of the token to remove</param>
 		public void Remove(int index) => this[index] = SyntaxToken.Empty;
 
-		// todo: ^ Remove(int) leaves gaps
-		// maybe make it automatically bump the ones below up??
-		// problem with this is that we'd have to check if this wouldn't blow the whole codebase up
-		// xxx: maybe reusable Compact() method for this thing
+		/// <summary>
+		/// Rearranges the syntax line and puts all non-empty tokens first.
+		/// </summary>
+		public void Compact()
+		{
+
+			if (Length is <= 0 or MaxLength || IndexOfFirstEmpty > IndexOfLast)
+				return;
+
+			int newPosition = IndexOfFirstEmpty;
+
+			for (int i = IndexOfFirst; i <= IndexOfLast; i++)
+			{
+
+				if (!this[i].IsEmpty)
+				{
+
+					if (this[newPosition].IsEmpty)
+					{
+
+						this[newPosition] = this[i];
+						Remove(i);
+
+					}
+
+					while (!this[newPosition].IsEmpty && newPosition < MaxLength)
+						newPosition++;
+
+				}
+
+			}
+
+		}
 
 		/// <summary>
 		/// Converts the line into a list of tokens.
@@ -660,7 +777,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 			public bool MoveNext()
 			{
 
-				if (index + 1 >= 8)
+				if (index + 1 >= MaxLength)
 					return false;
 
 				index++;
