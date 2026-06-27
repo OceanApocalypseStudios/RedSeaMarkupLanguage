@@ -17,8 +17,8 @@ namespace OceanApocalypseStudios.RSML.Tests
 			SyntaxLine expected = new(
 				new(TokenKind.SystemName, 0, 2),
 				new(TokenKind.SpecialActionArgument, 37, 44),
-				new(TokenKind.ArchitectureIdentifier, 11, 13),
-				new(TokenKind.MajorVersionId, 14, 19),
+				new(TokenKind.ProcessorArchitecture, 11, 13),
+				new(TokenKind.Integer, 14, 19),
 				new(TokenKind.DefinedKeyword, 4, 9),
 				SyntaxToken.Empty,
 				SyntaxToken.Empty,
@@ -30,8 +30,8 @@ namespace OceanApocalypseStudios.RSML.Tests
 				new(TokenKind.SystemName, 0, 2),
 				new(TokenKind.SpecialActionArgument, 37, 44),
 				SyntaxToken.Empty,
-				new(TokenKind.ArchitectureIdentifier, 11, 13),
-				new(TokenKind.MajorVersionId, 14, 19),
+				new(TokenKind.ProcessorArchitecture, 11, 13),
+				new(TokenKind.Integer, 14, 19),
 				SyntaxToken.Empty,
 				new(TokenKind.DefinedKeyword, 4, 9)
 			);
@@ -49,7 +49,7 @@ namespace OceanApocalypseStudios.RSML.Tests
 			SyntaxLine expected = new(
 				new(TokenKind.SpecialActionArgument, 37, 44),
 				new(TokenKind.DefinedKeyword, 4, 9),
-				new(TokenKind.MajorVersionId, 14, 19),
+				new(TokenKind.Integer, 14, 19),
 				SyntaxToken.Empty,
 				SyntaxToken.Empty,
 				SyntaxToken.Empty,
@@ -65,7 +65,7 @@ namespace OceanApocalypseStudios.RSML.Tests
 				SyntaxToken.Empty,
 				SyntaxToken.Empty,
 				new(TokenKind.DefinedKeyword, 4, 9),
-				new(TokenKind.MajorVersionId, 14, 19)
+				new(TokenKind.Integer, 14, 19)
 			);
 
 			actual.Compact();

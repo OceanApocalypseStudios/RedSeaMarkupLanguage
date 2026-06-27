@@ -7,6 +7,7 @@
 		<Nullable>enable</Nullable>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<OutputType>Library</OutputType>
+		<LangVersion>14</LangVersion>
 
 		<!-- Maintainability-related -->
 		<RootNamespace>OceanApocalypseStudios.RSML</RootNamespace>

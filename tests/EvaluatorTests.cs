@@ -2,6 +2,8 @@
 using OceanApocalypseStudios.RSML.Exceptions;
 using OceanApocalypseStudios.RSML.Host;
 
+using static System.Runtime.InteropServices.JavaScript.JSType;
+
 
 namespace OceanApocalypseStudios.RSML.Tests
 {
@@ -9,15 +11,33 @@ namespace OceanApocalypseStudios.RSML.Tests
 	public class EvaluatorTests
 	{
 
-
-
-		[Fact]
-		public void Evaluate_AnyWorksEvenIfUnknown()
+		[Theory]
+		[InlineData("any", "Main")]
+		[InlineData("defined", "Fallback")]
+		[InlineData("undefined", "Main")]
+		[InlineData("arm64", "Fallback")] // not a keyword, but still useful to test am i fucking right
+		[InlineData("x86", "Fallback")]
+		public void Evaluate_KeywordsWorkWhenUnknown(string keywordValue, string expectedValue)
 		{
 
-			Evaluator evaluator = new("-> osx any any \"Output!\"");
+			Evaluator evaluator = new($"-> osx {keywordValue} \"Main\"\r\n-> \"Fallback\"");
 			string? evaluationStr = evaluator.Evaluate(osxUnknownVersionUnknownArch).MatchValue;
-			Assert.Equal("Output!", evaluationStr);
+			Assert.Equal(expectedValue, evaluationStr);
+
+		}
+
+		[Theory]
+		[InlineData("any", "Main")]
+		[InlineData("defined", "Main")]
+		[InlineData("undefined", "Fallback")]
+		[InlineData("arm64", "Fallback")]
+		[InlineData("x86", "Main")]
+		public void Evaluate_KeywordsWorkWhenKnown(string keywordValue, string expectedValue)
+		{
+
+			Evaluator evaluator = new($"-> linux {keywordValue} \"Main\"\r\n-> \"Fallback\"");
+			string? evaluationStr = evaluator.Evaluate(debianUnknownVersionX86).MatchValue;
+			Assert.Equal(expectedValue, evaluationStr);
 
 		}
 

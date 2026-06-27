@@ -77,7 +77,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 
 					var retValRange = ReadQuotedString(buffer);
 
-					line.Add(new(TokenKind.LogicPathValue, retValRange));
+					line.Add(new(TokenKind.String, retValRange));
 					line.Add(new(TokenKind.Eol, ^1, 0));
 
 					break;
@@ -110,6 +110,9 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 			if (chars.IsEquals("defined"))
 				return new(TokenKind.DefinedKeyword, startIndex, curPos);
 
+			if (chars.IsEquals("undefined"))
+				return new(TokenKind.UndefinedKeyword, startIndex, curPos);
+
 			if (chars.IsAsciiEqualsIgnoreCase_10(
 					"windows",
 					"osx",
@@ -132,11 +135,11 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 					"loongarch64"
 				))
 			{
-				return new(TokenKind.ArchitectureIdentifier, startIndex, curPos);
+				return new(TokenKind.ProcessorArchitecture, startIndex, curPos);
 			}
 
 			if (Int32.TryParse(chars.Span, out _))
-				return new(TokenKind.MajorVersionId, startIndex, curPos);
+				return new(TokenKind.Integer, startIndex, curPos);
 
 			if (chars.IsEquals_8(
 					"==",
