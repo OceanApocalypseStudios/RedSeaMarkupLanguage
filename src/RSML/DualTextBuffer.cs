@@ -4,13 +4,13 @@ using System.IO;
 using System.Text;
 
 
-namespace OceanApocalypseStudios.RSML.Analyzer
+namespace OceanApocalypseStudios.RSML
 {
 
 	/// <summary>
 	/// All use-cases text buffer.
 	/// </summary>
-	public sealed class DualTextBuffer
+	public sealed partial class DualTextBuffer
 	{
 
 		/// <summary>
