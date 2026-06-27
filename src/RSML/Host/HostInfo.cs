@@ -343,6 +343,7 @@ namespace OceanApocalypseStudios.RSML.Host
 
 		}
 
+		[SuppressMessage("Style", "IDE0022:Use expression body for method", Justification = "Fix doesn't apply here.")]
 		private void InitializeVersionData()
 		{
 
@@ -367,10 +368,9 @@ namespace OceanApocalypseStudios.RSML.Host
 
 		}
 
-		public override int GetHashCode()
-		{
-			throw new NotImplementedException();
-		}
+		/// <inheritdoc/>
+		public override readonly int GetHashCode() => HashCode.Combine(SystemName, SystemVersion, DistroName, DistroFamily, ProcessorArchitecture);
+
 	}
 
 }

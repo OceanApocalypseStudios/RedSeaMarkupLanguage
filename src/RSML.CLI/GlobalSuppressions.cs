@@ -5,4 +5,4 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "<Pending>", Scope = "member", Target = "~M:OceanApocalypseStudios.RSML.CLI.Helpers.HostOutput.FromJson(System.String)~OceanApocalypseStudios.RSML.HostInfo")]
+[assembly: SuppressMessage("Style", "IDE0305:Simplify collection initialization", Justification = "<Pending>", Scope = "member", Target = "~M:OceanApocalypseStudios.RSML.CLI.Program.Tokenize_NoPretty(System.String)~System.String")]

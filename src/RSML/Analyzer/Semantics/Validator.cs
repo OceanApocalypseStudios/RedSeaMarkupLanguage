@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Immutable;
+using System.Diagnostics;
 
 using OceanApocalypseStudios.RSML.Analyzer.Syntax;
 using OceanApocalypseStudios.RSML.Exceptions;
-using OceanApocalypseStudios.RSML.Toolchain.Compliance;
 
 
 namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
@@ -14,9 +14,6 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 	/// </summary>
 	public class Validator : IValidator
 	{
-
-		/// <inheritdoc />
-		public static SpecificationCompliance SpecificationCompliance => SpecificationCompliance.CreateFull(ApiVersion);
 
 		/// <inheritdoc />
 		public static ImmutableArray<ReadOnlyMemory<char>> ValidArchitectures =>
@@ -31,7 +28,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 		];
 
 		/// <inheritdoc />
-		public static ImmutableArray<ReadOnlyMemory<char>> ValidSpecialActionNames => [ "Void".AsMemory(), "ThrowError".AsMemory(), "EndAll".AsMemory() ];
+		public static ImmutableArray<ReadOnlyMemory<char>> ValidSpecialActionNames => ["Void".AsMemory(), "ThrowError".AsMemory(), "EndAll".AsMemory()];
 
 		/// <inheritdoc />
 		public static ImmutableArray<ReadOnlyMemory<char>> ValidSystems =>
@@ -84,11 +81,11 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 
 			}
 
-			if (line[0].Kind is not (TokenKind.ReturnOperator or TokenKind.ThrowErrorOperator) || line[0].IsOffLimits)
+			if (line[0].Kind is not (TokenKind.ReturnOperator or TokenKind.ThrowErrorOperator or TokenKind.ReverseReturnOperator) || line[0].IsOffLimits)
 				throw new InvalidRsmlSyntax("Unrecognized start-of-line token.");
 
-			if (!context[line[0].BufferRange].IsEquals("!>") && !context[line[0].BufferRange].IsEquals("->"))
-				throw new InvalidRsmlSyntax("Operator must be one of !> or ->.");
+			if (!context[line[0].BufferRange].IsEquals("!>") && !context[line[0].BufferRange].IsEquals("N>") && !context[line[0].BufferRange].IsEquals("->"))
+				throw new InvalidRsmlSyntax("Operator must be one of !>, N> or ->.");
 
 			switch (line.Length)
 			{
@@ -104,12 +101,16 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 						 line[1].Kind != TokenKind.DefinedKeyword &&
 						 line[1].Kind != TokenKind.WildcardKeyword) ||
 						line[2].Kind != TokenKind.LogicPathValue)
+					{
 						throw new InvalidRsmlSyntax("A 3 token long logic path must be a *Operator + SystemName + LogicPathValue overload.");
+					}
 
 					if (!line[1].IsOffLimits &&
 						!context[line[1].BufferRange].IsAsciiEqualsIgnoreCase(ValidSystems) &&
 						line[1].Kind == TokenKind.SystemName)
-						throw new InvalidRsmlSyntax("Invalid system name as of v2.0.0.");
+					{
+						throw new InvalidRsmlSyntax("Invalid system name.");
+					}
 
 					return;
 
@@ -121,18 +122,24 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 						 line[2].Kind != TokenKind.DefinedKeyword &&
 						 line[2].Kind != TokenKind.WildcardKeyword) ||
 						line[3].Kind != TokenKind.LogicPathValue)
+					{
 						throw new InvalidRsmlSyntax("A 4 token long logic path must be a *Operator + SystemName + ArchitectureIdentifier + LogicPathValue overload.");
+					}
 
 					if (!line[1].IsOffLimits &&
 						!context[line[1].BufferRange].IsAsciiEqualsIgnoreCase(ValidSystems) &&
 						line[1].Kind == TokenKind.SystemName)
-						throw new InvalidRsmlSyntax("Invalid system name as of v2.0.0.");
+					{
+						throw new InvalidRsmlSyntax("Invalid system name.");
+					}
 
 					// ReSharper disable once InvertIf
 					if (!line[2].IsOffLimits &&
 						!context[line[2].BufferRange].IsAsciiEqualsIgnoreCase(ValidArchitectures) &&
 						line[2].Kind == TokenKind.ArchitectureIdentifier)
-						throw new InvalidRsmlSyntax("Invalid architecture identifier as of v2.0.0.");
+					{
+						throw new InvalidRsmlSyntax("Invalid architecture identifier.");
+					}
 
 					return;
 
@@ -157,12 +164,16 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 					if (!line[1].IsOffLimits &&
 						!context[line[1].BufferRange].IsAsciiEqualsIgnoreCase(ValidSystems) &&
 						line[1].Kind == TokenKind.SystemName)
-						throw new InvalidRsmlSyntax("Invalid system name as of v2.0.0.");
+					{
+						throw new InvalidRsmlSyntax("Invalid system name.");
+					}
 
 					if (!line[3].IsOffLimits &&
 						!context[line[3].BufferRange].IsAsciiEqualsIgnoreCase(ValidArchitectures) &&
 						line[3].Kind == TokenKind.ArchitectureIdentifier)
-						throw new InvalidRsmlSyntax("Invalid architecture identifier as of v2.0.0.");
+					{
+						throw new InvalidRsmlSyntax("Invalid architecture identifier.");
+					}
 
 					if (!line[2].IsOffLimits && !Int32.TryParse(context[line[2].BufferRange].Span, out _) && line[2].Kind == TokenKind.MajorVersionId)
 						throw new InvalidRsmlSyntax("The major version must be a valid integer");
@@ -173,41 +184,55 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 					if ((line[1].Kind != TokenKind.SystemName &&
 						 line[1].Kind != TokenKind.DefinedKeyword &&
 						 line[1].Kind != TokenKind.WildcardKeyword) ||
-						(line[2].Kind != TokenKind.EqualTo &&
+						(line[2].Kind != TokenKind.MajorVersionId &&
+						 line[2].Kind != TokenKind.EqualTo &&
 						 line[2].Kind != TokenKind.NotEqualTo &&
 						 line[2].Kind != TokenKind.GreaterThan &&
 						 line[2].Kind != TokenKind.LessThan &&
 						 line[2].Kind != TokenKind.GreaterThanOrEqualTo &&
 						 line[2].Kind != TokenKind.LessThanOrEqualTo) ||
-						(line[3].Kind != TokenKind.MajorVersionId &&
-						 line[3].Kind != TokenKind.DefinedKeyword &&
-						 line[3].Kind != TokenKind.WildcardKeyword) ||
+						(line[3].Kind != TokenKind.MajorVersionId) ||
 						(line[4].Kind != TokenKind.ArchitectureIdentifier &&
 						 line[4].Kind != TokenKind.DefinedKeyword &&
 						 line[4].Kind != TokenKind.WildcardKeyword) ||
 						line[5].Kind != TokenKind.LogicPathValue)
 					{
 						throw new InvalidRsmlSyntax(
-							"A 5 token long logic path must be a *Operator + SystemName + |Comparator| + MajorVersionId + ArchitectureIdentifier + LogicPathValue overload."
+							"A 6 token long logic path must be a *Operator + SystemName + |Comparator| + MajorVersionId + ArchitectureIdentifier + LogicPathValue overload."
 						);
 					}
 
 					if (!line[1].IsOffLimits &&
 						!context[line[1].BufferRange].IsAsciiEqualsIgnoreCase(ValidSystems) &&
 						line[1].Kind == TokenKind.SystemName)
-						throw new InvalidRsmlSyntax("Invalid system name as of v2.0.0.");
+					{
+						throw new InvalidRsmlSyntax("Invalid system name.");
+					}
 
 					if (!line[4].IsOffLimits &&
 						!context[line[4].BufferRange].IsAsciiEqualsIgnoreCase(ValidArchitectures) &&
 						line[4].Kind == TokenKind.ArchitectureIdentifier)
-						throw new InvalidRsmlSyntax("Invalid architecture identifier as of v2.0.0.");
+					{
+						throw new InvalidRsmlSyntax("Invalid architecture identifier.");
+					}
 
+					// these two will be assigned by the time we reach condition Z
+					// so that is safe
+					int minVersion = -1;
+					int maxVersion = -1;
+
+					if (!line[3].IsOffLimits && !Int32.TryParse(context[line[3].BufferRange].Span, out maxVersion))
+						throw new InvalidRsmlSyntax("The major version must be a valid integer. Wildcards are not compatible with comparators and in-between.");
+					
 					if (!line[2].IsOffLimits &&
-						!context[line[2].BufferRange].IsAsciiEqualsIgnoreCase(ValidComparators))
-						throw new InvalidRsmlSyntax("Invalid comparator.");
+						!context[line[2].BufferRange].IsAsciiEqualsIgnoreCase(ValidComparators) &&
+						!Int32.TryParse(context[line[2].BufferRange].Span, out minVersion))
+					{
+						throw new InvalidRsmlSyntax("Invalid comparator or in-between minimum value.");
+					}
 
-					if (!line[3].IsOffLimits && !Int32.TryParse(context[line[3].BufferRange].Span, out _))
-						throw new InvalidRsmlSyntax("The major version must be a valid integer. Wildcards are not compatible with comparators.");
+					if (!(minVersion < maxVersion)) // condition Z
+						throw new InvalidRsmlSyntax("In-between must be in format such that the minimum allowed value comes before the maximum allowed value, and that Min < Max.");
 
 					return;
 
@@ -217,8 +242,6 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 			}
 
 		}
-
-		private const string ApiVersion = "2.0.0";
 
 	}
 

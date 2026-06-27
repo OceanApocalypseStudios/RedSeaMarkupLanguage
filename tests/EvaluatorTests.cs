@@ -9,6 +9,8 @@ namespace OceanApocalypseStudios.RSML.Tests
 	public class EvaluatorTests
 	{
 
+
+
 		[Fact]
 		public void Evaluate_AnyWorksEvenIfUnknown()
 		{
@@ -20,11 +22,74 @@ namespace OceanApocalypseStudios.RSML.Tests
 		}
 
 		[Fact]
-		public void Evaluate_ComparatorPlusWildcard_InvalidSyntax()
+		public void Evaluate_ComparatorPlusWildcard1_InvalidSyntax()
 		{
 
 			Evaluator evaluator = new("-> windows == defined defined \"Output!\"");
 			_ = Assert.Throws<InvalidRsmlSyntax>(() => evaluator.Evaluate(win10X64));
+
+		}
+
+		[Fact]
+		public void Evaluate_ComparatorPlusWildcard2_InvalidSyntax()
+		{
+
+			Evaluator evaluator = new("-> windows <= defined defined \"Output!\"");
+			_ = Assert.Throws<InvalidRsmlSyntax>(() => evaluator.Evaluate(win10X64));
+
+		}
+
+		[Fact]
+		public void Evaluate_InBetweenPlusWildcard_InvalidSyntax()
+		{
+
+			Evaluator evaluator = new("-> windows 9 any defined \"Output!\"");
+			_ = Assert.Throws<InvalidRsmlSyntax>(() => evaluator.Evaluate(win10X64));
+
+		}
+
+		[Fact]
+		public void Evaluate_InBetweenUpperThenLower1_InvalidSyntax()
+		{
+
+			Evaluator evaluator = new("-> windows 11 9 defined \"Output!\"");
+			_ = Assert.Throws<InvalidRsmlSyntax>(() => evaluator.Evaluate(win10X64));
+
+		}
+
+		[Fact]
+		public void Evaluate_InBetweenUpperThenLower2_InvalidSyntax()
+		{
+
+			Evaluator evaluator = new("N> ubuntu 29 20 any \"Output!\"");
+			_ = Assert.Throws<InvalidRsmlSyntax>(() => evaluator.Evaluate(ubuntu22Arm64));
+
+		}
+
+		[Fact]
+		public void Evaluate_InBetween()
+		{
+
+			Evaluator evaluator = new("-> windows 9 11 defined \"Output!\"");
+			Assert.Equal("Output!", evaluator.Evaluate(win10X64).MatchValue);
+
+		}
+
+		[Fact]
+		public void Evaluate_NotOperator_InBetween()
+		{
+
+			Evaluator evaluator = new("N> defined 7 11 x64 \"Output A\"\nN> defined 7 11 arm64 \"Output B\"");
+			Assert.Equal("Output B", evaluator.Evaluate(win10X64).MatchValue);
+
+		}
+
+		[Fact]
+		public void Evaluate_NotOperator()
+		{
+
+			Evaluator evaluator = new("N> ubuntu 22 any \"Output A\"\nN> ubuntu 20 any \"Output B\"");
+			Assert.Equal("Output B", evaluator.Evaluate(ubuntu22Arm64).MatchValue);
 
 		}
 
@@ -152,7 +217,7 @@ namespace OceanApocalypseStudios.RSML.Tests
 		private static readonly HostInfo ubuntu22Arm64 = new(
 			"ubuntu",
 			"debian",
-			"x64",
+			"arm64",
 			22
 		);
 

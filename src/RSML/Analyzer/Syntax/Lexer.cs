@@ -1,19 +1,14 @@
 ﻿using System;
 
-using OceanApocalypseStudios.RSML.Toolchain.Compliance;
-
 
 namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 {
 
 	/// <summary>
-	/// The officially maintained lexer/tokenizer for RSML v2.0.0.
+	/// The officially maintained lexer/tokenizer for RSML.
 	/// </summary>
 	public class Lexer : ILexer
 	{
-
-		/// <inheritdoc />
-		public static SpecificationCompliance SpecificationCompliance => SpecificationCompliance.CreateFull(ApiVersion);
 
 		/// <inheritdoc />
 		public static SyntaxLine TokenizeLine(DualTextBuffer buffer)
@@ -65,6 +60,9 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 
 			else if (op.IsEquals("!>"))
 				line.Add(new(TokenKind.ThrowErrorOperator, pos, buffer.CaretPosition));
+
+			else if (op.IsEquals("N>")) // NOT ->
+				line.Add(new(TokenKind.ReverseReturnOperator, pos, buffer.CaretPosition));
 
 			while (buffer.CaretPosition < buffer.Length)
 			{
@@ -122,7 +120,9 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 					"archlinux",
 					"fedora"
 				))
+			{
 				return new(TokenKind.SystemName, startIndex, curPos);
+			}
 
 			if (chars.IsAsciiEqualsIgnoreCase_5(
 					"x64",
@@ -131,7 +131,9 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 					"arm64",
 					"loongarch64"
 				))
+			{
 				return new(TokenKind.ArchitectureIdentifier, startIndex, curPos);
+			}
 
 			if (Int32.TryParse(chars.Span, out _))
 				return new(TokenKind.MajorVersionId, startIndex, curPos);
@@ -172,8 +174,6 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 			return null;
 
 		}
-
-		private const string ApiVersion = "2.0.0";
 
 		private const string Quote = "\"";
 

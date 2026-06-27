@@ -1,7 +1,6 @@
 ﻿using OceanApocalypseStudios.RSML.Analyzer.Syntax;
 using OceanApocalypseStudios.RSML.Exceptions;
-using OceanApocalypseStudios.RSML.Toolchain;
-using OceanApocalypseStudios.RSML.Toolchain.Compliance;
+using OceanApocalypseStudios.RSML.Internals;
 
 
 namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
@@ -12,14 +11,6 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 	/// </summary>
 	public class Normalizer : INormalizer
 	{
-
-		/// <summary>
-		/// Creates a new Normalizer instance.
-		/// </summary>
-		public Normalizer() { }
-
-		/// <inheritdoc />
-		public static SpecificationCompliance SpecificationCompliance => SpecificationCompliance.CreateFull(ApiVersion);
 
 		/// <inheritdoc />
 		public static void NormalizeLine(
@@ -54,7 +45,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 
 						case 2:
 							line[1] = new(TokenKind.CommentText, ^1, 0);
-							line[2] = eol;
+							line[2] = ConstantTokens.EolToken;
 							line[3] = SyntaxToken.Empty;
 							line[4] = SyntaxToken.Empty;
 							line[5] = SyntaxToken.Empty;
@@ -89,7 +80,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 
 						case 3:
 							line[2] = new(TokenKind.SpecialActionArgument, ^1, 0);
-							line[3] = eol;
+							line[3] = ConstantTokens.EolToken;
 							line[4] = SyntaxToken.Empty;
 							line[5] = SyntaxToken.Empty;
 							line[6] = SyntaxToken.Empty;
@@ -113,6 +104,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 
 				case TokenKind.ReturnOperator:
 				case TokenKind.ThrowErrorOperator:
+				case TokenKind.ReverseReturnOperator:
 					// eol matters
 					switch (line.Length)
 					{
@@ -125,10 +117,10 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 							line[4] = line[1];
 
 							// name, version and arch become "any"
-							line[1] = line[2] = line[3] = wildcard;
+							line[1] = line[2] = line[3] = ConstantTokens.WildcardToken;
 
 							// eol and clear
-							line[5] = eol;
+							line[5] = ConstantTokens.EolToken;
 							line[6] = SyntaxToken.Empty;
 							line[7] = SyntaxToken.Empty;
 
@@ -144,10 +136,10 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 							line[4] = line[2];
 
 							// version and arch become "any"
-							line[2] = line[3] = wildcard;
+							line[2] = line[3] = ConstantTokens.WildcardToken;
 
 							// eol and clear
-							line[5] = eol;
+							line[5] = ConstantTokens.EolToken;
 							line[6] = SyntaxToken.Empty;
 							line[7] = SyntaxToken.Empty;
 
@@ -166,10 +158,10 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 							line[3] = line[2];
 
 							// version becomes "any"
-							line[2] = wildcard;
+							line[2] = ConstantTokens.WildcardToken;
 
 							// eol and clear
-							line[5] = eol;
+							line[5] = ConstantTokens.EolToken;
 							line[6] = SyntaxToken.Empty;
 							line[7] = SyntaxToken.Empty;
 
@@ -181,7 +173,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 						// is already normalized
 						// eol and clear
 						case 6:
-							line[5] = eol;
+							line[5] = ConstantTokens.EolToken;
 							line[6] = SyntaxToken.Empty;
 							line[7] = SyntaxToken.Empty;
 
@@ -217,12 +209,6 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 			}
 
 		}
-
-		private const string ApiVersion = "2.0.0";
-
-		private static readonly SyntaxToken eol = TokenBank.eolToken;
-
-		private static readonly SyntaxToken wildcard = TokenBank.wildcardToken;
 
 	}
 

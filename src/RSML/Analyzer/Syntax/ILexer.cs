@@ -1,7 +1,4 @@
-﻿using OceanApocalypseStudios.RSML.Toolchain;
-
-
-namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
+﻿namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 {
 
 	/// <summary>
