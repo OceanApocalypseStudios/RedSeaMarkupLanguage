@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Immutable;
-using System.Diagnostics;
 
 using OceanApocalypseStudios.RSML.Analyzer.Syntax;
 using OceanApocalypseStudios.RSML.Exceptions;
@@ -91,7 +90,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 			{
 
 				case 2:
-					if (line[1].Kind != TokenKind.LogicPathValue)
+					if (line[1].Kind != TokenKind.String)
 						throw new InvalidRsmlSyntax("A 2 token long logic path must be a *Operator + LogicPathValue overload.");
 
 					return;
@@ -99,8 +98,9 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 				case 3:
 					if ((line[1].Kind != TokenKind.SystemName &&
 						 line[1].Kind != TokenKind.DefinedKeyword &&
+						 line[1].Kind != TokenKind.UndefinedKeyword &&
 						 line[1].Kind != TokenKind.WildcardKeyword) ||
-						line[2].Kind != TokenKind.LogicPathValue)
+						line[2].Kind != TokenKind.String)
 					{
 						throw new InvalidRsmlSyntax("A 3 token long logic path must be a *Operator + SystemName + LogicPathValue overload.");
 					}
@@ -117,11 +117,13 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 				case 4:
 					if ((line[1].Kind != TokenKind.SystemName &&
 						 line[1].Kind != TokenKind.DefinedKeyword &&
+						 line[1].Kind != TokenKind.UndefinedKeyword &&
 						 line[1].Kind != TokenKind.WildcardKeyword) ||
-						(line[2].Kind != TokenKind.ArchitectureIdentifier &&
+						(line[2].Kind != TokenKind.ProcessorArchitecture &&
 						 line[2].Kind != TokenKind.DefinedKeyword &&
+						 line[2].Kind != TokenKind.UndefinedKeyword &&
 						 line[2].Kind != TokenKind.WildcardKeyword) ||
-						line[3].Kind != TokenKind.LogicPathValue)
+						line[3].Kind != TokenKind.String)
 					{
 						throw new InvalidRsmlSyntax("A 4 token long logic path must be a *Operator + SystemName + ArchitectureIdentifier + LogicPathValue overload.");
 					}
@@ -136,7 +138,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 					// ReSharper disable once InvertIf
 					if (!line[2].IsOffLimits &&
 						!context[line[2].BufferRange].IsAsciiEqualsIgnoreCase(ValidArchitectures) &&
-						line[2].Kind == TokenKind.ArchitectureIdentifier)
+						line[2].Kind == TokenKind.ProcessorArchitecture)
 					{
 						throw new InvalidRsmlSyntax("Invalid architecture identifier.");
 					}
@@ -146,14 +148,17 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 				case 5:
 					if ((line[1].Kind != TokenKind.SystemName &&
 						 line[1].Kind != TokenKind.DefinedKeyword &&
+						 line[1].Kind != TokenKind.UndefinedKeyword &&
 						 line[1].Kind != TokenKind.WildcardKeyword) ||
-						(line[2].Kind != TokenKind.MajorVersionId &&
+						(line[2].Kind != TokenKind.Integer &&
 						 line[2].Kind != TokenKind.DefinedKeyword &&
+						 line[2].Kind != TokenKind.UndefinedKeyword &&
 						 line[2].Kind != TokenKind.WildcardKeyword) ||
-						(line[3].Kind != TokenKind.ArchitectureIdentifier &&
+						(line[3].Kind != TokenKind.ProcessorArchitecture &&
 						 line[3].Kind != TokenKind.DefinedKeyword &&
+						 line[3].Kind != TokenKind.UndefinedKeyword &&
 						 line[3].Kind != TokenKind.WildcardKeyword) ||
-						line[4].Kind != TokenKind.LogicPathValue)
+						line[4].Kind != TokenKind.String)
 					{
 						throw new InvalidRsmlSyntax(
 							"A 5 token long logic path must be a *Operator + SystemName + MajorVersionId + ArchitectureIdentifier + LogicPathValue overload."
@@ -170,12 +175,12 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 
 					if (!line[3].IsOffLimits &&
 						!context[line[3].BufferRange].IsAsciiEqualsIgnoreCase(ValidArchitectures) &&
-						line[3].Kind == TokenKind.ArchitectureIdentifier)
+						line[3].Kind == TokenKind.ProcessorArchitecture)
 					{
 						throw new InvalidRsmlSyntax("Invalid architecture identifier.");
 					}
 
-					if (!line[2].IsOffLimits && !Int32.TryParse(context[line[2].BufferRange].Span, out _) && line[2].Kind == TokenKind.MajorVersionId)
+					if (!line[2].IsOffLimits && !Int32.TryParse(context[line[2].BufferRange].Span, out _) && line[2].Kind == TokenKind.Integer)
 						throw new InvalidRsmlSyntax("The major version must be a valid integer");
 
 					return;
@@ -183,19 +188,21 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 				case 6:
 					if ((line[1].Kind != TokenKind.SystemName &&
 						 line[1].Kind != TokenKind.DefinedKeyword &&
+						 line[1].Kind != TokenKind.UndefinedKeyword &&
 						 line[1].Kind != TokenKind.WildcardKeyword) ||
-						(line[2].Kind != TokenKind.MajorVersionId &&
+						(line[2].Kind != TokenKind.Integer &&
 						 line[2].Kind != TokenKind.EqualTo &&
 						 line[2].Kind != TokenKind.NotEqualTo &&
 						 line[2].Kind != TokenKind.GreaterThan &&
 						 line[2].Kind != TokenKind.LessThan &&
 						 line[2].Kind != TokenKind.GreaterThanOrEqualTo &&
 						 line[2].Kind != TokenKind.LessThanOrEqualTo) ||
-						(line[3].Kind != TokenKind.MajorVersionId) ||
-						(line[4].Kind != TokenKind.ArchitectureIdentifier &&
+						(line[3].Kind != TokenKind.Integer) ||
+						(line[4].Kind != TokenKind.ProcessorArchitecture &&
 						 line[4].Kind != TokenKind.DefinedKeyword &&
+						 line[4].Kind != TokenKind.UndefinedKeyword &&
 						 line[4].Kind != TokenKind.WildcardKeyword) ||
-						line[5].Kind != TokenKind.LogicPathValue)
+						line[5].Kind != TokenKind.String)
 					{
 						throw new InvalidRsmlSyntax(
 							"A 6 token long logic path must be a *Operator + SystemName + |Comparator| + MajorVersionId + ArchitectureIdentifier + LogicPathValue overload."
@@ -211,7 +218,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Semantics
 
 					if (!line[4].IsOffLimits &&
 						!context[line[4].BufferRange].IsAsciiEqualsIgnoreCase(ValidArchitectures) &&
-						line[4].Kind == TokenKind.ArchitectureIdentifier)
+						line[4].Kind == TokenKind.ProcessorArchitecture)
 					{
 						throw new InvalidRsmlSyntax("Invalid architecture identifier.");
 					}

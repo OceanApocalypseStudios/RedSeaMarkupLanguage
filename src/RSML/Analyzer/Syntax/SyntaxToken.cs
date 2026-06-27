@@ -48,7 +48,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 		/// <summary>
 		/// Creates an empty syntax token.
 		/// </summary>
-		public static SyntaxToken Empty => new(TokenKind.UndefinedToken, ^1, 0);
+		public static SyntaxToken Empty => new(TokenKind.None, ^1, 0);
 
 		/// <summary>
 		/// The token's value's range in the buffer.
@@ -58,7 +58,7 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 		/// <summary>
 		/// Checks if the token is empty.
 		/// </summary>
-		public bool IsEmpty => Kind == TokenKind.UndefinedToken && IsOffLimits;
+		public bool IsEmpty => Kind == TokenKind.None && IsOffLimits;
 
 		/// <summary>
 		/// Checks if the token is off limits.

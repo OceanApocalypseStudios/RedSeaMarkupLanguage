@@ -8,9 +8,9 @@
 	{
 
 		/// <summary>
-		/// An invalid or undefined token.
+		/// No token kind.
 		/// </summary>
-		UndefinedToken,
+		None,
 
 		/// <summary>
 		/// The return operator.
@@ -28,15 +28,14 @@
 		SystemName,
 
 		/// <summary>
-		/// The system architecture identification keyword.
+		/// The processor architecture keyword.
 		/// </summary>
-		ArchitectureIdentifier,
+		ProcessorArchitecture,
 
 		/// <summary>
-		/// The major version ID token. This is version of the system, <em>unless</em>
-		/// <c>defined</c> or <c>any</c> were used instead.
+		/// An integer.
 		/// </summary>
-		MajorVersionId,
+		Integer,
 
 		/// <summary>
 		/// The equals keyword (<c>==</c>).
@@ -69,9 +68,9 @@
 		LessThanOrEqualTo,
 
 		/// <summary>
-		/// The value token. This is the argument passed to an operator.
+		/// A string.
 		/// </summary>
-		LogicPathValue,
+		String,
 
 		/// <summary>
 		/// The <c>defined</c> keyword used to specify a version must be defined.
@@ -112,6 +111,11 @@
 		/// The Reverse Operator, also known as the NOT line operator.
 		/// </summary>
 		ReverseReturnOperator,
+
+		/// <summary>
+		/// The <c>undefined</c> keyword used to specify a field must not be defined.
+		/// </summary>
+		UndefinedKeyword,
 
 		/// <summary>
 		/// The end of line token.
