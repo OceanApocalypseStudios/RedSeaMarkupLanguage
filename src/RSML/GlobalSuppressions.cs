@@ -5,16 +5,6 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-
-[assembly:
-	SuppressMessage(
-		"Style",
-		"IDE0046:Convert to conditional expression",
-		Justification = "<Pending>",
-		Scope = "member",
-		Target =
-			"~M:OceanApocalypseStudios.RSML.Analyzer.Syntax.Lexer.TokenizeLogicPathComponent(OceanApocalypseStudios.RSML.Analyzer.DualTextBuffer)~System.Nullable{OceanApocalypseStudios.RSML.Analyzer.Syntax.SyntaxToken}"
-	)]
 [assembly:
 	SuppressMessage(
 		"Style",
@@ -74,9 +64,10 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "<Pending>", Scope = "member", Target = "~M:OceanApocalypseStudios.RSML.Host.HostInfoConverter.FromJson(System.Text.Json.JsonDocument,System.Text.Json.JsonSerializerOptions)~System.Nullable{OceanApocalypseStudios.RSML.Host.HostInfo}")]
 [assembly: SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "<Pending>", Scope = "member", Target = "~M:OceanApocalypseStudios.RSML.Host.HostInfo.Equals(System.Object)~System.Boolean")]
 [assembly: SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "<Pending>", Scope = "member", Target = "~M:OceanApocalypseStudios.RSML.Host.HostInfoConverter.FromJson(System.ReadOnlySpan{System.Char},System.Text.Json.JsonSerializerOptions)~System.Nullable{OceanApocalypseStudios.RSML.Host.HostInfo}")]
-[assembly: SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "<Pending>", Scope = "member", Target = "~M:OceanApocalypseStudios.RSML.Analyzer.DualTextBuffer.Peek~System.Int32")]
-[assembly: SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "<Pending>", Scope = "member", Target = "~M:OceanApocalypseStudios.RSML.Analyzer.DualTextBuffer.Read~System.Int32")]
-[assembly: SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "<Pending>", Scope = "member", Target = "~M:OceanApocalypseStudios.RSML.Analyzer.DualTextBuffer.Read(System.Int32)~System.ReadOnlyMemory{System.Char}")]
+[assembly: SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "<Pending>", Scope = "member", Target = "~M:OceanApocalypseStudios.RSML.DualTextBuffer.Peek~System.Int32")]
+[assembly: SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "<Pending>", Scope = "member", Target = "~M:OceanApocalypseStudios.RSML.DualTextBuffer.Read~System.Int32")]
+[assembly: SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "<Pending>", Scope = "member", Target = "~M:OceanApocalypseStudios.RSML.DualTextBuffer.Read(System.Int32)~System.ReadOnlyMemory{System.Char}")]
 [assembly: SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "<Pending>", Scope = "member", Target = "~M:OceanApocalypseStudios.RSML.StringExtensions.IsAsciiEqualsIgnoreCase_10(System.ReadOnlyMemory{System.Char},System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)~System.Boolean")]
 [assembly: SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "<Pending>", Scope = "member", Target = "~P:OceanApocalypseStudios.RSML.Analyzer.Syntax.SyntaxLine.IndexOfFirstEmpty")]
 [assembly: SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "<Pending>", Scope = "member", Target = "~P:OceanApocalypseStudios.RSML.Analyzer.Syntax.SyntaxLine.IndexOfLastIndex")]
+[assembly: SuppressMessage("Style", "IDE0046:Convert to conditional expression", Justification = "<Pending>", Scope = "member", Target = "~M:OceanApocalypseStudios.RSML.Analyzer.Syntax.Lexer.TokenizeLogicPathComponent(OceanApocalypseStudios.RSML.DualTextBuffer)~System.Nullable{OceanApocalypseStudios.RSML.Analyzer.Syntax.SyntaxToken}")]
