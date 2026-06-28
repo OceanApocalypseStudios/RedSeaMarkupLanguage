@@ -33,13 +33,13 @@ namespace OceanApocalypseStudios.RSML.Tests
 		private static readonly delegate* unmanaged[Cdecl]<nint> getError = (delegate* unmanaged[Cdecl]<nint>)&Exports.GetLastErrorMessage;
 
 		/// <inheritdoc cref="Exports.GetApiAuthorName"/>
-		private static readonly delegate* unmanaged[Cdecl]<BufferResult> getApiAuthor = (delegate* unmanaged[Cdecl]<BufferResult>)&Exports.GetApiAuthorName;
+		private static readonly delegate* unmanaged[Cdecl]<StringResult> getApiAuthor = (delegate* unmanaged[Cdecl]<StringResult>)&Exports.GetApiAuthorName;
 
 		/// <inheritdoc cref="Exports.GetApiDocumentationUrl"/>
-		private static readonly delegate* unmanaged[Cdecl]<BufferResult> getDocsUrl = (delegate* unmanaged[Cdecl]<BufferResult>)&Exports.GetApiDocumentationUrl;
+		private static readonly delegate* unmanaged[Cdecl]<StringResult> getDocsUrl = (delegate* unmanaged[Cdecl]<StringResult>)&Exports.GetApiDocumentationUrl;
 
 		/// <inheritdoc cref="Exports.GetApiVersion"/>
-		private static readonly delegate* unmanaged[Cdecl]<BufferResult> getApiVersion = (delegate* unmanaged[Cdecl]<BufferResult>)&Exports.GetApiVersion;
+		private static readonly delegate* unmanaged[Cdecl]<StringResult> getApiVersion = (delegate* unmanaged[Cdecl]<StringResult>)&Exports.GetApiVersion;
 
 		[Fact]
 		public void Cleanup_WorksCorrectly()

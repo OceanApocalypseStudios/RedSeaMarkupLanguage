@@ -1,26 +1,89 @@
-﻿# Red Sea Markup Language
-<!--suppress HtmlDeprecatedAttribute -->
-<img src="assets/FullSizeLogo.png" alt="RSML Logo" align="right" width="100">
+﻿#
+<div align="center">
+	<img src="assets/FullSizeLogo.png" alt="RSML Logo" align="center" width="150">
+	<h1>Red Sea Markup Language</h1>
+</div>
+<div align="center">
+	<a href="https://www.nuget.org/packages/OceanApocalypseStudios.RSML" target="_blank"><img src="https://img.shields.io/nuget/v/OceanApocalypseStudios.RSML?style=for-the-badge&logo=nuget&logoColor=white&logoSize=auto&label=Available%20on%20NuGet&labelColor=%231265fb&color=%2308317b"/></a>
+	<a href="https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/releases/latest"><img src="https://img.shields.io/github/v/release/OceanApocalypseStudios/RedSeaMarkupLanguage?sort=semver&display_name=tag&style=for-the-badge&logo=github&logoColor=white&logoSize=auto&label=Latest&labelColor=%23161616&color=%23000308"/></a>
+	<!--<a href="COPYING.txt"><img src="https://img.shields.io/badge/ignored-Custom_clause-ignored?style=for-the-badge&logo=opensourceinitiative&logoColor=white&logoSize=auto&label=repository%20licensing&labelColor=%23496300&color=%232b3c00"/></a>-->
+	<a href="LICENSE.txt"><img src="https://img.shields.io/badge/ignored-mit-ignored?style=for-the-badge&logo=opensourceinitiative&logoColor=white&logoSize=auto&label=code%20license&labelColor=%23496300&color=%232b3c00"/></a>
+	<a href="LICENSE-DOCS.txt"><img src="https://img.shields.io/badge/ignored-cc0_1.0_universal-ignored?style=for-the-badge&logo=opensourceinitiative&logoColor=white&logoSize=auto&label=documentation%20license&labelColor=%23496300&color=%232b3c00"/></a>
+	<img src="https://img.shields.io/github/languages/top/OceanApocalypseStudios/RedSeaMarkupLanguage?style=for-the-badge&logo=dotnet&logoColor=white&logoSize=auto&label=%20&labelColor=%234929ca&color=%234929ca" />
+	<img src="https://img.shields.io/github/stars/OceanApocalypseStudios/RedSeaMarkupLanguage?style=for-the-badge&logo=star&logoColor=black&logoSize=auto&labelColor=%2379610b&color=%23413405" />
+	<img src="https://img.shields.io/nuget/dt/OceanApocalypseStudios.RSML?style=for-the-badge&logo=nuget&logoColor=white&logoSize=auto&label=downloads%20(modern)&labelColor=%234929ca&color=%2327156f" />
+	<img src="https://img.shields.io/nuget/dt/RSML?style=for-the-badge&logo=nuget&logoColor=white&logoSize=auto&label=Downloads%20(Legacy)&labelColor=%23ad4734&color=%236e2d20" />
+	<a href="https://marketplace.visualstudio.com/items?itemName=OceanApocalypseStudios.oas-rsml-support-vs" target="_blank"><img src="https://img.shields.io/badge/RSML_for_Visual_Studio-b35ff2?style=for-the-badge"></a>
 
-[![NuGet Version](https://img.shields.io/nuget/v/OceanApocalypseStudios.RSML?style=for-the-badge&logo=nuget&logoColor=white&logoSize=auto&label=Available%20on%20NuGet&labelColor=%231265fb&color=%2308317b)](https://www.nuget.org/packages/OceanApocalypseStudios.RSML)
-[![GitHub Release](https://img.shields.io/github/v/release/OceanApocalypseStudios/RedSeaMarkupLanguage?sort=semver&display_name=tag&style=for-the-badge&logo=github&logoColor=white&logoSize=auto&label=Latest&labelColor=%23161616&color=%23000308)](https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/releases/latest)
-[![GitHub License Code-Docs](https://img.shields.io/badge/ignored-Custom_clause-ignored?style=for-the-badge&logo=opensourceinitiative&logoColor=white&logoSize=auto&label=repository%20licensing&labelColor=%23496300&color=%232b3c00)](COPYING.txt)
-[![GitHub Code License](https://img.shields.io/badge/ignored-mit-ignored?style=for-the-badge&logo=opensourceinitiative&logoColor=white&logoSize=auto&label=code%20license&labelColor=%23496300&color=%232b3c00)](LICENSE.txt)
-[![GitHub Documentation License](https://img.shields.io/badge/ignored-cc0_1.0_universal-ignored?style=for-the-badge&logo=opensourceinitiative&logoColor=white&logoSize=auto&label=documentation%20license&labelColor=%23496300&color=%232b3c00)](LICENSE-DOCS.txt)
-![GitHub top language](https://img.shields.io/github/languages/top/OceanApocalypseStudios/RedSeaMarkupLanguage?style=for-the-badge&logo=dotnet&logoColor=white&logoSize=auto&label=%20&labelColor=%234929ca&color=%234929ca)
-![GitHub Repo stars](https://img.shields.io/github/stars/OceanApocalypseStudios/RedSeaMarkupLanguage?style=for-the-badge&logo=star&logoColor=black&logoSize=auto&labelColor=%2379610b&color=%23413405)
-![NuGet Downloads - Modern](https://img.shields.io/nuget/dt/OceanApocalypseStudios.RSML?style=for-the-badge&logo=nuget&logoColor=white&logoSize=auto&label=downloads%20(modern)&labelColor=%234929ca&color=%2327156f)
-![NuGet Downloads](https://img.shields.io/nuget/dt/RSML?style=for-the-badge&logo=nuget&logoColor=white&logoSize=auto&label=Downloads%20(Legacy)&labelColor=%23ad4734&color=%236e2d20)
-
-> The modern fork of [MF's Crossroad](https://github.com/mf366-dev/MFRoad) we're sure you'll love.
+</div>
+<br/>
+<p align="center">
+The modern language designed to dynamically interpret different logic paths based on an host's OS and CPU architecture.
+</p>
 
 ---
 
-## RSML v2.0.0 is here. What's next?
+## Contents
+- [Red Sea Markup Language](#section)
+	- [Why RSML?](#why-rsml)
+    - [How to build RSML?](#how-to-build-rsml)
 
-- [ ] Finishing a stable version of `RSML.Native`
-- [ ] Creating a Python package for RSML
-- [ ] Creating documentation
+**Where's the "How to use" section?** You can find full documentation [here](https://oceanapocalypsestudios.org/rsml-docs/).
+
+---
+
+## Why RSML?
+RSML solves the issue of resolving logic paths dynamically based on a given host's characteristics.
+When assigned an host, which could be the local host, RSML solves the logic paths and returns the first match's associated value.
+The important part here is to note RSML does this dynamically: if you were to switch hosts or pass different data, RSML would adapt accordingly.
+
+**Still unsure about RSML?** You can find some usage examples [here](#examples).
+
+---
+
+## How to build RSML?
+<details>
+	<summary><strong>Debug build</strong></summary>
+
+	1. Clone [this repository](https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage).
+	2. Open the terminal in the root RSML directory (the one with the solution file).
+	
+	```
+	dotnet build -c Debug RedSeaMarkupLanguage.slnx
+	./src/RSML.CLI/bin/Debug/net10.0/RSML.CLI.exe
+	```
+
+</details>
+
+<details>
+	<summary><strong>Optimized build</strong></summary>
+
+	1. Clone [this repository](https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage).
+	2. Open the terminal in the root RSML directory (the one with the solution file).
+	
+	```
+	dotnet build -c Release RedSeaMarkupLanguage.slnx
+	./src/RSML.CLI/bin/Release/net10.0/RSML.CLI.exe
+	```
+
+</details>
+<details open>
+	<summary><strong>Native build</strong> <em>(compiles into a shared library)</em></summary>
+
+	1. Clone [this repository](https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage).
+	2. Open the terminal in the root RSML directory (the one with the solution file).
+	
+	```
+	dotnet publish -c Release -r <rid> src/RSML.Native/RSML.Native.csproj
+	```
+
+	> [!WARNING]
+	> If you're on Windows and using Visual Studio, this will require both the .NET and C++ development workloads.
+	> If something goes wrong with the MSVC side of things, the fix is almost always repairing the Visual Studio installation *(backup settings and everything you need first)*.
+
+	Once that is complete, the DLL will be located at `src/RSML.Native/bin/<arch>/Release/net10.0/<rid>/publish/RSML.Native.dll`. The XML files in the same directory are purely for documentation purposes and the `.pdb` file only matters for debugging.
+
+</details>
 
 ---
 
