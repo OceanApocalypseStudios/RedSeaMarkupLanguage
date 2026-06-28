@@ -26,24 +26,22 @@ Editors and IDEs with RSML support natively or via plugins.
 	<!-- Body -->
 	<tr>
 		<td>
-			<img src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/refs/heads/master/icons/file_type_sln.svg" alt="Visual Studio" width="75" />
+			<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Visual_Studio_Icon_2026.svg/960px-Visual_Studio_Icon_2026.svg.png" alt="Visual Studio 17+" width="75" />
 		</td>
 		<td>
-			Coming soon.
+			Offers syntax highlighting only, but more features are planned. Currently in preview.
 		</td>
-		<td>
-			🔴
+		<td align="center">
+			🟡 Preview
 		</td>
-		<td>
-			🔴
+		<td align="center">
+			🟢
 		</td>
-		<td>
-			<!-- <a href="https://www.nuget.org/packages/RSML"><img src="https://raw.githubusercontent.com/NuGet/Media/refs/heads/main/Images/MainLogo/Vector/nuget.svg" alt="NuGet" width="75" /></a> -->
-			🔴
+		<td align="center">
+			<a href="https://marketplace.visualstudio.com/items?itemName=OceanApocalypseStudios.oas-rsml-support-vs"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Visual_Studio_Icon_2026.svg/960px-Visual_Studio_Icon_2026.svg.png" alt="NuGet" width="75" /></a>
 		</td>
-		<td>
-			<!-- <a href="https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/"><img src="https://avatars.githubusercontent.com/u/9919?s=200&v=4" alt="GitHub" width="75" /></a> -->
-			🔴
+		<td align="center">
+			<a href="https://github.com/OceanApocalypseStudios/RSML-VisualStudio/"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Github-circle_%28CoreUI_Icons_v1.0.0%29.svg/960px-Github-circle_%28CoreUI_Icons_v1.0.0%29.svg.png" alt="GitHub" width="75" /></a>
 		</td>
 	</tr>
 	<tr>
@@ -56,17 +54,17 @@ Editors and IDEs with RSML support natively or via plugins.
 		<td>
 			Coming soon.
 		</td>
-		<td>
+		<td align="center">
 			🔴
 		</td>
-		<td>
+		<td align="center">
 			🔴
 		</td>
-		<td>
+		<td align="center">
 			<!-- <a href="https://www.nuget.org/packages/RSML"><img src="https://raw.githubusercontent.com/NuGet/Media/refs/heads/main/Images/MainLogo/Vector/nuget.svg" alt="NuGet" width="75" /></a> -->
 			🔴
 		</td>
-		<td>
+		<td align="center">
 			<!-- <a href="https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/"><img src="https://avatars.githubusercontent.com/u/9919?s=200&v=4" alt="GitHub" width="75" /></a> -->
 			🔴
 		</td>
@@ -78,17 +76,17 @@ Editors and IDEs with RSML support natively or via plugins.
 		<td>
 			Coming soon.
 		</td>
-		<td>
+		<td align="center">
 			🔴
 		</td>
-		<td>
+		<td align="center">
 			🔴
 		</td>
-		<td>
+		<td align="center">
 			<!-- <a href="https://www.nuget.org/packages/RSML"><img src="https://raw.githubusercontent.com/NuGet/Media/refs/heads/main/Images/MainLogo/Vector/nuget.svg" alt="NuGet" width="75" /></a> -->
 			🔴
 		</td>
-		<td>
+		<td align="center">
 			<!-- <a href="https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/"><img src="https://avatars.githubusercontent.com/u/9919?s=200&v=4" alt="GitHub" width="75" /></a> -->
 			🔴
 		</td>
@@ -100,17 +98,17 @@ Editors and IDEs with RSML support natively or via plugins.
 		<td>
 			Not planned.
 		</td>
-		<td>
+		<td align="center">
 			🔴
 		</td>
-		<td>
+		<td align="center">
 			🔴
 		</td>
-		<td>
+		<td align="center">
 			<!-- <a href="https://www.nuget.org/packages/RSML"><img src="https://raw.githubusercontent.com/NuGet/Media/refs/heads/main/Images/MainLogo/Vector/nuget.svg" alt="NuGet" width="75" /></a> -->
 			🔴
 		</td>
-		<td>
+		<td align="center">
 			<!-- <a href="https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/"><img src="https://avatars.githubusercontent.com/u/9919?s=200&v=4" alt="GitHub" width="75" /></a> -->
 			🔴
 		</td>
@@ -122,17 +120,17 @@ Editors and IDEs with RSML support natively or via plugins.
 		<td>
 			Coming soon.
 		</td>
-		<td>
+		<td align="center">
 			🔴
 		</td>
-		<td>
+		<td align="center">
 			🔴
 		</td>
-		<td>
+		<td align="center">
 			<!-- <a href="https://www.nuget.org/packages/RSML"><img src="https://raw.githubusercontent.com/NuGet/Media/refs/heads/main/Images/MainLogo/Vector/nuget.svg" alt="NuGet" width="75" /></a> -->
 			🔴
 		</td>
-		<td>
+		<td align="center">
 			<!-- <a href="https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/"><img src="https://avatars.githubusercontent.com/u/9919?s=200&v=4" alt="GitHub" width="75" /></a> -->
 			🔴
 		</td>
@@ -144,17 +142,17 @@ Editors and IDEs with RSML support natively or via plugins.
 		<td>
 			Offers syntax highlighting.
 		</td>
-		<td>
+		<td align="center">
 			🟢
 		</td>
-		<td>
+		<td align="center">
 			🟢
 		</td>
-		<td>
-			<a href="https://raw.githubusercontent.com/OceanApocalypseStudios/RedSeaMarkupLanguage/refs/heads/main/tools/RSML_NotepadPlusPlus.xml"><img src="https://avatars.githubusercontent.com/u/9919?s=200&v=4" alt="GitHub" width="75" /></a>
+		<td align="center">
+			<a href="https://raw.githubusercontent.com/OceanApocalypseStudios/RedSeaMarkupLanguage/refs/heads/main/tools/RSML_NotepadPlusPlus.xml"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Github-circle_%28CoreUI_Icons_v1.0.0%29.svg/960px-Github-circle_%28CoreUI_Icons_v1.0.0%29.svg.png" alt="GitHub" width="75" /></a>
 		</td>
-		<td>
-			<a href="https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/blob/main/tools/RSML_NotepadPlusPlus.xml"><img src="https://avatars.githubusercontent.com/u/9919?s=200&v=4" alt="GitHub" width="75" /></a>
+		<td align="center">
+			<a href="https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/blob/main/tools/RSML_NotepadPlusPlus.xml"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Github-circle_%28CoreUI_Icons_v1.0.0%29.svg/960px-Github-circle_%28CoreUI_Icons_v1.0.0%29.svg.png" alt="GitHub" width="75" /></a>
 		</td>
 	</tr>
 </table>
