@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 
 using OceanApocalypseStudios.RSML.Analyzer;
+using OceanApocalypseStudios.RSML.Native.Structures;
 
 
 namespace OceanApocalypseStudios.RSML.Native
@@ -77,6 +78,38 @@ namespace OceanApocalypseStudios.RSML.Native
 				lastErrorMessage = Marshal.StringToHGlobalAuto(ex.Message);
 
 				return -3;
+
+			}
+
+		}
+
+		/// <summary>
+		/// Gets information about the buffer to be public to all RSML toolchain tools.
+		/// </summary>
+		/// <returns>
+		/// A value of type <see cref="BufferInformation"/>, with all items set if successful.
+		/// <see cref="BufferInformation.length" /> will always be non-negative, except when set to <c>-1</c> (the buffer is empty or not allocated)
+		/// or <c>-2</c> (an error occured).
+		/// </returns>
+		[UnmanagedCallersOnly(CallConvs = [typeof(CallConvCdecl)], EntryPoint = "rsml_get_buffer_info")]
+		public static BufferInformation GetBufferInformation()
+		{
+
+			try
+			{
+
+				return buffer?.IsEmpty is true or null ? new(0, -1) : new(buffer.CaretPosition, buffer.Length);
+
+			}
+			catch (Exception ex)
+			{
+
+				if (lastErrorMessage != IntPtr.Zero)
+					Marshal.FreeHGlobal(lastErrorMessage);
+
+				lastErrorMessage = Marshal.StringToHGlobalAuto(ex.Message);
+
+				return new(0, -2);
 
 			}
 

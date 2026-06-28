@@ -20,7 +20,7 @@ namespace OceanApocalypseStudios.RSML.Native
 		/// </summary>
 		/// <returns>The buffer and its byte count</returns>
 		[UnmanagedCallersOnly(CallConvs = [typeof(CallConvCdecl)], EntryPoint = "rsml_get_api_author_name")]
-		public static BufferResult GetApiAuthorName()
+		public static StringResult GetApiAuthorName()
 		{
 
 			try
@@ -60,7 +60,7 @@ namespace OceanApocalypseStudios.RSML.Native
 		/// </summary>
 		/// <returns>The buffer and its byte count</returns>
 		[UnmanagedCallersOnly(CallConvs = [ typeof(CallConvCdecl) ], EntryPoint = "rsml_get_api_documentation_url")]
-		public static BufferResult GetApiDocumentationUrl()
+		public static StringResult GetApiDocumentationUrl()
 		{
 
 			try
@@ -100,7 +100,7 @@ namespace OceanApocalypseStudios.RSML.Native
 		/// </summary>
 		/// <returns>The buffer and its byte count</returns>
 		[UnmanagedCallersOnly(CallConvs = [ typeof(CallConvCdecl) ], EntryPoint = "rsml_get_api_version")]
-		public static BufferResult GetApiVersion()
+		public static StringResult GetApiVersion()
 		{
 
 			try

@@ -74,21 +74,19 @@ Editors and IDEs with RSML support natively or via plugins.
 			<img src="https://raw.githubusercontent.com/OceanApocalypseStudios/RedSeaMarkupLanguage/refs/heads/main/.github/others/code-logo.png" alt="Visual Studio Code" width="75" />
 		</td>
 		<td>
-			Coming soon.
+			Offers syntax highlighting. Currently in preview.
 		</td>
 		<td align="center">
-			🔴
+			🟡 Preview
 		</td>
 		<td align="center">
-			🔴
+			🟢
 		</td>
 		<td align="center">
-			<!-- <a href="https://www.nuget.org/packages/RSML"><img src="https://raw.githubusercontent.com/NuGet/Media/refs/heads/main/Images/MainLogo/Vector/nuget.svg" alt="NuGet" width="75" /></a> -->
-			🔴
+			<a href="https://marketplace.visualstudio.com/items?itemName=OceanApocalypseStudios.rsml"><img src="https://raw.githubusercontent.com/OceanApocalypseStudios/RedSeaMarkupLanguage/refs/heads/main/.github/others/code-logo.png" alt="NuGet" width="75" /></a>
 		</td>
 		<td align="center">
-			<!-- <a href="https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/"><img src="https://avatars.githubusercontent.com/u/9919?s=200&v=4" alt="GitHub" width="75" /></a> -->
-			🔴
+			<a href="https://github.com/OceanApocalypseStudios/RSML-VSCode/"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Github-circle_%28CoreUI_Icons_v1.0.0%29.svg/960px-Github-circle_%28CoreUI_Icons_v1.0.0%29.svg.png" alt="GitHub" width="75" /></a>
 		</td>
 	</tr>
 	<tr>
@@ -118,7 +116,7 @@ Editors and IDEs with RSML support natively or via plugins.
 			<img src="https://www.gnu.org/software/emacs/images/emacs.png" alt="Emacs" width="75" />
 		</td>
 		<td>
-			Coming soon.
+			Not planned.
 		</td>
 		<td align="center">
 			🔴
