@@ -7,10 +7,11 @@ using OceanApocalypseStudios.RSML.Host;
 namespace OceanApocalypseStudios.RSML.Tests
 {
 
+	[TestClass]
 	public class StructureTests
 	{
 
-		[Fact]
+		[TestMethod]
 		public void SyntaxLine_Compact1()
 		{
 
@@ -38,11 +39,11 @@ namespace OceanApocalypseStudios.RSML.Tests
 
 			actual.Compact();
 
-			Assert.True(expected == actual);
+			Assert.IsTrue(expected == actual);
 
 		}
 
-		[Fact]
+		[TestMethod]
 		public void SyntaxLine_Compact2()
 		{
 
@@ -70,11 +71,11 @@ namespace OceanApocalypseStudios.RSML.Tests
 
 			actual.Compact();
 
-			Assert.True(expected == actual);
+			Assert.IsTrue(expected == actual);
 
 		}
 
-		[Fact]
+		[TestMethod]
 		public void SyntaxLine_GetEnumerator()
 		{
 
@@ -93,14 +94,14 @@ namespace OceanApocalypseStudios.RSML.Tests
 			foreach (var token in line)
 			{
 
-				Assert.True(token == line[++x]);
-				Assert.True(token == line.ElementAt(x));
+				Assert.IsTrue(token == line[++x]);
+				Assert.IsTrue(token == line.ElementAt(x));
 
 			}
 
 		}
 
-		[Fact]
+		[TestMethod]
 		public void HostInfo_FromJson()
 		{
 
@@ -118,11 +119,11 @@ namespace OceanApocalypseStudios.RSML.Tests
 			var actual = HostInfoConverter.FromJson(jsonString);
 			HostInfo expected = new("ubuntu", "debian", "x86", 22);
 
-			Assert.True(expected.Equals(actual));
+			Assert.IsTrue(expected.Equals(actual));
 
 		}
 
-		[Fact]
+		[TestMethod]
 		public void HostInfo_ToJson()
 		{
 
@@ -140,7 +141,7 @@ namespace OceanApocalypseStudios.RSML.Tests
 			HostInfo hostInfo = new("ubuntu", "debian", "x86", 22);
 			var actual = HostInfoConverter.ToJson(hostInfo);
 
-			Assert.Equal(expected, actual);
+			Assert.AreEqual(expected, actual);
 
 		}
 

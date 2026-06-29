@@ -14,8 +14,12 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 		public static SyntaxLine TokenizeLine(DualTextBuffer buffer)
 		{
 
+			// XXX: in a future API update, we are definitely rewriting
+			// this spaghetti ass lexer. nah cuz wtf is this shit
+			// it will have to do for now
+
 			buffer.SkipWhitespace();
-			int pos = buffer.CaretPosition;
+			int originalPosition = buffer.CaretPosition;
 
 			if (buffer.CaretPosition >= buffer.Length)
 				return new(new SyntaxToken(TokenKind.Eol, ^1, 0));
@@ -25,8 +29,8 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 
 				case '#':
 					return new(
-						new(TokenKind.CommentSymbol, pos, pos++),
-						new(TokenKind.CommentText, pos, buffer.Length),
+						new(TokenKind.CommentSymbol, originalPosition, ++originalPosition),
+						new(TokenKind.CommentText, originalPosition, buffer.Length),
 						new(TokenKind.Eol, ^1, 0)
 					);
 
@@ -42,8 +46,8 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 					int argumentNameEndIdx = buffer.CaretPosition;
 
 					return new(
-						new(TokenKind.SpecialActionSymbol, pos, pos + 1),
-						new(TokenKind.SpecialActionName, pos + 1, beforeWhitespaceRemoval),
+						new(TokenKind.SpecialActionSymbol, originalPosition, originalPosition + 1),
+						new(TokenKind.SpecialActionName, originalPosition + 1, beforeWhitespaceRemoval),
 						new(TokenKind.SpecialActionArgument, argumentNameStartIdx, argumentNameEndIdx),
 						new(TokenKind.Eol, ^1, 0),
 						SyntaxToken.Empty
@@ -56,13 +60,13 @@ namespace OceanApocalypseStudios.RSML.Analyzer.Syntax
 			line.Clear();
 
 			if (op.IsEquals("->"))
-				line.Add(new(TokenKind.ReturnOperator, pos, buffer.CaretPosition));
+				line.Add(new(TokenKind.ReturnOperator, originalPosition, buffer.CaretPosition));
 
 			else if (op.IsEquals("!>"))
-				line.Add(new(TokenKind.ThrowErrorOperator, pos, buffer.CaretPosition));
+				line.Add(new(TokenKind.ThrowErrorOperator, originalPosition, buffer.CaretPosition));
 
 			else if (op.IsEquals("N>")) // NOT ->
-				line.Add(new(TokenKind.ReverseReturnOperator, pos, buffer.CaretPosition));
+				line.Add(new(TokenKind.ReverseReturnOperator, originalPosition, buffer.CaretPosition));
 
 			while (buffer.CaretPosition < buffer.Length)
 			{

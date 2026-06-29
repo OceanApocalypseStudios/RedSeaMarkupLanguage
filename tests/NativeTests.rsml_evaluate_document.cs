@@ -11,7 +11,7 @@ namespace OceanApocalypseStudios.RSML.Tests
 	public unsafe partial class NativeTests
 	{
 
-		[Fact]
+		[TestMethod]
 		public void NativeEvaluator_AnyWorksEvenIfUnknown()
 		{
 
@@ -22,7 +22,7 @@ namespace OceanApocalypseStudios.RSML.Tests
 			{
 
 				var allocErrorCode = allocate(bufferPtr, byteCount);
-				Assert.Equal(0, allocErrorCode);
+				Assert.AreEqual(0, allocErrorCode);
 
 			}
 
@@ -31,15 +31,15 @@ namespace OceanApocalypseStudios.RSML.Tests
 
 			var errorCode = evaluate((nint)resultPtr, 2, 0, -1, 0, 0); // osx, no version, no arch
 
-			Assert.Equal(0, errorCode);
-			Assert.Equal<byte>(1, result.wasMatchFound);
-			Assert.Equal("Output!", buffer[result.matchValueStart..result.matchValueEnd]);
+			Assert.AreEqual(0, errorCode);
+			Assert.AreEqual<byte>(1, result.wasMatchFound);
+			Assert.AreEqual("Output!", buffer[result.matchValueStart..result.matchValueEnd]);
 
 			cleanup();
 
 		}
 
-		[Fact]
+		[TestMethod]
 		public void NativeEvaluator_ComparatorPlusWildcard_InvalidSyntax()
 		{
 
@@ -50,7 +50,7 @@ namespace OceanApocalypseStudios.RSML.Tests
 			{
 
 				var allocErrorCode = allocate(bufferPtr, byteCount);
-				Assert.Equal(0, allocErrorCode);
+				Assert.AreEqual(0, allocErrorCode);
 
 			}
 
@@ -59,20 +59,20 @@ namespace OceanApocalypseStudios.RSML.Tests
 
 			var errorCode = evaluate((nint)resultPtr, 1, 0, 10, 3, 0); // win 10 x64
 
-			Assert.Equal(-1, errorCode);
-			Assert.Equal<byte>(0, result.wasMatchFound);
+			Assert.AreEqual(-1, errorCode);
+			Assert.AreEqual<byte>(0, result.wasMatchFound);
 
 			cleanup();
 
 		}
 
-		[Theory]
-		[InlineData("==", "Result A")]
-		[InlineData(">=", "Result A")]
-		[InlineData("<=", "Result A")]
-		[InlineData(">", "Result B")]
-		[InlineData("<", "Result B")]
-		[InlineData("!=", "Result B")]
+		[TestMethod]
+		[DataRow("==", "Result A")]
+		[DataRow(">=", "Result A")]
+		[DataRow("<=", "Result A")]
+		[DataRow(">", "Result B")]
+		[DataRow("<", "Result B")]
+		[DataRow("!=", "Result B")]
 		public void NativeEvaluator_ComparatorWorks(
 			string input,
 			string? expected
@@ -86,7 +86,7 @@ namespace OceanApocalypseStudios.RSML.Tests
 			{
 
 				var allocErrorCode = allocate(bufferPtr, byteCount);
-				Assert.Equal(0, allocErrorCode);
+				Assert.AreEqual(0, allocErrorCode);
 
 			}
 
@@ -95,26 +95,26 @@ namespace OceanApocalypseStudios.RSML.Tests
 
 			var errorCode = evaluate((nint)resultPtr, 1, 0, 10, 3, 0); // win 10 x64
 
-			Assert.Equal(0, errorCode);
-			Assert.Equal<byte>(1, result.wasMatchFound);
-			Assert.Equal(expected, buffer[result.matchValueStart..result.matchValueEnd]);
+			Assert.AreEqual(0, errorCode);
+			Assert.AreEqual<byte>(1, result.wasMatchFound);
+			Assert.AreEqual(expected, buffer[result.matchValueStart..result.matchValueEnd]);
 
 			cleanup();
 
 		}
 
-		[Theory]
-		[InlineData("-> windows 10 x64 \"Test A\"", 0)]
-		[InlineData("-> windows 10 x86 \"Test B\"", 1)]
-		[InlineData("-> windows <= 7 defined \"Test C\"", 1)]
-		[InlineData("!> \"Test D\"", -5)]
-		[InlineData("-> ubuntu defined any \"Test E\"", 1)]
-		[InlineData("-> bindows =! -5 64arm \"Test F\"", -1)]
-		[InlineData("-> defined < 11 any \"Test G\"", 0)]
-		[InlineData("@ThrowError", -3)]
-		[InlineData("@NonExistingAction ThisIsInvalidSyntax", -1)]
-		[InlineData("@EndAll", 1)]
-		[InlineData("@EndAll MatchValue", 0)]
+		[TestMethod]
+		[DataRow("-> windows 10 x64 \"Test A\"", 0)]
+		[DataRow("-> windows 10 x86 \"Test B\"", 1)]
+		[DataRow("-> windows <= 7 defined \"Test C\"", 1)]
+		[DataRow("!> \"Test D\"", -5)]
+		[DataRow("-> ubuntu defined any \"Test E\"", 1)]
+		[DataRow("-> bindows =! -5 64arm \"Test F\"", -1)]
+		[DataRow("-> defined < 11 any \"Test G\"", 0)]
+		[DataRow("@ThrowError", -3)]
+		[DataRow("@NonExistingAction ThisIsInvalidSyntax", -1)]
+		[DataRow("@EndAll", 1)]
+		[DataRow("@EndAll MatchValue", 0)]
 		public void NativeEvaluator_ThrowsErrorCodesCorrectly(string buffer, int expected)
 		{
 
@@ -124,7 +124,7 @@ namespace OceanApocalypseStudios.RSML.Tests
 			{
 
 				var allocErrorCode = allocate(bufferPtr, byteCount);
-				Assert.Equal(0, allocErrorCode);
+				Assert.AreEqual(0, allocErrorCode);
 
 			}
 
@@ -132,26 +132,26 @@ namespace OceanApocalypseStudios.RSML.Tests
 			NativeEvaluationResult* resultPtr = &result;
 
 			var errorCode = evaluate((nint)resultPtr, 1, 0, 10, 3, 0); // win 10 x64
-			Assert.Equal(expected, errorCode);
+			Assert.AreEqual(expected, errorCode);
 
 			cleanup();
 
 		}
 
-		[Theory]
-		[InlineData("-> debian \"This is the output...\"\n-> ubuntu \"...not this.\"")]
-		[InlineData("@Void", true)]
-		[InlineData("@Void\n", true)]
-		[InlineData("@Void\n# Comment", true)]
-		[InlineData("@Void\n# Comment\n", true)]
-		[InlineData("@Void \n", true)]
-		[InlineData("@Void ", true)]
-		[InlineData("@Void Argument", true)]
-		[InlineData("@EndAll\n-> linux \"Result C\"", true)]
-		[InlineData("@EndAll\n-> linux \"Result C\"\n", true)]
-		[InlineData("-> osx \"newlines are normalized\"\n-> osx \"are they really?\"\r\n-> ubuntu \"Ubuntu I guess\"\r\n")]
-		[InlineData("-> any any any \"Being explicit is good too\"\n")]
-		[InlineData("-> \"this will always return\"\n")]
+		[TestMethod]
+		[DataRow("-> debian \"This is the output...\"\n-> ubuntu \"...not this.\"")]
+		[DataRow("@Void", true)]
+		[DataRow("@Void\n", true)]
+		[DataRow("@Void\n# Comment", true)]
+		[DataRow("@Void\n# Comment\n", true)]
+		[DataRow("@Void \n", true)]
+		[DataRow("@Void ", true)]
+		[DataRow("@Void Argument", true)]
+		[DataRow("@EndAll\n-> linux \"Result C\"", true)]
+		[DataRow("@EndAll\n-> linux \"Result C\"\n", true)]
+		[DataRow("-> osx \"newlines are normalized\"\n-> osx \"are they really?\"\r\n-> ubuntu \"Ubuntu I guess\"\r\n")]
+		[DataRow("-> any any any \"Being explicit is good too\"\n")]
+		[DataRow("-> \"this will always return\"\n")]
 		public void NativeEvaluator_SameAsManagedEvaluator(string content, bool expectNull = false)
 		{
 
@@ -161,7 +161,7 @@ namespace OceanApocalypseStudios.RSML.Tests
 			{
 
 				var allocErrorCode = allocate(bufferPtr, byteCount);
-				Assert.Equal(0, allocErrorCode);
+				Assert.AreEqual(0, allocErrorCode);
 
 			}
 
@@ -169,7 +169,7 @@ namespace OceanApocalypseStudios.RSML.Tests
 			NativeEvaluationResult* resultPtr = &result;
 
 			var errorCode = evaluate((nint)resultPtr, 103, 1, 22, 2, 0); // ubuntu 22 (arm64)
-			Assert.InRange(errorCode, 0, 1);
+			Assert.IsInRange(0, 1, errorCode);
 
 			Evaluator evaluator = new(content);
 			string? evaluationStr = evaluator.Evaluate(ubuntu22Arm64).MatchValue;
@@ -177,16 +177,16 @@ namespace OceanApocalypseStudios.RSML.Tests
 			if (expectNull)
 			{
 
-				Assert.Null(evaluationStr);
-				Assert.True(result is { matchValueStart: -1, matchValueEnd: -1, wasMatchFound: 0 });
+				Assert.IsNull(evaluationStr);
+				Assert.IsTrue(result is { matchValueStart: -1, matchValueEnd: -1, wasMatchFound: 0 });
 			
 			}
 			else
 			{
 
-				Assert.NotNull(evaluationStr);
-				Assert.False(result.matchValueStart == -1 || result.matchValueEnd == -1 || result.wasMatchFound == 0);
-				Assert.Equal(evaluationStr, content[result.matchValueStart..result.matchValueEnd]);
+				Assert.IsNotNull(evaluationStr);
+				Assert.IsFalse(result.matchValueStart == -1 || result.matchValueEnd == -1 || result.wasMatchFound == 0);
+				Assert.AreEqual(evaluationStr, content[result.matchValueStart..result.matchValueEnd]);
 
 			}
 

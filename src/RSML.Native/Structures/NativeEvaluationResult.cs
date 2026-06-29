@@ -3,7 +3,6 @@ using System.Runtime.InteropServices;
 
 using JetBrains.Annotations;
 
-using OceanApocalypseStudios.RSML.Analyzer;
 using OceanApocalypseStudios.RSML.Evaluation;
 
 

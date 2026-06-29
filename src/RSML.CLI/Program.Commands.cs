@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using OceanApocalypseStudios.RSML.Analyzer;
 using OceanApocalypseStudios.RSML.Analyzer.Semantics;
 using OceanApocalypseStudios.RSML.Analyzer.Syntax;
 using OceanApocalypseStudios.RSML.CLI.Helpers;

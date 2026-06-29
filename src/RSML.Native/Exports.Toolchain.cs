@@ -33,6 +33,8 @@ namespace OceanApocalypseStudios.RSML.Native
 		/// <param name="processorArchitecture">The host's processor architecture - nullptr if undefined</param>
 		/// <param name="currentHostFallback">Whether the current host should be used as fallback</param>
 		/// <returns>
+		/// <list type="bullet"><c>-12:</c> Too many tokens (failed to register error message)</list>
+		/// <list type="bullet"><c>-11:</c> Too many tokens</list>
 		/// <list type="bullet"><c>-10:</c> Unknown error during the whole process</list>
 		/// <list type="bullet"><c>-9:</c> Unknown error during evaluation</list>
 		/// <list type="bullet"><c>-8:</c> No pointer was given for the result details</list>
@@ -140,6 +142,26 @@ namespace OceanApocalypseStudios.RSML.Native
 				try
 				{
 					result = evaluator.Evaluate(actualHost);
+				}
+				catch (ArgumentOutOfRangeException aoo)
+				{
+
+					try
+					{
+
+						if (lastErrorMessage != IntPtr.Zero)
+							Marshal.FreeHGlobal(lastErrorMessage);
+
+						lastErrorMessage = Marshal.StringToHGlobalAuto(aoo.Message);
+
+					}
+					catch
+					{
+						return -12;
+					}
+
+					return -11;
+
 				}
 				catch (InvalidRsmlSyntax irs) // yeah it's the fucking IRS
 				{
