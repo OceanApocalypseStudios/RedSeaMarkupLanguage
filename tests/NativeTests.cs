@@ -41,40 +41,40 @@ namespace OceanApocalypseStudios.RSML.Tests
 		/// <inheritdoc cref="Exports.GetApiVersion"/>
 		private static readonly delegate* unmanaged[Cdecl]<StringResult> getApiVersion = (delegate* unmanaged[Cdecl]<StringResult>)&Exports.GetApiVersion;
 
-		[Fact]
+		[TestMethod]
 		public void Cleanup_WorksCorrectly()
 		{
 
-			Assert.NotEqual(0, allocate(null, -4)); // allocate errors out here btw
-			Assert.NotEqual(IntPtr.Zero, Exports.lastErrorMessage);
-			Assert.Equal(0, cleanup());
-			Assert.Equal(IntPtr.Zero, Exports.lastErrorMessage);
+			Assert.AreNotEqual(0, allocate(null, -4)); // allocate errors out here btw
+			Assert.AreNotEqual(IntPtr.Zero, Exports.lastErrorMessage);
+			Assert.AreEqual(0, cleanup());
+			Assert.AreEqual(IntPtr.Zero, Exports.lastErrorMessage);
 
 		}
 
-		[Fact]
+		[TestMethod]
 		public void GetLastErrorMessage_WorksCorrectly()
 		{
 
 			// please error out (first time im begging for an error)
-			Assert.NotEqual(0, allocate(null, -4));
+			Assert.AreNotEqual(0, allocate(null, -4));
 
 			// null pointer assertions
-			Assert.NotEqual(IntPtr.Zero, Exports.lastErrorMessage);
-			Assert.NotEqual(IntPtr.Zero, getError());
+			Assert.AreNotEqual(IntPtr.Zero, Exports.lastErrorMessage);
+			Assert.AreNotEqual(IntPtr.Zero, getError());
 
 			// they point to the same mfing thing
-			Assert.Equal(Exports.lastErrorMessage, getError());
+			Assert.AreEqual(Exports.lastErrorMessage, getError());
 
 			var lastErrorMessageStr = Marshal.PtrToStringAuto(Exports.lastErrorMessage);
 			var getErrorStr = Marshal.PtrToStringAuto(getError());
 
 			// still null pointer assertions
-			Assert.NotNull(lastErrorMessageStr);
-			Assert.NotNull(getErrorStr);
+			Assert.IsNotNull(lastErrorMessageStr);
+			Assert.IsNotNull(getErrorStr);
 
 			// twins lmao
-			Assert.Equal(lastErrorMessageStr, getErrorStr);
+			Assert.AreEqual(lastErrorMessageStr, getErrorStr);
 
 			cleanup();
 

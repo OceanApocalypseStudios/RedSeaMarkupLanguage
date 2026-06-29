@@ -14,6 +14,7 @@
 	<img src="https://img.shields.io/nuget/dt/OceanApocalypseStudios.RSML?style=for-the-badge&logo=nuget&logoColor=white&logoSize=auto&label=downloads%20(modern)&labelColor=%234929ca&color=%2327156f" />
 	<img src="https://img.shields.io/nuget/dt/RSML?style=for-the-badge&logo=nuget&logoColor=white&logoSize=auto&label=Downloads%20(Legacy)&labelColor=%23ad4734&color=%236e2d20" />
 	<a href="https://marketplace.visualstudio.com/items?itemName=OceanApocalypseStudios.oas-rsml-support-vs" target="_blank"><img src="https://img.shields.io/badge/RSML_for_Visual_Studio-b35ff2?style=for-the-badge"></a>
+	<a href="https://marketplace.visualstudio.com/items?itemName=OceanApocalypseStudios.rsml" target="_blank"><img src="https://img.shields.io/badge/RSML_for_VS_Code-1f9cf0?style=for-the-badge"></a>
 
 </div>
 <br/>
@@ -28,7 +29,12 @@ The modern language designed to dynamically interpret different logic paths base
 	- [Why RSML?](#why-rsml)
     - [How to build RSML?](#how-to-build-rsml)
 
-**Where's the "How to use" section?** You can find full documentation [here](https://oceanapocalypsestudios.org/rsml-docs/).
+<details open>
+<summary><strong>Where's the "How to use" section?</strong></summary>
+
+You can find full documentation [here](https://oceanapocalypsestudios.org/rsml-docs/).
+
+</details>
 
 ---
 
@@ -45,43 +51,43 @@ The important part here is to note RSML does this dynamically: if you were to sw
 <details>
 	<summary><strong>Debug build</strong></summary>
 
-	1. Clone [this repository](https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage).
-	2. Open the terminal in the root RSML directory (the one with the solution file).
+1. Clone [this repository](https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage).
+2. Open the terminal in the root RSML directory (the one with the solution file).
 	
-	```
-	dotnet build -c Debug RedSeaMarkupLanguage.slnx
-	./src/RSML.CLI/bin/Debug/net10.0/RSML.CLI.exe
-	```
+```
+dotnet build -c Debug RedSeaMarkupLanguage.slnx
+./src/RSML.CLI/bin/Debug/net10.0/RSML.CLI.exe
+```
 
 </details>
 
 <details>
 	<summary><strong>Optimized build</strong></summary>
 
-	1. Clone [this repository](https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage).
-	2. Open the terminal in the root RSML directory (the one with the solution file).
+1. Clone [this repository](https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage).
+2. Open the terminal in the root RSML directory (the one with the solution file).
 	
-	```
-	dotnet build -c Release RedSeaMarkupLanguage.slnx
-	./src/RSML.CLI/bin/Release/net10.0/RSML.CLI.exe
-	```
+```
+dotnet build -c Release RedSeaMarkupLanguage.slnx
+./src/RSML.CLI/bin/Release/net10.0/RSML.CLI.exe
+```
 
 </details>
 <details open>
 	<summary><strong>Native build</strong> <em>(compiles into a shared library)</em></summary>
 
-	1. Clone [this repository](https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage).
-	2. Open the terminal in the root RSML directory (the one with the solution file).
+1. Clone [this repository](https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage).
+2. Open the terminal in the root RSML directory (the one with the solution file).
 	
-	```
-	dotnet publish -c Release -r <rid> src/RSML.Native/RSML.Native.csproj
-	```
+```
+dotnet publish -c Release -r <rid> src/RSML.Native/RSML.Native.csproj
+```
 
-	> [!WARNING]
-	> If you're on Windows and using Visual Studio, this will require both the .NET and C++ development workloads.
-	> If something goes wrong with the MSVC side of things, the fix is almost always repairing the Visual Studio installation *(backup settings and everything you need first)*.
+> [!WARNING]
+> If you're on Windows and using Visual Studio, this will require both the .NET and C++ development workloads.
+> If something goes wrong with the MSVC side of things, the fix is almost always repairing the Visual Studio installation *(backup settings and everything you need first)*.
 
-	Once that is complete, the DLL will be located at `src/RSML.Native/bin/<arch>/Release/net10.0/<rid>/publish/RSML.Native.dll`. The XML files in the same directory are purely for documentation purposes and the `.pdb` file only matters for debugging.
+Once that is complete, the DLL will be located at `src/RSML.Native/bin/<arch>/Release/net10.0/<rid>/publish/RSML.Native.dll`. The XML files in the same directory are purely for documentation purposes and the `.pdb` file only matters for debugging.
 
 </details>
 

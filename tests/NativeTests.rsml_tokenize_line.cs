@@ -11,15 +11,15 @@ namespace OceanApocalypseStudios.RSML.Tests
 	public unsafe partial class NativeTests
 	{
 
-		[Theory]
-		[InlineData("-> defined == 11 any \"Test A\"")]
-		[InlineData("-> any != 11 arm64 \"Test B\"")]
-		[InlineData("# Test C\r\n@Void")]
-		[InlineData("@Void \"Test D\"")]
-		[InlineData("!> windows >= 10 arm64 \"Test E\"")]
-		[InlineData("@ThrowError \"Test F1\"\n-> windows <= 7 x86 \"Test F2\"\r\n")]
-		[InlineData("!> ubuntu any x86 \"Test G\"")]
-		[InlineData("-> archlinux defined x64 \"Test H\"")]
+		[TestMethod]
+		[DataRow("-> defined == 11 any \"Test A\"")]
+		[DataRow("-> any != 11 arm64 \"Test B\"")]
+		[DataRow("# Test C\r\n@Void")]
+		[DataRow("@Void \"Test D\"")]
+		[DataRow("!> windows >= 10 arm64 \"Test E\"")]
+		[DataRow("@ThrowError \"Test F1\"\n-> windows <= 7 x86 \"Test F2\"\r\n")]
+		[DataRow("!> ubuntu any x86 \"Test G\"")]
+		[DataRow("-> archlinux defined x64 \"Test H\"")]
 		public void TokenizeRsml_SameAsManagedTokenizer(string data)
 		{
 
@@ -36,8 +36,8 @@ namespace OceanApocalypseStudios.RSML.Tests
 				var managedLine = NativeLine.PointerToLine(outputPtr);
 				var managedTokens = Lexer.TokenizeLine(new(data));
 
-				Assert.Equal(0, errorCode);
-				Assert.True(managedLine == managedTokens);
+				Assert.AreEqual(0, errorCode);
+				Assert.IsTrue(managedLine == managedTokens);
 
 			}
 
@@ -45,11 +45,11 @@ namespace OceanApocalypseStudios.RSML.Tests
 
 		}
 
-		[Theory]
-		[InlineData("# Just an innocent comment", -1)]
-		[InlineData(null, -2)]
-		[InlineData("", -2)]
-		[InlineData("!> windows linux defined any x64 x86 arm64 \"Failure\"\r\n", -5)]
+		[TestMethod]
+		[DataRow("# Just an innocent comment", -1)]
+		[DataRow(null, -2)]
+		[DataRow("", -2)]
+		[DataRow("!> windows linux defined any x64 x86 arm64 \"Failure\"\r\n", -5)]
 		public void TokenizeRsml_ThrowsErrorCodeCorrectly(
 			string? data,
 			int errorCode
@@ -65,7 +65,7 @@ namespace OceanApocalypseStudios.RSML.Tests
 				var outputPtr = &output;
 
 				int actualErrorCode = tokenize((nint)outputPtr);
-				Assert.Equal(errorCode, actualErrorCode);
+				Assert.AreEqual(errorCode, actualErrorCode);
 
 				return;
 
@@ -87,7 +87,7 @@ namespace OceanApocalypseStudios.RSML.Tests
 						: (nint)outputPtr
 				);
 
-				Assert.Equal(errorCode, actualErrorCode);
+				Assert.AreEqual(errorCode, actualErrorCode);
 
 			}
 
