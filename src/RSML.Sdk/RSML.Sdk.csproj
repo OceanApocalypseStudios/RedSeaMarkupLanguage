@@ -9,23 +9,23 @@
 		<OutputType>Library</OutputType>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 
-		<RootNamespace>OceanApocalypseStudios.RSML</RootNamespace>
+		<RootNamespace>OceanApocalypseStudios.RSML.Sdk</RootNamespace>
 	</PropertyGroup>
 
 	<PropertyGroup Label="NuGet Package Setup">
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 
-		<PackageId>OceanApocalypseStudios.RSML</PackageId>
-		<Title>Red Sea Markup Language</Title>
+		<PackageId>OceanApocalypseStudios.RSML.Sdk</PackageId>
+		<Title>Red Sea Markup Language SDK</Title>
 		<Authors>OceanApocalypseStudios</Authors>
 		<Company>OceanApocalypseStudios</Company>
 		<NeutralLanguage>en</NeutralLanguage>
 
 		<!-- !!! DON'T FORGET TO EDIT THE VERSION AND NOTES HERE !!! -->
-		<Version>3.0.0-prerelease1</Version>
-		<PackageReleaseNotes>RSML v2.0.0 is here!</PackageReleaseNotes>
+		<Version>1.0.0-prerelease1</Version>
+		<PackageReleaseNotes>RSML SDK v2.0.0 is here!</PackageReleaseNotes>
 
-		<Description>The only markup language that dynamically interprets different logic paths based on an host's OS and CPU architecture.</Description>
+		<Description>The plug and play SDK for the only markup language that dynamically interprets different logic paths based on an host's OS and CPU architecture.</Description>
 		<Copyright>Copyright (c) 2025 OceanApocalypseStudios</Copyright>
 		<PackageProjectUrl>https://oceanapocalypsestudios.org/rsml-docs/</PackageProjectUrl>
 		<PackageIcon>icon.png</PackageIcon>

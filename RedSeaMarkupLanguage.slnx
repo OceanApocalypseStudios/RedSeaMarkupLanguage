@@ -4,25 +4,37 @@
 		<Platform Name="x64" />
 		<Platform Name="x86" />
 	</Configurations>
+    
 	<Folder Name="/Solution Items/">
 		<File Path=".gitignore" />
-		<File Path="Assets/FullSizeLogo.png" />
-		<File Path="BENCHMARKS.md" />
-		<File Path="COPYING.txt" />
-		<File Path="EDITOR.md" />
-		<File Path="LANGUAGES.md" />
-		<File Path="LICENSE-DOCS.txt" />
-		<File Path="LICENSE.txt" />
 		<File Path="mkdocs.yml" />
 		<File Path="README.md" />
 	</Folder>
+    
+    <Folder Name="/Solution Items/Assets/">
+        <File Path="assets/logo.png" />
+        <File Path="assets/icon.png" />
+    </Folder>
+    
+    <Folder Name="/Solution Items/Information/">
+        <File Path="BENCHMARKS.md" />
+        <File Path="EDITOR.md" />
+        <File Path="LANGUAGES.md" />
+    </Folder>
+    
+    <Folder Name="/Solution Items/Licenses/">
+        <File Path="LICENSE-DOCS.txt" />
+        <File Path="LICENSE.txt" />
+        <File Path="COPYING.txt" />
+    </Folder>
 
 	<Folder Name="/Tests and Benchmarks/">
 		<Project Path="benchmarks/RSML.Benchmarks.csproj" />
 		<Project Path="tests/RSML.Tests.csproj" />
 	</Folder>
-	<Project Path="src/RSML/RSML.csproj" />
 	<Project Path="src/RSML.CLI/RSML.CLI.csproj" />
 	<Project Path="src/RSML.Native/RSML.Native.csproj" />
+	<Project Path="src/RSML.Sdk/RSML.Sdk.csproj" Id="303cc3e5-a196-467d-8d09-67698aed39d7" />
+	<Project Path="src/RSML/RSML.csproj" />
 
 </Solution>

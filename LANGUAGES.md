@@ -1,5 +1,5 @@
 ﻿# RSML API Programming Language Support
-RSML v2.0.0 will support native interop by exporting a C ABI, meaning it can be used in any language that supports C
+RSML v3.0.0 will support native interop by exporting a C ABI, meaning it can be used in any language that supports C
 interop.
 
 However, to make it easier for people who are unexperienced with C, we plan on creating packages for popular languages
@@ -43,7 +43,7 @@ so people can use high-level APIs instead of having to struggle with DLLs.
 			🟡 As a pre-release.
 		</td>
 		<td>
-			🔴 <a href="https://oceanapocalypsestudios.github.io/rsml-docs/api/csharp/">Out-of-date</a>
+			🔴 <a href="https://oceanapocalypsestudios.github.io/rsml-docs/api/csharp/">Out-of-date</a> <em>(new documentation coming soon)</em>
 		</td>
 		<td>
 			🟢
@@ -52,7 +52,7 @@ so people can use high-level APIs instead of having to struggle with DLLs.
 			<a href="https://www.nuget.org/packages/RSML"><img src="https://raw.githubusercontent.com/NuGet/Media/refs/heads/main/Images/MainLogo/Vector/nuget.svg" alt="NuGet" width="75" /></a>
 		</td>
 		<td>
-			<a href="https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/"><img src="https://avatars.githubusercontent.com/u/9919?s=200&v=4" alt="GitHub" width="75" /></a>
+			<a href="https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Github-circle_%28CoreUI_Icons_v1.0.0%29.svg/960px-Github-circle_%28CoreUI_Icons_v1.0.0%29.svg.png" alt="GitHub" width="75" /></a>
 		</td>
 		<td>
 			Still in development.
@@ -75,7 +75,7 @@ so people can use high-level APIs instead of having to struggle with DLLs.
 			<a href="https://www.nuget.org/packages/RSML"><img src="https://raw.githubusercontent.com/NuGet/Media/refs/heads/main/Images/MainLogo/Vector/nuget.svg" alt="NuGet" width="75" /></a>
 		</td>
 		<td>
-			<a href="https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/"><img src="https://avatars.githubusercontent.com/u/9919?s=200&v=4" alt="GitHub" width="75" /></a>
+			<a href="https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Github-circle_%28CoreUI_Icons_v1.0.0%29.svg/960px-Github-circle_%28CoreUI_Icons_v1.0.0%29.svg.png" alt="GitHub" width="75" /></a>
 		</td>
 		<td>
 			Still in development.
@@ -89,7 +89,7 @@ so people can use high-level APIs instead of having to struggle with DLLs.
 			🟡 As a pre-release.
 		</td>
 		<td>
-			🟣 No specific documentation planned (refer to <strong>RSML for C#</strong> docs).
+			🟡 Partial documentation only (coming soon).
 		</td>
 		<td>
 			🟢
@@ -98,7 +98,7 @@ so people can use high-level APIs instead of having to struggle with DLLs.
 			<a href="https://www.nuget.org/packages/RSML"><img src="https://raw.githubusercontent.com/NuGet/Media/refs/heads/main/Images/MainLogo/Vector/nuget.svg" alt="NuGet" width="75" /></a>
 		</td>
 		<td>
-			<a href="https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/"><img src="https://avatars.githubusercontent.com/u/9919?s=200&v=4" alt="GitHub" width="75" /></a>
+			<a href="https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Github-circle_%28CoreUI_Icons_v1.0.0%29.svg/960px-Github-circle_%28CoreUI_Icons_v1.0.0%29.svg.png" alt="GitHub" width="75" /></a>
 		</td>
 		<td>
 			Still in development.
@@ -138,19 +138,19 @@ so people can use high-level APIs instead of having to struggle with DLLs.
 			<img src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/refs/heads/master/icons/file_type_c.svg" alt="C" width="80" />
 		</td>
 		<td>
-			🔴
+			🟡 DLL available as a pre-release. Header file coming soon.
 		</td>
 		<td>
-			---
+			🔴 Coming soon.
 		</td>
 		<td>
-			---
+			🟢 Will be available as an official OAS project.
 		</td>
 		<td>
-			---
+			🔴 Coming soon.
 		</td>
 		<td>
-			---
+			🔴 Coming soon.
 		</td>
 		<td>
 			---
@@ -161,19 +161,19 @@ so people can use high-level APIs instead of having to struggle with DLLs.
 			<img src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/refs/heads/master/icons/file_type_cpp.svg" alt="C++" width="80" />
 		</td>
 		<td>
-			🔴
+			🔴 Coming soon.
 		</td>
 		<td>
-			---
+			🔴 Coming soon.
 		</td>
 		<td>
-			---
+			🟢 Will be available as an official OAS project.
 		</td>
 		<td>
-			---
+			🔴 Coming soon.
 		</td>
 		<td>
-			---
+			🔴 Coming soon.
 		</td>
 		<td>
 			---
@@ -276,10 +276,10 @@ so people can use high-level APIs instead of having to struggle with DLLs.
 			<img src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/refs/heads/master/icons/file_type_python.svg" alt="Python 3" width="80" />
 		</td>
 		<td>
-			🔴 Is not compliant with the new API.
+			🔴 New version coming soon.
 		</td>
 		<td>
-			🔴 <a href="https://oceanapocalypsestudios.github.io/rsml-docs/api/python/">Out-of-date</a>
+			🔴 <a href="https://oceanapocalypsestudios.github.io/rsml-docs/api/python/">Out-of-date</a> <em>(new documentation coming soon)</em>
 		</td>
 		<td>
 			🟢
@@ -288,7 +288,7 @@ so people can use high-level APIs instead of having to struggle with DLLs.
 			<a href="https://pypi.org/project/rsml-python/"><img src="https://pypi.org/static/images/logo-small.8998e9d1.svg" alt="PyPI" width="75" /></a>
 		</td>
 		<td>
-			<a href="https://github.com/OceanApocalypseStudios/RSML.Python/"><img src="https://avatars.githubusercontent.com/u/9919?s=200&v=4" alt="GitHub" width="75" /></a>
+			<a href="https://github.com/OceanApocalypseStudios/RSML.Python/"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Github-circle_%28CoreUI_Icons_v1.0.0%29.svg/960px-Github-circle_%28CoreUI_Icons_v1.0.0%29.svg.png" alt="GitHub" width="75" /></a>
 		</td>
 		<td>
 			Coming soon.
