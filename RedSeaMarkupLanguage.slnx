@@ -21,8 +21,8 @@
 		<Project Path="benchmarks/RSML.Benchmarks.csproj" />
 		<Project Path="tests/RSML.Tests.csproj" />
 	</Folder>
+	<Project Path="src/RSML/RSML.csproj" />
 	<Project Path="src/RSML.CLI/RSML.CLI.csproj" />
 	<Project Path="src/RSML.Native/RSML.Native.csproj" />
-	<Project Path="src/RSML/RSML.csproj" />
 
 </Solution>

@@ -1,6 +1,6 @@
 ﻿#
 <div align="center">
-	<img src="assets/FullSizeLogo.png" alt="RSML Logo" align="center" width="150">
+	<img src="assets/logo.png" alt="RSML Logo" align="center" width="150">
 	<h1>Red Sea Markup Language</h1>
 </div>
 <div align="center">

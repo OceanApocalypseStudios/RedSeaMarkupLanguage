@@ -1,70 +1,70 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<!-- General Properties -->
-	<PropertyGroup>
-		<!-- Language-related -->
+	<PropertyGroup Label="General Properties">
 		<TargetFramework>net10.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<LangVersion>latest</LangVersion>
+
 		<OutputType>Library</OutputType>
-		<LangVersion>14</LangVersion>
-
-		<!-- Maintainability-related -->
-		<RootNamespace>OceanApocalypseStudios.RSML</RootNamespace>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<NeutralLanguage>en</NeutralLanguage>
 
-		<!-- NuGet Properties -->
+		<RootNamespace>OceanApocalypseStudios.RSML</RootNamespace>
+	</PropertyGroup>
+
+	<PropertyGroup Label="NuGet Package Setup">
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+
 		<PackageId>OceanApocalypseStudios.RSML</PackageId>
 		<Title>Red Sea Markup Language</Title>
 		<Authors>OceanApocalypseStudios</Authors>
 		<Company>OceanApocalypseStudios</Company>
-		<Version>2.0.0</Version>
-		<Description>An extremely performant markup language for designing system-based logic paths in C#.</Description>
+		<NeutralLanguage>en</NeutralLanguage>
+
+		<!-- !!! DON'T FORGET TO EDIT THE VERSION AND NOTES HERE !!! -->
+		<Version>2.1.0</Version>
+		<PackageReleaseNotes>RSML v2.1.0 is here!</PackageReleaseNotes>
+
+		<Description>The only markup language that dynamically interprets different logic paths based on an host's OS and CPU architecture.</Description>
 		<Copyright>Copyright (c) 2025 OceanApocalypseStudios</Copyright>
-		<PackageProjectUrl>https://oceanapocalypsestudios.org/rsml-docs/2.0.0/</PackageProjectUrl>
-		<PackageLicenseUrl>https://mit-license.org</PackageLicenseUrl>
-		<PackageIcon>Icon.png</PackageIcon>
+		<PackageProjectUrl>https://oceanapocalypsestudios.org/rsml-docs/</PackageProjectUrl>
+		<PackageIcon>icon.png</PackageIcon>
 		<RepositoryUrl>https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<PackageTags>markup;language;logic;logic-path;system</PackageTags>
+		<PackageTags>markup;language;logic;logic-path;system;host;rsml;rsea;decision;oss</PackageTags>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-		<PackageReleaseNotes>RSML v2.0.0 is here!</PackageReleaseNotes>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	</PropertyGroup>
 
-	<!-- Windows only -->
-	<PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
+	<PropertyGroup Label="Windows" Condition="'$(OS)' == 'Windows_NT'">
 		<DefineConstants>WINDOWS;$(DefineConstants)</DefineConstants>
 	</PropertyGroup>
 
-	<!-- Not Windows -->
-	<PropertyGroup Condition="'$(OS)' != 'Windows_NT'">
+	<PropertyGroup Label="Not Windows" Condition="'$(OS)' != 'Windows_NT'">
 		<DefineConstants>NOT_WINDOWS;$(DefineConstants)</DefineConstants>
 	</PropertyGroup>
 
-	<!-- Debug -->
-	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+	<PropertyGroup Label="Debug Build" Condition="'$(Configuration)' == 'Debug'">
 		<DebugType>full</DebugType>
+		<CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
 	</PropertyGroup>
 
-	<!-- Release -->
-	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+	<PropertyGroup Label="Release (Optimized) Build" Condition="'$(Configuration)' == 'Release'">
 		<DebugType>none</DebugType>
+		<Optimize>true</Optimize>
 	</PropertyGroup>
-	<ItemGroup>
-		<None Include="..\..\Assets\Icon.png" />
+
+	<ItemGroup Label="Resources">
+		<None Include="..\..\assets\icon.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+			<Visible>false</Visible>
+		</None>
 		<None Include="..\..\README.md">
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
-		</None>
-	</ItemGroup>
-
-	<!-- Items -->
-	<ItemGroup>
-		<None Update="..\..\Assets\Icon.png">
-			<Pack>True</Pack>
-			<PackagePath>\</PackagePath>
+			<Visible>false</Visible>
 		</None>
 	</ItemGroup>
 
