@@ -19,7 +19,7 @@
   To solve this, I came up with 2 forms of making code framework
   specific.
 
-> THE CODE IS A TYPE ON ITS OWN AND THAT SHOULD BE ONLY AVAILABLE
+> THE CODE IS A TYPE ON ITS OWN AND SHOULD BE AVAILABLE ONLY
   FOR A GIVEN FRAMEWORK
   Name the file as usual, but inside of it wrap all the content
   like this:
@@ -47,3 +47,10 @@
   
   ! No wrapping and no #ifs are necessary in this case, because
     the project file has rules to deal with these names.
+
+  ! Don't forget to mark the type as partial.
+
+  ! You can also use this for situations where you're not
+    implement parts of methods depending on the target framework
+    but rather the type declaration itself needs to vary based on
+    the framework.

@@ -2,8 +2,6 @@
 using System.IO;
 using System.Text;
 
-using OceanApocalypseStudios.RSML.Exceptions;
-
 
 namespace OceanApocalypseStudios.RSML.Buffers
 {
@@ -13,6 +11,13 @@ namespace OceanApocalypseStudios.RSML.Buffers
 
 		readonly string data;
 
+		/// <inheritdoc/>
+		public int Length => data.Length;
+
+		/// <inheritdoc/>
+		public bool IsEmpty => Length == 0;
+
+		/// <inheritdoc/>
 		public char this[int index] => data[index];
 
 		public StringBuffer(string content) => data = content;
@@ -44,6 +49,50 @@ namespace OceanApocalypseStudios.RSML.Buffers
 			int count = 0;
 
 			while (count < span.Length && !Char.IsWhiteSpace(span[count]))
+				count++;
+
+			return count;
+
+		}
+
+		private int CountUntilMatch(int index, char character)
+		{
+
+			if (IsBufferEmpty())
+				return 0;
+
+			if (index < 0)
+				index = data.Length + index; // -1 is (Length-1) etc
+
+			if (IsOutOfBounds(index))
+				return -1;
+
+			var span = data.AsSpan(index);
+			int count = 0;
+
+			while (count < span.Length && span[count] == character)
+				count++;
+
+			return count;
+
+		}
+
+		private int CountUntilNotMatch(int index, char character)
+		{
+
+			if (IsBufferEmpty())
+				return 0;
+
+			if (index < 0)
+				index = data.Length + index; // -1 is (Length-1) etc
+
+			if (IsOutOfBounds(index))
+				return -1;
+
+			var span = data.AsSpan(index);
+			int count = 0;
+
+			while (count < span.Length && span[count] != character)
 				count++;
 
 			return count;
@@ -99,22 +148,7 @@ namespace OceanApocalypseStudios.RSML.Buffers
 
 		private bool IsBufferEmpty() => data.Length == 0;
 
-		private void ThrowIfOutOfBounds(int index)
-		{
-
-			if (index >= data.Length)
-				throw new ArgumentOutOfRangeException(nameof(index), "Index is out of bounds.");
-
-		}
-
-		private void ThrowIfEmptyBuffer()
-		{
-
-			if (data.Length == 0)
-				throw new BufferException("Buffer is empty");
-
-		}
-
+		/// <inheritdoc/>
 		public int CountWhile(Func<int, char, bool> predicate, int index)
 		{
 
@@ -137,10 +171,11 @@ namespace OceanApocalypseStudios.RSML.Buffers
 
 		}
 
+		/// <inheritdoc/>
 		public bool TryGetChar(int index, out char item)
 		{
 
-			item = default; // default
+			item = '\0'; // default
 
 			if (IsBufferEmpty())
 				return false;
@@ -158,6 +193,7 @@ namespace OceanApocalypseStudios.RSML.Buffers
 
 		private bool IsStartOfLine(int index) => index == 0 || data[index - 1].IsNewline();
 
+		/// <inheritdoc/>
 		public bool TryGetLine(int index, Span<char> line, out int charCount)
 		{
 
@@ -167,7 +203,7 @@ namespace OceanApocalypseStudios.RSML.Buffers
 				return false;
 
 			if (index < 0)
-				index = data.Length + index;
+				index += data.Length;
 
 			if (IsOutOfBounds(index))
 				return false;
@@ -186,21 +222,131 @@ namespace OceanApocalypseStudios.RSML.Buffers
 
 			charCount = charsToCopyAmount;
 
-			return true;
+			return line.Length >= actualLineLength;
 
 		}
 
-		public bool TryGetWord(int index, Span<char> destination, out bool isWhitespace, out int charCount) => throw new NotImplementedException();
+		/// <inheritdoc/>
+		public bool TryGetWord(int index, Span<char> destination, out bool isWhitespace, out int charCount)
+		{
+
+			isWhitespace = false;
+			charCount = 0;
+
+			if (IsBufferEmpty())
+				return false;
+
+			if (index < 0)
+				index += data.Length;
+
+			if (IsOutOfBounds(index))
+				return false;
+
+			isWhitespace = Char.IsWhiteSpace(data[index]);
+
+			// if first index is whitespace, the word is whitespace (ends when not whitespace/end of buffer)
+			// if first index not whitespace, the word is not whitespace (ends on whitespace/end of buffer)
+			int actualLineLength = isWhitespace ? CountUntilNotWhitespace(index) : CountUntilWhitespace(index);
+			int charsToCopyAmount = Math.Min(actualLineLength, destination.Length);
+			data.AsSpan(index, charsToCopyAmount).CopyTo(destination);
+
+			charCount = charsToCopyAmount;
+
+			return destination.Length >= actualLineLength;
+
+		}
+
+		/// <inheritdoc/>
+		public bool TryGetWord(int index, char itemKind, Span<char> destination, out bool isItemKind, out int charCount)
+		{
+
+			isItemKind = false;
+			charCount = 0;
+
+			if (IsBufferEmpty())
+				return false;
+
+			if (index < 0)
+				index += data.Length;
+
+			if (IsOutOfBounds(index))
+				return false;
+
+			isItemKind = data[index] == itemKind;
+
+			// if first index is KIND, the word is KIND (ends when not KIND/end of buffer)
+			// if first index not KIND, the word is not KIND (ends on KIND/end of buffer)
+			int actualLineLength = isItemKind ? CountUntilNotMatch(index, itemKind) : CountUntilMatch(index, itemKind);
+			int charsToCopyAmount = Math.Min(actualLineLength, destination.Length);
+			data.AsSpan(index, charsToCopyAmount).CopyTo(destination);
+
+			charCount = charsToCopyAmount;
+
+			return destination.Length >= actualLineLength;
+
+		}
 		
-		public bool TryGetWord(int index, char itemKind, Span<char> destination, out bool isItemKind, out int charCount) => throw new NotImplementedException();
-		
-		public int CountUntilNotWhitespace(int index) => throw new NotImplementedException();
+		/// <inheritdoc/>
+		public int CountUntilNotWhitespace(int index)
+		{
 
-		public char[] Slice(int start, int length) => throw new NotImplementedException();
+			if (IsBufferEmpty())
+				return 0;
 
-		public void Slice(int start, Span<char> slice) => throw new NotImplementedException();
+			if (index < 0)
+				index = data.Length + index; // -1 is (Length-1) etc
 
+			if (IsOutOfBounds(index))
+				return -1;
+
+			var span = data.AsSpan(index);
+			int count = 0;
+
+			while (count < span.Length && Char.IsWhiteSpace(span[count]))
+				count++;
+
+			return count;
+
+		}
+
+		/// <inheritdoc/>
+		public char[] Slice(int start, int length) => data.ToCharArray(start, length);
+
+		/// <inheritdoc/>
 		public void Dispose() { } // noop :(
+
+		/// <inheritdoc/>
+		public bool TryGetWord(int index, Func<int, char, bool> itemKindPredicate, Span<char> destination, out bool isItemKind, out int charCount)
+		{
+
+			isItemKind = false;
+			charCount = 0;
+
+			if (IsBufferEmpty())
+				return false;
+
+			if (index < 0)
+				index += data.Length;
+
+			if (IsOutOfBounds(index))
+				return false;
+
+			isItemKind = itemKindPredicate(index, data[index]);
+
+			// if first index is KIND, the word is KIND (ends when not KIND/end of buffer)
+			// if first index not KIND, the word is not KIND (ends on KIND/end of buffer)
+			int actualLineLength = isItemKind ? CountWhile((i, c) => !itemKindPredicate(i, c), index) : CountWhile(itemKindPredicate, index);
+			int charsToCopyAmount = Math.Min(actualLineLength, destination.Length);
+			data.AsSpan(index, charsToCopyAmount).CopyTo(destination);
+
+			charCount = charsToCopyAmount;
+
+			return destination.Length >= actualLineLength;
+
+		}
+
+		/// <inheritdoc/>
+		public void Slice(int start, Span<char> slice) => data.AsSpan(start, slice.Length).CopyTo(slice);
 
 	}
 
