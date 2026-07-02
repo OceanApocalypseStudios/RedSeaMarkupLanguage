@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 
 namespace OceanApocalypseStudios.RSML.Buffers
@@ -10,6 +11,16 @@ namespace OceanApocalypseStudios.RSML.Buffers
 	/// <typeparam name="TItem">The datatype of the values returned by the buffer methods</typeparam>
 	public interface ISequentialBuffer<TItem> : IDisposable
 	{
+
+		/// <summary>
+		/// The length of the buffer.
+		/// </summary>
+		int Length { get; }
+
+		/// <summary>
+		/// Whether the buffer is completely empty.
+		/// </summary>
+		bool IsEmpty { get; }
 
 		/// <summary>
 		/// Returns the index of the cursor.
@@ -111,6 +122,33 @@ namespace OceanApocalypseStudios.RSML.Buffers
 		/// </remarks>
 		/// <returns>False if the buffer was fully consumed or an exception occured.</returns>
 		bool TryReadWord(TItem itemKind, Span<TItem> destination, out bool isItemKind, out int consumed);
+
+		/// <summary>
+		/// Tries to read the word at cursor position, which can be a span of items verified by
+		/// <paramref name="itemKindPredicate"/> (if the starting index is verified by <paramref name="itemKindPredicate"/>)
+		/// or a span of content not verified by <paramref name="itemKindPredicate"/> (if
+		/// the starting index does not point to anything verified by <paramref name="itemKindPredicate"/>).
+		/// </summary>
+		/// <param name="itemKindPredicate">
+		/// A predicate that verifies if the first item in the selected range serves as the delimiter
+		/// (the predicate returns <c>true</c> if so). For example, if the predicate verifies <c>,</c>, then 
+		/// the current word if the buffer is <c>My awesome buffer, isn't it cool?</c> starting from the cursor position,
+		/// is <c>My awesome buffer</c>. If the predicate verifies <c>;</c>, then the current word
+		/// if the buffer is <c>;;so very awesome</c> starting from the cursor position, is <c>;;</c>.
+		/// </param>
+		/// <param name="destination">The span which will be the destination for the read content.</param>
+		/// <param name="isItemKind">
+		/// True if the span is fully comprised of the item kind verified by <paramref name="itemKindPredicate"/>.
+		/// If False, no items verified by <paramref name="itemKindPredicate"/> is present.
+		/// </param>
+		/// <param name="charCount">The amount of characters that were written to <paramref name="destination"/>.</param>
+		/// <remarks>
+		/// This method may lead to partial reading (for example if <paramref name="destination"/> is not
+		/// large enough). When this happens, the return value will be <strong>False</strong> but <paramref name="charCount"/>
+		/// will be set to something greater than <c>0</c>.
+		/// </remarks>
+		/// <returns>False if the buffer is out of bounds, the reading was only partial or an exception occured.</returns>
+		bool TryReadWord(Func<int, TItem, bool> itemKindPredicate, Span<TItem> destination, out bool isItemKind, out int charCount);
 
 		/// <summary>
 		/// Tries to read until a whitespace character is hit or the buffer is fully consumed.
