@@ -1,6 +1,8 @@
 <Solution>
 	<Configurations>
 		<Platform Name="Any CPU" />
+		<Platform Name="ARM32" />
+		<Platform Name="ARM64" />
 		<Platform Name="x64" />
 		<Platform Name="x86" />
 	</Configurations>
@@ -29,12 +31,36 @@
     </Folder>
 
 	<Folder Name="/Tests and Benchmarks/">
-		<Project Path="benchmarks/RSML.Benchmarks.csproj" />
-		<Project Path="tests/RSML.Tests.csproj" />
+		<Project Path="benchmarks/RSML.Benchmarks.csproj">
+			<Platform Solution="*|ARM64" Project="ARM64" />
+			<Platform Solution="*|x64" Project="x64" />
+			<Platform Solution="*|x86" Project="x86" />
+		</Project>
+		<Project Path="tests/RSML.Tests.csproj">
+			<Platform Solution="*|ARM64" Project="ARM64" />
+			<Platform Solution="*|x86" Project="x86" />
+			<Platform Solution="*|x64" Project="x64" />
+		</Project>
 	</Folder>
-	<Project Path="src/RSML.CLI/RSML.CLI.csproj" />
-	<Project Path="src/RSML.Native/RSML.Native.csproj" />
-	<Project Path="src/RSML.Sdk/RSML.Sdk.csproj" Id="303cc3e5-a196-467d-8d09-67698aed39d7" />
-	<Project Path="src/RSML/RSML.csproj" />
+	<Project Path="src/RSML.CLI/RSML.CLI.csproj">
+		<Platform Solution="*|ARM64" Project="ARM64" />
+		<Platform Solution="*|x64" Project="x64" />
+		<Platform Solution="*|x86" Project="x86" />
+	</Project>
+	<Project Path="src/RSML.Native/RSML.Native.csproj">
+		<Platform Solution="*|ARM64" Project="ARM64" />
+		<Platform Solution="*|x64" Project="x64" />
+		<Platform Solution="*|x86" Project="x86" />
+	</Project>
+	<Project Path="src/RSML.Sdk/RSML.Sdk.csproj">
+		<Platform Solution="*|ARM64" Project="ARM64" />
+		<Platform Solution="*|x64" Project="x64" />
+		<Platform Solution="*|x86" Project="x86" />
+	</Project>
+	<Project Path="src/RSML/RSML.csproj">
+		<Platform Solution="*|ARM64" Project="ARM64" />
+		<Platform Solution="*|x64" Project="x64" />
+		<Platform Solution="*|x86" Project="x86" />
+	</Project>
 
 </Solution>

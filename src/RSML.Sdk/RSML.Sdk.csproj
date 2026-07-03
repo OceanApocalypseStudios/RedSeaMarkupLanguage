@@ -10,6 +10,8 @@
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 
 		<RootNamespace>OceanApocalypseStudios.RSML.Sdk</RootNamespace>
+
+		<Platforms>AnyCPU;ARM64;x64;x86</Platforms>
 	</PropertyGroup>
 
 	<PropertyGroup Label="NuGet Package Setup">
@@ -68,16 +70,16 @@
 		</None>
 	</ItemGroup>
 
-	<ItemGroup Label="Memory Extensions" Condition="'$(TargetFramework)' == 'netstandard2.0'">
-		<PackageReference Include="System.Memory" Version="4.6.3" />
+	<ItemGroup Label="When not .NET Standard 2.0" Condition="'$(TargetFramework)' != 'netstandard2.0'">
+		<Compile Remove="**\*.NetStd2.cs" Visible="true" />
 	</ItemGroup>
 
-	<ItemGroup Label=".NET 10" Condition="'$(TargetFramework)' == 'net10.0'">
-		<Compile Remove="**\*.DotNetStd20.cs" />
+	<ItemGroup Label="When not .NET 10" Condition="'$(TargetFramework)' != 'net10.0'">
+		<Compile Remove="**\*.Net10.cs" Visible="true" />
 	</ItemGroup>
 
-	<ItemGroup Label=".NET Standard 2.0" Condition="'$(TargetFramework)' == 'netstandard2.0'">
-		<Compile Remove="**\*.DotNet10.cs" />
+	<ItemGroup>
+		<ProjectReference Include="..\RSML\RSML.csproj" />
 	</ItemGroup>
 
 </Project>

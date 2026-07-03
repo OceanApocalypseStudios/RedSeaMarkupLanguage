@@ -10,6 +10,8 @@
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 
 		<RootNamespace>OceanApocalypseStudios.RSML</RootNamespace>
+
+		<Platforms>AnyCPU;ARM64;x64;x86</Platforms>
 	</PropertyGroup>
 
 	<PropertyGroup Label="NuGet Package Setup">
@@ -73,11 +75,11 @@
 	</ItemGroup>
 
 	<ItemGroup Label=".NET 10" Condition="'$(TargetFramework)' == 'net10.0'">
-		<Compile Remove="**\*.DotNetStd20.cs" />
+		<Compile Remove="**\*.NetStd2.cs" />
 	</ItemGroup>
 
 	<ItemGroup Label=".NET Standard 2.0" Condition="'$(TargetFramework)' == 'netstandard2.0'">
-		<Compile Remove="**\*.DotNet10.cs" />
+		<Compile Remove="**\*.Net10.cs" />
 	</ItemGroup>
 
 </Project>

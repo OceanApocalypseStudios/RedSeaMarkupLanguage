@@ -12,6 +12,7 @@
 		<Description>The official RSML CLI.</Description>
 		<Company>OceanApocalypseStudios</Company>
 		<RootNamespace>OceanApocalypseStudios.RSML.CLI</RootNamespace>
+		<Platforms>AnyCPU;ARM64;x64;x86</Platforms>
 	</PropertyGroup>
 
 	<ItemGroup>

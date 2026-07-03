@@ -30,6 +30,7 @@
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>markup</PackageTags>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<Platforms>AnyCPU;ARM64;x64;x86</Platforms>
 	</PropertyGroup>
 
 	<ItemGroup>

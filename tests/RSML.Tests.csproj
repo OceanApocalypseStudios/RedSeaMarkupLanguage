@@ -13,12 +13,14 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+
+		<Platforms>AnyCPU;ARM64;x64;x86</Platforms>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\src\RSML.Native\RSML.Native.csproj" />
+		<!--<ProjectReference Include="..\src\RSML.Native\RSML.Native.csproj" />
 		<ProjectReference Include="..\src\RSML.Sdk\RSML.Sdk.csproj" />
-		<ProjectReference Include="..\src\RSML\RSML.csproj" />
+		--><ProjectReference Include="..\src\RSML\RSML.csproj" />
 	</ItemGroup>
 
 </Project>
