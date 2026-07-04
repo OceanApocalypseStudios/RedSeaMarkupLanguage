@@ -79,7 +79,7 @@ namespace OceanApocalypseStudios.RSML.Sources
 			switch (source)
 			{
 
-				case IBuffer<char> charBuffer:
+				case IReadOnlyBuffer<char> charBuffer:
 					Span<char> destination = stackalloc char[Length];
 					charBuffer.Slice(Start.Index, destination);
 

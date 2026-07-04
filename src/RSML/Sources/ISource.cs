@@ -11,6 +11,16 @@ namespace OceanApocalypseStudios.RSML.Sources
 	{
 
 		/// <summary>
+		/// The length of the source.
+		/// </summary>
+		int Length { get; }
+
+		/// <summary>
+		/// Whether the source is completely empty.
+		/// </summary>
+		bool IsEmpty { get; }
+
+		/// <summary>
 		/// Converts an index into a location.
 		/// </summary>
 		/// <param name="index">The index.</param>

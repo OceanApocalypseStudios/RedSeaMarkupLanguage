@@ -6,7 +6,7 @@ namespace OceanApocalypseStudios.RSML.Sources
 {
 
 	/// <summary>
-	/// Specifies the location of an item in a <see cref="ISource"/> (such as a <see cref="Buffers.IBuffer{TItem}"/>).
+	/// Specifies the location of an item in a <see cref="ISource"/> (such as a <see cref="Buffers.IReadOnlyBuffer{TItem}"/>).
 	/// </summary>
 	/// <param name="index">The 0-based index.</param>
 	/// <param name="line">The 0-based line number.</param>
