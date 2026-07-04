@@ -63,6 +63,7 @@ namespace OceanApocalypseStudios.RSML.Sources.Buffers
 		/// <summary>
 		/// Tries to read the next line in the buffer, relative to a given <paramref name="index"/>.
 		/// If the <paramref name="index"/> is the start of a line, then that line is considered instead of the next.
+		/// The line might be empty if it's made up of line separators only.
 		/// No end of line characters are added.
 		/// </summary>
 		/// <param name="index">The index at which to determine what the next line is.</param>

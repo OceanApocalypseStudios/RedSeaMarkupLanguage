@@ -336,16 +336,18 @@ namespace OceanApocalypseStudios.RSML.Sources.Buffers
 			if (IsOutOfBounds(index))
 				return false;
 
-			bool isCrLf = false;
+			ComputeLineSeparators();
 
-			if (!IsStartOfLine(index))
-				index += CountUntilLineSeparator(index, out isCrLf);
+			if (crFollowedByLf.Contains(index - 1)) // is the current index pointing to a LF inside a CRLF?
+				index--; // use the CR in the CRLF sequence instead of using the LF
 
-			index += isCrLf ? 2 : 1;
+			index += CountUntilLineSeparator(index, out bool isCrLf); // skip to the next line separator
+			index += isCrLf ? 2 : 1; // skip to the actual start of the next line (skip twice if CRLF)
 
 			if (IsOutOfBounds(index))
 				return false;
 
+			// when summed with the index, returns the line separator index - which must be excluded from the return value
 			var actualLineLength = CountUntilLineSeparator(index, out _);
 			var charsToCopyAmount = Math.Min(actualLineLength, line.Length);
 			data.AsSpan(index, charsToCopyAmount).CopyTo(line);
@@ -504,6 +506,11 @@ namespace OceanApocalypseStudios.RSML.Sources.Buffers
 
 			}
 
+			// todo: come up with a more performant method to replace CountNewlinesBefore and avoid O(n) every single run of this method
+			// this is because this method might be ran a lot
+			throw new NotImplementedException("Yet to implement an alternative to CountNewlinesBefore");
+
+			// xxx: keep "unused" code below temporarily
 			location = new(index, CountNewlinesBefore(index), ReverseCountUntilNewline(index));
 			return true;
 
@@ -545,7 +552,8 @@ namespace OceanApocalypseStudios.RSML.Sources.Buffers
 		public bool TryGetLineAt(int index, Span<char> line, out int itemCount)
 		{
 
-
+			// todo: this should return the line that contains the item at index
+			throw new NotImplementedException();
 
 		}
 
@@ -560,6 +568,30 @@ namespace OceanApocalypseStudios.RSML.Sources.Buffers
 
 		}
 
+		public int GetMinLengthOfLine(int lineNumber)
+		{
+
+			// todo: this should return the minimum length of a line
+			throw new NotImplementedException();
+
+		}
+
+		public int GetMinLengthOfLineAt(int index)
+		{
+
+			// todo: this should return the minimum length of a line
+			throw new NotImplementedException();
+
+		}
+
+		public bool TryGetNextLineFrom(int index, Span<char> line, bool skipEmptyLines, out int itemCount)
+		{
+
+			// todo: this should return the next line (see TryGetNextLineFrom(int, Span<char>, int))
+			// but skip empty lines if skipEmptyLines = true
+			throw new NotImplementedException();
+
+		}
 	}
 
 }
