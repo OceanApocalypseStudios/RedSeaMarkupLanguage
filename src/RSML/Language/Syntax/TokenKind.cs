@@ -1,12 +1,7 @@
-﻿namespace OceanApocalypseStudios.RSML.Language.Syntax
+﻿namespace OceanApocalypseStudios.RSML.Language.Syntax;
+
+public enum TokenKind
 {
-
-	public enum TokenKind
-	{
-
-		// todo: add token kinds here
-		// thank you thank you thank you
-
-	}
-
+	// todo: add token kinds here
+	// thank you thank you thank you
 }

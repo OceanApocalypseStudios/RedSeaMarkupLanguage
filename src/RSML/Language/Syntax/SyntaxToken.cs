@@ -1,12 +1,7 @@
-﻿namespace OceanApocalypseStudios.RSML.Language.Syntax
+﻿namespace OceanApocalypseStudios.RSML.Language.Syntax;
+
+public ref struct SyntaxToken
 {
-
-	public ref struct SyntaxToken
-	{
-
-		// todo: add necessary content to SyntaxToken
-		// thank you thank you thank you
-
-	}
-
+	// todo: add necessary content to SyntaxToken
+	// thank you thank you thank you
 }

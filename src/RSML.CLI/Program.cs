@@ -1,14 +1,9 @@
 ﻿using System;
 
 
-namespace OceanApocalypseStudios.RSML.CLI
+namespace OceanApocalypseStudios.RSML.CLI;
+
+internal class Program
 {
-
-	internal class Program
-	{
-
-		static void Main(string[] args) => Console.WriteLine("Hello, World!"); // todo
-
-	}
-
+	static void Main(string[] args) => Console.WriteLine("Hello, World!"); // todo
 }
