@@ -17,17 +17,17 @@ namespace OceanApocalypseStudios.RSML.Sources
 		/// <summary>
 		/// The 0-based line number, counting from the start of the source.
 		/// </summary>
-		public readonly int Line => line;
+		public int Line => line;
 
 		/// <summary>
 		/// The 0-based column number, which is the index of the item relative to the start of the line it is in.
 		/// </summary>
-		public readonly int Column => column;
+		public int Column => column;
 
 		/// <summary>
 		/// The absolute 0-based index of the item in the source.
 		/// </summary>
-		public readonly int Index => index;
+		public int Index => index;
 
 		/// <summary>
 		/// Compares the index of the location to another index.

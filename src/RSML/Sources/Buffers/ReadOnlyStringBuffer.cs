@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 
+using OceanApocalypseStudios.RSML.Common;
+
 
 namespace OceanApocalypseStudios.RSML.Sources.Buffers
 {
@@ -11,10 +13,8 @@ namespace OceanApocalypseStudios.RSML.Sources.Buffers
 	/// primarily via the internal use of <see cref="Span{Char}"/> over string allocations
 	/// and also via caching.
 	/// </summary>
-	public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>
+	public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache
 	{
-
-		bool cacheExists = false;
 		readonly List<int> lineSeparators = [];
 		readonly List<int> crFollowedByLf = [];
 		readonly string data;
@@ -33,11 +33,14 @@ namespace OceanApocalypseStudios.RSML.Sources.Buffers
 			{
 
 				ComputeLineSeparators();
-				return lineSeparators.Count + 1;
+				return lineSeparators.Count;
 
 			}
 
 		}
+
+		/// <inheritdoc/>
+		public bool CacheExists { get; private set; } = false;
 
 		/// <inheritdoc/>
 		public char this[int index] => data[index];
@@ -99,7 +102,7 @@ namespace OceanApocalypseStudios.RSML.Sources.Buffers
 			if (insertionPoint >= 0)
 				return lineSeparators[insertionPoint];
 
-			lsListIndex = data.Length - 1;
+			lsListIndex = -1;
 
 			if (~insertionPoint == lineSeparators.Count)
 				return data.Length - 1; // last character
@@ -132,6 +135,9 @@ namespace OceanApocalypseStudios.RSML.Sources.Buffers
 
 			lsListIndex = ~insertionPoint - 1;
 
+			if (lsListIndex == -1)
+				return lineSeparators[0];
+
 			return lineSeparators[lsListIndex];
 
 		}
@@ -139,7 +145,7 @@ namespace OceanApocalypseStudios.RSML.Sources.Buffers
 		private void ComputeLineSeparators(bool forceCache = false)
 		{
 
-			if (cacheExists && !forceCache)
+			if (CacheExists && !forceCache)
 				return;
 
 			var span = data.AsSpan();
@@ -170,7 +176,7 @@ namespace OceanApocalypseStudios.RSML.Sources.Buffers
 
 			}
 
-			cacheExists = true;
+			CacheExists = true;
 
 		}
 
@@ -507,21 +513,20 @@ namespace OceanApocalypseStudios.RSML.Sources.Buffers
 
 			ComputeLineSeparators();
 
-			// todo: come up with a more performant method to replace CountNewlinesBefore and avoid O(n) every single run of this method
-			// this is because this method might be ran a lot
-			// see #51
-
-			// xxx: keep "unused" code below temporarily
-			location = new(index, CountNewlinesBefore(index), ReverseCountUntilNewline(index));
+			location = new(index, CountLinesBefore(index), ReverseCountUntilNewline(index));
 			return true;
 
 		}
 
-		private int CountNewlinesBefore(int index)
+		internal int CountLinesBefore(int index)
 		{
 
-			// todo: implement this (#51)
-			throw new NotImplementedException("TODO");
+			if (index == data.Length - 1)
+				return LineCount;
+
+			GetLineSeparatorBefore(index, out int lineSepIndex);
+
+			return lineSepIndex + 1; // the amount of lines is the amount of line separators plus 1 ALWAYS
 
 		}
 
@@ -602,6 +607,13 @@ namespace OceanApocalypseStudios.RSML.Sources.Buffers
 			throw new NotImplementedException();
 
 		}
+
+		/// <inheritdoc/>
+		public void BuildCache() => ComputeLineSeparators();
+
+		/// <inheritdoc/>
+		public void BuildCache(bool forceRebuild) => ComputeLineSeparators(forceRebuild);
+
 	}
 
 }

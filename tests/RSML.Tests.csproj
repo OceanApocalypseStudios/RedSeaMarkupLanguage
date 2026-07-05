@@ -18,9 +18,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<!--<ProjectReference Include="..\src\RSML.Native\RSML.Native.csproj" />
-		<ProjectReference Include="..\src\RSML.Sdk\RSML.Sdk.csproj" />
-		--><ProjectReference Include="..\src\RSML\RSML.csproj" />
+		<ProjectReference Include="..\src\RSML\RSML.csproj" />
 	</ItemGroup>
 
 </Project>

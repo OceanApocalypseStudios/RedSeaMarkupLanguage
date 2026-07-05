@@ -4,5 +4,5 @@
 [assembly: CLSCompliant(false)]
 
 // MSTest requires I explicitly enable or disable test parallelization.
-// Method-level breaks native RSML.
+// Method-level breaks native RSML testing.
 [assembly: Parallelize(Scope = ExecutionScope.ClassLevel)]

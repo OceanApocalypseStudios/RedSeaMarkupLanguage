@@ -17,15 +17,20 @@
 	<a href="https://marketplace.visualstudio.com/items?itemName=OceanApocalypseStudios.rsml" target="_blank"><img src="https://img.shields.io/badge/RSML_for_VS_Code-1f9cf0?style=for-the-badge"></a>
 
 </div>
-<br/>
-<p align="center">
-The modern language designed to dynamically interpret different logic paths based on an host's OS and CPU architecture.
+<hr/>
+<div align="center">
+<strong style="font-size: small">
+An OceanApocalypseStudios project,
+</strong>
+<p>
+the modern language designed to dynamically interpret different logic paths based on an host's OS and CPU architecture.
 </p>
+</div>
 
 ---
 
 ## Contents
-- [Red Sea Markup Language](#section)
+- [Red Sea Markup Language (RSML)](#section)
 	- [Why RSML?](#why-rsml)
     - [How to build RSML?](#how-to-build-rsml)
 
@@ -33,6 +38,13 @@ The modern language designed to dynamically interpret different logic paths base
 <summary><strong>Where's the "How to use" section?</strong></summary>
 
 You can find full documentation [here](https://oceanapocalypsestudios.org/rsml-docs/).
+
+</details>
+
+<details open>
+<summary><strong>How can I see what is being worked on in RSML?</strong></summary>
+
+You can find the official bug tracker and roadmap [here](https://github.com/orgs/OceanApocalypseStudios/projects/6/views/2).
 
 </details>
 
@@ -99,60 +111,20 @@ Once that is complete, the DLL will be located at `src/RSML.Native/bin/<arch>/Re
 > Modern RSML (RSML v2.0.0).
 > In any other context, RSML and OceanApocalypseStudios.RSML have the exact same meaning.
 
-[![RSML on NuGet Trends](extras/NuGetTrends_January26.png)](https://nugettrends.com/packages?ids=RSML&ids=OceanApocalypseStudios.RSML&months=168)
-
----
-
-## CLI v2.0.0: An Improved Experience
-The CLI now has a **lot** more power. You can evaluate and tokenize RSML directly from the commandline and adjust things
-like what machine it's evaluating for, via JSON.
-
----
-
-## Shells and JSON (CLI Issue)
-We encountered issues with JSON parsing via commandline arguments in certain shells, where even escaping quotes failed.
-
-We present the solutions to said issues here.
-
-Speaking of JSON, the schema for **local-machine parsing** can be found [**here
-**](https://oceanapocalypsestudios.org/schemas/rsml_cli_machine_schema.json).
-
-### Bash
-Bash did not present any issues.
-
-```bash
-./RSML.CLI.exe evaluate -m "{ \"processor\": { \"architecture\": \"arm64\" } }"
-```
-
-### PowerShell
-PowerShell presented a weird issue, where the quotes enveloping the property names seemed to vanish. Even escaping or
-introducing a here-string failed.
-
-The solution was a weird one, since usually escaping via `""` is done on CMD only.
-
-```powershell
-.\RSML.CLI.exe evaluate -m '{ ""test"": ""value"" }'
-```
-
-### CMD
-The CMD did not present any issues.
-
-```batch
-.\RSML.CLI.exe evaluate -m "{ ""test"": ""value"" }"
-```
+[![RSML on NuGet Trends](extras/NuGetTrends_July5.png)](https://nugettrends.com/packages?ids=RSML&ids=OceanApocalypseStudios.RSML&months=12)
 
 ---
 
 ## See Also
 <ul>
 	<li>
-		<img src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/refs/heads/master/icons/file_type_csharp.svg" alt="C# Logo" width="20" style="vertical-align: middle;" /> <a href="LANGUAGES.md">Programming Language Support</a>
+		<img src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/refs/heads/master/icons/file_type_csharp.svg" alt="C# Logo" height="20" width="20" style="vertical-align: middle;" /> <a href="LANGUAGES.md">Programming Language Support</a>
 	</li>
 	<li>
-		<img src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/refs/heads/master/icons/file_type_sln.svg" alt="Visual Studio Logo" width="20" style="vertical-align: middle;" /> <a href="EDITOR.md">Editor Support</a>
+		<img src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/refs/heads/master/icons/file_type_sln.svg" alt="Visual Studio Logo" height="20" width="20" style="vertical-align: middle;" /> <a href="EDITOR.md">Editor Support</a>
 	</li>
 	<li>
-		<img src="https://raw.githubusercontent.com/dotnet/BenchmarkDotNet/refs/heads/master/docs/logo/icon.svg" alt="BenchmarkDotNet Icon" width="20" style="vertical-align: middle;" /> <a href="BENCHMARKS.md">Benchmarks</a>
+		<img src="https://raw.githubusercontent.com/dotnet/BenchmarkDotNet/refs/heads/master/docs/logo/icon.svg" alt="BenchmarkDotNet Icon" height="20" width="20" style="vertical-align: middle;" /> <a href="BENCHMARKS.md">Benchmarks</a>
 	</li>
 </ul>
 
