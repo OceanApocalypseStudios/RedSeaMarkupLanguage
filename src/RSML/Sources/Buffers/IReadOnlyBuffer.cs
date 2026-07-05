@@ -4,6 +4,12 @@
 namespace OceanApocalypseStudios.RSML.Sources.Buffers
 {
 
+	// TODO: cleanup this interface, change some signatures
+	// xxx: this interface has to be IMPECABLE!
+	// i fucking have no idea how to spell impecable
+
+	// see #50 and #53 and #54
+
 	/// <summary>
 	/// Represents a buffer.
 	/// </summary>

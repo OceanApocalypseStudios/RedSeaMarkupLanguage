@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text;
 
 
@@ -506,13 +505,23 @@ namespace OceanApocalypseStudios.RSML.Sources.Buffers
 
 			}
 
+			ComputeLineSeparators();
+
 			// todo: come up with a more performant method to replace CountNewlinesBefore and avoid O(n) every single run of this method
 			// this is because this method might be ran a lot
-			throw new NotImplementedException("Yet to implement an alternative to CountNewlinesBefore");
+			// see #51
 
 			// xxx: keep "unused" code below temporarily
 			location = new(index, CountNewlinesBefore(index), ReverseCountUntilNewline(index));
 			return true;
+
+		}
+
+		private int CountNewlinesBefore(int index)
+		{
+
+			// todo: implement this (#51)
+			throw new NotImplementedException("TODO");
 
 		}
 
@@ -552,7 +561,7 @@ namespace OceanApocalypseStudios.RSML.Sources.Buffers
 		public bool TryGetLineAt(int index, Span<char> line, out int itemCount)
 		{
 
-			// todo: this should return the line that contains the item at index
+			// todo: this should return the line that contains the item at index (#55)
 			throw new NotImplementedException();
 
 		}
@@ -568,18 +577,18 @@ namespace OceanApocalypseStudios.RSML.Sources.Buffers
 
 		}
 
-		public int GetMinLengthOfLine(int lineNumber)
+		public int GetLengthOfLine(int lineNumber)
 		{
 
-			// todo: this should return the minimum length of a line
+			// todo: this should return the minimum length of a line (#54)
 			throw new NotImplementedException();
 
 		}
 
-		public int GetMinLengthOfLineAt(int index)
+		public int GetLengthOfLineAt(int index)
 		{
 
-			// todo: this should return the minimum length of a line
+			// todo: this should return the minimum length of a line (#54)
 			throw new NotImplementedException();
 
 		}
@@ -589,6 +598,7 @@ namespace OceanApocalypseStudios.RSML.Sources.Buffers
 
 			// todo: this should return the next line (see TryGetNextLineFrom(int, Span<char>, int))
 			// but skip empty lines if skipEmptyLines = true
+			// see #52
 			throw new NotImplementedException();
 
 		}
