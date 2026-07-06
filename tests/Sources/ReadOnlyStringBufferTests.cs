@@ -20,10 +20,34 @@ public class ReadOnlyStringBufferTests
 	[DataRow(TestString01, 30, 6)] // Second CR in "\r\n\r\n."
 	[DataRow(TestString01, 31, 6)] // Second LF in "\r\n\r\n."
 	[DataRow(TestString01, 33, 7)] // End of file
-	public void CountLinesBefore_CountsCorrectly(string data, int index, int expectedLineCount)
+	public void CountLinesBefore(string data, int index, int expectedLineCount)
 	{
 		var buffer = new ReadOnlyStringBuffer(data);
 		buffer.BuildCache();
 		Assert.AreEqual(expectedLineCount, buffer.CountLinesBefore(index));
+	}
+
+	[TestMethod]
+	[DataRow(TestString01, 0, "Hey")]  // H in "Hey"
+	[DataRow(TestString01, 3, "Hey")]  // CR in "Hey\r\n"
+	[DataRow(TestString01, 4, "Hey")]  // LF in "Hey\r\n"
+	[DataRow(TestString01, 5, "This")]  // T in "This"
+	[DataRow(TestString01, 13, "A Test ")] // A in "A Test"
+	[DataRow(TestString01, 15, "A Test ")] // T in "Test"
+	[DataRow(TestString01, 22, " Method")] // M in "Method"
+	[DataRow(TestString01, 29, " Method")] // First LF in "\r\n\r\n."
+	[DataRow(TestString01, 30, "")] // Second CR in "\r\n\r\n."
+	[DataRow(TestString01, 31, "")] // Second LF in "\r\n\r\n."
+	[DataRow(TestString01, 33, ".")] // End of file
+	public void TryGetLineAt(string data, int index, string expectedLine)
+	{
+		var buffer = new ReadOnlyStringBuffer(data);
+		buffer.BuildCache();
+
+		Span<char> alloc = stackalloc char[expectedLine.Length];
+		Assert.IsTrue(buffer.TryGetLineAt(index, alloc, out int written));
+
+		Assert.AreEqual(expectedLine, alloc.ToString());
+		Assert.AreEqual(expectedLine.Length, written);
 	}
 }

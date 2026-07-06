@@ -565,7 +565,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>,
 		if (spanEnd > 0)
 			spanEnd--; // don't include the line separator
 
-		if (spanStart < spanEnd)
+		if (spanStart > spanEnd)
 			spanStart = spanEnd; // empty span
 
 		int actualLineLength = spanEnd - spanStart + 1;
