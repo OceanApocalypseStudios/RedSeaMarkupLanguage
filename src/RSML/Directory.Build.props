@@ -4,12 +4,14 @@
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 
 		<PackageId>OceanApocalypseStudios.RSML</PackageId>
-		<Title>Red Sea Markup Language</Title>
+		<Title>Red Sea Markup Language (RSML)</Title>
 		<Authors>OceanApocalypseStudios</Authors>
 		<Company>OceanApocalypseStudios</Company>
 		<NeutralLanguage>en</NeutralLanguage>
 
 		<!-- DON'T FORGET TO EDIT THIS -->
+		<Version>3.0.0-prerelease1</Version>
+		<InformationalVersion>3.0.0-prerelease1</InformationalVersion>
 		<PackageReleaseNotes>TODO</PackageReleaseNotes>
 
 		<Description>The only markup language that dynamically interprets different logic paths based on an host's OS and CPU architecture.</Description>

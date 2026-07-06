@@ -10,6 +10,8 @@
 		<NeutralLanguage>en</NeutralLanguage>
 
 		<!-- DON'T FORGET TO EDIT THIS -->
+		<Version>3.0.0-prerelease1</Version>
+		<InformationalVersion>3.0.0-prerelease1</InformationalVersion>
 		<PackageReleaseNotes>TODO</PackageReleaseNotes>
 
 		<Description>The plug and play SDK for the only markup language that dynamically interprets different logic paths based on an host's OS and CPU architecture.</Description>
