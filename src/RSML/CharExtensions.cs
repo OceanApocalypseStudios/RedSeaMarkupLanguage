@@ -17,12 +17,12 @@ internal static class CharExtensions
 	public static bool IsAsciiEqualsIgnoreCase(this char @this, char other)
 	{
 		@this |= @this is >= 'A' and <= 'Z'
-			? (char)AsciiCaseBit
-			: (char)0;
+					 ? (char)AsciiCaseBit
+					 : (char)0;
 
 		other |= other is >= 'A' and <= 'Z'
-			? (char)AsciiCaseBit
-			: (char)0;
+					 ? (char)AsciiCaseBit
+					 : (char)0;
 
 		return @this == other;
 	}

@@ -30,7 +30,7 @@ public readonly struct SourceError(SourceSpan span, string message, Severity sev
 
 	/// <inheritdoc/>
 	public override bool Equals(object? obj) => obj is SourceError error && Equals(error);
-	
+
 	/// <inheritdoc/>
 	public bool Equals(SourceError other) => Message == other.Message && Severity == other.Severity && Span.Equals(other.Span);
 
@@ -53,6 +53,7 @@ public readonly struct SourceError(SourceSpan span, string message, Severity sev
 		{
 			int hashCode = InternalUtils.HashCodeSeed * InternalUtils.HashCodeMultiplier + Span.GetHashCode();
 			hashCode = hashCode * InternalUtils.HashCodeMultiplier + Message.GetHashCode();
+
 			return hashCode * InternalUtils.HashCodeMultiplier + Severity.GetHashCode();
 		}
 	}
@@ -92,12 +93,12 @@ public readonly struct SourceError(SourceSpan span, string message, Severity sev
 			case "JSON":
 				return
 					$$"""
-					{
-						"span": {{span.ToString("JSON", null)}},
-						"message": "{{message}}",
-						"severity": "{{severity}}"
-					}
-					""";
+					  {
+					  	"span": {{span.ToString("JSON", null)}},
+					  	"message": "{{message}}",
+					  	"severity": "{{severity}}"
+					  }
+					  """;
 
 			default:
 				return ToString();

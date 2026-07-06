@@ -12,11 +12,14 @@ namespace OceanApocalypseStudios.RSML.Sources.Buffers;
 /// primarily via the internal use of <see cref="Span{Char}"/> over string allocations
 /// and also via caching.
 /// </summary>
-public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache
+public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>,
+									ISupportsCache
 {
-	readonly List<int> lineSeparators = [];
-	readonly List<int> crFollowedByLf = [];
-	readonly string data;
+	private readonly List<int> lineSeparators = [ ];
+
+	private readonly List<int> crFollowedByLf = [ ];
+
+	private readonly string data;
 
 	/// <inheritdoc/>
 	public int Length => data.Length;
@@ -30,6 +33,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache
 		get
 		{
 			ComputeLineSeparators();
+
 			return lineSeparators.Count;
 		}
 	}
@@ -85,7 +89,8 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache
 	/// </param>
 	/// <remarks>This method is not CLS-compliant due to the unsafe context and the use of pointers.</remarks>
 	[CLSCompliant(false)]
-	public unsafe ReadOnlyStringBuffer(byte* contentPtr, int byteCount, Encoding? encoding = null) => data = encoding?.GetString(contentPtr, byteCount) ?? Encoding.Default.GetString(contentPtr, byteCount);
+	public unsafe ReadOnlyStringBuffer(byte* contentPtr, int byteCount, Encoding? encoding = null) =>
+		data = encoding?.GetString(contentPtr, byteCount) ?? Encoding.Default.GetString(contentPtr, byteCount);
 
 	private int GetLineSeparatorAfter(int index, out int lsListIndex)
 	{
@@ -232,7 +237,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache
 			return 0;
 
 		ComputeLineSeparators();
-		var lineSep = GetLineSeparatorAfter(index, out _);
+		int lineSep = GetLineSeparatorAfter(index, out _);
 
 		isCrLf = crFollowedByLf.Contains(lineSep);
 
@@ -290,6 +295,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache
 			return false;
 
 		item = data[index];
+
 		return true;
 	}
 
@@ -312,7 +318,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache
 		ComputeLineSeparators();
 
 		if (crFollowedByLf.Contains(index - 1)) // is the current index pointing to a LF inside a CRLF?
-			index--; // use the CR in the CRLF sequence instead of using the LF
+			index--;                            // use the CR in the CRLF sequence instead of using the LF
 
 		index += CountUntilLineSeparator(index, out bool isCrLf); // skip to the next line separator
 		index += isCrLf ? 2 : 1; // skip to the actual start of the next line (skip twice if CRLF)
@@ -321,8 +327,8 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache
 			return false;
 
 		// when summed with the index, returns the line separator index - which must be excluded from the return value
-		var actualLineLength = CountUntilLineSeparator(index, out _);
-		var charsToCopyAmount = Math.Min(actualLineLength, line.Length);
+		int actualLineLength = CountUntilLineSeparator(index, out _);
+		int charsToCopyAmount = Math.Min(actualLineLength, line.Length);
 		data.AsSpan(index, charsToCopyAmount).CopyTo(line);
 
 		itemCount = charsToCopyAmount;
@@ -349,7 +355,10 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache
 
 		// if first index is whitespace, the word is whitespace (ends when not whitespace/end of buffer)
 		// if first index not whitespace, the word is not whitespace (ends on whitespace/end of buffer)
-		int actualLineLength = isWhitespace ? CountUntilNotWhitespace(index) : CountUntilWhitespace(index);
+		int actualLineLength = isWhitespace
+								   ? CountUntilNotWhitespace(index)
+								   : CountUntilWhitespace(index);
+
 		int charsToCopyAmount = Math.Min(actualLineLength, destination.Length);
 		data.AsSpan(index, charsToCopyAmount).CopyTo(destination);
 
@@ -377,7 +386,10 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache
 
 		// if first index is KIND, the word is KIND (ends when not KIND/end of buffer)
 		// if first index not KIND, the word is not KIND (ends on KIND/end of buffer)
-		int actualLineLength = isItemKind ? CountUntilNotMatch(index, itemKind) : CountUntilMatch(index, itemKind);
+		int actualLineLength = isItemKind
+								   ? CountUntilNotMatch(index, itemKind)
+								   : CountUntilMatch(index, itemKind);
+
 		int charsToCopyAmount = Math.Min(actualLineLength, destination.Length);
 		data.AsSpan(index, charsToCopyAmount).CopyTo(destination);
 
@@ -432,7 +444,10 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache
 
 		// if first index is KIND, the word is KIND (ends when not KIND/end of buffer)
 		// if first index not KIND, the word is not KIND (ends on KIND/end of buffer)
-		int actualLineLength = isItemKind ? CountWhile((i, c) => !itemKindPredicate(i, c), index) : CountWhile(itemKindPredicate, index);
+		int actualLineLength = isItemKind
+								   ? CountWhile((i, c) => !itemKindPredicate(i, c), index)
+								   : CountWhile(itemKindPredicate, index);
+
 		int charsToCopyAmount = Math.Min(actualLineLength, destination.Length);
 		data.AsSpan(index, charsToCopyAmount).CopyTo(destination);
 
@@ -464,12 +479,14 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache
 		if (index == 0) // best "best" case = triple zero
 		{
 			location = new(0, 0, 0);
+
 			return true;
 		}
 
 		ComputeLineSeparators();
 
 		location = new(index, CountLinesBefore(index), ReverseCountUntilNewline(index));
+
 		return true;
 	}
 
@@ -496,16 +513,19 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache
 		if (lineNumber >= lineSeparators.Count)
 			return false;
 
-		var spanEnd = lineSeparators[lineNumber];
-		var spanStartIndex = lineNumber == 0 ? 0 : (lineNumber - 1);
+		int spanEnd = lineSeparators[lineNumber];
+
+		int spanStartIndex = lineNumber == 0
+								 ? 0
+								 : lineNumber - 1;
 
 		if (crFollowedByLf.Contains(lineSeparators[spanStartIndex]))
 			spanStartIndex++; // skip past the CR in the CRLF sequence
 
 		spanStartIndex++; // get the actual start of the next line instead of the line sep
 
-		var spanStart = lineSeparators[spanStartIndex];
-		var actualLineLength = spanEnd - spanStart + 1;
+		int spanStart = lineSeparators[spanStartIndex];
+		int actualLineLength = spanEnd - spanStart + 1;
 		itemCount = Math.Min(actualLineLength, destination.Length);
 
 		data.AsSpan(spanStart, itemCount).CopyTo(destination);
@@ -548,7 +568,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache
 		if (spanStart < spanEnd)
 			spanStart = spanEnd; // empty span
 
-		var actualLineLength = spanEnd - spanStart + 1;
+		int actualLineLength = spanEnd - spanStart + 1;
 		itemCount = Math.Min(actualLineLength, line.Length);
 
 		data.AsSpan(spanStart, itemCount).CopyTo(line);

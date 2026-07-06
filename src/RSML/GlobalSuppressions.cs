@@ -6,6 +6,7 @@
 using SM = System.Diagnostics.CodeAnalysis.SuppressMessageAttribute; // SUPPRESS MESSAGE
 using C = OceanApocalypseStudios.RSML.InternalUtils;
 
+
 // Code style.
 [assembly: SM("Style", C.Ide0046, Justification = "The conditional expression in this case hurts readability.", Scope = "member", Target = "~M:OceanApocalypseStudios.RSML.CharSpanExtensions.GetCharAt(System.Char[],System.Int32)~System.Char")]
 [assembly: SM("Style", C.Ide0046, Justification = "The conditional expression in this case hurts readability.", Scope = "member", Target = "~M:OceanApocalypseStudios.RSML.CharSpanExtensions.GetCharAt(System.ReadOnlySpan{System.Char},System.Int32)~System.Char")]

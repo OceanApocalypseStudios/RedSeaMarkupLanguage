@@ -4,16 +4,15 @@ using System.Diagnostics.CodeAnalysis; // needed despite VS showing it grayed ou
 
 namespace OceanApocalypseStudios.RSML.Sources;
 
-
 /// <summary>
 /// Specifies the location of an item in a <see cref="ISource"/> (such as a <see cref="Buffers.IReadOnlyBuffer{TItem}"/>).
 /// </summary>
 /// <param name="index">The 0-based index.</param>
 /// <param name="line">The 0-based line number.</param>
 /// <param name="column">The 0-based column number (the index relative to the start of the line).</param>
-public readonly struct SourceLocation(int index, int line, int column) : IEquatable<SourceLocation>, IEquatable<int>, IComparable<SourceLocation>, IComparable<int>, IFormattable
+public readonly struct SourceLocation(int index, int line, int column) : IEquatable<SourceLocation>, IEquatable<int>, IFormattable,
+																		 IComparable<SourceLocation>, IComparable<int>
 {
-
 	/// <summary>
 	/// The 0-based line number, counting from the start of the source.
 	/// </summary>
@@ -47,8 +46,8 @@ public readonly struct SourceLocation(int index, int line, int column) : IEquata
 		obj switch
 		{
 			SourceLocation location => Equals(location),
-			int index => Index == index,
-			_ => false
+			int index               => Index == index,
+			_                       => false
 		};
 
 	/// <summary>
@@ -72,6 +71,7 @@ public readonly struct SourceLocation(int index, int line, int column) : IEquata
 		{
 			int hashCode = InternalUtils.HashCodeSeed * InternalUtils.HashCodeMultiplier + Index.GetHashCode();
 			hashCode = hashCode * InternalUtils.HashCodeMultiplier + Line.GetHashCode();
+
 			return hashCode * InternalUtils.HashCodeMultiplier + Column.GetHashCode();
 		}
 	}
@@ -89,12 +89,13 @@ public readonly struct SourceLocation(int index, int line, int column) : IEquata
 	/// <param name="format">The format. Available formats are: CTOR (constructor-like string) and JSON (struct as JSON).</param>
 	/// <param name="formatProvider">Unused. Don't bother assigning it anything.</param>
 	/// <returns>The string representation.</returns>
-	public string ToString(string? format, IFormatProvider? formatProvider) => format switch
-	{
-		"CTOR" or "I" or "INIT" or "NET" => $"new SourceLocation({Index}, {Line}, {Column})",
-		"JSON" => $$"""{ "index": {{Index}}, "line": {{Line}}, "column": {{Column}} }""",
-		_ => ToString()
-	};
+	public string ToString(string? format, IFormatProvider? formatProvider) =>
+		format switch
+		{
+			"CTOR" or "I" or "INIT" or "NET" => $"new SourceLocation({Index}, {Line}, {Column})",
+			"JSON"                           => $$"""{ "index": {{Index}}, "line": {{Line}}, "column": {{Column}} }""",
+			_                                => ToString()
+		};
 
 	/// <summary>
 	/// Checks if two <see cref="SourceLocation"/>s are equal to each other.

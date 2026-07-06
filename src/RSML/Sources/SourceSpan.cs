@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data.Common;
 using System.Diagnostics.CodeAnalysis; // needed despite VS showing it grayed out
-
 using OceanApocalypseStudios.RSML.Sources.Buffers;
 
 
@@ -33,11 +32,11 @@ public readonly partial struct SourceSpan(SourceLocation start, SourceLocation e
 	public bool IsSingleLine => Start.Line == End.Line;
 
 	/// <inheritdoc/>
-#if NET10_0_OR_GREATER
+	#if NET10_0_OR_GREATER
 	public override bool Equals([NotNullWhen(true)] object? obj) =>
-#elif NETSTANDARD2_0
+		#elif NETSTANDARD2_0
 	public override bool Equals(object obj) =>
-#endif
+		#endif
 		obj is SourceSpan span && Equals(span);
 
 	/// <summary>
@@ -93,12 +92,13 @@ public readonly partial struct SourceSpan(SourceLocation start, SourceLocation e
 	/// <param name="format">The format. Available formats are: CTOR (constructor-like string) and JSON (struct as JSON).</param>
 	/// <param name="formatProvider">Unused. Don't bother assigning it anything.</param>
 	/// <returns>The string representation.</returns>
-	public string ToString(string? format, IFormatProvider? formatProvider) => format switch
-	{
-		"CTOR" or "I" or "INIT" or "NET" => $"new SourceSpan({Start.ToString("ctor", null)}, {End.ToString("ctor", null)})",
-		"JSON" => $$"""{ "start": {{Start.ToString("JSON", null)}}, "end": {{End.ToString("JSON", null)}} }""",
-		_ => ToString()
-	};
+	public string ToString(string? format, IFormatProvider? formatProvider) =>
+		format switch
+		{
+			"CTOR" or "I" or "INIT" or "NET" => $"new SourceSpan({Start.ToString("ctor", null)}, {End.ToString("ctor", null)})",
+			"JSON"                           => $$"""{ "start": {{Start.ToString("JSON", null)}}, "end": {{End.ToString("JSON", null)}} }""",
+			_                                => ToString()
+		};
 
 	/// <inheritdoc/>
 	public override int GetHashCode()
@@ -106,6 +106,7 @@ public readonly partial struct SourceSpan(SourceLocation start, SourceLocation e
 		unchecked
 		{
 			int hashCode = InternalUtils.HashCodeSeed * InternalUtils.HashCodeMultiplier + Start.GetHashCode();
+
 			return hashCode * InternalUtils.HashCodeMultiplier + End.GetHashCode();
 		}
 	}

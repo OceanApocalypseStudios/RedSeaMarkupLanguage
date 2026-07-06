@@ -1,0 +1,11 @@
+<Project>
+	<!-- Windows -->
+	<PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
+		<DefineConstants>WINDOWS;$(DefineConstants)</DefineConstants>
+	</PropertyGroup>
+
+	<!-- Not Windows -->
+	<PropertyGroup Condition="'$(OS)' != 'Windows_NT'">
+		<DefineConstants>NOT_WINDOWS;$(DefineConstants)</DefineConstants>
+	</PropertyGroup>
+</Project>

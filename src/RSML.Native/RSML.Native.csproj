@@ -15,26 +15,11 @@
 		<TieredCompilation>true</TieredCompilation>
 		<PublishSingleFile>false</PublishSingleFile>
 
-		<!-- NuGet Properties -->
-		<Title>RSML Native Interop</Title>
-		<PackageId>OceanApocalypseStudios.RSML.Native</PackageId>
-		<Authors>OceanApocalypseStudios</Authors>
-		<Company>OceanApocalypseStudios</Company>
-		<Version>2.0.0-prerelease9</Version>
-		<Description>Native C-like interopability for RSML.</Description>
-		<Copyright>Copyright (c) 2025 OceanApocalypseStudios</Copyright>
-		<PackageProjectUrl>https://oceanapocalypsestudios.org/rsml-docs/2.0.0-prerelease8/</PackageProjectUrl>
-		<PackageLicenseUrl>https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/blob/v2.0.0-dev/LICENSE.txt</PackageLicenseUrl>
-		<PackageIcon>Icon.png</PackageIcon>
-		<RepositoryUrl>https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/</RepositoryUrl>
-		<RepositoryType>git</RepositoryType>
-		<PackageTags>markup</PackageTags>
-		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<Platforms>AnyCPU;ARM64;x64;x86</Platforms>
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="JetBrains.Annotations" Version="2026.2.0" />
+		<PackageReference Include="JetBrains.Annotations" Version="2026.2.0" />
 	</ItemGroup>
 
 	<ItemGroup>
