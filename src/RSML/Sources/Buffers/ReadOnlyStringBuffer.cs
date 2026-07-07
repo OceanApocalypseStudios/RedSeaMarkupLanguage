@@ -10,7 +10,7 @@ namespace OceanApocalypseStudios.RSML.Sources.Buffers;
 
 /// <summary>
 /// A read-only buffer backed by a string. All operations opt for performance
-/// primarily via the internal use of <see cref="Span{Char}"/> over string allocations
+/// primarily via the internal use of <see cref="ReadOnlySpan{Char}"/> over string allocations
 /// and also via caching.
 /// </summary>
 public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEquatable<ReadOnlyStringBuffer?>
@@ -98,42 +98,57 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 	/// <inheritdoc/>
 	public void BuildCache(bool forceRebuild) => ComputeLineStarts(forceRebuild);
 
+	/// <exception cref="BufferException">
+	/// The buffer is empty.
+	/// </exception>
+	/// <exception cref="IndexOutOfRangeException">
+	/// <paramref name="index"/> was set to something greater than the buffer's length.
+	/// </exception>
 	/// <inheritdoc/>
 	public int CountUntilLineSeparator(int index, out bool isCrLf)
 	{
 		isCrLf = false;
 
 		if (IsEmpty)
-			return 0;
+			throw new BufferException("The buffer is empty.");
 
 		if (index < 0)
-			index = data.Length + index; // -1 is (Length-1) etc
+			index = Length + index; // -1 is (Length-1) etc
 
-		if (IsOutOfRange(index))
-			return -1;
+		if (IsConventionallyOutOfRange(index))
+			throw new IndexOutOfRangeException("The index must be less than or equal to the buffer's length.");
 
-		if (data[index].IsNewline())
-			return 0;
+		if (index == Length)
+			return 0; // consumed the entire buffer
 
 		ComputeLineStarts();
-		int lineSep = GetNextLineStartPosition(index, out _);
+		int lineSep = GetNextOrCurrentLineStartPosition(index, out _);
 
 		isCrLf = precededByCrLf.Contains(lineSep);
 
 		return lineSep - index;
 	}
 
+	/// <exception cref="BufferException">
+	/// The buffer is empty.
+	/// </exception>
+	/// <exception cref="IndexOutOfRangeException">
+	/// <paramref name="index"/> was set to something greater than the buffer's length.
+	/// </exception>
 	/// <inheritdoc/>
 	public int CountUntilNotWhitespace(int index)
 	{
 		if (IsEmpty)
-			return 0;
+			throw new BufferException("The buffer is empty.");
 
 		if (index < 0)
 			index = data.Length + index; // -1 is (Length-1) etc
 
-		if (IsOutOfRange(index))
-			return -1;
+		if (IsConventionallyOutOfRange(index))
+			throw new IndexOutOfRangeException("The index must be less than or equal to the buffer's length.");
+		
+		if (index == Length)
+			return 0; // consumed the entire buffer
 
 		var span = data.AsSpan(index);
 		int count = 0;
@@ -144,17 +159,26 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 		return count;
 	}
 
+	/// <exception cref="BufferException">
+	/// The buffer is empty.
+	/// </exception>
+	/// <exception cref="IndexOutOfRangeException">
+	/// <paramref name="index"/> was set to something greater than the buffer's length.
+	/// </exception>
 	/// <inheritdoc/>
 	public int CountUntilWhitespace(int index)
 	{
 		if (IsEmpty)
-			return 0;
+			throw new BufferException("The buffer is empty.");
 
 		if (index < 0)
 			index = data.Length + index; // -1 is (Length-1) etc
 
-		if (IsOutOfRange(index))
-			return -1;
+		if (IsConventionallyOutOfRange(index))
+			throw new IndexOutOfRangeException("The index must be less than or equal to the buffer's length.");
+
+		if (index == Length)
+			return 0; // consumed the entire buffer
 
 		var span = data.AsSpan(index);
 		int count = 0;
@@ -165,17 +189,26 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 		return count;
 	}
 
+	/// <exception cref="BufferException">
+	/// The buffer is empty.
+	/// </exception>
+	/// <exception cref="IndexOutOfRangeException">
+	/// <paramref name="index"/> was set to something greater than the buffer's length.
+	/// </exception>
 	/// <inheritdoc/>
 	public int CountWhile(Func<int, char, bool> predicate, int index)
 	{
 		if (IsEmpty)
-			return 0;
+			throw new BufferException("The buffer is empty.");
 
 		if (index < 0)
 			index = data.Length + index; // -1 is (Length-1) etc
 
-		if (IsOutOfRange(index))
-			return -1;
+		if (IsConventionallyOutOfRange(index))
+			throw new IndexOutOfRangeException("The index must be less than or equal to the buffer's length.");
+
+		if (index == Length)
+			return 0; // consumed the entire buffer
 
 		var span = data.AsSpan(index);
 		int count = 0;
@@ -208,13 +241,13 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 	public int GetLineNumberAt(int index)
 	{
 		if (IsEmpty)
-			throw new BufferException("Buffer cannot be empty.");
+			throw new BufferException("The buffer is empty.");
 
 		if (index < 0)
 			index += data.Length;
 
 		if (IsConventionallyOutOfRange(index))
-			throw new IndexOutOfRangeException("Index must be less than the buffer's length in this context.");
+			throw new IndexOutOfRangeException("The index must be less than or equal to the buffer's length.");
 
 		GetPreviousOrCurrentLineStartPosition(index, out int lineSepIndex);
 		return lineSepIndex;

@@ -16,8 +16,11 @@ namespace OceanApocalypseStudios.RSML.Sources.Buffers;
 public interface IReadOnlyBuffer<TItem> : ISource, IEquatable<IReadOnlyBuffer<TItem>?>
 {
 	/// <summary>
-	/// The amount of lines in the buffer.
+	/// The total amount of lines in the buffer.
 	/// </summary>
+	/// <remarks>
+	/// Keep in mind lines might be empty.
+	/// </remarks>
 	int LineCount { get; }
 
 	/// <summary>
@@ -35,7 +38,7 @@ public interface IReadOnlyBuffer<TItem> : ISource, IEquatable<IReadOnlyBuffer<TI
 	/// <param name="isCrLf">
 	/// Whether the line separator at which the method stopped is the CR in a CRLF sequence. If true, the next item in the buffer is LF.
 	/// </param>
-	/// <returns>The index of the next line separator, relative to an <paramref name="index"/> or -1 if out of bounds.</returns>
+	/// <returns>The index of the next line separator, relative to an <paramref name="index"/>.</returns>
 	int CountUntilLineSeparator(int index, out bool isCrLf);
 
 	/// <summary>
@@ -43,7 +46,7 @@ public interface IReadOnlyBuffer<TItem> : ISource, IEquatable<IReadOnlyBuffer<TI
 	/// Line separators are included in the whitespace category.
 	/// </summary>
 	/// <param name="index">The index at which to start counting.</param>
-	/// <returns>The index of the next non-whitespace item, relative to a <paramref name="index"/> or -1 if out of bounds.</returns>
+	/// <returns>The index of the next non-whitespace item, relative to a <paramref name="index"/>.</returns>
 	int CountUntilNotWhitespace(int index);
 
 	/// <summary>
@@ -51,7 +54,7 @@ public interface IReadOnlyBuffer<TItem> : ISource, IEquatable<IReadOnlyBuffer<TI
 	/// Line separators are included in the whitespace category.
 	/// </summary>
 	/// <param name="index">The index at which to start counting.</param>
-	/// <returns>The index of the next whitespace item, relative to a <paramref name="index"/> or -1 if out of bounds.</returns>
+	/// <returns>The index of the next whitespace item, relative to a <paramref name="index"/>.</returns>
 	int CountUntilWhitespace(int index);
 
 	/// <summary>
@@ -68,19 +71,13 @@ public interface IReadOnlyBuffer<TItem> : ISource, IEquatable<IReadOnlyBuffer<TI
 	/// <paramref name="predicate"/> as an offset that when added to the index of the position
 	/// equal the actual index.
 	/// </param>
-	/// <returns>The amount of items counted or -1 if out of bounds.</returns>
+	/// <returns>The amount of items counted.</returns>
 	int CountWhile(Func<int, TItem, bool> predicate, int index);
 
 	/// <summary>
 	/// Determines the 0-based line number of the line that contains the item located at <paramref name="index"/>.
 	/// </summary>
 	/// <param name="index">The index whose parent line's number is to be returned.</param>
-	/// <remarks>
-	/// > [!NOTE]
-	/// > This method follows the convention where the index can be equal to the buffer's length,
-	/// > which means to consider the end of the buffer.
-	/// > When index is set to EOF, for this method, it returns <see cref="LineCount"/>.
-	/// </remarks>
 	/// <returns>The 0-based number of the line that contains item located at <paramref name="index"/>.</returns>
 	int GetLineNumberAt(int index);
 
