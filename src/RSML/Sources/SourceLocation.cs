@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis; // needed for .NET 10 despite VS showing it grayed out
 
 
 namespace OceanApocalypseStudios.RSML.Sources;
