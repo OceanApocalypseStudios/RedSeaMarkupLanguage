@@ -142,7 +142,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 			throw new BufferException("The buffer is empty.");
 
 		if (index < 0)
-			index = data.Length + index; // -1 is (Length-1) etc
+			index = Length + index; // -1 is (Length-1) etc
 
 		if (IsConventionallyOutOfRange(index))
 			throw new IndexOutOfRangeException("The index must be less than or equal to the buffer's length.");
@@ -172,7 +172,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 			throw new BufferException("The buffer is empty.");
 
 		if (index < 0)
-			index = data.Length + index; // -1 is (Length-1) etc
+			index = Length + index; // -1 is (Length-1) etc
 
 		if (IsConventionallyOutOfRange(index))
 			throw new IndexOutOfRangeException("The index must be less than or equal to the buffer's length.");
@@ -202,7 +202,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 			throw new BufferException("The buffer is empty.");
 
 		if (index < 0)
-			index = data.Length + index; // -1 is (Length-1) etc
+			index = Length + index; // -1 is (Length-1) etc
 
 		if (IsConventionallyOutOfRange(index))
 			throw new IndexOutOfRangeException("The index must be less than or equal to the buffer's length.");
@@ -238,13 +238,13 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 	/// <paramref name="index"/> was set to something greater than the buffer's length.
 	/// </exception>
 	/// <inheritdoc/>
-	public int GetLineNumberAt(int index)
+	public int GetLineNumberForIndex(int index)
 	{
 		if (IsEmpty)
 			throw new BufferException("The buffer is empty.");
 
 		if (index < 0)
-			index += data.Length;
+			index += Length;
 
 		if (IsConventionallyOutOfRange(index))
 			throw new IndexOutOfRangeException("The index must be less than or equal to the buffer's length.");
@@ -277,7 +277,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 			return false;
 
 		if (index < 0)
-			index = data.Length + index; // -1 is (Length-1) etc
+			index = Length + index; // -1 is (Length-1) etc
 
 		if (IsOutOfRange(index))
 			return false;
@@ -329,7 +329,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 			return false;
 
 		if (index < 0)
-			index += data.Length;
+			index += Length;
 
 		if (IsOutOfRange(index))
 			return false;
@@ -371,7 +371,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 			return false;
 
 		if (index < 0)
-			index += data.Length;
+			index += Length;
 
 		if (IsOutOfRange(index))
 			return false;
@@ -418,7 +418,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 			return false;
 
 		if (index < 0)
-			index += data.Length;
+			index += Length;
 
 		if (IsOutOfRange(index))
 			return false;
@@ -432,7 +432,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 
 		ComputeLineStarts();
 
-		location = new(index, GetLineNumberAt(index), ReverseCountUntilNewline(index));
+		location = new(index, GetLineNumberForIndex(index), ReverseCountUntilNewline(index));
 
 		return true;
 	}
@@ -447,7 +447,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 			return false;
 
 		if (index < 0)
-			index += data.Length;
+			index += Length;
 
 		if (IsOutOfRange(index))
 			return false;
@@ -478,7 +478,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 			return false;
 
 		if (index < 0)
-			index += data.Length;
+			index += Length;
 
 		if (IsOutOfRange(index))
 			return false;
@@ -509,7 +509,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 			return false;
 
 		if (index < 0)
-			index += data.Length;
+			index += Length;
 
 		if (IsOutOfRange(index))
 			return false;
@@ -629,7 +629,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 	private int CountUntilMatch(int index, char character)
 	{
 		if (index < 0)
-			index = data.Length + index; // -1 is (Length-1) etc
+			index = Length + index; // -1 is (Length-1) etc
 
 		var span = data.AsSpan(index);
 		int count = 0;
@@ -643,7 +643,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 	private int CountUntilNotMatch(int index, char character)
 	{
 		if (index < 0)
-			index = data.Length + index; // -1 is (Length-1) etc
+			index = Length + index; // -1 is (Length-1) etc
 
 		var span = data.AsSpan(index);
 		int count = 0;
@@ -677,7 +677,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 		{
 			// 2nd Case: the next line start is outside of the buffer (EOF convention)
 			lsListIndex = -1;
-			return data.Length;
+			return Length;
 		}
 
 		lsListIndex = nextIndex;
@@ -756,14 +756,14 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 	/// Does not protect against <see cref="ArgumentOutOfRangeException"/> and
 	/// <see cref="IndexOutOfRangeException"/>.
 	/// </summary>
-	private bool IsConventionallyOutOfRange(int index) => index > data.Length;
+	private bool IsConventionallyOutOfRange(int index) => index > Length;
 
 	/// <summary>
 	/// True if index is greater than or equal to the length.
 	/// This prevents throwing <see cref="ArgumentOutOfRangeException"/>
 	/// or <see cref="IndexOutOfRangeException"/>.
 	/// </summary>
-	private bool IsOutOfRange(int index) => index >= data.Length;
+	private bool IsOutOfRange(int index) => index >= Length;
 
 	/// <remarks>
 	/// Ignores the LF in CRLF sequences (returns the CR if the matching sequence is CRLF) - avoid double counting and other issues.
@@ -771,7 +771,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 	private int ReverseCountUntilNewline(int index)
 	{
 		if (index < 0)
-			index = data.Length + index; // -1 is (Length-1) etc
+			index = Length + index; // -1 is (Length-1) etc
 
 		ComputeLineStarts();
 

@@ -24,11 +24,11 @@ public class ReadOnlyStringBufferTests
 	[DataRow(TestString01, 32, 6)] // Dot/point in "\r\n\r\n."
 	[DataRow(TestString01, 33, 6)] // U2028 in ".\u2028"
 	[DataRow(TestString01, 34, 7)] // End of file
-	public void GetLineNumberAt(string data, int index, int expectedLineCount)
+	public void GetLineNumberForIndex(string data, int index, int expectedLineCount)
 	{
 		var buffer = new ReadOnlyStringBuffer(data);
 		buffer.BuildCache();
-		Assert.AreEqual(expectedLineCount, buffer.GetLineNumberAt(index));
+		Assert.AreEqual(expectedLineCount, buffer.GetLineNumberForIndex(index));
 	}
 
 	[TestMethod]

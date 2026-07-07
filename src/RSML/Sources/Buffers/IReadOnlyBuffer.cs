@@ -79,7 +79,7 @@ public interface IReadOnlyBuffer<TItem> : ISource, IEquatable<IReadOnlyBuffer<TI
 	/// </summary>
 	/// <param name="index">The index whose parent line's number is to be returned.</param>
 	/// <returns>The 0-based number of the line that contains item located at <paramref name="index"/>.</returns>
-	int GetLineNumberAt(int index);
+	int GetLineNumberForIndex(int index);
 
 	/// <summary>
 	/// Slices a region of the buffer.
