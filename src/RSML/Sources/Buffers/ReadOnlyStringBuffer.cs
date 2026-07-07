@@ -249,6 +249,9 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 		if (IsConventionallyOutOfRange(index))
 			throw new IndexOutOfRangeException("The index must be less than or equal to the buffer's length.");
 
+		if (index == Length)
+			return LineCount;
+
 		GetPreviousOrCurrentLineStartPosition(index, out int lineSepIndex);
 		return lineSepIndex;
 	}
@@ -331,30 +334,20 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 		if (index < 0)
 			index += Length;
 
-		if (IsOutOfRange(index))
+		if (IsConventionallyOutOfRange(index))
 			return false;
 
+		if (index == Length) // EOF means the current line is empty (line is empty by default)
+			return true;
+
 		ComputeLineStarts();
-		int spanStart = GetPreviousLineStartPosition(index, out int lineSepBeforeIndex);
+		int spanStart = GetPreviousOrCurrentLineStartPosition(index, out _);
+		int spanEnd = GetNextLineStartPosition(index, out int nextLineStartIndex) - 1; // don't include the line separator
 
-		if (lineSepBeforeIndex != -1) // only skip necessary characters if the start of the span isn't 0
-		{
-			if (precededByCrLf.Contains(spanStart))
-				spanStart++; // skip the LF in the CRLF sequence (if applicable)
+		if (precededByCrLf.Contains(nextLineStartIndex))
+			spanEnd--; // remove one extra line separator if it's CRLF
 
-			if (index < data.Length - 1)
-				spanStart++; // skip to the actual start of the line (but don't error out doing so)
-		}
-
-		int spanEnd = GetNextLineStartPosition(index, out _);
-
-		if (spanEnd > 0)
-			spanEnd--; // don't include the line separator
-
-		if (spanStart > spanEnd)
-			spanStart = spanEnd; // empty span
-
-		int actualLineLength = spanEnd - spanStart + 1;
+		int actualLineLength = spanEnd - spanStart;
 		itemCount = Math.Min(actualLineLength, line.Length);
 
 		data.AsSpan(spanStart, itemCount).CopyTo(line);
@@ -714,8 +707,10 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 		if (previousIndex == lineStarts.Count)
 		{
 			// 2nd Case: the next line start is outside of the buffer (EOF convention)
-			lsListIndex = previousIndex;
-			return data.Length;
+			// however we're gonna decrement one because otherwise all indexes from the last line that are after
+			// start of said line suddenly become part of the EOF line
+			lsListIndex = previousIndex - 1;
+			return Length;
 		}
 
 		lsListIndex = previousIndex == 0 ? 0 : previousIndex - 1;

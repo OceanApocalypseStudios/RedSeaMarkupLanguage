@@ -8,6 +8,12 @@ public class ReadOnlyStringBufferTests
 {
 	private const string TestString01 = "Hey\r\nThis\rIs\u2029A Test \n Method\r\n\r\n.\u2028";
 
+	/*
+	 * todo: see why tests for TryGetLineAt are failing
+	 * todo: write more tests for GetLineNumberForIndex
+	 * todo: test all buffer methods (close open issues first)
+	 */
+
 	[TestMethod]
 	[DataRow(TestString01, 0, 0)]  // H in "Hey"
 	[DataRow(TestString01, 3, 0)]  // CR in "Hey\r\n"
