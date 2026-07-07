@@ -13,7 +13,7 @@ namespace OceanApocalypseStudios.RSML.Sources.Buffers;
 /// Represents a buffer.
 /// </summary>
 /// <typeparam name="TItem">The datatype of the values returned by the buffer methods</typeparam>
-public interface IReadOnlyBuffer<TItem> : ISource
+public interface IReadOnlyBuffer<TItem> : ISource, IEquatable<IReadOnlyBuffer<TItem>?>
 {
 	/// <summary>
 	/// The amount of lines in the buffer.

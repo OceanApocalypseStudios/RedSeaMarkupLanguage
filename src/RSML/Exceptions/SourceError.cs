@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis; // needed despite grayed out by VS
 
 using OceanApocalypseStudios.RSML.Sources;
 
@@ -29,7 +30,12 @@ public readonly struct SourceError(SourceSpan span, string message, Severity sev
 	public Severity Severity => severity;
 
 	/// <inheritdoc/>
-	public override bool Equals(object? obj) => obj is SourceError error && Equals(error);
+#if NET10_0_OR_GREATER
+	public override bool Equals([NotNullWhen(true)] object? obj) =>
+#elif NETSTANDARD2_0
+	public override bool Equals(object obj) =>
+#endif
+		obj is SourceError error && Equals(error);
 
 	/// <inheritdoc/>
 	public bool Equals(SourceError other) => Message == other.Message && Severity == other.Severity && Span.Equals(other.Span);

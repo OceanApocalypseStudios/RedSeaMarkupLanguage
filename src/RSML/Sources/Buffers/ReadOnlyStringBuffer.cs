@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 using OceanApocalypseStudios.RSML.Common;
@@ -12,12 +13,11 @@ namespace OceanApocalypseStudios.RSML.Sources.Buffers;
 /// primarily via the internal use of <see cref="Span{Char}"/> over string allocations
 /// and also via caching.
 /// </summary>
-public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>,
-									ISupportsCache
+public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEquatable<ReadOnlyStringBuffer?>
 {
-	private readonly List<int> lineSeparators = [ ];
+	private readonly List<int> lineStarts = [];
 
-	private readonly List<int> crFollowedByLf = [ ];
+	private readonly List<int> precededByCrLf = [];
 
 	private readonly string data;
 
@@ -32,9 +32,9 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>,
 	{
 		get
 		{
-			ComputeLineSeparators();
+			ComputeLineStarts();
 
-			return lineSeparators.Count;
+			return lineStarts.Count;
 		}
 	}
 
@@ -90,81 +90,136 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>,
 	/// <remarks>This method is not CLS-compliant due to the unsafe context and the use of pointers.</remarks>
 	[CLSCompliant(false)]
 	public unsafe ReadOnlyStringBuffer(byte* contentPtr, int byteCount, Encoding? encoding = null) =>
-		data = encoding?.GetString(contentPtr, byteCount) ?? Encoding.Default.GetString(contentPtr, byteCount);
+		data = (encoding ?? Encoding.Default).GetString(contentPtr, byteCount);
 
-	private int GetLineSeparatorAfter(int index, out int lsListIndex)
+	private int GetNextLineStartPosition(int index, out int lsListIndex) =>
+		// we use index + 1 to skip to the next line start if we're already standing on one :)
+		GetNextLineStartFromInsertionPoint(lineStarts.BinarySearch(index + 1), out lsListIndex);
+
+	/// <summary>
+	/// Shared code context for <see cref="GetNextLineStartPosition(Int32, out Int32)"/> and
+	/// <see cref="GetNextOrCurrentLineStartPosition(Int32, out Int32)"/>.
+	/// </summary>
+	/// <param name="insertionPoint">The insertion point of the next line start.</param>
+	/// <param name="lsListIndex">The index, in <see cref="lineStarts"/> where the line start is.</param>
+	/// <returns>The line start index, in <see cref="data"/>.</returns>
+	private int GetNextLineStartFromInsertionPoint(int insertionPoint, out int lsListIndex)
 	{
-		int insertionPoint = lineSeparators.BinarySearch(index);
-
-		lsListIndex = insertionPoint;
-
 		if (insertionPoint >= 0)
-			return lineSeparators[insertionPoint];
+		{
+			// 1st Case: the used index (might have been index + 1 based on the method that called this)
+			// points to an actual line start
+			lsListIndex = insertionPoint;
+			return lineStarts[insertionPoint];
+		}
 
-		lsListIndex = -1;
+		int nextIndex = ~insertionPoint;
 
-		if (~insertionPoint == lineSeparators.Count)
-			return data.Length - 1; // last character
+		if (nextIndex == lineStarts.Count)
+		{
+			// 2nd Case: the next line start is outside of the buffer (EOF convention)
+			lsListIndex = -1;
+			return data.Length;
+		}
 
-		lsListIndex = ~insertionPoint;
+		lsListIndex = nextIndex;
 
-		return lineSeparators[~insertionPoint];
+		return lineStarts[nextIndex]; // 3rd Case: we found the next line start
 	}
 
-	private int GetLineSeparatorBefore(int index, out int lsListIndex)
+	private int GetNextOrCurrentLineStartPosition(int index, out int lsListIndex) =>
+		// we use the actual index because we might already be standing on the line start
+		GetNextLineStartFromInsertionPoint(lineStarts.BinarySearch(index), out lsListIndex);
+
+	/// <summary>
+	/// Shared code context for <see cref="GetPreviousLineStartPosition(Int32, out Int32)"/> and
+	/// <see cref="GetPreviousOrCurrentLineStartPosition(Int32, out Int32)"/>.
+	/// </summary>
+	/// <param name="insertionPoint">The insertion point of the next line start.</param>
+	/// <param name="lsListIndex">The index, in <see cref="lineStarts"/> where the line start is.</param>
+	/// <returns>The line start index, in <see cref="data"/>.</returns>
+	private int GetPreviousLineStartFromInsertionPoint(int insertionPoint, out int lsListIndex)
 	{
-		lsListIndex = -1;
-
-		if (index == 0)
-			return 0;
-
-		int insertionPoint = lineSeparators.BinarySearch(index);
-
-		lsListIndex = insertionPoint;
-
 		if (insertionPoint >= 0)
-			return lineSeparators[lsListIndex];
+		{
+			// 1st Case: the used index (might have been index + 1 based on the method that called this)
+			// points to an actual line start
+			lsListIndex = insertionPoint;
+			return lineStarts[insertionPoint];
+		}
 
-		lsListIndex = lineSeparators.Count - 1;
+		int nextIndex = ~insertionPoint;
 
-		if (~insertionPoint == lineSeparators.Count)
-			return lineSeparators[lsListIndex];
+		if (nextIndex == lineStarts.Count)
+		{
+			// 2nd Case: the next line start is outside of the buffer (EOF convention)
+			lsListIndex = -1;
+			return data.Length;
+		}
 
-		lsListIndex = ~insertionPoint - 1;
+		lsListIndex = nextIndex < 0 ? 0 : nextIndex - 1;
 
-		if (lsListIndex == -1)
-			return 0;
-
-		return lineSeparators[lsListIndex];
+		return lineStarts[lsListIndex]; // 3rd Case: we found the previous line start
 	}
 
-	private void ComputeLineSeparators(bool forceCache = false)
+	private int GetPreviousLineStartPosition(int index, out int lsListIndex)
+	{
+		if (index > 0)
+		{
+			// when the index is greater than 0, we can safely get the previous line start without getting a big shitty error
+			// we use 0 as the start following standard conventions
+			return GetPreviousLineStartFromInsertionPoint(lineStarts.BinarySearch(index - 1), out lsListIndex);
+		}
+
+		lsListIndex = 0;
+		return 0;
+	}
+
+	private int GetPreviousOrCurrentLineStartPosition(int index, out int lsListIndex)
+	{
+		if (index > 0)
+		{
+			// when the index is greater than 0, we can safely get the previous line start without getting a big shitty error
+			// we use 0 as the start following standard conventions
+			return GetPreviousLineStartFromInsertionPoint(lineStarts.BinarySearch(index), out lsListIndex);
+		}
+
+		lsListIndex = 0;
+		return 0;
+	}
+
+	private void ComputeLineStarts(bool forceCache = false)
 	{
 		if (CacheExists && !forceCache)
 			return;
 
 		var span = data.AsSpan();
 
-		lineSeparators.Clear();
-		crFollowedByLf.Clear();
+		lineStarts.Clear();
+		precededByCrLf.Clear();
 
-		lineSeparators.Capacity = Math.Max(lineSeparators.Capacity, span.Length / 25 + 32); // just a rough guess
-		crFollowedByLf.Capacity = Math.Max(crFollowedByLf.Capacity, span.Length / 25 + 16); // just a rough guess
+		lineStarts.Capacity = Math.Max(lineStarts.Capacity, span.Length / 25 + 32); // just a rough guess
+		precededByCrLf.Capacity = Math.Max(precededByCrLf.Capacity, span.Length / 25 + 16); // just a rough guess
 
 		int lastIndex = span.Length - 1;
+		int i = 0;
 
-		for (int i = 0; i < span.Length; i++)
+		while (i < span.Length)
 		{
 			if (!span[i].IsNewline())
-				continue; // immediate continue brotato
-
-			lineSeparators.Add(i);
-
-			if (i < lastIndex && span[i] == '\r' && span[i + 1] == '\n')
 			{
-				crFollowedByLf.Add(i);
-				i++; // skip the fucking LF associated to the CRLF
+				i++;
+				continue;
 			}
+
+			bool isCrLf = i < lastIndex && span[i] == '\r' && span[i + 1] == '\n';
+			int nextStart = i + (isCrLf ? 2 : 1);
+			lineStarts.Add(nextStart);
+
+			if (isCrLf)
+				precededByCrLf.Add(nextStart);
+
+			i = nextStart;
 		}
 
 		CacheExists = true;
@@ -236,10 +291,10 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>,
 		if (data[index].IsNewline())
 			return 0;
 
-		ComputeLineSeparators();
-		int lineSep = GetLineSeparatorAfter(index, out _);
+		ComputeLineStarts();
+		int lineSep = GetNextLineStartPosition(index, out _);
 
-		isCrLf = crFollowedByLf.Contains(lineSep);
+		isCrLf = precededByCrLf.Contains(lineSep);
 
 		return lineSep - index;
 	}
@@ -252,9 +307,9 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>,
 		if (index < 0)
 			index = data.Length + index; // -1 is (Length-1) etc
 
-		ComputeLineSeparators();
+		ComputeLineStarts();
 
-		return index - GetLineSeparatorBefore(index, out _);
+		return index - GetPreviousLineStartPosition(index, out _);
 	}
 
 	private bool IsOutOfBounds(int index) => index >= data.Length;
@@ -299,8 +354,6 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>,
 		return true;
 	}
 
-	private bool IsStartOfLine(int index) => index == 0 || data[index - 1].IsNewline();
-
 	/// <inheritdoc/>
 	public bool TryGetNextLineFrom(int index, Span<char> line, out int itemCount)
 	{
@@ -315,9 +368,9 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>,
 		if (IsOutOfBounds(index))
 			return false;
 
-		ComputeLineSeparators();
+		ComputeLineStarts();
 
-		if (crFollowedByLf.Contains(index - 1)) // is the current index pointing to a LF inside a CRLF?
+		if (precededByCrLf.Contains(index - 1)) // is the current index pointing to a LF inside a CRLF?
 			index--;                            // use the CR in the CRLF sequence instead of using the LF
 
 		index += CountUntilLineSeparator(index, out bool isCrLf); // skip to the next line separator
@@ -483,7 +536,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>,
 			return true;
 		}
 
-		ComputeLineSeparators();
+		ComputeLineStarts();
 
 		location = new(index, CountLinesBefore(index), ReverseCountUntilNewline(index));
 
@@ -495,7 +548,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>,
 		if (index == data.Length - 1)
 			return LineCount;
 
-		GetLineSeparatorBefore(index, out int lineSepIndex);
+		GetPreviousOrCurrentLineStartPosition(index, out int lineSepIndex);
 
 		return lineSepIndex + 1; // the amount of lines is the amount of line separators plus 1 ALWAYS
 	}
@@ -508,23 +561,23 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>,
 		if (IsEmpty || lineNumber < 0)
 			return false;
 
-		ComputeLineSeparators();
+		ComputeLineStarts();
 
-		if (lineNumber >= lineSeparators.Count)
+		if (lineNumber >= lineStarts.Count)
 			return false;
 
-		int spanEnd = lineSeparators[lineNumber];
+		int spanEnd = lineStarts[lineNumber];
 
 		int spanStartIndex = lineNumber == 0
 								 ? 0
 								 : lineNumber - 1;
 
-		if (crFollowedByLf.Contains(lineSeparators[spanStartIndex]))
+		if (precededByCrLf.Contains(lineStarts[spanStartIndex]))
 			spanStartIndex++; // skip past the CR in the CRLF sequence
 
 		spanStartIndex++; // get the actual start of the next line instead of the line sep
 
-		int spanStart = lineSeparators[spanStartIndex];
+		int spanStart = lineStarts[spanStartIndex];
 		int actualLineLength = spanEnd - spanStart + 1;
 		itemCount = Math.Min(actualLineLength, destination.Length);
 
@@ -547,20 +600,20 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>,
 		if (IsOutOfBounds(index))
 			return false;
 
-		ComputeLineSeparators();
+		ComputeLineStarts();
 
-		int spanStart = GetLineSeparatorBefore(index, out int lineSepBeforeIndex);
+		int spanStart = GetPreviousLineStartPosition(index, out int lineSepBeforeIndex);
 
 		if (lineSepBeforeIndex != -1) // only skip necessary characters if the start of the span isn't 0
 		{
-			if (crFollowedByLf.Contains(spanStart))
+			if (precededByCrLf.Contains(spanStart))
 				spanStart++; // skip the LF in the CRLF sequence (if applicable)
 
 			if (index < data.Length - 1)
 				spanStart++; // skip to the actual start of the line (but don't error out doing so)
 		}
 
-		int spanEnd = GetLineSeparatorAfter(index, out _);
+		int spanEnd = GetNextLineStartPosition(index, out _);
 
 		if (spanEnd > 0)
 			spanEnd--; // don't include the line separator
@@ -587,13 +640,13 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>,
 
 	public int GetLengthOfLine(int lineNumber)
 	{
-		// todo: this should return the minimum length of a line (#54)
+		// todo: this should return the exact length of a line (#54)
 		throw new NotImplementedException();
 	}
 
 	public int GetLengthOfLineAt(int index)
 	{
-		// todo: this should return the minimum length of a line (#54)
+		// todo: this should return the exact length of a line (#54)
 		throw new NotImplementedException();
 	}
 
@@ -607,8 +660,61 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>,
 	}
 
 	/// <inheritdoc/>
-	public void BuildCache() => ComputeLineSeparators();
+	public void BuildCache() => ComputeLineStarts();
 
 	/// <inheritdoc/>
-	public void BuildCache(bool forceRebuild) => ComputeLineSeparators(forceRebuild);
+	public void BuildCache(bool forceRebuild) => ComputeLineStarts(forceRebuild);
+
+	/// <inheritdoc/>
+#if NET10_0_OR_GREATER
+	public override bool Equals([NotNullWhen(true)] object? obj) =>
+#elif NETSTANDARD2_0
+	public override bool Equals(object obj) =>
+#endif
+		Equals(obj as ReadOnlyStringBuffer);
+
+	/// <summary>
+	/// Returns the buffer's content as a <see cref="String"/>.
+	/// </summary>
+	/// <returns>The buffer's content.</returns>
+	public override string ToString() => data;
+
+	/// <summary>
+	/// Checks if another read-only string buffer is equal to the current instance.
+	/// </summary>
+	/// <param name="other">The other read-only string buffer.</param>
+	/// <returns>True if equals.</returns>
+	public bool Equals(ReadOnlyStringBuffer? other) => other is not null && data == other.data && Length == other.Length && IsEmpty == other.IsEmpty && LineCount == other.LineCount;
+
+	/// <inheritdoc/>
+	public override int GetHashCode()
+	{
+		unchecked
+		{
+			int hashCode = InternalUtils.HashCodeSeed * InternalUtils.HashCodeMultiplier + EqualityComparer<string>.Default.GetHashCode(data);
+			hashCode = hashCode * InternalUtils.HashCodeMultiplier + Length.GetHashCode();
+			hashCode = hashCode * InternalUtils.HashCodeMultiplier + IsEmpty.GetHashCode();
+			return hashCode * InternalUtils.HashCodeMultiplier + LineCount.GetHashCode();
+		}
+	}
+
+	/// <summary>
+	/// Checks if another read-only buffer is equal to the current instance.
+	/// </summary>
+	/// <param name="other">The other read-only buffer.</param>
+	/// <returns>True if equals.</returns>
+	public bool Equals(IReadOnlyBuffer<char>? other) => other is ReadOnlyStringBuffer buffer && Equals(buffer);
+
+	/// <summary>
+	/// Checks if two read-only string buffers are equals.
+	/// </summary>
+	/// <returns>True if equals.</returns>
+	public static bool operator ==(ReadOnlyStringBuffer left, ReadOnlyStringBuffer right) =>
+		EqualityComparer<ReadOnlyStringBuffer>.Default.Equals(left, right);
+
+	/// <summary>
+	/// Checks if two read-only string buffers are different.
+	/// </summary>
+	/// <returns>True if different.</returns>
+	public static bool operator !=(ReadOnlyStringBuffer left, ReadOnlyStringBuffer right) => !(left == right);
 }
