@@ -75,6 +75,12 @@ public interface IReadOnlyBuffer<TItem> : ISource, IEquatable<IReadOnlyBuffer<TI
 	/// Determines the 0-based line number of the line that contains the item located at <paramref name="index"/>.
 	/// </summary>
 	/// <param name="index">The index whose parent line's number is to be returned.</param>
+	/// <remarks>
+	/// > [!NOTE]
+	/// > This method follows the convention where the index can be equal to the buffer's length,
+	/// > which means to consider the end of the buffer.
+	/// > When index is set to EOF, for this method, it returns <see cref="LineCount"/>.
+	/// </remarks>
 	/// <returns>The 0-based number of the line that contains item located at <paramref name="index"/>.</returns>
 	int GetLineNumberAt(int index);
 

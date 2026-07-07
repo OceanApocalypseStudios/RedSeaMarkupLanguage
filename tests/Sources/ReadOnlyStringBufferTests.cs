@@ -10,21 +10,25 @@ public class ReadOnlyStringBufferTests
 
 	[TestMethod]
 	[DataRow(TestString01, 0, 0)]  // H in "Hey"
-	[DataRow(TestString01, 3, 1)]  // CR in "Hey\r\n"
-	[DataRow(TestString01, 4, 1)]  // LF in "Hey\r\n"
+	[DataRow(TestString01, 3, 0)]  // CR in "Hey\r\n"
+	[DataRow(TestString01, 4, 0)]  // LF in "Hey\r\n"
 	[DataRow(TestString01, 5, 1)]  // T in "This"
+	[DataRow(TestString01, 6, 1)]  // h in "This"
 	[DataRow(TestString01, 13, 3)] // A in "A Test"
 	[DataRow(TestString01, 15, 3)] // T in "Test"
 	[DataRow(TestString01, 22, 4)] // M in "Method"
-	[DataRow(TestString01, 29, 5)] // First LF in "\r\n\r\n."
-	[DataRow(TestString01, 30, 6)] // Second CR in "\r\n\r\n."
-	[DataRow(TestString01, 31, 6)] // Second LF in "\r\n\r\n."
-	[DataRow(TestString01, 33, 7)] // End of file
-	public void CountLinesBefore(string data, int index, int expectedLineCount)
+	[DataRow(TestString01, 28, 4)] // First CR in "\r\n\r\n."
+	[DataRow(TestString01, 29, 4)] // First LF in "\r\n\r\n."
+	[DataRow(TestString01, 30, 5)] // Second CR in "\r\n\r\n."
+	[DataRow(TestString01, 31, 5)] // Second LF in "\r\n\r\n."
+	[DataRow(TestString01, 32, 6)] // Dot/point in "\r\n\r\n."
+	[DataRow(TestString01, 33, 6)] // U2028 in ".\u2028"
+	[DataRow(TestString01, 34, 7)] // End of file
+	public void GetLineNumberAt(string data, int index, int expectedLineCount)
 	{
 		var buffer = new ReadOnlyStringBuffer(data);
 		buffer.BuildCache();
-		Assert.AreEqual(expectedLineCount, buffer.CountLinesBefore(index));
+		Assert.AreEqual(expectedLineCount, buffer.GetLineNumberAt(index));
 	}
 
 	[TestMethod]

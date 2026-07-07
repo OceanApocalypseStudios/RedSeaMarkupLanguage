@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 using OceanApocalypseStudios.RSML.Common;
+using OceanApocalypseStudios.RSML.Exceptions;
 
 
 namespace OceanApocalypseStudios.RSML.Sources.Buffers;
@@ -21,10 +22,13 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 	private readonly string data;
 
 	/// <inheritdoc/>
-	public int Length => data.Length;
+	public bool CacheExists { get; private set; } = false;
 
 	/// <inheritdoc/>
 	public bool IsEmpty => Length == 0;
+
+	/// <inheritdoc/>
+	public int Length => data.Length;
 
 	/// <inheritdoc/>
 	public int LineCount
@@ -36,9 +40,6 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 			return lineStarts.Count;
 		}
 	}
-
-	/// <inheritdoc/>
-	public bool CacheExists { get; private set; } = false;
 
 	/// <inheritdoc/>
 	public char this[int index] => data[index];
@@ -91,187 +92,11 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 	public unsafe ReadOnlyStringBuffer(byte* contentPtr, int byteCount, Encoding? encoding = null) =>
 		data = (encoding ?? Encoding.Default).GetString(contentPtr, byteCount);
 
-	private int GetNextLineStartPosition(int index, out int lsListIndex) =>
-		// we use index + 1 to skip to the next line start if we're already standing on one :)
-		GetNextLineStartFromInsertionPoint(lineStarts.BinarySearch(index + 1), out lsListIndex);
-
-	/// <summary>
-	/// Shared code context for <see cref="GetNextLineStartPosition(Int32, out Int32)"/> and
-	/// <see cref="GetNextOrCurrentLineStartPosition(Int32, out Int32)"/>.
-	/// </summary>
-	/// <param name="insertionPoint">The insertion point of the next line start.</param>
-	/// <param name="lsListIndex">The index, in <see cref="lineStarts"/> where the line start is.</param>
-	/// <returns>The line start index, in <see cref="data"/>.</returns>
-	private int GetNextLineStartFromInsertionPoint(int insertionPoint, out int lsListIndex)
-	{
-		if (insertionPoint >= 0)
-		{
-			// 1st Case: the used index (might have been index + 1 based on the method that called this)
-			// points to an actual line start
-			lsListIndex = insertionPoint;
-			return lineStarts[insertionPoint];
-		}
-
-		int nextIndex = ~insertionPoint;
-
-		if (nextIndex == lineStarts.Count)
-		{
-			// 2nd Case: the next line start is outside of the buffer (EOF convention)
-			lsListIndex = -1;
-			return data.Length;
-		}
-
-		lsListIndex = nextIndex;
-
-		return lineStarts[nextIndex]; // 3rd Case: we found the next line start
-	}
-
-	private int GetNextOrCurrentLineStartPosition(int index, out int lsListIndex) =>
-		// we use the actual index because we might already be standing on the line start
-		GetNextLineStartFromInsertionPoint(lineStarts.BinarySearch(index), out lsListIndex);
-
-	/// <summary>
-	/// Shared code context for <see cref="GetPreviousLineStartPosition(Int32, out Int32)"/> and
-	/// <see cref="GetPreviousOrCurrentLineStartPosition(Int32, out Int32)"/>.
-	/// </summary>
-	/// <param name="insertionPoint">The insertion point of the next line start.</param>
-	/// <param name="lsListIndex">The index, in <see cref="lineStarts"/> where the line start is.</param>
-	/// <returns>The line start index, in <see cref="data"/>.</returns>
-	private int GetPreviousLineStartFromInsertionPoint(int insertionPoint, out int lsListIndex)
-	{
-		if (insertionPoint >= 0)
-		{
-			// 1st Case: the used index (might have been index + 1 based on the method that called this)
-			// points to an actual line start
-			lsListIndex = insertionPoint;
-			return lineStarts[insertionPoint];
-		}
-
-		int nextIndex = ~insertionPoint;
-
-		if (nextIndex == lineStarts.Count)
-		{
-			// 2nd Case: the next line start is outside of the buffer (EOF convention)
-			lsListIndex = -1;
-			return data.Length;
-		}
-
-		lsListIndex = nextIndex < 0 ? 0 : nextIndex - 1;
-
-		return lineStarts[lsListIndex]; // 3rd Case: we found the previous line start
-	}
-
-	private int GetPreviousLineStartPosition(int index, out int lsListIndex)
-	{
-		if (index > 0)
-		{
-			// when the index is greater than 0, we can safely get the previous line start without getting a big shitty error
-			// we use 0 as the start following standard conventions
-			return GetPreviousLineStartFromInsertionPoint(lineStarts.BinarySearch(index - 1), out lsListIndex);
-		}
-
-		lsListIndex = 0;
-		return 0;
-	}
-
-	private int GetPreviousOrCurrentLineStartPosition(int index, out int lsListIndex)
-	{
-		if (index > 0)
-		{
-			// when the index is greater than 0, we can safely get the previous line start without getting a big shitty error
-			// we use 0 as the start following standard conventions
-			return GetPreviousLineStartFromInsertionPoint(lineStarts.BinarySearch(index), out lsListIndex);
-		}
-
-		lsListIndex = 0;
-		return 0;
-	}
-
-	private void ComputeLineStarts(bool forceCache = false)
-	{
-		if (CacheExists && !forceCache)
-			return;
-
-		var span = data.AsSpan();
-
-		lineStarts.Clear();
-		precededByCrLf.Clear();
-
-		lineStarts.Capacity = Math.Max(lineStarts.Capacity, span.Length / 25 + 32); // just a rough guess
-		precededByCrLf.Capacity = Math.Max(precededByCrLf.Capacity, span.Length / 25 + 16); // just a rough guess
-
-		int lastIndex = span.Length - 1;
-		int i = 0;
-
-		while (i < span.Length)
-		{
-			if (!span[i].IsNewline())
-			{
-				i++;
-				continue;
-			}
-
-			bool isCrLf = i < lastIndex && span[i] == '\r' && span[i + 1] == '\n';
-			int nextStart = i + (isCrLf ? 2 : 1);
-			lineStarts.Add(nextStart);
-
-			if (isCrLf)
-				precededByCrLf.Add(nextStart);
-
-			i = nextStart;
-		}
-
-		CacheExists = true;
-	}
+	/// <inheritdoc/>
+	public void BuildCache() => ComputeLineStarts();
 
 	/// <inheritdoc/>
-	public int CountUntilWhitespace(int index)
-	{
-		if (IsEmpty)
-			return 0;
-
-		if (index < 0)
-			index = data.Length + index; // -1 is (Length-1) etc
-
-		if (IsOutOfBounds(index))
-			return -1;
-
-		var span = data.AsSpan(index);
-		int count = 0;
-
-		while (count < span.Length && !Char.IsWhiteSpace(span[count]))
-			count++;
-
-		return count;
-	}
-
-	private int CountUntilMatch(int index, char character)
-	{
-		if (index < 0)
-			index = data.Length + index; // -1 is (Length-1) etc
-
-		var span = data.AsSpan(index);
-		int count = 0;
-
-		while (count < span.Length && span[count] == character)
-			count++;
-
-		return count;
-	}
-
-	private int CountUntilNotMatch(int index, char character)
-	{
-		if (index < 0)
-			index = data.Length + index; // -1 is (Length-1) etc
-
-		var span = data.AsSpan(index);
-		int count = 0;
-
-		while (count < span.Length && span[count] != character)
-			count++;
-
-		return count;
-	}
+	public void BuildCache(bool forceRebuild) => ComputeLineStarts(forceRebuild);
 
 	/// <inheritdoc/>
 	public int CountUntilLineSeparator(int index, out bool isCrLf)
@@ -284,7 +109,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 		if (index < 0)
 			index = data.Length + index; // -1 is (Length-1) etc
 
-		if (IsOutOfBounds(index))
+		if (IsOutOfRange(index))
 			return -1;
 
 		if (data[index].IsNewline())
@@ -298,20 +123,47 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 		return lineSep - index;
 	}
 
-	/// <remarks>
-	/// Ignores the LF in CRLF sequences (returns the CR if the matching sequence is CRLF) - avoid double counting and other issues.
-	/// </remarks>
-	private int ReverseCountUntilNewline(int index)
+	/// <inheritdoc/>
+	public int CountUntilNotWhitespace(int index)
 	{
+		if (IsEmpty)
+			return 0;
+
 		if (index < 0)
 			index = data.Length + index; // -1 is (Length-1) etc
 
-		ComputeLineStarts();
+		if (IsOutOfRange(index))
+			return -1;
 
-		return index - GetPreviousLineStartPosition(index, out _);
+		var span = data.AsSpan(index);
+		int count = 0;
+
+		while (count < span.Length && Char.IsWhiteSpace(span[count]))
+			count++;
+
+		return count;
 	}
 
-	private bool IsOutOfBounds(int index) => index >= data.Length;
+	/// <inheritdoc/>
+	public int CountUntilWhitespace(int index)
+	{
+		if (IsEmpty)
+			return 0;
+
+		if (index < 0)
+			index = data.Length + index; // -1 is (Length-1) etc
+
+		if (IsOutOfRange(index))
+			return -1;
+
+		var span = data.AsSpan(index);
+		int count = 0;
+
+		while (count < span.Length && !Char.IsWhiteSpace(span[count]))
+			count++;
+
+		return count;
+	}
 
 	/// <inheritdoc/>
 	public int CountWhile(Func<int, char, bool> predicate, int index)
@@ -322,7 +174,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 		if (index < 0)
 			index = data.Length + index; // -1 is (Length-1) etc
 
-		if (IsOutOfBounds(index))
+		if (IsOutOfRange(index))
 			return -1;
 
 		var span = data.AsSpan(index);
@@ -332,6 +184,55 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 			count++;
 
 		return count;
+	}
+
+	public int GetLengthOfLine(int lineNumber)
+	{
+		// todo: this should return the exact length of a line (#54)
+		throw new NotImplementedException();
+	}
+
+	public int GetLengthOfLineAt(int index)
+	{
+		// todo: this should return the exact length of a line (#54)
+		throw new NotImplementedException();
+	}
+
+	/// <exception cref="BufferException">
+	/// The buffer is empty.
+	/// </exception>
+	/// <exception cref="IndexOutOfRangeException">
+	/// <paramref name="index"/> was set to something greater than the buffer's length.
+	/// </exception>
+	/// <inheritdoc/>
+	public int GetLineNumberAt(int index)
+	{
+		if (IsEmpty)
+			throw new BufferException("Buffer cannot be empty.");
+
+		if (index < 0)
+			index += data.Length;
+
+		if (IsConventionallyOutOfRange(index))
+			throw new IndexOutOfRangeException("Index must be less than the buffer's length in this context.");
+
+		GetPreviousOrCurrentLineStartPosition(index, out int lineSepIndex);
+		return lineSepIndex;
+	}
+
+	/// <inheritdoc/>
+	public char[] Slice(int start, int length) => data.ToCharArray(start, length);
+
+	/// <inheritdoc/>
+	public void Slice(int start, Span<char> slice) => data.AsSpan(start, slice.Length).CopyTo(slice);
+
+	/// <inheritdoc/>
+	public void Slice(SourceSpan sourceSpan, Span<char> slice)
+	{
+		if (slice.Length < sourceSpan.Length)
+			throw new ArgumentException("The slice's length is less than the span's length and therefore cannot contain the sliced region.", nameof(slice));
+
+		data.AsSpan(sourceSpan.Start.Index, sourceSpan.Length).CopyTo(slice);
 	}
 
 	/// <inheritdoc/>
@@ -345,211 +246,12 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 		if (index < 0)
 			index = data.Length + index; // -1 is (Length-1) etc
 
-		if (IsOutOfBounds(index))
+		if (IsOutOfRange(index))
 			return false;
 
 		item = data[index];
 
 		return true;
-	}
-
-	/// <inheritdoc/>
-	public bool TryGetNextLineFrom(int index, Span<char> line, out int itemCount)
-	{
-		itemCount = 0;
-
-		if (IsEmpty)
-			return false;
-
-		if (index < 0)
-			index += data.Length;
-
-		if (IsOutOfBounds(index))
-			return false;
-
-		ComputeLineStarts();
-
-		if (precededByCrLf.Contains(index - 1)) // is the current index pointing to a LF inside a CRLF?
-			index--;                            // use the CR in the CRLF sequence instead of using the LF
-
-		index += CountUntilLineSeparator(index, out bool isCrLf); // skip to the next line separator
-		index += isCrLf ? 2 : 1; // skip to the actual start of the next line (skip twice if CRLF)
-
-		if (IsOutOfBounds(index))
-			return false;
-
-		// when summed with the index, returns the line separator index - which must be excluded from the return value
-		int actualLineLength = CountUntilLineSeparator(index, out _);
-		int charsToCopyAmount = Math.Min(actualLineLength, line.Length);
-		data.AsSpan(index, charsToCopyAmount).CopyTo(line);
-
-		itemCount = charsToCopyAmount;
-
-		return line.Length >= actualLineLength;
-	}
-
-	/// <inheritdoc/>
-	public bool TryGetWord(int index, Span<char> destination, out bool isWhitespace, out int itemCount)
-	{
-		isWhitespace = false;
-		itemCount = 0;
-
-		if (IsEmpty)
-			return false;
-
-		if (index < 0)
-			index += data.Length;
-
-		if (IsOutOfBounds(index))
-			return false;
-
-		isWhitespace = Char.IsWhiteSpace(data[index]);
-
-		// if first index is whitespace, the word is whitespace (ends when not whitespace/end of buffer)
-		// if first index not whitespace, the word is not whitespace (ends on whitespace/end of buffer)
-		int actualLineLength = isWhitespace
-								   ? CountUntilNotWhitespace(index)
-								   : CountUntilWhitespace(index);
-
-		int charsToCopyAmount = Math.Min(actualLineLength, destination.Length);
-		data.AsSpan(index, charsToCopyAmount).CopyTo(destination);
-
-		itemCount = charsToCopyAmount;
-
-		return destination.Length >= actualLineLength;
-	}
-
-	/// <inheritdoc/>
-	public bool TryGetWord(int index, char itemKind, Span<char> destination, out bool isItemKind, out int itemCount)
-	{
-		isItemKind = false;
-		itemCount = 0;
-
-		if (IsEmpty)
-			return false;
-
-		if (index < 0)
-			index += data.Length;
-
-		if (IsOutOfBounds(index))
-			return false;
-
-		isItemKind = data[index] == itemKind;
-
-		// if first index is KIND, the word is KIND (ends when not KIND/end of buffer)
-		// if first index not KIND, the word is not KIND (ends on KIND/end of buffer)
-		int actualLineLength = isItemKind
-								   ? CountUntilNotMatch(index, itemKind)
-								   : CountUntilMatch(index, itemKind);
-
-		int charsToCopyAmount = Math.Min(actualLineLength, destination.Length);
-		data.AsSpan(index, charsToCopyAmount).CopyTo(destination);
-
-		itemCount = charsToCopyAmount;
-
-		return destination.Length >= actualLineLength;
-	}
-
-	/// <inheritdoc/>
-	public int CountUntilNotWhitespace(int index)
-	{
-		if (IsEmpty)
-			return 0;
-
-		if (index < 0)
-			index = data.Length + index; // -1 is (Length-1) etc
-
-		if (IsOutOfBounds(index))
-			return -1;
-
-		var span = data.AsSpan(index);
-		int count = 0;
-
-		while (count < span.Length && Char.IsWhiteSpace(span[count]))
-			count++;
-
-		return count;
-	}
-
-	/// <inheritdoc/>
-	public char[] Slice(int start, int length) => data.ToCharArray(start, length);
-
-	/// <inheritdoc/>
-	public void Dispose() => GC.SuppressFinalize(this);
-
-	/// <inheritdoc/>
-	public bool TryGetWord(int index, Func<int, char, bool> itemKindPredicate, Span<char> destination, out bool isItemKind, out int itemCount)
-	{
-		isItemKind = false;
-		itemCount = 0;
-
-		if (IsEmpty)
-			return false;
-
-		if (index < 0)
-			index += data.Length;
-
-		if (IsOutOfBounds(index))
-			return false;
-
-		isItemKind = itemKindPredicate(index, data[index]);
-
-		// if first index is KIND, the word is KIND (ends when not KIND/end of buffer)
-		// if first index not KIND, the word is not KIND (ends on KIND/end of buffer)
-		int actualLineLength = isItemKind
-								   ? CountWhile((i, c) => !itemKindPredicate(i, c), index)
-								   : CountWhile(itemKindPredicate, index);
-
-		int charsToCopyAmount = Math.Min(actualLineLength, destination.Length);
-		data.AsSpan(index, charsToCopyAmount).CopyTo(destination);
-
-		itemCount = charsToCopyAmount;
-
-		return destination.Length >= actualLineLength;
-	}
-
-	/// <inheritdoc/>
-	public void Slice(int start, Span<char> slice) => data.AsSpan(start, slice.Length).CopyTo(slice);
-
-	/// <remarks>
-	/// This implementation, unlike others, is official and does not suffer from major performance issues.
-	/// </remarks>
-	/// <inheritdoc/>
-	public bool TryGetSourceLocation(int index, out SourceLocation location)
-	{
-		location = new();
-
-		if (IsEmpty)
-			return false;
-
-		if (index < 0)
-			index += data.Length;
-
-		if (IsOutOfBounds(index))
-			return false;
-
-		if (index == 0) // best "best" case = triple zero
-		{
-			location = new(0, 0, 0);
-
-			return true;
-		}
-
-		ComputeLineStarts();
-
-		location = new(index, CountLinesBefore(index), ReverseCountUntilNewline(index));
-
-		return true;
-	}
-
-	internal int CountLinesBefore(int index)
-	{
-		if (index == data.Length - 1)
-			return LineCount;
-
-		GetPreviousOrCurrentLineStartPosition(index, out int lineSepIndex);
-
-		return lineSepIndex + 1; // the amount of lines is the amount of line separators plus 1 ALWAYS
 	}
 
 	/// <inheritdoc/>
@@ -596,11 +298,10 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 		if (index < 0)
 			index += data.Length;
 
-		if (IsOutOfBounds(index))
+		if (IsOutOfRange(index))
 			return false;
 
 		ComputeLineStarts();
-
 		int spanStart = GetPreviousLineStartPosition(index, out int lineSepBeforeIndex);
 
 		if (lineSepBeforeIndex != -1) // only skip necessary characters if the start of the span isn't 0
@@ -629,24 +330,38 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 	}
 
 	/// <inheritdoc/>
-	public void Slice(SourceSpan sourceSpan, Span<char> slice)
+	public bool TryGetNextLineFrom(int index, Span<char> line, out int itemCount)
 	{
-		if (slice.Length < sourceSpan.Length)
-			throw new ArgumentException("The slice's length is less than the span's length and therefore cannot contain the sliced region.", nameof(slice));
+		itemCount = 0;
 
-		data.AsSpan(sourceSpan.Start.Index, sourceSpan.Length).CopyTo(slice);
-	}
+		if (IsEmpty)
+			return false;
 
-	public int GetLengthOfLine(int lineNumber)
-	{
-		// todo: this should return the exact length of a line (#54)
-		throw new NotImplementedException();
-	}
+		if (index < 0)
+			index += data.Length;
 
-	public int GetLengthOfLineAt(int index)
-	{
-		// todo: this should return the exact length of a line (#54)
-		throw new NotImplementedException();
+		if (IsOutOfRange(index))
+			return false;
+
+		ComputeLineStarts();
+
+		if (precededByCrLf.Contains(index - 1)) // is the current index pointing to a LF inside a CRLF?
+			index--;                            // use the CR in the CRLF sequence instead of using the LF
+
+		index += CountUntilLineSeparator(index, out bool isCrLf); // skip to the next line separator
+		index += isCrLf ? 2 : 1; // skip to the actual start of the next line (skip twice if CRLF)
+
+		if (IsOutOfRange(index))
+			return false;
+
+		// when summed with the index, returns the line separator index - which must be excluded from the return value
+		int actualLineLength = CountUntilLineSeparator(index, out _);
+		int charsToCopyAmount = Math.Min(actualLineLength, line.Length);
+		data.AsSpan(index, charsToCopyAmount).CopyTo(line);
+
+		itemCount = charsToCopyAmount;
+
+		return line.Length >= actualLineLength;
 	}
 
 	/// <inheritdoc/>
@@ -658,11 +373,132 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 		throw new NotImplementedException();
 	}
 
+	/// <remarks>
+	/// This implementation, unlike others, is official and does not suffer from major performance issues.
+	/// </remarks>
 	/// <inheritdoc/>
-	public void BuildCache() => ComputeLineStarts();
+	public bool TryGetSourceLocation(int index, out SourceLocation location)
+	{
+		location = new();
+
+		if (IsEmpty)
+			return false;
+
+		if (index < 0)
+			index += data.Length;
+
+		if (IsOutOfRange(index))
+			return false;
+
+		if (index == 0) // best "best" case = triple zero
+		{
+			location = new(0, 0, 0);
+
+			return true;
+		}
+
+		ComputeLineStarts();
+
+		location = new(index, GetLineNumberAt(index), ReverseCountUntilNewline(index));
+
+		return true;
+	}
 
 	/// <inheritdoc/>
-	public void BuildCache(bool forceRebuild) => ComputeLineStarts(forceRebuild);
+	public bool TryGetWord(int index, char itemKind, Span<char> destination, out bool isItemKind, out int itemCount)
+	{
+		isItemKind = false;
+		itemCount = 0;
+
+		if (IsEmpty)
+			return false;
+
+		if (index < 0)
+			index += data.Length;
+
+		if (IsOutOfRange(index))
+			return false;
+
+		isItemKind = data[index] == itemKind;
+
+		// if first index is KIND, the word is KIND (ends when not KIND/end of buffer)
+		// if first index not KIND, the word is not KIND (ends on KIND/end of buffer)
+		int actualLineLength = isItemKind
+								   ? CountUntilNotMatch(index, itemKind)
+								   : CountUntilMatch(index, itemKind);
+
+		int charsToCopyAmount = Math.Min(actualLineLength, destination.Length);
+		data.AsSpan(index, charsToCopyAmount).CopyTo(destination);
+
+		itemCount = charsToCopyAmount;
+
+		return destination.Length >= actualLineLength;
+	}
+
+	/// <inheritdoc/>
+	public bool TryGetWord(int index, Span<char> destination, out bool isWhitespace, out int itemCount)
+	{
+		isWhitespace = false;
+		itemCount = 0;
+
+		if (IsEmpty)
+			return false;
+
+		if (index < 0)
+			index += data.Length;
+
+		if (IsOutOfRange(index))
+			return false;
+
+		isWhitespace = Char.IsWhiteSpace(data[index]);
+
+		// if first index is whitespace, the word is whitespace (ends when not whitespace/end of buffer)
+		// if first index not whitespace, the word is not whitespace (ends on whitespace/end of buffer)
+		int actualLineLength = isWhitespace
+								   ? CountUntilNotWhitespace(index)
+								   : CountUntilWhitespace(index);
+
+		int charsToCopyAmount = Math.Min(actualLineLength, destination.Length);
+		data.AsSpan(index, charsToCopyAmount).CopyTo(destination);
+
+		itemCount = charsToCopyAmount;
+
+		return destination.Length >= actualLineLength;
+	}
+
+	/// <inheritdoc/>
+	public bool TryGetWord(int index, Func<int, char, bool> itemKindPredicate, Span<char> destination, out bool isItemKind, out int itemCount)
+	{
+		isItemKind = false;
+		itemCount = 0;
+
+		if (IsEmpty)
+			return false;
+
+		if (index < 0)
+			index += data.Length;
+
+		if (IsOutOfRange(index))
+			return false;
+
+		isItemKind = itemKindPredicate(index, data[index]);
+
+		// if first index is KIND, the word is KIND (ends when not KIND/end of buffer)
+		// if first index not KIND, the word is not KIND (ends on KIND/end of buffer)
+		int actualLineLength = isItemKind
+								   ? CountWhile((i, c) => !itemKindPredicate(i, c), index)
+								   : CountWhile(itemKindPredicate, index);
+
+		int charsToCopyAmount = Math.Min(actualLineLength, destination.Length);
+		data.AsSpan(index, charsToCopyAmount).CopyTo(destination);
+
+		itemCount = charsToCopyAmount;
+
+		return destination.Length >= actualLineLength;
+	}
+
+	/// <inheritdoc/>
+	public void Dispose() => GC.SuppressFinalize(this);
 
 	/// <inheritdoc/>
 #if NET10_0_OR_GREATER
@@ -673,17 +509,19 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 		Equals(obj as ReadOnlyStringBuffer);
 
 	/// <summary>
-	/// Returns the buffer's content as a <see cref="String"/>.
+	/// Checks if another read-only buffer is equal to the current instance.
 	/// </summary>
-	/// <returns>The buffer's content.</returns>
-	public override string ToString() => data;
+	/// <param name="other">The other read-only buffer.</param>
+	/// <returns>True if equals.</returns>
+	public bool Equals(IReadOnlyBuffer<char>? other) => other is ReadOnlyStringBuffer buffer && Equals(buffer);
 
 	/// <summary>
 	/// Checks if another read-only string buffer is equal to the current instance.
 	/// </summary>
 	/// <param name="other">The other read-only string buffer.</param>
 	/// <returns>True if equals.</returns>
-	public bool Equals(ReadOnlyStringBuffer? other) => other is not null && data == other.data && Length == other.Length && IsEmpty == other.IsEmpty && LineCount == other.LineCount;
+	public bool Equals(ReadOnlyStringBuffer? other) =>
+		other is not null && data == other.data && Length == other.Length && IsEmpty == other.IsEmpty && LineCount == other.LineCount;
 
 	/// <inheritdoc/>
 	public override int GetHashCode()
@@ -698,11 +536,10 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 	}
 
 	/// <summary>
-	/// Checks if another read-only buffer is equal to the current instance.
+	/// Returns the buffer's content as a <see cref="String"/>.
 	/// </summary>
-	/// <param name="other">The other read-only buffer.</param>
-	/// <returns>True if equals.</returns>
-	public bool Equals(IReadOnlyBuffer<char>? other) => other is ReadOnlyStringBuffer buffer && Equals(buffer);
+	/// <returns>The buffer's content.</returns>
+	public override string ToString() => data;
 
 	/// <summary>
 	/// Checks if two read-only string buffers are equals.
@@ -716,4 +553,195 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 	/// </summary>
 	/// <returns>True if different.</returns>
 	public static bool operator !=(ReadOnlyStringBuffer left, ReadOnlyStringBuffer right) => !(left == right);
+
+	private void ComputeLineStarts(bool forceCache = false)
+	{
+		if (CacheExists && !forceCache)
+			return;
+
+		var span = data.AsSpan();
+
+		lineStarts.Clear();
+		precededByCrLf.Clear();
+
+		lineStarts.Capacity = Math.Max(lineStarts.Capacity, span.Length / 25 + 32); // just a rough guess
+		precededByCrLf.Capacity = Math.Max(precededByCrLf.Capacity, span.Length / 25 + 16); // just a rough guess
+
+		int lastIndex = span.Length - 1;
+		int i = 0;
+
+		lineStarts.Add(0); // 0 is by convention the start of line (and also the start of the buffer)
+
+		while (i < lastIndex)
+		{
+			if (!span[i].IsNewline())
+			{
+				i++;
+				continue;
+			}
+
+			bool isCrLf = i < lastIndex && span[i] == '\r' && span[i + 1] == '\n';
+			int nextStart = i + (isCrLf ? 2 : 1);
+			lineStarts.Add(nextStart);
+
+			if (isCrLf)
+				precededByCrLf.Add(nextStart);
+
+			i = nextStart;
+		}
+
+		CacheExists = true;
+	}
+
+	private int CountUntilMatch(int index, char character)
+	{
+		if (index < 0)
+			index = data.Length + index; // -1 is (Length-1) etc
+
+		var span = data.AsSpan(index);
+		int count = 0;
+
+		while (count < span.Length && span[count] == character)
+			count++;
+
+		return count;
+	}
+
+	private int CountUntilNotMatch(int index, char character)
+	{
+		if (index < 0)
+			index = data.Length + index; // -1 is (Length-1) etc
+
+		var span = data.AsSpan(index);
+		int count = 0;
+
+		while (count < span.Length && span[count] != character)
+			count++;
+
+		return count;
+	}
+
+	/// <summary>
+	/// Shared code context for <see cref="GetNextLineStartPosition(Int32, out Int32)"/> and
+	/// <see cref="GetNextOrCurrentLineStartPosition(Int32, out Int32)"/>.
+	/// </summary>
+	/// <param name="insertionPoint">The insertion point of the next line start.</param>
+	/// <param name="lsListIndex">The index, in <see cref="lineStarts"/> where the line start is.</param>
+	/// <returns>The line start index, in <see cref="data"/>.</returns>
+	private int GetNextLineStartFromInsertionPoint(int insertionPoint, out int lsListIndex)
+	{
+		if (insertionPoint >= 0)
+		{
+			// 1st Case: the used index (might have been index + 1 based on the method that called this)
+			// points to an actual line start
+			lsListIndex = insertionPoint;
+			return lineStarts[insertionPoint];
+		}
+
+		int nextIndex = ~insertionPoint;
+
+		if (nextIndex == lineStarts.Count)
+		{
+			// 2nd Case: the next line start is outside of the buffer (EOF convention)
+			lsListIndex = -1;
+			return data.Length;
+		}
+
+		lsListIndex = nextIndex;
+
+		return lineStarts[nextIndex]; // 3rd Case: we found the next line start
+	}
+
+	private int GetNextLineStartPosition(int index, out int lsListIndex) =>
+		// we use index + 1 to skip to the next line start if we're already standing on one :)
+		GetNextLineStartFromInsertionPoint(lineStarts.BinarySearch(index + 1), out lsListIndex);
+	private int GetNextOrCurrentLineStartPosition(int index, out int lsListIndex) =>
+		// we use the actual index because we might already be standing on the line start
+		GetNextLineStartFromInsertionPoint(lineStarts.BinarySearch(index), out lsListIndex);
+
+	/// <summary>
+	/// Shared code context for <see cref="GetPreviousLineStartPosition(Int32, out Int32)"/> and
+	/// <see cref="GetPreviousOrCurrentLineStartPosition(Int32, out Int32)"/>.
+	/// </summary>
+	/// <param name="insertionPoint">The insertion point of the next line start.</param>
+	/// <param name="lsListIndex">The index, in <see cref="lineStarts"/> where the line start is.</param>
+	/// <returns>The line start index, in <see cref="data"/>.</returns>
+	private int GetPreviousLineStartFromInsertionPoint(int insertionPoint, out int lsListIndex)
+	{
+		if (insertionPoint >= 0)
+		{
+			// 1st Case: the used index (might have been index + 1 based on the method that called this)
+			// points to an actual line start
+			lsListIndex = insertionPoint;
+			return lineStarts[insertionPoint];
+		}
+
+		int previousIndex = ~insertionPoint;
+
+		if (previousIndex == lineStarts.Count)
+		{
+			// 2nd Case: the next line start is outside of the buffer (EOF convention)
+			lsListIndex = previousIndex;
+			return data.Length;
+		}
+
+		lsListIndex = previousIndex == 0 ? 0 : previousIndex - 1;
+
+		return lineStarts[lsListIndex]; // 3rd Case: we found the previous line start
+	}
+
+	private int GetPreviousLineStartPosition(int index, out int lsListIndex)
+	{
+		if (index > 0)
+		{
+			// when the index is greater than 0, we can safely get the previous line start without getting a big shitty error
+			// we use 0 as the start following standard conventions
+			return GetPreviousLineStartFromInsertionPoint(lineStarts.BinarySearch(index - 1), out lsListIndex);
+		}
+
+		lsListIndex = 0;
+		return 0;
+	}
+
+	private int GetPreviousOrCurrentLineStartPosition(int index, out int lsListIndex)
+	{
+		if (index > 0)
+		{
+			// when the index is greater than 0, we can safely get the previous line start without getting a big shitty error
+			// we use 0 as the start following standard conventions
+			return GetPreviousLineStartFromInsertionPoint(lineStarts.BinarySearch(index), out lsListIndex);
+		}
+
+		lsListIndex = 0;
+		return 0;
+	}
+
+	/// <summary>
+	/// True if index is greater than the length.
+	/// This allows for the EOF convention, where the EOF is a possible output for
+	/// some methods.
+	/// Does not protect against <see cref="ArgumentOutOfRangeException"/> and
+	/// <see cref="IndexOutOfRangeException"/>.
+	/// </summary>
+	private bool IsConventionallyOutOfRange(int index) => index > data.Length;
+
+	/// <summary>
+	/// True if index is greater than or equal to the length.
+	/// This prevents throwing <see cref="ArgumentOutOfRangeException"/>
+	/// or <see cref="IndexOutOfRangeException"/>.
+	/// </summary>
+	private bool IsOutOfRange(int index) => index >= data.Length;
+
+	/// <remarks>
+	/// Ignores the LF in CRLF sequences (returns the CR if the matching sequence is CRLF) - avoid double counting and other issues.
+	/// </remarks>
+	private int ReverseCountUntilNewline(int index)
+	{
+		if (index < 0)
+			index = data.Length + index; // -1 is (Length-1) etc
+
+		ComputeLineStarts();
+
+		return index - GetPreviousLineStartPosition(index, out _);
+	}
 }
