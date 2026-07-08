@@ -249,9 +249,6 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 		if (IsConventionallyOutOfRange(index))
 			throw new IndexOutOfRangeException("The index must be less than or equal to the buffer's length.");
 
-		if (index == Length)
-			return LineCount;
-
 		GetPreviousOrCurrentLineStartPosition(index, out int lineSepIndex);
 		return lineSepIndex;
 	}
@@ -342,10 +339,12 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 
 		ComputeLineStarts();
 		int spanStart = GetPreviousOrCurrentLineStartPosition(index, out _);
-		int spanEnd = GetNextLineStartPosition(index, out int nextLineStartIndex) - 1; // don't include the line separator
+		int spanEnd = GetNextLineStartPosition(index, out int nextLineStartIndex); // don't include the line separator
 
-		if (precededByCrLf.Contains(nextLineStartIndex))
+		if (precededByCrLf.Contains(spanEnd))
 			spanEnd--; // remove one extra line separator if it's CRLF
+
+		spanEnd--; // remove the line separator
 
 		int actualLineLength = spanEnd - spanStart;
 		itemCount = Math.Min(actualLineLength, line.Length);
@@ -616,6 +615,8 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 			i = nextStart;
 		}
 
+		lineStarts.Add(Length); // add the EOF as the start of a line
+
 		CacheExists = true;
 	}
 
@@ -669,7 +670,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 		if (nextIndex == lineStarts.Count)
 		{
 			// 2nd Case: the next line start is outside of the buffer (EOF convention)
-			lsListIndex = -1;
+			lsListIndex = nextIndex;
 			return Length;
 		}
 
@@ -681,6 +682,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 	private int GetNextLineStartPosition(int index, out int lsListIndex) =>
 		// we use index + 1 to skip to the next line start if we're already standing on one :)
 		GetNextLineStartFromInsertionPoint(lineStarts.BinarySearch(index + 1), out lsListIndex);
+
 	private int GetNextOrCurrentLineStartPosition(int index, out int lsListIndex) =>
 		// we use the actual index because we might already be standing on the line start
 		GetNextLineStartFromInsertionPoint(lineStarts.BinarySearch(index), out lsListIndex);
@@ -709,7 +711,8 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 			// 2nd Case: the next line start is outside of the buffer (EOF convention)
 			// however we're gonna decrement one because otherwise all indexes from the last line that are after
 			// start of said line suddenly become part of the EOF line
-			lsListIndex = previousIndex - 1;
+			// however this might also mean we're at last character
+			lsListIndex = previousIndex;
 			return Length;
 		}
 
