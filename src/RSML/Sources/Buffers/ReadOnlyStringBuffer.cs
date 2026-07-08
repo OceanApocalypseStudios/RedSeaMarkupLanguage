@@ -324,7 +324,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 	}
 
 	/// <inheritdoc/>
-	public bool TryGetLineAt(int index, Span<char> line, out int itemCount)
+	public bool TryGetLineFromIndex(int index, Span<char> line, out int itemCount)
 	{
 		itemCount = 0;
 
@@ -356,7 +356,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 	}
 
 	/// <inheritdoc/>
-	public bool TryGetNextLineFrom(int index, Span<char> line, out int itemCount)
+	public bool TryGetLineAfterIndex(int index, Span<char> line, out int itemCount)
 	{
 		itemCount = 0;
 
@@ -391,7 +391,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 	}
 
 	/// <inheritdoc/>
-	public bool TryGetNextLineFrom(int index, Span<char> line, bool skipEmptyLines, out int itemCount)
+	public bool TryGetLineAfterIndex(int index, Span<char> line, bool skipEmptyLines, out int itemCount)
 	{
 		// todo: this should return the next line (see TryGetNextLineFrom(int, Span<char>, int))
 		// but skip empty lines if skipEmptyLines = true

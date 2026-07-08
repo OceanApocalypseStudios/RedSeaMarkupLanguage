@@ -128,7 +128,7 @@ public interface IReadOnlyBuffer<TItem> : ISource, IEquatable<IReadOnlyBuffer<TI
 	/// <param name="line">The destination span that will contain the line.</param>
 	/// <param name="itemCount">The amount of items that were written to <paramref name="line"/>.</param>
 	/// <returns>False if the buffer is out of bounds, there are no more lines to read or an exception occured.</returns>
-	bool TryGetLineAt(int index, Span<TItem> line, out int itemCount);
+	bool TryGetLineFromIndex(int index, Span<TItem> line, out int itemCount);
 
 	/// <summary>
 	/// Tries to read the next line in the buffer, relative to a given <paramref name="index"/>.
@@ -140,7 +140,7 @@ public interface IReadOnlyBuffer<TItem> : ISource, IEquatable<IReadOnlyBuffer<TI
 	/// <param name="line">The destination span that will contain the line.</param>
 	/// <param name="itemCount">The amount of items that were written to <paramref name="line"/>.</param>
 	/// <returns>False if the buffer is out of bounds, there are no more lines to read or an exception occured.</returns>
-	bool TryGetNextLineFrom(int index, Span<TItem> line, out int itemCount);
+	bool TryGetLineAfterIndex(int index, Span<TItem> line, out int itemCount);
 
 	/// <summary>
 	/// Tries to read the next line in the buffer, relative to a given <paramref name="index"/>.
@@ -154,7 +154,7 @@ public interface IReadOnlyBuffer<TItem> : ISource, IEquatable<IReadOnlyBuffer<TI
 	/// <param name="skipEmptyLines">Whether to skip lines that are composed only of line separators.</param>
 	/// <param name="itemCount">The amount of items that were written to <paramref name="line"/>.</param>
 	/// <returns>False if the buffer is out of bounds, there are no more lines to read or an exception occured.</returns>
-	bool TryGetNextLineFrom(int index, Span<TItem> line, bool skipEmptyLines, out int itemCount);
+	bool TryGetLineAfterIndex(int index, Span<TItem> line, bool skipEmptyLines, out int itemCount);
 
 	/// <summary>
 	/// Tries to read the word at index <paramref name="index"/>, which can be a span of items verified by

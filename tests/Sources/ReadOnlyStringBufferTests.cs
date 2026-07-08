@@ -55,7 +55,7 @@ public class ReadOnlyStringBufferTests
 		buffer.BuildCache();
 
 		Span<char> alloc = stackalloc char[expectedLine.Length];
-		Assert.IsTrue(buffer.TryGetLineAt(index, alloc, out int written));
+		Assert.IsTrue(buffer.TryGetLineFromIndex(index, alloc, out int written));
 
 		Assert.AreEqual(expectedLine, alloc.ToString());
 		Assert.AreEqual(expectedLine.Length, written);
