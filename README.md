@@ -32,7 +32,7 @@ the modern language designed to dynamically interpret different logic paths base
 ## Contents
 - [Red Sea Markup Language (RSML)](#section)
 	- [Why RSML?](#why-rsml)
-    - [How to build RSML?](#how-to-build-rsml)
+	- [How to build RSML?](#how-to-build-rsml)
 
 <details open>
 <summary><strong>Where's the "How to use" section?</strong></summary>
@@ -44,7 +44,8 @@ You can find full documentation [here](https://oceanapocalypsestudios.org/rsml-d
 <details open>
 <summary><strong>How can I see what is being worked on in RSML?</strong></summary>
 
-You can find the official bug tracker and roadmap [here](https://github.com/orgs/OceanApocalypseStudios/projects/6/views/2).
+You can find the official bug tracker and
+roadmap [here](https://github.com/orgs/OceanApocalypseStudios/projects/6/views/2).
 
 </details>
 
@@ -52,8 +53,10 @@ You can find the official bug tracker and roadmap [here](https://github.com/orgs
 
 ## Why RSML?
 RSML solves the issue of resolving logic paths dynamically based on a given host's characteristics.
-When assigned an host, which could be the local host, RSML solves the logic paths and returns the first match's associated value.
-The important part here is to note RSML does this dynamically: if you were to switch hosts or pass different data, RSML would adapt accordingly.
+When assigned an host, which could be the local host, RSML solves the logic paths and returns the first match's
+associated value.
+The important part here is to note RSML does this dynamically: if you were to switch hosts or pass different data, RSML
+would adapt accordingly.
 
 **Still unsure about RSML?** You can find some usage examples [here](#examples).
 
@@ -65,7 +68,7 @@ The important part here is to note RSML does this dynamically: if you were to sw
 
 1. Clone [this repository](https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage).
 2. Open the terminal in the root RSML directory (the one with the solution file).
-	
+
 ```
 dotnet build -c Debug RedSeaMarkupLanguage.slnx
 ./src/RSML.CLI/bin/Debug/net10.0/RSML.CLI.exe
@@ -78,7 +81,7 @@ dotnet build -c Debug RedSeaMarkupLanguage.slnx
 
 1. Clone [this repository](https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage).
 2. Open the terminal in the root RSML directory (the one with the solution file).
-	
+
 ```
 dotnet build -c Release RedSeaMarkupLanguage.slnx
 ./src/RSML.CLI/bin/Release/net10.0/RSML.CLI.exe
@@ -90,16 +93,19 @@ dotnet build -c Release RedSeaMarkupLanguage.slnx
 
 1. Clone [this repository](https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage).
 2. Open the terminal in the root RSML directory (the one with the solution file).
-	
+
 ```
 dotnet publish -c Release -r <rid> src/RSML.Native/RSML.Native.csproj
 ```
 
 > [!WARNING]
 > If you're on Windows and using Visual Studio, this will require both the .NET and C++ development workloads.
-> If something goes wrong with the MSVC side of things, the fix is almost always repairing the Visual Studio installation *(backup settings and everything you need first)*.
+> If something goes wrong with the MSVC side of things, the fix is almost always repairing the Visual Studio
+> installation *(backup settings and everything you need first)*.
 
-Once that is complete, the DLL will be located at `src/RSML.Native/bin/<arch>/Release/net10.0/<rid>/publish/RSML.Native.dll`. The XML files in the same directory are purely for documentation purposes and the `.pdb` file only matters for debugging.
+Once that is complete, the DLL will be located at
+`src/RSML.Native/bin/<arch>/Release/net10.0/<rid>/publish/RSML.Native.dll`. The XML files in the same directory are
+purely for documentation purposes and the `.pdb` file only matters for debugging.
 
 </details>
 

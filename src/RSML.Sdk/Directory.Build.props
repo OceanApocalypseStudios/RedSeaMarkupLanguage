@@ -1,0 +1,28 @@
+<!-- NuGet Packaging -->
+<Project>
+	<PropertyGroup Label="NuGet Package Setup">
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+
+		<PackageId>OceanApocalypseStudios.RSML.Sdk</PackageId>
+		<Title>Red Sea Markup Language SDK</Title>
+		<Authors>OceanApocalypseStudios</Authors>
+		<Company>OceanApocalypseStudios</Company>
+		<NeutralLanguage>en</NeutralLanguage>
+
+		<!-- DON'T FORGET TO EDIT THIS -->
+		<Version>3.0.0-prerelease1</Version>
+		<InformationalVersion>3.0.0-prerelease1</InformationalVersion>
+		<PackageReleaseNotes>TODO</PackageReleaseNotes>
+
+		<Description>The plug and play SDK for the only markup language that dynamically interprets different logic paths based on an host's OS and CPU architecture.</Description>
+		<Copyright>Copyright (c) 2025 OceanApocalypseStudios</Copyright>
+		<PackageProjectUrl>https://oceanapocalypsestudios.org/rsml-docs/</PackageProjectUrl>
+		<PackageIcon>icon.png</PackageIcon>
+		<RepositoryUrl>https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>markup;language;logic;logic-path;system;host;rsml;rsea;decision;oss</PackageTags>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	</PropertyGroup>
+</Project>

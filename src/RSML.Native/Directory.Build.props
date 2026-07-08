@@ -1,0 +1,28 @@
+<!-- NuGet Packaging -->
+<Project>
+	<PropertyGroup Label="NuGet Package Setup">
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+
+		<PackageId>OceanApocalypseStudios.RSML.Native</PackageId>
+		<Title>RSML Native ABI</Title>
+		<Authors>OceanApocalypseStudios</Authors>
+		<Company>OceanApocalypseStudios</Company>
+		<NeutralLanguage>en</NeutralLanguage>
+
+		<!-- DON'T FORGET TO EDIT THIS -->
+		<Version>3.0.0-prerelease1</Version>
+		<InformationalVersion>3.0.0-prerelease1</InformationalVersion>
+		<PackageReleaseNotes>TODO</PackageReleaseNotes>
+		
+		<Description>Native C interopability for RSML.</Description>
+		<Copyright>Copyright (c) 2025 OceanApocalypseStudios</Copyright>
+		<PackageProjectUrl>https://oceanapocalypsestudios.org/rsml-docs/2.0.0-prerelease8/</PackageProjectUrl>
+		<PackageIcon>icon.png</PackageIcon>
+		<RepositoryUrl>https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>markup;native;interop;c;cpp;c++;language;logic;logic-path;rsml;rsea;decision;oss</PackageTags>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	</PropertyGroup>
+</Project>

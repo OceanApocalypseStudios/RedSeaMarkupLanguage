@@ -1,14 +1,9 @@
 ﻿using System;
 
 
-namespace OceanApocalypseStudios.RSML.Benchmarks
+namespace OceanApocalypseStudios.RSML.Benchmarks;
+
+internal class Program
 {
-
-	internal class Program
-	{
-
-		static void Main(string[] args) => Console.WriteLine("Hello, World!"); // todo
-
-	}
-
+	private static void Main(string[] args) => Console.WriteLine("Hello, World!"); // todo
 }
