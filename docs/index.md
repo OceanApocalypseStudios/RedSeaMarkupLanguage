@@ -3,9 +3,9 @@ hide:
   - navigation
 ---
 
-# Red Sea Markup Language
+# Red Sea Markup Language v3.0.0
 ??? warning "Breaking API and Language Changes"
-    This documentation refers to RSML v2.0.0+. RSML has changed a **lot** from v1.x.x *(a.k.a. Legacy RSML)* to v2.0.0.
+    This documentation refers to RSML v3.0.0+, currently in development.
 
 **Red Sea Markup Language** is **the** powerful and robust fork of [MF's CrossRoad Solution](https://mf366-dev.github.io/documentation/mfroad/mfroad_1.0.html "MFRoad"), a language designed to **dynamically interpret different logic paths based on the local host OS and CPU architecture**.
 
@@ -41,9 +41,4 @@ To further enhance your experience with RSML, we offer a list of useful links in
 </div>
 
 ## Documentation License
-> _**“Freedom is nothing else but a chance to be better.”**_
-> - Albert Camus
-
-At OceanApocalypseStudios, we value **freedom**, and that's exactly why we're freeing this project's documentation from the outdated GFDL: **hello, Public Domain**.
-
-This documentation is licensed under the [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/) license.
+The documentation for **Red Sea Markup Language** is licensed under the [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/) license, except for code snippets and examples. For more details on licensing, click [here](https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/blob/v3.0.0-prerelease1-dev/COPYING.txt).

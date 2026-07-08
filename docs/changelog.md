@@ -4,11 +4,21 @@ hide:
 ---
 
 # Changelog
-## Red Sea Markup Language (v2.0.0+)
+## Red Sea Markup Language
 
-### 2.0.1 <small>TBD</small> { id="2.0.1" }
-!!! warning "In development"
-    Currently in development. Use at your own risk.
+### 3.0.0 <small>TBD</small> { id="3.0.0" }
+To be the first stable release under major version 3.
+
+### 3.0.0-prerelease2 <small>TBD</small> { id="3.0.0-prerelease2" }
+To be the next pre-release version after [3.0.0-prerelease1](#3.0.0-prerelease1).
+
+### 3.0.0-prerelease1 <small>TBD</small> { id="3.0.0-prerelease1" }
+!!! warning "In Development"
+    This version is currently in development. You can follow up on development [here](https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/tree/v3.0.0-prerelease1-dev).
+
+### 2.1.0 <small>Cancelled</small> { id="2.1.0" }
+!!! note "Cancelled"
+    Next major version, [3.0.0](#3.0.0), will take this version's place, as this one was cancelled.
 
 - Fully exported the C ABI
 <!-- todo: add more content here -->

@@ -1,4 +1,5 @@
 <!--  Abbreviations -->
 
-*[VB.NET]: Visual Basic (.NET)
+*[VB]: Visual Basic (.NET)
 *[CLI]: Commandline Interface
+*[RSML]: Red Sea Markup Language
