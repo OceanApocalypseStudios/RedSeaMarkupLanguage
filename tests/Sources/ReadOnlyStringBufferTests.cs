@@ -9,9 +9,8 @@ public class ReadOnlyStringBufferTests
 	private const string TestString01 = "Hey\r\nThis\rIs\u2029A Test \n Method\r\n\r\n.\u2028";
 
 	/*
-	 * todo: see why tests for TryGetLineAt are failing
-	 * todo: write more tests for GetLineNumberForIndex
 	 * todo: test all buffer methods (close open issues first)
+	 * todo: expand on these tested methods (test them further)
 	 */
 
 	[TestMethod]
@@ -45,11 +44,14 @@ public class ReadOnlyStringBufferTests
 	[DataRow(TestString01, 13, "A Test ")] // A in "A Test"
 	[DataRow(TestString01, 15, "A Test ")] // T in "Test"
 	[DataRow(TestString01, 22, " Method")] // M in "Method"
+	[DataRow(TestString01, 28, " Method")] // First CR in "\r\n\r\n."
 	[DataRow(TestString01, 29, " Method")] // First LF in "\r\n\r\n."
 	[DataRow(TestString01, 30, "")] // Second CR in "\r\n\r\n."
 	[DataRow(TestString01, 31, "")] // Second LF in "\r\n\r\n."
-	[DataRow(TestString01, 33, ".")] // End of file
-	public void TryGetLineAt(string data, int index, string expectedLine)
+	[DataRow(TestString01, 32, ".")] // Dot/point in Second LF in "\r\n\r\n."
+	[DataRow(TestString01, 33, ".")] // U2028 in ".\u2028"
+	[DataRow(TestString01, 34, "")] // End of file
+	public void TryGetLineFromIndex(string data, int index, string expectedLine)
 	{
 		var buffer = new ReadOnlyStringBuffer(data);
 		buffer.BuildCache();
