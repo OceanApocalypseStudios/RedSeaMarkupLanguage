@@ -96,7 +96,7 @@ public interface IReadOnlyBuffer<TItem> : ISource, IEquatable<IReadOnlyBuffer<TI
 	/// </summary>
 	/// <param name="index">The index whose parent line's number is to be returned.</param>
 	/// <returns>The 0-based number of the line that contains item located at <paramref name="index"/>.</returns>
-	int GetLineNumberForIndex(int index);
+	int GetLineNumberFromIndex(int index);
 
 	/// <summary>
 	/// Slices a region of the buffer.
@@ -142,10 +142,10 @@ public interface IReadOnlyBuffer<TItem> : ISource, IEquatable<IReadOnlyBuffer<TI
 	/// No end of line characters are added.
 	/// </summary>
 	/// <param name="index">The index at which to determine what the current line is.</param>
-	/// <param name="line">The destination span that will contain the line.</param>
-	/// <param name="itemCount">The amount of items that were written to <paramref name="line"/>.</param>
+	/// <param name="destination">The destination span that will contain the line.</param>
+	/// <param name="itemCount">The amount of items that were written to <paramref name="destination"/>.</param>
 	/// <returns>False if the buffer is out of bounds, there are no more lines to read or an exception occured.</returns>
-	bool TryGetLineFromIndex(int index, Span<TItem> line, out int itemCount);
+	bool TryGetLineFromIndex(int index, Span<TItem> destination, out int itemCount);
 
 	/// <summary>
 	/// Tries to read the next line in the buffer, relative to a given <paramref name="index"/>.
@@ -154,10 +154,10 @@ public interface IReadOnlyBuffer<TItem> : ISource, IEquatable<IReadOnlyBuffer<TI
 	/// No end of line characters are added.
 	/// </summary>
 	/// <param name="index">The index at which to determine what the next line is.</param>
-	/// <param name="line">The destination span that will contain the line.</param>
-	/// <param name="itemCount">The amount of items that were written to <paramref name="line"/>.</param>
+	/// <param name="destination">The destination span that will contain the line.</param>
+	/// <param name="itemCount">The amount of items that were written to <paramref name="destination"/>.</param>
 	/// <returns>False if the buffer is out of bounds, there are no more lines to read or an exception occured.</returns>
-	bool TryGetLineAfterIndex(int index, Span<TItem> line, out int itemCount);
+	bool TryGetLineAfterIndex(int index, Span<TItem> destination, out int itemCount);
 
 	/// <summary>
 	/// Tries to read the next line in the buffer, relative to a given <paramref name="index"/>.
@@ -167,11 +167,11 @@ public interface IReadOnlyBuffer<TItem> : ISource, IEquatable<IReadOnlyBuffer<TI
 	/// No end of line characters are added.
 	/// </summary>
 	/// <param name="index">The index at which to determine what the next line is.</param>
-	/// <param name="line">The destination span that will contain the line.</param>
+	/// <param name="destination">The destination span that will contain the line.</param>
 	/// <param name="skipEmptyLines">Whether to skip lines that are composed only of line separators.</param>
-	/// <param name="itemCount">The amount of items that were written to <paramref name="line"/>.</param>
+	/// <param name="itemCount">The amount of items that were written to <paramref name="destination"/>.</param>
 	/// <returns>False if the buffer is out of bounds, there are no more lines to read or an exception occured.</returns>
-	bool TryGetLineAfterIndex(int index, Span<TItem> line, bool skipEmptyLines, out int itemCount);
+	bool TryGetLineAfterIndex(int index, Span<TItem> destination, bool skipEmptyLines, out int itemCount);
 
 	/// <summary>
 	/// Tries to read the word at index <paramref name="index"/>, which can be a span of items verified by

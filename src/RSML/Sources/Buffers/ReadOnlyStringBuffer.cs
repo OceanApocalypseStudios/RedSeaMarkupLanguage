@@ -36,7 +36,9 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 	/// are necessary.
 	/// </remarks>
 	/// <inheritdoc/>
-	public int LineCount
+	public int LineCount => RawLineCount - 1; // ignore the "fake" EOF line (convention)
+
+	private int RawLineCount
 	{
 		get
 		{
@@ -151,7 +153,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 
 		if (IsConventionallyOutOfRange(index))
 			throw new IndexOutOfRangeException("The index must be less than or equal to the buffer's length.");
-		
+
 		if (index == Length)
 			return 0; // consumed the entire buffer
 
@@ -237,10 +239,10 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 		if (IsEmpty)
 			throw new BufferException("The buffer cannot be empty.");
 
-		if (lineNumber < 0 || lineNumber >= LineCount) // LineCount already implicitly computes line starts so we don't need to manually compute them
+		if (lineNumber < 0 || lineNumber >= RawLineCount) // LineCount already implicitly computes line starts so we don't need to manually compute them
 			throw new ArgumentOutOfRangeException(nameof(lineNumber), "The 0-based line number must be non-negative and less than the amount of lines in the buffer.");
 
-		if (lineNumber + 1 == LineCount)
+		if (lineNumber + 1 == RawLineCount)
 			return 0; // EOF means the line is empty
 
 		int start = lineStarts[lineNumber];
@@ -249,13 +251,14 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 		if (precededByCrLf.Contains(end))
 			end--; // skip the extra line separator in the CRLF sequence
 
-		end--;
+		if (!(lineNumber + 2 == RawLineCount && !data[Length - 1].IsNewline())) // if we're not on the last line then
+			end--; // skip one more line separator
 
 		return end - start;
 	}
 
 	/// <inheritdoc/>
-	public int GetLengthOfLineFromIndex(int index) => GetLengthOfLine(GetLineNumberForIndex(index));
+	public int GetLengthOfLineFromIndex(int index) => GetLengthOfLine(GetLineNumberFromIndex(index));
 
 	/// <exception cref="BufferException">
 	/// The buffer is empty.
@@ -264,7 +267,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 	/// <paramref name="index"/> was set to something greater than the buffer's length.
 	/// </exception>
 	/// <inheritdoc/>
-	public int GetLineNumberForIndex(int index)
+	public int GetLineNumberFromIndex(int index)
 	{
 		if (IsEmpty)
 			throw new BufferException("The buffer cannot be empty.");
@@ -318,67 +321,34 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 	{
 		itemCount = 0;
 
-		if (IsEmpty || lineNumber < 0)
+		if (IsEmpty || lineNumber < 0 || lineNumber >= RawLineCount)
 			return false;
 
-		ComputeLineStarts();
+		if (lineNumber + 1 == RawLineCount) // line count already implicitly builds cache
+			return true; // EOF means the line is empty (and destination is by default empty)
 
-		if (lineNumber >= lineStarts.Count)
-			return false;
+		int start = lineStarts[lineNumber];
+		int end;
 
-		int spanEnd = lineStarts[lineNumber];
+		end = lineStarts[lineNumber + 1];
 
-		int spanStartIndex = lineNumber == 0
-								 ? 0
-								 : lineNumber - 1;
+		if (precededByCrLf.Contains(end))
+			end--; // skip the extra line separator in the CRLF sequence
 
-		if (precededByCrLf.Contains(lineStarts[spanStartIndex]))
-			spanStartIndex++; // skip past the CR in the CRLF sequence
+		if (!(lineNumber + 2 == RawLineCount && !data[Length - 1].IsNewline())) // if we're not on the last line then
+			end--; // skip one more line separator
 
-		spanStartIndex++; // get the actual start of the next line instead of the line sep
-
-		int spanStart = lineStarts[spanStartIndex];
-		int actualLineLength = spanEnd - spanStart + 1;
+		int actualLineLength = end - start;
 		itemCount = Math.Min(actualLineLength, destination.Length);
 
-		data.AsSpan(spanStart, itemCount).CopyTo(destination);
+		data.AsSpan(start, itemCount).CopyTo(destination);
 
-		return actualLineLength > destination.Length;
+		return actualLineLength <= destination.Length;
 	}
 
 	/// <inheritdoc/>
-	public bool TryGetLineFromIndex(int index, Span<char> line, out int itemCount)
-	{
-		itemCount = 0;
-
-		if (IsEmpty)
-			return false;
-
-		if (index < 0)
-			index += Length;
-
-		if (IsConventionallyOutOfRange(index))
-			return false;
-
-		if (index == Length) // EOF means the current line is empty (line is empty by default)
-			return true;
-
-		ComputeLineStarts();
-		int spanStart = GetPreviousOrCurrentLineStartPosition(index, out _);
-		int spanEnd = GetNextLineStartPosition(index, out int nextLineStartIndex); // don't include the line separator
-
-		if (precededByCrLf.Contains(spanEnd))
-			spanEnd--; // remove one extra line separator if it's CRLF
-
-		spanEnd--; // remove the line separator
-
-		int actualLineLength = spanEnd - spanStart;
-		itemCount = Math.Min(actualLineLength, line.Length);
-
-		data.AsSpan(spanStart, itemCount).CopyTo(line);
-
-		return actualLineLength <= line.Length;
-	}
+	public bool TryGetLineFromIndex(int index, Span<char> line, out int itemCount) =>
+		TryGetLine(GetLineNumberFromIndex(index), line, out itemCount);
 
 	/// <inheritdoc/>
 	public bool TryGetLineAfterIndex(int index, Span<char> line, out int itemCount)
@@ -450,7 +420,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 
 		ComputeLineStarts();
 
-		location = new(index, GetLineNumberForIndex(index), ReverseCountUntilNewline(index));
+		location = new(index, GetLineNumberFromIndex(index), ReverseCountUntilNewline(index));
 
 		return true;
 	}
