@@ -32,5 +32,3 @@ That being said, there are some rules and guidelines you must follow, so that we
 
 ## Questions
 If you have any questions, you can email OceanApocalypseStudios at `rsml` (at) `oceanapocalypsestudios` dot `org`.
-
-**E-mail:** [`real_mf366@yahoo.com`](mailto:real_mf366@yahoo.com)
