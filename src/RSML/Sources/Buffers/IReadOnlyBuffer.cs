@@ -75,6 +75,23 @@ public interface IReadOnlyBuffer<TItem> : ISource, IEquatable<IReadOnlyBuffer<TI
 	int CountWhile(Func<int, TItem, bool> predicate, int index);
 
 	/// <summary>
+	/// Returns the length of a line given its 0-based line number.
+	/// Line separators do not count towards the length.
+	/// </summary>
+	/// <param name="lineNumber">The 0-based line number.</param>
+	/// <returns>The length of the line.</returns>
+	int GetLengthOfLine(int lineNumber);
+
+	/// <summary>
+	/// Returns the length of a line given a 0-based index of one
+	/// of its items.
+	/// Line separators do not count towards the length.
+	/// </summary>
+	/// <param name="index">The 0-based index whose line is considered.</param>
+	/// <returns>The length of the line.</returns>
+	int GetLengthOfLineFromIndex(int index);
+
+	/// <summary>
 	/// Determines the 0-based line number of the line that contains the item located at <paramref name="index"/>.
 	/// </summary>
 	/// <param name="index">The index whose parent line's number is to be returned.</param>
