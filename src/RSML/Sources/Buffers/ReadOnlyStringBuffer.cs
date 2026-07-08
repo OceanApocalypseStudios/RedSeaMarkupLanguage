@@ -30,6 +30,11 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 	/// <inheritdoc/>
 	public int Length => data.Length;
 
+	/// <remarks>
+	/// <see cref="LineCount"/> automatically builds cache if
+	/// no cached data exists. No <see cref="BuildCache()"/> calls
+	/// are necessary.
+	/// </remarks>
 	/// <inheritdoc/>
 	public int LineCount
 	{
@@ -110,7 +115,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 		isCrLf = false;
 
 		if (IsEmpty)
-			throw new BufferException("The buffer is empty.");
+			throw new BufferException("The buffer cannot be empty.");
 
 		if (index < 0)
 			index = Length + index; // -1 is (Length-1) etc
@@ -139,7 +144,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 	public int CountUntilNotWhitespace(int index)
 	{
 		if (IsEmpty)
-			throw new BufferException("The buffer is empty.");
+			throw new BufferException("The buffer cannot be empty.");
 
 		if (index < 0)
 			index = Length + index; // -1 is (Length-1) etc
@@ -169,7 +174,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 	public int CountUntilWhitespace(int index)
 	{
 		if (IsEmpty)
-			throw new BufferException("The buffer is empty.");
+			throw new BufferException("The buffer cannot be empty.");
 
 		if (index < 0)
 			index = Length + index; // -1 is (Length-1) etc
@@ -199,7 +204,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 	public int CountWhile(Func<int, char, bool> predicate, int index)
 	{
 		if (IsEmpty)
-			throw new BufferException("The buffer is empty.");
+			throw new BufferException("The buffer cannot be empty.");
 
 		if (index < 0)
 			index = Length + index; // -1 is (Length-1) etc
@@ -219,17 +224,38 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 		return count;
 	}
 
+	/// <exception cref="BufferException">
+	/// The buffer is empty.
+	/// </exception>
+	/// <exception cref="ArgumentOutOfRangeException">
+	/// The given <paramref name="lineNumber"/> is negative or
+	/// is greater than the amount of lines (see <see cref="LineCount"/>).
+	/// </exception>
+	/// <inheritdoc/>
 	public int GetLengthOfLine(int lineNumber)
 	{
-		// todo: this should return the exact length of a line (#54)
-		throw new NotImplementedException();
+		if (IsEmpty)
+			throw new BufferException("The buffer cannot be empty.");
+
+		if (lineNumber < 0 || lineNumber >= LineCount) // LineCount already implicitly computes line starts so we don't need to manually compute them
+			throw new ArgumentOutOfRangeException(nameof(lineNumber), "The 0-based line number must be non-negative and less than the amount of lines in the buffer.");
+
+		if (lineNumber + 1 == LineCount)
+			return 0; // EOF means the line is empty
+
+		int start = lineStarts[lineNumber];
+		int end = lineStarts[lineNumber + 1];
+
+		if (precededByCrLf.Contains(end))
+			end--; // skip the extra line separator in the CRLF sequence
+
+		end--;
+
+		return end - start;
 	}
 
-	public int GetLengthOfLineAt(int index)
-	{
-		// todo: this should return the exact length of a line (#54)
-		throw new NotImplementedException();
-	}
+	/// <inheritdoc/>
+	public int GetLengthOfLineFromIndex(int index) => GetLengthOfLine(GetLineNumberForIndex(index));
 
 	/// <exception cref="BufferException">
 	/// The buffer is empty.
@@ -241,7 +267,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 	public int GetLineNumberForIndex(int index)
 	{
 		if (IsEmpty)
-			throw new BufferException("The buffer is empty.");
+			throw new BufferException("The buffer cannot be empty.");
 
 		if (index < 0)
 			index += Length;
