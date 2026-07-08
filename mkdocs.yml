@@ -219,9 +219,15 @@ markdown_extensions:
 # here, as otherwise, it won't be built!!
 nav:
   - Home: index.md
-  - Why use RSML?:
-      - Why use RSML?: why/index.md
-      - Alternatives to RSML: why/alternatives.md
+  - Getting Started:
+      - Why use RSML?:
+          - Why use RSML?: why/index.md
+          - Comparison with alternatives: why/alternatives.md
+      - Changelog:
+          - Changelog: changelog.md
+      - Documentation:
+          - Conventions: conventions.md
+          - Contributing: contributing.md
   - Language:
       - RSML, the Language: language/index.md
       - RSML Implementations: language/implementations.md
@@ -259,8 +265,5 @@ nav:
       - RSML's CLI: cli/index.md
       - Commands: cli/commands.md
       - Real-world usage: cli/examples.md
-  - Contributing: contributing.md
-  - Changelog: changelog.md
   - Blog:
       - blog/index.md
-  - Conventions: conventions.md

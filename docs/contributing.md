@@ -1,7 +1,6 @@
 # Contributing
-**We really appreciate contributions** - they help us focus on releasing faster and better.
-
-That being said, there are some rules and guidelines you must follow.
+**We really appreciate contributions:** they help us focus on releasing faster and better, leaving the worries of "is this documentation good enough" aside.
+That being said, there are some rules and guidelines you must follow, so that we can ensure respect, clarity, readability, security and maintaibility.
 
 <div class="grid cards" markdown>
 
@@ -9,29 +8,29 @@ That being said, there are some rules and guidelines you must follow.
 
     ---
 
-    Make sure your changes are understandable and do not affect the simplicity of the documentation negatively.
+    Make sure your changes are understandable and do not affect the documentation negatively. Do not use words that are too complicated: remember not everyone speaks English fluently.
 
 -   :material-source-branch:{ .lg .middle } **Know your branches.**
 
     ---
 
-    Make changes to `main`, ==**NEVER**== to `gh-pages`.
+    When making improvements to the documentation, make a Pull Request on the [official repository](https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/), targetting `main`. If your PR is only about documentation, do not make any changes to the code (code examples being the exception to this rule).
     
 -   :fontawesome-solid-paint-roller:{ .lg .middle } **If it ain't broken, don't redesign it.**
 
     ---
 
-    Unless the current theme/CSS feels wrong or is broken, don't change it. Seriously. Don't.
+    Unless the current theme/CSS feels wrong or is broken, don't change it.
 
--   :material-format-font:{ .lg .middle } **Fixing typos is noble; flooding PRs with them is chaos.**
+-   :material-format-font:{ .lg .middle } **Don't flood PRs with typo squatting.**
 
     ---
 
-    Typo squatting is perfectly fine and helpful, but don't make too many _Pull Requests_ to fix typos in a row, as it causes unnecessary spam. The best alternative is to _"bundle"_ several typo fixes in one PR.
+    Typo squatting is perfectly fine and helpful, but don't make too many Pull Requests to fix typos in a row, as it causes unnecessary spam. The best alternative is to _"bundle"_ several typo fixes in one PR.
 
 </div>
 
 ## Questions
-Sadly, **OceanApocalypseStudios** does not have a formal way of contact _(yet)_. Therefore, I'll allow users with questions to use my public e-mail instead, but please only make use of it if the questions are really, _really_ important. Thank you.
+If you have any questions, you can email OceanApocalypseStudios at `rsml` (at) `oceanapocalypsestudios` dot `org`.
 
 **E-mail:** [`real_mf366@yahoo.com`](mailto:real_mf366@yahoo.com)

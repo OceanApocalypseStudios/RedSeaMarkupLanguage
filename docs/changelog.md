@@ -1,8 +1,3 @@
----
-hide:
-  - navigation
----
-
 # Changelog
 ## Red Sea Markup Language
 

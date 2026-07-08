@@ -1,8 +1,3 @@
----
-hide:
-  - navigation
----
-
 # Conventions
 This page explains several conventions used throughout this documentation.
 
