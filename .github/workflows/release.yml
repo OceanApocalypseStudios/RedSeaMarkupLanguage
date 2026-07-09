@@ -1,0 +1,99 @@
+name: Build, Pack, and Release
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  build-binaries:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        arch: [x64, arm64]
+        include:
+          - os: ubuntu-latest
+            rid-os: linux
+          - os: windows-latest
+            rid-os: win
+          - os: macos-latest
+            rid-os: osx
+    runs-on: ${{ matrix.os }}
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '10.x.x'
+
+    - name: Publish Native Project
+      run: |
+        dotnet publish ./src/RSML.Native/RSML.Native.csproj \
+          -c Release \
+          -r ${{ matrix.rid-os }}-${{ matrix.arch }} \
+          -o ./dist/native-${{ matrix.rid-os }}-${{ matrix.arch }} \
+          --self-contained true
+
+    - name: Publish CLI Project
+      run: |
+        dotnet publish ./src/RSML.CLI/RSML.CLI.csproj \
+          -c Release \
+          -r ${{ matrix.rid-os }}-${{ matrix.arch }} \
+          -o ./dist/cli-${{ matrix.rid-os }}-${{ matrix.arch }} \
+          --self-contained true
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: binaries-${{ matrix.rid-os }}-${{ matrix.arch }}
+        path: ./dist/
+
+  deploy:
+    needs: build-binaries
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Download All Artifacts
+      uses: actions/download-artifact@v4
+      with:
+        path: ./all-binaries
+
+    - name: Restore & Build Solution
+      run: |
+        dotnet restore
+        dotnet build --configuration Release --no-restore
+
+    - name: Pack Projects
+      run: dotnet pack --configuration Release --no-build --output ./nupkgs
+
+    #- name: Push to NuGet
+    #  run: |
+    #    dotnet nuget push "./nupkgs/*.nupkg" \
+    #      --api-key ${{ secrets.NUGET_API_KEY }} \
+    #      --source "https://api.nuget.org/v3/index.json" \
+    #      --skip-duplicate
+
+    - name: Prepare Release Assets
+      run: |
+        mkdir ./release-assets
+        cd ./all-binaries
+        for dir in *; do
+          tar -czf "../release-assets/${dir}.tar.gz" -C "$dir" .
+        done
+
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v2
+      with:
+        files: ./release-assets/*.tar.gz
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
