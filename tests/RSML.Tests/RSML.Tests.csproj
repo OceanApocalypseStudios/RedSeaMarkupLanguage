@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net10.0;net8.0;net481;net472</TargetFrameworks>
+		<Nullable>enable</Nullable>
+		<OutputType>Exe</OutputType>
+		<ImplicitUsings>enable</ImplicitUsings>
+
+		<IsTestProject>true</IsTestProject>
+		<TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
+		<UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
+
+		<RootNamespace>OceanApocalypseStudios.RSML.Tests</RootNamespace>
+		<LangVersion>latest</LangVersion>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+
+		<Platforms>AnyCPU;ARM64;x64;x86</Platforms>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Content Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Using Include="Xunit" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="xunit.v3.mtp-v2" Version="3.2.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\src\RSML\RSML.csproj" />
+	  <ProjectReference Include="..\..\src\RSML.Sdk\RSML.Sdk.csproj" />
+	</ItemGroup>
+
+</Project>

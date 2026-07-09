@@ -9,6 +9,7 @@
     
 	<Folder Name="/Solution Items/">
 		<File Path=".gitignore" />
+		<File Path="cliff.toml" />
 		<File Path="mkdocs.yml" />
 		<File Path="README.md" />
 	</Folder>
@@ -36,11 +37,12 @@
 			<Platform Solution="*|x64" Project="x64" />
 			<Platform Solution="*|x86" Project="x86" />
 		</Project>
-		<Project Path="tests/RSML.Tests.csproj">
+		<Project Path="tests/RSML.NativeTests/RSML.NativeTests.csproj">
 			<Platform Solution="*|ARM64" Project="ARM64" />
-			<Platform Solution="*|x86" Project="x86" />
 			<Platform Solution="*|x64" Project="x64" />
+			<Platform Solution="*|x86" Project="x86" />
 		</Project>
+		<Project Path="tests/RSML.Tests/RSML.Tests.csproj" Id="fcc9ab7e-80f7-48e8-9f3f-f61a3dc2b8bf" />
 	</Folder>
 	<Project Path="src/RSML.CLI/RSML.CLI.csproj">
 		<Platform Solution="*|ARM64" Project="ARM64" />
