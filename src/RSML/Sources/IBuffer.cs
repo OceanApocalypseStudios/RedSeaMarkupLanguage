@@ -1,20 +1,16 @@
 ﻿using System;
 
 
-namespace OceanApocalypseStudios.RSML.Sources.Buffers;
-
-// TODO: cleanup this interface, change some signatures
-// xxx: this interface has to be IMPECABLE!
-// i fucking have no idea how to spell impecable
-
-// see #50 and #53 and #54
+namespace OceanApocalypseStudios.RSML.Sources;
 
 /// <summary>
 /// Represents a buffer.
 /// </summary>
 /// <typeparam name="TItem">The datatype of the values returned by the buffer methods</typeparam>
-public interface IReadOnlyBuffer<TItem> : ISource, IEquatable<IReadOnlyBuffer<TItem>?>
+public interface IBuffer<TItem> : ISource, IEquatable<IBuffer<TItem>?>
 {
+	// todo: add methods that can mutate the buffer (coming to v3.0.0-prerelease2)
+
 	/// <summary>
 	/// The total amount of lines in the buffer.
 	/// </summary>
@@ -126,6 +122,13 @@ public interface IReadOnlyBuffer<TItem> : ISource, IEquatable<IReadOnlyBuffer<TI
 	/// <param name="index">The index whose parent line's number is to be returned.</param>
 	/// <returns>The 0-based number of the line that contains item located at <paramref name="index"/>.</returns>
 	int GetLineNumberFromIndex(int index);
+
+	/// <summary>
+	/// Converts an index into a location.
+	/// </summary>
+	/// <param name="index">The index.</param>
+	/// <returns>The location.</returns>
+	SourceLocation GetSourceLocation(int index);
 
 	/// <summary>
 	/// Tries to read the word at index <paramref name="index"/>, which can be a span of items verified by

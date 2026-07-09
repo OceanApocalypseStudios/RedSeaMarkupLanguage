@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using System.Text;
 
-using OceanApocalypseStudios.RSML.Common;
+using OceanApocalypseStudios.RSML.Cache;
 using OceanApocalypseStudios.RSML.Exceptions;
 
 
-namespace OceanApocalypseStudios.RSML.Sources.Buffers;
+namespace OceanApocalypseStudios.RSML.Sources;
 
 /// <summary>
 /// A read-only buffer backed by a string. All operations opt for performance
 /// primarily via the internal use of <see cref="ReadOnlySpan{Char}"/> over string allocations
 /// and also via caching.
 /// </summary>
-public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEquatable<ReadOnlyStringBuffer?>
+public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<ReadOnlyStringBuffer?>
 {
 	private readonly List<int> lineStarts = [];
 
@@ -24,8 +24,22 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 	/// <inheritdoc/>
 	public bool CacheExists { get; private set; } = false;
 
+	/// <remarks>
+	/// Always returns <c>-1</c>, as <see cref="ReadOnlyStringBuffer"/> doesn't
+	/// support cursor positioning (everything is done via indexing).
+	/// </remarks>
+	/// <inheritdoc/>
+	public int CursorIndex => -1;
+
 	/// <inheritdoc/>
 	public bool IsEmpty => Length == 0;
+
+	/// <remarks>
+	/// Always returns <c>true</c>, as <see cref="ReadOnlyStringBuffer"/> only
+	/// supports read-only content (hence the name).
+	/// </remarks> 
+	/// <inheritdoc/>
+	public bool IsReadOnly => true;
 
 	/// <inheritdoc/>
 	public int Length => data.Length;
@@ -120,8 +134,6 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 	/// <inheritdoc/>
 	public int CountUntilLineSeparator(int index, out bool isCrLf)
 	{
-		// todo: fix this method
-
 		isCrLf = false;
 
 		if (IsEmpty)
@@ -137,7 +149,11 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 			return 0; // consumed the entire buffer
 
 		ComputeLineStarts();
-		int lineSep = GetNextOrCurrentLineStartPosition(index, out _);
+		int lineStart = GetNextLineStartPosition(index, out int lineStartIndex);
+		int lineSep = lineStart;
+
+		if (precededByCrLf.Contains(lineStart))
+			lineSep--; // skip the extra line separator in the CRLF sequence
 
 		isCrLf = precededByCrLf.Contains(lineSep);
 
@@ -522,7 +538,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 
 		return destination.Length >= actualLineLength;
 	}
-
+	
 	/// <remarks>
 	/// Unlike with other <see cref="ReadOnlyStringBuffer"/> methods, this one
 	/// does not accept the EOF index (index at <see cref="Length"/>), because it is not
@@ -595,19 +611,21 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 	public void Dispose() => GC.SuppressFinalize(this);
 
 	/// <inheritdoc/>
-#if NET10_0_OR_GREATER
-	public override bool Equals([NotNullWhen(true)] object? obj) =>
-#elif NETSTANDARD2_0
-	public override bool Equals(object obj) =>
+	public override bool Equals(
+#if NET8_0_OR_GREATER
+		[NotNullWhen(true)]
+		object? obj
+#else
+		object obj
 #endif
-		Equals(obj as ReadOnlyStringBuffer);
+	) => Equals(obj as ReadOnlyStringBuffer);
 
 	/// <summary>
 	/// Checks if another read-only buffer is equal to the current instance.
 	/// </summary>
 	/// <param name="other">The other read-only buffer.</param>
 	/// <returns>True if equals.</returns>
-	public bool Equals(IReadOnlyBuffer<char>? other) => other is ReadOnlyStringBuffer buffer && Equals(buffer);
+	public bool Equals(IBuffer<char>? other) => other is ReadOnlyStringBuffer buffer && Equals(buffer);
 
 	/// <summary>
 	/// Checks if another read-only string buffer is equal to the current instance.
