@@ -34,16 +34,14 @@ jobs:
         dotnet publish ./src/RSML.Native/RSML.Native.csproj \
           -c Release \
           -r ${{ matrix.rid-os }}-${{ matrix.arch }} \
-          -o ./dist/native-${{ matrix.rid-os }}-${{ matrix.arch }} \
-          --self-contained true
+          -o ./dist/native-${{ matrix.rid-os }}-${{ matrix.arch }}
 
     - name: Publish CLI Project
       run: |
         dotnet publish ./src/RSML.CLI/RSML.CLI.csproj \
           -c Release \
           -r ${{ matrix.rid-os }}-${{ matrix.arch }} \
-          -o ./dist/cli-${{ matrix.rid-os }}-${{ matrix.arch }} \
-          --self-contained true
+          -o ./dist/cli-${{ matrix.rid-os }}-${{ matrix.arch }}
 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v4
