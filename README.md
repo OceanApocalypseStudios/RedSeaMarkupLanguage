@@ -6,16 +6,20 @@
 <div align="center">
 	<a href="https://www.nuget.org/packages/OceanApocalypseStudios.RSML" target="_blank"><img src="https://img.shields.io/nuget/v/OceanApocalypseStudios.RSML?style=for-the-badge&logo=nuget&logoColor=white&logoSize=auto&label=Available%20on%20NuGet&labelColor=%231265fb&color=%2308317b"/></a>
 	<a href="https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/releases/latest"><img src="https://img.shields.io/github/v/release/OceanApocalypseStudios/RedSeaMarkupLanguage?sort=semver&display_name=tag&style=for-the-badge&logo=github&logoColor=white&logoSize=auto&label=Latest&labelColor=%23161616&color=%23000308"/></a>
+	<img src="https://img.shields.io/github/languages/top/OceanApocalypseStudios/RedSeaMarkupLanguage?style=for-the-badge&logo=dotnet&logoColor=white&logoSize=auto&label=%20&labelColor=%234929ca&color=%234929ca" />
+	<br/><br/>
 	<!--<a href="COPYING.txt"><img src="https://img.shields.io/badge/ignored-Custom_clause-ignored?style=for-the-badge&logo=opensourceinitiative&logoColor=white&logoSize=auto&label=repository%20licensing&labelColor=%23496300&color=%232b3c00"/></a>-->
 	<a href="LICENSE.txt"><img src="https://img.shields.io/badge/ignored-mit-ignored?style=for-the-badge&logo=opensourceinitiative&logoColor=white&logoSize=auto&label=code%20license&labelColor=%23496300&color=%232b3c00"/></a>
 	<a href="LICENSE-DOCS.txt"><img src="https://img.shields.io/badge/ignored-cc0_1.0_universal-ignored?style=for-the-badge&logo=opensourceinitiative&logoColor=white&logoSize=auto&label=documentation%20license&labelColor=%23496300&color=%232b3c00"/></a>
-	<img src="https://img.shields.io/github/languages/top/OceanApocalypseStudios/RedSeaMarkupLanguage?style=for-the-badge&logo=dotnet&logoColor=white&logoSize=auto&label=%20&labelColor=%234929ca&color=%234929ca" />
+	<br/><br/>
 	<img src="https://img.shields.io/github/stars/OceanApocalypseStudios/RedSeaMarkupLanguage?style=for-the-badge&logo=star&logoColor=black&logoSize=auto&labelColor=%2379610b&color=%23413405" />
 	<img src="https://img.shields.io/nuget/dt/OceanApocalypseStudios.RSML?style=for-the-badge&logo=nuget&logoColor=white&logoSize=auto&label=downloads%20(modern)&labelColor=%234929ca&color=%2327156f" />
 	<img src="https://img.shields.io/nuget/dt/RSML?style=for-the-badge&logo=nuget&logoColor=white&logoSize=auto&label=Downloads%20(Legacy)&labelColor=%23ad4734&color=%236e2d20" />
 	<a href="https://marketplace.visualstudio.com/items?itemName=OceanApocalypseStudios.oas-rsml-support-vs" target="_blank"><img src="https://img.shields.io/badge/RSML_for_Visual_Studio-b35ff2?style=for-the-badge"></a>
 	<a href="https://marketplace.visualstudio.com/items?itemName=OceanApocalypseStudios.rsml" target="_blank"><img src="https://img.shields.io/badge/RSML_for_VS_Code-1f9cf0?style=for-the-badge"></a>
-
+	<br/><br/>
+	<img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/OceanApocalypseStudios/RedSeaMarkupLanguage/test.yml?style=for-the-badge&label=tests">
+	<img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/OceanApocalypseStudios/RedSeaMarkupLanguage/release.yml?style=for-the-badge&label=release">
 </div>
 <hr/>
 <div align="center">
