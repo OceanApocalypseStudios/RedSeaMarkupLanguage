@@ -37,16 +37,12 @@
 			<Platform Solution="*|x64" Project="x64" />
 			<Platform Solution="*|x86" Project="x86" />
 		</Project>
-		<Project Path="tests/RSML.NativeTests/RSML.NativeTests.csproj">
+		<Project Path="tests/RSML.NativeTests/RSML.NativeTests.csproj" Id="9c3a8c42-d460-4a2a-bcb0-5363a9d7022c">
 			<Platform Solution="*|ARM64" Project="ARM64" />
 			<Platform Solution="*|x64" Project="x64" />
 			<Platform Solution="*|x86" Project="x86" />
 		</Project>
-		<Project Path="tests/RSML.Tests/RSML.Tests.csproj">
-            <Platform Solution="*|ARM64" Project="ARM64" />
-			<Platform Solution="*|x64" Project="x64" />
-			<Platform Solution="*|x86" Project="x86" />
-		</Project>
+		<Project Path="tests/RSML.Tests/RSML.Tests.csproj" Id="960c858b-2254-426f-96e5-54a6761c600f" />
 	</Folder>
 	<Project Path="src/RSML.CLI/RSML.CLI.csproj">
 		<Platform Solution="*|ARM64" Project="ARM64" />

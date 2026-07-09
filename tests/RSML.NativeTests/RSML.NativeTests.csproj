@@ -5,13 +5,10 @@
 		<Nullable>enable</Nullable>
 		<OutputType>Exe</OutputType>
 		<ImplicitUsings>enable</ImplicitUsings>
-		
-		<IsTestProject>true</IsTestProject>
-
 		<RootNamespace>OceanApocalypseStudios.RSML.Tests.Native</RootNamespace>
+		<UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
 		<LangVersion>latest</LangVersion>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-
 		<Platforms>AnyCPU;ARM64;x64;x86</Platforms>
 	</PropertyGroup>
 
@@ -28,8 +25,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\src\RSML.Native\RSML.Native.csproj" />
-		<ProjectReference Include="..\..\src\RSML\RSML.csproj" />
+	  <ProjectReference Include="..\..\src\RSML.Native\RSML.Native.csproj" />
+	  <ProjectReference Include="..\..\src\RSML\RSML.csproj" />
 	</ItemGroup>
 
 </Project>
