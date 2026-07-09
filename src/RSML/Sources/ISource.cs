@@ -9,9 +9,9 @@ namespace OceanApocalypseStudios.RSML.Sources;
 public interface ISource : IDisposable
 {
 	/// <summary>
-	/// The length of the source.
+	/// The current index of the cursor.
 	/// </summary>
-	int Length { get; }
+	int CursorIndex { get; }
 
 	/// <summary>
 	/// Whether the source is completely empty.
@@ -19,9 +19,12 @@ public interface ISource : IDisposable
 	bool IsEmpty { get; }
 
 	/// <summary>
-	/// Converts an index into a location.
+	/// Whether the source can be mutated.
 	/// </summary>
-	/// <param name="index">The index.</param>
-	/// <returns>The location.</returns>
-	SourceLocation GetSourceLocation(int index);
+	bool IsReadOnly { get; }
+
+	/// <summary>
+	/// The length of the source.
+	/// </summary>
+	int Length { get; }
 }
