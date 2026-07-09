@@ -91,9 +91,9 @@ jobs:
           tar -czf "../release-assets/${dir}.tar.gz" -C "$dir" .
         done
 
-    - name: Create GitHub Release
-      uses: softprops/action-gh-release@v2
-      with:
-        files: ./release-assets/*.tar.gz
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #- name: Create GitHub Release
+    #  uses: softprops/action-gh-release@v2
+    #  with:
+    #    files: ./release-assets/*.tar.gz
+    #  env:
+    #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
