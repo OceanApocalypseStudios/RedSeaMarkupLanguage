@@ -1,7 +1,5 @@
 ﻿using System;
 
-using OceanApocalypseStudios.RSML.Sources.Buffers;
-
 
 namespace OceanApocalypseStudios.RSML.Sources;
 
@@ -31,12 +29,14 @@ public readonly partial struct SourceSpan(SourceLocation start, SourceLocation e
 	public bool IsSingleLine => Start.Line == End.Line;
 
 	/// <inheritdoc/>
-	#if NET10_0_OR_GREATER
-	public override bool Equals([NotNullWhen(true)] object? obj) =>
-		#elif NETSTANDARD2_0
-	public override bool Equals(object obj) =>
-		#endif
-		obj is SourceSpan span && Equals(span);
+	public override bool Equals(
+#if NET8_0_OR_GREATER
+		[NotNullWhen(true)]
+		object? obj
+#else
+		object obj
+#endif
+	) => obj is SourceSpan span && Equals(span);
 
 	/// <summary>
 	/// Checks whether two <see cref="SourceSpan"/>s are equals.
@@ -73,7 +73,7 @@ public readonly partial struct SourceSpan(SourceLocation start, SourceLocation e
 	{
 		switch (source)
 		{
-			case IReadOnlyBuffer<char> charBuffer:
+			case IBuffer<char> charBuffer:
 				Span<char> destination = stackalloc char[Length];
 				charBuffer.Slice(Start.Index, destination);
 

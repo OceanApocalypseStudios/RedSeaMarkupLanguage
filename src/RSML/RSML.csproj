@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup Label="General Properties">
-		<TargetFrameworks>net10.0;netstandard2.0</TargetFrameworks>
+		<TargetFrameworks>net10.0;net8.0;net481;net472;netstandard2.0</TargetFrameworks>
 		<Nullable>enable</Nullable>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<LangVersion>latest</LangVersion>
@@ -37,7 +37,7 @@
 		</None>
 	</ItemGroup>
 
-	<ItemGroup Label="Memory Extensions" Condition="'$(TargetFramework)' == 'netstandard2.0'">
+	<ItemGroup>
 		<PackageReference Include="System.Memory" Version="4.6.3" />
 	</ItemGroup>
 

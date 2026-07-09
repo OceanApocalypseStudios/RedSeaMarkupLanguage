@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup Label="General Properties">
-		<TargetFrameworks>net10.0;netstandard2.0</TargetFrameworks>
+		<TargetFrameworks>net10.0;net8.0;net481;net472;netstandard2.0</TargetFrameworks>
 		<Nullable>enable</Nullable>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<LangVersion>latest</LangVersion>
@@ -43,14 +43,6 @@
 			<PackagePath>\</PackagePath>
 			<Visible>false</Visible>
 		</None>
-	</ItemGroup>
-
-	<ItemGroup Label="When not .NET Standard 2.0" Condition="'$(TargetFramework)' != 'netstandard2.0'">
-		<Compile Remove="**\*.NetStd2.cs" Visible="true" />
-	</ItemGroup>
-
-	<ItemGroup Label="When not .NET 10" Condition="'$(TargetFramework)' != 'net10.0'">
-		<Compile Remove="**\*.Net10.cs" Visible="true" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -4,7 +4,7 @@
 namespace OceanApocalypseStudios.RSML.Sources;
 
 /// <summary>
-/// Specifies the location of an item in a <see cref="ISource"/> (such as a <see cref="Buffers.IReadOnlyBuffer{TItem}"/>).
+/// Specifies the location of an item in a <see cref="ISource"/>.
 /// </summary>
 /// <param name="index">The 0-based index.</param>
 /// <param name="line">The 0-based line number.</param>
@@ -37,17 +37,19 @@ public readonly struct SourceLocation(int index, int line, int column) : IEquata
 	public int CompareTo(SourceLocation other) => throw new NotImplementedException();
 
 	/// <inheritdoc/>
-#if NET10_0_OR_GREATER
-	public override bool Equals([NotNullWhen(true)] object? obj) =>
-#elif NETSTANDARD2_0
-	public override bool Equals(object obj) =>
+	public override bool Equals(
+#if NET8_0_OR_GREATER
+		[NotNullWhen(true)]
+		object? obj
+#else
+		object obj
 #endif
-		obj switch
-		{
-			SourceLocation location => Equals(location),
-			int index               => Index == index,
-			_                       => false
-		};
+	) => obj switch
+	{
+		SourceLocation location => Equals(location),
+		int index => Index == index,
+		_ => false
+	};
 
 	/// <summary>
 	/// Checks if two <see cref="SourceLocation"/>s are equal to each other.
@@ -92,8 +94,8 @@ public readonly struct SourceLocation(int index, int line, int column) : IEquata
 		format switch
 		{
 			"CTOR" or "I" or "INIT" or "NET" => $"new SourceLocation({Index}, {Line}, {Column})",
-			"JSON"                           => $$"""{ "index": {{Index}}, "line": {{Line}}, "column": {{Column}} }""",
-			_                                => ToString()
+			"JSON" => $$"""{ "index": {{Index}}, "line": {{Line}}, "column": {{Column}} }""",
+			_ => ToString()
 		};
 
 	/// <summary>

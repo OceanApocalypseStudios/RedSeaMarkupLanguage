@@ -29,12 +29,14 @@ public readonly struct SourceError(SourceSpan span, string message, Severity sev
 	public Severity Severity => severity;
 
 	/// <inheritdoc/>
-#if NET10_0_OR_GREATER
-	public override bool Equals([NotNullWhen(true)] object? obj) =>
-#elif NETSTANDARD2_0
-	public override bool Equals(object obj) =>
+	public override bool Equals(
+#if NET8_0_OR_GREATER
+		[NotNullWhen(true)]
+		object? obj
+#else
+		object obj
 #endif
-		obj is SourceError error && Equals(error);
+	) => obj is SourceError error && Equals(error);
 
 	/// <inheritdoc/>
 	public bool Equals(SourceError other) => Message == other.Message && Severity == other.Severity && Span.Equals(other.Span);

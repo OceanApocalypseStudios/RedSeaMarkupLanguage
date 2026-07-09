@@ -9,10 +9,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Remove="results\*\**" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="BenchmarkDotNet" Version="0.15.8" />
 	</ItemGroup>
 
