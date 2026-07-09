@@ -7,7 +7,6 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		
 		<IsTestProject>true</IsTestProject>
-		<TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
 		<UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
 
 		<RootNamespace>OceanApocalypseStudios.RSML.Tests.Native</RootNamespace>
