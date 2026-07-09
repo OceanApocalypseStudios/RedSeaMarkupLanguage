@@ -1,8 +1,6 @@
 <!-- NuGet Packaging -->
 <Project>
 	<PropertyGroup Label="NuGet Package Setup">
-		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-
 		<PackageId>OceanApocalypseStudios.RSML.Native</PackageId>
 		<Title>RSML Native ABI</Title>
 		<Authors>OceanApocalypseStudios</Authors>
