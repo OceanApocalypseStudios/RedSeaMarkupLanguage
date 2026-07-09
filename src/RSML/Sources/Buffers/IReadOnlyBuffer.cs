@@ -31,6 +31,20 @@ public interface IReadOnlyBuffer<TItem> : ISource, IEquatable<IReadOnlyBuffer<TI
 	TItem this[int index] { get; }
 
 	/// <summary>
+	/// Gets a single item out of the buffer.
+	/// </summary>
+	/// <param name="location">The location of the item to retrieve.</param>
+	/// <returns>The item.</returns>
+	TItem this[SourceLocation location] { get; }
+
+	/// <summary>
+	/// Gets a range of items out of the buffer.
+	/// </summary>
+	/// <param name="span">The span of items to get.</param>
+	/// <returns>The items.</returns>
+	TItem[] this[SourceSpan span] { get; }
+
+	/// <summary>
 	/// Counts the amount of items until the next line separator in the buffer, relative to a given <paramref name="index"/>.
 	/// Only line separators count - regular whitespace do not. CRLF counts as a single line separator, to avoid double counting.
 	/// </summary>
@@ -92,11 +106,75 @@ public interface IReadOnlyBuffer<TItem> : ISource, IEquatable<IReadOnlyBuffer<TI
 	int GetLengthOfLineFromIndex(int index);
 
 	/// <summary>
+	/// Given a 0-based line number, returns the matching line as an array of buffer items.
+	/// </summary>
+	/// <param name="lineNumber">The 0-based line number.</param>
+	/// <returns>The line as an array of items.</returns>
+	TItem[] GetLine(int lineNumber);
+
+	/// <summary>
+	/// Tries to read the line that contains the item at <paramref name="index"/>.
+	/// No end of line characters are added.
+	/// </summary>
+	/// <param name="index">The index at which to determine what the current line is.</param>
+	/// <returns>The line, as an array of items.</returns>
+	TItem[] GetLineFromIndex(int index);
+
+	/// <summary>
 	/// Determines the 0-based line number of the line that contains the item located at <paramref name="index"/>.
 	/// </summary>
 	/// <param name="index">The index whose parent line's number is to be returned.</param>
 	/// <returns>The 0-based number of the line that contains item located at <paramref name="index"/>.</returns>
 	int GetLineNumberFromIndex(int index);
+
+	/// <summary>
+	/// Tries to read the word at index <paramref name="index"/>, which can be a span of items verified by
+	/// <paramref name="itemKindPredicate"/> (if the starting index is verified by <paramref name="itemKindPredicate"/>)
+	/// or a span of content not verified by <paramref name="itemKindPredicate"/> (if
+	/// the starting index does not point to anything verified by <paramref name="itemKindPredicate"/>).
+	/// </summary>
+	/// <param name="index">The index at which the word starts.</param>
+	/// <param name="itemKindPredicate">
+	/// A predicate that verifies if the first item in the selected range serves as the delimiter
+	/// (the predicate returns <c>true</c> if so). For example, if the predicate verifies <c>,</c>, then 
+	/// the current word if the buffer is <c>My awesome buffer, isn't it cool?</c> starting from <paramref name="index"/>,
+	/// is <c>My awesome buffer</c>. If the predicate verifies <c>;</c>, then the current word
+	/// if the buffer is <c>;;so very awesome</c> starting from <paramref name="index"/>, is <c>;;</c>.
+	/// </param>
+	/// <param name="isItemKind">
+	/// True if the array is fully comprised of the item kind verified by <paramref name="itemKindPredicate"/>.
+	/// If False, no items verified by <paramref name="itemKindPredicate"/> is present.
+	/// </param>
+	/// <returns>The line, as an array of items.</returns>
+	TItem[] GetWord(int index, Func<int, TItem, bool> itemKindPredicate, out bool isItemKind);
+
+	/// <summary>
+	/// Tries to read the word at index <paramref name="index"/>, which can be a span of whitespace (if the starting index points to whitespace)
+	/// or a span of non-whitespace content (if the starting index does not point to whitespace).
+	/// </summary>
+	/// <param name="index">The index at which the word starts.</param>
+	/// <param name="isWhitespace">True if the array is fully comprised of whitespace. If False, no whitespace is present.</param>
+	/// <returns>The line, as an array of items.</returns>
+	TItem[] GetWord(int index, out bool isWhitespace);
+
+	/// <summary>
+	/// Tries to read the word at index <paramref name="index"/>, which can be a span of <paramref name="itemKind"/> (if the starting index
+	/// points to <paramref name="itemKind"/>) or a span of non-<paramref name="itemKind"/> content (if
+	/// the starting index does not point to <paramref name="itemKind"/>).
+	/// </summary>
+	/// <param name="index">The index at which the word starts.</param>
+	/// <param name="itemKind">
+	/// The item that will serve as the delimiter. For example, if item kind is <c>,</c>, then 
+	/// the current word if the buffer is <c> My awesome buffer, isn't it cool?</c> starting from <paramref name="index"/>,
+	/// is <c> My awesome buffer</c>. If item kind is <c>;</c>, then 
+	/// the current word if the buffer is <c>;;so very awesome</c> starting from <paramref name="index"/>, is <c>;;</c>.
+	/// </param>
+	/// <param name="isItemKind">
+	/// True if the array is fully comprised of <paramref name="itemKind"/>.
+	/// If False, no <paramref name="itemKind"/> is present.
+	/// </param>
+	/// <returns>The line, as an array of items.</returns>
+	TItem[] GetWord(int index, TItem itemKind, out bool isItemKind);
 
 	/// <summary>
 	/// Slices a region of the buffer.
