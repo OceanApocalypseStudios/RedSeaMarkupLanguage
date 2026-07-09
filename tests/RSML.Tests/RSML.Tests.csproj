@@ -7,7 +7,6 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<IsTestProject>true</IsTestProject>
-		<UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
 
 		<RootNamespace>OceanApocalypseStudios.RSML.Tests</RootNamespace>
 		<LangVersion>latest</LangVersion>
@@ -29,8 +28,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\src\RSML\RSML.csproj" />
-	  <ProjectReference Include="..\..\src\RSML.Sdk\RSML.Sdk.csproj" />
+		<ProjectReference Include="..\..\src\RSML\RSML.csproj" />
+		<ProjectReference Include="..\..\src\RSML.Sdk\RSML.Sdk.csproj" />
 	</ItemGroup>
 
 </Project>
