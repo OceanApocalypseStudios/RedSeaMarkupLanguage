@@ -114,6 +114,8 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 	/// <inheritdoc/>
 	public int CountUntilLineSeparator(int index, out bool isCrLf)
 	{
+		// todo: fix this method
+
 		isCrLf = false;
 
 		if (IsEmpty)
@@ -282,6 +284,36 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 		return lineSepIndex;
 	}
 
+	/// <remarks>
+	/// Unlike with other <see cref="ReadOnlyStringBuffer"/> methods, this one
+	/// does not accept the EOF index (index at <see cref="Length"/>), because it is not
+	/// considered a location.
+	/// </remarks>
+	/// <inheritdoc/>
+	public SourceLocation GetSourceLocation(int index)
+	{
+		if (IsEmpty)
+			throw new BufferException("The buffer cannot be empty.");
+
+		if (index < 0)
+			index += Length;
+
+		if (IsOutOfRange(index))
+			throw new IndexOutOfRangeException("The index must be less than or equal to the buffer's length.");
+
+		if (index == 0) // best "best" case = triple zero
+			return new(0, 0, 0);
+
+		int lineNumber = GetLineNumberFromIndex(index);
+		
+		if (lineNumber >= lineStarts.Count)
+			throw new IndexOutOfRangeException("The index points to a line number that is out of range.");
+
+		ComputeLineStarts();
+
+		return new(index, lineNumber, index - lineStarts[lineNumber]);
+	}
+
 	/// <inheritdoc/>
 	public char[] Slice(int start, int length) => data.ToCharArray(start, length);
 
@@ -328,17 +360,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 			return true; // EOF means the line is empty (and destination is by default empty)
 
 		int start = lineStarts[lineNumber];
-		int end;
-
-		end = lineStarts[lineNumber + 1];
-
-		if (precededByCrLf.Contains(end))
-			end--; // skip the extra line separator in the CRLF sequence
-
-		if (!(lineNumber + 2 == RawLineCount && !data[Length - 1].IsNewline())) // if we're not on the last line then
-			end--; // skip one more line separator
-
-		int actualLineLength = end - start;
+		int actualLineLength = GetLengthOfLine(lineNumber);
 		itemCount = Math.Min(actualLineLength, destination.Length);
 
 		data.AsSpan(start, itemCount).CopyTo(destination);
@@ -349,81 +371,6 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 	/// <inheritdoc/>
 	public bool TryGetLineFromIndex(int index, Span<char> line, out int itemCount) =>
 		TryGetLine(GetLineNumberFromIndex(index), line, out itemCount);
-
-	/// <inheritdoc/>
-	public bool TryGetLineAfterIndex(int index, Span<char> line, out int itemCount)
-	{
-		itemCount = 0;
-
-		if (IsEmpty)
-			return false;
-
-		if (index < 0)
-			index += Length;
-
-		if (IsOutOfRange(index))
-			return false;
-
-		ComputeLineStarts();
-
-		if (precededByCrLf.Contains(index - 1)) // is the current index pointing to a LF inside a CRLF?
-			index--;                            // use the CR in the CRLF sequence instead of using the LF
-
-		index += CountUntilLineSeparator(index, out bool isCrLf); // skip to the next line separator
-		index += isCrLf ? 2 : 1; // skip to the actual start of the next line (skip twice if CRLF)
-
-		if (IsOutOfRange(index))
-			return false;
-
-		// when summed with the index, returns the line separator index - which must be excluded from the return value
-		int actualLineLength = CountUntilLineSeparator(index, out _);
-		int charsToCopyAmount = Math.Min(actualLineLength, line.Length);
-		data.AsSpan(index, charsToCopyAmount).CopyTo(line);
-
-		itemCount = charsToCopyAmount;
-
-		return line.Length >= actualLineLength;
-	}
-
-	/// <inheritdoc/>
-	public bool TryGetLineAfterIndex(int index, Span<char> line, bool skipEmptyLines, out int itemCount)
-	{
-		// todo: this should return the next line (see TryGetNextLineFrom(int, Span<char>, int))
-		// but skip empty lines if skipEmptyLines = true
-		// see #52
-		throw new NotImplementedException();
-	}
-
-	/// <remarks>
-	/// This implementation, unlike others, is official and does not suffer from major performance issues.
-	/// </remarks>
-	/// <inheritdoc/>
-	public bool TryGetSourceLocation(int index, out SourceLocation location)
-	{
-		location = new();
-
-		if (IsEmpty)
-			return false;
-
-		if (index < 0)
-			index += Length;
-
-		if (IsOutOfRange(index))
-			return false;
-
-		if (index == 0) // best "best" case = triple zero
-		{
-			location = new(0, 0, 0);
-
-			return true;
-		}
-
-		ComputeLineStarts();
-
-		location = new(index, GetLineNumberFromIndex(index), ReverseCountUntilNewline(index));
-
-		return true;
-	}
 
 	/// <inheritdoc/>
 	public bool TryGetWord(int index, char itemKind, Span<char> destination, out bool isItemKind, out int itemCount)
@@ -758,17 +705,4 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer<char>, ISupportsCache, IEqua
 	/// or <see cref="IndexOutOfRangeException"/>.
 	/// </summary>
 	private bool IsOutOfRange(int index) => index >= Length;
-
-	/// <remarks>
-	/// Ignores the LF in CRLF sequences (returns the CR if the matching sequence is CRLF) - avoid double counting and other issues.
-	/// </remarks>
-	private int ReverseCountUntilNewline(int index)
-	{
-		if (index < 0)
-			index = Length + index; // -1 is (Length-1) etc
-
-		ComputeLineStarts();
-
-		return index - GetPreviousLineStartPosition(index, out _);
-	}
 }

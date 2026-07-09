@@ -148,32 +148,6 @@ public interface IReadOnlyBuffer<TItem> : ISource, IEquatable<IReadOnlyBuffer<TI
 	bool TryGetLineFromIndex(int index, Span<TItem> destination, out int itemCount);
 
 	/// <summary>
-	/// Tries to read the next line in the buffer, relative to a given <paramref name="index"/>.
-	/// If the <paramref name="index"/> is the start of a line, then that line is considered instead of the next.
-	/// The line might be empty if it's made up of line separators only.
-	/// No end of line characters are added.
-	/// </summary>
-	/// <param name="index">The index at which to determine what the next line is.</param>
-	/// <param name="destination">The destination span that will contain the line.</param>
-	/// <param name="itemCount">The amount of items that were written to <paramref name="destination"/>.</param>
-	/// <returns>False if the buffer is out of bounds, there are no more lines to read or an exception occured.</returns>
-	bool TryGetLineAfterIndex(int index, Span<TItem> destination, out int itemCount);
-
-	/// <summary>
-	/// Tries to read the next line in the buffer, relative to a given <paramref name="index"/>.
-	/// If the <paramref name="index"/> is the start of a line, then that line is considered instead of the next.
-	/// If <paramref name="skipEmptyLines"/> is set to <c>true</c>, lines that only contain line separators will be
-	/// skipped, but lines containing non-line separator whitespace will not be skipped.
-	/// No end of line characters are added.
-	/// </summary>
-	/// <param name="index">The index at which to determine what the next line is.</param>
-	/// <param name="destination">The destination span that will contain the line.</param>
-	/// <param name="skipEmptyLines">Whether to skip lines that are composed only of line separators.</param>
-	/// <param name="itemCount">The amount of items that were written to <paramref name="destination"/>.</param>
-	/// <returns>False if the buffer is out of bounds, there are no more lines to read or an exception occured.</returns>
-	bool TryGetLineAfterIndex(int index, Span<TItem> destination, bool skipEmptyLines, out int itemCount);
-
-	/// <summary>
 	/// Tries to read the word at index <paramref name="index"/>, which can be a span of items verified by
 	/// <paramref name="itemKindPredicate"/> (if the starting index is verified by <paramref name="itemKindPredicate"/>)
 	/// or a span of content not verified by <paramref name="itemKindPredicate"/> (if
