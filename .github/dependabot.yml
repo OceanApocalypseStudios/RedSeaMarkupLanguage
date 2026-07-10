@@ -1,0 +1,32 @@
+version: 2
+
+updates:
+  # NuGet dependencies
+  - package-ecosystem: "nuget"
+    directories:
+      - "/src/*"
+      - "/tests/*"
+      - "/benchmarks"
+    exclude-paths:
+      - "/docs/*"
+    schedule:
+      interval: "cron"
+      cronjob: "0 7 * * WED"
+      timezone: "Europe/Lisbon"
+    open-pull-requests-limit: 12
+    target-branch: "dev"
+    rebase-strategy: "auto"
+    groups:
+      minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+      major:
+        update-types:
+          - "major"
+    assignees:
+      - "mf366-dev"
+    labels:
+      - "Dependencies"
+    commit-message:
+      prefix: "chore(deps.nuget):"
