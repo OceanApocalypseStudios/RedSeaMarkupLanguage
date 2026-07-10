@@ -263,7 +263,9 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 		if (IsEmpty)
 			throw new BufferException("The buffer cannot be empty.");
 
-		if (lineNumber < 0 || lineNumber >= RawLineCount) // LineCount already implicitly computes line starts so we don't need to manually compute them
+		ComputeLineStarts();
+
+		if (lineNumber < 0 || lineNumber >= RawLineCount)
 			throw new ArgumentOutOfRangeException(nameof(lineNumber), "The 0-based line number must be non-negative and less than the amount of lines in the buffer.");
 
 		if (lineNumber + 1 == RawLineCount)
@@ -302,6 +304,8 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 		if (IsConventionallyOutOfRange(index))
 			throw new IndexOutOfRangeException("The index must be less than or equal to the buffer's length.");
 
+		ComputeLineStarts();
+
 		GetPreviousOrCurrentLineStartPosition(index, out int lineSepIndex);
 		return lineSepIndex;
 	}
@@ -312,10 +316,12 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 		if (IsEmpty)
 			throw new BufferException("The buffer cannot be empty.");
 
+		ComputeLineStarts();
+
 		if (lineNumber < 0 || lineNumber >= RawLineCount)
 			throw new ArgumentOutOfRangeException(nameof(lineNumber), "The 0-based line number must be non-negative and less than the amount of lines in the buffer.");
 
-		if (lineNumber + 1 == RawLineCount) // line count already implicitly builds cache
+		if (lineNumber + 1 == RawLineCount)
 			return []; // EOF means the line is empty
 
 		int start = lineStarts[lineNumber];
@@ -347,12 +353,11 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 		if (index == 0) // best "best" case = triple zero
 			return new(0, 0, 0);
 
+		ComputeLineStarts();
 		int lineNumber = GetLineNumberFromIndex(index);
 
 		if (lineNumber >= lineStarts.Count)
 			throw new IndexOutOfRangeException("The index points to a line number that is out of range.");
-
-		ComputeLineStarts();
 
 		return new(index, lineNumber, index - lineStarts[lineNumber]);
 	}
@@ -486,10 +491,12 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	{
 		itemCount = 0;
 
+		ComputeLineStarts();
+
 		if (IsEmpty || lineNumber < 0 || lineNumber >= RawLineCount)
 			return false;
 
-		if (lineNumber + 1 == RawLineCount) // line count already implicitly builds cache
+		if (lineNumber + 1 == RawLineCount)
 			return true; // EOF means the line is empty (and destination is by default empty)
 
 		int start = lineStarts[lineNumber];
