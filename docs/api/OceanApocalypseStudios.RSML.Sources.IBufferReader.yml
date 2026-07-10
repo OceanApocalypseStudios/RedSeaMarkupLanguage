@@ -19,11 +19,15 @@ items:
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: IBufferReader
     path: ../src/RSML/Sources/IBufferReader.cs
-    startLine: 8
+    startLine: 12
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
   summary: Represents a sequential buffer reader whose data is composed of <xref href="System.Byte" data-throw-if-not-resolved="false"></xref>s.
+  remarks: >-
+    > [!NOTE]
+
+    > Not implemented in v3.0.0-prerelease1.
   example: []
   syntax:
     content: 'public interface IBufferReader : ISource, IDisposable, IEquatable<IBufferReader?>'

@@ -6,3 +6,7 @@
   items:
     - name: Getting Started
       href: cli/getting-started.md
+- name: Editor Support
+  items:
+    - name: List of Supported Editors
+      href: editor-support/index.md

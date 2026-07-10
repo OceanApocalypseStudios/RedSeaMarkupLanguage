@@ -1,0 +1,8 @@
+- name: 2026 Archive
+  items:
+    - name: Hello, DocFX!
+      href: announcements/hello-docfx.md
+- name: Announcements
+  items:
+    - name: Hello, DocFX!
+      href: announcements/hello-docfx.md

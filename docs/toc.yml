@@ -2,11 +2,15 @@
   href: index.md
 - name: Changelog
   href: changelog.md
-- name: Language
+- name: Language and Specification
   href: language/
-- name: API
+- name: RSML's .NET API
   href: api/
-- name: Tools
+- name: Bindings
+  href: bindings/
+- name: Other Tools
   href: tools/
 - name: Guides and Tutorials
   href: guides/
+- name: Blog
+  href: articles/

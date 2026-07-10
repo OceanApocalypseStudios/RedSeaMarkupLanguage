@@ -29,7 +29,8 @@
     "resource": [
       {
         "files": [
-          "images/**"
+          "images/**",
+          "articles/images/**"
         ]
       }
     ],
@@ -46,8 +47,21 @@
       "_enableSearch": true,
       "pdf": true,
       "_enableNewTab": true,
-      "_appFooter": "Made with <a href=\"https://dotnet.github.io/docfx/\">DocFX</a> and <a href=\"https://github.com/Singulink/SingulinkFX\">SingulinkFX</a>",
-      "_copyrightFooter": "Documentation licensed under CC0 1.0 (OceanApocalypseStudios)"
+      "_appFooter": "See on <a href=\"https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/\">GitHub</a>.<br/>Docs made with <a href=\"https://dotnet.github.io/docfx/\">DocFX</a> and <a href=\"https://github.com/Singulink/SingulinkFX\">SingulinkFX</a>.",
+      "_copyrightFooter": "OceanApocalypseStudios. Documentation licensed under CC0 1.0."
+    },
+    "markdownEngineProperties": {
+      "markdigExtensions": [
+          "SmartyPants",
+          "ListExtras",
+          "Footnotes",
+          "Footers",
+          "Figures",
+          "DefinitionLists"
+      ],
+      "alerts": {
+        "ARTICLE": "alert alert-article"
+      }
     }
   }
 }

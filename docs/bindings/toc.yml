@@ -1,0 +1,6 @@
+- name: RSML for Python
+  items:
+    - name: Getting Started
+      href: python/getting-started.md
+
+# TODO: add python API to the toc
