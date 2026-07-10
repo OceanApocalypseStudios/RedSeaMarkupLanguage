@@ -8,7 +8,7 @@ updates:
       - "/tests/*"
       - "/benchmarks"
     exclude-paths:
-      - "/docs/*"
+      - "docs/*"
     schedule:
       interval: "cron"
       cronjob: "0 7 * * WED"
