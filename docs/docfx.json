@@ -22,7 +22,7 @@
           "**/*.{md,yml}"
         ],
         "exclude": [
-          "_site/**"
+          "__site/**"
         ]
       }
     ],
@@ -33,7 +33,7 @@
         ]
       }
     ],
-    "output": "_site",
+    "output": "__site",
     "template": [
       "default",
       "templates/singulinkfx"
