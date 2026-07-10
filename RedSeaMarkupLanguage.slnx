@@ -6,24 +6,27 @@
 		<Platform Name="x64" />
 		<Platform Name="x86" />
 	</Configurations>
-    
+
 	<Folder Name="/Solution Items/">
 		<File Path=".gitignore" />
 		<File Path="cliff.toml" />
 		<File Path="README.md" />
+		<File Path="docs/docfx.json" />
+		<File Path="CHANGELOG.md" />
 	</Folder>
-    
+
     <Folder Name="/Solution Items/Assets/">
         <File Path="assets/logo.png" />
         <File Path="assets/icon.png" />
+        <File Path="docs/images/small.png" />
     </Folder>
-    
+
     <Folder Name="/Solution Items/Information/">
         <File Path="BENCHMARKS.md" />
         <File Path="EDITOR.md" />
         <File Path="LANGUAGES.md" />
     </Folder>
-    
+
     <Folder Name="/Solution Items/Licenses/">
         <File Path="LICENSE-DOCS.txt" />
         <File Path="LICENSE.txt" />
@@ -41,7 +44,11 @@
 			<Platform Solution="*|x64" Project="x64" />
 			<Platform Solution="*|x86" Project="x86" />
 		</Project>
-		<Project Path="tests/RSML.Tests/RSML.Tests.csproj" Id="960c858b-2254-426f-96e5-54a6761c600f" />
+		<Project Path="tests/RSML.Tests/RSML.Tests.csproj" Id="960c858b-2254-426f-96e5-54a6761c600f">
+			<Platform Solution="*|ARM64" Project="ARM64" />
+			<Platform Solution="*|x64" Project="x64" />
+			<Platform Solution="*|x86" Project="x86" />
+		</Project>
 	</Folder>
 	<Project Path="src/RSML.CLI/RSML.CLI.csproj">
 		<Platform Solution="*|ARM64" Project="ARM64" />
