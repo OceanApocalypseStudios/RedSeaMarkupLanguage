@@ -23,6 +23,9 @@
 ### 📚 Documentation
 
 - Improve documentation partially
+- Migrate from mkdocs to DocFX
+- Mark documentation as to be done
+- *(blog)* Add the very first blog article and organize documentation better
 
 ### 🧪 Testing
 
@@ -40,6 +43,12 @@
 - Debug release workflow on macOS
 - Debug release workflow on Linux ARM64
 - Make the CLI non-packable
+- Add platform support to the RSML solution
+- Remove docs output from the repository
+- Update workflows and add security information
+- Fix Dependabot workflow issue
+- Setup code owners for the repository
+- Update release workflow to use Trusted Publishers over API keys
 ## 2.0.0 @ 2025-09-09
 
 ### ⚡ Performance
