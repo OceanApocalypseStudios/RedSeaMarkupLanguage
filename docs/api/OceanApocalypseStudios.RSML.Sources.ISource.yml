@@ -1,0 +1,277 @@
+### YamlMime:ManagedReference
+items:
+- uid: OceanApocalypseStudios.RSML.Sources.ISource
+  commentId: T:OceanApocalypseStudios.RSML.Sources.ISource
+  id: ISource
+  parent: OceanApocalypseStudios.RSML.Sources
+  children:
+  - OceanApocalypseStudios.RSML.Sources.ISource.CursorIndex
+  - OceanApocalypseStudios.RSML.Sources.ISource.IsEmpty
+  - OceanApocalypseStudios.RSML.Sources.ISource.IsReadOnly
+  - OceanApocalypseStudios.RSML.Sources.ISource.Length
+  langs:
+  - csharp
+  - vb
+  name: ISource
+  nameWithType: ISource
+  fullName: OceanApocalypseStudios.RSML.Sources.ISource
+  type: Interface
+  source:
+    remote:
+      path: src/RSML/Sources/ISource.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: ISource
+    path: ../src/RSML/Sources/ISource.cs
+    startLine: 8
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: A data source for RSML's toolchain members.
+  example: []
+  syntax:
+    content: 'public interface ISource : IDisposable'
+    content.vb: Public Interface ISource Inherits IDisposable
+  derivedClasses:
+  - OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer
+  inheritedMembers:
+  - System.IDisposable.Dispose
+- uid: OceanApocalypseStudios.RSML.Sources.ISource.CursorIndex
+  commentId: P:OceanApocalypseStudios.RSML.Sources.ISource.CursorIndex
+  id: CursorIndex
+  parent: OceanApocalypseStudios.RSML.Sources.ISource
+  langs:
+  - csharp
+  - vb
+  name: CursorIndex
+  nameWithType: ISource.CursorIndex
+  fullName: OceanApocalypseStudios.RSML.Sources.ISource.CursorIndex
+  type: Property
+  source:
+    remote:
+      path: src/RSML/Sources/ISource.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: CursorIndex
+    path: ../src/RSML/Sources/ISource.cs
+    startLine: 13
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: The current index of the cursor.
+  example: []
+  syntax:
+    content: int CursorIndex { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: ReadOnly Property CursorIndex As Integer
+  overload: OceanApocalypseStudios.RSML.Sources.ISource.CursorIndex*
+- uid: OceanApocalypseStudios.RSML.Sources.ISource.IsEmpty
+  commentId: P:OceanApocalypseStudios.RSML.Sources.ISource.IsEmpty
+  id: IsEmpty
+  parent: OceanApocalypseStudios.RSML.Sources.ISource
+  langs:
+  - csharp
+  - vb
+  name: IsEmpty
+  nameWithType: ISource.IsEmpty
+  fullName: OceanApocalypseStudios.RSML.Sources.ISource.IsEmpty
+  type: Property
+  source:
+    remote:
+      path: src/RSML/Sources/ISource.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: IsEmpty
+    path: ../src/RSML/Sources/ISource.cs
+    startLine: 18
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Whether the source is completely empty.
+  example: []
+  syntax:
+    content: bool IsEmpty { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: ReadOnly Property IsEmpty As Boolean
+  overload: OceanApocalypseStudios.RSML.Sources.ISource.IsEmpty*
+- uid: OceanApocalypseStudios.RSML.Sources.ISource.IsReadOnly
+  commentId: P:OceanApocalypseStudios.RSML.Sources.ISource.IsReadOnly
+  id: IsReadOnly
+  parent: OceanApocalypseStudios.RSML.Sources.ISource
+  langs:
+  - csharp
+  - vb
+  name: IsReadOnly
+  nameWithType: ISource.IsReadOnly
+  fullName: OceanApocalypseStudios.RSML.Sources.ISource.IsReadOnly
+  type: Property
+  source:
+    remote:
+      path: src/RSML/Sources/ISource.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: IsReadOnly
+    path: ../src/RSML/Sources/ISource.cs
+    startLine: 23
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Whether the source can be mutated.
+  example: []
+  syntax:
+    content: bool IsReadOnly { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: ReadOnly Property IsReadOnly As Boolean
+  overload: OceanApocalypseStudios.RSML.Sources.ISource.IsReadOnly*
+- uid: OceanApocalypseStudios.RSML.Sources.ISource.Length
+  commentId: P:OceanApocalypseStudios.RSML.Sources.ISource.Length
+  id: Length
+  parent: OceanApocalypseStudios.RSML.Sources.ISource
+  langs:
+  - csharp
+  - vb
+  name: Length
+  nameWithType: ISource.Length
+  fullName: OceanApocalypseStudios.RSML.Sources.ISource.Length
+  type: Property
+  source:
+    remote:
+      path: src/RSML/Sources/ISource.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Length
+    path: ../src/RSML/Sources/ISource.cs
+    startLine: 28
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: The length of the source.
+  example: []
+  syntax:
+    content: int Length { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: ReadOnly Property Length As Integer
+  overload: OceanApocalypseStudios.RSML.Sources.ISource.Length*
+references:
+- uid: OceanApocalypseStudios.RSML.Sources
+  commentId: N:OceanApocalypseStudios.RSML.Sources
+  href: OceanApocalypseStudios.html
+  name: OceanApocalypseStudios.RSML.Sources
+  nameWithType: OceanApocalypseStudios.RSML.Sources
+  fullName: OceanApocalypseStudios.RSML.Sources
+  spec.csharp:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sources
+    name: Sources
+    href: OceanApocalypseStudios.RSML.Sources.html
+  spec.vb:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sources
+    name: Sources
+    href: OceanApocalypseStudios.RSML.Sources.html
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: OceanApocalypseStudios.RSML.Sources.ISource.CursorIndex*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.ISource.CursorIndex
+  href: OceanApocalypseStudios.RSML.Sources.ISource.CursorIndex.html#OceanApocalypseStudios_RSML_Sources_ISource_CursorIndex
+  name: CursorIndex
+  nameWithType: ISource.CursorIndex
+  fullName: OceanApocalypseStudios.RSML.Sources.ISource.CursorIndex
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: OceanApocalypseStudios.RSML.Sources.ISource.IsEmpty*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.ISource.IsEmpty
+  href: OceanApocalypseStudios.RSML.Sources.ISource.IsEmpty.html#OceanApocalypseStudios_RSML_Sources_ISource_IsEmpty
+  name: IsEmpty
+  nameWithType: ISource.IsEmpty
+  fullName: OceanApocalypseStudios.RSML.Sources.ISource.IsEmpty
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: OceanApocalypseStudios.RSML.Sources.ISource.IsReadOnly*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.ISource.IsReadOnly
+  href: OceanApocalypseStudios.RSML.Sources.ISource.IsReadOnly.html#OceanApocalypseStudios_RSML_Sources_ISource_IsReadOnly
+  name: IsReadOnly
+  nameWithType: ISource.IsReadOnly
+  fullName: OceanApocalypseStudios.RSML.Sources.ISource.IsReadOnly
+- uid: OceanApocalypseStudios.RSML.Sources.ISource.Length*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.ISource.Length
+  href: OceanApocalypseStudios.RSML.Sources.ISource.Length.html#OceanApocalypseStudios_RSML_Sources_ISource_Length
+  name: Length
+  nameWithType: ISource.Length
+  fullName: OceanApocalypseStudios.RSML.Sources.ISource.Length
+memberLayout: SeparatePages

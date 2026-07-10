@@ -1,0 +1,31 @@
+### YamlMime:ManagedReference
+items:
+- uid: OceanApocalypseStudios.RSML.Language.Syntax
+  commentId: N:OceanApocalypseStudios.RSML.Language.Syntax
+  id: OceanApocalypseStudios.RSML.Language.Syntax
+  children:
+  - OceanApocalypseStudios.RSML.Language.Syntax.SyntaxToken
+  - OceanApocalypseStudios.RSML.Language.Syntax.TokenKind
+  langs:
+  - csharp
+  - vb
+  name: OceanApocalypseStudios.RSML.Language.Syntax
+  nameWithType: OceanApocalypseStudios.RSML.Language.Syntax
+  fullName: OceanApocalypseStudios.RSML.Language.Syntax
+  type: Namespace
+  assemblies:
+  - RSML
+references:
+- uid: OceanApocalypseStudios.RSML.Language.Syntax.SyntaxToken
+  commentId: T:OceanApocalypseStudios.RSML.Language.Syntax.SyntaxToken
+  href: OceanApocalypseStudios.RSML.Language.Syntax.SyntaxToken.html
+  name: SyntaxToken
+  nameWithType: SyntaxToken
+  fullName: OceanApocalypseStudios.RSML.Language.Syntax.SyntaxToken
+- uid: OceanApocalypseStudios.RSML.Language.Syntax.TokenKind
+  commentId: T:OceanApocalypseStudios.RSML.Language.Syntax.TokenKind
+  href: OceanApocalypseStudios.RSML.Language.Syntax.TokenKind.html
+  name: TokenKind
+  nameWithType: TokenKind
+  fullName: OceanApocalypseStudios.RSML.Language.Syntax.TokenKind
+memberLayout: SeparatePages

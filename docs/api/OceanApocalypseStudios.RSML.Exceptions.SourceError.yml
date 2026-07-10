@@ -1,0 +1,1168 @@
+### YamlMime:ManagedReference
+items:
+- uid: OceanApocalypseStudios.RSML.Exceptions.SourceError
+  commentId: T:OceanApocalypseStudios.RSML.Exceptions.SourceError
+  id: SourceError
+  parent: OceanApocalypseStudios.RSML.Exceptions
+  children:
+  - OceanApocalypseStudios.RSML.Exceptions.SourceError.#ctor(OceanApocalypseStudios.RSML.Sources.SourceSpan,System.String,OceanApocalypseStudios.RSML.Exceptions.Severity)
+  - OceanApocalypseStudios.RSML.Exceptions.SourceError.Equals(OceanApocalypseStudios.RSML.Exceptions.IError)
+  - OceanApocalypseStudios.RSML.Exceptions.SourceError.Equals(OceanApocalypseStudios.RSML.Exceptions.SourceError)
+  - OceanApocalypseStudios.RSML.Exceptions.SourceError.Equals(System.Object)
+  - OceanApocalypseStudios.RSML.Exceptions.SourceError.GetHashCode
+  - OceanApocalypseStudios.RSML.Exceptions.SourceError.Message
+  - OceanApocalypseStudios.RSML.Exceptions.SourceError.Severity
+  - OceanApocalypseStudios.RSML.Exceptions.SourceError.Span
+  - OceanApocalypseStudios.RSML.Exceptions.SourceError.ToString
+  - OceanApocalypseStudios.RSML.Exceptions.SourceError.ToString(System.String,System.IFormatProvider)
+  - OceanApocalypseStudios.RSML.Exceptions.SourceError.op_Equality(OceanApocalypseStudios.RSML.Exceptions.SourceError,OceanApocalypseStudios.RSML.Exceptions.SourceError)
+  - OceanApocalypseStudios.RSML.Exceptions.SourceError.op_Inequality(OceanApocalypseStudios.RSML.Exceptions.SourceError,OceanApocalypseStudios.RSML.Exceptions.SourceError)
+  langs:
+  - csharp
+  - vb
+  name: SourceError
+  nameWithType: SourceError
+  fullName: OceanApocalypseStudios.RSML.Exceptions.SourceError
+  type: Struct
+  source:
+    remote:
+      path: src/RSML/Exceptions/SourceError.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: SourceError
+    path: ../src/RSML/Exceptions/SourceError.cs
+    startLine: 13
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Exceptions
+  summary: An error that has happened in the RSML toolchain and comes from a source.
+  example: []
+  syntax:
+    content: 'public readonly struct SourceError : IError, IEquatable<IError>, IFormattable, IEquatable<SourceError>'
+    content.vb: Public Structure SourceError Implements IError, IEquatable(Of IError), IFormattable, IEquatable(Of SourceError)
+  implements:
+  - OceanApocalypseStudios.RSML.Exceptions.IError
+  - System.IEquatable{OceanApocalypseStudios.RSML.Exceptions.IError}
+  - System.IFormattable
+  - System.IEquatable{OceanApocalypseStudios.RSML.Exceptions.SourceError}
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+- uid: OceanApocalypseStudios.RSML.Exceptions.SourceError.#ctor(OceanApocalypseStudios.RSML.Sources.SourceSpan,System.String,OceanApocalypseStudios.RSML.Exceptions.Severity)
+  commentId: M:OceanApocalypseStudios.RSML.Exceptions.SourceError.#ctor(OceanApocalypseStudios.RSML.Sources.SourceSpan,System.String,OceanApocalypseStudios.RSML.Exceptions.Severity)
+  id: '#ctor(OceanApocalypseStudios.RSML.Sources.SourceSpan,System.String,OceanApocalypseStudios.RSML.Exceptions.Severity)'
+  parent: OceanApocalypseStudios.RSML.Exceptions.SourceError
+  langs:
+  - csharp
+  - vb
+  name: SourceError(SourceSpan, string, Severity)
+  nameWithType: SourceError.SourceError(SourceSpan, string, Severity)
+  fullName: OceanApocalypseStudios.RSML.Exceptions.SourceError.SourceError(OceanApocalypseStudios.RSML.Sources.SourceSpan, string, OceanApocalypseStudios.RSML.Exceptions.Severity)
+  type: Constructor
+  source:
+    remote:
+      path: src/RSML/Exceptions/SourceError.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: .ctor
+    path: ../src/RSML/Exceptions/SourceError.cs
+    startLine: 13
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Exceptions
+  summary: An error that has happened in the RSML toolchain and comes from a source.
+  example: []
+  syntax:
+    content: public SourceError(SourceSpan span, string message, Severity severity)
+    parameters:
+    - id: span
+      type: OceanApocalypseStudios.RSML.Sources.SourceSpan
+      description: The span the error relates to.
+    - id: message
+      type: System.String
+      description: A brief error message detailing why it has happened.
+    - id: severity
+      type: OceanApocalypseStudios.RSML.Exceptions.Severity
+      description: The error's severity.
+    content.vb: Public Sub New(span As SourceSpan, message As String, severity As Severity)
+  overload: OceanApocalypseStudios.RSML.Exceptions.SourceError.#ctor*
+  nameWithType.vb: SourceError.New(SourceSpan, String, Severity)
+  fullName.vb: OceanApocalypseStudios.RSML.Exceptions.SourceError.New(OceanApocalypseStudios.RSML.Sources.SourceSpan, String, OceanApocalypseStudios.RSML.Exceptions.Severity)
+  name.vb: New(SourceSpan, String, Severity)
+- uid: OceanApocalypseStudios.RSML.Exceptions.SourceError.Span
+  commentId: P:OceanApocalypseStudios.RSML.Exceptions.SourceError.Span
+  id: Span
+  parent: OceanApocalypseStudios.RSML.Exceptions.SourceError
+  langs:
+  - csharp
+  - vb
+  name: Span
+  nameWithType: SourceError.Span
+  fullName: OceanApocalypseStudios.RSML.Exceptions.SourceError.Span
+  type: Property
+  source:
+    remote:
+      path: src/RSML/Exceptions/SourceError.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Span
+    path: ../src/RSML/Exceptions/SourceError.cs
+    startLine: 18
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Exceptions
+  summary: The span the error relates to.
+  example: []
+  syntax:
+    content: public SourceSpan Span { get; }
+    parameters: []
+    return:
+      type: OceanApocalypseStudios.RSML.Sources.SourceSpan
+    content.vb: Public ReadOnly Property Span As SourceSpan
+  overload: OceanApocalypseStudios.RSML.Exceptions.SourceError.Span*
+- uid: OceanApocalypseStudios.RSML.Exceptions.SourceError.Message
+  commentId: P:OceanApocalypseStudios.RSML.Exceptions.SourceError.Message
+  id: Message
+  parent: OceanApocalypseStudios.RSML.Exceptions.SourceError
+  langs:
+  - csharp
+  - vb
+  name: Message
+  nameWithType: SourceError.Message
+  fullName: OceanApocalypseStudios.RSML.Exceptions.SourceError.Message
+  type: Property
+  source:
+    remote:
+      path: src/RSML/Exceptions/SourceError.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Message
+    path: ../src/RSML/Exceptions/SourceError.cs
+    startLine: 23
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Exceptions
+  summary: A brief error message detailing why it has happened.
+  example: []
+  syntax:
+    content: public string Message { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property Message As String
+  overload: OceanApocalypseStudios.RSML.Exceptions.SourceError.Message*
+- uid: OceanApocalypseStudios.RSML.Exceptions.SourceError.Severity
+  commentId: P:OceanApocalypseStudios.RSML.Exceptions.SourceError.Severity
+  id: Severity
+  parent: OceanApocalypseStudios.RSML.Exceptions.SourceError
+  langs:
+  - csharp
+  - vb
+  name: Severity
+  nameWithType: SourceError.Severity
+  fullName: OceanApocalypseStudios.RSML.Exceptions.SourceError.Severity
+  type: Property
+  source:
+    remote:
+      path: src/RSML/Exceptions/SourceError.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Severity
+    path: ../src/RSML/Exceptions/SourceError.cs
+    startLine: 28
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Exceptions
+  summary: The error's severity.
+  example: []
+  syntax:
+    content: public Severity Severity { get; }
+    parameters: []
+    return:
+      type: OceanApocalypseStudios.RSML.Exceptions.Severity
+    content.vb: Public ReadOnly Property Severity As Severity
+  overload: OceanApocalypseStudios.RSML.Exceptions.SourceError.Severity*
+- uid: OceanApocalypseStudios.RSML.Exceptions.SourceError.Equals(System.Object)
+  commentId: M:OceanApocalypseStudios.RSML.Exceptions.SourceError.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: OceanApocalypseStudios.RSML.Exceptions.SourceError
+  langs:
+  - csharp
+  - vb
+  name: Equals(object?)
+  nameWithType: SourceError.Equals(object?)
+  fullName: OceanApocalypseStudios.RSML.Exceptions.SourceError.Equals(object?)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Exceptions/SourceError.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Equals
+    path: ../src/RSML/Exceptions/SourceError.cs
+    startLine: 31
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Exceptions
+  summary: Indicates whether this instance and a specified object are equal.
+  example: []
+  syntax:
+    content: public override bool Equals(object? obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: The object to compare with the current instance.
+      attributes:
+      - type: System.Diagnostics.CodeAnalysis.NotNullWhenAttribute
+        ctor: System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.#ctor(System.Boolean)
+        arguments:
+        - type: System.Boolean
+          value: true
+    return:
+      type: System.Boolean
+      description: <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if <code class="paramref">obj</code> and this instance are the same type and represent the same value; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.ValueType.Equals(System.Object)
+  overload: OceanApocalypseStudios.RSML.Exceptions.SourceError.Equals*
+  nameWithType.vb: SourceError.Equals(Object)
+  fullName.vb: OceanApocalypseStudios.RSML.Exceptions.SourceError.Equals(Object)
+  name.vb: Equals(Object)
+- uid: OceanApocalypseStudios.RSML.Exceptions.SourceError.Equals(OceanApocalypseStudios.RSML.Exceptions.SourceError)
+  commentId: M:OceanApocalypseStudios.RSML.Exceptions.SourceError.Equals(OceanApocalypseStudios.RSML.Exceptions.SourceError)
+  id: Equals(OceanApocalypseStudios.RSML.Exceptions.SourceError)
+  parent: OceanApocalypseStudios.RSML.Exceptions.SourceError
+  langs:
+  - csharp
+  - vb
+  name: Equals(SourceError)
+  nameWithType: SourceError.Equals(SourceError)
+  fullName: OceanApocalypseStudios.RSML.Exceptions.SourceError.Equals(OceanApocalypseStudios.RSML.Exceptions.SourceError)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Exceptions/SourceError.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Equals
+    path: ../src/RSML/Exceptions/SourceError.cs
+    startLine: 41
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Exceptions
+  summary: Indicates whether the current object is equal to another object of the same type.
+  example: []
+  syntax:
+    content: public bool Equals(SourceError other)
+    parameters:
+    - id: other
+      type: OceanApocalypseStudios.RSML.Exceptions.SourceError
+      description: An object to compare with this object.
+    return:
+      type: System.Boolean
+      description: <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the current object is equal to the <code class="paramref">other</code> parameter; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.
+    content.vb: Public Function Equals(other As SourceError) As Boolean
+  overload: OceanApocalypseStudios.RSML.Exceptions.SourceError.Equals*
+  implements:
+  - System.IEquatable{OceanApocalypseStudios.RSML.Exceptions.SourceError}.Equals(OceanApocalypseStudios.RSML.Exceptions.SourceError)
+- uid: OceanApocalypseStudios.RSML.Exceptions.SourceError.op_Equality(OceanApocalypseStudios.RSML.Exceptions.SourceError,OceanApocalypseStudios.RSML.Exceptions.SourceError)
+  commentId: M:OceanApocalypseStudios.RSML.Exceptions.SourceError.op_Equality(OceanApocalypseStudios.RSML.Exceptions.SourceError,OceanApocalypseStudios.RSML.Exceptions.SourceError)
+  id: op_Equality(OceanApocalypseStudios.RSML.Exceptions.SourceError,OceanApocalypseStudios.RSML.Exceptions.SourceError)
+  parent: OceanApocalypseStudios.RSML.Exceptions.SourceError
+  langs:
+  - csharp
+  - vb
+  name: operator ==(SourceError, SourceError)
+  nameWithType: SourceError.operator ==(SourceError, SourceError)
+  fullName: OceanApocalypseStudios.RSML.Exceptions.SourceError.operator ==(OceanApocalypseStudios.RSML.Exceptions.SourceError, OceanApocalypseStudios.RSML.Exceptions.SourceError)
+  type: Operator
+  source:
+    remote:
+      path: src/RSML/Exceptions/SourceError.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: op_Equality
+    path: ../src/RSML/Exceptions/SourceError.cs
+    startLine: 47
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Exceptions
+  summary: Checks if two <xref href="OceanApocalypseStudios.RSML.Exceptions.SourceError" data-throw-if-not-resolved="false"></xref>s are equal to each other.
+  example: []
+  syntax:
+    content: public static bool operator ==(SourceError left, SourceError right)
+    parameters:
+    - id: left
+      type: OceanApocalypseStudios.RSML.Exceptions.SourceError
+    - id: right
+      type: OceanApocalypseStudios.RSML.Exceptions.SourceError
+    return:
+      type: System.Boolean
+      description: True if equals.
+    content.vb: Public Shared Operator =(left As SourceError, right As SourceError) As Boolean
+  overload: OceanApocalypseStudios.RSML.Exceptions.SourceError.op_Equality*
+  nameWithType.vb: SourceError.=(SourceError, SourceError)
+  fullName.vb: OceanApocalypseStudios.RSML.Exceptions.SourceError.=(OceanApocalypseStudios.RSML.Exceptions.SourceError, OceanApocalypseStudios.RSML.Exceptions.SourceError)
+  name.vb: =(SourceError, SourceError)
+- uid: OceanApocalypseStudios.RSML.Exceptions.SourceError.op_Inequality(OceanApocalypseStudios.RSML.Exceptions.SourceError,OceanApocalypseStudios.RSML.Exceptions.SourceError)
+  commentId: M:OceanApocalypseStudios.RSML.Exceptions.SourceError.op_Inequality(OceanApocalypseStudios.RSML.Exceptions.SourceError,OceanApocalypseStudios.RSML.Exceptions.SourceError)
+  id: op_Inequality(OceanApocalypseStudios.RSML.Exceptions.SourceError,OceanApocalypseStudios.RSML.Exceptions.SourceError)
+  parent: OceanApocalypseStudios.RSML.Exceptions.SourceError
+  langs:
+  - csharp
+  - vb
+  name: operator !=(SourceError, SourceError)
+  nameWithType: SourceError.operator !=(SourceError, SourceError)
+  fullName: OceanApocalypseStudios.RSML.Exceptions.SourceError.operator !=(OceanApocalypseStudios.RSML.Exceptions.SourceError, OceanApocalypseStudios.RSML.Exceptions.SourceError)
+  type: Operator
+  source:
+    remote:
+      path: src/RSML/Exceptions/SourceError.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: op_Inequality
+    path: ../src/RSML/Exceptions/SourceError.cs
+    startLine: 53
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Exceptions
+  summary: Checks if two <xref href="OceanApocalypseStudios.RSML.Exceptions.SourceError" data-throw-if-not-resolved="false"></xref>s are different from each other.
+  example: []
+  syntax:
+    content: public static bool operator !=(SourceError left, SourceError right)
+    parameters:
+    - id: left
+      type: OceanApocalypseStudios.RSML.Exceptions.SourceError
+    - id: right
+      type: OceanApocalypseStudios.RSML.Exceptions.SourceError
+    return:
+      type: System.Boolean
+      description: True if different.
+    content.vb: Public Shared Operator <>(left As SourceError, right As SourceError) As Boolean
+  overload: OceanApocalypseStudios.RSML.Exceptions.SourceError.op_Inequality*
+  nameWithType.vb: SourceError.<>(SourceError, SourceError)
+  fullName.vb: OceanApocalypseStudios.RSML.Exceptions.SourceError.<>(OceanApocalypseStudios.RSML.Exceptions.SourceError, OceanApocalypseStudios.RSML.Exceptions.SourceError)
+  name.vb: <>(SourceError, SourceError)
+- uid: OceanApocalypseStudios.RSML.Exceptions.SourceError.GetHashCode
+  commentId: M:OceanApocalypseStudios.RSML.Exceptions.SourceError.GetHashCode
+  id: GetHashCode
+  parent: OceanApocalypseStudios.RSML.Exceptions.SourceError
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: SourceError.GetHashCode()
+  fullName: OceanApocalypseStudios.RSML.Exceptions.SourceError.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Exceptions/SourceError.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: GetHashCode
+    path: ../src/RSML/Exceptions/SourceError.cs
+    startLine: 56
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Exceptions
+  summary: Returns the hash code for this instance.
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer that is the hash code for this instance.
+    content.vb: Public Overrides Function GetHashCode() As Integer
+  overridden: System.ValueType.GetHashCode
+  overload: OceanApocalypseStudios.RSML.Exceptions.SourceError.GetHashCode*
+- uid: OceanApocalypseStudios.RSML.Exceptions.SourceError.Equals(OceanApocalypseStudios.RSML.Exceptions.IError)
+  commentId: M:OceanApocalypseStudios.RSML.Exceptions.SourceError.Equals(OceanApocalypseStudios.RSML.Exceptions.IError)
+  id: Equals(OceanApocalypseStudios.RSML.Exceptions.IError)
+  parent: OceanApocalypseStudios.RSML.Exceptions.SourceError
+  langs:
+  - csharp
+  - vb
+  name: Equals(IError?)
+  nameWithType: SourceError.Equals(IError?)
+  fullName: OceanApocalypseStudios.RSML.Exceptions.SourceError.Equals(OceanApocalypseStudios.RSML.Exceptions.IError?)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Exceptions/SourceError.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Equals
+    path: ../src/RSML/Exceptions/SourceError.cs
+    startLine: 68
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Exceptions
+  summary: Indicates whether the current object is equal to another object of the same type.
+  example: []
+  syntax:
+    content: public bool Equals(IError? other)
+    parameters:
+    - id: other
+      type: OceanApocalypseStudios.RSML.Exceptions.IError
+      description: An object to compare with this object.
+    return:
+      type: System.Boolean
+      description: <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the current object is equal to the <code class="paramref">other</code> parameter; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.
+    content.vb: Public Function Equals(other As IError) As Boolean
+  overload: OceanApocalypseStudios.RSML.Exceptions.SourceError.Equals*
+  implements:
+  - System.IEquatable{OceanApocalypseStudios.RSML.Exceptions.IError}.Equals(OceanApocalypseStudios.RSML.Exceptions.IError)
+  nameWithType.vb: SourceError.Equals(IError)
+  fullName.vb: OceanApocalypseStudios.RSML.Exceptions.SourceError.Equals(OceanApocalypseStudios.RSML.Exceptions.IError)
+  name.vb: Equals(IError)
+- uid: OceanApocalypseStudios.RSML.Exceptions.SourceError.ToString
+  commentId: M:OceanApocalypseStudios.RSML.Exceptions.SourceError.ToString
+  id: ToString
+  parent: OceanApocalypseStudios.RSML.Exceptions.SourceError
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: SourceError.ToString()
+  fullName: OceanApocalypseStudios.RSML.Exceptions.SourceError.ToString()
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Exceptions/SourceError.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: ToString
+    path: ../src/RSML/Exceptions/SourceError.cs
+    startLine: 74
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Exceptions
+  summary: Returns a generic string representation of the current instance.
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: The string representation.
+    content.vb: Public Overrides Function ToString() As String
+  overridden: System.ValueType.ToString
+  overload: OceanApocalypseStudios.RSML.Exceptions.SourceError.ToString*
+- uid: OceanApocalypseStudios.RSML.Exceptions.SourceError.ToString(System.String,System.IFormatProvider)
+  commentId: M:OceanApocalypseStudios.RSML.Exceptions.SourceError.ToString(System.String,System.IFormatProvider)
+  id: ToString(System.String,System.IFormatProvider)
+  parent: OceanApocalypseStudios.RSML.Exceptions.SourceError
+  langs:
+  - csharp
+  - vb
+  name: ToString(string?, IFormatProvider?)
+  nameWithType: SourceError.ToString(string?, IFormatProvider?)
+  fullName: OceanApocalypseStudios.RSML.Exceptions.SourceError.ToString(string?, System.IFormatProvider?)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Exceptions/SourceError.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: ToString
+    path: ../src/RSML/Exceptions/SourceError.cs
+    startLine: 83
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Exceptions
+  summary: >-
+    Given a format, tries to return a string that uses said format as a basis for the representation.
+
+    If it fails, it defaults to <xref href="OceanApocalypseStudios.RSML.Exceptions.SourceError.ToString" data-throw-if-not-resolved="false"></xref>.
+  example: []
+  syntax:
+    content: public string ToString(string? format, IFormatProvider? formatProvider)
+    parameters:
+    - id: format
+      type: System.String
+      description: 'The format. Available formats are: CTOR (constructor-like string), LOG (output-ready format) and JSON (struct as JSON).'
+    - id: formatProvider
+      type: System.IFormatProvider
+      description: Unused. Don't bother assigning it anything.
+    return:
+      type: System.String
+      description: The string representation.
+    content.vb: Public Function ToString(format As String, formatProvider As IFormatProvider) As String
+  overload: OceanApocalypseStudios.RSML.Exceptions.SourceError.ToString*
+  implements:
+  - System.IFormattable.ToString(System.String,System.IFormatProvider)
+  nameWithType.vb: SourceError.ToString(String, IFormatProvider)
+  fullName.vb: OceanApocalypseStudios.RSML.Exceptions.SourceError.ToString(String, System.IFormatProvider)
+  name.vb: ToString(String, IFormatProvider)
+references:
+- uid: OceanApocalypseStudios.RSML.Exceptions
+  commentId: N:OceanApocalypseStudios.RSML.Exceptions
+  href: OceanApocalypseStudios.html
+  name: OceanApocalypseStudios.RSML.Exceptions
+  nameWithType: OceanApocalypseStudios.RSML.Exceptions
+  fullName: OceanApocalypseStudios.RSML.Exceptions
+  spec.csharp:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Exceptions
+    name: Exceptions
+    href: OceanApocalypseStudios.RSML.Exceptions.html
+  spec.vb:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Exceptions
+    name: Exceptions
+    href: OceanApocalypseStudios.RSML.Exceptions.html
+- uid: OceanApocalypseStudios.RSML.Exceptions.IError
+  commentId: T:OceanApocalypseStudios.RSML.Exceptions.IError
+  parent: OceanApocalypseStudios.RSML.Exceptions
+  href: OceanApocalypseStudios.RSML.Exceptions.IError.html
+  name: IError
+  nameWithType: IError
+  fullName: OceanApocalypseStudios.RSML.Exceptions.IError
+- uid: System.IEquatable{OceanApocalypseStudios.RSML.Exceptions.IError}
+  commentId: T:System.IEquatable{OceanApocalypseStudios.RSML.Exceptions.IError}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<IError>
+  nameWithType: IEquatable<IError>
+  fullName: System.IEquatable<OceanApocalypseStudios.RSML.Exceptions.IError>
+  nameWithType.vb: IEquatable(Of IError)
+  fullName.vb: System.IEquatable(Of OceanApocalypseStudios.RSML.Exceptions.IError)
+  name.vb: IEquatable(Of IError)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: OceanApocalypseStudios.RSML.Exceptions.IError
+    name: IError
+    href: OceanApocalypseStudios.RSML.Exceptions.IError.html
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: OceanApocalypseStudios.RSML.Exceptions.IError
+    name: IError
+    href: OceanApocalypseStudios.RSML.Exceptions.IError.html
+  - name: )
+- uid: System.IFormattable
+  commentId: T:System.IFormattable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iformattable
+  name: IFormattable
+  nameWithType: IFormattable
+  fullName: System.IFormattable
+- uid: System.IEquatable{OceanApocalypseStudios.RSML.Exceptions.SourceError}
+  commentId: T:System.IEquatable{OceanApocalypseStudios.RSML.Exceptions.SourceError}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<SourceError>
+  nameWithType: IEquatable<SourceError>
+  fullName: System.IEquatable<OceanApocalypseStudios.RSML.Exceptions.SourceError>
+  nameWithType.vb: IEquatable(Of SourceError)
+  fullName.vb: System.IEquatable(Of OceanApocalypseStudios.RSML.Exceptions.SourceError)
+  name.vb: IEquatable(Of SourceError)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: OceanApocalypseStudios.RSML.Exceptions.SourceError
+    name: SourceError
+    href: OceanApocalypseStudios.RSML.Exceptions.SourceError.html
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: OceanApocalypseStudios.RSML.Exceptions.SourceError
+    name: SourceError
+    href: OceanApocalypseStudios.RSML.Exceptions.SourceError.html
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.IEquatable`1
+  commentId: T:System.IEquatable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<T>
+  nameWithType: IEquatable<T>
+  fullName: System.IEquatable<T>
+  nameWithType.vb: IEquatable(Of T)
+  fullName.vb: System.IEquatable(Of T)
+  name.vb: IEquatable(Of T)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: OceanApocalypseStudios.RSML.Exceptions.SourceError.#ctor*
+  commentId: Overload:OceanApocalypseStudios.RSML.Exceptions.SourceError.#ctor
+  href: OceanApocalypseStudios.RSML.Exceptions.SourceError.-ctor.html#OceanApocalypseStudios_RSML_Exceptions_SourceError__ctor_OceanApocalypseStudios_RSML_Sources_SourceSpan_System_String_OceanApocalypseStudios_RSML_Exceptions_Severity_
+  name: SourceError
+  nameWithType: SourceError.SourceError
+  fullName: OceanApocalypseStudios.RSML.Exceptions.SourceError.SourceError
+  nameWithType.vb: SourceError.New
+  fullName.vb: OceanApocalypseStudios.RSML.Exceptions.SourceError.New
+  name.vb: New
+- uid: OceanApocalypseStudios.RSML.Sources.SourceSpan
+  commentId: T:OceanApocalypseStudios.RSML.Sources.SourceSpan
+  parent: OceanApocalypseStudios.RSML.Sources
+  href: OceanApocalypseStudios.RSML.Sources.SourceSpan.html
+  name: SourceSpan
+  nameWithType: SourceSpan
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: OceanApocalypseStudios.RSML.Exceptions.Severity
+  commentId: T:OceanApocalypseStudios.RSML.Exceptions.Severity
+  parent: OceanApocalypseStudios.RSML.Exceptions
+  href: OceanApocalypseStudios.RSML.Exceptions.Severity.html
+  name: Severity
+  nameWithType: Severity
+  fullName: OceanApocalypseStudios.RSML.Exceptions.Severity
+- uid: OceanApocalypseStudios.RSML.Sources
+  commentId: N:OceanApocalypseStudios.RSML.Sources
+  href: OceanApocalypseStudios.html
+  name: OceanApocalypseStudios.RSML.Sources
+  nameWithType: OceanApocalypseStudios.RSML.Sources
+  fullName: OceanApocalypseStudios.RSML.Sources
+  spec.csharp:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sources
+    name: Sources
+    href: OceanApocalypseStudios.RSML.Sources.html
+  spec.vb:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sources
+    name: Sources
+    href: OceanApocalypseStudios.RSML.Sources.html
+- uid: OceanApocalypseStudios.RSML.Exceptions.SourceError.Span*
+  commentId: Overload:OceanApocalypseStudios.RSML.Exceptions.SourceError.Span
+  href: OceanApocalypseStudios.RSML.Exceptions.SourceError.Span.html#OceanApocalypseStudios_RSML_Exceptions_SourceError_Span
+  name: Span
+  nameWithType: SourceError.Span
+  fullName: OceanApocalypseStudios.RSML.Exceptions.SourceError.Span
+- uid: OceanApocalypseStudios.RSML.Exceptions.SourceError.Message*
+  commentId: Overload:OceanApocalypseStudios.RSML.Exceptions.SourceError.Message
+  href: OceanApocalypseStudios.RSML.Exceptions.SourceError.Message.html#OceanApocalypseStudios_RSML_Exceptions_SourceError_Message
+  name: Message
+  nameWithType: SourceError.Message
+  fullName: OceanApocalypseStudios.RSML.Exceptions.SourceError.Message
+- uid: OceanApocalypseStudios.RSML.Exceptions.SourceError.Severity*
+  commentId: Overload:OceanApocalypseStudios.RSML.Exceptions.SourceError.Severity
+  href: OceanApocalypseStudios.RSML.Exceptions.SourceError.Severity.html#OceanApocalypseStudios_RSML_Exceptions_SourceError_Severity
+  name: Severity
+  nameWithType: SourceError.Severity
+  fullName: OceanApocalypseStudios.RSML.Exceptions.SourceError.Severity
+- uid: System.ValueType.Equals(System.Object)
+  commentId: M:System.ValueType.Equals(System.Object)
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  name: Equals(object)
+  nameWithType: ValueType.Equals(object)
+  fullName: System.ValueType.Equals(object)
+  nameWithType.vb: ValueType.Equals(Object)
+  fullName.vb: System.ValueType.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: OceanApocalypseStudios.RSML.Exceptions.SourceError.Equals*
+  commentId: Overload:OceanApocalypseStudios.RSML.Exceptions.SourceError.Equals
+  href: OceanApocalypseStudios.RSML.Exceptions.SourceError.Equals.html#OceanApocalypseStudios_RSML_Exceptions_SourceError_Equals_System_Object_
+  name: Equals
+  nameWithType: SourceError.Equals
+  fullName: OceanApocalypseStudios.RSML.Exceptions.SourceError.Equals
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
+- uid: System.IEquatable{OceanApocalypseStudios.RSML.Exceptions.SourceError}.Equals(OceanApocalypseStudios.RSML.Exceptions.SourceError)
+  commentId: M:System.IEquatable{OceanApocalypseStudios.RSML.Exceptions.SourceError}.Equals(OceanApocalypseStudios.RSML.Exceptions.SourceError)
+  parent: System.IEquatable{OceanApocalypseStudios.RSML.Exceptions.SourceError}
+  definition: System.IEquatable`1.Equals(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(SourceError)
+  nameWithType: IEquatable<SourceError>.Equals(SourceError)
+  fullName: System.IEquatable<OceanApocalypseStudios.RSML.Exceptions.SourceError>.Equals(OceanApocalypseStudios.RSML.Exceptions.SourceError)
+  nameWithType.vb: IEquatable(Of SourceError).Equals(SourceError)
+  fullName.vb: System.IEquatable(Of OceanApocalypseStudios.RSML.Exceptions.SourceError).Equals(OceanApocalypseStudios.RSML.Exceptions.SourceError)
+  spec.csharp:
+  - uid: System.IEquatable{OceanApocalypseStudios.RSML.Exceptions.SourceError}.Equals(OceanApocalypseStudios.RSML.Exceptions.SourceError)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: OceanApocalypseStudios.RSML.Exceptions.SourceError
+    name: SourceError
+    href: OceanApocalypseStudios.RSML.Exceptions.SourceError.html
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable{OceanApocalypseStudios.RSML.Exceptions.SourceError}.Equals(OceanApocalypseStudios.RSML.Exceptions.SourceError)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: OceanApocalypseStudios.RSML.Exceptions.SourceError
+    name: SourceError
+    href: OceanApocalypseStudios.RSML.Exceptions.SourceError.html
+  - name: )
+- uid: OceanApocalypseStudios.RSML.Exceptions.SourceError
+  commentId: T:OceanApocalypseStudios.RSML.Exceptions.SourceError
+  parent: OceanApocalypseStudios.RSML.Exceptions
+  href: OceanApocalypseStudios.RSML.Exceptions.SourceError.html
+  name: SourceError
+  nameWithType: SourceError
+  fullName: OceanApocalypseStudios.RSML.Exceptions.SourceError
+- uid: System.IEquatable`1.Equals(`0)
+  commentId: M:System.IEquatable`1.Equals(`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(T)
+  nameWithType: IEquatable<T>.Equals(T)
+  fullName: System.IEquatable<T>.Equals(T)
+  nameWithType.vb: IEquatable(Of T).Equals(T)
+  fullName.vb: System.IEquatable(Of T).Equals(T)
+  spec.csharp:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+- uid: OceanApocalypseStudios.RSML.Exceptions.SourceError.op_Equality*
+  commentId: Overload:OceanApocalypseStudios.RSML.Exceptions.SourceError.op_Equality
+  href: OceanApocalypseStudios.RSML.Exceptions.SourceError.op_Equality.html#OceanApocalypseStudios_RSML_Exceptions_SourceError_op_Equality_OceanApocalypseStudios_RSML_Exceptions_SourceError_OceanApocalypseStudios_RSML_Exceptions_SourceError_
+  name: operator ==
+  nameWithType: SourceError.operator ==
+  fullName: OceanApocalypseStudios.RSML.Exceptions.SourceError.operator ==
+  nameWithType.vb: SourceError.=
+  fullName.vb: OceanApocalypseStudios.RSML.Exceptions.SourceError.=
+  name.vb: =
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: OceanApocalypseStudios.RSML.Exceptions.SourceError.op_Equality*
+    name: ==
+    href: OceanApocalypseStudios.RSML.Exceptions.SourceError.op_Equality.html#OceanApocalypseStudios_RSML_Exceptions_SourceError_op_Equality_OceanApocalypseStudios_RSML_Exceptions_SourceError_OceanApocalypseStudios_RSML_Exceptions_SourceError_
+- uid: OceanApocalypseStudios.RSML.Exceptions.SourceError.op_Inequality*
+  commentId: Overload:OceanApocalypseStudios.RSML.Exceptions.SourceError.op_Inequality
+  href: OceanApocalypseStudios.RSML.Exceptions.SourceError.op_Inequality.html#OceanApocalypseStudios_RSML_Exceptions_SourceError_op_Inequality_OceanApocalypseStudios_RSML_Exceptions_SourceError_OceanApocalypseStudios_RSML_Exceptions_SourceError_
+  name: operator !=
+  nameWithType: SourceError.operator !=
+  fullName: OceanApocalypseStudios.RSML.Exceptions.SourceError.operator !=
+  nameWithType.vb: SourceError.<>
+  fullName.vb: OceanApocalypseStudios.RSML.Exceptions.SourceError.<>
+  name.vb: <>
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: OceanApocalypseStudios.RSML.Exceptions.SourceError.op_Inequality*
+    name: '!='
+    href: OceanApocalypseStudios.RSML.Exceptions.SourceError.op_Inequality.html#OceanApocalypseStudios_RSML_Exceptions_SourceError_op_Inequality_OceanApocalypseStudios_RSML_Exceptions_SourceError_OceanApocalypseStudios_RSML_Exceptions_SourceError_
+- uid: System.ValueType.GetHashCode
+  commentId: M:System.ValueType.GetHashCode
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  name: GetHashCode()
+  nameWithType: ValueType.GetHashCode()
+  fullName: System.ValueType.GetHashCode()
+  spec.csharp:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+- uid: OceanApocalypseStudios.RSML.Exceptions.SourceError.GetHashCode*
+  commentId: Overload:OceanApocalypseStudios.RSML.Exceptions.SourceError.GetHashCode
+  href: OceanApocalypseStudios.RSML.Exceptions.SourceError.GetHashCode.html#OceanApocalypseStudios_RSML_Exceptions_SourceError_GetHashCode
+  name: GetHashCode
+  nameWithType: SourceError.GetHashCode
+  fullName: OceanApocalypseStudios.RSML.Exceptions.SourceError.GetHashCode
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: System.IEquatable{OceanApocalypseStudios.RSML.Exceptions.IError}.Equals(OceanApocalypseStudios.RSML.Exceptions.IError)
+  commentId: M:System.IEquatable{OceanApocalypseStudios.RSML.Exceptions.IError}.Equals(OceanApocalypseStudios.RSML.Exceptions.IError)
+  parent: System.IEquatable{OceanApocalypseStudios.RSML.Exceptions.IError}
+  definition: System.IEquatable`1.Equals(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(IError)
+  nameWithType: IEquatable<IError>.Equals(IError)
+  fullName: System.IEquatable<OceanApocalypseStudios.RSML.Exceptions.IError>.Equals(OceanApocalypseStudios.RSML.Exceptions.IError)
+  nameWithType.vb: IEquatable(Of IError).Equals(IError)
+  fullName.vb: System.IEquatable(Of OceanApocalypseStudios.RSML.Exceptions.IError).Equals(OceanApocalypseStudios.RSML.Exceptions.IError)
+  spec.csharp:
+  - uid: System.IEquatable{OceanApocalypseStudios.RSML.Exceptions.IError}.Equals(OceanApocalypseStudios.RSML.Exceptions.IError)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: OceanApocalypseStudios.RSML.Exceptions.IError
+    name: IError
+    href: OceanApocalypseStudios.RSML.Exceptions.IError.html
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable{OceanApocalypseStudios.RSML.Exceptions.IError}.Equals(OceanApocalypseStudios.RSML.Exceptions.IError)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: OceanApocalypseStudios.RSML.Exceptions.IError
+    name: IError
+    href: OceanApocalypseStudios.RSML.Exceptions.IError.html
+  - name: )
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+- uid: OceanApocalypseStudios.RSML.Exceptions.SourceError.ToString*
+  commentId: Overload:OceanApocalypseStudios.RSML.Exceptions.SourceError.ToString
+  href: OceanApocalypseStudios.RSML.Exceptions.SourceError.ToString.html#OceanApocalypseStudios_RSML_Exceptions_SourceError_ToString
+  name: ToString
+  nameWithType: SourceError.ToString
+  fullName: OceanApocalypseStudios.RSML.Exceptions.SourceError.ToString
+- uid: OceanApocalypseStudios.RSML.Exceptions.SourceError.ToString
+  commentId: M:OceanApocalypseStudios.RSML.Exceptions.SourceError.ToString
+  href: OceanApocalypseStudios.RSML.Exceptions.SourceError.ToString.html#OceanApocalypseStudios_RSML_Exceptions_SourceError_ToString
+  name: ToString()
+  nameWithType: SourceError.ToString()
+  fullName: OceanApocalypseStudios.RSML.Exceptions.SourceError.ToString()
+  spec.csharp:
+  - uid: OceanApocalypseStudios.RSML.Exceptions.SourceError.ToString
+    name: ToString
+    href: OceanApocalypseStudios.RSML.Exceptions.SourceError.ToString.html#OceanApocalypseStudios_RSML_Exceptions_SourceError_ToString
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: OceanApocalypseStudios.RSML.Exceptions.SourceError.ToString
+    name: ToString
+    href: OceanApocalypseStudios.RSML.Exceptions.SourceError.ToString.html#OceanApocalypseStudios_RSML_Exceptions_SourceError_ToString
+  - name: (
+  - name: )
+- uid: System.IFormattable.ToString(System.String,System.IFormatProvider)
+  commentId: M:System.IFormattable.ToString(System.String,System.IFormatProvider)
+  parent: System.IFormattable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iformattable.tostring
+  name: ToString(string, IFormatProvider)
+  nameWithType: IFormattable.ToString(string, IFormatProvider)
+  fullName: System.IFormattable.ToString(string, System.IFormatProvider)
+  nameWithType.vb: IFormattable.ToString(String, IFormatProvider)
+  fullName.vb: System.IFormattable.ToString(String, System.IFormatProvider)
+  name.vb: ToString(String, IFormatProvider)
+  spec.csharp:
+  - uid: System.IFormattable.ToString(System.String,System.IFormatProvider)
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iformattable.tostring
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.IFormatProvider
+    name: IFormatProvider
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iformatprovider
+  - name: )
+  spec.vb:
+  - uid: System.IFormattable.ToString(System.String,System.IFormatProvider)
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iformattable.tostring
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.IFormatProvider
+    name: IFormatProvider
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iformatprovider
+  - name: )
+- uid: System.IFormatProvider
+  commentId: T:System.IFormatProvider
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iformatprovider
+  name: IFormatProvider
+  nameWithType: IFormatProvider
+  fullName: System.IFormatProvider
+memberLayout: SeparatePages

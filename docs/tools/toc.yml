@@ -1,0 +1,8 @@
+- name: Using RSML in C and C++
+  items:
+    - name: Getting Started
+      href: native/getting-started.md
+- name: Using the CLI
+  items:
+    - name: Getting Started
+      href: cli/getting-started.md

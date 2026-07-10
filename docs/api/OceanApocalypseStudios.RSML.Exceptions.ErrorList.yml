@@ -1,0 +1,1042 @@
+### YamlMime:ManagedReference
+items:
+- uid: OceanApocalypseStudios.RSML.Exceptions.ErrorList
+  commentId: T:OceanApocalypseStudios.RSML.Exceptions.ErrorList
+  id: ErrorList
+  parent: OceanApocalypseStudios.RSML.Exceptions
+  children:
+  - OceanApocalypseStudios.RSML.Exceptions.ErrorList.#ctor
+  - OceanApocalypseStudios.RSML.Exceptions.ErrorList.Add(OceanApocalypseStudios.RSML.Exceptions.IError)
+  - OceanApocalypseStudios.RSML.Exceptions.ErrorList.AddSourceError(OceanApocalypseStudios.RSML.Sources.SourceSpan,System.Byte*,System.Int32,System.Text.Encoding,OceanApocalypseStudios.RSML.Exceptions.Severity)
+  - OceanApocalypseStudios.RSML.Exceptions.ErrorList.AddSourceError(OceanApocalypseStudios.RSML.Sources.SourceSpan,System.String,OceanApocalypseStudios.RSML.Exceptions.Severity)
+  - OceanApocalypseStudios.RSML.Exceptions.ErrorList.Clear
+  - OceanApocalypseStudios.RSML.Exceptions.ErrorList.GetEnumerator
+  - OceanApocalypseStudios.RSML.Exceptions.ErrorList.System#Collections#IEnumerable#GetEnumerator
+  langs:
+  - csharp
+  - vb
+  name: ErrorList
+  nameWithType: ErrorList
+  fullName: OceanApocalypseStudios.RSML.Exceptions.ErrorList
+  type: Class
+  source:
+    remote:
+      path: src/RSML/Exceptions/ErrorList.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: ErrorList
+    path: ../src/RSML/Exceptions/ErrorList.cs
+    startLine: 13
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Exceptions
+  summary: A list of RSML toolchain errors.
+  example: []
+  syntax:
+    content: 'public class ErrorList : IEnumerable<IError>, IEnumerable'
+    content.vb: Public Class ErrorList Implements IEnumerable(Of IError), IEnumerable
+  inheritance:
+  - System.Object
+  implements:
+  - System.Collections.Generic.IEnumerable{OceanApocalypseStudios.RSML.Exceptions.IError}
+  - System.Collections.IEnumerable
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: OceanApocalypseStudios.RSML.Exceptions.ErrorList.#ctor
+  commentId: M:OceanApocalypseStudios.RSML.Exceptions.ErrorList.#ctor
+  id: '#ctor'
+  parent: OceanApocalypseStudios.RSML.Exceptions.ErrorList
+  langs:
+  - csharp
+  - vb
+  name: ErrorList()
+  nameWithType: ErrorList.ErrorList()
+  fullName: OceanApocalypseStudios.RSML.Exceptions.ErrorList.ErrorList()
+  type: Constructor
+  source:
+    remote:
+      path: src/RSML/Exceptions/ErrorList.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: .ctor
+    path: ../src/RSML/Exceptions/ErrorList.cs
+    startLine: 13
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Exceptions
+  summary: A list of RSML toolchain errors.
+  example: []
+  syntax:
+    content: public ErrorList()
+    content.vb: Public Sub New()
+  overload: OceanApocalypseStudios.RSML.Exceptions.ErrorList.#ctor*
+  nameWithType.vb: ErrorList.New()
+  fullName.vb: OceanApocalypseStudios.RSML.Exceptions.ErrorList.New()
+  name.vb: New()
+- uid: OceanApocalypseStudios.RSML.Exceptions.ErrorList.Add(OceanApocalypseStudios.RSML.Exceptions.IError)
+  commentId: M:OceanApocalypseStudios.RSML.Exceptions.ErrorList.Add(OceanApocalypseStudios.RSML.Exceptions.IError)
+  id: Add(OceanApocalypseStudios.RSML.Exceptions.IError)
+  parent: OceanApocalypseStudios.RSML.Exceptions.ErrorList
+  langs:
+  - csharp
+  - vb
+  name: Add(IError)
+  nameWithType: ErrorList.Add(IError)
+  fullName: OceanApocalypseStudios.RSML.Exceptions.ErrorList.Add(OceanApocalypseStudios.RSML.Exceptions.IError)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Exceptions/ErrorList.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Add
+    path: ../src/RSML/Exceptions/ErrorList.cs
+    startLine: 21
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Exceptions
+  summary: Adds an error to the list of errors.
+  example: []
+  syntax:
+    content: public void Add(IError error)
+    parameters:
+    - id: error
+      type: OceanApocalypseStudios.RSML.Exceptions.IError
+      description: ''
+    content.vb: Public Sub Add([error] As IError)
+  overload: OceanApocalypseStudios.RSML.Exceptions.ErrorList.Add*
+- uid: OceanApocalypseStudios.RSML.Exceptions.ErrorList.AddSourceError(OceanApocalypseStudios.RSML.Sources.SourceSpan,System.String,OceanApocalypseStudios.RSML.Exceptions.Severity)
+  commentId: M:OceanApocalypseStudios.RSML.Exceptions.ErrorList.AddSourceError(OceanApocalypseStudios.RSML.Sources.SourceSpan,System.String,OceanApocalypseStudios.RSML.Exceptions.Severity)
+  id: AddSourceError(OceanApocalypseStudios.RSML.Sources.SourceSpan,System.String,OceanApocalypseStudios.RSML.Exceptions.Severity)
+  parent: OceanApocalypseStudios.RSML.Exceptions.ErrorList
+  langs:
+  - csharp
+  - vb
+  name: AddSourceError(SourceSpan, string, Severity)
+  nameWithType: ErrorList.AddSourceError(SourceSpan, string, Severity)
+  fullName: OceanApocalypseStudios.RSML.Exceptions.ErrorList.AddSourceError(OceanApocalypseStudios.RSML.Sources.SourceSpan, string, OceanApocalypseStudios.RSML.Exceptions.Severity)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Exceptions/ErrorList.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: AddSourceError
+    path: ../src/RSML/Exceptions/ErrorList.cs
+    startLine: 29
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Exceptions
+  summary: Adds a <xref href="OceanApocalypseStudios.RSML.Exceptions.SourceError" data-throw-if-not-resolved="false"></xref> to the list of errors.
+  example: []
+  syntax:
+    content: public void AddSourceError(SourceSpan span, string message, Severity severity)
+    parameters:
+    - id: span
+      type: OceanApocalypseStudios.RSML.Sources.SourceSpan
+      description: The span the error relates to.
+    - id: message
+      type: System.String
+      description: A brief description of why the error occured.
+    - id: severity
+      type: OceanApocalypseStudios.RSML.Exceptions.Severity
+      description: The error severity.
+    content.vb: Public Sub AddSourceError(span As SourceSpan, message As String, severity As Severity)
+  overload: OceanApocalypseStudios.RSML.Exceptions.ErrorList.AddSourceError*
+  nameWithType.vb: ErrorList.AddSourceError(SourceSpan, String, Severity)
+  fullName.vb: OceanApocalypseStudios.RSML.Exceptions.ErrorList.AddSourceError(OceanApocalypseStudios.RSML.Sources.SourceSpan, String, OceanApocalypseStudios.RSML.Exceptions.Severity)
+  name.vb: AddSourceError(SourceSpan, String, Severity)
+- uid: OceanApocalypseStudios.RSML.Exceptions.ErrorList.AddSourceError(OceanApocalypseStudios.RSML.Sources.SourceSpan,System.Byte*,System.Int32,System.Text.Encoding,OceanApocalypseStudios.RSML.Exceptions.Severity)
+  commentId: M:OceanApocalypseStudios.RSML.Exceptions.ErrorList.AddSourceError(OceanApocalypseStudios.RSML.Sources.SourceSpan,System.Byte*,System.Int32,System.Text.Encoding,OceanApocalypseStudios.RSML.Exceptions.Severity)
+  id: AddSourceError(OceanApocalypseStudios.RSML.Sources.SourceSpan,System.Byte*,System.Int32,System.Text.Encoding,OceanApocalypseStudios.RSML.Exceptions.Severity)
+  parent: OceanApocalypseStudios.RSML.Exceptions.ErrorList
+  langs:
+  - csharp
+  - vb
+  name: AddSourceError(SourceSpan, byte*, int, Encoding?, Severity)
+  nameWithType: ErrorList.AddSourceError(SourceSpan, byte*, int, Encoding?, Severity)
+  fullName: OceanApocalypseStudios.RSML.Exceptions.ErrorList.AddSourceError(OceanApocalypseStudios.RSML.Sources.SourceSpan, byte*, int, System.Text.Encoding?, OceanApocalypseStudios.RSML.Exceptions.Severity)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Exceptions/ErrorList.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: AddSourceError
+    path: ../src/RSML/Exceptions/ErrorList.cs
+    startLine: 39
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Exceptions
+  summary: Adds a <xref href="OceanApocalypseStudios.RSML.Exceptions.SourceError" data-throw-if-not-resolved="false"></xref> to the list of errors.
+  example: []
+  syntax:
+    content: >-
+      [CLSCompliant(false)]
+
+      public void AddSourceError(SourceSpan span, byte* message, int byteCount, Encoding? messageEncoding, Severity severity)
+    parameters:
+    - id: span
+      type: OceanApocalypseStudios.RSML.Sources.SourceSpan
+      description: The span the error relates to.
+    - id: message
+      type: System.Byte*
+      description: A pointer to an array of bytes that describe the error.
+    - id: byteCount
+      type: System.Int32
+      description: The amount of bytes in <code class="paramref">message</code>.
+    - id: messageEncoding
+      type: System.Text.Encoding
+      description: The error message encoding (this determines which encoding to use to decode <code class="paramref">message</code>).
+    - id: severity
+      type: OceanApocalypseStudios.RSML.Exceptions.Severity
+      description: The error severity.
+    content.vb: >-
+      <CLSCompliant(False)>
+
+      Public Sub AddSourceError(span As SourceSpan, message As Byte*, byteCount As Integer, messageEncoding As Encoding, severity As Severity)
+  overload: OceanApocalypseStudios.RSML.Exceptions.ErrorList.AddSourceError*
+  attributes:
+  - type: System.CLSCompliantAttribute
+    ctor: System.CLSCompliantAttribute.#ctor(System.Boolean)
+    arguments:
+    - type: System.Boolean
+      value: false
+  nameWithType.vb: ErrorList.AddSourceError(SourceSpan, Byte*, Integer, Encoding, Severity)
+  fullName.vb: OceanApocalypseStudios.RSML.Exceptions.ErrorList.AddSourceError(OceanApocalypseStudios.RSML.Sources.SourceSpan, Byte*, Integer, System.Text.Encoding, OceanApocalypseStudios.RSML.Exceptions.Severity)
+  name.vb: AddSourceError(SourceSpan, Byte*, Integer, Encoding, Severity)
+- uid: OceanApocalypseStudios.RSML.Exceptions.ErrorList.Clear
+  commentId: M:OceanApocalypseStudios.RSML.Exceptions.ErrorList.Clear
+  id: Clear
+  parent: OceanApocalypseStudios.RSML.Exceptions.ErrorList
+  langs:
+  - csharp
+  - vb
+  name: Clear()
+  nameWithType: ErrorList.Clear()
+  fullName: OceanApocalypseStudios.RSML.Exceptions.ErrorList.Clear()
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Exceptions/ErrorList.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Clear
+    path: ../src/RSML/Exceptions/ErrorList.cs
+    startLine: 46
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Exceptions
+  summary: Clears the <xref href="OceanApocalypseStudios.RSML.Exceptions.ErrorList" data-throw-if-not-resolved="false"></xref>, leaving it fully empty.
+  example: []
+  syntax:
+    content: public void Clear()
+    content.vb: Public Sub Clear()
+  overload: OceanApocalypseStudios.RSML.Exceptions.ErrorList.Clear*
+- uid: OceanApocalypseStudios.RSML.Exceptions.ErrorList.GetEnumerator
+  commentId: M:OceanApocalypseStudios.RSML.Exceptions.ErrorList.GetEnumerator
+  id: GetEnumerator
+  parent: OceanApocalypseStudios.RSML.Exceptions.ErrorList
+  langs:
+  - csharp
+  - vb
+  name: GetEnumerator()
+  nameWithType: ErrorList.GetEnumerator()
+  fullName: OceanApocalypseStudios.RSML.Exceptions.ErrorList.GetEnumerator()
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Exceptions/ErrorList.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: GetEnumerator
+    path: ../src/RSML/Exceptions/ErrorList.cs
+    startLine: 49
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Exceptions
+  summary: Returns an enumerator that iterates through the collection.
+  example: []
+  syntax:
+    content: public IEnumerator<IError> GetEnumerator()
+    return:
+      type: System.Collections.Generic.IEnumerator{OceanApocalypseStudios.RSML.Exceptions.IError}
+      description: An enumerator that can be used to iterate through the collection.
+    content.vb: Public Function GetEnumerator() As IEnumerator(Of IError)
+  overload: OceanApocalypseStudios.RSML.Exceptions.ErrorList.GetEnumerator*
+  implements:
+  - System.Collections.Generic.IEnumerable{OceanApocalypseStudios.RSML.Exceptions.IError}.GetEnumerator
+- uid: OceanApocalypseStudios.RSML.Exceptions.ErrorList.System#Collections#IEnumerable#GetEnumerator
+  commentId: M:OceanApocalypseStudios.RSML.Exceptions.ErrorList.System#Collections#IEnumerable#GetEnumerator
+  id: System#Collections#IEnumerable#GetEnumerator
+  isEii: true
+  parent: OceanApocalypseStudios.RSML.Exceptions.ErrorList
+  langs:
+  - csharp
+  - vb
+  name: IEnumerable.GetEnumerator()
+  nameWithType: ErrorList.IEnumerable.GetEnumerator()
+  fullName: OceanApocalypseStudios.RSML.Exceptions.ErrorList.System.Collections.IEnumerable.GetEnumerator()
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Exceptions/ErrorList.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: System.Collections.IEnumerable.GetEnumerator
+    path: ../src/RSML/Exceptions/ErrorList.cs
+    startLine: 51
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Exceptions
+  summary: Returns an enumerator that iterates through a collection.
+  example: []
+  syntax:
+    content: IEnumerator IEnumerable.GetEnumerator()
+    return:
+      type: System.Collections.IEnumerator
+      description: An <xref href="System.Collections.IEnumerator" data-throw-if-not-resolved="false"></xref> object that can be used to iterate through the collection.
+    content.vb: ''
+  overload: OceanApocalypseStudios.RSML.Exceptions.ErrorList.System#Collections#IEnumerable#GetEnumerator*
+  implements:
+  - System.Collections.IEnumerable.GetEnumerator
+  nameWithType.vb: ''
+  fullName.vb: ''
+  name.vb: ''
+references:
+- uid: OceanApocalypseStudios.RSML.Exceptions
+  commentId: N:OceanApocalypseStudios.RSML.Exceptions
+  href: OceanApocalypseStudios.html
+  name: OceanApocalypseStudios.RSML.Exceptions
+  nameWithType: OceanApocalypseStudios.RSML.Exceptions
+  fullName: OceanApocalypseStudios.RSML.Exceptions
+  spec.csharp:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Exceptions
+    name: Exceptions
+    href: OceanApocalypseStudios.RSML.Exceptions.html
+  spec.vb:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Exceptions
+    name: Exceptions
+    href: OceanApocalypseStudios.RSML.Exceptions.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Collections.Generic.IEnumerable{OceanApocalypseStudios.RSML.Exceptions.IError}
+  commentId: T:System.Collections.Generic.IEnumerable{OceanApocalypseStudios.RSML.Exceptions.IError}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<IError>
+  nameWithType: IEnumerable<IError>
+  fullName: System.Collections.Generic.IEnumerable<OceanApocalypseStudios.RSML.Exceptions.IError>
+  nameWithType.vb: IEnumerable(Of IError)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of OceanApocalypseStudios.RSML.Exceptions.IError)
+  name.vb: IEnumerable(Of IError)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: OceanApocalypseStudios.RSML.Exceptions.IError
+    name: IError
+    href: OceanApocalypseStudios.RSML.Exceptions.IError.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: OceanApocalypseStudios.RSML.Exceptions.IError
+    name: IError
+    href: OceanApocalypseStudios.RSML.Exceptions.IError.html
+  - name: )
+- uid: System.Collections.IEnumerable
+  commentId: T:System.Collections.IEnumerable
+  parent: System.Collections
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.ienumerable
+  name: IEnumerable
+  nameWithType: IEnumerable
+  fullName: System.Collections.IEnumerable
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: System.Collections
+  commentId: N:System.Collections
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections
+  nameWithType: System.Collections
+  fullName: System.Collections
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+- uid: OceanApocalypseStudios.RSML.Exceptions.ErrorList.#ctor*
+  commentId: Overload:OceanApocalypseStudios.RSML.Exceptions.ErrorList.#ctor
+  href: OceanApocalypseStudios.RSML.Exceptions.ErrorList.-ctor.html#OceanApocalypseStudios_RSML_Exceptions_ErrorList__ctor
+  name: ErrorList
+  nameWithType: ErrorList.ErrorList
+  fullName: OceanApocalypseStudios.RSML.Exceptions.ErrorList.ErrorList
+  nameWithType.vb: ErrorList.New
+  fullName.vb: OceanApocalypseStudios.RSML.Exceptions.ErrorList.New
+  name.vb: New
+- uid: OceanApocalypseStudios.RSML.Exceptions.ErrorList.Add*
+  commentId: Overload:OceanApocalypseStudios.RSML.Exceptions.ErrorList.Add
+  href: OceanApocalypseStudios.RSML.Exceptions.ErrorList.Add.html#OceanApocalypseStudios_RSML_Exceptions_ErrorList_Add_OceanApocalypseStudios_RSML_Exceptions_IError_
+  name: Add
+  nameWithType: ErrorList.Add
+  fullName: OceanApocalypseStudios.RSML.Exceptions.ErrorList.Add
+- uid: OceanApocalypseStudios.RSML.Exceptions.IError
+  commentId: T:OceanApocalypseStudios.RSML.Exceptions.IError
+  parent: OceanApocalypseStudios.RSML.Exceptions
+  href: OceanApocalypseStudios.RSML.Exceptions.IError.html
+  name: IError
+  nameWithType: IError
+  fullName: OceanApocalypseStudios.RSML.Exceptions.IError
+- uid: OceanApocalypseStudios.RSML.Exceptions.SourceError
+  commentId: T:OceanApocalypseStudios.RSML.Exceptions.SourceError
+  parent: OceanApocalypseStudios.RSML.Exceptions
+  href: OceanApocalypseStudios.RSML.Exceptions.SourceError.html
+  name: SourceError
+  nameWithType: SourceError
+  fullName: OceanApocalypseStudios.RSML.Exceptions.SourceError
+- uid: OceanApocalypseStudios.RSML.Exceptions.ErrorList.AddSourceError*
+  commentId: Overload:OceanApocalypseStudios.RSML.Exceptions.ErrorList.AddSourceError
+  href: OceanApocalypseStudios.RSML.Exceptions.ErrorList.AddSourceError.html#OceanApocalypseStudios_RSML_Exceptions_ErrorList_AddSourceError_OceanApocalypseStudios_RSML_Sources_SourceSpan_System_String_OceanApocalypseStudios_RSML_Exceptions_Severity_
+  name: AddSourceError
+  nameWithType: ErrorList.AddSourceError
+  fullName: OceanApocalypseStudios.RSML.Exceptions.ErrorList.AddSourceError
+- uid: OceanApocalypseStudios.RSML.Sources.SourceSpan
+  commentId: T:OceanApocalypseStudios.RSML.Sources.SourceSpan
+  parent: OceanApocalypseStudios.RSML.Sources
+  href: OceanApocalypseStudios.RSML.Sources.SourceSpan.html
+  name: SourceSpan
+  nameWithType: SourceSpan
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: OceanApocalypseStudios.RSML.Exceptions.Severity
+  commentId: T:OceanApocalypseStudios.RSML.Exceptions.Severity
+  parent: OceanApocalypseStudios.RSML.Exceptions
+  href: OceanApocalypseStudios.RSML.Exceptions.Severity.html
+  name: Severity
+  nameWithType: Severity
+  fullName: OceanApocalypseStudios.RSML.Exceptions.Severity
+- uid: OceanApocalypseStudios.RSML.Sources
+  commentId: N:OceanApocalypseStudios.RSML.Sources
+  href: OceanApocalypseStudios.html
+  name: OceanApocalypseStudios.RSML.Sources
+  nameWithType: OceanApocalypseStudios.RSML.Sources
+  fullName: OceanApocalypseStudios.RSML.Sources
+  spec.csharp:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sources
+    name: Sources
+    href: OceanApocalypseStudios.RSML.Sources.html
+  spec.vb:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sources
+    name: Sources
+    href: OceanApocalypseStudios.RSML.Sources.html
+- uid: System.Byte*
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.byte
+  name: byte*
+  nameWithType: byte*
+  fullName: byte*
+  nameWithType.vb: Byte*
+  fullName.vb: Byte*
+  name.vb: Byte*
+  spec.csharp:
+  - uid: System.Byte
+    name: byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '*'
+  spec.vb:
+  - uid: System.Byte
+    name: Byte
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.byte
+  - name: '*'
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: System.Text.Encoding
+  commentId: T:System.Text.Encoding
+  parent: System.Text
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.text.encoding
+  name: Encoding
+  nameWithType: Encoding
+  fullName: System.Text.Encoding
+- uid: System.Text
+  commentId: N:System.Text
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Text
+  nameWithType: System.Text
+  fullName: System.Text
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Text
+    name: Text
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Text
+    name: Text
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.text
+- uid: OceanApocalypseStudios.RSML.Exceptions.ErrorList
+  commentId: T:OceanApocalypseStudios.RSML.Exceptions.ErrorList
+  href: OceanApocalypseStudios.RSML.Exceptions.ErrorList.html
+  name: ErrorList
+  nameWithType: ErrorList
+  fullName: OceanApocalypseStudios.RSML.Exceptions.ErrorList
+- uid: OceanApocalypseStudios.RSML.Exceptions.ErrorList.Clear*
+  commentId: Overload:OceanApocalypseStudios.RSML.Exceptions.ErrorList.Clear
+  href: OceanApocalypseStudios.RSML.Exceptions.ErrorList.Clear.html#OceanApocalypseStudios_RSML_Exceptions_ErrorList_Clear
+  name: Clear
+  nameWithType: ErrorList.Clear
+  fullName: OceanApocalypseStudios.RSML.Exceptions.ErrorList.Clear
+- uid: OceanApocalypseStudios.RSML.Exceptions.ErrorList.GetEnumerator*
+  commentId: Overload:OceanApocalypseStudios.RSML.Exceptions.ErrorList.GetEnumerator
+  href: OceanApocalypseStudios.RSML.Exceptions.ErrorList.GetEnumerator.html#OceanApocalypseStudios_RSML_Exceptions_ErrorList_GetEnumerator
+  name: GetEnumerator
+  nameWithType: ErrorList.GetEnumerator
+  fullName: OceanApocalypseStudios.RSML.Exceptions.ErrorList.GetEnumerator
+- uid: System.Collections.Generic.IEnumerable{OceanApocalypseStudios.RSML.Exceptions.IError}.GetEnumerator
+  commentId: M:System.Collections.Generic.IEnumerable{OceanApocalypseStudios.RSML.Exceptions.IError}.GetEnumerator
+  parent: System.Collections.Generic.IEnumerable{OceanApocalypseStudios.RSML.Exceptions.IError}
+  definition: System.Collections.Generic.IEnumerable`1.GetEnumerator
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1.getenumerator
+  name: GetEnumerator()
+  nameWithType: IEnumerable<IError>.GetEnumerator()
+  fullName: System.Collections.Generic.IEnumerable<OceanApocalypseStudios.RSML.Exceptions.IError>.GetEnumerator()
+  nameWithType.vb: IEnumerable(Of IError).GetEnumerator()
+  fullName.vb: System.Collections.Generic.IEnumerable(Of OceanApocalypseStudios.RSML.Exceptions.IError).GetEnumerator()
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable{OceanApocalypseStudios.RSML.Exceptions.IError}.GetEnumerator
+    name: GetEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1.getenumerator
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable{OceanApocalypseStudios.RSML.Exceptions.IError}.GetEnumerator
+    name: GetEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1.getenumerator
+  - name: (
+  - name: )
+- uid: System.Collections.Generic.IEnumerator{OceanApocalypseStudios.RSML.Exceptions.IError}
+  commentId: T:System.Collections.Generic.IEnumerator{OceanApocalypseStudios.RSML.Exceptions.IError}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerator`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1
+  name: IEnumerator<IError>
+  nameWithType: IEnumerator<IError>
+  fullName: System.Collections.Generic.IEnumerator<OceanApocalypseStudios.RSML.Exceptions.IError>
+  nameWithType.vb: IEnumerator(Of IError)
+  fullName.vb: System.Collections.Generic.IEnumerator(Of OceanApocalypseStudios.RSML.Exceptions.IError)
+  name.vb: IEnumerator(Of IError)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerator`1
+    name: IEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1
+  - name: <
+  - uid: OceanApocalypseStudios.RSML.Exceptions.IError
+    name: IError
+    href: OceanApocalypseStudios.RSML.Exceptions.IError.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerator`1
+    name: IEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: OceanApocalypseStudios.RSML.Exceptions.IError
+    name: IError
+    href: OceanApocalypseStudios.RSML.Exceptions.IError.html
+  - name: )
+- uid: System.Collections.Generic.IEnumerable`1.GetEnumerator
+  commentId: M:System.Collections.Generic.IEnumerable`1.GetEnumerator
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1.getenumerator
+  name: GetEnumerator()
+  nameWithType: IEnumerable<T>.GetEnumerator()
+  fullName: System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+  nameWithType.vb: IEnumerable(Of T).GetEnumerator()
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T).GetEnumerator()
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1.GetEnumerator
+    name: GetEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1.getenumerator
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1.GetEnumerator
+    name: GetEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1.getenumerator
+  - name: (
+  - name: )
+- uid: System.Collections.Generic.IEnumerator`1
+  commentId: T:System.Collections.Generic.IEnumerator`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1
+  name: IEnumerator<T>
+  nameWithType: IEnumerator<T>
+  fullName: System.Collections.Generic.IEnumerator<T>
+  nameWithType.vb: IEnumerator(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerator(Of T)
+  name.vb: IEnumerator(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerator`1
+    name: IEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerator`1
+    name: IEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.IEnumerator
+  commentId: T:System.Collections.IEnumerator
+  parent: System.Collections
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.ienumerator
+  name: IEnumerator
+  nameWithType: IEnumerator
+  fullName: System.Collections.IEnumerator
+- uid: OceanApocalypseStudios.RSML.Exceptions.ErrorList.System#Collections#IEnumerable#GetEnumerator*
+  commentId: Overload:OceanApocalypseStudios.RSML.Exceptions.ErrorList.System#Collections#IEnumerable#GetEnumerator
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.ienumerable
+  name: IEnumerable.GetEnumerator
+  nameWithType: ErrorList.IEnumerable.GetEnumerator
+  fullName: OceanApocalypseStudios.RSML.Exceptions.ErrorList.System.Collections.IEnumerable.GetEnumerator
+  spec.csharp:
+  - uid: System.Collections.IEnumerable*
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.ienumerable
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Exceptions.ErrorList.System#Collections#IEnumerable#GetEnumerator*
+    name: GetEnumerator
+    href: OceanApocalypseStudios.RSML.Exceptions.ErrorList.System-Collections-IEnumerable-GetEnumerator.html#OceanApocalypseStudios_RSML_Exceptions_ErrorList_System_Collections_IEnumerable_GetEnumerator
+- uid: System.Collections.IEnumerable.GetEnumerator
+  commentId: M:System.Collections.IEnumerable.GetEnumerator
+  parent: System.Collections.IEnumerable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.ienumerable.getenumerator
+  name: GetEnumerator()
+  nameWithType: IEnumerable.GetEnumerator()
+  fullName: System.Collections.IEnumerable.GetEnumerator()
+  spec.csharp:
+  - uid: System.Collections.IEnumerable.GetEnumerator
+    name: GetEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.ienumerable.getenumerator
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Collections.IEnumerable.GetEnumerator
+    name: GetEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.ienumerable.getenumerator
+  - name: (
+  - name: )
+memberLayout: SeparatePages

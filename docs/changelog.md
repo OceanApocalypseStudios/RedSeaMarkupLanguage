@@ -1,102 +1,45 @@
 # Changelog
-## Red Sea Markup Language
 
-### 3.0.0 <small>TBD</small> { id="3.0.0" }
-To be the first stable release under major version 3.
+## v3.0.0-prerelease1 (in development)
+Currently in development, will lead to the biggest RSML release yet: **v3.0.0**.
 
-### 3.0.0-prerelease2 <small>TBD</small> { id="3.0.0-prerelease2" }
-To be the next pre-release version after [3.0.0-prerelease1](#3.0.0-prerelease1).
+### 🚀 Features
+- *(buffer)* Add and test `TryGetLineFromIndex` method to the read-only string buffer (#57)
+- *(buffer)* Add methods for calculating the length of a line in the buffer (#58)
+- *(buffer)* [**breaking**] Add array-based methods to the read-only buffer interface and class, for convenience (#53 closed by #59)
+- *(buffer)* Add properties for checking if a source is read-only and checking its cursor position
 
-### 3.0.0-prerelease1 <small>TBD</small> { id="3.0.0-prerelease1" }
-!!! warning "In Development"
-    This version is currently in development. You can follow up on development [here](https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/tree/v3.0.0-prerelease1-dev).
+### 🐛 Bug Fixes
+- *(buffer)* Fix methods and line counting mechanics in the read-only string buffer
+- *(test)* Fix MTP setup
 
-### 2.1.0 <small>Cancelled</small> { id="2.1.0" }
-!!! note "Cancelled"
-    Next major version, [3.0.0](#3.0.0), will take this version's place, as this one was cancelled.
+### 🚧 Refactor
+- *(cache)* Move `ISupportsCache` to a dedicated cache directory (and namespace)
 
-- Fully exported the C ABI
-<!-- todo: add more content here -->
+### 📚 Documentation
+- Improve documentation partially
 
-### 2.0.0 <small>September 9, 2025</small> { id="2.0.0" }
-- Retired `RSML.Performance` for not being needed anymore
-- Improved performance: as of this release, RSML is more than **100** times faster
-- Improved the CLI
-- Further developed the C ABI
-- Implemented the `DualTextBuffer` class for performant buffering
-- Closes #11: Rewrite Middleware logic
-- Closes #12: Benchmark further and locate badly optimized spots
-- Closes #15: Change namespaces to match studio's naming scheme
-- Merged #16: Release v2.0.0
+### 🧪 Testing
+- Add more tests
+- [**breaking**] Add test projects for testing RSML, RSML's SDK and RSML's Native exports
 
-### 2.0.0-prerelease8 <small>August 18, 2025</small> { id="2.0.0-prerelease8" }
-!!! warning "Pre-release"
-    This is a pre-release. Use at your own risk.
+### ⚙️ Miscellaneous Tasks
+- Migrate to MTP
+- Move the MTP migration property to a props file
+- Comment out the release step (the only goal is testing)
+- Fix workflow toa void parser error on Windows ARM64
+- Update workflow to avoid linker issues
+- Prefer bash over PowerShell to avoid YAML escaping issues
+- Improve README.md and add test badges
+- Debug release workflow on macOS
+- Debug release workflow on Linux ARM64
+- Make the CLI non-packable
 
-    !!! warning
-        [v2.0.0-prerelease8](#2.0.0-prerelease8) is known to have serious performance issues.
+## 2.0.0 @ 2025-09-09
+Breaking changes for performance sake.
 
-- Completely redesigned the language from scratch
-- Removed the use of Regex for performance and simplicity reasons
-- Added support for Notepad++ syntax highlighting
-- Added benchmarking project
-- Redesigned the CLI from scratch
-- Started work on the C ABI for interoperability reasons
-- Created a `.Performance` project due to performance on main project being absolutely awful
-- Added testing project
-- Redesigned Special Actions
-- Added a parser, an evaluator, a semantic validator and a normalizer for syntactic and semantic reasons
-- Added Middleware support
-- Closed #1: Work on the documentation
-- Closed #5: Update README (languages)
-- Closed #6: Deploy the docs
-- Closed #7: Documentation versioning
-- Closed #8: Documentation index
-- Closed #9: Remove `NonInteractibleTree`
+### ⚡ Performance
+- Its actually good now
 
-
-## Red Sea Markup Language (Legacy)
-!!! warning "Legacy"
-    The releases in this section are considered **deprecated** and are largely out of support. Albeit stable and documentation being available, users are strongly encouraged to migrate to the latest RSML version, as not only the API changed, but also the language itself.
-
-### 1.0.4 &amp; 1.0.5 <small>June 21, 2025</small> { id="1.0.5" }
-!!! info "Skipped Version"
-    1.0.4 was skipped due to a bug in a GitHub Actions workflow - still available on NuGet, but has the exact same codebase as 1.0.5.
-
-- Removed reflection entirely, in order to produce an AOT-compatible CLI
-- Set the project to be trimmed on build
-- Moved from `RSML.Docs.vbproj` to `mkdocs` (Material theme)
-- Closed #3: AOT this
-- Merged #4: Update README.md with badge formatting and documentation clarifications
-
-### 1.0.3 <small>June 14, 2025</small> { id="1.0.3" }
-- Added more constructors to `RSParser` class
-- Added async loading options for RSML documents
-- Added the underlying expansion of `any` into `.+` as an opt-in but highly recommended feature
-- Introduced more specialized commands for the different possibilities the new RSML features carried
-- Closed #2: CLI bug, workflow not working and setup file
-
-### 1.0.2 <small>June 12, 2025</small> { id="1.0.2" }
-- Added Special Action support
-- Added the possibility of parsing with custom RIDs
-- Further documented RSML
-
-### 1.0.1 <small>May 31, 2025</small> { id="1.0.1" }
-- Fixed a critical bug where the parser would not restrict the system name Regex
-- Improved the documentation building process using the custom `RSML.Docs.vbproj`
-
-### 1.0.0 <small>May 28, 2025</small> { id="1.0.0" }
-!!! bug "Critical Bug"
-    This release contains a critical bug where the parser does not restrict the system name Regex, essentially breaking partial matching (e.g.: `win` would not match `win-x64`). Fixed in version [1.0.1].
-
-- Initial Red Sea Markup Language Release
-
-
-## MF's CrossRoad Solution
-
-### MF1.0 <small>Apr 19, 2025</small> { id="MF1.0" }
-!!! warning "Deprecated"
-    MFRoad is no longer supported and has been publicly archived.
-
-- Initial public solo release of MFRoad
-- Separated MFRoad from dying project ContenterX and archived it
+## 1.0.0 @ 2025-05-28
+First public RSML release.

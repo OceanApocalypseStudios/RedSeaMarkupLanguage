@@ -1,0 +1,1617 @@
+### YamlMime:ManagedReference
+items:
+- uid: OceanApocalypseStudios.RSML.Sources.SourceLocation
+  commentId: T:OceanApocalypseStudios.RSML.Sources.SourceLocation
+  id: SourceLocation
+  parent: OceanApocalypseStudios.RSML.Sources
+  children:
+  - OceanApocalypseStudios.RSML.Sources.SourceLocation.#ctor(System.Int32,System.Int32,System.Int32)
+  - OceanApocalypseStudios.RSML.Sources.SourceLocation.Column
+  - OceanApocalypseStudios.RSML.Sources.SourceLocation.CompareTo(OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  - OceanApocalypseStudios.RSML.Sources.SourceLocation.CompareTo(System.Int32)
+  - OceanApocalypseStudios.RSML.Sources.SourceLocation.Equals(OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  - OceanApocalypseStudios.RSML.Sources.SourceLocation.Equals(System.Int32)
+  - OceanApocalypseStudios.RSML.Sources.SourceLocation.Equals(System.Object)
+  - OceanApocalypseStudios.RSML.Sources.SourceLocation.GetHashCode
+  - OceanApocalypseStudios.RSML.Sources.SourceLocation.Index
+  - OceanApocalypseStudios.RSML.Sources.SourceLocation.Line
+  - OceanApocalypseStudios.RSML.Sources.SourceLocation.ToString
+  - OceanApocalypseStudios.RSML.Sources.SourceLocation.ToString(System.String,System.IFormatProvider)
+  - OceanApocalypseStudios.RSML.Sources.SourceLocation.op_Equality(OceanApocalypseStudios.RSML.Sources.SourceLocation,OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  - OceanApocalypseStudios.RSML.Sources.SourceLocation.op_GreaterThan(OceanApocalypseStudios.RSML.Sources.SourceLocation,OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  - OceanApocalypseStudios.RSML.Sources.SourceLocation.op_GreaterThanOrEqual(OceanApocalypseStudios.RSML.Sources.SourceLocation,OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  - OceanApocalypseStudios.RSML.Sources.SourceLocation.op_Inequality(OceanApocalypseStudios.RSML.Sources.SourceLocation,OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  - OceanApocalypseStudios.RSML.Sources.SourceLocation.op_LessThan(OceanApocalypseStudios.RSML.Sources.SourceLocation,OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  - OceanApocalypseStudios.RSML.Sources.SourceLocation.op_LessThanOrEqual(OceanApocalypseStudios.RSML.Sources.SourceLocation,OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  langs:
+  - csharp
+  - vb
+  name: SourceLocation
+  nameWithType: SourceLocation
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceLocation
+  type: Struct
+  source:
+    remote:
+      path: src/RSML/Sources/SourceLocation.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: SourceLocation
+    path: ../src/RSML/Sources/SourceLocation.cs
+    startLine: 11
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Specifies the location of an item in a <xref href="OceanApocalypseStudios.RSML.Sources.ISource" data-throw-if-not-resolved="false"></xref>.
+  example: []
+  syntax:
+    content: 'public readonly struct SourceLocation : IEquatable<SourceLocation>, IEquatable<int>, IFormattable, IComparable<SourceLocation>, IComparable<int>'
+    content.vb: Public Structure SourceLocation Implements IEquatable(Of SourceLocation), IEquatable(Of Integer), IFormattable, IComparable(Of SourceLocation), IComparable(Of Integer)
+  implements:
+  - System.IEquatable{OceanApocalypseStudios.RSML.Sources.SourceLocation}
+  - System.IEquatable{System.Int32}
+  - System.IFormattable
+  - System.IComparable{OceanApocalypseStudios.RSML.Sources.SourceLocation}
+  - System.IComparable{System.Int32}
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+- uid: OceanApocalypseStudios.RSML.Sources.SourceLocation.#ctor(System.Int32,System.Int32,System.Int32)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.SourceLocation.#ctor(System.Int32,System.Int32,System.Int32)
+  id: '#ctor(System.Int32,System.Int32,System.Int32)'
+  parent: OceanApocalypseStudios.RSML.Sources.SourceLocation
+  langs:
+  - csharp
+  - vb
+  name: SourceLocation(int, int, int)
+  nameWithType: SourceLocation.SourceLocation(int, int, int)
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceLocation.SourceLocation(int, int, int)
+  type: Constructor
+  source:
+    remote:
+      path: src/RSML/Sources/SourceLocation.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: .ctor
+    path: ../src/RSML/Sources/SourceLocation.cs
+    startLine: 11
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Specifies the location of an item in a <xref href="OceanApocalypseStudios.RSML.Sources.ISource" data-throw-if-not-resolved="false"></xref>.
+  example: []
+  syntax:
+    content: public SourceLocation(int index, int line, int column)
+    parameters:
+    - id: index
+      type: System.Int32
+      description: The 0-based index.
+    - id: line
+      type: System.Int32
+      description: The 0-based line number.
+    - id: column
+      type: System.Int32
+      description: The 0-based column number (the index relative to the start of the line).
+    content.vb: Public Sub New(index As Integer, line As Integer, column As Integer)
+  overload: OceanApocalypseStudios.RSML.Sources.SourceLocation.#ctor*
+  nameWithType.vb: SourceLocation.New(Integer, Integer, Integer)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.SourceLocation.New(Integer, Integer, Integer)
+  name.vb: New(Integer, Integer, Integer)
+- uid: OceanApocalypseStudios.RSML.Sources.SourceLocation.Line
+  commentId: P:OceanApocalypseStudios.RSML.Sources.SourceLocation.Line
+  id: Line
+  parent: OceanApocalypseStudios.RSML.Sources.SourceLocation
+  langs:
+  - csharp
+  - vb
+  name: Line
+  nameWithType: SourceLocation.Line
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceLocation.Line
+  type: Property
+  source:
+    remote:
+      path: src/RSML/Sources/SourceLocation.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Line
+    path: ../src/RSML/Sources/SourceLocation.cs
+    startLine: 17
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: The 0-based line number, counting from the start of the source.
+  example: []
+  syntax:
+    content: public int Line { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property Line As Integer
+  overload: OceanApocalypseStudios.RSML.Sources.SourceLocation.Line*
+- uid: OceanApocalypseStudios.RSML.Sources.SourceLocation.Column
+  commentId: P:OceanApocalypseStudios.RSML.Sources.SourceLocation.Column
+  id: Column
+  parent: OceanApocalypseStudios.RSML.Sources.SourceLocation
+  langs:
+  - csharp
+  - vb
+  name: Column
+  nameWithType: SourceLocation.Column
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceLocation.Column
+  type: Property
+  source:
+    remote:
+      path: src/RSML/Sources/SourceLocation.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Column
+    path: ../src/RSML/Sources/SourceLocation.cs
+    startLine: 22
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: The 0-based column number, which is the index of the item relative to the start of the line it is in.
+  example: []
+  syntax:
+    content: public int Column { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property Column As Integer
+  overload: OceanApocalypseStudios.RSML.Sources.SourceLocation.Column*
+- uid: OceanApocalypseStudios.RSML.Sources.SourceLocation.Index
+  commentId: P:OceanApocalypseStudios.RSML.Sources.SourceLocation.Index
+  id: Index
+  parent: OceanApocalypseStudios.RSML.Sources.SourceLocation
+  langs:
+  - csharp
+  - vb
+  name: Index
+  nameWithType: SourceLocation.Index
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceLocation.Index
+  type: Property
+  source:
+    remote:
+      path: src/RSML/Sources/SourceLocation.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Index
+    path: ../src/RSML/Sources/SourceLocation.cs
+    startLine: 27
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: The absolute 0-based index of the item in the source.
+  example: []
+  syntax:
+    content: public int Index { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property Index As Integer
+  overload: OceanApocalypseStudios.RSML.Sources.SourceLocation.Index*
+- uid: OceanApocalypseStudios.RSML.Sources.SourceLocation.CompareTo(System.Int32)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.SourceLocation.CompareTo(System.Int32)
+  id: CompareTo(System.Int32)
+  parent: OceanApocalypseStudios.RSML.Sources.SourceLocation
+  langs:
+  - csharp
+  - vb
+  name: CompareTo(int)
+  nameWithType: SourceLocation.CompareTo(int)
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceLocation.CompareTo(int)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/SourceLocation.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: CompareTo
+    path: ../src/RSML/Sources/SourceLocation.cs
+    startLine: 33
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Compares the index of the location to another index.
+  example: []
+  syntax:
+    content: public int CompareTo(int other)
+    parameters:
+    - id: other
+      type: System.Int32
+      description: The index to compare against.
+    return:
+      type: System.Int32
+    content.vb: Public Function CompareTo(other As Integer) As Integer
+  overload: OceanApocalypseStudios.RSML.Sources.SourceLocation.CompareTo*
+  implements:
+  - System.IComparable{System.Int32}.CompareTo(System.Int32)
+  nameWithType.vb: SourceLocation.CompareTo(Integer)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.SourceLocation.CompareTo(Integer)
+  name.vb: CompareTo(Integer)
+- uid: OceanApocalypseStudios.RSML.Sources.SourceLocation.CompareTo(OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.SourceLocation.CompareTo(OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  id: CompareTo(OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  parent: OceanApocalypseStudios.RSML.Sources.SourceLocation
+  langs:
+  - csharp
+  - vb
+  name: CompareTo(SourceLocation)
+  nameWithType: SourceLocation.CompareTo(SourceLocation)
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceLocation.CompareTo(OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/SourceLocation.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: CompareTo
+    path: ../src/RSML/Sources/SourceLocation.cs
+    startLine: 36
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Compares the current instance with another object of the same type and returns an integer that indicates whether the current instance precedes, follows, or occurs in the same position in the sort order as the other object.
+  example: []
+  syntax:
+    content: public int CompareTo(SourceLocation other)
+    parameters:
+    - id: other
+      type: OceanApocalypseStudios.RSML.Sources.SourceLocation
+      description: An object to compare with this instance.
+    return:
+      type: System.Int32
+      description: >-
+        A value that indicates the relative order of the objects being compared. The return value has these meanings:
+
+         <table><thead><tr><th class="term"> Value</th><th class="description"> Meaning</th></tr></thead><tbody><tr><td class="term"> Less than zero</td><td class="description"> This instance precedes <code class="paramref">other</code> in the sort order.</td></tr><tr><td class="term"> Zero</td><td class="description"> This instance occurs in the same position in the sort order as <code class="paramref">other</code>.</td></tr><tr><td class="term"> Greater than zero</td><td class="description"> This instance follows <code class="paramref">other</code> in the sort order.</td></tr></tbody></table>
+    content.vb: Public Function CompareTo(other As SourceLocation) As Integer
+  overload: OceanApocalypseStudios.RSML.Sources.SourceLocation.CompareTo*
+  implements:
+  - System.IComparable{OceanApocalypseStudios.RSML.Sources.SourceLocation}.CompareTo(OceanApocalypseStudios.RSML.Sources.SourceLocation)
+- uid: OceanApocalypseStudios.RSML.Sources.SourceLocation.Equals(System.Object)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.SourceLocation.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: OceanApocalypseStudios.RSML.Sources.SourceLocation
+  langs:
+  - csharp
+  - vb
+  name: Equals(object?)
+  nameWithType: SourceLocation.Equals(object?)
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceLocation.Equals(object?)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/SourceLocation.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Equals
+    path: ../src/RSML/Sources/SourceLocation.cs
+    startLine: 39
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Indicates whether this instance and a specified object are equal.
+  example: []
+  syntax:
+    content: public override bool Equals(object? obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: The object to compare with the current instance.
+      attributes:
+      - type: System.Diagnostics.CodeAnalysis.NotNullWhenAttribute
+        ctor: System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.#ctor(System.Boolean)
+        arguments:
+        - type: System.Boolean
+          value: true
+    return:
+      type: System.Boolean
+      description: <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if <code class="paramref">obj</code> and this instance are the same type and represent the same value; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.ValueType.Equals(System.Object)
+  overload: OceanApocalypseStudios.RSML.Sources.SourceLocation.Equals*
+  nameWithType.vb: SourceLocation.Equals(Object)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.SourceLocation.Equals(Object)
+  name.vb: Equals(Object)
+- uid: OceanApocalypseStudios.RSML.Sources.SourceLocation.Equals(OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.SourceLocation.Equals(OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  id: Equals(OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  parent: OceanApocalypseStudios.RSML.Sources.SourceLocation
+  langs:
+  - csharp
+  - vb
+  name: Equals(SourceLocation)
+  nameWithType: SourceLocation.Equals(SourceLocation)
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceLocation.Equals(OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/SourceLocation.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Equals
+    path: ../src/RSML/Sources/SourceLocation.cs
+    startLine: 58
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Checks if two <xref href="OceanApocalypseStudios.RSML.Sources.SourceLocation" data-throw-if-not-resolved="false"></xref>s are equal to each other.
+  example: []
+  syntax:
+    content: public bool Equals(SourceLocation other)
+    parameters:
+    - id: other
+      type: OceanApocalypseStudios.RSML.Sources.SourceLocation
+      description: The other <xref href="OceanApocalypseStudios.RSML.Sources.SourceLocation" data-throw-if-not-resolved="false"></xref>.
+    return:
+      type: System.Boolean
+      description: True if equals.
+    content.vb: Public Function Equals(other As SourceLocation) As Boolean
+  overload: OceanApocalypseStudios.RSML.Sources.SourceLocation.Equals*
+  implements:
+  - System.IEquatable{OceanApocalypseStudios.RSML.Sources.SourceLocation}.Equals(OceanApocalypseStudios.RSML.Sources.SourceLocation)
+- uid: OceanApocalypseStudios.RSML.Sources.SourceLocation.Equals(System.Int32)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.SourceLocation.Equals(System.Int32)
+  id: Equals(System.Int32)
+  parent: OceanApocalypseStudios.RSML.Sources.SourceLocation
+  langs:
+  - csharp
+  - vb
+  name: Equals(int)
+  nameWithType: SourceLocation.Equals(int)
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceLocation.Equals(int)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/SourceLocation.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Equals
+    path: ../src/RSML/Sources/SourceLocation.cs
+    startLine: 65
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Checks if two indexes are equal to each other.
+  example: []
+  syntax:
+    content: public bool Equals(int other)
+    parameters:
+    - id: other
+      type: System.Int32
+      description: The other location's index.
+    return:
+      type: System.Boolean
+      description: True if equals.
+    content.vb: Public Function Equals(other As Integer) As Boolean
+  overload: OceanApocalypseStudios.RSML.Sources.SourceLocation.Equals*
+  implements:
+  - System.IEquatable{System.Int32}.Equals(System.Int32)
+  nameWithType.vb: SourceLocation.Equals(Integer)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.SourceLocation.Equals(Integer)
+  name.vb: Equals(Integer)
+- uid: OceanApocalypseStudios.RSML.Sources.SourceLocation.GetHashCode
+  commentId: M:OceanApocalypseStudios.RSML.Sources.SourceLocation.GetHashCode
+  id: GetHashCode
+  parent: OceanApocalypseStudios.RSML.Sources.SourceLocation
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: SourceLocation.GetHashCode()
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceLocation.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/SourceLocation.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: GetHashCode
+    path: ../src/RSML/Sources/SourceLocation.cs
+    startLine: 68
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Returns the hash code for this instance.
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer that is the hash code for this instance.
+    content.vb: Public Overrides Function GetHashCode() As Integer
+  overridden: System.ValueType.GetHashCode
+  overload: OceanApocalypseStudios.RSML.Sources.SourceLocation.GetHashCode*
+- uid: OceanApocalypseStudios.RSML.Sources.SourceLocation.ToString
+  commentId: M:OceanApocalypseStudios.RSML.Sources.SourceLocation.ToString
+  id: ToString
+  parent: OceanApocalypseStudios.RSML.Sources.SourceLocation
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: SourceLocation.ToString()
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceLocation.ToString()
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/SourceLocation.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: ToString
+    path: ../src/RSML/Sources/SourceLocation.cs
+    startLine: 83
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Returns a generic string representation of the current instance.
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: The string representation.
+    content.vb: Public Overrides Function ToString() As String
+  overridden: System.ValueType.ToString
+  overload: OceanApocalypseStudios.RSML.Sources.SourceLocation.ToString*
+- uid: OceanApocalypseStudios.RSML.Sources.SourceLocation.ToString(System.String,System.IFormatProvider)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.SourceLocation.ToString(System.String,System.IFormatProvider)
+  id: ToString(System.String,System.IFormatProvider)
+  parent: OceanApocalypseStudios.RSML.Sources.SourceLocation
+  langs:
+  - csharp
+  - vb
+  name: ToString(string?, IFormatProvider?)
+  nameWithType: SourceLocation.ToString(string?, IFormatProvider?)
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceLocation.ToString(string?, System.IFormatProvider?)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/SourceLocation.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: ToString
+    path: ../src/RSML/Sources/SourceLocation.cs
+    startLine: 92
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: >-
+    Given a format, tries to return a string that uses said format as a basis for the representation.
+
+    If it fails, it defaults to <xref href="OceanApocalypseStudios.RSML.Sources.SourceLocation.ToString" data-throw-if-not-resolved="false"></xref>.
+  example: []
+  syntax:
+    content: public string ToString(string? format, IFormatProvider? formatProvider)
+    parameters:
+    - id: format
+      type: System.String
+      description: 'The format. Available formats are: CTOR (constructor-like string) and JSON (struct as JSON).'
+    - id: formatProvider
+      type: System.IFormatProvider
+      description: Unused. Don't bother assigning it anything.
+    return:
+      type: System.String
+      description: The string representation.
+    content.vb: Public Function ToString(format As String, formatProvider As IFormatProvider) As String
+  overload: OceanApocalypseStudios.RSML.Sources.SourceLocation.ToString*
+  implements:
+  - System.IFormattable.ToString(System.String,System.IFormatProvider)
+  nameWithType.vb: SourceLocation.ToString(String, IFormatProvider)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.SourceLocation.ToString(String, System.IFormatProvider)
+  name.vb: ToString(String, IFormatProvider)
+- uid: OceanApocalypseStudios.RSML.Sources.SourceLocation.op_Equality(OceanApocalypseStudios.RSML.Sources.SourceLocation,OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.SourceLocation.op_Equality(OceanApocalypseStudios.RSML.Sources.SourceLocation,OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  id: op_Equality(OceanApocalypseStudios.RSML.Sources.SourceLocation,OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  parent: OceanApocalypseStudios.RSML.Sources.SourceLocation
+  langs:
+  - csharp
+  - vb
+  name: operator ==(SourceLocation, SourceLocation)
+  nameWithType: SourceLocation.operator ==(SourceLocation, SourceLocation)
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceLocation.operator ==(OceanApocalypseStudios.RSML.Sources.SourceLocation, OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  type: Operator
+  source:
+    remote:
+      path: src/RSML/Sources/SourceLocation.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: op_Equality
+    path: ../src/RSML/Sources/SourceLocation.cs
+    startLine: 104
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Checks if two <xref href="OceanApocalypseStudios.RSML.Sources.SourceLocation" data-throw-if-not-resolved="false"></xref>s are equal to each other.
+  example: []
+  syntax:
+    content: public static bool operator ==(SourceLocation left, SourceLocation right)
+    parameters:
+    - id: left
+      type: OceanApocalypseStudios.RSML.Sources.SourceLocation
+    - id: right
+      type: OceanApocalypseStudios.RSML.Sources.SourceLocation
+    return:
+      type: System.Boolean
+      description: True if equals.
+    content.vb: Public Shared Operator =(left As SourceLocation, right As SourceLocation) As Boolean
+  overload: OceanApocalypseStudios.RSML.Sources.SourceLocation.op_Equality*
+  nameWithType.vb: SourceLocation.=(SourceLocation, SourceLocation)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.SourceLocation.=(OceanApocalypseStudios.RSML.Sources.SourceLocation, OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  name.vb: =(SourceLocation, SourceLocation)
+- uid: OceanApocalypseStudios.RSML.Sources.SourceLocation.op_Inequality(OceanApocalypseStudios.RSML.Sources.SourceLocation,OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.SourceLocation.op_Inequality(OceanApocalypseStudios.RSML.Sources.SourceLocation,OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  id: op_Inequality(OceanApocalypseStudios.RSML.Sources.SourceLocation,OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  parent: OceanApocalypseStudios.RSML.Sources.SourceLocation
+  langs:
+  - csharp
+  - vb
+  name: operator !=(SourceLocation, SourceLocation)
+  nameWithType: SourceLocation.operator !=(SourceLocation, SourceLocation)
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceLocation.operator !=(OceanApocalypseStudios.RSML.Sources.SourceLocation, OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  type: Operator
+  source:
+    remote:
+      path: src/RSML/Sources/SourceLocation.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: op_Inequality
+    path: ../src/RSML/Sources/SourceLocation.cs
+    startLine: 110
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Checks if two <xref href="OceanApocalypseStudios.RSML.Sources.SourceLocation" data-throw-if-not-resolved="false"></xref>s are different from each other.
+  example: []
+  syntax:
+    content: public static bool operator !=(SourceLocation left, SourceLocation right)
+    parameters:
+    - id: left
+      type: OceanApocalypseStudios.RSML.Sources.SourceLocation
+    - id: right
+      type: OceanApocalypseStudios.RSML.Sources.SourceLocation
+    return:
+      type: System.Boolean
+      description: True if different.
+    content.vb: Public Shared Operator <>(left As SourceLocation, right As SourceLocation) As Boolean
+  overload: OceanApocalypseStudios.RSML.Sources.SourceLocation.op_Inequality*
+  nameWithType.vb: SourceLocation.<>(SourceLocation, SourceLocation)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.SourceLocation.<>(OceanApocalypseStudios.RSML.Sources.SourceLocation, OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  name.vb: <>(SourceLocation, SourceLocation)
+- uid: OceanApocalypseStudios.RSML.Sources.SourceLocation.op_LessThan(OceanApocalypseStudios.RSML.Sources.SourceLocation,OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.SourceLocation.op_LessThan(OceanApocalypseStudios.RSML.Sources.SourceLocation,OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  id: op_LessThan(OceanApocalypseStudios.RSML.Sources.SourceLocation,OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  parent: OceanApocalypseStudios.RSML.Sources.SourceLocation
+  langs:
+  - csharp
+  - vb
+  name: operator <(SourceLocation, SourceLocation)
+  nameWithType: SourceLocation.operator <(SourceLocation, SourceLocation)
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceLocation.operator <(OceanApocalypseStudios.RSML.Sources.SourceLocation, OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  type: Operator
+  source:
+    remote:
+      path: src/RSML/Sources/SourceLocation.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: op_LessThan
+    path: ../src/RSML/Sources/SourceLocation.cs
+    startLine: 115
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Checks if <code class="paramref">left</code> is strictly less than <code class="paramref">right</code>.
+  example: []
+  syntax:
+    content: public static bool operator <(SourceLocation left, SourceLocation right)
+    parameters:
+    - id: left
+      type: OceanApocalypseStudios.RSML.Sources.SourceLocation
+    - id: right
+      type: OceanApocalypseStudios.RSML.Sources.SourceLocation
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Operator <(left As SourceLocation, right As SourceLocation) As Boolean
+  overload: OceanApocalypseStudios.RSML.Sources.SourceLocation.op_LessThan*
+  nameWithType.vb: SourceLocation.<(SourceLocation, SourceLocation)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.SourceLocation.<(OceanApocalypseStudios.RSML.Sources.SourceLocation, OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  name.vb: <(SourceLocation, SourceLocation)
+- uid: OceanApocalypseStudios.RSML.Sources.SourceLocation.op_GreaterThan(OceanApocalypseStudios.RSML.Sources.SourceLocation,OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.SourceLocation.op_GreaterThan(OceanApocalypseStudios.RSML.Sources.SourceLocation,OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  id: op_GreaterThan(OceanApocalypseStudios.RSML.Sources.SourceLocation,OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  parent: OceanApocalypseStudios.RSML.Sources.SourceLocation
+  langs:
+  - csharp
+  - vb
+  name: operator >(SourceLocation, SourceLocation)
+  nameWithType: SourceLocation.operator >(SourceLocation, SourceLocation)
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceLocation.operator >(OceanApocalypseStudios.RSML.Sources.SourceLocation, OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  type: Operator
+  source:
+    remote:
+      path: src/RSML/Sources/SourceLocation.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: op_GreaterThan
+    path: ../src/RSML/Sources/SourceLocation.cs
+    startLine: 120
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Checks if <code class="paramref">left</code> is strictly greater than <code class="paramref">right</code>.
+  example: []
+  syntax:
+    content: public static bool operator >(SourceLocation left, SourceLocation right)
+    parameters:
+    - id: left
+      type: OceanApocalypseStudios.RSML.Sources.SourceLocation
+    - id: right
+      type: OceanApocalypseStudios.RSML.Sources.SourceLocation
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Operator >(left As SourceLocation, right As SourceLocation) As Boolean
+  overload: OceanApocalypseStudios.RSML.Sources.SourceLocation.op_GreaterThan*
+  nameWithType.vb: SourceLocation.>(SourceLocation, SourceLocation)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.SourceLocation.>(OceanApocalypseStudios.RSML.Sources.SourceLocation, OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  name.vb: '>(SourceLocation, SourceLocation)'
+- uid: OceanApocalypseStudios.RSML.Sources.SourceLocation.op_GreaterThanOrEqual(OceanApocalypseStudios.RSML.Sources.SourceLocation,OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.SourceLocation.op_GreaterThanOrEqual(OceanApocalypseStudios.RSML.Sources.SourceLocation,OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  id: op_GreaterThanOrEqual(OceanApocalypseStudios.RSML.Sources.SourceLocation,OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  parent: OceanApocalypseStudios.RSML.Sources.SourceLocation
+  langs:
+  - csharp
+  - vb
+  name: operator >=(SourceLocation, SourceLocation)
+  nameWithType: SourceLocation.operator >=(SourceLocation, SourceLocation)
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceLocation.operator >=(OceanApocalypseStudios.RSML.Sources.SourceLocation, OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  type: Operator
+  source:
+    remote:
+      path: src/RSML/Sources/SourceLocation.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: op_GreaterThanOrEqual
+    path: ../src/RSML/Sources/SourceLocation.cs
+    startLine: 125
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Checks if <code class="paramref">left</code> is greather than or equal to <code class="paramref">right</code>.
+  example: []
+  syntax:
+    content: public static bool operator >=(SourceLocation left, SourceLocation right)
+    parameters:
+    - id: left
+      type: OceanApocalypseStudios.RSML.Sources.SourceLocation
+    - id: right
+      type: OceanApocalypseStudios.RSML.Sources.SourceLocation
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Operator >=(left As SourceLocation, right As SourceLocation) As Boolean
+  overload: OceanApocalypseStudios.RSML.Sources.SourceLocation.op_GreaterThanOrEqual*
+  nameWithType.vb: SourceLocation.>=(SourceLocation, SourceLocation)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.SourceLocation.>=(OceanApocalypseStudios.RSML.Sources.SourceLocation, OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  name.vb: '>=(SourceLocation, SourceLocation)'
+- uid: OceanApocalypseStudios.RSML.Sources.SourceLocation.op_LessThanOrEqual(OceanApocalypseStudios.RSML.Sources.SourceLocation,OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.SourceLocation.op_LessThanOrEqual(OceanApocalypseStudios.RSML.Sources.SourceLocation,OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  id: op_LessThanOrEqual(OceanApocalypseStudios.RSML.Sources.SourceLocation,OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  parent: OceanApocalypseStudios.RSML.Sources.SourceLocation
+  langs:
+  - csharp
+  - vb
+  name: operator <=(SourceLocation, SourceLocation)
+  nameWithType: SourceLocation.operator <=(SourceLocation, SourceLocation)
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceLocation.operator <=(OceanApocalypseStudios.RSML.Sources.SourceLocation, OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  type: Operator
+  source:
+    remote:
+      path: src/RSML/Sources/SourceLocation.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: op_LessThanOrEqual
+    path: ../src/RSML/Sources/SourceLocation.cs
+    startLine: 130
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Checks if <code class="paramref">left</code> is less than or equal to <code class="paramref">right</code>.
+  example: []
+  syntax:
+    content: public static bool operator <=(SourceLocation left, SourceLocation right)
+    parameters:
+    - id: left
+      type: OceanApocalypseStudios.RSML.Sources.SourceLocation
+    - id: right
+      type: OceanApocalypseStudios.RSML.Sources.SourceLocation
+    return:
+      type: System.Boolean
+    content.vb: Public Shared Operator <=(left As SourceLocation, right As SourceLocation) As Boolean
+  overload: OceanApocalypseStudios.RSML.Sources.SourceLocation.op_LessThanOrEqual*
+  nameWithType.vb: SourceLocation.<=(SourceLocation, SourceLocation)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.SourceLocation.<=(OceanApocalypseStudios.RSML.Sources.SourceLocation, OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  name.vb: <=(SourceLocation, SourceLocation)
+references:
+- uid: OceanApocalypseStudios.RSML.Sources.ISource
+  commentId: T:OceanApocalypseStudios.RSML.Sources.ISource
+  parent: OceanApocalypseStudios.RSML.Sources
+  href: OceanApocalypseStudios.RSML.Sources.ISource.html
+  name: ISource
+  nameWithType: ISource
+  fullName: OceanApocalypseStudios.RSML.Sources.ISource
+- uid: OceanApocalypseStudios.RSML.Sources
+  commentId: N:OceanApocalypseStudios.RSML.Sources
+  href: OceanApocalypseStudios.html
+  name: OceanApocalypseStudios.RSML.Sources
+  nameWithType: OceanApocalypseStudios.RSML.Sources
+  fullName: OceanApocalypseStudios.RSML.Sources
+  spec.csharp:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sources
+    name: Sources
+    href: OceanApocalypseStudios.RSML.Sources.html
+  spec.vb:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sources
+    name: Sources
+    href: OceanApocalypseStudios.RSML.Sources.html
+- uid: System.IEquatable{OceanApocalypseStudios.RSML.Sources.SourceLocation}
+  commentId: T:System.IEquatable{OceanApocalypseStudios.RSML.Sources.SourceLocation}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<SourceLocation>
+  nameWithType: IEquatable<SourceLocation>
+  fullName: System.IEquatable<OceanApocalypseStudios.RSML.Sources.SourceLocation>
+  nameWithType.vb: IEquatable(Of SourceLocation)
+  fullName.vb: System.IEquatable(Of OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  name.vb: IEquatable(Of SourceLocation)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: OceanApocalypseStudios.RSML.Sources.SourceLocation
+    name: SourceLocation
+    href: OceanApocalypseStudios.RSML.Sources.SourceLocation.html
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: OceanApocalypseStudios.RSML.Sources.SourceLocation
+    name: SourceLocation
+    href: OceanApocalypseStudios.RSML.Sources.SourceLocation.html
+  - name: )
+- uid: System.IEquatable{System.Int32}
+  commentId: T:System.IEquatable{System.Int32}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<int>
+  nameWithType: IEquatable<int>
+  fullName: System.IEquatable<int>
+  nameWithType.vb: IEquatable(Of Integer)
+  fullName.vb: System.IEquatable(Of Integer)
+  name.vb: IEquatable(Of Integer)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: System.IFormattable
+  commentId: T:System.IFormattable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iformattable
+  name: IFormattable
+  nameWithType: IFormattable
+  fullName: System.IFormattable
+- uid: System.IComparable{OceanApocalypseStudios.RSML.Sources.SourceLocation}
+  commentId: T:System.IComparable{OceanApocalypseStudios.RSML.Sources.SourceLocation}
+  parent: System
+  definition: System.IComparable`1
+  href: https://learn.microsoft.com/dotnet/api/system.icomparable-1
+  name: IComparable<SourceLocation>
+  nameWithType: IComparable<SourceLocation>
+  fullName: System.IComparable<OceanApocalypseStudios.RSML.Sources.SourceLocation>
+  nameWithType.vb: IComparable(Of SourceLocation)
+  fullName.vb: System.IComparable(Of OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  name.vb: IComparable(Of SourceLocation)
+  spec.csharp:
+  - uid: System.IComparable`1
+    name: IComparable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.icomparable-1
+  - name: <
+  - uid: OceanApocalypseStudios.RSML.Sources.SourceLocation
+    name: SourceLocation
+    href: OceanApocalypseStudios.RSML.Sources.SourceLocation.html
+  - name: '>'
+  spec.vb:
+  - uid: System.IComparable`1
+    name: IComparable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.icomparable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: OceanApocalypseStudios.RSML.Sources.SourceLocation
+    name: SourceLocation
+    href: OceanApocalypseStudios.RSML.Sources.SourceLocation.html
+  - name: )
+- uid: System.IComparable{System.Int32}
+  commentId: T:System.IComparable{System.Int32}
+  parent: System
+  definition: System.IComparable`1
+  href: https://learn.microsoft.com/dotnet/api/system.icomparable-1
+  name: IComparable<int>
+  nameWithType: IComparable<int>
+  fullName: System.IComparable<int>
+  nameWithType.vb: IComparable(Of Integer)
+  fullName.vb: System.IComparable(Of Integer)
+  name.vb: IComparable(Of Integer)
+  spec.csharp:
+  - uid: System.IComparable`1
+    name: IComparable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.icomparable-1
+  - name: <
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: '>'
+  spec.vb:
+  - uid: System.IComparable`1
+    name: IComparable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.icomparable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.IEquatable`1
+  commentId: T:System.IEquatable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<T>
+  nameWithType: IEquatable<T>
+  fullName: System.IEquatable<T>
+  nameWithType.vb: IEquatable(Of T)
+  fullName.vb: System.IEquatable(Of T)
+  name.vb: IEquatable(Of T)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.IComparable`1
+  commentId: T:System.IComparable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.icomparable-1
+  name: IComparable<T>
+  nameWithType: IComparable<T>
+  fullName: System.IComparable<T>
+  nameWithType.vb: IComparable(Of T)
+  fullName.vb: System.IComparable(Of T)
+  name.vb: IComparable(Of T)
+  spec.csharp:
+  - uid: System.IComparable`1
+    name: IComparable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.icomparable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.IComparable`1
+    name: IComparable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.icomparable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: OceanApocalypseStudios.RSML.Sources.SourceLocation.#ctor*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.SourceLocation.#ctor
+  href: OceanApocalypseStudios.RSML.Sources.SourceLocation.-ctor.html#OceanApocalypseStudios_RSML_Sources_SourceLocation__ctor_System_Int32_System_Int32_System_Int32_
+  name: SourceLocation
+  nameWithType: SourceLocation.SourceLocation
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceLocation.SourceLocation
+  nameWithType.vb: SourceLocation.New
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.SourceLocation.New
+  name.vb: New
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: OceanApocalypseStudios.RSML.Sources.SourceLocation.Line*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.SourceLocation.Line
+  href: OceanApocalypseStudios.RSML.Sources.SourceLocation.Line.html#OceanApocalypseStudios_RSML_Sources_SourceLocation_Line
+  name: Line
+  nameWithType: SourceLocation.Line
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceLocation.Line
+- uid: OceanApocalypseStudios.RSML.Sources.SourceLocation.Column*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.SourceLocation.Column
+  href: OceanApocalypseStudios.RSML.Sources.SourceLocation.Column.html#OceanApocalypseStudios_RSML_Sources_SourceLocation_Column
+  name: Column
+  nameWithType: SourceLocation.Column
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceLocation.Column
+- uid: OceanApocalypseStudios.RSML.Sources.SourceLocation.Index*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.SourceLocation.Index
+  href: OceanApocalypseStudios.RSML.Sources.SourceLocation.Index.html#OceanApocalypseStudios_RSML_Sources_SourceLocation_Index
+  name: Index
+  nameWithType: SourceLocation.Index
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceLocation.Index
+- uid: OceanApocalypseStudios.RSML.Sources.SourceLocation.CompareTo*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.SourceLocation.CompareTo
+  href: OceanApocalypseStudios.RSML.Sources.SourceLocation.CompareTo.html#OceanApocalypseStudios_RSML_Sources_SourceLocation_CompareTo_System_Int32_
+  name: CompareTo
+  nameWithType: SourceLocation.CompareTo
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceLocation.CompareTo
+- uid: System.IComparable{System.Int32}.CompareTo(System.Int32)
+  commentId: M:System.IComparable{System.Int32}.CompareTo(System.Int32)
+  parent: System.IComparable{System.Int32}
+  definition: System.IComparable`1.CompareTo(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.icomparable-1.compareto
+  name: CompareTo(int)
+  nameWithType: IComparable<int>.CompareTo(int)
+  fullName: System.IComparable<int>.CompareTo(int)
+  nameWithType.vb: IComparable(Of Integer).CompareTo(Integer)
+  fullName.vb: System.IComparable(Of Integer).CompareTo(Integer)
+  name.vb: CompareTo(Integer)
+  spec.csharp:
+  - uid: System.IComparable{System.Int32}.CompareTo(System.Int32)
+    name: CompareTo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.icomparable-1.compareto
+  - name: (
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: System.IComparable{System.Int32}.CompareTo(System.Int32)
+    name: CompareTo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.icomparable-1.compareto
+  - name: (
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: System.IComparable`1.CompareTo(`0)
+  commentId: M:System.IComparable`1.CompareTo(`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.icomparable-1.compareto
+  name: CompareTo(T)
+  nameWithType: IComparable<T>.CompareTo(T)
+  fullName: System.IComparable<T>.CompareTo(T)
+  nameWithType.vb: IComparable(Of T).CompareTo(T)
+  fullName.vb: System.IComparable(Of T).CompareTo(T)
+  spec.csharp:
+  - uid: System.IComparable`1.CompareTo(`0)
+    name: CompareTo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.icomparable-1.compareto
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.IComparable`1.CompareTo(`0)
+    name: CompareTo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.icomparable-1.compareto
+  - name: (
+  - name: T
+  - name: )
+- uid: System.IComparable{OceanApocalypseStudios.RSML.Sources.SourceLocation}.CompareTo(OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  commentId: M:System.IComparable{OceanApocalypseStudios.RSML.Sources.SourceLocation}.CompareTo(OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  parent: System.IComparable{OceanApocalypseStudios.RSML.Sources.SourceLocation}
+  definition: System.IComparable`1.CompareTo(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.icomparable-1.compareto
+  name: CompareTo(SourceLocation)
+  nameWithType: IComparable<SourceLocation>.CompareTo(SourceLocation)
+  fullName: System.IComparable<OceanApocalypseStudios.RSML.Sources.SourceLocation>.CompareTo(OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  nameWithType.vb: IComparable(Of SourceLocation).CompareTo(SourceLocation)
+  fullName.vb: System.IComparable(Of OceanApocalypseStudios.RSML.Sources.SourceLocation).CompareTo(OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  spec.csharp:
+  - uid: System.IComparable{OceanApocalypseStudios.RSML.Sources.SourceLocation}.CompareTo(OceanApocalypseStudios.RSML.Sources.SourceLocation)
+    name: CompareTo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.icomparable-1.compareto
+  - name: (
+  - uid: OceanApocalypseStudios.RSML.Sources.SourceLocation
+    name: SourceLocation
+    href: OceanApocalypseStudios.RSML.Sources.SourceLocation.html
+  - name: )
+  spec.vb:
+  - uid: System.IComparable{OceanApocalypseStudios.RSML.Sources.SourceLocation}.CompareTo(OceanApocalypseStudios.RSML.Sources.SourceLocation)
+    name: CompareTo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.icomparable-1.compareto
+  - name: (
+  - uid: OceanApocalypseStudios.RSML.Sources.SourceLocation
+    name: SourceLocation
+    href: OceanApocalypseStudios.RSML.Sources.SourceLocation.html
+  - name: )
+- uid: OceanApocalypseStudios.RSML.Sources.SourceLocation
+  commentId: T:OceanApocalypseStudios.RSML.Sources.SourceLocation
+  parent: OceanApocalypseStudios.RSML.Sources
+  href: OceanApocalypseStudios.RSML.Sources.SourceLocation.html
+  name: SourceLocation
+  nameWithType: SourceLocation
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceLocation
+- uid: System.ValueType.Equals(System.Object)
+  commentId: M:System.ValueType.Equals(System.Object)
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  name: Equals(object)
+  nameWithType: ValueType.Equals(object)
+  fullName: System.ValueType.Equals(object)
+  nameWithType.vb: ValueType.Equals(Object)
+  fullName.vb: System.ValueType.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: OceanApocalypseStudios.RSML.Sources.SourceLocation.Equals*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.SourceLocation.Equals
+  href: OceanApocalypseStudios.RSML.Sources.SourceLocation.Equals.html#OceanApocalypseStudios_RSML_Sources_SourceLocation_Equals_System_Object_
+  name: Equals
+  nameWithType: SourceLocation.Equals
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceLocation.Equals
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
+- uid: System.IEquatable{OceanApocalypseStudios.RSML.Sources.SourceLocation}.Equals(OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  commentId: M:System.IEquatable{OceanApocalypseStudios.RSML.Sources.SourceLocation}.Equals(OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  parent: System.IEquatable{OceanApocalypseStudios.RSML.Sources.SourceLocation}
+  definition: System.IEquatable`1.Equals(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(SourceLocation)
+  nameWithType: IEquatable<SourceLocation>.Equals(SourceLocation)
+  fullName: System.IEquatable<OceanApocalypseStudios.RSML.Sources.SourceLocation>.Equals(OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  nameWithType.vb: IEquatable(Of SourceLocation).Equals(SourceLocation)
+  fullName.vb: System.IEquatable(Of OceanApocalypseStudios.RSML.Sources.SourceLocation).Equals(OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  spec.csharp:
+  - uid: System.IEquatable{OceanApocalypseStudios.RSML.Sources.SourceLocation}.Equals(OceanApocalypseStudios.RSML.Sources.SourceLocation)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: OceanApocalypseStudios.RSML.Sources.SourceLocation
+    name: SourceLocation
+    href: OceanApocalypseStudios.RSML.Sources.SourceLocation.html
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable{OceanApocalypseStudios.RSML.Sources.SourceLocation}.Equals(OceanApocalypseStudios.RSML.Sources.SourceLocation)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: OceanApocalypseStudios.RSML.Sources.SourceLocation
+    name: SourceLocation
+    href: OceanApocalypseStudios.RSML.Sources.SourceLocation.html
+  - name: )
+- uid: System.IEquatable`1.Equals(`0)
+  commentId: M:System.IEquatable`1.Equals(`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(T)
+  nameWithType: IEquatable<T>.Equals(T)
+  fullName: System.IEquatable<T>.Equals(T)
+  nameWithType.vb: IEquatable(Of T).Equals(T)
+  fullName.vb: System.IEquatable(Of T).Equals(T)
+  spec.csharp:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+- uid: System.IEquatable{System.Int32}.Equals(System.Int32)
+  commentId: M:System.IEquatable{System.Int32}.Equals(System.Int32)
+  parent: System.IEquatable{System.Int32}
+  definition: System.IEquatable`1.Equals(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(int)
+  nameWithType: IEquatable<int>.Equals(int)
+  fullName: System.IEquatable<int>.Equals(int)
+  nameWithType.vb: IEquatable(Of Integer).Equals(Integer)
+  fullName.vb: System.IEquatable(Of Integer).Equals(Integer)
+  name.vb: Equals(Integer)
+  spec.csharp:
+  - uid: System.IEquatable{System.Int32}.Equals(System.Int32)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable{System.Int32}.Equals(System.Int32)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: System.ValueType.GetHashCode
+  commentId: M:System.ValueType.GetHashCode
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  name: GetHashCode()
+  nameWithType: ValueType.GetHashCode()
+  fullName: System.ValueType.GetHashCode()
+  spec.csharp:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+- uid: OceanApocalypseStudios.RSML.Sources.SourceLocation.GetHashCode*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.SourceLocation.GetHashCode
+  href: OceanApocalypseStudios.RSML.Sources.SourceLocation.GetHashCode.html#OceanApocalypseStudios_RSML_Sources_SourceLocation_GetHashCode
+  name: GetHashCode
+  nameWithType: SourceLocation.GetHashCode
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceLocation.GetHashCode
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+- uid: OceanApocalypseStudios.RSML.Sources.SourceLocation.ToString*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.SourceLocation.ToString
+  href: OceanApocalypseStudios.RSML.Sources.SourceLocation.ToString.html#OceanApocalypseStudios_RSML_Sources_SourceLocation_ToString
+  name: ToString
+  nameWithType: SourceLocation.ToString
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceLocation.ToString
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: OceanApocalypseStudios.RSML.Sources.SourceLocation.ToString
+  commentId: M:OceanApocalypseStudios.RSML.Sources.SourceLocation.ToString
+  href: OceanApocalypseStudios.RSML.Sources.SourceLocation.ToString.html#OceanApocalypseStudios_RSML_Sources_SourceLocation_ToString
+  name: ToString()
+  nameWithType: SourceLocation.ToString()
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceLocation.ToString()
+  spec.csharp:
+  - uid: OceanApocalypseStudios.RSML.Sources.SourceLocation.ToString
+    name: ToString
+    href: OceanApocalypseStudios.RSML.Sources.SourceLocation.ToString.html#OceanApocalypseStudios_RSML_Sources_SourceLocation_ToString
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: OceanApocalypseStudios.RSML.Sources.SourceLocation.ToString
+    name: ToString
+    href: OceanApocalypseStudios.RSML.Sources.SourceLocation.ToString.html#OceanApocalypseStudios_RSML_Sources_SourceLocation_ToString
+  - name: (
+  - name: )
+- uid: System.IFormattable.ToString(System.String,System.IFormatProvider)
+  commentId: M:System.IFormattable.ToString(System.String,System.IFormatProvider)
+  parent: System.IFormattable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iformattable.tostring
+  name: ToString(string, IFormatProvider)
+  nameWithType: IFormattable.ToString(string, IFormatProvider)
+  fullName: System.IFormattable.ToString(string, System.IFormatProvider)
+  nameWithType.vb: IFormattable.ToString(String, IFormatProvider)
+  fullName.vb: System.IFormattable.ToString(String, System.IFormatProvider)
+  name.vb: ToString(String, IFormatProvider)
+  spec.csharp:
+  - uid: System.IFormattable.ToString(System.String,System.IFormatProvider)
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iformattable.tostring
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.IFormatProvider
+    name: IFormatProvider
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iformatprovider
+  - name: )
+  spec.vb:
+  - uid: System.IFormattable.ToString(System.String,System.IFormatProvider)
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iformattable.tostring
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.IFormatProvider
+    name: IFormatProvider
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iformatprovider
+  - name: )
+- uid: System.IFormatProvider
+  commentId: T:System.IFormatProvider
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iformatprovider
+  name: IFormatProvider
+  nameWithType: IFormatProvider
+  fullName: System.IFormatProvider
+- uid: OceanApocalypseStudios.RSML.Sources.SourceLocation.op_Equality*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.SourceLocation.op_Equality
+  href: OceanApocalypseStudios.RSML.Sources.SourceLocation.op_Equality.html#OceanApocalypseStudios_RSML_Sources_SourceLocation_op_Equality_OceanApocalypseStudios_RSML_Sources_SourceLocation_OceanApocalypseStudios_RSML_Sources_SourceLocation_
+  name: operator ==
+  nameWithType: SourceLocation.operator ==
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceLocation.operator ==
+  nameWithType.vb: SourceLocation.=
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.SourceLocation.=
+  name.vb: =
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: OceanApocalypseStudios.RSML.Sources.SourceLocation.op_Equality*
+    name: ==
+    href: OceanApocalypseStudios.RSML.Sources.SourceLocation.op_Equality.html#OceanApocalypseStudios_RSML_Sources_SourceLocation_op_Equality_OceanApocalypseStudios_RSML_Sources_SourceLocation_OceanApocalypseStudios_RSML_Sources_SourceLocation_
+- uid: OceanApocalypseStudios.RSML.Sources.SourceLocation.op_Inequality*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.SourceLocation.op_Inequality
+  href: OceanApocalypseStudios.RSML.Sources.SourceLocation.op_Inequality.html#OceanApocalypseStudios_RSML_Sources_SourceLocation_op_Inequality_OceanApocalypseStudios_RSML_Sources_SourceLocation_OceanApocalypseStudios_RSML_Sources_SourceLocation_
+  name: operator !=
+  nameWithType: SourceLocation.operator !=
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceLocation.operator !=
+  nameWithType.vb: SourceLocation.<>
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.SourceLocation.<>
+  name.vb: <>
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: OceanApocalypseStudios.RSML.Sources.SourceLocation.op_Inequality*
+    name: '!='
+    href: OceanApocalypseStudios.RSML.Sources.SourceLocation.op_Inequality.html#OceanApocalypseStudios_RSML_Sources_SourceLocation_op_Inequality_OceanApocalypseStudios_RSML_Sources_SourceLocation_OceanApocalypseStudios_RSML_Sources_SourceLocation_
+- uid: OceanApocalypseStudios.RSML.Sources.SourceLocation.op_LessThan*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.SourceLocation.op_LessThan
+  href: OceanApocalypseStudios.RSML.Sources.SourceLocation.op_LessThan.html#OceanApocalypseStudios_RSML_Sources_SourceLocation_op_LessThan_OceanApocalypseStudios_RSML_Sources_SourceLocation_OceanApocalypseStudios_RSML_Sources_SourceLocation_
+  name: operator <
+  nameWithType: SourceLocation.operator <
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceLocation.operator <
+  nameWithType.vb: SourceLocation.<
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.SourceLocation.<
+  name.vb: <
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: OceanApocalypseStudios.RSML.Sources.SourceLocation.op_LessThan*
+    name: <
+    href: OceanApocalypseStudios.RSML.Sources.SourceLocation.op_LessThan.html#OceanApocalypseStudios_RSML_Sources_SourceLocation_op_LessThan_OceanApocalypseStudios_RSML_Sources_SourceLocation_OceanApocalypseStudios_RSML_Sources_SourceLocation_
+- uid: OceanApocalypseStudios.RSML.Sources.SourceLocation.op_GreaterThan*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.SourceLocation.op_GreaterThan
+  href: OceanApocalypseStudios.RSML.Sources.SourceLocation.op_GreaterThan.html#OceanApocalypseStudios_RSML_Sources_SourceLocation_op_GreaterThan_OceanApocalypseStudios_RSML_Sources_SourceLocation_OceanApocalypseStudios_RSML_Sources_SourceLocation_
+  name: operator >
+  nameWithType: SourceLocation.operator >
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceLocation.operator >
+  nameWithType.vb: SourceLocation.>
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.SourceLocation.>
+  name.vb: '>'
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: OceanApocalypseStudios.RSML.Sources.SourceLocation.op_GreaterThan*
+    name: '>'
+    href: OceanApocalypseStudios.RSML.Sources.SourceLocation.op_GreaterThan.html#OceanApocalypseStudios_RSML_Sources_SourceLocation_op_GreaterThan_OceanApocalypseStudios_RSML_Sources_SourceLocation_OceanApocalypseStudios_RSML_Sources_SourceLocation_
+- uid: OceanApocalypseStudios.RSML.Sources.SourceLocation.op_GreaterThanOrEqual*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.SourceLocation.op_GreaterThanOrEqual
+  href: OceanApocalypseStudios.RSML.Sources.SourceLocation.op_GreaterThanOrEqual.html#OceanApocalypseStudios_RSML_Sources_SourceLocation_op_GreaterThanOrEqual_OceanApocalypseStudios_RSML_Sources_SourceLocation_OceanApocalypseStudios_RSML_Sources_SourceLocation_
+  name: operator >=
+  nameWithType: SourceLocation.operator >=
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceLocation.operator >=
+  nameWithType.vb: SourceLocation.>=
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.SourceLocation.>=
+  name.vb: '>='
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: OceanApocalypseStudios.RSML.Sources.SourceLocation.op_GreaterThanOrEqual*
+    name: '>='
+    href: OceanApocalypseStudios.RSML.Sources.SourceLocation.op_GreaterThanOrEqual.html#OceanApocalypseStudios_RSML_Sources_SourceLocation_op_GreaterThanOrEqual_OceanApocalypseStudios_RSML_Sources_SourceLocation_OceanApocalypseStudios_RSML_Sources_SourceLocation_
+- uid: OceanApocalypseStudios.RSML.Sources.SourceLocation.op_LessThanOrEqual*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.SourceLocation.op_LessThanOrEqual
+  href: OceanApocalypseStudios.RSML.Sources.SourceLocation.op_LessThanOrEqual.html#OceanApocalypseStudios_RSML_Sources_SourceLocation_op_LessThanOrEqual_OceanApocalypseStudios_RSML_Sources_SourceLocation_OceanApocalypseStudios_RSML_Sources_SourceLocation_
+  name: operator <=
+  nameWithType: SourceLocation.operator <=
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceLocation.operator <=
+  nameWithType.vb: SourceLocation.<=
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.SourceLocation.<=
+  name.vb: <=
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: OceanApocalypseStudios.RSML.Sources.SourceLocation.op_LessThanOrEqual*
+    name: <=
+    href: OceanApocalypseStudios.RSML.Sources.SourceLocation.op_LessThanOrEqual.html#OceanApocalypseStudios_RSML_Sources_SourceLocation_op_LessThanOrEqual_OceanApocalypseStudios_RSML_Sources_SourceLocation_OceanApocalypseStudios_RSML_Sources_SourceLocation_
+memberLayout: SeparatePages

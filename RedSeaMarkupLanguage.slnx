@@ -10,7 +10,6 @@
 	<Folder Name="/Solution Items/">
 		<File Path=".gitignore" />
 		<File Path="cliff.toml" />
-		<File Path="mkdocs.yml" />
 		<File Path="README.md" />
 	</Folder>
     

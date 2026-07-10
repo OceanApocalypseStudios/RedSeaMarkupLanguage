@@ -1,0 +1,652 @@
+{
+  "api/OceanApocalypseStudios.RSML.Cache.ISupportsCache.BuildCache.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Cache.ISupportsCache.BuildCache.html",
+    "title": "Method BuildCache | Red Sea Markup Language",
+    "summary": "Method BuildCache | Edit this page View Source BuildCache() Builds the cache if it doesn't exist yet. Declaration void BuildCache() | Edit this page View Source BuildCache(bool) Builds the cache. If forceRebuild is set to true, the cache will be built even if it already exists. Declaration void BuildCache(bool forceRebuild) Parameters Type Name Description bool forceRebuild Whether to force the cache to be built even if it exists."
+  },
+  "api/OceanApocalypseStudios.RSML.Cache.ISupportsCache.CacheExists.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Cache.ISupportsCache.CacheExists.html",
+    "title": "Property CacheExists | Red Sea Markup Language",
+    "summary": "Property CacheExists | Edit this page View Source CacheExists Whether there's cached data. Declaration bool CacheExists { get; } Property Value Type Description bool"
+  },
+  "api/OceanApocalypseStudios.RSML.Cache.ISupportsCache.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Cache.ISupportsCache.html",
+    "title": "Interface ISupportsCache | Red Sea Markup Language",
+    "summary": "Interface ISupportsCache Represents a service or a type that supports cached data. Namespace: OceanApocalypseStudios.RSML.Cache Assembly: RSML.dll Syntax public interface ISupportsCache Properties Name Description CacheExists Whether there's cached data. Methods Name Description BuildCache() Builds the cache if it doesn't exist yet. BuildCache(bool) Builds the cache. If forceRebuild is set to true, the cache will be built even if it already exists."
+  },
+  "api/OceanApocalypseStudios.RSML.Cache.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Cache.html",
+    "title": "Namespace OceanApocalypseStudios.RSML.Cache | Red Sea Markup Language",
+    "summary": "Namespace OceanApocalypseStudios.RSML.Cache Interfaces ISupportsCache Represents a service or a type that supports cached data."
+  },
+  "api/OceanApocalypseStudios.RSML.Exceptions.BufferException.-ctor.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Exceptions.BufferException.-ctor.html",
+    "title": "Constructor BufferException | Red Sea Markup Language",
+    "summary": "Constructor BufferException | Edit this page View Source BufferException() Initializes a new BufferException with no message. Declaration public BufferException() | Edit this page View Source BufferException(string) Initializes a new BufferException with a message. Declaration public BufferException(string message) Parameters Type Name Description string message | Edit this page View Source BufferException(string?, Exception?) Initializes a new BufferException with a message and a reference to the exception that caused this error (innerException). Declaration public BufferException(string? message, Exception? innerException) Parameters Type Name Description string message Exception innerException"
+  },
+  "api/OceanApocalypseStudios.RSML.Exceptions.BufferException.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Exceptions.BufferException.html",
+    "title": "Class BufferException | Red Sea Markup Language",
+    "summary": "Class BufferException An exception that is thrown when an error occurs inside a buffer operation. Inheritance object Exception SystemException IOException BufferException Implements ISerializable Inherited Members Exception.GetBaseException() Exception.GetType() Exception.ToString() Exception.Data Exception.HelpLink Exception.HResult Exception.InnerException Exception.Message Exception.Source Exception.StackTrace Exception.TargetSite Exception.SerializeObjectState object.Equals(object) object.Equals(object, object) object.GetHashCode() object.MemberwiseClone() object.ReferenceEquals(object, object) Namespace: OceanApocalypseStudios.RSML.Exceptions Assembly: RSML.dll Syntax public class BufferException : IOException, ISerializable Constructors Name Description BufferException() Initializes a new BufferException with no message. BufferException(string) Initializes a new BufferException with a message. BufferException(string?, Exception?) Initializes a new BufferException with a message and a reference to the exception that caused this error (innerException)."
+  },
+  "api/OceanApocalypseStudios.RSML.Exceptions.ErrorList.-ctor.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Exceptions.ErrorList.-ctor.html",
+    "title": "Constructor ErrorList | Red Sea Markup Language",
+    "summary": "Constructor ErrorList | Edit this page View Source ErrorList() A list of RSML toolchain errors. Declaration public ErrorList()"
+  },
+  "api/OceanApocalypseStudios.RSML.Exceptions.ErrorList.Add.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Exceptions.ErrorList.Add.html",
+    "title": "Method Add | Red Sea Markup Language",
+    "summary": "Method Add | Edit this page View Source Add(IError) Adds an error to the list of errors. Declaration public void Add(IError error) Parameters Type Name Description IError error"
+  },
+  "api/OceanApocalypseStudios.RSML.Exceptions.ErrorList.AddSourceError.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Exceptions.ErrorList.AddSourceError.html",
+    "title": "Method AddSourceError | Red Sea Markup Language",
+    "summary": "Method AddSourceError | Edit this page View Source AddSourceError(SourceSpan, string, Severity) Adds a SourceError to the list of errors. Declaration public void AddSourceError(SourceSpan span, string message, Severity severity) Parameters Type Name Description SourceSpan span The span the error relates to. string message A brief description of why the error occured. Severity severity The error severity. | Edit this page View Source AddSourceError(SourceSpan, byte*, int, Encoding?, Severity) Adds a SourceError to the list of errors. Declaration [CLSCompliant(false)] public void AddSourceError(SourceSpan span, byte* message, int byteCount, Encoding? messageEncoding, Severity severity) Parameters Type Name Description SourceSpan span The span the error relates to. byte* message A pointer to an array of bytes that describe the error. int byteCount The amount of bytes in message. Encoding messageEncoding The error message encoding (this determines which encoding to use to decode message). Severity severity The error severity."
+  },
+  "api/OceanApocalypseStudios.RSML.Exceptions.ErrorList.Clear.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Exceptions.ErrorList.Clear.html",
+    "title": "Method Clear | Red Sea Markup Language",
+    "summary": "Method Clear | Edit this page View Source Clear() Clears the ErrorList, leaving it fully empty. Declaration public void Clear()"
+  },
+  "api/OceanApocalypseStudios.RSML.Exceptions.ErrorList.GetEnumerator.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Exceptions.ErrorList.GetEnumerator.html",
+    "title": "Method GetEnumerator | Red Sea Markup Language",
+    "summary": "Method GetEnumerator | Edit this page View Source GetEnumerator() Returns an enumerator that iterates through the collection. Declaration public IEnumerator<IError> GetEnumerator() Returns Type Description IEnumerator<IError> An enumerator that can be used to iterate through the collection. Implements IEnumerable<T>.GetEnumerator()"
+  },
+  "api/OceanApocalypseStudios.RSML.Exceptions.ErrorList.System-Collections-IEnumerable-GetEnumerator.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Exceptions.ErrorList.System-Collections-IEnumerable-GetEnumerator.html",
+    "title": "Method IEnumerable.GetEnumerator | Red Sea Markup Language",
+    "summary": "Method IEnumerable.GetEnumerator | Edit this page View Source IEnumerable.GetEnumerator() Returns an enumerator that iterates through a collection. Declaration IEnumerator IEnumerable.GetEnumerator() Returns Type Description IEnumerator An IEnumerator object that can be used to iterate through the collection. Implements IEnumerable.GetEnumerator()"
+  },
+  "api/OceanApocalypseStudios.RSML.Exceptions.ErrorList.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Exceptions.ErrorList.html",
+    "title": "Class ErrorList | Red Sea Markup Language",
+    "summary": "Class ErrorList A list of RSML toolchain errors. Inheritance object ErrorList Implements IEnumerable<IError> IEnumerable Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Namespace: OceanApocalypseStudios.RSML.Exceptions Assembly: RSML.dll Syntax public class ErrorList : IEnumerable<IError>, IEnumerable Constructors Name Description ErrorList() A list of RSML toolchain errors. Methods Name Description Add(IError) Adds an error to the list of errors. AddSourceError(SourceSpan, byte*, int, Encoding?, Severity) Adds a SourceError to the list of errors. AddSourceError(SourceSpan, string, Severity) Adds a SourceError to the list of errors. Clear() Clears the ErrorList, leaving it fully empty. GetEnumerator() Returns an enumerator that iterates through the collection. Explicit Interface Implementations Name Description IEnumerable.GetEnumerator() Returns an enumerator that iterates through a collection."
+  },
+  "api/OceanApocalypseStudios.RSML.Exceptions.IError.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Exceptions.IError.html",
+    "title": "Interface IError | Red Sea Markup Language",
+    "summary": "Interface IError Represents an error in the RSML toolchain. Inherited Members IEquatable<IError>.Equals(IError) IFormattable.ToString(string, IFormatProvider) Namespace: OceanApocalypseStudios.RSML.Exceptions Assembly: RSML.dll Syntax public interface IError : IEquatable<IError>, IFormattable"
+  },
+  "api/OceanApocalypseStudios.RSML.Exceptions.Severity.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Exceptions.Severity.html",
+    "title": "Enum Severity | Red Sea Markup Language",
+    "summary": "Enum Severity The severity of an error. Namespace: OceanApocalypseStudios.RSML.Exceptions Assembly: RSML.dll Syntax public enum Severity Fields Name Description Critical Fatal error that should abort the executing toolchain component. Error Non-critical errors, such as style errors. Message Messages and hints. None No severity information. Warning Non-critical warnings."
+  },
+  "api/OceanApocalypseStudios.RSML.Exceptions.SourceError.-ctor.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Exceptions.SourceError.-ctor.html",
+    "title": "Constructor SourceError | Red Sea Markup Language",
+    "summary": "Constructor SourceError | Edit this page View Source SourceError(SourceSpan, string, Severity) An error that has happened in the RSML toolchain and comes from a source. Declaration public SourceError(SourceSpan span, string message, Severity severity) Parameters Type Name Description SourceSpan span The span the error relates to. string message A brief error message detailing why it has happened. Severity severity The error's severity."
+  },
+  "api/OceanApocalypseStudios.RSML.Exceptions.SourceError.Equals.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Exceptions.SourceError.Equals.html",
+    "title": "Method Equals | Red Sea Markup Language",
+    "summary": "Method Equals | Edit this page View Source Equals(object?) Indicates whether this instance and a specified object are equal. Declaration public override bool Equals(object? obj) Parameters Type Name Description object obj The object to compare with the current instance. Returns Type Description bool true if obj and this instance are the same type and represent the same value; otherwise, false. Overrides ValueType.Equals(object) | Edit this page View Source Equals(SourceError) Indicates whether the current object is equal to another object of the same type. Declaration public bool Equals(SourceError other) Parameters Type Name Description SourceError other An object to compare with this object. Returns Type Description bool true if the current object is equal to the other parameter; otherwise, false. Implements IEquatable<T>.Equals(T) | Edit this page View Source Equals(IError?) Indicates whether the current object is equal to another object of the same type. Declaration public bool Equals(IError? other) Parameters Type Name Description IError other An object to compare with this object. Returns Type Description bool true if the current object is equal to the other parameter; otherwise, false. Implements IEquatable<T>.Equals(T)"
+  },
+  "api/OceanApocalypseStudios.RSML.Exceptions.SourceError.GetHashCode.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Exceptions.SourceError.GetHashCode.html",
+    "title": "Method GetHashCode | Red Sea Markup Language",
+    "summary": "Method GetHashCode | Edit this page View Source GetHashCode() Returns the hash code for this instance. Declaration public override int GetHashCode() Returns Type Description int A 32-bit signed integer that is the hash code for this instance. Overrides ValueType.GetHashCode()"
+  },
+  "api/OceanApocalypseStudios.RSML.Exceptions.SourceError.Message.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Exceptions.SourceError.Message.html",
+    "title": "Property Message | Red Sea Markup Language",
+    "summary": "Property Message | Edit this page View Source Message A brief error message detailing why it has happened. Declaration public string Message { get; } Property Value Type Description string"
+  },
+  "api/OceanApocalypseStudios.RSML.Exceptions.SourceError.Severity.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Exceptions.SourceError.Severity.html",
+    "title": "Property Severity | Red Sea Markup Language",
+    "summary": "Property Severity | Edit this page View Source Severity The error's severity. Declaration public Severity Severity { get; } Property Value Type Description Severity"
+  },
+  "api/OceanApocalypseStudios.RSML.Exceptions.SourceError.Span.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Exceptions.SourceError.Span.html",
+    "title": "Property Span | Red Sea Markup Language",
+    "summary": "Property Span | Edit this page View Source Span The span the error relates to. Declaration public SourceSpan Span { get; } Property Value Type Description SourceSpan"
+  },
+  "api/OceanApocalypseStudios.RSML.Exceptions.SourceError.ToString.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Exceptions.SourceError.ToString.html",
+    "title": "Method ToString | Red Sea Markup Language",
+    "summary": "Method ToString | Edit this page View Source ToString() Returns a generic string representation of the current instance. Declaration public override string ToString() Returns Type Description string The string representation. Overrides ValueType.ToString() | Edit this page View Source ToString(string?, IFormatProvider?) Given a format, tries to return a string that uses said format as a basis for the representation. If it fails, it defaults to ToString(). Declaration public string ToString(string? format, IFormatProvider? formatProvider) Parameters Type Name Description string format The format. Available formats are: CTOR (constructor-like string), LOG (output-ready format) and JSON (struct as JSON). IFormatProvider formatProvider Unused. Don't bother assigning it anything. Returns Type Description string The string representation. Implements IFormattable.ToString(string, IFormatProvider)"
+  },
+  "api/OceanApocalypseStudios.RSML.Exceptions.SourceError.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Exceptions.SourceError.html",
+    "title": "Struct SourceError | Red Sea Markup Language",
+    "summary": "Struct SourceError An error that has happened in the RSML toolchain and comes from a source. Implements IError IEquatable<IError> IFormattable IEquatable<SourceError> Inherited Members object.Equals(object, object) object.GetType() object.ReferenceEquals(object, object) Namespace: OceanApocalypseStudios.RSML.Exceptions Assembly: RSML.dll Syntax public readonly struct SourceError : IError, IEquatable<IError>, IFormattable, IEquatable<SourceError> Constructors Name Description SourceError(SourceSpan, string, Severity) An error that has happened in the RSML toolchain and comes from a source. Properties Name Description Message A brief error message detailing why it has happened. Severity The error's severity. Span The span the error relates to. Methods Name Description Equals(IError?) Indicates whether the current object is equal to another object of the same type. Equals(SourceError) Indicates whether the current object is equal to another object of the same type. Equals(object?) Indicates whether this instance and a specified object are equal. GetHashCode() Returns the hash code for this instance. ToString() Returns a generic string representation of the current instance. ToString(string?, IFormatProvider?) Given a format, tries to return a string that uses said format as a basis for the representation. If it fails, it defaults to ToString(). Operators Name Description operator ==(SourceError, SourceError) Checks if two SourceErrors are equal to each other. operator !=(SourceError, SourceError) Checks if two SourceErrors are different from each other."
+  },
+  "api/OceanApocalypseStudios.RSML.Exceptions.SourceError.op_Equality.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Exceptions.SourceError.op_Equality.html",
+    "title": "Operator operator == | Red Sea Markup Language",
+    "summary": "Operator operator == | Edit this page View Source operator ==(SourceError, SourceError) Checks if two SourceErrors are equal to each other. Declaration public static bool operator ==(SourceError left, SourceError right) Parameters Type Name Description SourceError left SourceError right Returns Type Description bool True if equals."
+  },
+  "api/OceanApocalypseStudios.RSML.Exceptions.SourceError.op_Inequality.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Exceptions.SourceError.op_Inequality.html",
+    "title": "Operator operator != | Red Sea Markup Language",
+    "summary": "Operator operator != | Edit this page View Source operator !=(SourceError, SourceError) Checks if two SourceErrors are different from each other. Declaration public static bool operator !=(SourceError left, SourceError right) Parameters Type Name Description SourceError left SourceError right Returns Type Description bool True if different."
+  },
+  "api/OceanApocalypseStudios.RSML.Exceptions.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Exceptions.html",
+    "title": "Namespace OceanApocalypseStudios.RSML.Exceptions | Red Sea Markup Language",
+    "summary": "Namespace OceanApocalypseStudios.RSML.Exceptions Classes BufferException An exception that is thrown when an error occurs inside a buffer operation. ErrorList A list of RSML toolchain errors. Structs SourceError An error that has happened in the RSML toolchain and comes from a source. Interfaces IError Represents an error in the RSML toolchain. Enums Severity The severity of an error."
+  },
+  "api/OceanApocalypseStudios.RSML.Language.Lexer.ILexer.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Language.Lexer.ILexer.html",
+    "title": "Interface ILexer | Red Sea Markup Language",
+    "summary": "Interface ILexer Namespace: OceanApocalypseStudios.RSML.Language.Lexer Assembly: RSML.dll Syntax public interface ILexer"
+  },
+  "api/OceanApocalypseStudios.RSML.Language.Lexer.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Language.Lexer.html",
+    "title": "Namespace OceanApocalypseStudios.RSML.Language.Lexer | Red Sea Markup Language",
+    "summary": "Namespace OceanApocalypseStudios.RSML.Language.Lexer Interfaces ILexer"
+  },
+  "api/OceanApocalypseStudios.RSML.Language.Syntax.SyntaxToken.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Language.Syntax.SyntaxToken.html",
+    "title": "Struct SyntaxToken | Red Sea Markup Language",
+    "summary": "Struct SyntaxToken Inherited Members ValueType.Equals(object) ValueType.GetHashCode() ValueType.ToString() object.Equals(object, object) object.GetType() object.ReferenceEquals(object, object) Namespace: OceanApocalypseStudios.RSML.Language.Syntax Assembly: RSML.dll Syntax public ref struct SyntaxToken"
+  },
+  "api/OceanApocalypseStudios.RSML.Language.Syntax.TokenKind.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Language.Syntax.TokenKind.html",
+    "title": "Enum TokenKind | Red Sea Markup Language",
+    "summary": "Enum TokenKind Namespace: OceanApocalypseStudios.RSML.Language.Syntax Assembly: RSML.dll Syntax public enum TokenKind"
+  },
+  "api/OceanApocalypseStudios.RSML.Language.Syntax.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Language.Syntax.html",
+    "title": "Namespace OceanApocalypseStudios.RSML.Language.Syntax | Red Sea Markup Language",
+    "summary": "Namespace OceanApocalypseStudios.RSML.Language.Syntax Structs SyntaxToken Enums TokenKind"
+  },
+  "api/OceanApocalypseStudios.RSML.Native.Class1.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Native.Class1.html",
+    "title": "Class Class1 | Red Sea Markup Language",
+    "summary": "Class Class1 Inheritance object Class1 Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Namespace: OceanApocalypseStudios.RSML.Native Assembly: RSML.Native.dll Syntax public class Class1"
+  },
+  "api/OceanApocalypseStudios.RSML.Native.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Native.html",
+    "title": "Namespace OceanApocalypseStudios.RSML.Native | Red Sea Markup Language",
+    "summary": "Namespace OceanApocalypseStudios.RSML.Native Classes Class1"
+  },
+  "api/OceanApocalypseStudios.RSML.Sdk.Class1.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sdk.Class1.html",
+    "title": "Class Class1 | Red Sea Markup Language",
+    "summary": "Class Class1 Inheritance object Class1 Inherited Members object.Equals(object) object.Equals(object, object) object.GetHashCode() object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) object.ToString() Namespace: OceanApocalypseStudios.RSML.Sdk Assembly: RSML.Sdk.dll Syntax public class Class1"
+  },
+  "api/OceanApocalypseStudios.RSML.Sdk.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sdk.html",
+    "title": "Namespace OceanApocalypseStudios.RSML.Sdk | Red Sea Markup Language",
+    "summary": "Namespace OceanApocalypseStudios.RSML.Sdk Classes Class1"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.CountUntilLineSeparator.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.CountUntilLineSeparator.html",
+    "title": "Method CountUntilLineSeparator | Red Sea Markup Language",
+    "summary": "Method CountUntilLineSeparator | Edit this page View Source CountUntilLineSeparator(int, out bool) Counts the amount of items until the next line separator in the buffer, relative to a given index. Only line separators count - regular whitespace do not. CRLF counts as a single line separator, to avoid double counting. Declaration int CountUntilLineSeparator(int index, out bool isCrLf) Parameters Type Name Description int index The index at which to start counting. bool isCrLf Whether the line separator at which the method stopped is the CR in a CRLF sequence. If true, the next item in the buffer is LF. Returns Type Description int The index of the next line separator, relative to an index."
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.CountUntilNotWhitespace.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.CountUntilNotWhitespace.html",
+    "title": "Method CountUntilNotWhitespace | Red Sea Markup Language",
+    "summary": "Method CountUntilNotWhitespace | Edit this page View Source CountUntilNotWhitespace(int) Counts the amount of items until the next non-whitespace item in the buffer, relative to a given index. Line separators are included in the whitespace category. Declaration int CountUntilNotWhitespace(int index) Parameters Type Name Description int index The index at which to start counting. Returns Type Description int The index of the next non-whitespace item, relative to a index."
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.CountUntilWhitespace.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.CountUntilWhitespace.html",
+    "title": "Method CountUntilWhitespace | Red Sea Markup Language",
+    "summary": "Method CountUntilWhitespace | Edit this page View Source CountUntilWhitespace(int) Counts the amount of items until the next whitespace item in the buffer, relative to a given index. Line separators are included in the whitespace category. Declaration int CountUntilWhitespace(int index) Parameters Type Name Description int index The index at which to start counting. Returns Type Description int The index of the next whitespace item, relative to a index."
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.CountWhile.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.CountWhile.html",
+    "title": "Method CountWhile | Red Sea Markup Language",
+    "summary": "Method CountWhile | Edit this page View Source CountWhile(Func<int, TItem, bool>, int) Counts the amount of items, starting from a given index, while a predicate returns true. Declaration int CountWhile(Func<int, TItem, bool> predicate, int index) Parameters Type Name Description Func<int, TItem, bool> predicate A function that takes the current index (relative to index), which is incremented every item, and the item associated with it. Execution stops when the predicate returns false or the index is out of bounds. int index The index at which to start counting; all indexes will also be given to the predicate as an offset that when added to the index of the position equal the actual index. Returns Type Description int The amount of items counted."
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.GetLengthOfLine.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.GetLengthOfLine.html",
+    "title": "Method GetLengthOfLine | Red Sea Markup Language",
+    "summary": "Method GetLengthOfLine | Edit this page View Source GetLengthOfLine(int) Returns the length of a line given its 0-based line number. Line separators do not count towards the length. Declaration int GetLengthOfLine(int lineNumber) Parameters Type Name Description int lineNumber The 0-based line number. Returns Type Description int The length of the line."
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.GetLengthOfLineFromIndex.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.GetLengthOfLineFromIndex.html",
+    "title": "Method GetLengthOfLineFromIndex | Red Sea Markup Language",
+    "summary": "Method GetLengthOfLineFromIndex | Edit this page View Source GetLengthOfLineFromIndex(int) Returns the length of a line given a 0-based index of one of its items. Line separators do not count towards the length. Declaration int GetLengthOfLineFromIndex(int index) Parameters Type Name Description int index The 0-based index whose line is considered. Returns Type Description int The length of the line."
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.GetLine.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.GetLine.html",
+    "title": "Method GetLine | Red Sea Markup Language",
+    "summary": "Method GetLine | Edit this page View Source GetLine(int) Given a 0-based line number, returns the matching line as an array of buffer items. Declaration TItem[] GetLine(int lineNumber) Parameters Type Name Description int lineNumber The 0-based line number. Returns Type Description TItem[] The line as an array of items."
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.GetLineFromIndex.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.GetLineFromIndex.html",
+    "title": "Method GetLineFromIndex | Red Sea Markup Language",
+    "summary": "Method GetLineFromIndex | Edit this page View Source GetLineFromIndex(int) Tries to read the line that contains the item at index. No end of line characters are added. Declaration TItem[] GetLineFromIndex(int index) Parameters Type Name Description int index The index at which to determine what the current line is. Returns Type Description TItem[] The line, as an array of items."
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.GetLineNumberFromIndex.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.GetLineNumberFromIndex.html",
+    "title": "Method GetLineNumberFromIndex | Red Sea Markup Language",
+    "summary": "Method GetLineNumberFromIndex | Edit this page View Source GetLineNumberFromIndex(int) Determines the 0-based line number of the line that contains the item located at index. Declaration int GetLineNumberFromIndex(int index) Parameters Type Name Description int index The index whose parent line's number is to be returned. Returns Type Description int The 0-based number of the line that contains item located at index."
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.GetSourceLocation.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.GetSourceLocation.html",
+    "title": "Method GetSourceLocation | Red Sea Markup Language",
+    "summary": "Method GetSourceLocation | Edit this page View Source GetSourceLocation(int) Converts an index into a location. Declaration SourceLocation GetSourceLocation(int index) Parameters Type Name Description int index The index. Returns Type Description SourceLocation The location."
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.GetWord.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.GetWord.html",
+    "title": "Method GetWord | Red Sea Markup Language",
+    "summary": "Method GetWord | Edit this page View Source GetWord(int, Func<int, TItem, bool>, out bool) Tries to read the word at index index, which can be a span of items verified by itemKindPredicate (if the starting index is verified by itemKindPredicate) or a span of content not verified by itemKindPredicate (if the starting index does not point to anything verified by itemKindPredicate). Declaration TItem[] GetWord(int index, Func<int, TItem, bool> itemKindPredicate, out bool isItemKind) Parameters Type Name Description int index The index at which the word starts. Func<int, TItem, bool> itemKindPredicate A predicate that verifies if the first item in the selected range serves as the delimiter (the predicate returns true if so). For example, if the predicate verifies ,, then the current word if the buffer is My awesome buffer, isn't it cool? starting from index, is My awesome buffer. If the predicate verifies ;, then the current word if the buffer is ;;so very awesome starting from index, is ;;. bool isItemKind True if the array is fully comprised of the item kind verified by itemKindPredicate. If False, no items verified by itemKindPredicate is present. Returns Type Description TItem[] The line, as an array of items. | Edit this page View Source GetWord(int, out bool) Tries to read the word at index index, which can be a span of whitespace (if the starting index points to whitespace) or a span of non-whitespace content (if the starting index does not point to whitespace). Declaration TItem[] GetWord(int index, out bool isWhitespace) Parameters Type Name Description int index The index at which the word starts. bool isWhitespace True if the array is fully comprised of whitespace. If False, no whitespace is present. Returns Type Description TItem[] The line, as an array of items. | Edit this page View Source GetWord(int, TItem, out bool) Tries to read the word at index index, which can be a span of itemKind (if the starting index points to itemKind) or a span of non-itemKind content (if the starting index does not point to itemKind). Declaration TItem[] GetWord(int index, TItem itemKind, out bool isItemKind) Parameters Type Name Description int index The index at which the word starts. TItem itemKind The item that will serve as the delimiter. For example, if item kind is ,, then the current word if the buffer is My awesome buffer, isn't it cool? starting from index, is My awesome buffer. If item kind is ;, then the current word if the buffer is ;;so very awesome starting from index, is ;;. bool isItemKind True if the array is fully comprised of itemKind. If False, no itemKind is present. Returns Type Description TItem[] The line, as an array of items."
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.Item.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.Item.html",
+    "title": "Property this | Red Sea Markup Language",
+    "summary": "Property this | Edit this page View Source this[int] Gets a single item out of the buffer. Declaration TItem this[int index] { get; } Parameters Type Name Description int index The index of the item to retrieve. Property Value Type Description TItem The item. | Edit this page View Source this[SourceLocation] Gets a single item out of the buffer. Declaration TItem this[SourceLocation location] { get; } Parameters Type Name Description SourceLocation location The location of the item to retrieve. Property Value Type Description TItem The item. | Edit this page View Source this[SourceSpan] Gets a range of items out of the buffer. Declaration TItem[] this[SourceSpan span] { get; } Parameters Type Name Description SourceSpan span The span of items to get. Property Value Type Description TItem[] The items."
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.LineCount.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.LineCount.html",
+    "title": "Property LineCount | Red Sea Markup Language",
+    "summary": "Property LineCount | Edit this page View Source LineCount The total amount of lines in the buffer. Declaration int LineCount { get; } Property Value Type Description int Remarks Keep in mind lines might be empty."
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.Slice.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.Slice.html",
+    "title": "Method Slice | Red Sea Markup Language",
+    "summary": "Method Slice | Edit this page View Source Slice(int, int) Slices a region of the buffer. Declaration TItem[] Slice(int start, int length) Parameters Type Name Description int start The index of the first item in the slice. int length The amount of items to slice starting at start. Returns Type Description TItem[] A slice, as an array of items. | Edit this page View Source Slice(int, Span<TItem>) Slices a region of the buffer into a performant span. Declaration void Slice(int start, Span<TItem> slice) Parameters Type Name Description int start The index of the first item in the slice. Span<TItem> slice The span serving as the destination for the slice. | Edit this page View Source Slice(SourceSpan, Span<TItem>) Slices a region of the buffer into a performant span. Declaration void Slice(SourceSpan sourceSpan, Span<TItem> slice) Parameters Type Name Description SourceSpan sourceSpan The span indicating what the slice is. Span<TItem> slice The span serving as the destination for the slice."
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.TryGetChar.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.TryGetChar.html",
+    "title": "Method TryGetChar | Red Sea Markup Language",
+    "summary": "Method TryGetChar | Edit this page View Source TryGetChar(int, out TItem) Tries to read the next item in the buffer, relative to an index. Declaration bool TryGetChar(int index, out TItem item) Parameters Type Name Description int index The index of the character. TItem item The item. Returns Type Description bool False if the buffer is out of bounds or an exception occured."
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.TryGetLine.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.TryGetLine.html",
+    "title": "Method TryGetLine | Red Sea Markup Language",
+    "summary": "Method TryGetLine | Edit this page View Source TryGetLine(int, Span<TItem>, out int) Given a 0-based line number, assigns the exact line to a result buffer (destination). Declaration bool TryGetLine(int lineNumber, Span<TItem> destination, out int itemCount) Parameters Type Name Description int lineNumber The 0-based line number. Span<TItem> destination The destination buffer for the line. int itemCount The amount of items returned. Returns Type Description bool True if successful."
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.TryGetLineFromIndex.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.TryGetLineFromIndex.html",
+    "title": "Method TryGetLineFromIndex | Red Sea Markup Language",
+    "summary": "Method TryGetLineFromIndex | Edit this page View Source TryGetLineFromIndex(int, Span<TItem>, out int) Tries to read the line that contains the item at index. No end of line characters are added. Declaration bool TryGetLineFromIndex(int index, Span<TItem> destination, out int itemCount) Parameters Type Name Description int index The index at which to determine what the current line is. Span<TItem> destination The destination span that will contain the line. int itemCount The amount of items that were written to destination. Returns Type Description bool False if the buffer is out of bounds, there are no more lines to read or an exception occured."
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.TryGetWord.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.TryGetWord.html",
+    "title": "Method TryGetWord | Red Sea Markup Language",
+    "summary": "Method TryGetWord | Edit this page View Source TryGetWord(int, Func<int, TItem, bool>, Span<TItem>, out bool, out int) Tries to read the word at index index, which can be a span of items verified by itemKindPredicate (if the starting index is verified by itemKindPredicate) or a span of content not verified by itemKindPredicate (if the starting index does not point to anything verified by itemKindPredicate). Declaration bool TryGetWord(int index, Func<int, TItem, bool> itemKindPredicate, Span<TItem> destination, out bool isItemKind, out int itemCount) Parameters Type Name Description int index The index at which the word starts. Func<int, TItem, bool> itemKindPredicate A predicate that verifies if the first item in the selected range serves as the delimiter (the predicate returns true if so). For example, if the predicate verifies ,, then the current word if the buffer is My awesome buffer, isn't it cool? starting from index, is My awesome buffer. If the predicate verifies ;, then the current word if the buffer is ;;so very awesome starting from index, is ;;. Span<TItem> destination The span which will be the destination for the read content. bool isItemKind True if the span is fully comprised of the item kind verified by itemKindPredicate. If False, no items verified by itemKindPredicate is present. int itemCount The amount of characters that were written to destination. Returns Type Description bool False if the buffer is out of bounds, the reading was only partial or an exception occured. Remarks This method may lead to partial reading (for example if destination is not large enough). When this happens, the return value will be False but itemCount will be set to something greater than 0. | Edit this page View Source TryGetWord(int, Span<TItem>, out bool, out int) Tries to read the word at index index, which can be a span of whitespace (if the starting index points to whitespace) or a span of non-whitespace content (if the starting index does not point to whitespace). Declaration bool TryGetWord(int index, Span<TItem> destination, out bool isWhitespace, out int itemCount) Parameters Type Name Description int index The index at which the word starts. Span<TItem> destination The span which will be the destination for the read content. bool isWhitespace True if the span is fully comprised of whitespace. If False, no whitespace is present. int itemCount The amount of characters that were written to destination. Returns Type Description bool False if the buffer is out of bounds or an exception occured. Remarks This method may lead to partial reading (for example if destination is not large enough). When this happens, the return value will be False but itemCount will be set to something greater than 0. | Edit this page View Source TryGetWord(int, TItem, Span<TItem>, out bool, out int) Tries to read the word at index index, which can be a span of itemKind (if the starting index points to itemKind) or a span of non-itemKind content (if the starting index does not point to itemKind). Declaration bool TryGetWord(int index, TItem itemKind, Span<TItem> destination, out bool isItemKind, out int itemCount) Parameters Type Name Description int index The index at which the word starts. TItem itemKind The item that will serve as the delimiter. For example, if item kind is ,, then the current word if the buffer is My awesome buffer, isn't it cool? starting from index, is My awesome buffer. If item kind is ;, then the current word if the buffer is ;;so very awesome starting from index, is ;;. Span<TItem> destination The span which will be the destination for the read content. bool isItemKind True if the span is fully comprised of itemKind. If False, no itemKind is present. int itemCount The amount of items that were written to destination. Returns Type Description bool False if the buffer is out of bounds, the reading was only partial or an exception occured. Remarks This method may lead to partial reading (for example if destination is not large enough). When this happens, the return value will be False but itemCount will be set to something greater than 0."
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.html",
+    "title": "Interface IBuffer<TItem> | Red Sea Markup Language",
+    "summary": "Interface IBuffer<TItem> Represents a buffer. Inherited Members ISource.CursorIndex ISource.IsEmpty ISource.IsReadOnly ISource.Length IDisposable.Dispose() IEquatable<IBuffer<TItem>>.Equals(IBuffer<TItem>) Namespace: OceanApocalypseStudios.RSML.Sources Assembly: RSML.dll Syntax public interface IBuffer<TItem> : ISource, IDisposable, IEquatable<IBuffer<TItem>?> Type Parameters Name Description TItem The datatype of the values returned by the buffer methods Properties Name Description this[SourceLocation] Gets a single item out of the buffer. this[SourceSpan] Gets a range of items out of the buffer. this[int] Gets a single item out of the buffer. LineCount The total amount of lines in the buffer. Methods Name Description CountUntilLineSeparator(int, out bool) Counts the amount of items until the next line separator in the buffer, relative to a given index. Only line separators count - regular whitespace do not. CRLF counts as a single line separator, to avoid double counting. CountUntilNotWhitespace(int) Counts the amount of items until the next non-whitespace item in the buffer, relative to a given index. Line separators are included in the whitespace category. CountUntilWhitespace(int) Counts the amount of items until the next whitespace item in the buffer, relative to a given index. Line separators are included in the whitespace category. CountWhile(Func<int, TItem, bool>, int) Counts the amount of items, starting from a given index, while a predicate returns true. GetLengthOfLine(int) Returns the length of a line given its 0-based line number. Line separators do not count towards the length. GetLengthOfLineFromIndex(int) Returns the length of a line given a 0-based index of one of its items. Line separators do not count towards the length. GetLine(int) Given a 0-based line number, returns the matching line as an array of buffer items. GetLineFromIndex(int) Tries to read the line that contains the item at index. No end of line characters are added. GetLineNumberFromIndex(int) Determines the 0-based line number of the line that contains the item located at index. GetSourceLocation(int) Converts an index into a location. GetWord(int, out bool) Tries to read the word at index index, which can be a span of whitespace (if the starting index points to whitespace) or a span of non-whitespace content (if the starting index does not point to whitespace). GetWord(int, Func<int, TItem, bool>, out bool) Tries to read the word at index index, which can be a span of items verified by itemKindPredicate (if the starting index is verified by itemKindPredicate) or a span of content not verified by itemKindPredicate (if the starting index does not point to anything verified by itemKindPredicate). GetWord(int, TItem, out bool) Tries to read the word at index index, which can be a span of itemKind (if the starting index points to itemKind) or a span of non-itemKind content (if the starting index does not point to itemKind). Slice(SourceSpan, Span<TItem>) Slices a region of the buffer into a performant span. Slice(int, int) Slices a region of the buffer. Slice(int, Span<TItem>) Slices a region of the buffer into a performant span. TryGetChar(int, out TItem) Tries to read the next item in the buffer, relative to an index. TryGetLine(int, Span<TItem>, out int) Given a 0-based line number, assigns the exact line to a result buffer (destination). TryGetLineFromIndex(int, Span<TItem>, out int) Tries to read the line that contains the item at index. No end of line characters are added. TryGetWord(int, Func<int, TItem, bool>, Span<TItem>, out bool, out int) Tries to read the word at index index, which can be a span of items verified by itemKindPredicate (if the starting index is verified by itemKindPredicate) or a span of content not verified by itemKindPredicate (if the starting index does not point to anything verified by itemKindPredicate). TryGetWord(int, Span<TItem>, out bool, out int) Tries to read the word at index index, which can be a span of whitespace (if the starting index points to whitespace) or a span of non-whitespace content (if the starting index does not point to whitespace). TryGetWord(int, TItem, Span<TItem>, out bool, out int) Tries to read the word at index index, which can be a span of itemKind (if the starting index points to itemKind) or a span of non-itemKind content (if the starting index does not point to itemKind)."
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.IBufferReader.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.IBufferReader.html",
+    "title": "Interface IBufferReader | Red Sea Markup Language",
+    "summary": "Interface IBufferReader Represents a sequential buffer reader whose data is composed of bytes. Inherited Members ISource.CursorIndex ISource.IsEmpty ISource.IsReadOnly ISource.Length IDisposable.Dispose() IEquatable<IBufferReader>.Equals(IBufferReader) Namespace: OceanApocalypseStudios.RSML.Sources Assembly: RSML.dll Syntax public interface IBufferReader : ISource, IDisposable, IEquatable<IBufferReader?>"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.ISource.CursorIndex.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.ISource.CursorIndex.html",
+    "title": "Property CursorIndex | Red Sea Markup Language",
+    "summary": "Property CursorIndex | Edit this page View Source CursorIndex The current index of the cursor. Declaration int CursorIndex { get; } Property Value Type Description int"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.ISource.IsEmpty.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.ISource.IsEmpty.html",
+    "title": "Property IsEmpty | Red Sea Markup Language",
+    "summary": "Property IsEmpty | Edit this page View Source IsEmpty Whether the source is completely empty. Declaration bool IsEmpty { get; } Property Value Type Description bool"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.ISource.IsReadOnly.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.ISource.IsReadOnly.html",
+    "title": "Property IsReadOnly | Red Sea Markup Language",
+    "summary": "Property IsReadOnly | Edit this page View Source IsReadOnly Whether the source can be mutated. Declaration bool IsReadOnly { get; } Property Value Type Description bool"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.ISource.Length.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.ISource.Length.html",
+    "title": "Property Length | Red Sea Markup Language",
+    "summary": "Property Length | Edit this page View Source Length The length of the source. Declaration int Length { get; } Property Value Type Description int"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.ISource.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.ISource.html",
+    "title": "Interface ISource | Red Sea Markup Language",
+    "summary": "Interface ISource A data source for RSML's toolchain members. Inherited Members IDisposable.Dispose() Namespace: OceanApocalypseStudios.RSML.Sources Assembly: RSML.dll Syntax public interface ISource : IDisposable Properties Name Description CursorIndex The current index of the cursor. IsEmpty Whether the source is completely empty. IsReadOnly Whether the source can be mutated. Length The length of the source."
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.-ctor.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.-ctor.html",
+    "title": "Constructor ReadOnlyStringBuffer | Red Sea Markup Language",
+    "summary": "Constructor ReadOnlyStringBuffer | Edit this page View Source ReadOnlyStringBuffer(string) Initializes a new ReadOnlyStringBuffer with a string. Declaration public ReadOnlyStringBuffer(string content) Parameters Type Name Description string content The string that the buffer will wrap. | Edit this page View Source ReadOnlyStringBuffer(ReadOnlySpan<char>) Initializes a new ReadOnlyStringBuffer by allocating a string from a ReadOnlySpan<T>. Declaration public ReadOnlyStringBuffer(ReadOnlySpan<char> content) Parameters Type Name Description ReadOnlySpan<char> content The span pointing to the string's data. | Edit this page View Source ReadOnlyStringBuffer(char[]) Initializes a new ReadOnlyStringBuffer with an array of characters. Declaration public ReadOnlyStringBuffer(char[] content) Parameters Type Name Description char[] content The array of characters to use for the buffer. | Edit this page View Source ReadOnlyStringBuffer(byte[], Encoding?) Initializes a new ReadOnlyStringBuffer with an array of bytes and the encoding to use when decoding them. Declaration public ReadOnlyStringBuffer(byte[] content, Encoding? encoding = null) Parameters Type Name Description byte[] content The array of bytes to use for the buffer. Encoding encoding The encoding to use when decoding content. Use null for the Default encoding. | Edit this page View Source ReadOnlyStringBuffer(byte*, int, Encoding?) Initializes a new ReadOnlyStringBuffer with a pointer referencing an array of bytes and the encoding to use when decoding them. Declaration [CLSCompliant(false)] public ReadOnlyStringBuffer(byte* contentPtr, int byteCount, Encoding? encoding = null) Parameters Type Name Description byte* contentPtr The pointer referecing the array of bytes to use for the buffer. int byteCount The amount of bytes in the array referenced by contentPtr. Encoding encoding The encoding to use when decoding contentPtr. Use null for the Default encoding. Remarks This method is not CLS-compliant due to the unsafe context and the use of pointers."
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.BuildCache.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.BuildCache.html",
+    "title": "Method BuildCache | Red Sea Markup Language",
+    "summary": "Method BuildCache | Edit this page View Source BuildCache() Builds the cache if it doesn't exist yet. Declaration public void BuildCache() Implements ISupportsCache.BuildCache() | Edit this page View Source BuildCache(bool) Builds the cache. If forceRebuild is set to true, the cache will be built even if it already exists. Declaration public void BuildCache(bool forceRebuild) Parameters Type Name Description bool forceRebuild Whether to force the cache to be built even if it exists. Implements ISupportsCache.BuildCache(bool)"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CacheExists.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CacheExists.html",
+    "title": "Property CacheExists | Red Sea Markup Language",
+    "summary": "Property CacheExists | Edit this page View Source CacheExists Whether there's cached data. Declaration public bool CacheExists { get; } Property Value Type Description bool Implements ISupportsCache.CacheExists"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CountUntilLineSeparator.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CountUntilLineSeparator.html",
+    "title": "Method CountUntilLineSeparator | Red Sea Markup Language",
+    "summary": "Method CountUntilLineSeparator | Edit this page View Source CountUntilLineSeparator(int, out bool) Counts the amount of items until the next line separator in the buffer, relative to a given index. Only line separators count - regular whitespace do not. CRLF counts as a single line separator, to avoid double counting. Declaration public int CountUntilLineSeparator(int index, out bool isCrLf) Parameters Type Name Description int index The index at which to start counting. bool isCrLf Whether the line separator at which the method stopped is the CR in a CRLF sequence. If true, the next item in the buffer is LF. Returns Type Description int The index of the next line separator, relative to an index. Implements IBuffer<TItem>.CountUntilLineSeparator(int, out bool) Exceptions Type Condition BufferException The buffer is empty. IndexOutOfRangeException index was set to something greater than the buffer's length."
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CountUntilNotWhitespace.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CountUntilNotWhitespace.html",
+    "title": "Method CountUntilNotWhitespace | Red Sea Markup Language",
+    "summary": "Method CountUntilNotWhitespace | Edit this page View Source CountUntilNotWhitespace(int) Counts the amount of items until the next non-whitespace item in the buffer, relative to a given index. Line separators are included in the whitespace category. Declaration public int CountUntilNotWhitespace(int index) Parameters Type Name Description int index The index at which to start counting. Returns Type Description int The index of the next non-whitespace item, relative to a index. Implements IBuffer<TItem>.CountUntilNotWhitespace(int) Exceptions Type Condition BufferException The buffer is empty. IndexOutOfRangeException index was set to something greater than the buffer's length."
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CountUntilWhitespace.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CountUntilWhitespace.html",
+    "title": "Method CountUntilWhitespace | Red Sea Markup Language",
+    "summary": "Method CountUntilWhitespace | Edit this page View Source CountUntilWhitespace(int) Counts the amount of items until the next whitespace item in the buffer, relative to a given index. Line separators are included in the whitespace category. Declaration public int CountUntilWhitespace(int index) Parameters Type Name Description int index The index at which to start counting. Returns Type Description int The index of the next whitespace item, relative to a index. Implements IBuffer<TItem>.CountUntilWhitespace(int) Exceptions Type Condition BufferException The buffer is empty. IndexOutOfRangeException index was set to something greater than the buffer's length."
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CountWhile.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CountWhile.html",
+    "title": "Method CountWhile | Red Sea Markup Language",
+    "summary": "Method CountWhile | Edit this page View Source CountWhile(Func<int, char, bool>, int) Counts the amount of items, starting from a given index, while a predicate returns true. Declaration public int CountWhile(Func<int, char, bool> predicate, int index) Parameters Type Name Description Func<int, char, bool> predicate A function that takes the current index (relative to index), which is incremented every item, and the item associated with it. Execution stops when the predicate returns false or the index is out of bounds. int index The index at which to start counting; all indexes will also be given to the predicate as an offset that when added to the index of the position equal the actual index. Returns Type Description int The amount of items counted. Implements IBuffer<TItem>.CountWhile(Func<int, TItem, bool>, int) Exceptions Type Condition BufferException The buffer is empty. IndexOutOfRangeException index was set to something greater than the buffer's length."
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CursorIndex.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CursorIndex.html",
+    "title": "Property CursorIndex | Red Sea Markup Language",
+    "summary": "Property CursorIndex | Edit this page View Source CursorIndex The current index of the cursor. Declaration public int CursorIndex { get; } Property Value Type Description int Implements ISource.CursorIndex Remarks Always returns -1, as ReadOnlyStringBuffer doesn't support cursor positioning (everything is done via indexing)."
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Dispose.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Dispose.html",
+    "title": "Method Dispose | Red Sea Markup Language",
+    "summary": "Method Dispose | Edit this page View Source Dispose() Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources. Declaration public void Dispose() Implements IDisposable.Dispose()"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals.html",
+    "title": "Method Equals | Red Sea Markup Language",
+    "summary": "Method Equals | Edit this page View Source Equals(object?) Determines whether the specified object is equal to the current object. Declaration public override bool Equals(object? obj) Parameters Type Name Description object obj The object to compare with the current object. Returns Type Description bool true if the specified object is equal to the current object; otherwise, false. Overrides object.Equals(object) | Edit this page View Source Equals(IBuffer<char>?) Checks if another read-only buffer is equal to the current instance. Declaration public bool Equals(IBuffer<char>? other) Parameters Type Name Description IBuffer<char> other The other read-only buffer. Returns Type Description bool True if equals. Implements IEquatable<T>.Equals(T) | Edit this page View Source Equals(ReadOnlyStringBuffer?) Checks if another read-only string buffer is equal to the current instance. Declaration public bool Equals(ReadOnlyStringBuffer? other) Parameters Type Name Description ReadOnlyStringBuffer other The other read-only string buffer. Returns Type Description bool True if equals. Implements IEquatable<T>.Equals(T)"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetHashCode.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetHashCode.html",
+    "title": "Method GetHashCode | Red Sea Markup Language",
+    "summary": "Method GetHashCode | Edit this page View Source GetHashCode() Serves as the default hash function. Declaration public override int GetHashCode() Returns Type Description int A hash code for the current object. Overrides object.GetHashCode()"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetLengthOfLine.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetLengthOfLine.html",
+    "title": "Method GetLengthOfLine | Red Sea Markup Language",
+    "summary": "Method GetLengthOfLine | Edit this page View Source GetLengthOfLine(int) Returns the length of a line given its 0-based line number. Line separators do not count towards the length. Declaration public int GetLengthOfLine(int lineNumber) Parameters Type Name Description int lineNumber The 0-based line number. Returns Type Description int The length of the line. Implements IBuffer<TItem>.GetLengthOfLine(int) Exceptions Type Condition BufferException The buffer is empty. ArgumentOutOfRangeException The given lineNumber is negative or is greater than the amount of lines (see LineCount)."
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetLengthOfLineFromIndex.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetLengthOfLineFromIndex.html",
+    "title": "Method GetLengthOfLineFromIndex | Red Sea Markup Language",
+    "summary": "Method GetLengthOfLineFromIndex | Edit this page View Source GetLengthOfLineFromIndex(int) Returns the length of a line given a 0-based index of one of its items. Line separators do not count towards the length. Declaration public int GetLengthOfLineFromIndex(int index) Parameters Type Name Description int index The 0-based index whose line is considered. Returns Type Description int The length of the line. Implements IBuffer<TItem>.GetLengthOfLineFromIndex(int)"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetLine.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetLine.html",
+    "title": "Method GetLine | Red Sea Markup Language",
+    "summary": "Method GetLine | Edit this page View Source GetLine(int) Given a 0-based line number, returns the matching line as an array of buffer items. Declaration public char[] GetLine(int lineNumber) Parameters Type Name Description int lineNumber The 0-based line number. Returns Type Description char[] The line as an array of items. Implements IBuffer<TItem>.GetLine(int)"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetLineFromIndex.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetLineFromIndex.html",
+    "title": "Method GetLineFromIndex | Red Sea Markup Language",
+    "summary": "Method GetLineFromIndex | Edit this page View Source GetLineFromIndex(int) Tries to read the line that contains the item at index. No end of line characters are added. Declaration public char[] GetLineFromIndex(int index) Parameters Type Name Description int index The index at which to determine what the current line is. Returns Type Description char[] The line, as an array of items. Implements IBuffer<TItem>.GetLineFromIndex(int)"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetLineNumberFromIndex.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetLineNumberFromIndex.html",
+    "title": "Method GetLineNumberFromIndex | Red Sea Markup Language",
+    "summary": "Method GetLineNumberFromIndex | Edit this page View Source GetLineNumberFromIndex(int) Determines the 0-based line number of the line that contains the item located at index. Declaration public int GetLineNumberFromIndex(int index) Parameters Type Name Description int index The index whose parent line's number is to be returned. Returns Type Description int The 0-based number of the line that contains item located at index. Implements IBuffer<TItem>.GetLineNumberFromIndex(int) Exceptions Type Condition BufferException The buffer is empty. IndexOutOfRangeException index was set to something greater than the buffer's length."
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetSourceLocation.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetSourceLocation.html",
+    "title": "Method GetSourceLocation | Red Sea Markup Language",
+    "summary": "Method GetSourceLocation | Edit this page View Source GetSourceLocation(int) Converts an index into a location. Declaration public SourceLocation GetSourceLocation(int index) Parameters Type Name Description int index The index. Returns Type Description SourceLocation The location. Implements IBuffer<TItem>.GetSourceLocation(int) Remarks Unlike with other ReadOnlyStringBuffer methods, this one does not accept the EOF index (index at Length), because it is not considered a location."
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetWord.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetWord.html",
+    "title": "Method GetWord | Red Sea Markup Language",
+    "summary": "Method GetWord | Edit this page View Source GetWord(int, out bool) Tries to read the word at index index, which can be a span of whitespace (if the starting index points to whitespace) or a span of non-whitespace content (if the starting index does not point to whitespace). Declaration public char[] GetWord(int index, out bool isWhitespace) Parameters Type Name Description int index The index at which the word starts. bool isWhitespace True if the array is fully comprised of whitespace. If False, no whitespace is present. Returns Type Description char[] The line, as an array of items. Implements IBuffer<TItem>.GetWord(int, out bool) Remarks Unlike with other ReadOnlyStringBuffer methods, this one does not accept the EOF index (index at Length), because it is not considered part of any word. | Edit this page View Source GetWord(int, char, out bool) Tries to read the word at index index, which can be a span of itemKind (if the starting index points to itemKind) or a span of non-itemKind content (if the starting index does not point to itemKind). Declaration public char[] GetWord(int index, char itemKind, out bool isItemKind) Parameters Type Name Description int index The index at which the word starts. char itemKind The item that will serve as the delimiter. For example, if item kind is ,, then the current word if the buffer is My awesome buffer, isn't it cool? starting from index, is My awesome buffer. If item kind is ;, then the current word if the buffer is ;;so very awesome starting from index, is ;;. bool isItemKind True if the array is fully comprised of itemKind. If False, no itemKind is present. Returns Type Description char[] The line, as an array of items. Implements IBuffer<TItem>.GetWord(int, TItem, out bool) Remarks Unlike with other ReadOnlyStringBuffer methods, this one does not accept the EOF index (index at Length), because it is not considered part of any word. | Edit this page View Source GetWord(int, Func<int, char, bool>, out bool) Tries to read the word at index index, which can be a span of items verified by itemKindPredicate (if the starting index is verified by itemKindPredicate) or a span of content not verified by itemKindPredicate (if the starting index does not point to anything verified by itemKindPredicate). Declaration public char[] GetWord(int index, Func<int, char, bool> itemKindPredicate, out bool isItemKind) Parameters Type Name Description int index The index at which the word starts. Func<int, char, bool> itemKindPredicate A predicate that verifies if the first item in the selected range serves as the delimiter (the predicate returns true if so). For example, if the predicate verifies ,, then the current word if the buffer is My awesome buffer, isn't it cool? starting from index, is My awesome buffer. If the predicate verifies ;, then the current word if the buffer is ;;so very awesome starting from index, is ;;. bool isItemKind True if the array is fully comprised of the item kind verified by itemKindPredicate. If False, no items verified by itemKindPredicate is present. Returns Type Description char[] The line, as an array of items. Implements IBuffer<TItem>.GetWord(int, Func<int, TItem, bool>, out bool) Remarks Unlike with other ReadOnlyStringBuffer methods, this one does not accept the EOF index (index at Length), because it is not considered part of any word."
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.IsEmpty.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.IsEmpty.html",
+    "title": "Property IsEmpty | Red Sea Markup Language",
+    "summary": "Property IsEmpty | Edit this page View Source IsEmpty Whether the source is completely empty. Declaration public bool IsEmpty { get; } Property Value Type Description bool Implements ISource.IsEmpty"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.IsReadOnly.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.IsReadOnly.html",
+    "title": "Property IsReadOnly | Red Sea Markup Language",
+    "summary": "Property IsReadOnly | Edit this page View Source IsReadOnly Whether the source can be mutated. Declaration public bool IsReadOnly { get; } Property Value Type Description bool Implements ISource.IsReadOnly Remarks Always returns true, as ReadOnlyStringBuffer only supports read-only content (hence the name)."
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Item.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Item.html",
+    "title": "Property this | Red Sea Markup Language",
+    "summary": "Property this | Edit this page View Source this[int] Gets a single item out of the buffer. Declaration public char this[int index] { get; } Parameters Type Name Description int index The index of the item to retrieve. Property Value Type Description char The item. Implements IBuffer<TItem>.this[int] | Edit this page View Source this[SourceLocation] Gets a single item out of the buffer. Declaration public char this[SourceLocation location] { get; } Parameters Type Name Description SourceLocation location The location of the item to retrieve. Property Value Type Description char The item. Implements IBuffer<TItem>.this[SourceLocation] | Edit this page View Source this[SourceSpan] Gets a range of items out of the buffer. Declaration public char[] this[SourceSpan span] { get; } Parameters Type Name Description SourceSpan span The span of items to get. Property Value Type Description char[] The items. Implements IBuffer<TItem>.this[SourceSpan]"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Length.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Length.html",
+    "title": "Property Length | Red Sea Markup Language",
+    "summary": "Property Length | Edit this page View Source Length The length of the source. Declaration public int Length { get; } Property Value Type Description int Implements ISource.Length"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.LineCount.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.LineCount.html",
+    "title": "Property LineCount | Red Sea Markup Language",
+    "summary": "Property LineCount | Edit this page View Source LineCount The total amount of lines in the buffer. Declaration public int LineCount { get; } Property Value Type Description int Implements IBuffer<TItem>.LineCount Remarks LineCount automatically builds cache if no cached data exists. No BuildCache() calls are necessary."
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Slice.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Slice.html",
+    "title": "Method Slice | Red Sea Markup Language",
+    "summary": "Method Slice | Edit this page View Source Slice(int, int) Slices a region of the buffer. Declaration public char[] Slice(int start, int length) Parameters Type Name Description int start The index of the first item in the slice. int length The amount of items to slice starting at start. Returns Type Description char[] A slice, as an array of items. Implements IBuffer<TItem>.Slice(int, int) | Edit this page View Source Slice(int, Span<char>) Slices a region of the buffer into a performant span. Declaration public void Slice(int start, Span<char> slice) Parameters Type Name Description int start The index of the first item in the slice. Span<char> slice The span serving as the destination for the slice. Implements IBuffer<TItem>.Slice(int, Span<TItem>) | Edit this page View Source Slice(SourceSpan, Span<char>) Slices a region of the buffer into a performant span. Declaration public void Slice(SourceSpan sourceSpan, Span<char> slice) Parameters Type Name Description SourceSpan sourceSpan The span indicating what the slice is. Span<char> slice The span serving as the destination for the slice. Implements IBuffer<TItem>.Slice(SourceSpan, Span<TItem>)"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.ToString.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.ToString.html",
+    "title": "Method ToString | Red Sea Markup Language",
+    "summary": "Method ToString | Edit this page View Source ToString() Returns the buffer's content as a string. Declaration public override string ToString() Returns Type Description string The buffer's content. Overrides object.ToString()"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.TryGetChar.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.TryGetChar.html",
+    "title": "Method TryGetChar | Red Sea Markup Language",
+    "summary": "Method TryGetChar | Edit this page View Source TryGetChar(int, out char) Tries to read the next item in the buffer, relative to an index. Declaration public bool TryGetChar(int index, out char item) Parameters Type Name Description int index The index of the character. char item The item. Returns Type Description bool False if the buffer is out of bounds or an exception occured. Implements IBuffer<TItem>.TryGetChar(int, out TItem)"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.TryGetLine.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.TryGetLine.html",
+    "title": "Method TryGetLine | Red Sea Markup Language",
+    "summary": "Method TryGetLine | Edit this page View Source TryGetLine(int, Span<char>, out int) Given a 0-based line number, assigns the exact line to a result buffer (destination). Declaration public bool TryGetLine(int lineNumber, Span<char> destination, out int itemCount) Parameters Type Name Description int lineNumber The 0-based line number. Span<char> destination The destination buffer for the line. int itemCount The amount of items returned. Returns Type Description bool True if successful. Implements IBuffer<TItem>.TryGetLine(int, Span<TItem>, out int)"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.TryGetLineFromIndex.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.TryGetLineFromIndex.html",
+    "title": "Method TryGetLineFromIndex | Red Sea Markup Language",
+    "summary": "Method TryGetLineFromIndex | Edit this page View Source TryGetLineFromIndex(int, Span<char>, out int) Tries to read the line that contains the item at index. No end of line characters are added. Declaration public bool TryGetLineFromIndex(int index, Span<char> line, out int itemCount) Parameters Type Name Description int index The index at which to determine what the current line is. Span<char> line int itemCount The amount of items that were written to destination. Returns Type Description bool False if the buffer is out of bounds, there are no more lines to read or an exception occured. Implements IBuffer<TItem>.TryGetLineFromIndex(int, Span<TItem>, out int)"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.TryGetWord.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.TryGetWord.html",
+    "title": "Method TryGetWord | Red Sea Markup Language",
+    "summary": "Method TryGetWord | Edit this page View Source TryGetWord(int, Span<char>, out bool, out int) Tries to read the word at index index, which can be a span of whitespace (if the starting index points to whitespace) or a span of non-whitespace content (if the starting index does not point to whitespace). Declaration public bool TryGetWord(int index, Span<char> destination, out bool isWhitespace, out int itemCount) Parameters Type Name Description int index The index at which the word starts. Span<char> destination The span which will be the destination for the read content. bool isWhitespace True if the span is fully comprised of whitespace. If False, no whitespace is present. int itemCount The amount of characters that were written to destination. Returns Type Description bool False if the buffer is out of bounds or an exception occured. Implements IBuffer<TItem>.TryGetWord(int, Span<TItem>, out bool, out int) Remarks Unlike with other ReadOnlyStringBuffer methods, this one does not accept the EOF index (index at Length), because it is not considered part of any word. | Edit this page View Source TryGetWord(int, char, Span<char>, out bool, out int) Tries to read the word at index index, which can be a span of itemKind (if the starting index points to itemKind) or a span of non-itemKind content (if the starting index does not point to itemKind). Declaration public bool TryGetWord(int index, char itemKind, Span<char> destination, out bool isItemKind, out int itemCount) Parameters Type Name Description int index The index at which the word starts. char itemKind The item that will serve as the delimiter. For example, if item kind is ,, then the current word if the buffer is My awesome buffer, isn't it cool? starting from index, is My awesome buffer. If item kind is ;, then the current word if the buffer is ;;so very awesome starting from index, is ;;. Span<char> destination The span which will be the destination for the read content. bool isItemKind True if the span is fully comprised of itemKind. If False, no itemKind is present. int itemCount The amount of items that were written to destination. Returns Type Description bool False if the buffer is out of bounds, the reading was only partial or an exception occured. Implements IBuffer<TItem>.TryGetWord(int, TItem, Span<TItem>, out bool, out int) Remarks Unlike with other ReadOnlyStringBuffer methods, this one does not accept the EOF index (index at Length), because it is not considered part of any word. | Edit this page View Source TryGetWord(int, Func<int, char, bool>, Span<char>, out bool, out int) Tries to read the word at index index, which can be a span of items verified by itemKindPredicate (if the starting index is verified by itemKindPredicate) or a span of content not verified by itemKindPredicate (if the starting index does not point to anything verified by itemKindPredicate). Declaration public bool TryGetWord(int index, Func<int, char, bool> itemKindPredicate, Span<char> destination, out bool isItemKind, out int itemCount) Parameters Type Name Description int index The index at which the word starts. Func<int, char, bool> itemKindPredicate A predicate that verifies if the first item in the selected range serves as the delimiter (the predicate returns true if so). For example, if the predicate verifies ,, then the current word if the buffer is My awesome buffer, isn't it cool? starting from index, is My awesome buffer. If the predicate verifies ;, then the current word if the buffer is ;;so very awesome starting from index, is ;;. Span<char> destination The span which will be the destination for the read content. bool isItemKind True if the span is fully comprised of the item kind verified by itemKindPredicate. If False, no items verified by itemKindPredicate is present. int itemCount The amount of characters that were written to destination. Returns Type Description bool False if the buffer is out of bounds, the reading was only partial or an exception occured. Implements IBuffer<TItem>.TryGetWord(int, Func<int, TItem, bool>, Span<TItem>, out bool, out int) Remarks Unlike with other ReadOnlyStringBuffer methods, this one does not accept the EOF index (index at Length), because it is not considered part of any word."
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.html",
+    "title": "Class ReadOnlyStringBuffer | Red Sea Markup Language",
+    "summary": "Class ReadOnlyStringBuffer A read-only buffer backed by a string. All operations opt for performance primarily via the internal use of ReadOnlySpan<T> over string allocations and also via caching. Inheritance object ReadOnlyStringBuffer Implements IBuffer<char> ISource IDisposable IEquatable<IBuffer<char>> ISupportsCache IEquatable<ReadOnlyStringBuffer> Inherited Members object.Equals(object, object) object.GetType() object.MemberwiseClone() object.ReferenceEquals(object, object) Namespace: OceanApocalypseStudios.RSML.Sources Assembly: RSML.dll Syntax public class ReadOnlyStringBuffer : IBuffer<char>, ISource, IDisposable, IEquatable<IBuffer<char>?>, ISupportsCache, IEquatable<ReadOnlyStringBuffer?> Constructors Name Description ReadOnlyStringBuffer(byte*, int, Encoding?) Initializes a new ReadOnlyStringBuffer with a pointer referencing an array of bytes and the encoding to use when decoding them. ReadOnlyStringBuffer(byte[], Encoding?) Initializes a new ReadOnlyStringBuffer with an array of bytes and the encoding to use when decoding them. ReadOnlyStringBuffer(char[]) Initializes a new ReadOnlyStringBuffer with an array of characters. ReadOnlyStringBuffer(ReadOnlySpan<char>) Initializes a new ReadOnlyStringBuffer by allocating a string from a ReadOnlySpan<T>. ReadOnlyStringBuffer(string) Initializes a new ReadOnlyStringBuffer with a string. Properties Name Description CacheExists Whether there's cached data. CursorIndex The current index of the cursor. IsEmpty Whether the source is completely empty. IsReadOnly Whether the source can be mutated. this[SourceLocation] Gets a single item out of the buffer. this[SourceSpan] Gets a range of items out of the buffer. this[int] Gets a single item out of the buffer. Length The length of the source. LineCount The total amount of lines in the buffer. Methods Name Description BuildCache() Builds the cache if it doesn't exist yet. BuildCache(bool) Builds the cache. If forceRebuild is set to true, the cache will be built even if it already exists. CountUntilLineSeparator(int, out bool) Counts the amount of items until the next line separator in the buffer, relative to a given index. Only line separators count - regular whitespace do not. CRLF counts as a single line separator, to avoid double counting. CountUntilNotWhitespace(int) Counts the amount of items until the next non-whitespace item in the buffer, relative to a given index. Line separators are included in the whitespace category. CountUntilWhitespace(int) Counts the amount of items until the next whitespace item in the buffer, relative to a given index. Line separators are included in the whitespace category. CountWhile(Func<int, char, bool>, int) Counts the amount of items, starting from a given index, while a predicate returns true. Dispose() Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources. Equals(IBuffer<char>?) Checks if another read-only buffer is equal to the current instance. Equals(ReadOnlyStringBuffer?) Checks if another read-only string buffer is equal to the current instance. Equals(object?) Determines whether the specified object is equal to the current object. GetHashCode() Serves as the default hash function. GetLengthOfLine(int) Returns the length of a line given its 0-based line number. Line separators do not count towards the length. GetLengthOfLineFromIndex(int) Returns the length of a line given a 0-based index of one of its items. Line separators do not count towards the length. GetLine(int) Given a 0-based line number, returns the matching line as an array of buffer items. GetLineFromIndex(int) Tries to read the line that contains the item at index. No end of line characters are added. GetLineNumberFromIndex(int) Determines the 0-based line number of the line that contains the item located at index. GetSourceLocation(int) Converts an index into a location. GetWord(int, out bool) Tries to read the word at index index, which can be a span of whitespace (if the starting index points to whitespace) or a span of non-whitespace content (if the starting index does not point to whitespace). GetWord(int, char, out bool) Tries to read the word at index index, which can be a span of itemKind (if the starting index points to itemKind) or a span of non-itemKind content (if the starting index does not point to itemKind). GetWord(int, Func<int, char, bool>, out bool) Tries to read the word at index index, which can be a span of items verified by itemKindPredicate (if the starting index is verified by itemKindPredicate) or a span of content not verified by itemKindPredicate (if the starting index does not point to anything verified by itemKindPredicate). Slice(SourceSpan, Span<char>) Slices a region of the buffer into a performant span. Slice(int, int) Slices a region of the buffer. Slice(int, Span<char>) Slices a region of the buffer into a performant span. ToString() Returns the buffer's content as a string. TryGetChar(int, out char) Tries to read the next item in the buffer, relative to an index. TryGetLine(int, Span<char>, out int) Given a 0-based line number, assigns the exact line to a result buffer (destination). TryGetLineFromIndex(int, Span<char>, out int) Tries to read the line that contains the item at index. No end of line characters are added. TryGetWord(int, char, Span<char>, out bool, out int) Tries to read the word at index index, which can be a span of itemKind (if the starting index points to itemKind) or a span of non-itemKind content (if the starting index does not point to itemKind). TryGetWord(int, Func<int, char, bool>, Span<char>, out bool, out int) Tries to read the word at index index, which can be a span of items verified by itemKindPredicate (if the starting index is verified by itemKindPredicate) or a span of content not verified by itemKindPredicate (if the starting index does not point to anything verified by itemKindPredicate). TryGetWord(int, Span<char>, out bool, out int) Tries to read the word at index index, which can be a span of whitespace (if the starting index points to whitespace) or a span of non-whitespace content (if the starting index does not point to whitespace). Operators Name Description operator ==(ReadOnlyStringBuffer, ReadOnlyStringBuffer) Checks if two read-only string buffers are equals. operator !=(ReadOnlyStringBuffer, ReadOnlyStringBuffer) Checks if two read-only string buffers are different."
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.op_Equality.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.op_Equality.html",
+    "title": "Operator operator == | Red Sea Markup Language",
+    "summary": "Operator operator == | Edit this page View Source operator ==(ReadOnlyStringBuffer, ReadOnlyStringBuffer) Checks if two read-only string buffers are equals. Declaration public static bool operator ==(ReadOnlyStringBuffer left, ReadOnlyStringBuffer right) Parameters Type Name Description ReadOnlyStringBuffer left ReadOnlyStringBuffer right Returns Type Description bool True if equals."
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.op_Inequality.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.op_Inequality.html",
+    "title": "Operator operator != | Red Sea Markup Language",
+    "summary": "Operator operator != | Edit this page View Source operator !=(ReadOnlyStringBuffer, ReadOnlyStringBuffer) Checks if two read-only string buffers are different. Declaration public static bool operator !=(ReadOnlyStringBuffer left, ReadOnlyStringBuffer right) Parameters Type Name Description ReadOnlyStringBuffer left ReadOnlyStringBuffer right Returns Type Description bool True if different."
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.-ctor.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.-ctor.html",
+    "title": "Constructor SourceLocation | Red Sea Markup Language",
+    "summary": "Constructor SourceLocation | Edit this page View Source SourceLocation(int, int, int) Specifies the location of an item in a ISource. Declaration public SourceLocation(int index, int line, int column) Parameters Type Name Description int index The 0-based index. int line The 0-based line number. int column The 0-based column number (the index relative to the start of the line)."
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.Column.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.Column.html",
+    "title": "Property Column | Red Sea Markup Language",
+    "summary": "Property Column | Edit this page View Source Column The 0-based column number, which is the index of the item relative to the start of the line it is in. Declaration public int Column { get; } Property Value Type Description int"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.CompareTo.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.CompareTo.html",
+    "title": "Method CompareTo | Red Sea Markup Language",
+    "summary": "Method CompareTo | Edit this page View Source CompareTo(int) Compares the index of the location to another index. Declaration public int CompareTo(int other) Parameters Type Name Description int other The index to compare against. Returns Type Description int Implements IComparable<T>.CompareTo(T) | Edit this page View Source CompareTo(SourceLocation) Compares the current instance with another object of the same type and returns an integer that indicates whether the current instance precedes, follows, or occurs in the same position in the sort order as the other object. Declaration public int CompareTo(SourceLocation other) Parameters Type Name Description SourceLocation other An object to compare with this instance. Returns Type Description int A value that indicates the relative order of the objects being compared. The return value has these meanings: Value Meaning Less than zero This instance precedes other in the sort order. Zero This instance occurs in the same position in the sort order as other. Greater than zero This instance follows other in the sort order. Implements IComparable<T>.CompareTo(T)"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.Equals.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.Equals.html",
+    "title": "Method Equals | Red Sea Markup Language",
+    "summary": "Method Equals | Edit this page View Source Equals(object?) Indicates whether this instance and a specified object are equal. Declaration public override bool Equals(object? obj) Parameters Type Name Description object obj The object to compare with the current instance. Returns Type Description bool true if obj and this instance are the same type and represent the same value; otherwise, false. Overrides ValueType.Equals(object) | Edit this page View Source Equals(SourceLocation) Checks if two SourceLocations are equal to each other. Declaration public bool Equals(SourceLocation other) Parameters Type Name Description SourceLocation other The other SourceLocation. Returns Type Description bool True if equals. Implements IEquatable<T>.Equals(T) | Edit this page View Source Equals(int) Checks if two indexes are equal to each other. Declaration public bool Equals(int other) Parameters Type Name Description int other The other location's index. Returns Type Description bool True if equals. Implements IEquatable<T>.Equals(T)"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.GetHashCode.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.GetHashCode.html",
+    "title": "Method GetHashCode | Red Sea Markup Language",
+    "summary": "Method GetHashCode | Edit this page View Source GetHashCode() Returns the hash code for this instance. Declaration public override int GetHashCode() Returns Type Description int A 32-bit signed integer that is the hash code for this instance. Overrides ValueType.GetHashCode()"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.Index.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.Index.html",
+    "title": "Property Index | Red Sea Markup Language",
+    "summary": "Property Index | Edit this page View Source Index The absolute 0-based index of the item in the source. Declaration public int Index { get; } Property Value Type Description int"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.Line.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.Line.html",
+    "title": "Property Line | Red Sea Markup Language",
+    "summary": "Property Line | Edit this page View Source Line The 0-based line number, counting from the start of the source. Declaration public int Line { get; } Property Value Type Description int"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.ToString.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.ToString.html",
+    "title": "Method ToString | Red Sea Markup Language",
+    "summary": "Method ToString | Edit this page View Source ToString() Returns a generic string representation of the current instance. Declaration public override string ToString() Returns Type Description string The string representation. Overrides ValueType.ToString() | Edit this page View Source ToString(string?, IFormatProvider?) Given a format, tries to return a string that uses said format as a basis for the representation. If it fails, it defaults to ToString(). Declaration public string ToString(string? format, IFormatProvider? formatProvider) Parameters Type Name Description string format The format. Available formats are: CTOR (constructor-like string) and JSON (struct as JSON). IFormatProvider formatProvider Unused. Don't bother assigning it anything. Returns Type Description string The string representation. Implements IFormattable.ToString(string, IFormatProvider)"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.html",
+    "title": "Struct SourceLocation | Red Sea Markup Language",
+    "summary": "Struct SourceLocation Specifies the location of an item in a ISource. Implements IEquatable<SourceLocation> IEquatable<int> IFormattable IComparable<SourceLocation> IComparable<int> Inherited Members object.Equals(object, object) object.GetType() object.ReferenceEquals(object, object) Namespace: OceanApocalypseStudios.RSML.Sources Assembly: RSML.dll Syntax public readonly struct SourceLocation : IEquatable<SourceLocation>, IEquatable<int>, IFormattable, IComparable<SourceLocation>, IComparable<int> Constructors Name Description SourceLocation(int, int, int) Specifies the location of an item in a ISource. Properties Name Description Column The 0-based column number, which is the index of the item relative to the start of the line it is in. Index The absolute 0-based index of the item in the source. Line The 0-based line number, counting from the start of the source. Methods Name Description CompareTo(SourceLocation) Compares the current instance with another object of the same type and returns an integer that indicates whether the current instance precedes, follows, or occurs in the same position in the sort order as the other object. CompareTo(int) Compares the index of the location to another index. Equals(SourceLocation) Checks if two SourceLocations are equal to each other. Equals(int) Checks if two indexes are equal to each other. Equals(object?) Indicates whether this instance and a specified object are equal. GetHashCode() Returns the hash code for this instance. ToString() Returns a generic string representation of the current instance. ToString(string?, IFormatProvider?) Given a format, tries to return a string that uses said format as a basis for the representation. If it fails, it defaults to ToString(). Operators Name Description operator ==(SourceLocation, SourceLocation) Checks if two SourceLocations are equal to each other. operator >(SourceLocation, SourceLocation) Checks if left is strictly greater than right. operator >=(SourceLocation, SourceLocation) Checks if left is greather than or equal to right. operator !=(SourceLocation, SourceLocation) Checks if two SourceLocations are different from each other. operator <(SourceLocation, SourceLocation) Checks if left is strictly less than right. operator <=(SourceLocation, SourceLocation) Checks if left is less than or equal to right."
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.op_Equality.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.op_Equality.html",
+    "title": "Operator operator == | Red Sea Markup Language",
+    "summary": "Operator operator == | Edit this page View Source operator ==(SourceLocation, SourceLocation) Checks if two SourceLocations are equal to each other. Declaration public static bool operator ==(SourceLocation left, SourceLocation right) Parameters Type Name Description SourceLocation left SourceLocation right Returns Type Description bool True if equals."
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.op_GreaterThan.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.op_GreaterThan.html",
+    "title": "Operator operator > | Red Sea Markup Language",
+    "summary": "Operator operator > | Edit this page View Source operator >(SourceLocation, SourceLocation) Checks if left is strictly greater than right. Declaration public static bool operator >(SourceLocation left, SourceLocation right) Parameters Type Name Description SourceLocation left SourceLocation right Returns Type Description bool"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.op_GreaterThanOrEqual.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.op_GreaterThanOrEqual.html",
+    "title": "Operator operator >= | Red Sea Markup Language",
+    "summary": "Operator operator >= | Edit this page View Source operator >=(SourceLocation, SourceLocation) Checks if left is greather than or equal to right. Declaration public static bool operator >=(SourceLocation left, SourceLocation right) Parameters Type Name Description SourceLocation left SourceLocation right Returns Type Description bool"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.op_Inequality.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.op_Inequality.html",
+    "title": "Operator operator != | Red Sea Markup Language",
+    "summary": "Operator operator != | Edit this page View Source operator !=(SourceLocation, SourceLocation) Checks if two SourceLocations are different from each other. Declaration public static bool operator !=(SourceLocation left, SourceLocation right) Parameters Type Name Description SourceLocation left SourceLocation right Returns Type Description bool True if different."
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.op_LessThan.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.op_LessThan.html",
+    "title": "Operator operator < | Red Sea Markup Language",
+    "summary": "Operator operator < | Edit this page View Source operator <(SourceLocation, SourceLocation) Checks if left is strictly less than right. Declaration public static bool operator <(SourceLocation left, SourceLocation right) Parameters Type Name Description SourceLocation left SourceLocation right Returns Type Description bool"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.op_LessThanOrEqual.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.op_LessThanOrEqual.html",
+    "title": "Operator operator <= | Red Sea Markup Language",
+    "summary": "Operator operator <= | Edit this page View Source operator <=(SourceLocation, SourceLocation) Checks if left is less than or equal to right. Declaration public static bool operator <=(SourceLocation left, SourceLocation right) Parameters Type Name Description SourceLocation left SourceLocation right Returns Type Description bool"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.-ctor.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.-ctor.html",
+    "title": "Constructor SourceSpan | Red Sea Markup Language",
+    "summary": "Constructor SourceSpan | Edit this page View Source SourceSpan(SourceLocation, SourceLocation) Represents a span taken from a source. Declaration public SourceSpan(SourceLocation start, SourceLocation end) Parameters Type Name Description SourceLocation start SourceLocation end"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.End.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.End.html",
+    "title": "Property End | Red Sea Markup Language",
+    "summary": "Property End | Edit this page View Source End The end of the span. Declaration public SourceLocation End { get; } Property Value Type Description SourceLocation"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.Equals.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.Equals.html",
+    "title": "Method Equals | Red Sea Markup Language",
+    "summary": "Method Equals | Edit this page View Source Equals(object?) Indicates whether this instance and a specified object are equal. Declaration public override bool Equals(object? obj) Parameters Type Name Description object obj The object to compare with the current instance. Returns Type Description bool true if obj and this instance are the same type and represent the same value; otherwise, false. Overrides ValueType.Equals(object) | Edit this page View Source Equals(SourceSpan?) Checks whether two SourceSpans are equals. Declaration public bool Equals(SourceSpan? other) Parameters Type Name Description SourceSpan? other The span to check against Returns Type Description bool True if equals"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.GetHashCode.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.GetHashCode.html",
+    "title": "Method GetHashCode | Red Sea Markup Language",
+    "summary": "Method GetHashCode | Edit this page View Source GetHashCode() Returns the hash code for this instance. Declaration public override int GetHashCode() Returns Type Description int A 32-bit signed integer that is the hash code for this instance. Overrides ValueType.GetHashCode()"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.IsSingleLine.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.IsSingleLine.html",
+    "title": "Property IsSingleLine | Red Sea Markup Language",
+    "summary": "Property IsSingleLine | Edit this page View Source IsSingleLine The span is located in a single line. Declaration public bool IsSingleLine { get; } Property Value Type Description bool"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.Length.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.Length.html",
+    "title": "Property Length | Red Sea Markup Language",
+    "summary": "Property Length | Edit this page View Source Length The length of the span. Declaration public int Length { get; } Property Value Type Description int"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.Start.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.Start.html",
+    "title": "Property Start | Red Sea Markup Language",
+    "summary": "Property Start | Edit this page View Source Start The start of the span. Declaration public SourceLocation Start { get; } Property Value Type Description SourceLocation"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.ToString.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.ToString.html",
+    "title": "Method ToString | Red Sea Markup Language",
+    "summary": "Method ToString | Edit this page View Source ToString() Returns a generic string representation of the current instance. Declaration public override string ToString() Returns Type Description string The string representation. Overrides ValueType.ToString() | Edit this page View Source ToString(ISource) Given a source, tries to return a string that uses said source as a basis for the representation. If it fails, it defaults to ToString(). Declaration public string ToString(ISource source) Parameters Type Name Description ISource source The source. Returns Type Description string The string representation. | Edit this page View Source ToString(string?, IFormatProvider?) Given a format, tries to return a string that uses said format as a basis for the representation. If it fails, it defaults to ToString(). Declaration public string ToString(string? format, IFormatProvider? formatProvider) Parameters Type Name Description string format The format. Available formats are: CTOR (constructor-like string) and JSON (struct as JSON). IFormatProvider formatProvider Unused. Don't bother assigning it anything. Returns Type Description string The string representation. Implements IFormattable.ToString(string, IFormatProvider)"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.html",
+    "title": "Struct SourceSpan | Red Sea Markup Language",
+    "summary": "Struct SourceSpan Represents a span taken from a source. Implements IFormattable Inherited Members object.Equals(object, object) object.GetType() object.ReferenceEquals(object, object) Namespace: OceanApocalypseStudios.RSML.Sources Assembly: RSML.dll Syntax public readonly struct SourceSpan : IFormattable Constructors Name Description SourceSpan(SourceLocation, SourceLocation) Represents a span taken from a source. Properties Name Description End The end of the span. IsSingleLine The span is located in a single line. Length The length of the span. Start The start of the span. Methods Name Description Equals(SourceSpan?) Checks whether two SourceSpans are equals. Equals(object?) Indicates whether this instance and a specified object are equal. GetHashCode() Returns the hash code for this instance. ToString() Returns a generic string representation of the current instance. ToString(ISource) Given a source, tries to return a string that uses said source as a basis for the representation. If it fails, it defaults to ToString(). ToString(string?, IFormatProvider?) Given a format, tries to return a string that uses said format as a basis for the representation. If it fails, it defaults to ToString(). Operators Name Description operator ==(SourceSpan, SourceSpan) Checks whether two SourceSpans are equals. operator !=(SourceSpan, SourceSpan) Checks whether two SourceSpans are different from each other."
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.op_Equality.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.op_Equality.html",
+    "title": "Operator operator == | Red Sea Markup Language",
+    "summary": "Operator operator == | Edit this page View Source operator ==(SourceSpan, SourceSpan) Checks whether two SourceSpans are equals. Declaration public static bool operator ==(SourceSpan left, SourceSpan right) Parameters Type Name Description SourceSpan left SourceSpan right Returns Type Description bool True if equals"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.op_Inequality.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.op_Inequality.html",
+    "title": "Operator operator != | Red Sea Markup Language",
+    "summary": "Operator operator != | Edit this page View Source operator !=(SourceSpan, SourceSpan) Checks whether two SourceSpans are different from each other. Declaration public static bool operator !=(SourceSpan left, SourceSpan right) Parameters Type Name Description SourceSpan left SourceSpan right Returns Type Description bool True if different"
+  },
+  "api/OceanApocalypseStudios.RSML.Sources.html": {
+    "href": "api/OceanApocalypseStudios.RSML.Sources.html",
+    "title": "Namespace OceanApocalypseStudios.RSML.Sources | Red Sea Markup Language",
+    "summary": "Namespace OceanApocalypseStudios.RSML.Sources Classes ReadOnlyStringBuffer A read-only buffer backed by a string. All operations opt for performance primarily via the internal use of ReadOnlySpan<T> over string allocations and also via caching. Structs SourceLocation Specifies the location of an item in a ISource. SourceSpan Represents a span taken from a source. Interfaces IBufferReader Represents a sequential buffer reader whose data is composed of bytes. IBuffer<TItem> Represents a buffer. ISource A data source for RSML's toolchain members."
+  },
+  "changelog.html": {
+    "href": "changelog.html",
+    "title": "Changelog | Red Sea Markup Language",
+    "summary": "Changelog v3.0.0-prerelease1 (in development) Currently in development, will lead to the biggest RSML release yet: v3.0.0. \uD83D\uDE80 Features (buffer) Add and test TryGetLineFromIndex method to the read-only string buffer (#57) (buffer) Add methods for calculating the length of a line in the buffer (#58) (buffer) [breaking] Add array-based methods to the read-only buffer interface and class, for convenience (#53 closed by #59) (buffer) Add properties for checking if a source is read-only and checking its cursor position \uD83D\uDC1B Bug Fixes (buffer) Fix methods and line counting mechanics in the read-only string buffer (test) Fix MTP setup \uD83D\uDEA7 Refactor (cache) Move ISupportsCache to a dedicated cache directory (and namespace) \uD83D\uDCDA Documentation Improve documentation partially \uD83E\uDDEA Testing Add more tests [breaking] Add test projects for testing RSML, RSML's SDK and RSML's Native exports ⚙️ Miscellaneous Tasks Migrate to MTP Move the MTP migration property to a props file Comment out the release step (the only goal is testing) Fix workflow toa void parser error on Windows ARM64 Update workflow to avoid linker issues Prefer bash over PowerShell to avoid YAML escaping issues Improve README.md and add test badges Debug release workflow on macOS Debug release workflow on Linux ARM64 Make the CLI non-packable 2.0.0 @ 2025-09-09 Breaking changes for performance sake. ⚡ Performance Its actually good now 1.0.0 @ 2025-05-28 First public RSML release."
+  },
+  "getting-started.html": {
+    "href": "getting-started.html",
+    "title": "Getting Started | Red Sea Markup Language",
+    "summary": "Getting Started"
+  },
+  "guides/hello-world-cli.html": {
+    "href": "guides/hello-world-cli.html",
+    "title": "| Red Sea Markup Language",
+    "summary": ""
+  },
+  "guides/hello-world.html": {
+    "href": "guides/hello-world.html",
+    "title": "| Red Sea Markup Language",
+    "summary": ""
+  },
+  "guides/index.html": {
+    "href": "guides/index.html",
+    "title": "| Red Sea Markup Language",
+    "summary": ""
+  },
+  "index.html": {
+    "href": "index.html",
+    "title": "Red Sea Markup Language v3.0.0 | Red Sea Markup Language",
+    "summary": "Red Sea Markup Language v3.0.0 Warning This documentation refers to RSML v3.0.0+, which is currently in development. Said version introduced major changes to how RSML works, with a full rewrite in C#. Red Sea Markup Language is the powerful and robust fork of MF's CrossRoad Solution, a language designed to dynamically interpret different logic paths based on the local host OS and CPU architecture. RSML, which is short for Red Sea Markup Language, is still in development, but the finished v3.0.0 will observe the following core features: A complete toolchain featuring buffers, readers, lexers, parsers and evaluators. The core library available in C#, Visual Basic, Python and many other languages. SDK for convenience and a more idiomatic usage of RSML in C#. A native shared library for those using RSML in C, C++ or languages that don't have official bindings. A CLI for interacting with the RSML toolchain easily. A static website for evaluating RSML on the go. First-class support for Visual Studio. Syntax highlighting for Visual Studio Code, JetBrains IDEs, Notepad++ and more. Useful Links To further enhance your experience with RSML, we offer a list of links that will prove rather useful. GitHub Repository: the official repository for RSML contains the C# source code for the core library, the SDK, the CLI, the native exports, the respective test projects and the documentation you're currently browsing. Contributions are very much accepted. RSML NuGet Package: the NuGet package for the core RSML library. There are 2 core packages available for RSML, which are the recommended modern one (the link refers to this one) and the deprecated legacy package."
+  },
+  "language/evaluation-flow.html": {
+    "href": "language/evaluation-flow.html",
+    "title": "| Red Sea Markup Language",
+    "summary": ""
+  },
+  "language/getting-started.html": {
+    "href": "language/getting-started.html",
+    "title": "| Red Sea Markup Language",
+    "summary": ""
+  },
+  "language/syntax.html": {
+    "href": "language/syntax.html",
+    "title": "| Red Sea Markup Language",
+    "summary": ""
+  },
+  "tools/cli/getting-started.html": {
+    "href": "tools/cli/getting-started.html",
+    "title": "| Red Sea Markup Language",
+    "summary": ""
+  },
+  "tools/native/getting-started.html": {
+    "href": "tools/native/getting-started.html",
+    "title": "| Red Sea Markup Language",
+    "summary": ""
+  }
+}

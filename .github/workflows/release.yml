@@ -1,4 +1,4 @@
-name: Build, Pack, and Release
+name: Build, pack and release
 
 on:
   workflow_dispatch:
@@ -91,12 +91,12 @@ jobs:
     - name: Pack Projects
       run: dotnet pack --configuration Release --no-build --output ./nupkgs
 
-    #- name: Push to NuGet
-    #  run: |
-    #    dotnet nuget push "./nupkgs/*.nupkg" \
-    #      --api-key ${{ secrets.NUGET_API_KEY }} \
-    #      --source "https://api.nuget.org/v3/index.json" \
-    #      --skip-duplicate
+    - name: Push to NuGet
+      run: |
+        dotnet nuget push "./nupkgs/*.nupkg" \
+          --api-key ${{ secrets.NUGET_API_KEY_RSML }} \
+          --source "https://api.nuget.org/v3/index.json" \
+          --skip-duplicate
 
     - name: Prepare Release Assets
       run: |
@@ -106,9 +106,9 @@ jobs:
           tar -czf "../release-assets/${dir}.tar.gz" -C "$dir" .
         done
 
-    #- name: Create GitHub Release
-    #  uses: softprops/action-gh-release@v2
-    #  with:
-    #    files: ./release-assets/*.tar.gz
-    #  env:
-    #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v2
+      with:
+        files: ./release-assets/*.tar.gz
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

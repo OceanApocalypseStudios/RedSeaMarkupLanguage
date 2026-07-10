@@ -1,0 +1,243 @@
+### YamlMime:ManagedReference
+items:
+- uid: OceanApocalypseStudios.RSML.Exceptions.IError
+  commentId: T:OceanApocalypseStudios.RSML.Exceptions.IError
+  id: IError
+  parent: OceanApocalypseStudios.RSML.Exceptions
+  children: []
+  langs:
+  - csharp
+  - vb
+  name: IError
+  nameWithType: IError
+  fullName: OceanApocalypseStudios.RSML.Exceptions.IError
+  type: Interface
+  source:
+    remote:
+      path: src/RSML/Exceptions/IError.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: IError
+    path: ../src/RSML/Exceptions/IError.cs
+    startLine: 8
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Exceptions
+  summary: Represents an error in the RSML toolchain.
+  example: []
+  syntax:
+    content: 'public interface IError : IEquatable<IError>, IFormattable'
+    content.vb: Public Interface IError Inherits IEquatable(Of IError), IFormattable
+  derivedClasses:
+  - OceanApocalypseStudios.RSML.Exceptions.SourceError
+  inheritedMembers:
+  - System.IEquatable{OceanApocalypseStudios.RSML.Exceptions.IError}.Equals(OceanApocalypseStudios.RSML.Exceptions.IError)
+  - System.IFormattable.ToString(System.String,System.IFormatProvider)
+references:
+- uid: OceanApocalypseStudios.RSML.Exceptions
+  commentId: N:OceanApocalypseStudios.RSML.Exceptions
+  href: OceanApocalypseStudios.html
+  name: OceanApocalypseStudios.RSML.Exceptions
+  nameWithType: OceanApocalypseStudios.RSML.Exceptions
+  fullName: OceanApocalypseStudios.RSML.Exceptions
+  spec.csharp:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Exceptions
+    name: Exceptions
+    href: OceanApocalypseStudios.RSML.Exceptions.html
+  spec.vb:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Exceptions
+    name: Exceptions
+    href: OceanApocalypseStudios.RSML.Exceptions.html
+- uid: System.IEquatable{OceanApocalypseStudios.RSML.Exceptions.IError}.Equals(OceanApocalypseStudios.RSML.Exceptions.IError)
+  commentId: M:System.IEquatable{OceanApocalypseStudios.RSML.Exceptions.IError}.Equals(OceanApocalypseStudios.RSML.Exceptions.IError)
+  parent: System.IEquatable{OceanApocalypseStudios.RSML.Exceptions.IError}
+  definition: System.IEquatable`1.Equals(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(IError)
+  nameWithType: IEquatable<IError>.Equals(IError)
+  fullName: System.IEquatable<OceanApocalypseStudios.RSML.Exceptions.IError>.Equals(OceanApocalypseStudios.RSML.Exceptions.IError)
+  nameWithType.vb: IEquatable(Of IError).Equals(IError)
+  fullName.vb: System.IEquatable(Of OceanApocalypseStudios.RSML.Exceptions.IError).Equals(OceanApocalypseStudios.RSML.Exceptions.IError)
+  spec.csharp:
+  - uid: System.IEquatable{OceanApocalypseStudios.RSML.Exceptions.IError}.Equals(OceanApocalypseStudios.RSML.Exceptions.IError)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: OceanApocalypseStudios.RSML.Exceptions.IError
+    name: IError
+    href: OceanApocalypseStudios.RSML.Exceptions.IError.html
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable{OceanApocalypseStudios.RSML.Exceptions.IError}.Equals(OceanApocalypseStudios.RSML.Exceptions.IError)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: OceanApocalypseStudios.RSML.Exceptions.IError
+    name: IError
+    href: OceanApocalypseStudios.RSML.Exceptions.IError.html
+  - name: )
+- uid: System.IFormattable.ToString(System.String,System.IFormatProvider)
+  commentId: M:System.IFormattable.ToString(System.String,System.IFormatProvider)
+  parent: System.IFormattable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iformattable.tostring
+  name: ToString(string, IFormatProvider)
+  nameWithType: IFormattable.ToString(string, IFormatProvider)
+  fullName: System.IFormattable.ToString(string, System.IFormatProvider)
+  nameWithType.vb: IFormattable.ToString(String, IFormatProvider)
+  fullName.vb: System.IFormattable.ToString(String, System.IFormatProvider)
+  name.vb: ToString(String, IFormatProvider)
+  spec.csharp:
+  - uid: System.IFormattable.ToString(System.String,System.IFormatProvider)
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iformattable.tostring
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.IFormatProvider
+    name: IFormatProvider
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iformatprovider
+  - name: )
+  spec.vb:
+  - uid: System.IFormattable.ToString(System.String,System.IFormatProvider)
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iformattable.tostring
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.IFormatProvider
+    name: IFormatProvider
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iformatprovider
+  - name: )
+- uid: System.IEquatable`1.Equals(`0)
+  commentId: M:System.IEquatable`1.Equals(`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(T)
+  nameWithType: IEquatable<T>.Equals(T)
+  fullName: System.IEquatable<T>.Equals(T)
+  nameWithType.vb: IEquatable(Of T).Equals(T)
+  fullName.vb: System.IEquatable(Of T).Equals(T)
+  spec.csharp:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+- uid: System.IEquatable{OceanApocalypseStudios.RSML.Exceptions.IError}
+  commentId: T:System.IEquatable{OceanApocalypseStudios.RSML.Exceptions.IError}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<IError>
+  nameWithType: IEquatable<IError>
+  fullName: System.IEquatable<OceanApocalypseStudios.RSML.Exceptions.IError>
+  nameWithType.vb: IEquatable(Of IError)
+  fullName.vb: System.IEquatable(Of OceanApocalypseStudios.RSML.Exceptions.IError)
+  name.vb: IEquatable(Of IError)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: OceanApocalypseStudios.RSML.Exceptions.IError
+    name: IError
+    href: OceanApocalypseStudios.RSML.Exceptions.IError.html
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: OceanApocalypseStudios.RSML.Exceptions.IError
+    name: IError
+    href: OceanApocalypseStudios.RSML.Exceptions.IError.html
+  - name: )
+- uid: System.IFormattable
+  commentId: T:System.IFormattable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iformattable
+  name: IFormattable
+  nameWithType: IFormattable
+  fullName: System.IFormattable
+- uid: System.IEquatable`1
+  commentId: T:System.IEquatable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<T>
+  nameWithType: IEquatable<T>
+  fullName: System.IEquatable<T>
+  nameWithType.vb: IEquatable(Of T)
+  fullName.vb: System.IEquatable(Of T)
+  name.vb: IEquatable(Of T)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+memberLayout: SeparatePages

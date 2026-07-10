@@ -1,0 +1,1849 @@
+### YamlMime:ManagedReference
+items:
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1
+  commentId: T:OceanApocalypseStudios.RSML.Sources.IBuffer`1
+  id: IBuffer`1
+  parent: OceanApocalypseStudios.RSML.Sources
+  children:
+  - OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilLineSeparator(System.Int32,System.Boolean@)
+  - OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilNotWhitespace(System.Int32)
+  - OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilWhitespace(System.Int32)
+  - OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountWhile(System.Func{System.Int32,`0,System.Boolean},System.Int32)
+  - OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetLengthOfLine(System.Int32)
+  - OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetLengthOfLineFromIndex(System.Int32)
+  - OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetLine(System.Int32)
+  - OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetLineFromIndex(System.Int32)
+  - OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetLineNumberFromIndex(System.Int32)
+  - OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetSourceLocation(System.Int32)
+  - OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetWord(System.Int32,System.Boolean@)
+  - OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetWord(System.Int32,System.Func{System.Int32,`0,System.Boolean},System.Boolean@)
+  - OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetWord(System.Int32,`0,System.Boolean@)
+  - OceanApocalypseStudios.RSML.Sources.IBuffer`1.Item(OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  - OceanApocalypseStudios.RSML.Sources.IBuffer`1.Item(OceanApocalypseStudios.RSML.Sources.SourceSpan)
+  - OceanApocalypseStudios.RSML.Sources.IBuffer`1.Item(System.Int32)
+  - OceanApocalypseStudios.RSML.Sources.IBuffer`1.LineCount
+  - OceanApocalypseStudios.RSML.Sources.IBuffer`1.Slice(OceanApocalypseStudios.RSML.Sources.SourceSpan,System.Span{`0})
+  - OceanApocalypseStudios.RSML.Sources.IBuffer`1.Slice(System.Int32,System.Int32)
+  - OceanApocalypseStudios.RSML.Sources.IBuffer`1.Slice(System.Int32,System.Span{`0})
+  - OceanApocalypseStudios.RSML.Sources.IBuffer`1.TryGetChar(System.Int32,`0@)
+  - OceanApocalypseStudios.RSML.Sources.IBuffer`1.TryGetLine(System.Int32,System.Span{`0},System.Int32@)
+  - OceanApocalypseStudios.RSML.Sources.IBuffer`1.TryGetLineFromIndex(System.Int32,System.Span{`0},System.Int32@)
+  - OceanApocalypseStudios.RSML.Sources.IBuffer`1.TryGetWord(System.Int32,System.Func{System.Int32,`0,System.Boolean},System.Span{`0},System.Boolean@,System.Int32@)
+  - OceanApocalypseStudios.RSML.Sources.IBuffer`1.TryGetWord(System.Int32,System.Span{`0},System.Boolean@,System.Int32@)
+  - OceanApocalypseStudios.RSML.Sources.IBuffer`1.TryGetWord(System.Int32,`0,System.Span{`0},System.Boolean@,System.Int32@)
+  langs:
+  - csharp
+  - vb
+  name: IBuffer<TItem>
+  nameWithType: IBuffer<TItem>
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>
+  type: Interface
+  source:
+    remote:
+      path: src/RSML/Sources/IBuffer.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: IBuffer
+    path: ../src/RSML/Sources/IBuffer.cs
+    startLine: 9
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Represents a buffer.
+  example: []
+  syntax:
+    content: 'public interface IBuffer<TItem> : ISource, IDisposable, IEquatable<IBuffer<TItem>?>'
+    typeParameters:
+    - id: TItem
+      description: The datatype of the values returned by the buffer methods
+    content.vb: Public Interface IBuffer(Of TItem) Inherits ISource, IDisposable, IEquatable(Of IBuffer(Of TItem))
+  derivedClasses:
+  - OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer
+  inheritedMembers:
+  - OceanApocalypseStudios.RSML.Sources.ISource.CursorIndex
+  - OceanApocalypseStudios.RSML.Sources.ISource.IsEmpty
+  - OceanApocalypseStudios.RSML.Sources.ISource.IsReadOnly
+  - OceanApocalypseStudios.RSML.Sources.ISource.Length
+  - System.IDisposable.Dispose
+  - System.IEquatable{OceanApocalypseStudios.RSML.Sources.IBuffer`1}.Equals(OceanApocalypseStudios.RSML.Sources.IBuffer{{TItem}})
+  nameWithType.vb: IBuffer(Of TItem)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem)
+  name.vb: IBuffer(Of TItem)
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.LineCount
+  commentId: P:OceanApocalypseStudios.RSML.Sources.IBuffer`1.LineCount
+  id: LineCount
+  parent: OceanApocalypseStudios.RSML.Sources.IBuffer`1
+  langs:
+  - csharp
+  - vb
+  name: LineCount
+  nameWithType: IBuffer<TItem>.LineCount
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.LineCount
+  type: Property
+  source:
+    remote:
+      path: src/RSML/Sources/IBuffer.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: LineCount
+    path: ../src/RSML/Sources/IBuffer.cs
+    startLine: 19
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: The total amount of lines in the buffer.
+  remarks: Keep in mind lines might be empty.
+  example: []
+  syntax:
+    content: int LineCount { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: ReadOnly Property LineCount As Integer
+  overload: OceanApocalypseStudios.RSML.Sources.IBuffer`1.LineCount*
+  nameWithType.vb: IBuffer(Of TItem).LineCount
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).LineCount
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.Item(System.Int32)
+  commentId: P:OceanApocalypseStudios.RSML.Sources.IBuffer`1.Item(System.Int32)
+  id: Item(System.Int32)
+  parent: OceanApocalypseStudios.RSML.Sources.IBuffer`1
+  langs:
+  - csharp
+  - vb
+  name: this[int]
+  nameWithType: IBuffer<TItem>.this[int]
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.this[int]
+  type: Property
+  source:
+    remote:
+      path: src/RSML/Sources/IBuffer.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: this[]
+    path: ../src/RSML/Sources/IBuffer.cs
+    startLine: 26
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Gets a single item out of the buffer.
+  example: []
+  syntax:
+    content: TItem this[int index] { get; }
+    parameters:
+    - id: index
+      type: System.Int32
+      description: The index of the item to retrieve.
+    return:
+      type: '{TItem}'
+      description: The item.
+    content.vb: ReadOnly Default Property this[](index As Integer) As TItem
+  overload: OceanApocalypseStudios.RSML.Sources.IBuffer`1.Item*
+  nameWithType.vb: IBuffer(Of TItem).this[](Integer)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).this[](Integer)
+  name.vb: this[](Integer)
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.Item(OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  commentId: P:OceanApocalypseStudios.RSML.Sources.IBuffer`1.Item(OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  id: Item(OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  parent: OceanApocalypseStudios.RSML.Sources.IBuffer`1
+  langs:
+  - csharp
+  - vb
+  name: this[SourceLocation]
+  nameWithType: IBuffer<TItem>.this[SourceLocation]
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.this[OceanApocalypseStudios.RSML.Sources.SourceLocation]
+  type: Property
+  source:
+    remote:
+      path: src/RSML/Sources/IBuffer.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: this[]
+    path: ../src/RSML/Sources/IBuffer.cs
+    startLine: 33
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Gets a single item out of the buffer.
+  example: []
+  syntax:
+    content: TItem this[SourceLocation location] { get; }
+    parameters:
+    - id: location
+      type: OceanApocalypseStudios.RSML.Sources.SourceLocation
+      description: The location of the item to retrieve.
+    return:
+      type: '{TItem}'
+      description: The item.
+    content.vb: ReadOnly Default Property this[](location As SourceLocation) As TItem
+  overload: OceanApocalypseStudios.RSML.Sources.IBuffer`1.Item*
+  nameWithType.vb: IBuffer(Of TItem).this[](SourceLocation)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).this[](OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  name.vb: this[](SourceLocation)
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.Item(OceanApocalypseStudios.RSML.Sources.SourceSpan)
+  commentId: P:OceanApocalypseStudios.RSML.Sources.IBuffer`1.Item(OceanApocalypseStudios.RSML.Sources.SourceSpan)
+  id: Item(OceanApocalypseStudios.RSML.Sources.SourceSpan)
+  parent: OceanApocalypseStudios.RSML.Sources.IBuffer`1
+  langs:
+  - csharp
+  - vb
+  name: this[SourceSpan]
+  nameWithType: IBuffer<TItem>.this[SourceSpan]
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.this[OceanApocalypseStudios.RSML.Sources.SourceSpan]
+  type: Property
+  source:
+    remote:
+      path: src/RSML/Sources/IBuffer.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: this[]
+    path: ../src/RSML/Sources/IBuffer.cs
+    startLine: 40
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Gets a range of items out of the buffer.
+  example: []
+  syntax:
+    content: TItem[] this[SourceSpan span] { get; }
+    parameters:
+    - id: span
+      type: OceanApocalypseStudios.RSML.Sources.SourceSpan
+      description: The span of items to get.
+    return:
+      type: '{TItem}[]'
+      description: The items.
+    content.vb: ReadOnly Default Property this[](span As SourceSpan) As TItem()
+  overload: OceanApocalypseStudios.RSML.Sources.IBuffer`1.Item*
+  nameWithType.vb: IBuffer(Of TItem).this[](SourceSpan)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).this[](OceanApocalypseStudios.RSML.Sources.SourceSpan)
+  name.vb: this[](SourceSpan)
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilLineSeparator(System.Int32,System.Boolean@)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilLineSeparator(System.Int32,System.Boolean@)
+  id: CountUntilLineSeparator(System.Int32,System.Boolean@)
+  parent: OceanApocalypseStudios.RSML.Sources.IBuffer`1
+  langs:
+  - csharp
+  - vb
+  name: CountUntilLineSeparator(int, out bool)
+  nameWithType: IBuffer<TItem>.CountUntilLineSeparator(int, out bool)
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.CountUntilLineSeparator(int, out bool)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/IBuffer.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: CountUntilLineSeparator
+    path: ../src/RSML/Sources/IBuffer.cs
+    startLine: 51
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: >-
+    Counts the amount of items until the next line separator in the buffer, relative to a given <code class="paramref">index</code>.
+
+    Only line separators count - regular whitespace do not. CRLF counts as a single line separator, to avoid double counting.
+  example: []
+  syntax:
+    content: int CountUntilLineSeparator(int index, out bool isCrLf)
+    parameters:
+    - id: index
+      type: System.Int32
+      description: The index at which to start counting.
+    - id: isCrLf
+      type: System.Boolean
+      description: Whether the line separator at which the method stopped is the CR in a CRLF sequence. If true, the next item in the buffer is LF.
+    return:
+      type: System.Int32
+      description: The index of the next line separator, relative to an <code class="paramref">index</code>.
+    content.vb: Function CountUntilLineSeparator(index As Integer, isCrLf As Boolean) As Integer
+  overload: OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilLineSeparator*
+  nameWithType.vb: IBuffer(Of TItem).CountUntilLineSeparator(Integer, Boolean)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).CountUntilLineSeparator(Integer, Boolean)
+  name.vb: CountUntilLineSeparator(Integer, Boolean)
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilNotWhitespace(System.Int32)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilNotWhitespace(System.Int32)
+  id: CountUntilNotWhitespace(System.Int32)
+  parent: OceanApocalypseStudios.RSML.Sources.IBuffer`1
+  langs:
+  - csharp
+  - vb
+  name: CountUntilNotWhitespace(int)
+  nameWithType: IBuffer<TItem>.CountUntilNotWhitespace(int)
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.CountUntilNotWhitespace(int)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/IBuffer.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: CountUntilNotWhitespace
+    path: ../src/RSML/Sources/IBuffer.cs
+    startLine: 59
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: >-
+    Counts the amount of items until the next non-whitespace item in the buffer, relative to a given <code class="paramref">index</code>.
+
+    Line separators are included in the whitespace category.
+  example: []
+  syntax:
+    content: int CountUntilNotWhitespace(int index)
+    parameters:
+    - id: index
+      type: System.Int32
+      description: The index at which to start counting.
+    return:
+      type: System.Int32
+      description: The index of the next non-whitespace item, relative to a <code class="paramref">index</code>.
+    content.vb: Function CountUntilNotWhitespace(index As Integer) As Integer
+  overload: OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilNotWhitespace*
+  nameWithType.vb: IBuffer(Of TItem).CountUntilNotWhitespace(Integer)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).CountUntilNotWhitespace(Integer)
+  name.vb: CountUntilNotWhitespace(Integer)
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilWhitespace(System.Int32)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilWhitespace(System.Int32)
+  id: CountUntilWhitespace(System.Int32)
+  parent: OceanApocalypseStudios.RSML.Sources.IBuffer`1
+  langs:
+  - csharp
+  - vb
+  name: CountUntilWhitespace(int)
+  nameWithType: IBuffer<TItem>.CountUntilWhitespace(int)
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.CountUntilWhitespace(int)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/IBuffer.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: CountUntilWhitespace
+    path: ../src/RSML/Sources/IBuffer.cs
+    startLine: 67
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: >-
+    Counts the amount of items until the next whitespace item in the buffer, relative to a given <code class="paramref">index</code>.
+
+    Line separators are included in the whitespace category.
+  example: []
+  syntax:
+    content: int CountUntilWhitespace(int index)
+    parameters:
+    - id: index
+      type: System.Int32
+      description: The index at which to start counting.
+    return:
+      type: System.Int32
+      description: The index of the next whitespace item, relative to a <code class="paramref">index</code>.
+    content.vb: Function CountUntilWhitespace(index As Integer) As Integer
+  overload: OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilWhitespace*
+  nameWithType.vb: IBuffer(Of TItem).CountUntilWhitespace(Integer)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).CountUntilWhitespace(Integer)
+  name.vb: CountUntilWhitespace(Integer)
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountWhile(System.Func{System.Int32,`0,System.Boolean},System.Int32)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountWhile(System.Func{System.Int32,`0,System.Boolean},System.Int32)
+  id: CountWhile(System.Func{System.Int32,`0,System.Boolean},System.Int32)
+  parent: OceanApocalypseStudios.RSML.Sources.IBuffer`1
+  langs:
+  - csharp
+  - vb
+  name: CountWhile(Func<int, TItem, bool>, int)
+  nameWithType: IBuffer<TItem>.CountWhile(Func<int, TItem, bool>, int)
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.CountWhile(System.Func<int, TItem, bool>, int)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/IBuffer.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: CountWhile
+    path: ../src/RSML/Sources/IBuffer.cs
+    startLine: 84
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: >-
+    Counts the amount of items, starting from a given <code class="paramref">index</code>,
+
+    while a <code class="paramref">predicate</code> returns <code>true</code>.
+  example: []
+  syntax:
+    content: int CountWhile(Func<int, TItem, bool> predicate, int index)
+    parameters:
+    - id: predicate
+      type: System.Func{System.Int32,{TItem},System.Boolean}
+      description: >-
+        A function that takes the current index (relative to <code class="paramref">index</code>),
+
+        which is incremented every item, and the item associated with it. Execution stops when
+
+        the predicate returns <code>false</code> or the index is out of bounds.
+    - id: index
+      type: System.Int32
+      description: >-
+        The index at which to start counting; all indexes will also be given to the
+
+        <code class="paramref">predicate</code> as an offset that when added to the index of the position
+
+        equal the actual index.
+    return:
+      type: System.Int32
+      description: The amount of items counted.
+    content.vb: Function CountWhile(predicate As Func(Of Integer, TItem, Boolean), index As Integer) As Integer
+  overload: OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountWhile*
+  nameWithType.vb: IBuffer(Of TItem).CountWhile(Func(Of Integer, TItem, Boolean), Integer)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).CountWhile(System.Func(Of Integer, TItem, Boolean), Integer)
+  name.vb: CountWhile(Func(Of Integer, TItem, Boolean), Integer)
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetLengthOfLine(System.Int32)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetLengthOfLine(System.Int32)
+  id: GetLengthOfLine(System.Int32)
+  parent: OceanApocalypseStudios.RSML.Sources.IBuffer`1
+  langs:
+  - csharp
+  - vb
+  name: GetLengthOfLine(int)
+  nameWithType: IBuffer<TItem>.GetLengthOfLine(int)
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.GetLengthOfLine(int)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/IBuffer.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: GetLengthOfLine
+    path: ../src/RSML/Sources/IBuffer.cs
+    startLine: 92
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: >-
+    Returns the length of a line given its 0-based line number.
+
+    Line separators do not count towards the length.
+  example: []
+  syntax:
+    content: int GetLengthOfLine(int lineNumber)
+    parameters:
+    - id: lineNumber
+      type: System.Int32
+      description: The 0-based line number.
+    return:
+      type: System.Int32
+      description: The length of the line.
+    content.vb: Function GetLengthOfLine(lineNumber As Integer) As Integer
+  overload: OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetLengthOfLine*
+  nameWithType.vb: IBuffer(Of TItem).GetLengthOfLine(Integer)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).GetLengthOfLine(Integer)
+  name.vb: GetLengthOfLine(Integer)
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetLengthOfLineFromIndex(System.Int32)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetLengthOfLineFromIndex(System.Int32)
+  id: GetLengthOfLineFromIndex(System.Int32)
+  parent: OceanApocalypseStudios.RSML.Sources.IBuffer`1
+  langs:
+  - csharp
+  - vb
+  name: GetLengthOfLineFromIndex(int)
+  nameWithType: IBuffer<TItem>.GetLengthOfLineFromIndex(int)
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.GetLengthOfLineFromIndex(int)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/IBuffer.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: GetLengthOfLineFromIndex
+    path: ../src/RSML/Sources/IBuffer.cs
+    startLine: 101
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: >-
+    Returns the length of a line given a 0-based index of one
+
+    of its items.
+
+    Line separators do not count towards the length.
+  example: []
+  syntax:
+    content: int GetLengthOfLineFromIndex(int index)
+    parameters:
+    - id: index
+      type: System.Int32
+      description: The 0-based index whose line is considered.
+    return:
+      type: System.Int32
+      description: The length of the line.
+    content.vb: Function GetLengthOfLineFromIndex(index As Integer) As Integer
+  overload: OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetLengthOfLineFromIndex*
+  nameWithType.vb: IBuffer(Of TItem).GetLengthOfLineFromIndex(Integer)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).GetLengthOfLineFromIndex(Integer)
+  name.vb: GetLengthOfLineFromIndex(Integer)
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetLine(System.Int32)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetLine(System.Int32)
+  id: GetLine(System.Int32)
+  parent: OceanApocalypseStudios.RSML.Sources.IBuffer`1
+  langs:
+  - csharp
+  - vb
+  name: GetLine(int)
+  nameWithType: IBuffer<TItem>.GetLine(int)
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.GetLine(int)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/IBuffer.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: GetLine
+    path: ../src/RSML/Sources/IBuffer.cs
+    startLine: 108
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Given a 0-based line number, returns the matching line as an array of buffer items.
+  example: []
+  syntax:
+    content: TItem[] GetLine(int lineNumber)
+    parameters:
+    - id: lineNumber
+      type: System.Int32
+      description: The 0-based line number.
+    return:
+      type: '{TItem}[]'
+      description: The line as an array of items.
+    content.vb: Function GetLine(lineNumber As Integer) As TItem()
+  overload: OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetLine*
+  nameWithType.vb: IBuffer(Of TItem).GetLine(Integer)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).GetLine(Integer)
+  name.vb: GetLine(Integer)
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetLineFromIndex(System.Int32)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetLineFromIndex(System.Int32)
+  id: GetLineFromIndex(System.Int32)
+  parent: OceanApocalypseStudios.RSML.Sources.IBuffer`1
+  langs:
+  - csharp
+  - vb
+  name: GetLineFromIndex(int)
+  nameWithType: IBuffer<TItem>.GetLineFromIndex(int)
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.GetLineFromIndex(int)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/IBuffer.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: GetLineFromIndex
+    path: ../src/RSML/Sources/IBuffer.cs
+    startLine: 116
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: >-
+    Tries to read the line that contains the item at <code class="paramref">index</code>.
+
+    No end of line characters are added.
+  example: []
+  syntax:
+    content: TItem[] GetLineFromIndex(int index)
+    parameters:
+    - id: index
+      type: System.Int32
+      description: The index at which to determine what the current line is.
+    return:
+      type: '{TItem}[]'
+      description: The line, as an array of items.
+    content.vb: Function GetLineFromIndex(index As Integer) As TItem()
+  overload: OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetLineFromIndex*
+  nameWithType.vb: IBuffer(Of TItem).GetLineFromIndex(Integer)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).GetLineFromIndex(Integer)
+  name.vb: GetLineFromIndex(Integer)
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetLineNumberFromIndex(System.Int32)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetLineNumberFromIndex(System.Int32)
+  id: GetLineNumberFromIndex(System.Int32)
+  parent: OceanApocalypseStudios.RSML.Sources.IBuffer`1
+  langs:
+  - csharp
+  - vb
+  name: GetLineNumberFromIndex(int)
+  nameWithType: IBuffer<TItem>.GetLineNumberFromIndex(int)
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.GetLineNumberFromIndex(int)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/IBuffer.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: GetLineNumberFromIndex
+    path: ../src/RSML/Sources/IBuffer.cs
+    startLine: 123
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Determines the 0-based line number of the line that contains the item located at <code class="paramref">index</code>.
+  example: []
+  syntax:
+    content: int GetLineNumberFromIndex(int index)
+    parameters:
+    - id: index
+      type: System.Int32
+      description: The index whose parent line's number is to be returned.
+    return:
+      type: System.Int32
+      description: The 0-based number of the line that contains item located at <code class="paramref">index</code>.
+    content.vb: Function GetLineNumberFromIndex(index As Integer) As Integer
+  overload: OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetLineNumberFromIndex*
+  nameWithType.vb: IBuffer(Of TItem).GetLineNumberFromIndex(Integer)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).GetLineNumberFromIndex(Integer)
+  name.vb: GetLineNumberFromIndex(Integer)
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetSourceLocation(System.Int32)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetSourceLocation(System.Int32)
+  id: GetSourceLocation(System.Int32)
+  parent: OceanApocalypseStudios.RSML.Sources.IBuffer`1
+  langs:
+  - csharp
+  - vb
+  name: GetSourceLocation(int)
+  nameWithType: IBuffer<TItem>.GetSourceLocation(int)
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.GetSourceLocation(int)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/IBuffer.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: GetSourceLocation
+    path: ../src/RSML/Sources/IBuffer.cs
+    startLine: 130
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Converts an index into a location.
+  example: []
+  syntax:
+    content: SourceLocation GetSourceLocation(int index)
+    parameters:
+    - id: index
+      type: System.Int32
+      description: The index.
+    return:
+      type: OceanApocalypseStudios.RSML.Sources.SourceLocation
+      description: The location.
+    content.vb: Function GetSourceLocation(index As Integer) As SourceLocation
+  overload: OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetSourceLocation*
+  nameWithType.vb: IBuffer(Of TItem).GetSourceLocation(Integer)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).GetSourceLocation(Integer)
+  name.vb: GetSourceLocation(Integer)
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetWord(System.Int32,System.Func{System.Int32,`0,System.Boolean},System.Boolean@)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetWord(System.Int32,System.Func{System.Int32,`0,System.Boolean},System.Boolean@)
+  id: GetWord(System.Int32,System.Func{System.Int32,`0,System.Boolean},System.Boolean@)
+  parent: OceanApocalypseStudios.RSML.Sources.IBuffer`1
+  langs:
+  - csharp
+  - vb
+  name: GetWord(int, Func<int, TItem, bool>, out bool)
+  nameWithType: IBuffer<TItem>.GetWord(int, Func<int, TItem, bool>, out bool)
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.GetWord(int, System.Func<int, TItem, bool>, out bool)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/IBuffer.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: GetWord
+    path: ../src/RSML/Sources/IBuffer.cs
+    startLine: 151
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: >-
+    Tries to read the word at index <code class="paramref">index</code>, which can be a span of items verified by
+
+    <code class="paramref">itemKindPredicate</code> (if the starting index is verified by <code class="paramref">itemKindPredicate</code>)
+
+    or a span of content not verified by <code class="paramref">itemKindPredicate</code> (if
+
+    the starting index does not point to anything verified by <code class="paramref">itemKindPredicate</code>).
+  example: []
+  syntax:
+    content: TItem[] GetWord(int index, Func<int, TItem, bool> itemKindPredicate, out bool isItemKind)
+    parameters:
+    - id: index
+      type: System.Int32
+      description: The index at which the word starts.
+    - id: itemKindPredicate
+      type: System.Func{System.Int32,{TItem},System.Boolean}
+      description: >-
+        A predicate that verifies if the first item in the selected range serves as the delimiter
+
+        (the predicate returns <code>true</code> if so). For example, if the predicate verifies <code>,</code>, then 
+
+        the current word if the buffer is <code>My awesome buffer, isn't it cool?</code> starting from <code class="paramref">index</code>,
+
+        is <code>My awesome buffer</code>. If the predicate verifies <code>;</code>, then the current word
+
+        if the buffer is <code>;;so very awesome</code> starting from <code class="paramref">index</code>, is <code>;;</code>.
+    - id: isItemKind
+      type: System.Boolean
+      description: >-
+        True if the array is fully comprised of the item kind verified by <code class="paramref">itemKindPredicate</code>.
+
+        If False, no items verified by <code class="paramref">itemKindPredicate</code> is present.
+    return:
+      type: '{TItem}[]'
+      description: The line, as an array of items.
+    content.vb: Function GetWord(index As Integer, itemKindPredicate As Func(Of Integer, TItem, Boolean), isItemKind As Boolean) As TItem()
+  overload: OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetWord*
+  nameWithType.vb: IBuffer(Of TItem).GetWord(Integer, Func(Of Integer, TItem, Boolean), Boolean)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).GetWord(Integer, System.Func(Of Integer, TItem, Boolean), Boolean)
+  name.vb: GetWord(Integer, Func(Of Integer, TItem, Boolean), Boolean)
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetWord(System.Int32,System.Boolean@)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetWord(System.Int32,System.Boolean@)
+  id: GetWord(System.Int32,System.Boolean@)
+  parent: OceanApocalypseStudios.RSML.Sources.IBuffer`1
+  langs:
+  - csharp
+  - vb
+  name: GetWord(int, out bool)
+  nameWithType: IBuffer<TItem>.GetWord(int, out bool)
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.GetWord(int, out bool)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/IBuffer.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: GetWord
+    path: ../src/RSML/Sources/IBuffer.cs
+    startLine: 160
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: >-
+    Tries to read the word at index <code class="paramref">index</code>, which can be a span of whitespace (if the starting index points to whitespace)
+
+    or a span of non-whitespace content (if the starting index does not point to whitespace).
+  example: []
+  syntax:
+    content: TItem[] GetWord(int index, out bool isWhitespace)
+    parameters:
+    - id: index
+      type: System.Int32
+      description: The index at which the word starts.
+    - id: isWhitespace
+      type: System.Boolean
+      description: True if the array is fully comprised of whitespace. If False, no whitespace is present.
+    return:
+      type: '{TItem}[]'
+      description: The line, as an array of items.
+    content.vb: Function GetWord(index As Integer, isWhitespace As Boolean) As TItem()
+  overload: OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetWord*
+  nameWithType.vb: IBuffer(Of TItem).GetWord(Integer, Boolean)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).GetWord(Integer, Boolean)
+  name.vb: GetWord(Integer, Boolean)
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetWord(System.Int32,`0,System.Boolean@)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetWord(System.Int32,`0,System.Boolean@)
+  id: GetWord(System.Int32,`0,System.Boolean@)
+  parent: OceanApocalypseStudios.RSML.Sources.IBuffer`1
+  langs:
+  - csharp
+  - vb
+  name: GetWord(int, TItem, out bool)
+  nameWithType: IBuffer<TItem>.GetWord(int, TItem, out bool)
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.GetWord(int, TItem, out bool)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/IBuffer.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: GetWord
+    path: ../src/RSML/Sources/IBuffer.cs
+    startLine: 179
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: >-
+    Tries to read the word at index <code class="paramref">index</code>, which can be a span of <code class="paramref">itemKind</code> (if the starting index
+
+    points to <code class="paramref">itemKind</code>) or a span of non-<code class="paramref">itemKind</code> content (if
+
+    the starting index does not point to <code class="paramref">itemKind</code>).
+  example: []
+  syntax:
+    content: TItem[] GetWord(int index, TItem itemKind, out bool isItemKind)
+    parameters:
+    - id: index
+      type: System.Int32
+      description: The index at which the word starts.
+    - id: itemKind
+      type: '{TItem}'
+      description: >-
+        The item that will serve as the delimiter. For example, if item kind is <code>,</code>, then 
+
+        the current word if the buffer is <code> My awesome buffer, isn't it cool?</code> starting from <code class="paramref">index</code>,
+
+        is <code> My awesome buffer</code>. If item kind is <code>;</code>, then 
+
+        the current word if the buffer is <code>;;so very awesome</code> starting from <code class="paramref">index</code>, is <code>;;</code>.
+    - id: isItemKind
+      type: System.Boolean
+      description: >-
+        True if the array is fully comprised of <code class="paramref">itemKind</code>.
+
+        If False, no <code class="paramref">itemKind</code> is present.
+    return:
+      type: '{TItem}[]'
+      description: The line, as an array of items.
+    content.vb: Function GetWord(index As Integer, itemKind As TItem, isItemKind As Boolean) As TItem()
+  overload: OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetWord*
+  nameWithType.vb: IBuffer(Of TItem).GetWord(Integer, TItem, Boolean)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).GetWord(Integer, TItem, Boolean)
+  name.vb: GetWord(Integer, TItem, Boolean)
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.Slice(System.Int32,System.Int32)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.IBuffer`1.Slice(System.Int32,System.Int32)
+  id: Slice(System.Int32,System.Int32)
+  parent: OceanApocalypseStudios.RSML.Sources.IBuffer`1
+  langs:
+  - csharp
+  - vb
+  name: Slice(int, int)
+  nameWithType: IBuffer<TItem>.Slice(int, int)
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.Slice(int, int)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/IBuffer.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Slice
+    path: ../src/RSML/Sources/IBuffer.cs
+    startLine: 187
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Slices a region of the buffer.
+  example: []
+  syntax:
+    content: TItem[] Slice(int start, int length)
+    parameters:
+    - id: start
+      type: System.Int32
+      description: The index of the first item in the slice.
+    - id: length
+      type: System.Int32
+      description: The amount of items to slice starting at <code class="paramref">start</code>.
+    return:
+      type: '{TItem}[]'
+      description: A slice, as an array of items.
+    content.vb: Function Slice(start As Integer, length As Integer) As TItem()
+  overload: OceanApocalypseStudios.RSML.Sources.IBuffer`1.Slice*
+  nameWithType.vb: IBuffer(Of TItem).Slice(Integer, Integer)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).Slice(Integer, Integer)
+  name.vb: Slice(Integer, Integer)
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.Slice(System.Int32,System.Span{`0})
+  commentId: M:OceanApocalypseStudios.RSML.Sources.IBuffer`1.Slice(System.Int32,System.Span{`0})
+  id: Slice(System.Int32,System.Span{`0})
+  parent: OceanApocalypseStudios.RSML.Sources.IBuffer`1
+  langs:
+  - csharp
+  - vb
+  name: Slice(int, Span<TItem>)
+  nameWithType: IBuffer<TItem>.Slice(int, Span<TItem>)
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.Slice(int, System.Span<TItem>)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/IBuffer.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Slice
+    path: ../src/RSML/Sources/IBuffer.cs
+    startLine: 194
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Slices a region of the buffer into a performant span.
+  example: []
+  syntax:
+    content: void Slice(int start, Span<TItem> slice)
+    parameters:
+    - id: start
+      type: System.Int32
+      description: The index of the first item in the slice.
+    - id: slice
+      type: System.Span{{TItem}}
+      description: The span serving as the destination for the slice.
+    content.vb: Sub Slice(start As Integer, slice As Span(Of TItem))
+  overload: OceanApocalypseStudios.RSML.Sources.IBuffer`1.Slice*
+  nameWithType.vb: IBuffer(Of TItem).Slice(Integer, Span(Of TItem))
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).Slice(Integer, System.Span(Of TItem))
+  name.vb: Slice(Integer, Span(Of TItem))
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.Slice(OceanApocalypseStudios.RSML.Sources.SourceSpan,System.Span{`0})
+  commentId: M:OceanApocalypseStudios.RSML.Sources.IBuffer`1.Slice(OceanApocalypseStudios.RSML.Sources.SourceSpan,System.Span{`0})
+  id: Slice(OceanApocalypseStudios.RSML.Sources.SourceSpan,System.Span{`0})
+  parent: OceanApocalypseStudios.RSML.Sources.IBuffer`1
+  langs:
+  - csharp
+  - vb
+  name: Slice(SourceSpan, Span<TItem>)
+  nameWithType: IBuffer<TItem>.Slice(SourceSpan, Span<TItem>)
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.Slice(OceanApocalypseStudios.RSML.Sources.SourceSpan, System.Span<TItem>)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/IBuffer.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Slice
+    path: ../src/RSML/Sources/IBuffer.cs
+    startLine: 201
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Slices a region of the buffer into a performant span.
+  example: []
+  syntax:
+    content: void Slice(SourceSpan sourceSpan, Span<TItem> slice)
+    parameters:
+    - id: sourceSpan
+      type: OceanApocalypseStudios.RSML.Sources.SourceSpan
+      description: The span indicating what the slice is.
+    - id: slice
+      type: System.Span{{TItem}}
+      description: The span serving as the destination for the slice.
+    content.vb: Sub Slice(sourceSpan As SourceSpan, slice As Span(Of TItem))
+  overload: OceanApocalypseStudios.RSML.Sources.IBuffer`1.Slice*
+  nameWithType.vb: IBuffer(Of TItem).Slice(SourceSpan, Span(Of TItem))
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).Slice(OceanApocalypseStudios.RSML.Sources.SourceSpan, System.Span(Of TItem))
+  name.vb: Slice(SourceSpan, Span(Of TItem))
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.TryGetChar(System.Int32,`0@)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.IBuffer`1.TryGetChar(System.Int32,`0@)
+  id: TryGetChar(System.Int32,`0@)
+  parent: OceanApocalypseStudios.RSML.Sources.IBuffer`1
+  langs:
+  - csharp
+  - vb
+  name: TryGetChar(int, out TItem)
+  nameWithType: IBuffer<TItem>.TryGetChar(int, out TItem)
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.TryGetChar(int, out TItem)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/IBuffer.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: TryGetChar
+    path: ../src/RSML/Sources/IBuffer.cs
+    startLine: 209
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Tries to read the next item in the buffer, relative to an <code class="paramref">index</code>.
+  example: []
+  syntax:
+    content: bool TryGetChar(int index, out TItem item)
+    parameters:
+    - id: index
+      type: System.Int32
+      description: The index of the character.
+    - id: item
+      type: '{TItem}'
+      description: The item.
+    return:
+      type: System.Boolean
+      description: False if the buffer is out of bounds or an exception occured.
+    content.vb: Function TryGetChar(index As Integer, item As TItem) As Boolean
+  overload: OceanApocalypseStudios.RSML.Sources.IBuffer`1.TryGetChar*
+  nameWithType.vb: IBuffer(Of TItem).TryGetChar(Integer, TItem)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).TryGetChar(Integer, TItem)
+  name.vb: TryGetChar(Integer, TItem)
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.TryGetLine(System.Int32,System.Span{`0},System.Int32@)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.IBuffer`1.TryGetLine(System.Int32,System.Span{`0},System.Int32@)
+  id: TryGetLine(System.Int32,System.Span{`0},System.Int32@)
+  parent: OceanApocalypseStudios.RSML.Sources.IBuffer`1
+  langs:
+  - csharp
+  - vb
+  name: TryGetLine(int, Span<TItem>, out int)
+  nameWithType: IBuffer<TItem>.TryGetLine(int, Span<TItem>, out int)
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.TryGetLine(int, System.Span<TItem>, out int)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/IBuffer.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: TryGetLine
+    path: ../src/RSML/Sources/IBuffer.cs
+    startLine: 218
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Given a 0-based line number, assigns the exact line to a result buffer (<code class="paramref">destination</code>).
+  example: []
+  syntax:
+    content: bool TryGetLine(int lineNumber, Span<TItem> destination, out int itemCount)
+    parameters:
+    - id: lineNumber
+      type: System.Int32
+      description: The 0-based line number.
+    - id: destination
+      type: System.Span{{TItem}}
+      description: The destination buffer for the line.
+    - id: itemCount
+      type: System.Int32
+      description: The amount of items returned.
+    return:
+      type: System.Boolean
+      description: True if successful.
+    content.vb: Function TryGetLine(lineNumber As Integer, destination As Span(Of TItem), itemCount As Integer) As Boolean
+  overload: OceanApocalypseStudios.RSML.Sources.IBuffer`1.TryGetLine*
+  nameWithType.vb: IBuffer(Of TItem).TryGetLine(Integer, Span(Of TItem), Integer)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).TryGetLine(Integer, System.Span(Of TItem), Integer)
+  name.vb: TryGetLine(Integer, Span(Of TItem), Integer)
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.TryGetLineFromIndex(System.Int32,System.Span{`0},System.Int32@)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.IBuffer`1.TryGetLineFromIndex(System.Int32,System.Span{`0},System.Int32@)
+  id: TryGetLineFromIndex(System.Int32,System.Span{`0},System.Int32@)
+  parent: OceanApocalypseStudios.RSML.Sources.IBuffer`1
+  langs:
+  - csharp
+  - vb
+  name: TryGetLineFromIndex(int, Span<TItem>, out int)
+  nameWithType: IBuffer<TItem>.TryGetLineFromIndex(int, Span<TItem>, out int)
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.TryGetLineFromIndex(int, System.Span<TItem>, out int)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/IBuffer.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: TryGetLineFromIndex
+    path: ../src/RSML/Sources/IBuffer.cs
+    startLine: 228
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: >-
+    Tries to read the line that contains the item at <code class="paramref">index</code>.
+
+    No end of line characters are added.
+  example: []
+  syntax:
+    content: bool TryGetLineFromIndex(int index, Span<TItem> destination, out int itemCount)
+    parameters:
+    - id: index
+      type: System.Int32
+      description: The index at which to determine what the current line is.
+    - id: destination
+      type: System.Span{{TItem}}
+      description: The destination span that will contain the line.
+    - id: itemCount
+      type: System.Int32
+      description: The amount of items that were written to <code class="paramref">destination</code>.
+    return:
+      type: System.Boolean
+      description: False if the buffer is out of bounds, there are no more lines to read or an exception occured.
+    content.vb: Function TryGetLineFromIndex(index As Integer, destination As Span(Of TItem), itemCount As Integer) As Boolean
+  overload: OceanApocalypseStudios.RSML.Sources.IBuffer`1.TryGetLineFromIndex*
+  nameWithType.vb: IBuffer(Of TItem).TryGetLineFromIndex(Integer, Span(Of TItem), Integer)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).TryGetLineFromIndex(Integer, System.Span(Of TItem), Integer)
+  name.vb: TryGetLineFromIndex(Integer, Span(Of TItem), Integer)
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.TryGetWord(System.Int32,System.Func{System.Int32,`0,System.Boolean},System.Span{`0},System.Boolean@,System.Int32@)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.IBuffer`1.TryGetWord(System.Int32,System.Func{System.Int32,`0,System.Boolean},System.Span{`0},System.Boolean@,System.Int32@)
+  id: TryGetWord(System.Int32,System.Func{System.Int32,`0,System.Boolean},System.Span{`0},System.Boolean@,System.Int32@)
+  parent: OceanApocalypseStudios.RSML.Sources.IBuffer`1
+  langs:
+  - csharp
+  - vb
+  name: TryGetWord(int, Func<int, TItem, bool>, Span<TItem>, out bool, out int)
+  nameWithType: IBuffer<TItem>.TryGetWord(int, Func<int, TItem, bool>, Span<TItem>, out bool, out int)
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.TryGetWord(int, System.Func<int, TItem, bool>, System.Span<TItem>, out bool, out int)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/IBuffer.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: TryGetWord
+    path: ../src/RSML/Sources/IBuffer.cs
+    startLine: 256
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: >-
+    Tries to read the word at index <code class="paramref">index</code>, which can be a span of items verified by
+
+    <code class="paramref">itemKindPredicate</code> (if the starting index is verified by <code class="paramref">itemKindPredicate</code>)
+
+    or a span of content not verified by <code class="paramref">itemKindPredicate</code> (if
+
+    the starting index does not point to anything verified by <code class="paramref">itemKindPredicate</code>).
+  remarks: >-
+    This method may lead to partial reading (for example if <code class="paramref">destination</code> is not
+
+    large enough). When this happens, the return value will be <strong>False</strong> but <code class="paramref">itemCount</code>
+
+    will be set to something greater than <code>0</code>.
+  example: []
+  syntax:
+    content: bool TryGetWord(int index, Func<int, TItem, bool> itemKindPredicate, Span<TItem> destination, out bool isItemKind, out int itemCount)
+    parameters:
+    - id: index
+      type: System.Int32
+      description: The index at which the word starts.
+    - id: itemKindPredicate
+      type: System.Func{System.Int32,{TItem},System.Boolean}
+      description: >-
+        A predicate that verifies if the first item in the selected range serves as the delimiter
+
+        (the predicate returns <code>true</code> if so). For example, if the predicate verifies <code>,</code>, then 
+
+        the current word if the buffer is <code>My awesome buffer, isn't it cool?</code> starting from <code class="paramref">index</code>,
+
+        is <code>My awesome buffer</code>. If the predicate verifies <code>;</code>, then the current word
+
+        if the buffer is <code>;;so very awesome</code> starting from <code class="paramref">index</code>, is <code>;;</code>.
+    - id: destination
+      type: System.Span{{TItem}}
+      description: The span which will be the destination for the read content.
+    - id: isItemKind
+      type: System.Boolean
+      description: >-
+        True if the span is fully comprised of the item kind verified by <code class="paramref">itemKindPredicate</code>.
+
+        If False, no items verified by <code class="paramref">itemKindPredicate</code> is present.
+    - id: itemCount
+      type: System.Int32
+      description: The amount of characters that were written to <code class="paramref">destination</code>.
+    return:
+      type: System.Boolean
+      description: False if the buffer is out of bounds, the reading was only partial or an exception occured.
+    content.vb: Function TryGetWord(index As Integer, itemKindPredicate As Func(Of Integer, TItem, Boolean), destination As Span(Of TItem), isItemKind As Boolean, itemCount As Integer) As Boolean
+  overload: OceanApocalypseStudios.RSML.Sources.IBuffer`1.TryGetWord*
+  nameWithType.vb: IBuffer(Of TItem).TryGetWord(Integer, Func(Of Integer, TItem, Boolean), Span(Of TItem), Boolean, Integer)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).TryGetWord(Integer, System.Func(Of Integer, TItem, Boolean), System.Span(Of TItem), Boolean, Integer)
+  name.vb: TryGetWord(Integer, Func(Of Integer, TItem, Boolean), Span(Of TItem), Boolean, Integer)
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.TryGetWord(System.Int32,System.Span{`0},System.Boolean@,System.Int32@)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.IBuffer`1.TryGetWord(System.Int32,System.Span{`0},System.Boolean@,System.Int32@)
+  id: TryGetWord(System.Int32,System.Span{`0},System.Boolean@,System.Int32@)
+  parent: OceanApocalypseStudios.RSML.Sources.IBuffer`1
+  langs:
+  - csharp
+  - vb
+  name: TryGetWord(int, Span<TItem>, out bool, out int)
+  nameWithType: IBuffer<TItem>.TryGetWord(int, Span<TItem>, out bool, out int)
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.TryGetWord(int, System.Span<TItem>, out bool, out int)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/IBuffer.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: TryGetWord
+    path: ../src/RSML/Sources/IBuffer.cs
+    startLine: 272
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: >-
+    Tries to read the word at index <code class="paramref">index</code>, which can be a span of whitespace (if the starting index points to whitespace)
+
+    or a span of non-whitespace content (if the starting index does not point to whitespace).
+  remarks: >-
+    This method may lead to partial reading (for example if <code class="paramref">destination</code> is not
+
+    large enough). When this happens, the return value will be <strong>False</strong> but <code class="paramref">itemCount</code>
+
+    will be set to something greater than <code>0</code>.
+  example: []
+  syntax:
+    content: bool TryGetWord(int index, Span<TItem> destination, out bool isWhitespace, out int itemCount)
+    parameters:
+    - id: index
+      type: System.Int32
+      description: The index at which the word starts.
+    - id: destination
+      type: System.Span{{TItem}}
+      description: The span which will be the destination for the read content.
+    - id: isWhitespace
+      type: System.Boolean
+      description: True if the span is fully comprised of whitespace. If False, no whitespace is present.
+    - id: itemCount
+      type: System.Int32
+      description: The amount of characters that were written to <code class="paramref">destination</code>.
+    return:
+      type: System.Boolean
+      description: False if the buffer is out of bounds or an exception occured.
+    content.vb: Function TryGetWord(index As Integer, destination As Span(Of TItem), isWhitespace As Boolean, itemCount As Integer) As Boolean
+  overload: OceanApocalypseStudios.RSML.Sources.IBuffer`1.TryGetWord*
+  nameWithType.vb: IBuffer(Of TItem).TryGetWord(Integer, Span(Of TItem), Boolean, Integer)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).TryGetWord(Integer, System.Span(Of TItem), Boolean, Integer)
+  name.vb: TryGetWord(Integer, Span(Of TItem), Boolean, Integer)
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.TryGetWord(System.Int32,`0,System.Span{`0},System.Boolean@,System.Int32@)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.IBuffer`1.TryGetWord(System.Int32,`0,System.Span{`0},System.Boolean@,System.Int32@)
+  id: TryGetWord(System.Int32,`0,System.Span{`0},System.Boolean@,System.Int32@)
+  parent: OceanApocalypseStudios.RSML.Sources.IBuffer`1
+  langs:
+  - csharp
+  - vb
+  name: TryGetWord(int, TItem, Span<TItem>, out bool, out int)
+  nameWithType: IBuffer<TItem>.TryGetWord(int, TItem, Span<TItem>, out bool, out int)
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.TryGetWord(int, TItem, System.Span<TItem>, out bool, out int)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/IBuffer.cs
+      branch: v3.0.0-prerelease1-dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: TryGetWord
+    path: ../src/RSML/Sources/IBuffer.cs
+    startLine: 298
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: >-
+    Tries to read the word at index <code class="paramref">index</code>, which can be a span of <code class="paramref">itemKind</code> (if the starting index
+
+    points to <code class="paramref">itemKind</code>) or a span of non-<code class="paramref">itemKind</code> content (if
+
+    the starting index does not point to <code class="paramref">itemKind</code>).
+  remarks: >-
+    This method may lead to partial reading (for example if <code class="paramref">destination</code> is not
+
+    large enough). When this happens, the return value will be <strong>False</strong> but <code class="paramref">itemCount</code>
+
+    will be set to something greater than <code>0</code>.
+  example: []
+  syntax:
+    content: bool TryGetWord(int index, TItem itemKind, Span<TItem> destination, out bool isItemKind, out int itemCount)
+    parameters:
+    - id: index
+      type: System.Int32
+      description: The index at which the word starts.
+    - id: itemKind
+      type: '{TItem}'
+      description: >-
+        The item that will serve as the delimiter. For example, if item kind is <code>,</code>, then 
+
+        the current word if the buffer is <code> My awesome buffer, isn't it cool?</code> starting from <code class="paramref">index</code>,
+
+        is <code> My awesome buffer</code>. If item kind is <code>;</code>, then 
+
+        the current word if the buffer is <code>;;so very awesome</code> starting from <code class="paramref">index</code>, is <code>;;</code>.
+    - id: destination
+      type: System.Span{{TItem}}
+      description: The span which will be the destination for the read content.
+    - id: isItemKind
+      type: System.Boolean
+      description: >-
+        True if the span is fully comprised of <code class="paramref">itemKind</code>.
+
+        If False, no <code class="paramref">itemKind</code> is present.
+    - id: itemCount
+      type: System.Int32
+      description: The amount of items that were written to <code class="paramref">destination</code>.
+    return:
+      type: System.Boolean
+      description: False if the buffer is out of bounds, the reading was only partial or an exception occured.
+    content.vb: Function TryGetWord(index As Integer, itemKind As TItem, destination As Span(Of TItem), isItemKind As Boolean, itemCount As Integer) As Boolean
+  overload: OceanApocalypseStudios.RSML.Sources.IBuffer`1.TryGetWord*
+  nameWithType.vb: IBuffer(Of TItem).TryGetWord(Integer, TItem, Span(Of TItem), Boolean, Integer)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).TryGetWord(Integer, TItem, System.Span(Of TItem), Boolean, Integer)
+  name.vb: TryGetWord(Integer, TItem, Span(Of TItem), Boolean, Integer)
+references:
+- uid: OceanApocalypseStudios.RSML.Sources
+  commentId: N:OceanApocalypseStudios.RSML.Sources
+  href: OceanApocalypseStudios.html
+  name: OceanApocalypseStudios.RSML.Sources
+  nameWithType: OceanApocalypseStudios.RSML.Sources
+  fullName: OceanApocalypseStudios.RSML.Sources
+  spec.csharp:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sources
+    name: Sources
+    href: OceanApocalypseStudios.RSML.Sources.html
+  spec.vb:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sources
+    name: Sources
+    href: OceanApocalypseStudios.RSML.Sources.html
+- uid: OceanApocalypseStudios.RSML.Sources.ISource.CursorIndex
+  commentId: P:OceanApocalypseStudios.RSML.Sources.ISource.CursorIndex
+  parent: OceanApocalypseStudios.RSML.Sources.ISource
+  href: OceanApocalypseStudios.RSML.Sources.ISource.CursorIndex.html#OceanApocalypseStudios_RSML_Sources_ISource_CursorIndex
+  name: CursorIndex
+  nameWithType: ISource.CursorIndex
+  fullName: OceanApocalypseStudios.RSML.Sources.ISource.CursorIndex
+- uid: OceanApocalypseStudios.RSML.Sources.ISource.IsEmpty
+  commentId: P:OceanApocalypseStudios.RSML.Sources.ISource.IsEmpty
+  parent: OceanApocalypseStudios.RSML.Sources.ISource
+  href: OceanApocalypseStudios.RSML.Sources.ISource.IsEmpty.html#OceanApocalypseStudios_RSML_Sources_ISource_IsEmpty
+  name: IsEmpty
+  nameWithType: ISource.IsEmpty
+  fullName: OceanApocalypseStudios.RSML.Sources.ISource.IsEmpty
+- uid: OceanApocalypseStudios.RSML.Sources.ISource.IsReadOnly
+  commentId: P:OceanApocalypseStudios.RSML.Sources.ISource.IsReadOnly
+  parent: OceanApocalypseStudios.RSML.Sources.ISource
+  href: OceanApocalypseStudios.RSML.Sources.ISource.IsReadOnly.html#OceanApocalypseStudios_RSML_Sources_ISource_IsReadOnly
+  name: IsReadOnly
+  nameWithType: ISource.IsReadOnly
+  fullName: OceanApocalypseStudios.RSML.Sources.ISource.IsReadOnly
+- uid: OceanApocalypseStudios.RSML.Sources.ISource.Length
+  commentId: P:OceanApocalypseStudios.RSML.Sources.ISource.Length
+  parent: OceanApocalypseStudios.RSML.Sources.ISource
+  href: OceanApocalypseStudios.RSML.Sources.ISource.Length.html#OceanApocalypseStudios_RSML_Sources_ISource_Length
+  name: Length
+  nameWithType: ISource.Length
+  fullName: OceanApocalypseStudios.RSML.Sources.ISource.Length
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+- uid: System.IEquatable{OceanApocalypseStudios.RSML.Sources.IBuffer`1}.Equals(OceanApocalypseStudios.RSML.Sources.IBuffer{{TItem}})
+  commentId: M:System.IEquatable{OceanApocalypseStudios.RSML.Sources.IBuffer`1}.Equals(OceanApocalypseStudios.RSML.Sources.IBuffer{`0})
+  parent: System.IEquatable{OceanApocalypseStudios.RSML.Sources.IBuffer`1}
+  definition: System.IEquatable`1.Equals(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(IBuffer<TItem>)
+  nameWithType: IEquatable<IBuffer<TItem>>.Equals(IBuffer<TItem>)
+  fullName: System.IEquatable<OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>>.Equals(OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>)
+  nameWithType.vb: IEquatable(Of IBuffer(Of TItem)).Equals(IBuffer(Of TItem))
+  fullName.vb: System.IEquatable(Of OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem)).Equals(OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem))
+  name.vb: Equals(IBuffer(Of TItem))
+  spec.csharp:
+  - uid: System.IEquatable{OceanApocalypseStudios.RSML.Sources.IBuffer`1}.Equals(OceanApocalypseStudios.RSML.Sources.IBuffer{`0})
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1
+    name: IBuffer
+    href: OceanApocalypseStudios.RSML.Sources.IBuffer-1.html
+  - name: <
+  - name: TItem
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable{OceanApocalypseStudios.RSML.Sources.IBuffer`1}.Equals(OceanApocalypseStudios.RSML.Sources.IBuffer{`0})
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1
+    name: IBuffer
+    href: OceanApocalypseStudios.RSML.Sources.IBuffer-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TItem
+  - name: )
+  - name: )
+- uid: OceanApocalypseStudios.RSML.Sources.ISource
+  commentId: T:OceanApocalypseStudios.RSML.Sources.ISource
+  parent: OceanApocalypseStudios.RSML.Sources
+  href: OceanApocalypseStudios.RSML.Sources.ISource.html
+  name: ISource
+  nameWithType: ISource
+  fullName: OceanApocalypseStudios.RSML.Sources.ISource
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: System.IEquatable`1.Equals(`0)
+  commentId: M:System.IEquatable`1.Equals(`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(T)
+  nameWithType: IEquatable<T>.Equals(T)
+  fullName: System.IEquatable<T>.Equals(T)
+  nameWithType.vb: IEquatable(Of T).Equals(T)
+  fullName.vb: System.IEquatable(Of T).Equals(T)
+  spec.csharp:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+- uid: System.IEquatable{OceanApocalypseStudios.RSML.Sources.IBuffer`1}
+  commentId: T:System.IEquatable{OceanApocalypseStudios.RSML.Sources.IBuffer`1}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<IBuffer<TItem>>
+  nameWithType: IEquatable<IBuffer<TItem>>
+  fullName: System.IEquatable<OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>>
+  nameWithType.vb: IEquatable(Of IBuffer(Of TItem))
+  fullName.vb: System.IEquatable(Of OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem))
+  name.vb: IEquatable(Of IBuffer(Of TItem))
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1
+    name: IBuffer
+    href: OceanApocalypseStudios.RSML.Sources.IBuffer-1.html
+  - name: <
+  - name: TItem
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1
+    name: IBuffer
+    href: OceanApocalypseStudios.RSML.Sources.IBuffer-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TItem
+  - name: )
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.IEquatable`1
+  commentId: T:System.IEquatable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<T>
+  nameWithType: IEquatable<T>
+  fullName: System.IEquatable<T>
+  nameWithType.vb: IEquatable(Of T)
+  fullName.vb: System.IEquatable(Of T)
+  name.vb: IEquatable(Of T)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.LineCount*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.IBuffer`1.LineCount
+  href: OceanApocalypseStudios.RSML.Sources.IBuffer-1.LineCount.html#OceanApocalypseStudios_RSML_Sources_IBuffer_1_LineCount
+  name: LineCount
+  nameWithType: IBuffer<TItem>.LineCount
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.LineCount
+  nameWithType.vb: IBuffer(Of TItem).LineCount
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).LineCount
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.Item*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.IBuffer`1.Item
+  href: OceanApocalypseStudios.RSML.Sources.IBuffer-1.Item.html#OceanApocalypseStudios_RSML_Sources_IBuffer_1_Item_System_Int32_
+  name: this
+  nameWithType: IBuffer<TItem>.this
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.this
+  nameWithType.vb: IBuffer(Of TItem).this[]
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).this[]
+  name.vb: this[]
+- uid: '{TItem}'
+  commentId: '!:TItem'
+  definition: TItem
+  name: TItem
+  nameWithType: TItem
+  fullName: TItem
+- uid: TItem
+  name: TItem
+  nameWithType: TItem
+  fullName: TItem
+- uid: OceanApocalypseStudios.RSML.Sources.SourceLocation
+  commentId: T:OceanApocalypseStudios.RSML.Sources.SourceLocation
+  parent: OceanApocalypseStudios.RSML.Sources
+  href: OceanApocalypseStudios.RSML.Sources.SourceLocation.html
+  name: SourceLocation
+  nameWithType: SourceLocation
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceLocation
+- uid: OceanApocalypseStudios.RSML.Sources.SourceSpan
+  commentId: T:OceanApocalypseStudios.RSML.Sources.SourceSpan
+  parent: OceanApocalypseStudios.RSML.Sources
+  href: OceanApocalypseStudios.RSML.Sources.SourceSpan.html
+  name: SourceSpan
+  nameWithType: SourceSpan
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan
+- uid: '{TItem}[]'
+  isExternal: true
+  name: TItem[]
+  nameWithType: TItem[]
+  fullName: TItem[]
+  nameWithType.vb: TItem()
+  fullName.vb: TItem()
+  name.vb: TItem()
+  spec.csharp:
+  - name: TItem
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - name: TItem
+  - name: (
+  - name: )
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilLineSeparator*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilLineSeparator
+  href: OceanApocalypseStudios.RSML.Sources.IBuffer-1.CountUntilLineSeparator.html#OceanApocalypseStudios_RSML_Sources_IBuffer_1_CountUntilLineSeparator_System_Int32_System_Boolean__
+  name: CountUntilLineSeparator
+  nameWithType: IBuffer<TItem>.CountUntilLineSeparator
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.CountUntilLineSeparator
+  nameWithType.vb: IBuffer(Of TItem).CountUntilLineSeparator
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).CountUntilLineSeparator
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilNotWhitespace*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilNotWhitespace
+  href: OceanApocalypseStudios.RSML.Sources.IBuffer-1.CountUntilNotWhitespace.html#OceanApocalypseStudios_RSML_Sources_IBuffer_1_CountUntilNotWhitespace_System_Int32_
+  name: CountUntilNotWhitespace
+  nameWithType: IBuffer<TItem>.CountUntilNotWhitespace
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.CountUntilNotWhitespace
+  nameWithType.vb: IBuffer(Of TItem).CountUntilNotWhitespace
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).CountUntilNotWhitespace
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilWhitespace*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilWhitespace
+  href: OceanApocalypseStudios.RSML.Sources.IBuffer-1.CountUntilWhitespace.html#OceanApocalypseStudios_RSML_Sources_IBuffer_1_CountUntilWhitespace_System_Int32_
+  name: CountUntilWhitespace
+  nameWithType: IBuffer<TItem>.CountUntilWhitespace
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.CountUntilWhitespace
+  nameWithType.vb: IBuffer(Of TItem).CountUntilWhitespace
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).CountUntilWhitespace
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountWhile*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountWhile
+  href: OceanApocalypseStudios.RSML.Sources.IBuffer-1.CountWhile.html#OceanApocalypseStudios_RSML_Sources_IBuffer_1_CountWhile_System_Func_System_Int32__0_System_Boolean__System_Int32_
+  name: CountWhile
+  nameWithType: IBuffer<TItem>.CountWhile
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.CountWhile
+  nameWithType.vb: IBuffer(Of TItem).CountWhile
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).CountWhile
+- uid: System.Func{System.Int32,{TItem},System.Boolean}
+  commentId: T:System.Func{System.Int32,`0,System.Boolean}
+  parent: System
+  definition: System.Func`3
+  href: https://learn.microsoft.com/dotnet/api/system.func-3
+  name: Func<int, TItem, bool>
+  nameWithType: Func<int, TItem, bool>
+  fullName: System.Func<int, TItem, bool>
+  nameWithType.vb: Func(Of Integer, TItem, Boolean)
+  fullName.vb: System.Func(Of Integer, TItem, Boolean)
+  name.vb: Func(Of Integer, TItem, Boolean)
+  spec.csharp:
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: <
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - name: TItem
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - name: TItem
+  - name: ','
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+- uid: System.Func`3
+  commentId: T:System.Func`3
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.func-3
+  name: Func<T1, T2, TResult>
+  nameWithType: Func<T1, T2, TResult>
+  fullName: System.Func<T1, T2, TResult>
+  nameWithType.vb: Func(Of T1, T2, TResult)
+  fullName.vb: System.Func(Of T1, T2, TResult)
+  name.vb: Func(Of T1, T2, TResult)
+  spec.csharp:
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: <
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`3
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-3
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetLengthOfLine*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetLengthOfLine
+  href: OceanApocalypseStudios.RSML.Sources.IBuffer-1.GetLengthOfLine.html#OceanApocalypseStudios_RSML_Sources_IBuffer_1_GetLengthOfLine_System_Int32_
+  name: GetLengthOfLine
+  nameWithType: IBuffer<TItem>.GetLengthOfLine
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.GetLengthOfLine
+  nameWithType.vb: IBuffer(Of TItem).GetLengthOfLine
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).GetLengthOfLine
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetLengthOfLineFromIndex*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetLengthOfLineFromIndex
+  href: OceanApocalypseStudios.RSML.Sources.IBuffer-1.GetLengthOfLineFromIndex.html#OceanApocalypseStudios_RSML_Sources_IBuffer_1_GetLengthOfLineFromIndex_System_Int32_
+  name: GetLengthOfLineFromIndex
+  nameWithType: IBuffer<TItem>.GetLengthOfLineFromIndex
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.GetLengthOfLineFromIndex
+  nameWithType.vb: IBuffer(Of TItem).GetLengthOfLineFromIndex
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).GetLengthOfLineFromIndex
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetLine*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetLine
+  href: OceanApocalypseStudios.RSML.Sources.IBuffer-1.GetLine.html#OceanApocalypseStudios_RSML_Sources_IBuffer_1_GetLine_System_Int32_
+  name: GetLine
+  nameWithType: IBuffer<TItem>.GetLine
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.GetLine
+  nameWithType.vb: IBuffer(Of TItem).GetLine
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).GetLine
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetLineFromIndex*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetLineFromIndex
+  href: OceanApocalypseStudios.RSML.Sources.IBuffer-1.GetLineFromIndex.html#OceanApocalypseStudios_RSML_Sources_IBuffer_1_GetLineFromIndex_System_Int32_
+  name: GetLineFromIndex
+  nameWithType: IBuffer<TItem>.GetLineFromIndex
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.GetLineFromIndex
+  nameWithType.vb: IBuffer(Of TItem).GetLineFromIndex
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).GetLineFromIndex
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetLineNumberFromIndex*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetLineNumberFromIndex
+  href: OceanApocalypseStudios.RSML.Sources.IBuffer-1.GetLineNumberFromIndex.html#OceanApocalypseStudios_RSML_Sources_IBuffer_1_GetLineNumberFromIndex_System_Int32_
+  name: GetLineNumberFromIndex
+  nameWithType: IBuffer<TItem>.GetLineNumberFromIndex
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.GetLineNumberFromIndex
+  nameWithType.vb: IBuffer(Of TItem).GetLineNumberFromIndex
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).GetLineNumberFromIndex
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetSourceLocation*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetSourceLocation
+  href: OceanApocalypseStudios.RSML.Sources.IBuffer-1.GetSourceLocation.html#OceanApocalypseStudios_RSML_Sources_IBuffer_1_GetSourceLocation_System_Int32_
+  name: GetSourceLocation
+  nameWithType: IBuffer<TItem>.GetSourceLocation
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.GetSourceLocation
+  nameWithType.vb: IBuffer(Of TItem).GetSourceLocation
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).GetSourceLocation
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetWord*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.IBuffer`1.GetWord
+  href: OceanApocalypseStudios.RSML.Sources.IBuffer-1.GetWord.html#OceanApocalypseStudios_RSML_Sources_IBuffer_1_GetWord_System_Int32_System_Func_System_Int32__0_System_Boolean__System_Boolean__
+  name: GetWord
+  nameWithType: IBuffer<TItem>.GetWord
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.GetWord
+  nameWithType.vb: IBuffer(Of TItem).GetWord
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).GetWord
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.Slice*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.IBuffer`1.Slice
+  href: OceanApocalypseStudios.RSML.Sources.IBuffer-1.Slice.html#OceanApocalypseStudios_RSML_Sources_IBuffer_1_Slice_System_Int32_System_Int32_
+  name: Slice
+  nameWithType: IBuffer<TItem>.Slice
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.Slice
+  nameWithType.vb: IBuffer(Of TItem).Slice
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).Slice
+- uid: System.Span{{TItem}}
+  commentId: T:System.Span{`0}
+  parent: System
+  definition: System.Span`1
+  href: https://learn.microsoft.com/dotnet/api/system.span-1
+  name: Span<TItem>
+  nameWithType: Span<TItem>
+  fullName: System.Span<TItem>
+  nameWithType.vb: Span(Of TItem)
+  fullName.vb: System.Span(Of TItem)
+  name.vb: Span(Of TItem)
+  spec.csharp:
+  - uid: System.Span`1
+    name: Span
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.span-1
+  - name: <
+  - name: TItem
+  - name: '>'
+  spec.vb:
+  - uid: System.Span`1
+    name: Span
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.span-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TItem
+  - name: )
+- uid: System.Span`1
+  commentId: T:System.Span`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.span-1
+  name: Span<T>
+  nameWithType: Span<T>
+  fullName: System.Span<T>
+  nameWithType.vb: Span(Of T)
+  fullName.vb: System.Span(Of T)
+  name.vb: Span(Of T)
+  spec.csharp:
+  - uid: System.Span`1
+    name: Span
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.span-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Span`1
+    name: Span
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.span-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.TryGetChar*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.IBuffer`1.TryGetChar
+  href: OceanApocalypseStudios.RSML.Sources.IBuffer-1.TryGetChar.html#OceanApocalypseStudios_RSML_Sources_IBuffer_1_TryGetChar_System_Int32__0__
+  name: TryGetChar
+  nameWithType: IBuffer<TItem>.TryGetChar
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.TryGetChar
+  nameWithType.vb: IBuffer(Of TItem).TryGetChar
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).TryGetChar
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.TryGetLine*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.IBuffer`1.TryGetLine
+  href: OceanApocalypseStudios.RSML.Sources.IBuffer-1.TryGetLine.html#OceanApocalypseStudios_RSML_Sources_IBuffer_1_TryGetLine_System_Int32_System_Span__0__System_Int32__
+  name: TryGetLine
+  nameWithType: IBuffer<TItem>.TryGetLine
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.TryGetLine
+  nameWithType.vb: IBuffer(Of TItem).TryGetLine
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).TryGetLine
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.TryGetLineFromIndex*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.IBuffer`1.TryGetLineFromIndex
+  href: OceanApocalypseStudios.RSML.Sources.IBuffer-1.TryGetLineFromIndex.html#OceanApocalypseStudios_RSML_Sources_IBuffer_1_TryGetLineFromIndex_System_Int32_System_Span__0__System_Int32__
+  name: TryGetLineFromIndex
+  nameWithType: IBuffer<TItem>.TryGetLineFromIndex
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.TryGetLineFromIndex
+  nameWithType.vb: IBuffer(Of TItem).TryGetLineFromIndex
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).TryGetLineFromIndex
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.TryGetWord*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.IBuffer`1.TryGetWord
+  href: OceanApocalypseStudios.RSML.Sources.IBuffer-1.TryGetWord.html#OceanApocalypseStudios_RSML_Sources_IBuffer_1_TryGetWord_System_Int32_System_Func_System_Int32__0_System_Boolean__System_Span__0__System_Boolean__System_Int32__
+  name: TryGetWord
+  nameWithType: IBuffer<TItem>.TryGetWord
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.TryGetWord
+  nameWithType.vb: IBuffer(Of TItem).TryGetWord
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).TryGetWord
+memberLayout: SeparatePages

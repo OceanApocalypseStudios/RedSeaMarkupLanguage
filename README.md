@@ -5,19 +5,19 @@
 </div>
 <div align="center">
 	<a href="https://www.nuget.org/packages/OceanApocalypseStudios.RSML" target="_blank"><img src="https://img.shields.io/nuget/v/OceanApocalypseStudios.RSML?style=for-the-badge&logo=nuget&logoColor=white&logoSize=auto&label=Available%20on%20NuGet&labelColor=%231265fb&color=%2308317b"/></a>
+	<img src="https://img.shields.io/nuget/dt/OceanApocalypseStudios.RSML?style=for-the-badge&logo=nuget&logoColor=white&logoSize=auto&label=downloads%20(modern)&labelColor=%234929ca&color=%2327156f" />
+	<img src="https://img.shields.io/nuget/dt/RSML?style=for-the-badge&logo=nuget&logoColor=white&logoSize=auto&label=Downloads%20(Legacy)&labelColor=%23ad4734&color=%236e2d20" />
+	<br/>
 	<a href="https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/releases/latest"><img src="https://img.shields.io/github/v/release/OceanApocalypseStudios/RedSeaMarkupLanguage?sort=semver&display_name=tag&style=for-the-badge&logo=github&logoColor=white&logoSize=auto&label=Latest&labelColor=%23161616&color=%23000308"/></a>
+	<img src="https://img.shields.io/github/stars/OceanApocalypseStudios/RedSeaMarkupLanguage?style=for-the-badge&logo=star&logoColor=black&logoSize=auto&labelColor=%2379610b&color=%23413405" />
 	<img src="https://img.shields.io/github/languages/top/OceanApocalypseStudios/RedSeaMarkupLanguage?style=for-the-badge&logo=dotnet&logoColor=white&logoSize=auto&label=%20&labelColor=%234929ca&color=%234929ca" />
-	<br/><br/>
 	<!--<a href="COPYING.txt"><img src="https://img.shields.io/badge/ignored-Custom_clause-ignored?style=for-the-badge&logo=opensourceinitiative&logoColor=white&logoSize=auto&label=repository%20licensing&labelColor=%23496300&color=%232b3c00"/></a>-->
 	<a href="LICENSE.txt"><img src="https://img.shields.io/badge/ignored-mit-ignored?style=for-the-badge&logo=opensourceinitiative&logoColor=white&logoSize=auto&label=code%20license&labelColor=%23496300&color=%232b3c00"/></a>
 	<a href="LICENSE-DOCS.txt"><img src="https://img.shields.io/badge/ignored-cc0_1.0_universal-ignored?style=for-the-badge&logo=opensourceinitiative&logoColor=white&logoSize=auto&label=documentation%20license&labelColor=%23496300&color=%232b3c00"/></a>
-	<br/><br/>
-	<img src="https://img.shields.io/github/stars/OceanApocalypseStudios/RedSeaMarkupLanguage?style=for-the-badge&logo=star&logoColor=black&logoSize=auto&labelColor=%2379610b&color=%23413405" />
-	<img src="https://img.shields.io/nuget/dt/OceanApocalypseStudios.RSML?style=for-the-badge&logo=nuget&logoColor=white&logoSize=auto&label=downloads%20(modern)&labelColor=%234929ca&color=%2327156f" />
-	<img src="https://img.shields.io/nuget/dt/RSML?style=for-the-badge&logo=nuget&logoColor=white&logoSize=auto&label=Downloads%20(Legacy)&labelColor=%23ad4734&color=%236e2d20" />
+	<br/>
 	<a href="https://marketplace.visualstudio.com/items?itemName=OceanApocalypseStudios.oas-rsml-support-vs" target="_blank"><img src="https://img.shields.io/badge/RSML_for_Visual_Studio-b35ff2?style=for-the-badge"></a>
 	<a href="https://marketplace.visualstudio.com/items?itemName=OceanApocalypseStudios.rsml" target="_blank"><img src="https://img.shields.io/badge/RSML_for_VS_Code-1f9cf0?style=for-the-badge"></a>
-	<br/><br/>
+	<br/>
 	<img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/OceanApocalypseStudios/RedSeaMarkupLanguage/test.yml?style=for-the-badge&label=tests">
 	<img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/OceanApocalypseStudios/RedSeaMarkupLanguage/release.yml?style=for-the-badge&label=release">
 </div>
@@ -70,8 +70,9 @@ would adapt accordingly.
 <details>
 	<summary><strong>Debug build</strong></summary>
 
-1. Clone [this repository](https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage).
-2. Open the terminal in the root RSML directory (the one with the solution file).
+1. Install the [.NET SDK 10.0](https://dotnet.microsoft.com/download).
+2. Clone [this repository](https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage).
+3. Open the terminal in the root RSML directory (the one with the solution file).
 
 ```
 dotnet build -c Debug RedSeaMarkupLanguage.slnx
@@ -83,8 +84,9 @@ dotnet build -c Debug RedSeaMarkupLanguage.slnx
 <details>
 	<summary><strong>Optimized build</strong></summary>
 
-1. Clone [this repository](https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage).
-2. Open the terminal in the root RSML directory (the one with the solution file).
+1. Install the [.NET SDK 10.0](https://dotnet.microsoft.com/download).
+2. Clone [this repository](https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage).
+3. Open the terminal in the root RSML directory (the one with the solution file).
 
 ```
 dotnet build -c Release RedSeaMarkupLanguage.slnx
@@ -93,19 +95,26 @@ dotnet build -c Release RedSeaMarkupLanguage.slnx
 
 </details>
 <details open>
+	<summary><strong>CLI Framework-dependent Build</strong> <em>(good if you want a lighter CLI that uses your installed .NET SDK)</em></summary>
+
+1. Install the [.NET SDK 10.0](https://dotnet.microsoft.com/download).
+2. Clone [this repository](https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage).
+3. Open the terminal in the root RSML directory (the one with the solution file).
+
+```
+dotnet publish -c Release -r <rid> src/RSML.CLI/RSML.CLI.csproj --no-self-contained true
+```
+</details>
+<details open>
 	<summary><strong>Native build</strong> <em>(compiles into a shared library)</em></summary>
 
-1. Clone [this repository](https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage).
-2. Open the terminal in the root RSML directory (the one with the solution file).
+1. Install the [.NET SDK 10.0](https://dotnet.microsoft.com/download).
+2. Clone [this repository](https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage).
+3. Open the terminal in the root RSML directory (the one with the solution file).
 
 ```
 dotnet publish -c Release -r <rid> src/RSML.Native/RSML.Native.csproj
 ```
-
-> [!WARNING]
-> If you're on Windows and using Visual Studio, this will require both the .NET and C++ development workloads.
-> If something goes wrong with the MSVC side of things, the fix is almost always repairing the Visual Studio
-> installation *(backup settings and everything you need first)*.
 
 Once that is complete, the DLL will be located at
 `src/RSML.Native/bin/<arch>/Release/net10.0/<rid>/publish/RSML.Native.dll`. The XML files in the same directory are

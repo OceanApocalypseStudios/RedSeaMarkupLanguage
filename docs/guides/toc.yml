@@ -1,0 +1,8 @@
+- name: Getting Started with RSML
+  items:
+    - name: Hello, World!
+      href: hello-world.md
+    - name: Hello, World! on the CLI
+      href: hello-world-cli.md
+#- name: Easy Guides
+#  items:

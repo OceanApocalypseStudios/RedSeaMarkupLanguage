@@ -1,0 +1,24 @@
+### YamlMime:ManagedReference
+items:
+- uid: OceanApocalypseStudios.RSML.Native
+  commentId: N:OceanApocalypseStudios.RSML.Native
+  id: OceanApocalypseStudios.RSML.Native
+  children:
+  - OceanApocalypseStudios.RSML.Native.Class1
+  langs:
+  - csharp
+  - vb
+  name: OceanApocalypseStudios.RSML.Native
+  nameWithType: OceanApocalypseStudios.RSML.Native
+  fullName: OceanApocalypseStudios.RSML.Native
+  type: Namespace
+  assemblies:
+  - RSML.Native
+references:
+- uid: OceanApocalypseStudios.RSML.Native.Class1
+  commentId: T:OceanApocalypseStudios.RSML.Native.Class1
+  href: OceanApocalypseStudios.RSML.Native.Class1.html
+  name: Class1
+  nameWithType: Class1
+  fullName: OceanApocalypseStudios.RSML.Native.Class1
+memberLayout: SeparatePages
