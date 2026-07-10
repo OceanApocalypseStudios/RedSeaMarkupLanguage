@@ -1,6 +1,6 @@
 # Changelog
 
-## v3.0.0-prerelease1 (in development)
+## v3.0.0-prerelease1 _(in development)_
 Currently in development, will lead to the biggest RSML release yet: **v3.0.0**.
 
 ### 🚀 Features

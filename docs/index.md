@@ -2,9 +2,12 @@
 _layout: landing
 ---
 
-# Red Sea Markup Language v3.0.0
-> [!WARNING]
-> This documentation refers to RSML v3.0.0+, which is currently in development. Said version introduced major changes to how RSML works, with a full rewrite in C#.
+# Red Sea Markup Language
+> [!NOTE]
+> This documentation refers to RSML v3.0.0+, which is currently in development. Said version introduced major changes to how RSML works, with a full rewrite in C#. The previous versions, due to being documented via a different framework, don't have documentation available online.
+
+> [!NOTE]
+> This documentation is a work in progress, as v3.0.0 is still in development.
 
 **Red Sea Markup Language** is **the** powerful and robust fork of [MF's CrossRoad Solution](https://mf366-dev.github.io/documentation/mfroad/mfroad_1.0.html), a language designed to **dynamically interpret different logic paths based on the local host OS and CPU architecture**.
 
