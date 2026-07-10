@@ -13,6 +13,8 @@
 		<Company>OceanApocalypseStudios</Company>
 		<RootNamespace>OceanApocalypseStudios.RSML.CLI</RootNamespace>
 		<Platforms>AnyCPU;ARM64;x64;x86</Platforms>
+
+		<IsPackable>false</IsPackable>
 	</PropertyGroup>
 
 	<ItemGroup>
