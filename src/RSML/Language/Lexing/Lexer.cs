@@ -1,7 +1,4 @@
-﻿using OceanApocalypseStudios.RSML.Language.Lexer;
-
-
-namespace OceanApocalypseStudios.RSML.Language.Implementations;
+﻿namespace OceanApocalypseStudios.RSML.Language.Lexing;
 
 internal class Lexer : ILexer
 {

@@ -1,4 +1,4 @@
-﻿namespace OceanApocalypseStudios.RSML.Language.Lexer;
+﻿namespace OceanApocalypseStudios.RSML.Language.Lexing;
 
 public interface ILexer
 {
