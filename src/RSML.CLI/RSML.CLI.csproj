@@ -24,7 +24,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\RSML.Sdk\RSML.Sdk.csproj" />
 		<ProjectReference Include="..\RSML\RSML.csproj" />
 	</ItemGroup>
 
