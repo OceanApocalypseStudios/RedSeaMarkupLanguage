@@ -11,6 +11,8 @@
 
 - *(buffer)* Fix methods and line counting mechanics in the read-only string buffer
 - *(test)* Fix MTP setup
+- *(buffer)* Made a condition more obvious on what the consequences are
+- *(buffer)* [**breaking**] Fix `CountUntilLineSeparator` returning off-by-one and negative results
 
 ### Other
 
@@ -30,6 +32,7 @@
 ### 🧪 Testing
 
 - [**breaking**] Add test projects for testing RSML, RSML's SDK and RSML's Native exports
+- *(buffer)* Heavily test several buffer functions related to counting
 
 ### ⚙️ Miscellaneous Tasks
 
@@ -49,6 +52,8 @@
 - Fix Dependabot workflow issue
 - Setup code owners for the repository
 - Update release workflow to use Trusted Publishers over API keys
+- Update changelog with latest available data
+- Remove SDK project and have the SDK in the RSML project instead
 ## 2.0.0 @ 2025-09-09
 
 ### ⚡ Performance
