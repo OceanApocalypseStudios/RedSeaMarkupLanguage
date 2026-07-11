@@ -149,13 +149,12 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 			return 0; // consumed the entire buffer
 
 		ComputeLineStarts();
-		int lineStart = GetNextLineStartPosition(index, out int lineStartIndex);
-		int lineSep = lineStart;
+		int lineStart = GetNextLineStartPosition(index, out _);
+		int lineSep = lineStart - 1;
+		isCrLf = precededByCrLf.Contains(lineStart) && data[index] is not '\n'; // to us, CRLF is only when we're not standing on the LF
 
-		if (precededByCrLf.Contains(lineStart))
-			lineSep--; // skip the extra line separator in the CRLF sequence
-
-		isCrLf = precededByCrLf.Contains(lineSep);
+		if (isCrLf)
+			lineSep--; // skip the extra line separator in the CRLF sequence		
 
 		return lineSep - index;
 	}
