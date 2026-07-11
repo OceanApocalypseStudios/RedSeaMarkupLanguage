@@ -6,7 +6,7 @@ namespace OceanApocalypseStudios.RSML.Sources;
 /// <summary>
 /// A data source for RSML's toolchain members.
 /// </summary>
-public interface ISource : IDisposable
+public interface ISource : IToolchainComponent, IDisposable
 {
 	/// <summary>
 	/// The current index of the cursor.
