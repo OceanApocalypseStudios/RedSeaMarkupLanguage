@@ -441,6 +441,34 @@ public class ReadOnlyStringBufferTests
 	}
 
 	[Theory]
+	[InlineData(TestString01)]
+	[InlineData(TestString02)]
+	[InlineData(TestString04)]
+	[InlineData(TestString06)]
+	public void EqualsBuffer(string data) => Assert.Equal(new ReadOnlyStringBuffer(data), new ReadOnlyStringBuffer(data));
+
+	[Theory]
+	[InlineData(TestString01)]
+	[InlineData(TestString02)]
+	[InlineData(TestString04)]
+	[InlineData(TestString06)]
+	public void EqualsMemory(string data) => Assert.True(new ReadOnlyStringBuffer(data).Equals(data.AsMemory()));
+
+	[Theory]
+	[InlineData(TestString01)]
+	[InlineData(TestString02)]
+	[InlineData(TestString04)]
+	[InlineData(TestString06)]
+	public void EqualsString(string data) => Assert.True(new ReadOnlyStringBuffer(data).Equals(data));
+
+	[Theory]
+	[InlineData(TestString01)]
+	[InlineData(TestString02)]
+	[InlineData(TestString04)]
+	[InlineData(TestString06)]
+	public void EqualsSpan(string data) => Assert.True(new ReadOnlyStringBuffer(data).Equals(data.AsSpan()));
+
+	[Theory]
 	#region String ends with newline
 	[InlineData(TestString01, 0, 3)] // "Hey"
 	[InlineData(TestString01, 1, 4)] // "This"
