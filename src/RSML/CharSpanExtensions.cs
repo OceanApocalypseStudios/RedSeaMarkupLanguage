@@ -6,45 +6,46 @@ namespace OceanApocalypseStudios.RSML;
 
 internal static class CharSpanExtensions
 {
-	public const byte AsciiCaseBit = 0x20;
-
-	internal static unsafe bool IsAsciiEqualsIgnoreCase(this ReadOnlySpan<char> chars, ReadOnlySpan<char> str)
+	extension(ReadOnlySpan<char> chars)
 	{
-		if (chars.Length != str.Length)
-			return false;
-
-		fixed (char* spanPtr = &MemoryMarshal.GetReference(chars))
-		fixed (char* strPtr = &MemoryMarshal.GetReference(str))
+		public unsafe bool IsAsciiEqualsIgnoreCase(ReadOnlySpan<char> str)
 		{
-			char* ptrToSpan = spanPtr;
-			char* ptrToStr = strPtr;
-			int len = chars.Length;
+			if (chars.Length != str.Length)
+				return false;
 
-			for (int i = 0; i < len; i++)
+			fixed (char* spanPtr = &MemoryMarshal.GetReference(chars))
+			fixed (char* strPtr = &MemoryMarshal.GetReference(str))
 			{
-				char spanChar = *ptrToSpan++;
-				char strChar = *ptrToStr++;
+				char* ptrToSpan = spanPtr;
+				char* ptrToStr = strPtr;
+				int len = chars.Length;
 
-				if (!spanChar.IsAsciiEqualsIgnoreCase(strChar))
-					return false;
+				for (int i = 0; i < len; i++)
+				{
+					char spanChar = *ptrToSpan++;
+					char strChar = *ptrToStr++;
+
+					if (!spanChar.IsAsciiEqualsIgnoreCase(strChar))
+						return false;
+				}
 			}
+
+			return true;
 		}
 
-		return true;
+		public char GetCharAt(int index)
+		{
+			if (index < 0)
+				index += chars.Length;
+
+			if (index >= chars.Length)
+				return '\0';
+
+			return chars[index];
+		}
 	}
 
 	public static char GetCharAt(this Span<char> span, int index)
-	{
-		if (index < 0)
-			index += span.Length;
-
-		if (index >= span.Length)
-			return '\0';
-
-		return span[index];
-	}
-
-	public static char GetCharAt(this ReadOnlySpan<char> span, int index)
 	{
 		if (index < 0)
 			index += span.Length;
