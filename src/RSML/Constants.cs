@@ -1,6 +1,6 @@
 ﻿namespace OceanApocalypseStudios.RSML;
 
-internal static class InternalUtils
+internal static class Constants
 {
 	public const string Ide0046 = "IDE0046:Convert to conditional expression";
 	public const string Ide0056 = "IDE0056:Use index operator";

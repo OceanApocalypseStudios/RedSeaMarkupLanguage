@@ -70,10 +70,10 @@ public readonly struct SourceLocation(int index, int line, int column) : IEquata
 	{
 		unchecked
 		{
-			int hashCode = InternalUtils.HashCodeSeed * InternalUtils.HashCodeMultiplier + Index.GetHashCode();
-			hashCode = hashCode * InternalUtils.HashCodeMultiplier + Line.GetHashCode();
+			int hashCode = Constants.HashCodeSeed * Constants.HashCodeMultiplier + Index.GetHashCode();
+			hashCode = hashCode * Constants.HashCodeMultiplier + Line.GetHashCode();
 
-			return hashCode * InternalUtils.HashCodeMultiplier + Column.GetHashCode();
+			return hashCode * Constants.HashCodeMultiplier + Column.GetHashCode();
 		}
 	}
 

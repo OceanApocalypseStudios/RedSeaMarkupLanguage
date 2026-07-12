@@ -58,10 +58,10 @@ public readonly struct SourceError(SourceSpan span, string message, Severity sev
 	{
 		unchecked
 		{
-			int hashCode = InternalUtils.HashCodeSeed * InternalUtils.HashCodeMultiplier + Span.GetHashCode();
-			hashCode = hashCode * InternalUtils.HashCodeMultiplier + Message.GetHashCode();
+			int hashCode = Constants.HashCodeSeed * Constants.HashCodeMultiplier + Span.GetHashCode();
+			hashCode = hashCode * Constants.HashCodeMultiplier + Message.GetHashCode();
 
-			return hashCode * InternalUtils.HashCodeMultiplier + Severity.GetHashCode();
+			return hashCode * Constants.HashCodeMultiplier + Severity.GetHashCode();
 		}
 	}
 

@@ -104,9 +104,9 @@ public readonly partial struct SourceSpan(SourceLocation start, SourceLocation e
 	{
 		unchecked
 		{
-			int hashCode = InternalUtils.HashCodeSeed * InternalUtils.HashCodeMultiplier + Start.GetHashCode();
+			int hashCode = Constants.HashCodeSeed * Constants.HashCodeMultiplier + Start.GetHashCode();
 
-			return hashCode * InternalUtils.HashCodeMultiplier + End.GetHashCode();
+			return hashCode * Constants.HashCodeMultiplier + End.GetHashCode();
 		}
 	}
 }

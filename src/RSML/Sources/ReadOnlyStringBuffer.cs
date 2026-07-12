@@ -730,10 +730,10 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	{
 		unchecked
 		{
-			int hashCode = InternalUtils.HashCodeSeed * InternalUtils.HashCodeMultiplier + EqualityComparer<string>.Default.GetHashCode(data);
-			hashCode = hashCode * InternalUtils.HashCodeMultiplier + Length.GetHashCode();
-			hashCode = hashCode * InternalUtils.HashCodeMultiplier + IsEmpty.GetHashCode();
-			return hashCode * InternalUtils.HashCodeMultiplier + LineCount.GetHashCode();
+			int hashCode = Constants.HashCodeSeed * Constants.HashCodeMultiplier + EqualityComparer<string>.Default.GetHashCode(data);
+			hashCode = hashCode * Constants.HashCodeMultiplier + Length.GetHashCode();
+			hashCode = hashCode * Constants.HashCodeMultiplier + IsEmpty.GetHashCode();
+			return hashCode * Constants.HashCodeMultiplier + LineCount.GetHashCode();
 		}
 	}
 
