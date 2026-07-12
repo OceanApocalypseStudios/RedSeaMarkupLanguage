@@ -13,7 +13,7 @@ namespace OceanApocalypseStudios.RSML.Sources;
 /// primarily via the internal use of <see cref="ReadOnlySpan{Char}"/> over string allocations
 /// and also via caching.
 /// </summary>
-public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<ReadOnlyStringBuffer?>
+public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<ReadOnlyStringBuffer?>, IEquatable<string?>
 {
 	private readonly List<int> lineStarts = [];
 
@@ -131,6 +131,17 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	/// <exception cref="IndexOutOfRangeException">
 	/// <paramref name="index"/> was set to something greater than the buffer's length.
 	/// </exception>
+	/// <remarks>
+	/// > [!NOTE]
+	/// > This method allows the EOF index as in-range. The convention is as follows:
+	/// > - If the index is EOF (<see cref="Length"/>), then the output is always 0 and <paramref name="isCrLf"/> is always <c>false</c>.
+	/// > - If the index is the last (<see cref="Length"/> - 1), then the output is always 0.
+	/// > [!NOTE]
+	/// > <paramref name="isCrLf"/> is only <c>true</c> if all the following conditions are true:
+	/// > - The next line start counting from <paramref name="index"/> is preceded by a CRLF sequence.
+	/// > - <paramref name="index"/> does not point to the LF in the CRLF sequence.
+	/// > - <paramref name="index"/> does not point to EOF.
+	/// </remarks>
 	/// <inheritdoc/>
 	public int CountUntilLineSeparator(int index, out bool isCrLf)
 	{
@@ -165,6 +176,11 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	/// <exception cref="IndexOutOfRangeException">
 	/// <paramref name="index"/> was set to something greater than the buffer's length.
 	/// </exception>
+	/// <remarks>
+	/// > [!NOTE]
+	/// > This method allows the EOF index as in-range.
+	/// > If the index is EOF (<see cref="Length"/>), then the output is always 0.
+	/// </remarks>
 	/// <inheritdoc/>
 	public int CountUntilNotWhitespace(int index)
 	{
@@ -195,6 +211,11 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	/// <exception cref="IndexOutOfRangeException">
 	/// <paramref name="index"/> was set to something greater than the buffer's length.
 	/// </exception>
+	/// <remarks>
+	/// > [!NOTE]
+	/// > This method allows the EOF index as in-range.
+	/// > If the index is EOF (<see cref="Length"/>), then the output is always 0.
+	/// </remarks>
 	/// <inheritdoc/>
 	public int CountUntilWhitespace(int index)
 	{
@@ -225,6 +246,17 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	/// <exception cref="IndexOutOfRangeException">
 	/// <paramref name="index"/> was set to something greater than the buffer's length.
 	/// </exception>
+	/// <remarks>
+	/// > [!NOTE]
+	/// > This method allows the EOF index as in-range.
+	/// > If the index is EOF (<see cref="Length"/>), then the output is always 0.
+	/// > [!NOTE]
+	/// > The return value, when summed with <paramref name="index"/>, becomes the index of the first character that
+	/// > fails to verify the <paramref name="predicate"/>, counting from <paramref name="index"/>.
+	/// > The only exception is if the buffer has been consumed (you pass EOF index or there's no more characters that fail to verify
+	/// > the <paramref name="predicate"/>), meaning the return value, when summed with <paramref name="index"/> is the value of
+	/// > <see cref="Length"/>, which is also the EOF index.
+	/// </remarks>
 	/// <inheritdoc/>
 	public int CountWhile(Func<int, char, bool> predicate, int index)
 	{
@@ -624,7 +656,23 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 #else
 		object obj
 #endif
-	) => Equals(obj as ReadOnlyStringBuffer);
+	) => obj switch
+	{
+		string str => Equals(str),
+		ReadOnlyStringBuffer readOnlyStringBuffer => Equals(readOnlyStringBuffer),
+		IBuffer<char> buffer => Equals(buffer),
+		Memory<char> memory => Equals(memory),
+		ReadOnlyMemory<char> readOnlyMemory => Equals(readOnlyMemory),
+		null => false,
+		_ => false
+	};
+
+	/// <summary>
+	/// Checks if an array of characters is equal to the current instance.
+	/// </summary>
+	/// <param name="other">The array.</param>
+	/// <returns>True if equals.</returns>
+	public bool Equals(char[]? other) => other is not null && data.Equal(other);
 
 	/// <summary>
 	/// Checks if another read-only buffer is equal to the current instance.
@@ -634,12 +682,48 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	public bool Equals(IBuffer<char>? other) => other is ReadOnlyStringBuffer buffer && Equals(buffer);
 
 	/// <summary>
+	/// Checks if a contiguous region of memory is equal to the current instance.
+	/// </summary>
+	/// <param name="other">The region of memory.</param>
+	/// <returns>True if equals.</returns>
+	public bool Equals(Memory<char>? other) => other is not null && Length == other.Value.Length && data.Equals(other.Value.Span, StringComparison.Ordinal);
+
+	/// <summary>
+	/// Checks if a read-only contiguous region of memory is equal to the current instance.
+	/// </summary>
+	/// <param name="other">The region of memory.</param>
+	/// <returns>True if equals.</returns>
+	public bool Equals(ReadOnlyMemory<char>? other) => other is not null && Length == other.Value.Length && data.Equals(other.Value.Span, StringComparison.Ordinal);
+
+	/// <summary>
+	/// Checks if a read-only contiguous region of memory is equal to the current instance.
+	/// </summary>
+	/// <param name="other">The region of memory.</param>
+	/// <returns>True if equals.</returns>
+	public bool Equals(ReadOnlySpan<char> other) => Length == other.Length && data.Equals(other, StringComparison.Ordinal);
+
+	/// <summary>
 	/// Checks if another read-only string buffer is equal to the current instance.
 	/// </summary>
 	/// <param name="other">The other read-only string buffer.</param>
 	/// <returns>True if equals.</returns>
 	public bool Equals(ReadOnlyStringBuffer? other) =>
 		other is not null && data == other.data && Length == other.Length && IsEmpty == other.IsEmpty && LineCount == other.LineCount;
+
+	/// <summary>
+	/// Checks if a contiguous region of memory is equal to the current instance.
+	/// </summary>
+	/// <param name="other">The region of memory.</param>
+	/// <returns>True if equals.</returns>
+	public bool Equals(Span<char> other) => data.Equals(other, StringComparison.Ordinal);
+
+	/// <summary>
+	/// Checks if a string is equal to the current instance.
+	/// </summary>
+	/// <param name="other">The string.</param>
+	/// <returns>True if equals.</returns>
+	public bool Equals(string? other) =>
+		other is not null && Length == other.Length && data == other;
 
 	/// <inheritdoc/>
 	public override int GetHashCode()

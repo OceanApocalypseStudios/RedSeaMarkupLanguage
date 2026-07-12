@@ -7,7 +7,7 @@ namespace OceanApocalypseStudios.RSML.Sources;
 /// Represents a buffer.
 /// </summary>
 /// <typeparam name="TItem">The datatype of the values returned by the buffer methods</typeparam>
-public interface IBuffer<TItem> : ISource, IEquatable<IBuffer<TItem>?>
+public interface IBuffer<TItem> : ISource, IEquatable<IBuffer<TItem>?>, IEquatable<TItem[]?>, IEquatable<Memory<TItem>?>, IEquatable<ReadOnlyMemory<TItem>?>
 {
 	// todo: add methods that can mutate the buffer (coming to v3.0.0-prerelease2)
 
