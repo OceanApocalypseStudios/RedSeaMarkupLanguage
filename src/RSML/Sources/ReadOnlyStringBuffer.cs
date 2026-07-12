@@ -288,6 +288,13 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	/// The given <paramref name="lineNumber"/> is negative or
 	/// is greater than the amount of lines (see <see cref="LineCount"/>).
 	/// </exception>
+	/// <remarks>
+	/// > [!NOTE]
+	/// > This method follows EOF conventions.
+	/// > EOF is considered a 0-character sequence in line N, where N is <see cref="LineCount"/>.
+	/// > Keep in mind N does not point to an actual line (it's just a convention), as line numbers are 0-based
+	/// > (meaning the actual last line is located at N - 1).
+	/// </remarks>
 	/// <inheritdoc/>
 	public int GetLengthOfLine(int lineNumber)
 	{
@@ -299,7 +306,7 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 		if (lineNumber < 0 || lineNumber >= RawLineCount)
 			throw new ArgumentOutOfRangeException(nameof(lineNumber), "The 0-based line number must be non-negative and less than the amount of lines in the buffer.");
 
-		if (lineNumber + 1 == RawLineCount)
+		if (lineNumber == LineCount)
 			return 0; // EOF means the line is empty
 
 		int start = lineStarts[lineNumber];

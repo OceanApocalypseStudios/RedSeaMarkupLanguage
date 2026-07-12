@@ -495,6 +495,49 @@ public class ReadOnlyStringBufferTests
 	}
 
 	[Theory]
+	#region Attributes
+	[InlineData(0, false)]
+	[InlineData(1, false)]
+	[InlineData(3, false)]
+	[InlineData(6, false)]
+	[InlineData(7, false)] // EOF line is considered the last line
+	[InlineData(8, true)]
+	[InlineData(-1, true)]
+	[InlineData(-4, true)]
+	[InlineData(20, true)]
+	[InlineData(-20, true)]
+	#endregion
+	public void GetLengthOfLine_ThrowsIfLineNumberOutOfRange(int lineNumber, bool throws)
+	{
+		var buffer = new ReadOnlyStringBuffer(TestString01);
+
+		if (throws)
+		{
+			Debug.WriteLine("Expecting an exception...");
+			Assert.Throws<ArgumentOutOfRangeException>(() => buffer.GetLengthOfLine(lineNumber));
+		}
+		else
+		{
+			Debug.WriteLine("Not expecting an exception...");
+			buffer.GetLengthOfLine(lineNumber); // if this throws, test fails
+		}
+	}
+
+	[Theory]
+	#region Attributes
+	[InlineData(0)]
+	[InlineData(20)]
+	[InlineData(69)]
+	[InlineData(136)]
+	[InlineData(-4)]
+	#endregion
+	public void GetLengthOfLine_ThrowsIfEmpty(int lineNumber)
+	{
+		var buffer = new ReadOnlyStringBuffer(String.Empty);
+		Assert.Throws<BufferException>(() => buffer.GetLengthOfLine(lineNumber));
+	}
+
+	[Theory]
 	#region String ends with newline
 	[InlineData(TestString01, 0, 0)]  // H in "Hey"
 	[InlineData(TestString01, 3, 0)]  // CR in "Hey\r\n"
