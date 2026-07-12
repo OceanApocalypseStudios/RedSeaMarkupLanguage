@@ -847,12 +847,12 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	/// Does not protect against <see cref="ArgumentOutOfRangeException"/> and
 	/// <see cref="IndexOutOfRangeException"/>.
 	/// </summary>
-	private bool IsConventionallyOutOfRange(int index) => index > Length;
+	private bool IsConventionallyOutOfRange(int index) => index < 0 || index > Length;
 
 	/// <summary>
 	/// True if index is greater than or equal to the length.
 	/// This prevents throwing <see cref="ArgumentOutOfRangeException"/>
 	/// or <see cref="IndexOutOfRangeException"/>.
 	/// </summary>
-	private bool IsOutOfRange(int index) => index >= Length;
+	private bool IsOutOfRange(int index) => index < 0 || index >= Length;
 }
