@@ -1,4 +1,5 @@
 ﻿using OceanApocalypseStudios.RSML.Sdk;
+using OceanApocalypseStudios.RSML.Sdk.Extensibility;
 
 
 namespace OceanApocalypseStudios.RSML.Language.Parsing;
@@ -17,10 +18,10 @@ public abstract class Parser : IToolchainComponent
 	public virtual void Freeze() => IsMutable = false;
 
 	/// <inheritdoc/>
-	public virtual void Inject<TInjectable>() where TInjectable : IInjectable, new() => throw new System.NotImplementedException();
+	public void Inject<TExtension>() where TExtension : ILanguageExtension, new() => throw new System.NotImplementedException();
 
 	/// <inheritdoc/>
-	public virtual void Inject(IInjectable injectable) => throw new System.NotImplementedException();
+	public void Inject(ILanguageExtension injectable) => throw new System.NotImplementedException();
 
 	/// <inheritdoc/>
 	public virtual void Inject(ToolchainConfiguration configuration) => throw new System.NotImplementedException();

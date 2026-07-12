@@ -3,7 +3,7 @@
 /// <summary>
 /// Represents an extension of RSML's language API.
 /// </summary>
-public interface ILanguageExtension : IInjectable
+public interface ILanguageExtension
 {
 	/// <summary>
 	/// A required <see cref="System.String"/> with the name of the extension.

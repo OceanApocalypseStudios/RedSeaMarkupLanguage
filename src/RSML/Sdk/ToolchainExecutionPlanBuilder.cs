@@ -5,6 +5,7 @@ using OceanApocalypseStudios.RSML.Execution;
 using OceanApocalypseStudios.RSML.Language.Lexing;
 using OceanApocalypseStudios.RSML.Language.Parsing;
 using OceanApocalypseStudios.RSML.Sdk.Exceptions;
+using OceanApocalypseStudios.RSML.Sdk.Extensibility;
 using OceanApocalypseStudios.RSML.Sources;
 
 
@@ -31,14 +32,14 @@ public sealed class ToolchainExecutionPlanBuilder
 		return this;
 	}
 
-	public ToolchainExecutionPlanBuilder Register(IInjectable injectable)
+	public ToolchainExecutionPlanBuilder Register(ILanguageExtension extension)
 	{
 		// todo: implement this
 		return this;
 	}
 
-	public ToolchainExecutionPlanBuilder Register<TInjectable>()
-		where TInjectable : IInjectable
+	public ToolchainExecutionPlanBuilder Register<TExtension>()
+		where TExtension : ILanguageExtension, new()
 	{
 		// todo: implement this
 		return this;
@@ -95,9 +96,10 @@ public sealed class ToolchainExecutionPlanBuilder
 	public ToolchainExecutionPlan Build()
 	{
 		if (hasBuilt)
-			throw new SdkException("The toolchain execution plan has already been created and cannot be built again.")
+			throw new SdkException("The toolchain execution plan has already been created and cannot be built again.");
 
 		// todo: implement build
+		hasBuilt = true;
 		throw new NotImplementedException();
 	}
 }

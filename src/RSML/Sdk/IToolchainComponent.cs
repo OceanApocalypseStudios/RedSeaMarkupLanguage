@@ -1,4 +1,7 @@
-﻿namespace OceanApocalypseStudios.RSML.Sdk;
+﻿using OceanApocalypseStudios.RSML.Sdk.Extensibility;
+
+
+namespace OceanApocalypseStudios.RSML.Sdk;
 
 /// <summary>
 /// A component of the RSML toolchain.
@@ -20,20 +23,20 @@ public interface IToolchainComponent
 	void Freeze();
 
 	/// <summary>
-	/// Injects an item into the toolchain component, modifying it if
-	/// it's mutable (see <see cref="IsMutable"/>). The item is of type <typeparamref name="TInjectable"/>
+	/// Injects an extension into the toolchain component, modifying it if
+	/// it's mutable (see <see cref="IsMutable"/>). The item is of type <typeparamref name="TExtension"/>
 	/// and is created via the default parameter-less constructor.
 	/// </summary>
-	/// <typeparam name="TInjectable">The type of the injectable item.</typeparam>
-	void Inject<TInjectable>()
-		where TInjectable : IInjectable, new();
+	/// <typeparam name="TExtension">The type of the extension.</typeparam>
+	void Inject<TExtension>()
+		where TExtension : ILanguageExtension, new();
 
 	/// <summary>
-	/// Injects an item into the toolchain component, modifying it if
+	/// Injects an extension into the toolchain component, modifying it if
 	/// it's mutable (see <see cref="IsMutable"/>).
 	/// </summary>
 	/// <param name="injectable">The item to inject.</param>
-	void Inject(IInjectable injectable);
+	void Inject(ILanguageExtension injectable);
 
 	/// <summary>
 	/// Injects a configuration into the toolchain component, modifying it
