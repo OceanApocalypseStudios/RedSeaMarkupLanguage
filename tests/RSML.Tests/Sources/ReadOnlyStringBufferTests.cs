@@ -1,3 +1,6 @@
+using System.Diagnostics;
+
+using OceanApocalypseStudios.RSML.Exceptions;
 using OceanApocalypseStudios.RSML.Sources;
 
 
@@ -12,6 +15,8 @@ public class ReadOnlyStringBufferTests
 	private const string TestString02 = "Hey\r\nThis\rIs\u2029A Test \n Method\r\n\r\n.";
 	private const string TestString03 = "This  string     has a lotofwhitespace     charact\u2029\u2028ers out of\r\nnowhere !! ";
 	private const string TestString04 = "this STRING MIXES a LOT\n of \u2029dIffereNT cas1ngs RAND0mLy!?";
+	private const string TestString05 = "!rrrrrrrrr";
+	private const string TestString06 = "r!!!!!!!!!";
 
 	[Theory]
 	#region String ends with newline
@@ -53,6 +58,52 @@ public class ReadOnlyStringBufferTests
 		buffer.BuildCache();
 		Assert.Equal(expectedCount, buffer.CountUntilLineSeparator(index, out bool actualCrLf));
 		Assert.Equal(expectedCrLf, actualCrLf);
+	}
+
+	[Theory]
+	#region Attributes
+	[InlineData(0)]
+	[InlineData(2)]
+	[InlineData(14)]
+	[InlineData(99)]
+	[InlineData(-10)]
+	#endregion
+	public void CountUntilLineSeparator_ThrowsIfEmpty(int index)
+	{
+		var buffer = new ReadOnlyStringBuffer(String.Empty);
+		bool isCrLf = true;
+		Assert.Throws<BufferException>(() => buffer.CountUntilLineSeparator(index, out isCrLf));
+		Assert.False(isCrLf);
+	}
+
+	[Theory]
+	#region Attributes
+	[InlineData(0, false)]
+	[InlineData(2, false)]
+	[InlineData(14, false)]
+	[InlineData(99, true)]
+	[InlineData(34, false)] // this method allows for EOF convention
+	[InlineData(35, true)]
+	[InlineData(-10, false)]
+	[InlineData(-34, false)]
+	[InlineData(-35, true)]
+	#endregion
+	public void CountUntilLineSeparator_ThrowsIfOutOfRange(int index, bool throws)
+	{
+		var buffer = new ReadOnlyStringBuffer(TestString01);
+		bool isCrLf = true;
+
+		if (throws)
+		{
+			Debug.WriteLine("Expecting an exception...");
+			Assert.Throws<IndexOutOfRangeException>(() => buffer.CountUntilLineSeparator(index, out isCrLf));
+			Assert.False(isCrLf);
+		}
+		else
+		{
+			Debug.WriteLine("Not expecting an exception...");
+			buffer.CountUntilLineSeparator(index, out isCrLf); // if this throws, test fails
+		}
 	}
 
 	[Theory]
@@ -99,6 +150,48 @@ public class ReadOnlyStringBufferTests
 
 	[Theory]
 	#region Attributes
+	[InlineData(0)]
+	[InlineData(2)]
+	[InlineData(14)]
+	[InlineData(99)]
+	[InlineData(-10)]
+	#endregion
+	public void CountUntilNotWhitespace_ThrowsIfEmpty(int index)
+	{
+		var buffer = new ReadOnlyStringBuffer(String.Empty);
+		Assert.Throws<BufferException>(() => buffer.CountUntilWhitespace(index));
+	}
+
+	[Theory]
+	#region Attributes
+	[InlineData(0, false)]
+	[InlineData(2, false)]
+	[InlineData(14, false)]
+	[InlineData(99, true)]
+	[InlineData(34, false)] // this method allows for EOF convention
+	[InlineData(35, true)]
+	[InlineData(-10, false)]
+	[InlineData(-34, false)]
+	[InlineData(-35, true)]
+	#endregion
+	public void CountUntilNotWhitespace_ThrowsIfOutOfRange(int index, bool throws)
+	{
+		var buffer = new ReadOnlyStringBuffer(TestString01);
+
+		if (throws)
+		{
+			Debug.WriteLine("Expecting an exception...");
+			Assert.Throws<IndexOutOfRangeException>(() => buffer.CountUntilNotWhitespace(index));
+		}
+		else
+		{
+			Debug.WriteLine("Not expecting an exception...");
+			buffer.CountUntilNotWhitespace(index); // if this throws, test fails
+		}
+	}
+
+	[Theory]
+	#region Attributes
 	[InlineData(TestString03, 0, 4)]  // T in "This"
 	[InlineData(TestString03, 2, 2)]  // i in "This"
 	[InlineData(TestString03, 3, 1)]  // s in "This"
@@ -141,6 +234,48 @@ public class ReadOnlyStringBufferTests
 
 	[Theory]
 	#region Attributes
+	[InlineData(0)]
+	[InlineData(2)]
+	[InlineData(14)]
+	[InlineData(99)]
+	[InlineData(-10)]
+	#endregion
+	public void CountUntilWhitespace_ThrowsIfEmpty(int index)
+	{
+		var buffer = new ReadOnlyStringBuffer(String.Empty);
+		Assert.Throws<BufferException>(() => buffer.CountUntilWhitespace(index));
+	}
+
+	[Theory]
+	#region Attributes
+	[InlineData(0, false)]
+	[InlineData(2, false)]
+	[InlineData(14, false)]
+	[InlineData(99, true)]
+	[InlineData(34, false)] // this method allows for EOF convention
+	[InlineData(35, true)]
+	[InlineData(-10, false)]
+	[InlineData(-34, false)]
+	[InlineData(-35, true)]
+	#endregion
+	public void CountUntilWhitespace_ThrowsIfOutOfRange(int index, bool throws)
+	{
+		var buffer = new ReadOnlyStringBuffer(TestString01);
+
+		if (throws)
+		{
+			Debug.WriteLine("Expecting an exception...");
+			Assert.Throws<IndexOutOfRangeException>(() => buffer.CountUntilWhitespace(index));
+		}
+		else
+		{
+			Debug.WriteLine("Not expecting an exception...");
+			buffer.CountUntilWhitespace(index); // if this throws, test fails
+		}
+	}
+
+	[Theory]
+	#region Attributes
 	[InlineData(TestString01)]
 	[InlineData(TestString02)]
 	[InlineData(TestString03)]
@@ -150,6 +285,70 @@ public class ReadOnlyStringBufferTests
 	{
 		var buffer = new ReadOnlyStringBuffer(data);
 		Assert.Equal(data.Length, buffer.CountWhile((_, _) => true, 0));
+	}
+
+	[Theory]
+	#region Regular string
+	[InlineData(TestString03, 0, 8)] // T in "This
+	[InlineData(TestString03, 2, 6)] // i in "This"
+	[InlineData(TestString03, 5, 3)] // whitespace before "string"
+	[InlineData(TestString03, 7, 1)] // t in "This  string"
+	[InlineData(TestString03, 8, 0)] // r in "This  string"
+	[InlineData(TestString03, 9, 37)] // i in "string"
+	[InlineData(TestString03, 10, 36)]
+	[InlineData(TestString03, 11, 35)]
+	[InlineData(TestString03, 15, 31)]
+	[InlineData(TestString03, 18, 28)]
+	[InlineData(TestString03, 20, 26)]
+	[InlineData(TestString03, 22, 24)]
+	[InlineData(TestString03, 24, 22)]
+	[InlineData(TestString03, 29, 17)]
+	[InlineData(TestString03, 31, 15)]
+	[InlineData(TestString03, 34, 12)]
+	[InlineData(TestString03, 37, 9)]
+	[InlineData(TestString03, 41, 5)]
+	[InlineData(TestString03, 44, 2)]
+	[InlineData(TestString03, 45, 1)]
+	[InlineData(TestString03, 46, 0)]
+	[InlineData(TestString03, 47, 6)] // second in "charact"
+	[InlineData(TestString03, 48, 5)]
+	[InlineData(TestString03, 50, 3)]
+	[InlineData(TestString03, 51, 2)]
+	[InlineData(TestString03, 53, 0)]
+	[InlineData(TestString03, 54, 15)] // s in "ers "
+	[InlineData(TestString03, 55, 14)]
+	[InlineData(TestString03, 58, 11)]
+	[InlineData(TestString03, 61, 8)]
+	[InlineData(TestString03, 63, 6)]
+	[InlineData(TestString03, 64, 5)]
+	[InlineData(TestString03, 67, 2)]
+	[InlineData(TestString03, 68, 1)]
+	[InlineData(TestString03, 69, 0)]
+	[InlineData(TestString03, 70, 5)]
+	[InlineData(TestString03, 72, 3)] // after last r in the whole string
+	[InlineData(TestString03, 74, 1)] // before End of file
+	[InlineData(TestString03, 75, 0)] // End of file
+	#endregion
+	#region String with several r's
+	[InlineData(TestString05, 0, 1)] // "!"
+	[InlineData(TestString05, 1, 0)]
+	[InlineData(TestString05, 4, 0)]
+	[InlineData(TestString05, 7, 0)]
+	[InlineData(TestString05, 9, 0)]
+	[InlineData(TestString05, 10, 0)] // EOF
+	#endregion
+	#region String with a single r
+	[InlineData(TestString06, 0, 0)] // "r"
+	[InlineData(TestString06, 1, 9)]
+	[InlineData(TestString06, 4, 6)]
+	[InlineData(TestString06, 7, 3)]
+	[InlineData(TestString06, 9, 1)]
+	[InlineData(TestString06, 10, 0)] // EOF
+	#endregion
+	public void CountWhile_CountsWhileNotLowercaseR(string data, int index, int expectedCount)
+	{
+		var buffer = new ReadOnlyStringBuffer(data);
+		Assert.Equal(expectedCount, buffer.CountWhile((_, c) => c != 'r', index));
 	}
 
 	[Theory]
@@ -197,6 +396,48 @@ public class ReadOnlyStringBufferTests
 	{
 		var buffer = new ReadOnlyStringBuffer(data);
 		Assert.Equal(expectedCount, buffer.CountWhile((_, c) => Char.IsWhiteSpace(c) || c.IsNewline() || Char.IsUpper(c), index));
+	}
+
+	[Theory]
+	#region Attributes
+	[InlineData(0)]
+	[InlineData(2)]
+	[InlineData(14)]
+	[InlineData(99)]
+	[InlineData(-10)]
+	#endregion
+	public void CountWhile_ThrowsIfEmpty(int index)
+	{
+		var buffer = new ReadOnlyStringBuffer(String.Empty);
+		Assert.Throws<BufferException>(() => buffer.CountWhile((_, _) => true, index));
+	}
+
+	[Theory]
+	#region Attributes
+	[InlineData(0, false)]
+	[InlineData(2, false)]
+	[InlineData(14, false)]
+	[InlineData(99, true)]
+	[InlineData(34, false)] // this method allows for EOF convention
+	[InlineData(35, true)]
+	[InlineData(-10, false)]
+	[InlineData(-34, false)]
+	[InlineData(-35, true)]
+	#endregion
+	public void CountWhile_ThrowsIfOutOfRange(int index, bool throws)
+	{
+		var buffer = new ReadOnlyStringBuffer(TestString01);
+
+		if (throws)
+		{
+			Debug.WriteLine("Expecting an exception...");
+			Assert.Throws<IndexOutOfRangeException>(() => buffer.CountWhile((_, _) => true, index));
+		}
+		else
+		{
+			Debug.WriteLine("Not expecting an exception...");
+			buffer.CountWhile((_, _) => true, index); // if this throws, test fails
+		}
 	}
 
 	[Theory]
@@ -265,8 +506,6 @@ public class ReadOnlyStringBufferTests
 		buffer.BuildCache();
 		Assert.Equal(expectedLineCount, buffer.GetLineNumberFromIndex(index));
 	}
-
-	
 
 	[Theory]
 	#region String ends with newline

@@ -672,7 +672,7 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	/// </summary>
 	/// <param name="other">The array.</param>
 	/// <returns>True if equals.</returns>
-	public bool Equals(char[]? other) => other is not null && data.Equal(other);
+	public bool Equals(char[]? other) => other is not null && data.Equals(other.AsSpan(), StringComparison.Ordinal);
 
 	/// <summary>
 	/// Checks if another read-only buffer is equal to the current instance.
