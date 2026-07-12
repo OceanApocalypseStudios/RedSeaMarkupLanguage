@@ -1,4 +1,4 @@
-﻿using OceanApocalypseStudios.RSML.Sources;
+using OceanApocalypseStudios.RSML.Sources;
 
 namespace OceanApocalypseStudios.RSML.Language.Lexing;
 

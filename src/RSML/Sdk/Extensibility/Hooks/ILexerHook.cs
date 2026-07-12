@@ -1,4 +1,4 @@
-﻿using OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries;
+using OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries;
 
 
 namespace OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks;

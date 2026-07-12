@@ -1,4 +1,4 @@
-﻿using OceanApocalypseStudios.RSML.Execution;
+using OceanApocalypseStudios.RSML.Execution;
 using OceanApocalypseStudios.RSML.Language.Lexing;
 using OceanApocalypseStudios.RSML.Language.Parsing;
 using OceanApocalypseStudios.RSML.Sdk.Extensibility;

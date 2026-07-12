@@ -1,7 +1,7 @@
 ###############################################################################
 # Set default behavior to automatically normalize line endings.
 ###############################################################################
-* text=auto
+*            text=auto       eol=lf
 
 ###############################################################################
 # Set default behavior for command prompt diff.
@@ -10,7 +10,7 @@
 # default for csharp files.
 # Note: This is only used by command line
 ###############################################################################
-*.cs     diff=csharp
+*.cs         diff=csharp
 
 ###############################################################################
 # Set the merge driver for project and solution files
@@ -22,7 +22,7 @@
 # these files as binary and thus will always conflict and require user
 # intervention with every merge. To do so, just uncomment the entries below
 ###############################################################################
-*.sln       merge=binary
+#*.sln       merge=binary
 #*.csproj    merge=binary
 #*.vbproj    merge=binary
 #*.vcxproj   merge=binary
@@ -40,9 +40,9 @@
 #
 # image files are treated as binary by default.
 ###############################################################################
-*.jpg   binary
-*.png   binary
-*.gif   binary
+*.jpg        binary
+*.png        binary
+*.gif        binary
 
 ###############################################################################
 # diff behavior for common document formats
@@ -51,35 +51,40 @@
 # is only available from the command line. Turn it on by uncommenting the 
 # entries below.
 ###############################################################################
-#*.doc   diff=astextplain
-#*.DOC   diff=astextplain
-#*.docx  diff=astextplain
-#*.DOCX  diff=astextplain
-#*.dot   diff=astextplain
-#*.DOT   diff=astextplain
-#*.pdf   diff=astextplain
-#*.PDF   diff=astextplain
-#*.rtf   diff=astextplain
-#*.RTF   diff=astextplain
+#*.doc       diff=astextplain
+#*.DOC       diff=astextplain
+#*.docx      diff=astextplain
+#*.DOCX      diff=astextplain
+#*.dot       diff=astextplain
+#*.DOT       diff=astextplain
+#*.pdf       diff=astextplain
+#*.PDF       diff=astextplain
+#*.rtf       diff=astextplain
+#*.RTF       diff=astextplain
 
-# Projet files
-*.rsea linguist-language=Text
-*.rsml linguist-language=Text
-*.slnx linguist-language=Visual Studio Solution
-*.csproj linguist-language=C#
-*.vbproj linguist-language=Visual Basic
-*.fsproj linguist-language=F#
-*.pyproj linguist-language=Python
-*.sqlproj linguist-language=SQL
+# RSML files
+*.rsea       linguist-language=Text
+*.decision   linguist-language=Text
+*.rsml       linguist-language=Text
+
+# Solution and project files
+*.slnx       linguist-language=Visual Studio Solution
+*.csproj     linguist-language=C#
+*.vbproj     linguist-language=Visual Basic
+*.fsproj     linguist-language=F#
+*.pyproj     linguist-language=Python
+*.sqlproj    linguist-language=SQL
 
 # The RSML dataset (C# format) was being detected
 # as Smalltalk for whatever reason.
 # This should fix it.
-*.cs linguist-language=C#
+*.cs         linguist-language=C#
 
 # Documentation
-*.md linguist-documentation
-*.html linguist-documentation
+*.md         linguist-documentation
+*.html       linguist-documentation
+*.css        linguist-documentation
+*.js         linguist-documentation
 
 # Throwback to when github thought this repo contained 74% smalltalk
-*.st linguist-vendored
+*.st         linguist-vendored

@@ -1,4 +1,4 @@
-﻿using OceanApocalypseStudios.RSML.Sdk;
+using OceanApocalypseStudios.RSML.Sdk;
 using OceanApocalypseStudios.RSML.Sdk.Extensibility;
 
 

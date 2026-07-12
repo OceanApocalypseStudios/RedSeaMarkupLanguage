@@ -1,4 +1,4 @@
-﻿namespace OceanApocalypseStudios.RSML.Sdk;
+namespace OceanApocalypseStudios.RSML.Sdk;
 
 /// <summary>
 /// Configuration options for a <see cref="ToolchainExecutionPlan"/>, usually passed via a <see cref="ToolchainExecutionPlanBuilder"/>.

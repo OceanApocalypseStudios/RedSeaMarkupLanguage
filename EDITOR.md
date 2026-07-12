@@ -1,4 +1,4 @@
-﻿# RSML Code Editor and IDE Support
+# RSML Code Editor and IDE Support
 Editors and IDEs with RSML support natively or via plugins.
 
 <table>

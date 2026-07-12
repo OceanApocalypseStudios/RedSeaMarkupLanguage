@@ -1,4 +1,4 @@
-﻿namespace OceanApocalypseStudios.RSML;
+namespace OceanApocalypseStudios.RSML;
 
 internal static class Constants
 {

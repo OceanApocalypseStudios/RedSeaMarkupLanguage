@@ -1,4 +1,4 @@
-﻿#
+#
 <div align="center">
 	<img src="assets/logo.png" alt="RSML Logo" align="center" width="150">
 	<h1>Red Sea Markup Language</h1>

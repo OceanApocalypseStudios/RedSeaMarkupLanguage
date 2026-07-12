@@ -1,4 +1,4 @@
-﻿namespace OceanApocalypseStudios.RSML.Cache;
+namespace OceanApocalypseStudios.RSML.Cache;
 
 /// <summary>
 /// Represents a service or a type that supports cached data.

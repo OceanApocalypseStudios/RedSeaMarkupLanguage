@@ -1,4 +1,4 @@
-﻿# RSML API Programming Language Support
+# RSML API Programming Language Support
 RSML v3.0.0 will support native interop by exporting a C ABI, meaning it can be used in any language that supports C
 interop.
 
