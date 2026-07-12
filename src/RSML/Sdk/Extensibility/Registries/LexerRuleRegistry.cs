@@ -3,7 +3,7 @@
 using OceanApocalypseStudios.RSML.Language.Lexing;
 
 
-namespace OceanApocalypseStudios.RSML.Sdk.Extensibility;
+namespace OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries;
 
 public class LexerRuleRegistry
 {

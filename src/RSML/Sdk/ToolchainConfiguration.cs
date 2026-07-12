@@ -1,9 +1,9 @@
 ﻿namespace OceanApocalypseStudios.RSML.Sdk;
 
 /// <summary>
-/// Configuration options for a <see cref="PipeLine"/>, usually passed via a <see cref="PipeLineBuilder"/>.
+/// Configuration options for a <see cref="ToolchainExecutionPlan"/>, usually passed via a <see cref="ToolchainExecutionPlanBuilder"/>.
 /// </summary>
-public enum PipeLineConfiguration
+public enum ToolchainConfiguration
 {
 	/// <summary>
 	/// Optimizes the toolchain pipeline by disabling extension processing.
@@ -14,10 +14,10 @@ public enum PipeLineConfiguration
 	/// > meaning sometimes you might be wondering why your extension is not working when, in reality,
 	/// you've enabled this configuration.
 	/// > [!IMPORTANT]
-	/// > This configuration is automatically enabled when no extensions are activated, meaning that
+	/// > This configuration is automatically enabled when no extensions are enabled, meaning that
 	/// > if you pass this configuration manually when no extensions are active, you will cause RSML
 	/// > to error out due to duplicated configuration, unless <see cref="SilentlyIgnoreDuplicatedConfigurations"/>
-	/// > is enabled.
+	/// > or <see cref="SilentlyIgnoreAllErrors"/> are enabled.
 	/// </remarks>
 	DisableExtensionProcessing,
 
@@ -30,6 +30,11 @@ public enum PipeLineConfiguration
 	/// > no errors will be thrown.
 	/// </remarks>
 	AllowOnlyOASExtensions,
+
+	/// <summary>
+	/// Overrides the default behavior of freezing all toolchain components after the last injection.
+	/// </summary>
+	DoNotFreezeComponentsOnLastInjection,
 
 	SilentlyIgnoreBrokenExtensions,
 	SilentlyIgnoreDuplicatedExtensions,
