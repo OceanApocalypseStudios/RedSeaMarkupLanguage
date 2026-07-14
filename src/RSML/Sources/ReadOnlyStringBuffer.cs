@@ -417,9 +417,11 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	public char[] GetLineFromIndex(int index) => GetLine(GetLineNumberFromIndex(index));
 
 	/// <remarks>
-	/// Unlike with other <see cref="ReadOnlyStringBuffer"/> methods, this one
-	/// does not accept the EOF index (index at <see cref="Length"/>), because it is not
-	/// considered a location.
+	/// > [!IMPORTANT]
+	/// > Unlike with other <see cref="ReadOnlyStringBuffer"/> methods, this one
+	/// > does not follow EOF conventions and, because of that, does not accept the 
+	/// > EOF index (index at <see cref="Length"/>), because it is not
+	/// > considered a location.
 	/// </remarks>
 	/// <inheritdoc/>
 	public SourceLocation GetSourceLocation(int index)
