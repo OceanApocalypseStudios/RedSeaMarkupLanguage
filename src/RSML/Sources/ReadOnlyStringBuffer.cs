@@ -151,7 +151,7 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 			throw new BufferException("The buffer cannot be empty.");
 
 		if (index < 0)
-			index = Length + index; // -1 is (Length-1) etc
+			index += Length;
 
 		if (IsConventionallyOutOfRange(index))
 			throw new IndexOutOfRangeException("The index must be less than or equal to the buffer's length.");
@@ -160,12 +160,21 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 			return 0; // consumed the entire buffer
 
 		ComputeLineStarts();
-		int lineStart = GetNextLineStartPosition(index, out _);
-		int lineSep = lineStart - 1;
-		isCrLf = precededByCrLf.Contains(lineStart) && data[index] is not '\n'; // to us, CRLF is only when we're not standing on the LF
+
+		int lineSep = GetNextLineStartPosition(index, out _);
+		isCrLf = precededByCrLf.Contains(lineSep) && data[index] is not '\n'; // to us, CRLF is only when we're not standing on the LF
 
 		if (isCrLf)
 			lineSep--; // skip the extra line separator in the CRLF sequence		
+
+#if NET8_0_OR_GREATER
+		if (!(IsLastLine(index) && !data[^1].IsNewline())) // if we're not on the last line and it doesn't end with a newline then
+#else
+		if (!(IsLastLine(index) && !data[Length - 1].IsNewline()))
+#endif
+		{
+			lineSep--;
+		}
 
 		return lineSep - index;
 	}
@@ -306,7 +315,7 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 		if (lineNumber < 0 || lineNumber >= RawLineCount)
 			throw new ArgumentOutOfRangeException(nameof(lineNumber), "The 0-based line number must be non-negative and less than the amount of lines in the buffer.");
 
-		if (lineNumber == LineCount)
+		if (lineNumber == RawLineCount - 1)
 			return 0; // EOF means the line is empty
 
 		int start = lineStarts[lineNumber];
@@ -315,8 +324,15 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 		if (precededByCrLf.Contains(end))
 			end--; // skip the extra line separator in the CRLF sequence
 
-		if (!(lineNumber + 2 == RawLineCount && !data[Length - 1].IsNewline())) // if we're not on the last line then
+#if NET8_0_OR_GREATER
+		if (!(lineNumber + 2 == RawLineCount && !data[^1].IsNewline()))
+#else
+		if (!(lineNumber + 2 == RawLineCount && !data[Length - 1].IsNewline()))
+#endif
+		{
+			// if we're not on the last line and it doesn't end with newline then
 			end--; // skip one more line separator
+		}
 
 		return end - start;
 	}
@@ -589,7 +605,7 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 								   : CountUntilWhitespace(index);
 
 		itemCount = Math.Min(actualLineLength, destination.Length);
-		data.AsSpan(index, itemCount).CopyTo(destination);;
+		data.AsSpan(index, itemCount).CopyTo(destination);
 
 		return destination.Length >= actualLineLength;
 	}
@@ -949,6 +965,21 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	/// <see cref="IndexOutOfRangeException"/>.
 	/// </summary>
 	private bool IsConventionallyOutOfRange(int index) => index < 0 || index > Length;
+
+	private bool IsLastLine(int index)
+	{
+		if (RawLineCount == 1)
+			return true; // only raw line is last line
+
+#if NET8_0_OR_GREATER
+		if (index >= lineStarts[^2] && index < lineStarts[^1])
+#else
+		if (index >= lineStarts[RawLineCount - 2] && index < lineStarts[RawLineCount - 1])
+#endif
+			return true;
+
+		return false;
+	}
 
 	/// <summary>
 	/// True if index is greater than or equal to the length.
