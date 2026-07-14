@@ -48,8 +48,8 @@ public class ReadOnlyStringBufferTests
 	[InlineData(TestString02, 28, 0, true)] // First CR in "\r\n\r\n."
 	[InlineData(TestString02, 29, 0, false)] // First LF in "\r\n\r\n."
 	[InlineData(TestString02, 30, 0, true)] // Second CR in "\r\n\r\n."
-	[InlineData(TestString02, 31, 0, false)] // Second LF in "\r\n\r\n."
-	[InlineData(TestString02, 32, 1, false)] // Dot/point in "\r\n\r\n."
+	[InlineData(TestString02, -2, 0, false)] // Second LF in "\r\n\r\n."
+	[InlineData(TestString02, -1, 1, false)] // Dot/point in "\r\n\r\n."
 	[InlineData(TestString02, 33, 0, false)] // End of file
 	#endregion
 	#region String with a single line
@@ -476,7 +476,7 @@ public class ReadOnlyStringBufferTests
 	[InlineData(TestString01, 20)]
 	[InlineData(TestString01, -20)]
 	#endregion
-	public void GetLengthOfLine_ThrowsIfLineNumberOutOfRange(string data, int lineNumber)
+	public void GetLengthOfLine_ThrowsIfOutOfRange(string data, int lineNumber)
 	{
 		var buffer = new ReadOnlyStringBuffer(data);
 		Assert.Throws<ArgumentOutOfRangeException>(() => buffer.GetLengthOfLine(lineNumber));
@@ -512,8 +512,8 @@ public class ReadOnlyStringBufferTests
 	[InlineData(TestString02, 28, 7)] // First CR in "\r\n\r\n."
 	[InlineData(TestString02, 29, 7)] // First LF in "\r\n\r\n."
 	[InlineData(TestString02, 30, 0)] // Second CR in "\r\n\r\n."
-	[InlineData(TestString02, 31, 0)] // Second LF in "\r\n\r\n."
-	[InlineData(TestString02, 32, 1)] // Dot/point in "\r\n\r\n."
+	[InlineData(TestString02, -2, 0)] // Second LF in "\r\n\r\n."
+	[InlineData(TestString02, -1, 1)] // Dot/point in "\r\n\r\n."
 	[InlineData(TestString02, 33, 0)] // End of file
 	#endregion
 	public void GetLengthOfLineFromIndex(string data, int lineNumber, int expectedLength)
@@ -543,7 +543,7 @@ public class ReadOnlyStringBufferTests
 	[InlineData(TestString01, 35)]
 	[InlineData(TestString01, -35)]
 	#endregion
-	public void GetLengthOfLineFromIndex_ThrowsIfLineNumberOutOfRange(string data, int lineNumber)
+	public void GetLengthOfLineFromIndex_ThrowsIfOutOfRange(string data, int lineNumber)
 	{
 		var buffer = new ReadOnlyStringBuffer(data);
 		Assert.Throws<IndexOutOfRangeException>(() => buffer.GetLengthOfLineFromIndex(lineNumber));
@@ -603,14 +603,86 @@ public class ReadOnlyStringBufferTests
 	[InlineData(TestString01, -4)]
 	[InlineData(TestString01, 20)]
 	[InlineData(TestString01, -20)]
+	[InlineData(TestString02, 8)]
+	[InlineData(TestString05, 2)]
 	#endregion
-	public void GetLine_ThrowsIfLineNumberOutOfRange(string data, int lineNumber)
+	public void GetLine_ThrowsIfOutOfRange(string data, int lineNumber)
 	{
 		var buffer = new ReadOnlyStringBuffer(data);
 		Assert.Throws<ArgumentOutOfRangeException>(() => buffer.GetLine(lineNumber));
 	}
 
-	// todo: test GetLineFromIndex
+	[Theory]
+	#region String ends with newline
+	[InlineData(TestString01, 0, "Hey")]  // H in "Hey"
+	[InlineData(TestString01, 2, "Hey")]  // y in "Hey\r\n"
+	[InlineData(TestString01, 3, "Hey")]  // CR in "Hey\r\n"
+	[InlineData(TestString01, 4, "Hey")]  // LF in "Hey\r\n"
+	[InlineData(TestString01, 5, "This")]  // T in "This"
+	[InlineData(TestString01, 6, "This")]  // h in "This"
+	[InlineData(TestString01, 11, "Is")] // s in "Is"
+	[InlineData(TestString01, 12, "Is")] // U2029 before "A Test"
+	[InlineData(TestString01, 13, "A Test ")] // A in "A Test"
+	[InlineData(TestString01, 15, "A Test ")] // T in "Test"
+	[InlineData(TestString01, 22, " Method")] // M in "Method"
+	[InlineData(TestString01, 28, " Method")] // First CR in "\r\n\r\n."
+	[InlineData(TestString01, 29, " Method")] // First LF in "\r\n\r\n."
+	[InlineData(TestString01, 30, "")] // Second CR in "\r\n\r\n."
+	[InlineData(TestString01, 31, "")] // Second LF in "\r\n\r\n."
+	[InlineData(TestString01, 32, ".")] // Dot/point in "\r\n\r\n."
+	[InlineData(TestString01, 33, ".")] // U2028 in ".\u2028"
+	[InlineData(TestString01, 34, "")] // End of file
+	#endregion
+	#region String ends without newline
+	[InlineData(TestString02, 0, "Hey")]  // H in "Hey"
+	[InlineData(TestString02, 2, "Hey")]  // y in "Hey\r\n"
+	[InlineData(TestString02, 3, "Hey")]  // CR in "Hey\r\n"
+	[InlineData(TestString02, 4, "Hey")]  // LF in "Hey\r\n"
+	[InlineData(TestString02, 5, "This")]  // T in "This"
+	[InlineData(TestString02, 6, "This")]  // h in "This"
+	[InlineData(TestString02, 11, "Is")] // s in "Is"
+	[InlineData(TestString02, 12, "Is")] // U2029 before "A Test"
+	[InlineData(TestString02, 13, "A Test ")] // A in "A Test"
+	[InlineData(TestString02, 15, "A Test ")] // T in "Test"
+	[InlineData(TestString02, 22, " Method")] // M in "Method"
+	[InlineData(TestString02, 28, " Method")] // First CR in "\r\n\r\n."
+	[InlineData(TestString02, 29, " Method")] // First LF in "\r\n\r\n."
+	[InlineData(TestString02, 30, "")] // Second CR in "\r\n\r\n."
+	[InlineData(TestString02, -2, "")] // Second LF in "\r\n\r\n."
+	[InlineData(TestString02, -1, ".")] // Dot/point in "\r\n\r\n."
+	[InlineData(TestString02, 33, "")] // End of file
+	#endregion
+	public void GetLineFromIndex(string data, int index, string expectedLine)
+	{
+		var buffer = new ReadOnlyStringBuffer(data);
+		Assert.Equal(expectedLine, buffer.GetLineFromIndex(index));
+	}
+
+	[Theory]
+	#region Attributes
+	[InlineData(TestString01, 99)]
+	[InlineData(TestString01, 35)]
+	[InlineData(TestString01, -35)]
+	#endregion
+	public void GetLineFromIndex_ThrowsIfOutOfRange(string data, int lineNumber)
+	{
+		var buffer = new ReadOnlyStringBuffer(data);
+		Assert.Throws<IndexOutOfRangeException>(() => buffer.GetLineFromIndex(lineNumber));
+	}
+
+	[Theory]
+	#region Attributes
+	[InlineData(0)]
+	[InlineData(20)]
+	[InlineData(69)]
+	[InlineData(136)]
+	[InlineData(-4)]
+	#endregion
+	public void GetLineFromIndex_ThrowsIfEmpty(int lineNumber)
+	{
+		var buffer = new ReadOnlyStringBuffer(String.Empty);
+		Assert.Throws<BufferException>(() => buffer.GetLineFromIndex(lineNumber));
+	}
 
 	[Theory]
 	#region String ends with newline
@@ -642,8 +714,8 @@ public class ReadOnlyStringBufferTests
 	[InlineData(TestString02, 28, 4)] // First CR in "\r\n\r\n."
 	[InlineData(TestString02, 29, 4)] // First LF in "\r\n\r\n."
 	[InlineData(TestString02, 30, 5)] // Second CR in "\r\n\r\n."
-	[InlineData(TestString02, 31, 5)] // Second LF in "\r\n\r\n."
-	[InlineData(TestString02, 32, 6)] // Dot/point in "\r\n\r\n."
+	[InlineData(TestString02, -2, 5)] // Second LF in "\r\n\r\n."
+	[InlineData(TestString02, -1, 6)] // Dot/point in "\r\n\r\n."
 	[InlineData(TestString02, 33, 7)] // EOF
 	#endregion
 	public void GetLineNumberFromIndex(string data, int index, int expectedLineCount)
@@ -659,7 +731,7 @@ public class ReadOnlyStringBufferTests
 	[InlineData(TestString01, 35)]
 	[InlineData(TestString01, -35)]
 	#endregion
-	public void GetLineNumberFromIndex_ThrowsIfLineNumberOutOfRange(string data, int lineNumber)
+	public void GetLineNumberFromIndex_ThrowsIfOutOfRange(string data, int lineNumber)
 	{
 		var buffer = new ReadOnlyStringBuffer(data);
 		Assert.Throws<IndexOutOfRangeException>(() => buffer.GetLineNumberFromIndex(lineNumber));
@@ -679,14 +751,81 @@ public class ReadOnlyStringBufferTests
 		Assert.Throws<BufferException>(() => buffer.GetLineNumberFromIndex(lineNumber));
 	}
 
-	/* todo: test GetSourceLocation
-	 * todo: test GetWord (all overloads)
+	[Theory]
+	#region String ends with newline
+	[InlineData(TestString01, 0, 0, 0, 0)]  // H in "Hey"
+	[InlineData(TestString01, 3, 3, 0, 3)]  // CR in "Hey\r\n"
+	[InlineData(TestString01, 4, 4, 0, 4)]  // LF in "Hey\r\n"
+	[InlineData(TestString01, 5, 5, 1, 0)]  // T in "This"
+	[InlineData(TestString01, 6, 6, 1, 1)]  // h in "This"
+	[InlineData(TestString01, 13, 13, 3, 0)] // A in "A Test"
+	[InlineData(TestString01, 15, 15, 3, 2)] // T in "Test"
+	[InlineData(TestString01, 22, 22, 4, 1)] // M in "Method"
+	[InlineData(TestString01, 28, 28, 4, 7)] // First CR in "\r\n\r\n."
+	[InlineData(TestString01, -5, 29, 4, 8)] // First LF in "\r\n\r\n."
+	[InlineData(TestString01, 30, 30, 5, 0)] // Second CR in "\r\n\r\n."
+	[InlineData(TestString01, -3, 31, 5, 1)] // Second LF in "\r\n\r\n."
+	[InlineData(TestString01, 32, 32, 6, 0)] // Dot/point in "\r\n\r\n."
+	[InlineData(TestString01, 33, 33, 6, 1)] // U2028 in ".\u2028"
+	#endregion
+	#region String ends without newline
+	[InlineData(TestString02, 0, 0, 0, 0)]  // H in "Hey"
+	[InlineData(TestString02, 3, 3, 0, 3)]  // CR in "Hey\r\n"
+	[InlineData(TestString02, 4, 4, 0, 4)]  // LF in "Hey\r\n"
+	[InlineData(TestString02, 5, 5, 1, 0)]  // T in "This"
+	[InlineData(TestString02, 6, 6, 1, 1)]  // h in "This"
+	[InlineData(TestString02, 13, 13, 3, 0)] // A in "A Test"
+	[InlineData(TestString02, 15, 15, 3, 2)] // T in "Test"
+	[InlineData(TestString02, 22, 22, 4, 1)] // M in "Method"
+	[InlineData(TestString02, 28, 28, 4, 7)] // First CR in "\r\n\r\n."
+	[InlineData(TestString02, 29, 29, 4, 8)] // First LF in "\r\n\r\n."
+	[InlineData(TestString02, 30, 30, 5, 0)] // Second CR in "\r\n\r\n."
+	[InlineData(TestString02, -2, 31, 5, 1)] // Second LF in "\r\n\r\n."
+	[InlineData(TestString02, -1, 32, 6, 0)] // Dot/point in "\r\n\r\n."
+	#endregion
+	public void GetSourceLocation(string data, int index, int expectedIndex, int expectedLine, int expectedColumn)
+	{
+		var buffer = new ReadOnlyStringBuffer(data);
+		var location = buffer.GetSourceLocation(index);
+
+		Assert.Equal(expectedIndex, location.Index);
+		Assert.Equal(expectedLine, location.Line);
+		Assert.Equal(expectedColumn, location.Column);
+	}
+
+	[Theory]
+	#region Attributes
+	[InlineData(TestString01, 99)]
+	[InlineData(TestString01, 34)] // EOF is not accepted for this method
+	[InlineData(TestString01, 35)]
+	[InlineData(TestString01, -35)]
+	#endregion
+	public void GetSourceLocation_ThrowsIfOutOfRange(string data, int lineNumber)
+	{
+		var buffer = new ReadOnlyStringBuffer(data);
+		Assert.Throws<IndexOutOfRangeException>(() => buffer.GetSourceLocation(lineNumber));
+	}
+
+	[Theory]
+	#region Attributes
+	[InlineData(0)]
+	[InlineData(20)]
+	[InlineData(69)]
+	[InlineData(136)]
+	[InlineData(-4)]
+	#endregion
+	public void GetSourceLocation_ThrowsIfEmpty(int lineNumber)
+	{
+		var buffer = new ReadOnlyStringBuffer(String.Empty);
+		Assert.Throws<BufferException>(() => buffer.GetSourceLocation(lineNumber));
+	}
+
+	/* todo: test GetWord (all overloads)
 	 * todo: test non-string constructors
 	 * todo: test Slice (all overloads)
 	 * todo: test ToString
 	 * todo: test TryGetChar
-	 * todo: test TryGetLine
-	 */ 
+	 * todo: test TryGetLine */
 
 	[Theory]
 	#region String ends with newline
@@ -716,8 +855,8 @@ public class ReadOnlyStringBufferTests
 	[InlineData(TestString02, 28, " Method")] // First CR in "\r\n\r\n."
 	[InlineData(TestString02, 29, " Method")] // First LF in "\r\n\r\n."
 	[InlineData(TestString02, 30, "")]        // Second CR in "\r\n\r\n."
-	[InlineData(TestString02, 31, "")]        // Second LF in "\r\n\r\n."
-	[InlineData(TestString02, 32, ".")]       // Dot/point in Second LF in "\r\n\r\n."
+	[InlineData(TestString02, -2, "")]        // Second LF in "\r\n\r\n."
+	[InlineData(TestString02, -1, ".")]       // Dot/point in Second LF in "\r\n\r\n."
 	[InlineData(TestString02, 33, "")]        // End of file
 	#endregion
 	public void TryGetLineFromIndex(string data, int index, string expectedLine)
