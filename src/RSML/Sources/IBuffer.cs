@@ -49,7 +49,7 @@ public interface IBuffer<TItem> : ISource, IEquatable<IBuffer<TItem>?>, IEquatab
 	/// Whether the line separator at which the method stopped is the CR in a CRLF sequence. If true, the next item in the buffer is LF.
 	/// </param>
 	/// <returns>The index of the next line separator, relative to an <paramref name="index"/>.</returns>
-	int CountUntilLineSeparator(int index, out bool isCrLf);
+	int CountUntilEndOfLine(int index, out bool isCrLf);
 
 	/// <summary>
 	/// Counts the amount of items until the next non-whitespace item in the buffer, relative to a given <paramref name="index"/>.

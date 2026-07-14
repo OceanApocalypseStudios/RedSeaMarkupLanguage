@@ -18,8 +18,6 @@ public class ReadOnlyStringBufferTests
 	private const string TestString05 = "!rrrrrrrrr";
 	private const string TestString06 = "r!!!!!!!!!";
 
-	#region DELETE THIS
-
 	[Theory]
 	#region String ends with newline
 	[InlineData(TestString01, 0, 3, true)]  // H in "Hey"
@@ -54,11 +52,19 @@ public class ReadOnlyStringBufferTests
 	[InlineData(TestString02, 32, 0, false)] // Dot/point in "\r\n\r\n."
 	[InlineData(TestString02, 33, 0, false)] // End of file
 	#endregion
-	public void CountUntilLineSeparator(string data, int index, int expectedCount, bool expectedCrLf)
+	#region String with a single line
+	[InlineData(TestString06, 0, 10, false)]
+	[InlineData(TestString06, 3, 7, false)]
+	[InlineData(TestString06, 6, 4, false)]
+	[InlineData(TestString06, 8, 2, false)]
+	[InlineData(TestString06, 9, 1, false)]
+	[InlineData(TestString06, 10, 0, false)]
+	#endregion
+	public void CountUntilEndOfLine(string data, int index, int expectedCount, bool expectedCrLf)
 	{
 		var buffer = new ReadOnlyStringBuffer(data);
 		buffer.BuildCache();
-		Assert.Equal(expectedCount, buffer.CountUntilLineSeparator(index, out bool actualCrLf));
+		Assert.Equal(expectedCount, buffer.CountUntilEndOfLine(index, out bool actualCrLf));
 		Assert.Equal(expectedCrLf, actualCrLf);
 	}
 
@@ -70,11 +76,11 @@ public class ReadOnlyStringBufferTests
 	[InlineData(99)]
 	[InlineData(-10)]
 	#endregion
-	public void CountUntilLineSeparator_ThrowsIfEmpty(int index)
+	public void CountUntilEndOfLine_ThrowsIfEmpty(int index)
 	{
 		var buffer = new ReadOnlyStringBuffer(String.Empty);
 		bool isCrLf = true;
-		Assert.Throws<BufferException>(() => buffer.CountUntilLineSeparator(index, out isCrLf));
+		Assert.Throws<BufferException>(() => buffer.CountUntilEndOfLine(index, out isCrLf));
 		Assert.False(isCrLf);
 	}
 
@@ -90,7 +96,7 @@ public class ReadOnlyStringBufferTests
 	[InlineData(-34, false)]
 	[InlineData(-35, true)]
 	#endregion
-	public void CountUntilLineSeparator_ThrowsIfOutOfRange(int index, bool throws)
+	public void CountUntilEndOfLine_ThrowsIfOutOfRange(int index, bool throws)
 	{
 		var buffer = new ReadOnlyStringBuffer(TestString01);
 		bool isCrLf = true;
@@ -98,13 +104,13 @@ public class ReadOnlyStringBufferTests
 		if (throws)
 		{
 			Debug.WriteLine("Expecting an exception...");
-			Assert.Throws<IndexOutOfRangeException>(() => buffer.CountUntilLineSeparator(index, out isCrLf));
+			Assert.Throws<IndexOutOfRangeException>(() => buffer.CountUntilEndOfLine(index, out isCrLf));
 			Assert.False(isCrLf);
 		}
 		else
 		{
 			Debug.WriteLine("Not expecting an exception...");
-			buffer.CountUntilLineSeparator(index, out isCrLf); // if this throws, test fails
+			buffer.CountUntilEndOfLine(index, out isCrLf); // if this throws, test fails
 		}
 	}
 
@@ -538,8 +544,6 @@ public class ReadOnlyStringBufferTests
 		var buffer = new ReadOnlyStringBuffer(String.Empty);
 		Assert.Throws<BufferException>(() => buffer.GetLengthOfLine(lineNumber));
 	}
-
-	#endregion
 
 	[Theory]
 	#region String ends with newline

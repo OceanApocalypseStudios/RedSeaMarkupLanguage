@@ -143,7 +143,7 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	/// > - <paramref name="index"/> does not point to EOF.
 	/// </remarks>
 	/// <inheritdoc/>
-	public int CountUntilLineSeparator(int index, out bool isCrLf)
+	public int CountUntilEndOfLine(int index, out bool isCrLf)
 	{
 		isCrLf = false;
 

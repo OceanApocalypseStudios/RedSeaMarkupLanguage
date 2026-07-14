@@ -13,6 +13,7 @@
 		<File Path="README.md" />
 		<File Path="docs/docfx.json" />
 		<File Path="CHANGELOG.md" />
+		<File Path="SECURITY.md" />
 	</Folder>
 
     <Folder Name="/Solution Items/Assets/">

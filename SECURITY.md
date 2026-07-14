@@ -2,7 +2,7 @@
 This guideline is to be followed in the occasion of a vulnerability being discovered by a member of the community.
 
 ## Supported Versions
-The following table displays the versions of RSML that have on-going support and have constant security updates (:white_check_mark:) and the ones that don't (:x:).
+The following table displays the versions of RSML that have on-going support and have constant security updates ( :white_check_mark: ) and the ones that don't ( :x: ).
 
 | Project                | Version              | Supported          | Notes                                                                                             |
 | -------                | -------------------- | ------------------ | ------------------------------------------------------------------------------------------------- |
