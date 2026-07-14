@@ -386,6 +386,13 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 		return lineSepIndex;
 	}
 
+	/// <remarks>
+	/// > [!NOTE]
+	/// > This method follows EOF conventions.
+	/// > EOF is considered a 0-character sequence in line N, where N is <see cref="LineCount"/>.
+	/// > Keep in mind N does not point to an actual line (it's just a convention), as line numbers are 0-based
+	/// > (meaning the actual last line is located at N - 1).
+	/// </remarks>
 	/// <inheritdoc/>
 	public char[] GetLine(int lineNumber)
 	{
