@@ -1,0 +1,63 @@
+### YamlMime:ManagedReference
+items:
+- uid: OceanApocalypseStudios.RSML.Sdk.Extensibility
+  commentId: N:OceanApocalypseStudios.RSML.Sdk.Extensibility
+  id: OceanApocalypseStudios.RSML.Sdk.Extensibility
+  children:
+  - OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension
+  langs:
+  - csharp
+  - vb
+  name: OceanApocalypseStudios.RSML.Sdk.Extensibility
+  nameWithType: OceanApocalypseStudios.RSML.Sdk.Extensibility
+  fullName: OceanApocalypseStudios.RSML.Sdk.Extensibility
+  type: Namespace
+  assemblies:
+  - RSML
+references:
+- uid: OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension
+  commentId: T:OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension
+  parent: OceanApocalypseStudios.RSML.Sdk.Extensibility
+  href: OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension.html
+  name: ILanguageExtension
+  nameWithType: ILanguageExtension
+  fullName: OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension
+- uid: OceanApocalypseStudios.RSML.Sdk.Extensibility
+  commentId: N:OceanApocalypseStudios.RSML.Sdk.Extensibility
+  href: OceanApocalypseStudios.html
+  name: OceanApocalypseStudios.RSML.Sdk.Extensibility
+  nameWithType: OceanApocalypseStudios.RSML.Sdk.Extensibility
+  fullName: OceanApocalypseStudios.RSML.Sdk.Extensibility
+  spec.csharp:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sdk
+    name: Sdk
+    href: OceanApocalypseStudios.RSML.Sdk.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sdk.Extensibility
+    name: Extensibility
+    href: OceanApocalypseStudios.RSML.Sdk.Extensibility.html
+  spec.vb:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sdk
+    name: Sdk
+    href: OceanApocalypseStudios.RSML.Sdk.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sdk.Extensibility
+    name: Extensibility
+    href: OceanApocalypseStudios.RSML.Sdk.Extensibility.html
+memberLayout: SeparatePages

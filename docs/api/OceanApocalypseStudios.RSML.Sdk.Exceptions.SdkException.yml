@@ -1,41 +1,39 @@
 ### YamlMime:ManagedReference
 items:
-- uid: OceanApocalypseStudios.RSML.Exceptions.BufferException
-  commentId: T:OceanApocalypseStudios.RSML.Exceptions.BufferException
-  id: BufferException
-  parent: OceanApocalypseStudios.RSML.Exceptions
+- uid: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException
+  commentId: T:OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException
+  id: SdkException
+  parent: OceanApocalypseStudios.RSML.Sdk.Exceptions
   children:
-  - OceanApocalypseStudios.RSML.Exceptions.BufferException.#ctor
-  - OceanApocalypseStudios.RSML.Exceptions.BufferException.#ctor(System.String)
-  - OceanApocalypseStudios.RSML.Exceptions.BufferException.#ctor(System.String,System.Exception)
+  - OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.#ctor
+  - OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.#ctor(System.String)
+  - OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.#ctor(System.String,System.Exception)
   langs:
   - csharp
   - vb
-  name: BufferException
-  nameWithType: BufferException
-  fullName: OceanApocalypseStudios.RSML.Exceptions.BufferException
+  name: SdkException
+  nameWithType: SdkException
+  fullName: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException
   type: Class
   source:
     remote:
-      path: src/RSML/Exceptions/BufferException.cs
+      path: src/RSML/Sdk/Exceptions/SdkException.cs
       branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
-    id: BufferException
-    path: ../src/RSML/Exceptions/BufferException.cs
-    startLine: 9
+    id: SdkException
+    path: ../src/RSML/Sdk/Exceptions/SdkException.cs
+    startLine: 8
   assemblies:
   - RSML
-  namespace: OceanApocalypseStudios.RSML.Exceptions
-  summary: An exception that is thrown when an error occurs inside a buffer operation.
+  namespace: OceanApocalypseStudios.RSML.Sdk.Exceptions
+  summary: An exception caused by a mal-function of the <xref href="OceanApocalypseStudios.RSML.Sdk" data-throw-if-not-resolved="false"></xref>.
   example: []
   syntax:
-    content: 'public class BufferException : IOException, ISerializable'
-    content.vb: Public Class BufferException Inherits IOException Implements ISerializable
+    content: 'public class SdkException : Exception, ISerializable'
+    content.vb: Public Class SdkException Inherits Exception Implements ISerializable
   inheritance:
   - System.Object
   - System.Exception
-  - System.SystemException
-  - System.IO.IOException
   implements:
   - System.Runtime.Serialization.ISerializable
   inheritedMembers:
@@ -56,117 +54,120 @@ items:
   - System.Object.GetHashCode
   - System.Object.MemberwiseClone
   - System.Object.ReferenceEquals(System.Object,System.Object)
-- uid: OceanApocalypseStudios.RSML.Exceptions.BufferException.#ctor
-  commentId: M:OceanApocalypseStudios.RSML.Exceptions.BufferException.#ctor
+- uid: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.#ctor
+  commentId: M:OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.#ctor
   id: '#ctor'
-  parent: OceanApocalypseStudios.RSML.Exceptions.BufferException
+  parent: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException
   langs:
   - csharp
   - vb
-  name: BufferException()
-  nameWithType: BufferException.BufferException()
-  fullName: OceanApocalypseStudios.RSML.Exceptions.BufferException.BufferException()
+  name: SdkException()
+  nameWithType: SdkException.SdkException()
+  fullName: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.SdkException()
   type: Constructor
   source:
     remote:
-      path: src/RSML/Exceptions/BufferException.cs
+      path: src/RSML/Sdk/Exceptions/SdkException.cs
       branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: .ctor
-    path: ../src/RSML/Exceptions/BufferException.cs
-    startLine: 14
+    path: ../src/RSML/Sdk/Exceptions/SdkException.cs
+    startLine: 13
   assemblies:
   - RSML
-  namespace: OceanApocalypseStudios.RSML.Exceptions
-  summary: Initializes a new <xref href="OceanApocalypseStudios.RSML.Exceptions.BufferException" data-throw-if-not-resolved="false"></xref> with no message.
+  namespace: OceanApocalypseStudios.RSML.Sdk.Exceptions
+  summary: Creates an empty <xref href="OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException" data-throw-if-not-resolved="false"></xref>.
   example: []
   syntax:
-    content: public BufferException()
+    content: public SdkException()
     content.vb: Public Sub New()
-  overload: OceanApocalypseStudios.RSML.Exceptions.BufferException.#ctor*
-  nameWithType.vb: BufferException.New()
-  fullName.vb: OceanApocalypseStudios.RSML.Exceptions.BufferException.New()
+  overload: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.#ctor*
+  nameWithType.vb: SdkException.New()
+  fullName.vb: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.New()
   name.vb: New()
-- uid: OceanApocalypseStudios.RSML.Exceptions.BufferException.#ctor(System.String)
-  commentId: M:OceanApocalypseStudios.RSML.Exceptions.BufferException.#ctor(System.String)
+- uid: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.#ctor(System.String)
+  commentId: M:OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.#ctor(System.String)
   id: '#ctor(System.String)'
-  parent: OceanApocalypseStudios.RSML.Exceptions.BufferException
+  parent: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException
   langs:
   - csharp
   - vb
-  name: BufferException(string)
-  nameWithType: BufferException.BufferException(string)
-  fullName: OceanApocalypseStudios.RSML.Exceptions.BufferException.BufferException(string)
+  name: SdkException(string)
+  nameWithType: SdkException.SdkException(string)
+  fullName: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.SdkException(string)
   type: Constructor
   source:
     remote:
-      path: src/RSML/Exceptions/BufferException.cs
+      path: src/RSML/Sdk/Exceptions/SdkException.cs
       branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: .ctor
-    path: ../src/RSML/Exceptions/BufferException.cs
+    path: ../src/RSML/Sdk/Exceptions/SdkException.cs
     startLine: 19
   assemblies:
   - RSML
-  namespace: OceanApocalypseStudios.RSML.Exceptions
-  summary: Initializes a new <xref href="OceanApocalypseStudios.RSML.Exceptions.BufferException" data-throw-if-not-resolved="false"></xref> with a <code class="paramref">message</code>.
+  namespace: OceanApocalypseStudios.RSML.Sdk.Exceptions
+  summary: Creates a <xref href="OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException" data-throw-if-not-resolved="false"></xref> with a custom error message.
   example: []
   syntax:
-    content: public BufferException(string message)
+    content: public SdkException(string message)
     parameters:
     - id: message
       type: System.String
+      description: The error message.
     content.vb: Public Sub New(message As String)
-  overload: OceanApocalypseStudios.RSML.Exceptions.BufferException.#ctor*
-  nameWithType.vb: BufferException.New(String)
-  fullName.vb: OceanApocalypseStudios.RSML.Exceptions.BufferException.New(String)
+  overload: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.#ctor*
+  nameWithType.vb: SdkException.New(String)
+  fullName.vb: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.New(String)
   name.vb: New(String)
-- uid: OceanApocalypseStudios.RSML.Exceptions.BufferException.#ctor(System.String,System.Exception)
-  commentId: M:OceanApocalypseStudios.RSML.Exceptions.BufferException.#ctor(System.String,System.Exception)
+- uid: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.#ctor(System.String,System.Exception)
+  commentId: M:OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.#ctor(System.String,System.Exception)
   id: '#ctor(System.String,System.Exception)'
-  parent: OceanApocalypseStudios.RSML.Exceptions.BufferException
+  parent: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException
   langs:
   - csharp
   - vb
-  name: BufferException(string?, Exception?)
-  nameWithType: BufferException.BufferException(string?, Exception?)
-  fullName: OceanApocalypseStudios.RSML.Exceptions.BufferException.BufferException(string?, System.Exception?)
+  name: SdkException(string?, Exception)
+  nameWithType: SdkException.SdkException(string?, Exception)
+  fullName: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.SdkException(string?, System.Exception)
   type: Constructor
   source:
     remote:
-      path: src/RSML/Exceptions/BufferException.cs
+      path: src/RSML/Sdk/Exceptions/SdkException.cs
       branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: .ctor
-    path: ../src/RSML/Exceptions/BufferException.cs
-    startLine: 25
+    path: ../src/RSML/Sdk/Exceptions/SdkException.cs
+    startLine: 27
   assemblies:
   - RSML
-  namespace: OceanApocalypseStudios.RSML.Exceptions
+  namespace: OceanApocalypseStudios.RSML.Sdk.Exceptions
   summary: >-
-    Initializes a new <xref href="OceanApocalypseStudios.RSML.Exceptions.BufferException" data-throw-if-not-resolved="false"></xref> with a <code class="paramref">message</code> and a reference
+    Creates a <xref href="OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException" data-throw-if-not-resolved="false"></xref> with a custom error message
 
-    to the exception that caused this error (<code class="paramref">innerException</code>).
+    and a reference to the <xref href="System.Exception" data-throw-if-not-resolved="false"></xref> that caused this issue.
   example: []
   syntax:
-    content: public BufferException(string? message, Exception? innerException)
+    content: public SdkException(string? message, Exception innerException)
     parameters:
     - id: message
       type: System.String
+      description: The error message.
     - id: innerException
       type: System.Exception
+      description: The exception that caused the issue.
     content.vb: Public Sub New(message As String, innerException As Exception)
-  overload: OceanApocalypseStudios.RSML.Exceptions.BufferException.#ctor*
-  nameWithType.vb: BufferException.New(String, Exception)
-  fullName.vb: OceanApocalypseStudios.RSML.Exceptions.BufferException.New(String, System.Exception)
+  overload: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.#ctor*
+  nameWithType.vb: SdkException.New(String, Exception)
+  fullName.vb: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.New(String, System.Exception)
   name.vb: New(String, Exception)
 references:
-- uid: OceanApocalypseStudios.RSML.Exceptions
-  commentId: N:OceanApocalypseStudios.RSML.Exceptions
+- uid: OceanApocalypseStudios.RSML.Sdk
+  commentId: N:OceanApocalypseStudios.RSML.Sdk
   href: OceanApocalypseStudios.html
-  name: OceanApocalypseStudios.RSML.Exceptions
-  nameWithType: OceanApocalypseStudios.RSML.Exceptions
-  fullName: OceanApocalypseStudios.RSML.Exceptions
+  name: OceanApocalypseStudios.RSML.Sdk
+  nameWithType: OceanApocalypseStudios.RSML.Sdk
+  fullName: OceanApocalypseStudios.RSML.Sdk
   spec.csharp:
   - uid: OceanApocalypseStudios
     name: OceanApocalypseStudios
@@ -176,9 +177,9 @@ references:
     name: RSML
     href: OceanApocalypseStudios.RSML.html
   - name: .
-  - uid: OceanApocalypseStudios.RSML.Exceptions
-    name: Exceptions
-    href: OceanApocalypseStudios.RSML.Exceptions.html
+  - uid: OceanApocalypseStudios.RSML.Sdk
+    name: Sdk
+    href: OceanApocalypseStudios.RSML.Sdk.html
   spec.vb:
   - uid: OceanApocalypseStudios
     name: OceanApocalypseStudios
@@ -188,9 +189,47 @@ references:
     name: RSML
     href: OceanApocalypseStudios.RSML.html
   - name: .
-  - uid: OceanApocalypseStudios.RSML.Exceptions
+  - uid: OceanApocalypseStudios.RSML.Sdk
+    name: Sdk
+    href: OceanApocalypseStudios.RSML.Sdk.html
+- uid: OceanApocalypseStudios.RSML.Sdk.Exceptions
+  commentId: N:OceanApocalypseStudios.RSML.Sdk.Exceptions
+  href: OceanApocalypseStudios.html
+  name: OceanApocalypseStudios.RSML.Sdk.Exceptions
+  nameWithType: OceanApocalypseStudios.RSML.Sdk.Exceptions
+  fullName: OceanApocalypseStudios.RSML.Sdk.Exceptions
+  spec.csharp:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sdk
+    name: Sdk
+    href: OceanApocalypseStudios.RSML.Sdk.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sdk.Exceptions
     name: Exceptions
-    href: OceanApocalypseStudios.RSML.Exceptions.html
+    href: OceanApocalypseStudios.RSML.Sdk.Exceptions.html
+  spec.vb:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sdk
+    name: Sdk
+    href: OceanApocalypseStudios.RSML.Sdk.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sdk.Exceptions
+    name: Exceptions
+    href: OceanApocalypseStudios.RSML.Sdk.Exceptions.html
 - uid: System.Object
   commentId: T:System.Object
   parent: System
@@ -210,22 +249,6 @@ references:
   name: Exception
   nameWithType: Exception
   fullName: System.Exception
-- uid: System.SystemException
-  commentId: T:System.SystemException
-  parent: System
-  isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.systemexception
-  name: SystemException
-  nameWithType: SystemException
-  fullName: System.SystemException
-- uid: System.IO.IOException
-  commentId: T:System.IO.IOException
-  parent: System.IO
-  isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system.io.ioexception
-  name: IOException
-  nameWithType: IOException
-  fullName: System.IO.IOException
 - uid: System.Runtime.Serialization.ISerializable
   commentId: T:System.Runtime.Serialization.ISerializable
   parent: System.Runtime.Serialization
@@ -550,33 +573,6 @@ references:
   name: System
   nameWithType: System
   fullName: System
-- uid: System.IO
-  commentId: N:System.IO
-  isExternal: true
-  href: https://learn.microsoft.com/dotnet/api/system
-  name: System.IO
-  nameWithType: System.IO
-  fullName: System.IO
-  spec.csharp:
-  - uid: System
-    name: System
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system
-  - name: .
-  - uid: System.IO
-    name: IO
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.io
-  spec.vb:
-  - uid: System
-    name: System
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system
-  - name: .
-  - uid: System.IO
-    name: IO
-    isExternal: true
-    href: https://learn.microsoft.com/dotnet/api/system.io
 - uid: System.Runtime.Serialization
   commentId: N:System.Runtime.Serialization
   isExternal: true
@@ -614,20 +610,20 @@ references:
     name: Serialization
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.runtime.serialization
-- uid: OceanApocalypseStudios.RSML.Exceptions.BufferException
-  commentId: T:OceanApocalypseStudios.RSML.Exceptions.BufferException
-  href: OceanApocalypseStudios.RSML.Exceptions.BufferException.html
-  name: BufferException
-  nameWithType: BufferException
-  fullName: OceanApocalypseStudios.RSML.Exceptions.BufferException
-- uid: OceanApocalypseStudios.RSML.Exceptions.BufferException.#ctor*
-  commentId: Overload:OceanApocalypseStudios.RSML.Exceptions.BufferException.#ctor
-  href: OceanApocalypseStudios.RSML.Exceptions.BufferException.-ctor.html#OceanApocalypseStudios_RSML_Exceptions_BufferException__ctor
-  name: BufferException
-  nameWithType: BufferException.BufferException
-  fullName: OceanApocalypseStudios.RSML.Exceptions.BufferException.BufferException
-  nameWithType.vb: BufferException.New
-  fullName.vb: OceanApocalypseStudios.RSML.Exceptions.BufferException.New
+- uid: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException
+  commentId: T:OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException
+  href: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.html
+  name: SdkException
+  nameWithType: SdkException
+  fullName: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException
+- uid: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.#ctor*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.#ctor
+  href: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.-ctor.html#OceanApocalypseStudios_RSML_Sdk_Exceptions_SdkException__ctor
+  name: SdkException
+  nameWithType: SdkException.SdkException
+  fullName: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.SdkException
+  nameWithType.vb: SdkException.New
+  fullName.vb: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.New
   name.vb: New
 - uid: System.String
   commentId: T:System.String

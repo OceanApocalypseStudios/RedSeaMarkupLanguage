@@ -13,7 +13,7 @@ items:
   - OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.BuildCache
   - OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.BuildCache(System.Boolean)
   - OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CacheExists
-  - OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CountUntilLineSeparator(System.Int32,System.Boolean@)
+  - OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CountUntilEndOfLine(System.Int32,System.Boolean@)
   - OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CountUntilNotWhitespace(System.Int32)
   - OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CountUntilWhitespace(System.Int32)
   - OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CountWhile(System.Func{System.Int32,System.Char,System.Boolean},System.Int32)
@@ -21,7 +21,13 @@ items:
   - OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Dispose
   - OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals(OceanApocalypseStudios.RSML.Sources.IBuffer{System.Char})
   - OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals(OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer)
+  - OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals(System.Char[])
+  - OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals(System.Nullable{System.Memory{System.Char}})
+  - OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals(System.Nullable{System.ReadOnlyMemory{System.Char}})
   - OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals(System.Object)
+  - OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals(System.ReadOnlySpan{System.Char})
+  - OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals(System.Span{System.Char})
+  - OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals(System.String)
   - OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetHashCode
   - OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetLengthOfLine(System.Int32)
   - OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetLengthOfLineFromIndex(System.Int32)
@@ -61,7 +67,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: ReadOnlyStringBuffer
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
@@ -77,8 +83,8 @@ items:
     and also via caching.
   example: []
   syntax:
-    content: 'public class ReadOnlyStringBuffer : IBuffer<char>, ISource, IDisposable, IEquatable<IBuffer<char>?>, ISupportsCache, IEquatable<ReadOnlyStringBuffer?>'
-    content.vb: Public Class ReadOnlyStringBuffer Implements IBuffer(Of Char), ISource, IDisposable, IEquatable(Of IBuffer(Of Char)), ISupportsCache, IEquatable(Of ReadOnlyStringBuffer)
+    content: 'public class ReadOnlyStringBuffer : IBuffer<char>, ISource, IDisposable, IEquatable<IBuffer<char>?>, IEquatable<char[]?>, IEquatable<Memory<char>?>, IEquatable<ReadOnlyMemory<char>?>, ISupportsCache, IEquatable<ReadOnlyStringBuffer?>, IEquatable<string?>'
+    content.vb: Public Class ReadOnlyStringBuffer Implements IBuffer(Of Char), ISource, IDisposable, IEquatable(Of IBuffer(Of Char)), IEquatable(Of Char()), IEquatable(Of Memory(Of Char)?), IEquatable(Of ReadOnlyMemory(Of Char)?), ISupportsCache, IEquatable(Of ReadOnlyStringBuffer), IEquatable(Of String)
   inheritance:
   - System.Object
   implements:
@@ -86,8 +92,12 @@ items:
   - OceanApocalypseStudios.RSML.Sources.ISource
   - System.IDisposable
   - System.IEquatable{OceanApocalypseStudios.RSML.Sources.IBuffer{System.Char}}
+  - System.IEquatable{System.Char[]}
+  - System.IEquatable{System.Nullable{System.Memory{System.Char}}}
+  - System.IEquatable{System.Nullable{System.ReadOnlyMemory{System.Char}}}
   - OceanApocalypseStudios.RSML.Cache.ISupportsCache
   - System.IEquatable{OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer}
+  - System.IEquatable{System.String}
   inheritedMembers:
   - System.Object.Equals(System.Object,System.Object)
   - System.Object.GetType
@@ -107,7 +117,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: CacheExists
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
@@ -140,7 +150,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: CursorIndex
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
@@ -177,7 +187,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: IsEmpty
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
@@ -210,7 +220,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: IsReadOnly
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
@@ -247,7 +257,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: Length
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
@@ -280,7 +290,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: LineCount
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
@@ -319,7 +329,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: this[]
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
@@ -359,7 +369,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: this[]
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
@@ -399,7 +409,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: this[]
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
@@ -439,7 +449,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: .ctor
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
@@ -477,7 +487,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: .ctor
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
@@ -515,7 +525,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: .ctor
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
@@ -553,7 +563,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: .ctor
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
@@ -597,7 +607,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: .ctor
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
@@ -659,7 +669,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: BuildCache
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
@@ -689,7 +699,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: BuildCache
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
@@ -715,25 +725,25 @@ items:
   nameWithType.vb: ReadOnlyStringBuffer.BuildCache(Boolean)
   fullName.vb: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.BuildCache(Boolean)
   name.vb: BuildCache(Boolean)
-- uid: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CountUntilLineSeparator(System.Int32,System.Boolean@)
-  commentId: M:OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CountUntilLineSeparator(System.Int32,System.Boolean@)
-  id: CountUntilLineSeparator(System.Int32,System.Boolean@)
+- uid: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CountUntilEndOfLine(System.Int32,System.Boolean@)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CountUntilEndOfLine(System.Int32,System.Boolean@)
+  id: CountUntilEndOfLine(System.Int32,System.Boolean@)
   parent: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer
   langs:
   - csharp
   - vb
-  name: CountUntilLineSeparator(int, out bool)
-  nameWithType: ReadOnlyStringBuffer.CountUntilLineSeparator(int, out bool)
-  fullName: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CountUntilLineSeparator(int, out bool)
+  name: CountUntilEndOfLine(int, out bool)
+  nameWithType: ReadOnlyStringBuffer.CountUntilEndOfLine(int, out bool)
+  fullName: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CountUntilEndOfLine(int, out bool)
   type: Method
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
-    id: CountUntilLineSeparator
+    id: CountUntilEndOfLine
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
-    startLine: 134
+    startLine: 145
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
@@ -741,9 +751,27 @@ items:
     Counts the amount of items until the next line separator in the buffer, relative to a given <code class="paramref">index</code>.
 
     Only line separators count - regular whitespace do not. CRLF counts as a single line separator, to avoid double counting.
+  remarks: >-
+    > [!NOTE]
+
+    > This method allows the EOF index as in-range. The convention is as follows:
+
+    > - If the index is EOF (<xref href="OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Length" data-throw-if-not-resolved="false"></xref>), then the output is always 0 and <code class="paramref">isCrLf</code> is always <code>false</code>.
+
+    > - If the index is the last (<xref href="OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Length" data-throw-if-not-resolved="false"></xref> - 1), then the output is always 0.
+
+    > [!NOTE]
+
+    > <code class="paramref">isCrLf</code> is only <code>true</code> if all the following conditions are true:
+
+    > - The next line start counting from <code class="paramref">index</code> is preceded by a CRLF sequence.
+
+    > - <code class="paramref">index</code> does not point to the LF in the CRLF sequence.
+
+    > - <code class="paramref">index</code> does not point to EOF.
   example: []
   syntax:
-    content: public int CountUntilLineSeparator(int index, out bool isCrLf)
+    content: public int CountUntilEndOfLine(int index, out bool isCrLf)
     parameters:
     - id: index
       type: System.Int32
@@ -754,8 +782,8 @@ items:
     return:
       type: System.Int32
       description: The index of the next line separator, relative to an <code class="paramref">index</code>.
-    content.vb: Public Function CountUntilLineSeparator(index As Integer, isCrLf As Boolean) As Integer
-  overload: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CountUntilLineSeparator*
+    content.vb: Public Function CountUntilEndOfLine(index As Integer, isCrLf As Boolean) As Integer
+  overload: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CountUntilEndOfLine*
   exceptions:
   - type: OceanApocalypseStudios.RSML.Exceptions.BufferException
     commentId: T:OceanApocalypseStudios.RSML.Exceptions.BufferException
@@ -764,10 +792,10 @@ items:
     commentId: T:System.IndexOutOfRangeException
     description: <code class="paramref">index</code> was set to something greater than the buffer's length.
   implements:
-  - OceanApocalypseStudios.RSML.Sources.IBuffer{System.Char}.CountUntilLineSeparator(System.Int32,System.Boolean@)
-  nameWithType.vb: ReadOnlyStringBuffer.CountUntilLineSeparator(Integer, Boolean)
-  fullName.vb: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CountUntilLineSeparator(Integer, Boolean)
-  name.vb: CountUntilLineSeparator(Integer, Boolean)
+  - OceanApocalypseStudios.RSML.Sources.IBuffer{System.Char}.CountUntilEndOfLine(System.Int32,System.Boolean@)
+  nameWithType.vb: ReadOnlyStringBuffer.CountUntilEndOfLine(Integer, Boolean)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CountUntilEndOfLine(Integer, Boolean)
+  name.vb: CountUntilEndOfLine(Integer, Boolean)
 - uid: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CountUntilNotWhitespace(System.Int32)
   commentId: M:OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CountUntilNotWhitespace(System.Int32)
   id: CountUntilNotWhitespace(System.Int32)
@@ -782,11 +810,11 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: CountUntilNotWhitespace
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
-    startLine: 169
+    startLine: 199
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
@@ -794,6 +822,24 @@ items:
     Counts the amount of items until the next non-whitespace item in the buffer, relative to a given <code class="paramref">index</code>.
 
     Line separators are included in the whitespace category.
+  remarks: >-
+    > [!NOTE]
+
+    > This method allows the EOF index as in-range.
+
+    > If the index is EOF (<xref href="OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Length" data-throw-if-not-resolved="false"></xref>), then the output is always 0.
+
+    > [!NOTE]
+
+    > The return value, when summed with <code class="paramref">index</code>, becomes the index of the first character that
+
+    > is not whitespace, counting from <code class="paramref">index</code>.
+
+    > The only exception is if the buffer has been consumed (you pass EOF index or there's no more characters that are
+
+    > not whitespace), meaning the return value, when summed with <code class="paramref">index</code> is the value of
+
+    > <xref href="OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Length" data-throw-if-not-resolved="false"></xref>, which is also the EOF index.
   example: []
   syntax:
     content: public int CountUntilNotWhitespace(int index)
@@ -832,11 +878,11 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: CountUntilWhitespace
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
-    startLine: 199
+    startLine: 240
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
@@ -844,6 +890,24 @@ items:
     Counts the amount of items until the next whitespace item in the buffer, relative to a given <code class="paramref">index</code>.
 
     Line separators are included in the whitespace category.
+  remarks: >-
+    > [!NOTE]
+
+    > This method allows the EOF index as in-range.
+
+    > If the index is EOF (<xref href="OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Length" data-throw-if-not-resolved="false"></xref>), then the output is always 0.
+
+    > [!NOTE]
+
+    > The return value, when summed with <code class="paramref">index</code>, becomes the index of the first character that
+
+    > is whitespace, counting from <code class="paramref">index</code>.
+
+    > The only exception is if the buffer has been consumed (you pass EOF index or there's no more characters that are
+
+    > whitespace), meaning the return value, when summed with <code class="paramref">index</code> is the value of
+
+    > <xref href="OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Length" data-throw-if-not-resolved="false"></xref>, which is also the EOF index.
   example: []
   syntax:
     content: public int CountUntilWhitespace(int index)
@@ -882,11 +946,11 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: CountWhile
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
-    startLine: 229
+    startLine: 281
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
@@ -894,6 +958,24 @@ items:
     Counts the amount of items, starting from a given <code class="paramref">index</code>,
 
     while a <code class="paramref">predicate</code> returns <code>true</code>.
+  remarks: >-
+    > [!NOTE]
+
+    > This method allows the EOF index as in-range.
+
+    > If the index is EOF (<xref href="OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Length" data-throw-if-not-resolved="false"></xref>), then the output is always 0.
+
+    > [!NOTE]
+
+    > The return value, when summed with <code class="paramref">index</code>, becomes the index of the first character that
+
+    > fails to verify the <code class="paramref">predicate</code>, counting from <code class="paramref">index</code>.
+
+    > The only exception is if the buffer has been consumed (you pass EOF index or there's no more characters that fail to verify
+
+    > the <code class="paramref">predicate</code>), meaning the return value, when summed with <code class="paramref">index</code> is the value of
+
+    > <xref href="OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Length" data-throw-if-not-resolved="false"></xref>, which is also the EOF index.
   example: []
   syntax:
     content: public int CountWhile(Func<int, char, bool> predicate, int index)
@@ -945,11 +1027,11 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: GetLengthOfLine
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
-    startLine: 260
+    startLine: 319
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
@@ -957,6 +1039,16 @@ items:
     Returns the length of a line given its 0-based line number.
 
     Line separators do not count towards the length.
+  remarks: >-
+    > [!NOTE]
+
+    > This method follows EOF conventions.
+
+    > EOF is considered a 0-character sequence in line N, where N is <xref href="OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.LineCount" data-throw-if-not-resolved="false"></xref>.
+
+    > Keep in mind N does not point to an actual line (it's just a convention), as line numbers are 0-based
+
+    > (meaning the actual last line is located at N - 1).
   example: []
   syntax:
     content: public int GetLengthOfLine(int lineNumber)
@@ -998,11 +1090,11 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: GetLengthOfLineFromIndex
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
-    startLine: 284
+    startLine: 362
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
@@ -1012,6 +1104,16 @@ items:
     of its items.
 
     Line separators do not count towards the length.
+  remarks: >-
+    > [!NOTE]
+
+    > This method follows EOF conventions.
+
+    > EOF is considered a 0-character sequence in line N, where N is <xref href="OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.LineCount" data-throw-if-not-resolved="false"></xref>.
+
+    > Keep in mind N does not point to an actual line (it's just a convention), as line numbers are 0-based
+
+    > (meaning the actual last line is located at N - 1).
   example: []
   syntax:
     content: public int GetLengthOfLineFromIndex(int index)
@@ -1024,6 +1126,10 @@ items:
       description: The length of the line.
     content.vb: Public Function GetLengthOfLineFromIndex(index As Integer) As Integer
   overload: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetLengthOfLineFromIndex*
+  exceptions:
+  - type: System.IndexOutOfRangeException
+    commentId: T:System.IndexOutOfRangeException
+    description: The <code class="paramref">index</code> is greater than the buffer's length.
   implements:
   - OceanApocalypseStudios.RSML.Sources.IBuffer{System.Char}.GetLengthOfLineFromIndex(System.Int32)
   nameWithType.vb: ReadOnlyStringBuffer.GetLengthOfLineFromIndex(Integer)
@@ -1043,11 +1149,11 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: GetLineNumberFromIndex
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
-    startLine: 293
+    startLine: 371
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
@@ -1090,15 +1196,25 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: GetLine
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
-    startLine: 309
+    startLine: 396
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
   summary: Given a 0-based line number, returns the matching line as an array of buffer items.
+  remarks: >-
+    > [!NOTE]
+
+    > This method follows EOF conventions.
+
+    > EOF is considered a 0-character sequence in line N, where N is <xref href="OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.LineCount" data-throw-if-not-resolved="false"></xref>.
+
+    > Keep in mind N does not point to an actual line (it's just a convention), as line numbers are 0-based
+
+    > (meaning the actual last line is located at N - 1).
   example: []
   syntax:
     content: public char[] GetLine(int lineNumber)
@@ -1130,11 +1246,11 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: GetLineFromIndex
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
-    startLine: 327
+    startLine: 416
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
@@ -1173,11 +1289,11 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: GetSourceLocation
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
-    startLine: 335
+    startLine: 424
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
@@ -1219,11 +1335,11 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: GetWord
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
-    startLine: 365
+    startLine: 453
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
@@ -1271,11 +1387,11 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: GetWord
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
-    startLine: 395
+    startLine: 483
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
@@ -1338,11 +1454,11 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: GetWord
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
-    startLine: 425
+    startLine: 513
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
@@ -1409,11 +1525,11 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: Slice
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
-    startLine: 450
+    startLine: 538
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
@@ -1452,11 +1568,11 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: Slice
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
-    startLine: 453
+    startLine: 541
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
@@ -1492,11 +1608,11 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: Slice
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
-    startLine: 456
+    startLine: 544
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
@@ -1532,11 +1648,11 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: TryGetChar
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
-    startLine: 465
+    startLine: 553
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
@@ -1575,11 +1691,11 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: TryGetLine
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
-    startLine: 484
+    startLine: 572
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
@@ -1621,11 +1737,11 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: TryGetLineFromIndex
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
-    startLine: 504
+    startLine: 594
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
@@ -1669,11 +1785,11 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: TryGetWord
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
-    startLine: 513
+    startLine: 603
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
@@ -1727,11 +1843,11 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: TryGetWord
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
-    startLine: 547
+    startLine: 637
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
@@ -1800,11 +1916,11 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: TryGetWord
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
-    startLine: 581
+    startLine: 671
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
@@ -1877,11 +1993,11 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: Dispose
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
-    startLine: 610
+    startLine: 700
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
@@ -1907,11 +2023,11 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: Equals
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
-    startLine: 613
+    startLine: 703
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
@@ -1938,6 +2054,46 @@ items:
   nameWithType.vb: ReadOnlyStringBuffer.Equals(Object)
   fullName.vb: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals(Object)
   name.vb: Equals(Object)
+- uid: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals(System.Char[])
+  commentId: M:OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals(System.Char[])
+  id: Equals(System.Char[])
+  parent: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer
+  langs:
+  - csharp
+  - vb
+  name: Equals(char[]?)
+  nameWithType: ReadOnlyStringBuffer.Equals(char[]?)
+  fullName: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals(char[]?)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/ReadOnlyStringBuffer.cs
+      branch: docs
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Equals
+    path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
+    startLine: 726
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Checks if an array of characters is equal to the current instance.
+  example: []
+  syntax:
+    content: public bool Equals(char[]? other)
+    parameters:
+    - id: other
+      type: System.Char[]
+      description: The array.
+    return:
+      type: System.Boolean
+      description: True if equals.
+    content.vb: Public Function Equals(other As Char()) As Boolean
+  overload: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals*
+  implements:
+  - System.IEquatable{System.Char[]}.Equals(System.Char[])
+  nameWithType.vb: ReadOnlyStringBuffer.Equals(Char())
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals(Char())
+  name.vb: Equals(Char())
 - uid: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals(OceanApocalypseStudios.RSML.Sources.IBuffer{System.Char})
   commentId: M:OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals(OceanApocalypseStudios.RSML.Sources.IBuffer{System.Char})
   id: Equals(OceanApocalypseStudios.RSML.Sources.IBuffer{System.Char})
@@ -1952,11 +2108,11 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: Equals
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
-    startLine: 627
+    startLine: 733
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
@@ -1978,6 +2134,124 @@ items:
   nameWithType.vb: ReadOnlyStringBuffer.Equals(IBuffer(Of Char))
   fullName.vb: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals(OceanApocalypseStudios.RSML.Sources.IBuffer(Of Char))
   name.vb: Equals(IBuffer(Of Char))
+- uid: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals(System.Nullable{System.Memory{System.Char}})
+  commentId: M:OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals(System.Nullable{System.Memory{System.Char}})
+  id: Equals(System.Nullable{System.Memory{System.Char}})
+  parent: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer
+  langs:
+  - csharp
+  - vb
+  name: Equals(Memory<char>?)
+  nameWithType: ReadOnlyStringBuffer.Equals(Memory<char>?)
+  fullName: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals(System.Memory<char>?)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/ReadOnlyStringBuffer.cs
+      branch: docs
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Equals
+    path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
+    startLine: 740
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Checks if a contiguous region of memory is equal to the current instance.
+  example: []
+  syntax:
+    content: public bool Equals(Memory<char>? other)
+    parameters:
+    - id: other
+      type: System.Nullable{System.Memory{System.Char}}
+      description: The region of memory.
+    return:
+      type: System.Boolean
+      description: True if equals.
+    content.vb: Public Function Equals(other As Memory(Of Char)?) As Boolean
+  overload: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals*
+  implements:
+  - System.IEquatable{System.Nullable{System.Memory{System.Char}}}.Equals(System.Nullable{System.Memory{System.Char}})
+  nameWithType.vb: ReadOnlyStringBuffer.Equals(Memory(Of Char)?)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals(System.Memory(Of Char)?)
+  name.vb: Equals(Memory(Of Char)?)
+- uid: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals(System.Nullable{System.ReadOnlyMemory{System.Char}})
+  commentId: M:OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals(System.Nullable{System.ReadOnlyMemory{System.Char}})
+  id: Equals(System.Nullable{System.ReadOnlyMemory{System.Char}})
+  parent: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer
+  langs:
+  - csharp
+  - vb
+  name: Equals(ReadOnlyMemory<char>?)
+  nameWithType: ReadOnlyStringBuffer.Equals(ReadOnlyMemory<char>?)
+  fullName: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals(System.ReadOnlyMemory<char>?)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/ReadOnlyStringBuffer.cs
+      branch: docs
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Equals
+    path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
+    startLine: 747
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Checks if a read-only contiguous region of memory is equal to the current instance.
+  example: []
+  syntax:
+    content: public bool Equals(ReadOnlyMemory<char>? other)
+    parameters:
+    - id: other
+      type: System.Nullable{System.ReadOnlyMemory{System.Char}}
+      description: The region of memory.
+    return:
+      type: System.Boolean
+      description: True if equals.
+    content.vb: Public Function Equals(other As ReadOnlyMemory(Of Char)?) As Boolean
+  overload: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals*
+  implements:
+  - System.IEquatable{System.Nullable{System.ReadOnlyMemory{System.Char}}}.Equals(System.Nullable{System.ReadOnlyMemory{System.Char}})
+  nameWithType.vb: ReadOnlyStringBuffer.Equals(ReadOnlyMemory(Of Char)?)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals(System.ReadOnlyMemory(Of Char)?)
+  name.vb: Equals(ReadOnlyMemory(Of Char)?)
+- uid: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals(System.ReadOnlySpan{System.Char})
+  commentId: M:OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals(System.ReadOnlySpan{System.Char})
+  id: Equals(System.ReadOnlySpan{System.Char})
+  parent: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer
+  langs:
+  - csharp
+  - vb
+  name: Equals(ReadOnlySpan<char>)
+  nameWithType: ReadOnlyStringBuffer.Equals(ReadOnlySpan<char>)
+  fullName: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals(System.ReadOnlySpan<char>)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/ReadOnlyStringBuffer.cs
+      branch: docs
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Equals
+    path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
+    startLine: 754
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Checks if a read-only contiguous region of memory is equal to the current instance.
+  example: []
+  syntax:
+    content: public bool Equals(ReadOnlySpan<char> other)
+    parameters:
+    - id: other
+      type: System.ReadOnlySpan{System.Char}
+      description: The region of memory.
+    return:
+      type: System.Boolean
+      description: True if equals.
+    content.vb: Public Function Equals(other As ReadOnlySpan(Of Char)) As Boolean
+  overload: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals*
+  nameWithType.vb: ReadOnlyStringBuffer.Equals(ReadOnlySpan(Of Char))
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals(System.ReadOnlySpan(Of Char))
+  name.vb: Equals(ReadOnlySpan(Of Char))
 - uid: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals(OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer)
   commentId: M:OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals(OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer)
   id: Equals(OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer)
@@ -1992,11 +2266,11 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: Equals
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
-    startLine: 634
+    startLine: 761
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
@@ -2018,6 +2292,84 @@ items:
   nameWithType.vb: ReadOnlyStringBuffer.Equals(ReadOnlyStringBuffer)
   fullName.vb: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals(OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer)
   name.vb: Equals(ReadOnlyStringBuffer)
+- uid: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals(System.Span{System.Char})
+  commentId: M:OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals(System.Span{System.Char})
+  id: Equals(System.Span{System.Char})
+  parent: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer
+  langs:
+  - csharp
+  - vb
+  name: Equals(Span<char>)
+  nameWithType: ReadOnlyStringBuffer.Equals(Span<char>)
+  fullName: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals(System.Span<char>)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/ReadOnlyStringBuffer.cs
+      branch: docs
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Equals
+    path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
+    startLine: 769
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Checks if a contiguous region of memory is equal to the current instance.
+  example: []
+  syntax:
+    content: public bool Equals(Span<char> other)
+    parameters:
+    - id: other
+      type: System.Span{System.Char}
+      description: The region of memory.
+    return:
+      type: System.Boolean
+      description: True if equals.
+    content.vb: Public Function Equals(other As Span(Of Char)) As Boolean
+  overload: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals*
+  nameWithType.vb: ReadOnlyStringBuffer.Equals(Span(Of Char))
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals(System.Span(Of Char))
+  name.vb: Equals(Span(Of Char))
+- uid: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals(System.String)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals(System.String)
+  id: Equals(System.String)
+  parent: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer
+  langs:
+  - csharp
+  - vb
+  name: Equals(string?)
+  nameWithType: ReadOnlyStringBuffer.Equals(string?)
+  fullName: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals(string?)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/ReadOnlyStringBuffer.cs
+      branch: docs
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Equals
+    path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
+    startLine: 776
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Checks if a string is equal to the current instance.
+  example: []
+  syntax:
+    content: public bool Equals(string? other)
+    parameters:
+    - id: other
+      type: System.String
+      description: The string.
+    return:
+      type: System.Boolean
+      description: True if equals.
+    content.vb: Public Function Equals(other As String) As Boolean
+  overload: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals*
+  implements:
+  - System.IEquatable{System.String}.Equals(System.String)
+  nameWithType.vb: ReadOnlyStringBuffer.Equals(String)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals(String)
+  name.vb: Equals(String)
 - uid: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetHashCode
   commentId: M:OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetHashCode
   id: GetHashCode
@@ -2032,11 +2384,11 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: GetHashCode
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
-    startLine: 638
+    startLine: 780
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
@@ -2064,11 +2416,11 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: ToString
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
-    startLine: 653
+    startLine: 795
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
@@ -2096,11 +2448,11 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: op_Equality
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
-    startLine: 659
+    startLine: 801
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
@@ -2135,11 +2487,11 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ReadOnlyStringBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: op_Inequality
     path: ../src/RSML/Sources/ReadOnlyStringBuffer.cs
-    startLine: 666
+    startLine: 808
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
@@ -2325,6 +2677,147 @@ references:
     href: https://learn.microsoft.com/dotnet/api/system.char
   - name: )
   - name: )
+- uid: System.IEquatable{System.Char[]}
+  commentId: T:System.IEquatable{System.Char[]}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<char[]>
+  nameWithType: IEquatable<char[]>
+  fullName: System.IEquatable<char[]>
+  nameWithType.vb: IEquatable(Of Char())
+  fullName.vb: System.IEquatable(Of Char())
+  name.vb: IEquatable(Of Char())
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: System.Char
+    name: char
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.char
+  - name: '['
+  - name: ']'
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Char
+    name: Char
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.char
+  - name: (
+  - name: )
+  - name: )
+- uid: System.IEquatable{System.Nullable{System.Memory{System.Char}}}
+  commentId: T:System.IEquatable{System.Nullable{System.Memory{System.Char}}}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<Memory<char>?>
+  nameWithType: IEquatable<Memory<char>?>
+  fullName: System.IEquatable<System.Memory<char>?>
+  nameWithType.vb: IEquatable(Of Memory(Of Char)?)
+  fullName.vb: System.IEquatable(Of System.Memory(Of Char)?)
+  name.vb: IEquatable(Of Memory(Of Char)?)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: System.Memory`1
+    name: Memory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.memory-1
+  - name: <
+  - uid: System.Char
+    name: char
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.char
+  - name: '>'
+  - name: '?'
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Memory`1
+    name: Memory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.memory-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Char
+    name: Char
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.char
+  - name: )
+  - name: '?'
+  - name: )
+- uid: System.IEquatable{System.Nullable{System.ReadOnlyMemory{System.Char}}}
+  commentId: T:System.IEquatable{System.Nullable{System.ReadOnlyMemory{System.Char}}}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<ReadOnlyMemory<char>?>
+  nameWithType: IEquatable<ReadOnlyMemory<char>?>
+  fullName: System.IEquatable<System.ReadOnlyMemory<char>?>
+  nameWithType.vb: IEquatable(Of ReadOnlyMemory(Of Char)?)
+  fullName.vb: System.IEquatable(Of System.ReadOnlyMemory(Of Char)?)
+  name.vb: IEquatable(Of ReadOnlyMemory(Of Char)?)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: System.ReadOnlyMemory`1
+    name: ReadOnlyMemory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+  - name: <
+  - uid: System.Char
+    name: char
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.char
+  - name: '>'
+  - name: '?'
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.ReadOnlyMemory`1
+    name: ReadOnlyMemory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Char
+    name: Char
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.char
+  - name: )
+  - name: '?'
+  - name: )
 - uid: OceanApocalypseStudios.RSML.Cache.ISupportsCache
   commentId: T:OceanApocalypseStudios.RSML.Cache.ISupportsCache
   parent: OceanApocalypseStudios.RSML.Cache
@@ -2364,6 +2857,41 @@ references:
   - uid: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer
     name: ReadOnlyStringBuffer
     href: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.html
+  - name: )
+- uid: System.IEquatable{System.String}
+  commentId: T:System.IEquatable{System.String}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<string>
+  nameWithType: IEquatable<string>
+  fullName: System.IEquatable<string>
+  nameWithType.vb: IEquatable(Of String)
+  fullName.vb: System.IEquatable(Of String)
+  name.vb: IEquatable(Of String)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
   - name: )
 - uid: System.Object.Equals(System.Object,System.Object)
   commentId: M:System.Object.Equals(System.Object,System.Object)
@@ -3150,6 +3678,12 @@ references:
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.boolean
   - name: )
+- uid: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Length
+  commentId: P:OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Length
+  href: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Length.html#OceanApocalypseStudios_RSML_Sources_ReadOnlyStringBuffer_Length
+  name: Length
+  nameWithType: ReadOnlyStringBuffer.Length
+  fullName: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Length
 - uid: OceanApocalypseStudios.RSML.Exceptions.BufferException
   commentId: T:OceanApocalypseStudios.RSML.Exceptions.BufferException
   href: OceanApocalypseStudios.RSML.Exceptions.BufferException.html
@@ -3163,27 +3697,27 @@ references:
   name: IndexOutOfRangeException
   nameWithType: IndexOutOfRangeException
   fullName: System.IndexOutOfRangeException
-- uid: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CountUntilLineSeparator*
-  commentId: Overload:OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CountUntilLineSeparator
-  href: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CountUntilLineSeparator.html#OceanApocalypseStudios_RSML_Sources_ReadOnlyStringBuffer_CountUntilLineSeparator_System_Int32_System_Boolean__
-  name: CountUntilLineSeparator
-  nameWithType: ReadOnlyStringBuffer.CountUntilLineSeparator
-  fullName: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CountUntilLineSeparator
-- uid: OceanApocalypseStudios.RSML.Sources.IBuffer{System.Char}.CountUntilLineSeparator(System.Int32,System.Boolean@)
-  commentId: M:OceanApocalypseStudios.RSML.Sources.IBuffer{System.Char}.CountUntilLineSeparator(System.Int32,System.Boolean@)
+- uid: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CountUntilEndOfLine*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CountUntilEndOfLine
+  href: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CountUntilEndOfLine.html#OceanApocalypseStudios_RSML_Sources_ReadOnlyStringBuffer_CountUntilEndOfLine_System_Int32_System_Boolean__
+  name: CountUntilEndOfLine
+  nameWithType: ReadOnlyStringBuffer.CountUntilEndOfLine
+  fullName: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CountUntilEndOfLine
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer{System.Char}.CountUntilEndOfLine(System.Int32,System.Boolean@)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.IBuffer{System.Char}.CountUntilEndOfLine(System.Int32,System.Boolean@)
   parent: OceanApocalypseStudios.RSML.Sources.IBuffer{System.Char}
-  definition: OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilLineSeparator(System.Int32,System.Boolean@)
-  href: OceanApocalypseStudios.RSML.Sources.IBuffer-1.CountUntilLineSeparator.html#OceanApocalypseStudios_RSML_Sources_IBuffer_1_CountUntilLineSeparator_System_Int32_System_Boolean__
-  name: CountUntilLineSeparator(int, out bool)
-  nameWithType: IBuffer<char>.CountUntilLineSeparator(int, out bool)
-  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<char>.CountUntilLineSeparator(int, out bool)
-  nameWithType.vb: IBuffer(Of Char).CountUntilLineSeparator(Integer, Boolean)
-  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of Char).CountUntilLineSeparator(Integer, Boolean)
-  name.vb: CountUntilLineSeparator(Integer, Boolean)
+  definition: OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilEndOfLine(System.Int32,System.Boolean@)
+  href: OceanApocalypseStudios.RSML.Sources.IBuffer-1.CountUntilEndOfLine.html#OceanApocalypseStudios_RSML_Sources_IBuffer_1_CountUntilEndOfLine_System_Int32_System_Boolean__
+  name: CountUntilEndOfLine(int, out bool)
+  nameWithType: IBuffer<char>.CountUntilEndOfLine(int, out bool)
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<char>.CountUntilEndOfLine(int, out bool)
+  nameWithType.vb: IBuffer(Of Char).CountUntilEndOfLine(Integer, Boolean)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of Char).CountUntilEndOfLine(Integer, Boolean)
+  name.vb: CountUntilEndOfLine(Integer, Boolean)
   spec.csharp:
-  - uid: OceanApocalypseStudios.RSML.Sources.IBuffer{System.Char}.CountUntilLineSeparator(System.Int32,System.Boolean@)
-    name: CountUntilLineSeparator
-    href: OceanApocalypseStudios.RSML.Sources.IBuffer-1.CountUntilLineSeparator.html#OceanApocalypseStudios_RSML_Sources_IBuffer_1_CountUntilLineSeparator_System_Int32_System_Boolean__
+  - uid: OceanApocalypseStudios.RSML.Sources.IBuffer{System.Char}.CountUntilEndOfLine(System.Int32,System.Boolean@)
+    name: CountUntilEndOfLine
+    href: OceanApocalypseStudios.RSML.Sources.IBuffer-1.CountUntilEndOfLine.html#OceanApocalypseStudios_RSML_Sources_IBuffer_1_CountUntilEndOfLine_System_Int32_System_Boolean__
   - name: (
   - uid: System.Int32
     name: int
@@ -3199,9 +3733,9 @@ references:
     href: https://learn.microsoft.com/dotnet/api/system.boolean
   - name: )
   spec.vb:
-  - uid: OceanApocalypseStudios.RSML.Sources.IBuffer{System.Char}.CountUntilLineSeparator(System.Int32,System.Boolean@)
-    name: CountUntilLineSeparator
-    href: OceanApocalypseStudios.RSML.Sources.IBuffer-1.CountUntilLineSeparator.html#OceanApocalypseStudios_RSML_Sources_IBuffer_1_CountUntilLineSeparator_System_Int32_System_Boolean__
+  - uid: OceanApocalypseStudios.RSML.Sources.IBuffer{System.Char}.CountUntilEndOfLine(System.Int32,System.Boolean@)
+    name: CountUntilEndOfLine
+    href: OceanApocalypseStudios.RSML.Sources.IBuffer-1.CountUntilEndOfLine.html#OceanApocalypseStudios_RSML_Sources_IBuffer_1_CountUntilEndOfLine_System_Int32_System_Boolean__
   - name: (
   - uid: System.Int32
     name: Integer
@@ -3214,20 +3748,20 @@ references:
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.boolean
   - name: )
-- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilLineSeparator(System.Int32,System.Boolean@)
-  commentId: M:OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilLineSeparator(System.Int32,System.Boolean@)
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilEndOfLine(System.Int32,System.Boolean@)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilEndOfLine(System.Int32,System.Boolean@)
   isExternal: true
-  href: OceanApocalypseStudios.RSML.Sources.IBuffer-1.CountUntilLineSeparator.html#OceanApocalypseStudios_RSML_Sources_IBuffer_1_CountUntilLineSeparator_System_Int32_System_Boolean__
-  name: CountUntilLineSeparator(int, out bool)
-  nameWithType: IBuffer<TItem>.CountUntilLineSeparator(int, out bool)
-  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.CountUntilLineSeparator(int, out bool)
-  nameWithType.vb: IBuffer(Of TItem).CountUntilLineSeparator(Integer, Boolean)
-  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).CountUntilLineSeparator(Integer, Boolean)
-  name.vb: CountUntilLineSeparator(Integer, Boolean)
+  href: OceanApocalypseStudios.RSML.Sources.IBuffer-1.CountUntilEndOfLine.html#OceanApocalypseStudios_RSML_Sources_IBuffer_1_CountUntilEndOfLine_System_Int32_System_Boolean__
+  name: CountUntilEndOfLine(int, out bool)
+  nameWithType: IBuffer<TItem>.CountUntilEndOfLine(int, out bool)
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.CountUntilEndOfLine(int, out bool)
+  nameWithType.vb: IBuffer(Of TItem).CountUntilEndOfLine(Integer, Boolean)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).CountUntilEndOfLine(Integer, Boolean)
+  name.vb: CountUntilEndOfLine(Integer, Boolean)
   spec.csharp:
-  - uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilLineSeparator(System.Int32,System.Boolean@)
-    name: CountUntilLineSeparator
-    href: OceanApocalypseStudios.RSML.Sources.IBuffer-1.CountUntilLineSeparator.html#OceanApocalypseStudios_RSML_Sources_IBuffer_1_CountUntilLineSeparator_System_Int32_System_Boolean__
+  - uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilEndOfLine(System.Int32,System.Boolean@)
+    name: CountUntilEndOfLine
+    href: OceanApocalypseStudios.RSML.Sources.IBuffer-1.CountUntilEndOfLine.html#OceanApocalypseStudios_RSML_Sources_IBuffer_1_CountUntilEndOfLine_System_Int32_System_Boolean__
   - name: (
   - uid: System.Int32
     name: int
@@ -3243,9 +3777,9 @@ references:
     href: https://learn.microsoft.com/dotnet/api/system.boolean
   - name: )
   spec.vb:
-  - uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilLineSeparator(System.Int32,System.Boolean@)
-    name: CountUntilLineSeparator
-    href: OceanApocalypseStudios.RSML.Sources.IBuffer-1.CountUntilLineSeparator.html#OceanApocalypseStudios_RSML_Sources_IBuffer_1_CountUntilLineSeparator_System_Int32_System_Boolean__
+  - uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilEndOfLine(System.Int32,System.Boolean@)
+    name: CountUntilEndOfLine
+    href: OceanApocalypseStudios.RSML.Sources.IBuffer-1.CountUntilEndOfLine.html#OceanApocalypseStudios_RSML_Sources_IBuffer_1_CountUntilEndOfLine_System_Int32_System_Boolean__
   - name: (
   - uid: System.Int32
     name: Integer
@@ -3994,12 +4528,6 @@ references:
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.int32
   - name: )
-- uid: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Length
-  commentId: P:OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Length
-  href: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Length.html#OceanApocalypseStudios_RSML_Sources_ReadOnlyStringBuffer_Length
-  name: Length
-  nameWithType: ReadOnlyStringBuffer.Length
-  fullName: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Length
 - uid: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetSourceLocation*
   commentId: Overload:OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetSourceLocation
   href: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetSourceLocation.html#OceanApocalypseStudios_RSML_Sources_ReadOnlyStringBuffer_GetSourceLocation_System_Int32_
@@ -5861,6 +6389,68 @@ references:
   name: Equals
   nameWithType: ReadOnlyStringBuffer.Equals
   fullName: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals
+- uid: System.IEquatable{System.Char[]}.Equals(System.Char[])
+  commentId: M:System.IEquatable{System.Char[]}.Equals(System.Char[])
+  parent: System.IEquatable{System.Char[]}
+  definition: System.IEquatable`1.Equals(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(char[])
+  nameWithType: IEquatable<char[]>.Equals(char[])
+  fullName: System.IEquatable<char[]>.Equals(char[])
+  nameWithType.vb: IEquatable(Of Char()).Equals(Char())
+  fullName.vb: System.IEquatable(Of Char()).Equals(Char())
+  name.vb: Equals(Char())
+  spec.csharp:
+  - uid: System.IEquatable{System.Char[]}.Equals(System.Char[])
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: System.Char
+    name: char
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.char
+  - name: '['
+  - name: ']'
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable{System.Char[]}.Equals(System.Char[])
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: System.Char
+    name: Char
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.char
+  - name: (
+  - name: )
+  - name: )
+- uid: System.IEquatable`1.Equals(`0)
+  commentId: M:System.IEquatable`1.Equals(`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(T)
+  nameWithType: IEquatable<T>.Equals(T)
+  fullName: System.IEquatable<T>.Equals(T)
+  nameWithType.vb: IEquatable(Of T).Equals(T)
+  fullName.vb: System.IEquatable(Of T).Equals(T)
+  spec.csharp:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
 - uid: System.IEquatable{OceanApocalypseStudios.RSML.Sources.IBuffer{System.Char}}.Equals(OceanApocalypseStudios.RSML.Sources.IBuffer{System.Char})
   commentId: M:System.IEquatable{OceanApocalypseStudios.RSML.Sources.IBuffer{System.Char}}.Equals(OceanApocalypseStudios.RSML.Sources.IBuffer{System.Char})
   parent: System.IEquatable{OceanApocalypseStudios.RSML.Sources.IBuffer{System.Char}}
@@ -5906,31 +6496,206 @@ references:
     href: https://learn.microsoft.com/dotnet/api/system.char
   - name: )
   - name: )
-- uid: System.IEquatable`1.Equals(`0)
-  commentId: M:System.IEquatable`1.Equals(`0)
-  isExternal: true
+- uid: System.IEquatable{System.Nullable{System.Memory{System.Char}}}.Equals(System.Nullable{System.Memory{System.Char}})
+  commentId: M:System.IEquatable{System.Nullable{System.Memory{System.Char}}}.Equals(System.Nullable{System.Memory{System.Char}})
+  parent: System.IEquatable{System.Nullable{System.Memory{System.Char}}}
+  definition: System.IEquatable`1.Equals(`0)
   href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
-  name: Equals(T)
-  nameWithType: IEquatable<T>.Equals(T)
-  fullName: System.IEquatable<T>.Equals(T)
-  nameWithType.vb: IEquatable(Of T).Equals(T)
-  fullName.vb: System.IEquatable(Of T).Equals(T)
+  name: Equals(Memory<char>?)
+  nameWithType: IEquatable<Memory<char>?>.Equals(Memory<char>?)
+  fullName: System.IEquatable<System.Memory<char>?>.Equals(System.Memory<char>?)
+  nameWithType.vb: IEquatable(Of Memory(Of Char)?).Equals(Memory(Of Char)?)
+  fullName.vb: System.IEquatable(Of System.Memory(Of Char)?).Equals(System.Memory(Of Char)?)
+  name.vb: Equals(Memory(Of Char)?)
   spec.csharp:
-  - uid: System.IEquatable`1.Equals(`0)
+  - uid: System.IEquatable{System.Nullable{System.Memory{System.Char}}}.Equals(System.Nullable{System.Memory{System.Char}})
     name: Equals
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
   - name: (
-  - name: T
+  - uid: System.Memory`1
+    name: Memory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.memory-1
+  - name: <
+  - uid: System.Char
+    name: char
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.char
+  - name: '>'
+  - name: '?'
   - name: )
   spec.vb:
-  - uid: System.IEquatable`1.Equals(`0)
+  - uid: System.IEquatable{System.Nullable{System.Memory{System.Char}}}.Equals(System.Nullable{System.Memory{System.Char}})
     name: Equals
     isExternal: true
     href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
   - name: (
+  - uid: System.Memory`1
+    name: Memory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.memory-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Char
+    name: Char
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.char
+  - name: )
+  - name: '?'
+  - name: )
+- uid: System.Nullable{System.Memory{System.Char}}
+  commentId: T:System.Nullable{System.Memory{System.Char}}
+  parent: System
+  definition: System.Nullable`1
+  href: https://learn.microsoft.com/dotnet/api/system.memory-1
+  name: Memory<char>?
+  nameWithType: Memory<char>?
+  fullName: System.Memory<char>?
+  nameWithType.vb: Memory(Of Char)?
+  fullName.vb: System.Memory(Of Char)?
+  name.vb: Memory(Of Char)?
+  spec.csharp:
+  - uid: System.Memory`1
+    name: Memory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.memory-1
+  - name: <
+  - uid: System.Char
+    name: char
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.char
+  - name: '>'
+  - name: '?'
+  spec.vb:
+  - uid: System.Memory`1
+    name: Memory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.memory-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Char
+    name: Char
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.char
+  - name: )
+  - name: '?'
+- uid: System.Nullable`1
+  commentId: T:System.Nullable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: (
+  - name: Of
+  - name: " "
   - name: T
   - name: )
+- uid: System.IEquatable{System.Nullable{System.ReadOnlyMemory{System.Char}}}.Equals(System.Nullable{System.ReadOnlyMemory{System.Char}})
+  commentId: M:System.IEquatable{System.Nullable{System.ReadOnlyMemory{System.Char}}}.Equals(System.Nullable{System.ReadOnlyMemory{System.Char}})
+  parent: System.IEquatable{System.Nullable{System.ReadOnlyMemory{System.Char}}}
+  definition: System.IEquatable`1.Equals(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(ReadOnlyMemory<char>?)
+  nameWithType: IEquatable<ReadOnlyMemory<char>?>.Equals(ReadOnlyMemory<char>?)
+  fullName: System.IEquatable<System.ReadOnlyMemory<char>?>.Equals(System.ReadOnlyMemory<char>?)
+  nameWithType.vb: IEquatable(Of ReadOnlyMemory(Of Char)?).Equals(ReadOnlyMemory(Of Char)?)
+  fullName.vb: System.IEquatable(Of System.ReadOnlyMemory(Of Char)?).Equals(System.ReadOnlyMemory(Of Char)?)
+  name.vb: Equals(ReadOnlyMemory(Of Char)?)
+  spec.csharp:
+  - uid: System.IEquatable{System.Nullable{System.ReadOnlyMemory{System.Char}}}.Equals(System.Nullable{System.ReadOnlyMemory{System.Char}})
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: System.ReadOnlyMemory`1
+    name: ReadOnlyMemory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+  - name: <
+  - uid: System.Char
+    name: char
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.char
+  - name: '>'
+  - name: '?'
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable{System.Nullable{System.ReadOnlyMemory{System.Char}}}.Equals(System.Nullable{System.ReadOnlyMemory{System.Char}})
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: System.ReadOnlyMemory`1
+    name: ReadOnlyMemory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Char
+    name: Char
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.char
+  - name: )
+  - name: '?'
+  - name: )
+- uid: System.Nullable{System.ReadOnlyMemory{System.Char}}
+  commentId: T:System.Nullable{System.ReadOnlyMemory{System.Char}}
+  parent: System
+  definition: System.Nullable`1
+  href: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+  name: ReadOnlyMemory<char>?
+  nameWithType: ReadOnlyMemory<char>?
+  fullName: System.ReadOnlyMemory<char>?
+  nameWithType.vb: ReadOnlyMemory(Of Char)?
+  fullName.vb: System.ReadOnlyMemory(Of Char)?
+  name.vb: ReadOnlyMemory(Of Char)?
+  spec.csharp:
+  - uid: System.ReadOnlyMemory`1
+    name: ReadOnlyMemory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+  - name: <
+  - uid: System.Char
+    name: char
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.char
+  - name: '>'
+  - name: '?'
+  spec.vb:
+  - uid: System.ReadOnlyMemory`1
+    name: ReadOnlyMemory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Char
+    name: Char
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.char
+  - name: )
+  - name: '?'
 - uid: System.IEquatable{OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer}.Equals(OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer)
   commentId: M:System.IEquatable{OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer}.Equals(OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer)
   parent: System.IEquatable{OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer}
@@ -5960,6 +6725,39 @@ references:
   - uid: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer
     name: ReadOnlyStringBuffer
     href: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.html
+  - name: )
+- uid: System.IEquatable{System.String}.Equals(System.String)
+  commentId: M:System.IEquatable{System.String}.Equals(System.String)
+  parent: System.IEquatable{System.String}
+  definition: System.IEquatable`1.Equals(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(string)
+  nameWithType: IEquatable<string>.Equals(string)
+  fullName: System.IEquatable<string>.Equals(string)
+  nameWithType.vb: IEquatable(Of String).Equals(String)
+  fullName.vb: System.IEquatable(Of String).Equals(String)
+  name.vb: Equals(String)
+  spec.csharp:
+  - uid: System.IEquatable{System.String}.Equals(System.String)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable{System.String}.Equals(System.String)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
   - name: )
 - uid: System.Object.GetHashCode
   commentId: M:System.Object.GetHashCode

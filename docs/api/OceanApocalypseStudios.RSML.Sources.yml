@@ -47,6 +47,7 @@ references:
   - name: )
 - uid: OceanApocalypseStudios.RSML.Sources.IBufferReader
   commentId: T:OceanApocalypseStudios.RSML.Sources.IBufferReader
+  parent: OceanApocalypseStudios.RSML.Sources
   href: OceanApocalypseStudios.RSML.Sources.IBufferReader.html
   name: IBufferReader
   nameWithType: IBufferReader

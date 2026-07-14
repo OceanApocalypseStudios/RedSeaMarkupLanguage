@@ -33,7 +33,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceLocation.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: SourceLocation
     path: ../src/RSML/Sources/SourceLocation.cs
@@ -70,7 +70,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceLocation.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: .ctor
     path: ../src/RSML/Sources/SourceLocation.cs
@@ -111,7 +111,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceLocation.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: Line
     path: ../src/RSML/Sources/SourceLocation.cs
@@ -142,7 +142,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceLocation.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: Column
     path: ../src/RSML/Sources/SourceLocation.cs
@@ -173,7 +173,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceLocation.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: Index
     path: ../src/RSML/Sources/SourceLocation.cs
@@ -204,7 +204,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceLocation.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: CompareTo
     path: ../src/RSML/Sources/SourceLocation.cs
@@ -243,7 +243,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceLocation.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: CompareTo
     path: ../src/RSML/Sources/SourceLocation.cs
@@ -283,7 +283,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceLocation.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: Equals
     path: ../src/RSML/Sources/SourceLocation.cs
@@ -328,7 +328,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceLocation.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: Equals
     path: ../src/RSML/Sources/SourceLocation.cs
@@ -365,7 +365,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceLocation.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: Equals
     path: ../src/RSML/Sources/SourceLocation.cs
@@ -405,7 +405,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceLocation.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: GetHashCode
     path: ../src/RSML/Sources/SourceLocation.cs
@@ -437,7 +437,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceLocation.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: ToString
     path: ../src/RSML/Sources/SourceLocation.cs
@@ -469,7 +469,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceLocation.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: ToString
     path: ../src/RSML/Sources/SourceLocation.cs
@@ -515,7 +515,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceLocation.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: op_Equality
     path: ../src/RSML/Sources/SourceLocation.cs
@@ -554,7 +554,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceLocation.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: op_Inequality
     path: ../src/RSML/Sources/SourceLocation.cs
@@ -593,7 +593,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceLocation.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: op_LessThan
     path: ../src/RSML/Sources/SourceLocation.cs
@@ -631,7 +631,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceLocation.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: op_GreaterThan
     path: ../src/RSML/Sources/SourceLocation.cs
@@ -669,7 +669,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceLocation.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: op_GreaterThanOrEqual
     path: ../src/RSML/Sources/SourceLocation.cs
@@ -707,7 +707,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceLocation.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: op_LessThanOrEqual
     path: ../src/RSML/Sources/SourceLocation.cs

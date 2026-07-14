@@ -5,7 +5,7 @@ items:
   id: IBuffer`1
   parent: OceanApocalypseStudios.RSML.Sources
   children:
-  - OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilLineSeparator(System.Int32,System.Boolean@)
+  - OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilEndOfLine(System.Int32,System.Boolean@)
   - OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilNotWhitespace(System.Int32)
   - OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilWhitespace(System.Int32)
   - OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountWhile(System.Func{System.Int32,`0,System.Boolean},System.Int32)
@@ -41,7 +41,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/IBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: IBuffer
     path: ../src/RSML/Sources/IBuffer.cs
@@ -52,11 +52,11 @@ items:
   summary: Represents a buffer.
   example: []
   syntax:
-    content: 'public interface IBuffer<TItem> : ISource, IDisposable, IEquatable<IBuffer<TItem>?>'
+    content: 'public interface IBuffer<TItem> : ISource, IDisposable, IEquatable<IBuffer<TItem>?>, IEquatable<TItem[]?>, IEquatable<Memory<TItem>?>, IEquatable<ReadOnlyMemory<TItem>?>'
     typeParameters:
     - id: TItem
       description: The datatype of the values returned by the buffer methods
-    content.vb: Public Interface IBuffer(Of TItem) Inherits ISource, IDisposable, IEquatable(Of IBuffer(Of TItem))
+    content.vb: Public Interface IBuffer(Of TItem) Inherits ISource, IDisposable, IEquatable(Of IBuffer(Of TItem)), IEquatable(Of TItem()), IEquatable(Of Memory(Of TItem)?), IEquatable(Of ReadOnlyMemory(Of TItem)?)
   derivedClasses:
   - OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer
   inheritedMembers:
@@ -66,6 +66,9 @@ items:
   - OceanApocalypseStudios.RSML.Sources.ISource.Length
   - System.IDisposable.Dispose
   - System.IEquatable{OceanApocalypseStudios.RSML.Sources.IBuffer`1}.Equals(OceanApocalypseStudios.RSML.Sources.IBuffer{{TItem}})
+  - System.IEquatable{{TItem}[]}.Equals({TItem}[])
+  - System.IEquatable{System.Nullable{System.Memory{{TItem}}}}.Equals(System.Nullable{System.Memory{{TItem}}})
+  - System.IEquatable{System.Nullable{System.ReadOnlyMemory{{TItem}}}}.Equals(System.Nullable{System.ReadOnlyMemory{{TItem}}})
   nameWithType.vb: IBuffer(Of TItem)
   fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem)
   name.vb: IBuffer(Of TItem)
@@ -83,7 +86,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/IBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: LineCount
     path: ../src/RSML/Sources/IBuffer.cs
@@ -117,7 +120,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/IBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: this[]
     path: ../src/RSML/Sources/IBuffer.cs
@@ -155,7 +158,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/IBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: this[]
     path: ../src/RSML/Sources/IBuffer.cs
@@ -193,7 +196,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/IBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: this[]
     path: ../src/RSML/Sources/IBuffer.cs
@@ -217,23 +220,23 @@ items:
   nameWithType.vb: IBuffer(Of TItem).this[](SourceSpan)
   fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).this[](OceanApocalypseStudios.RSML.Sources.SourceSpan)
   name.vb: this[](SourceSpan)
-- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilLineSeparator(System.Int32,System.Boolean@)
-  commentId: M:OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilLineSeparator(System.Int32,System.Boolean@)
-  id: CountUntilLineSeparator(System.Int32,System.Boolean@)
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilEndOfLine(System.Int32,System.Boolean@)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilEndOfLine(System.Int32,System.Boolean@)
+  id: CountUntilEndOfLine(System.Int32,System.Boolean@)
   parent: OceanApocalypseStudios.RSML.Sources.IBuffer`1
   langs:
   - csharp
   - vb
-  name: CountUntilLineSeparator(int, out bool)
-  nameWithType: IBuffer<TItem>.CountUntilLineSeparator(int, out bool)
-  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.CountUntilLineSeparator(int, out bool)
+  name: CountUntilEndOfLine(int, out bool)
+  nameWithType: IBuffer<TItem>.CountUntilEndOfLine(int, out bool)
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.CountUntilEndOfLine(int, out bool)
   type: Method
   source:
     remote:
       path: src/RSML/Sources/IBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
-    id: CountUntilLineSeparator
+    id: CountUntilEndOfLine
     path: ../src/RSML/Sources/IBuffer.cs
     startLine: 51
   assemblies:
@@ -245,7 +248,7 @@ items:
     Only line separators count - regular whitespace do not. CRLF counts as a single line separator, to avoid double counting.
   example: []
   syntax:
-    content: int CountUntilLineSeparator(int index, out bool isCrLf)
+    content: int CountUntilEndOfLine(int index, out bool isCrLf)
     parameters:
     - id: index
       type: System.Int32
@@ -256,11 +259,11 @@ items:
     return:
       type: System.Int32
       description: The index of the next line separator, relative to an <code class="paramref">index</code>.
-    content.vb: Function CountUntilLineSeparator(index As Integer, isCrLf As Boolean) As Integer
-  overload: OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilLineSeparator*
-  nameWithType.vb: IBuffer(Of TItem).CountUntilLineSeparator(Integer, Boolean)
-  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).CountUntilLineSeparator(Integer, Boolean)
-  name.vb: CountUntilLineSeparator(Integer, Boolean)
+    content.vb: Function CountUntilEndOfLine(index As Integer, isCrLf As Boolean) As Integer
+  overload: OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilEndOfLine*
+  nameWithType.vb: IBuffer(Of TItem).CountUntilEndOfLine(Integer, Boolean)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).CountUntilEndOfLine(Integer, Boolean)
+  name.vb: CountUntilEndOfLine(Integer, Boolean)
 - uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilNotWhitespace(System.Int32)
   commentId: M:OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilNotWhitespace(System.Int32)
   id: CountUntilNotWhitespace(System.Int32)
@@ -275,7 +278,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/IBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: CountUntilNotWhitespace
     path: ../src/RSML/Sources/IBuffer.cs
@@ -316,7 +319,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/IBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: CountUntilWhitespace
     path: ../src/RSML/Sources/IBuffer.cs
@@ -357,7 +360,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/IBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: CountWhile
     path: ../src/RSML/Sources/IBuffer.cs
@@ -411,7 +414,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/IBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: GetLengthOfLine
     path: ../src/RSML/Sources/IBuffer.cs
@@ -452,7 +455,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/IBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: GetLengthOfLineFromIndex
     path: ../src/RSML/Sources/IBuffer.cs
@@ -495,7 +498,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/IBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: GetLine
     path: ../src/RSML/Sources/IBuffer.cs
@@ -533,7 +536,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/IBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: GetLineFromIndex
     path: ../src/RSML/Sources/IBuffer.cs
@@ -574,7 +577,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/IBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: GetLineNumberFromIndex
     path: ../src/RSML/Sources/IBuffer.cs
@@ -612,7 +615,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/IBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: GetSourceLocation
     path: ../src/RSML/Sources/IBuffer.cs
@@ -650,7 +653,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/IBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: GetWord
     path: ../src/RSML/Sources/IBuffer.cs
@@ -713,7 +716,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/IBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: GetWord
     path: ../src/RSML/Sources/IBuffer.cs
@@ -757,7 +760,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/IBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: GetWord
     path: ../src/RSML/Sources/IBuffer.cs
@@ -816,7 +819,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/IBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: Slice
     path: ../src/RSML/Sources/IBuffer.cs
@@ -857,7 +860,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/IBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: Slice
     path: ../src/RSML/Sources/IBuffer.cs
@@ -895,7 +898,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/IBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: Slice
     path: ../src/RSML/Sources/IBuffer.cs
@@ -933,7 +936,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/IBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: TryGetChar
     path: ../src/RSML/Sources/IBuffer.cs
@@ -974,7 +977,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/IBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: TryGetLine
     path: ../src/RSML/Sources/IBuffer.cs
@@ -1018,7 +1021,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/IBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: TryGetLineFromIndex
     path: ../src/RSML/Sources/IBuffer.cs
@@ -1065,7 +1068,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/IBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: TryGetWord
     path: ../src/RSML/Sources/IBuffer.cs
@@ -1140,7 +1143,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/IBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: TryGetWord
     path: ../src/RSML/Sources/IBuffer.cs
@@ -1196,7 +1199,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/IBuffer.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: TryGetWord
     path: ../src/RSML/Sources/IBuffer.cs
@@ -1373,6 +1376,123 @@ references:
   - name: TItem
   - name: )
   - name: )
+- uid: System.IEquatable{{TItem}[]}.Equals({TItem}[])
+  commentId: M:System.IEquatable{`0[]}.Equals(`0[])
+  parent: System.IEquatable{{TItem}[]}
+  definition: System.IEquatable`1.Equals(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(TItem[])
+  nameWithType: IEquatable<TItem[]>.Equals(TItem[])
+  fullName: System.IEquatable<TItem[]>.Equals(TItem[])
+  nameWithType.vb: IEquatable(Of TItem()).Equals(TItem())
+  fullName.vb: System.IEquatable(Of TItem()).Equals(TItem())
+  name.vb: Equals(TItem())
+  spec.csharp:
+  - uid: System.IEquatable{`0[]}.Equals(`0[])
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: TItem
+  - name: '['
+  - name: ']'
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable{`0[]}.Equals(`0[])
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: TItem
+  - name: (
+  - name: )
+  - name: )
+- uid: System.IEquatable{System.Nullable{System.Memory{{TItem}}}}.Equals(System.Nullable{System.Memory{{TItem}}})
+  commentId: M:System.IEquatable{System.Nullable{System.Memory{`0}}}.Equals(System.Nullable{System.Memory{`0}})
+  parent: System.IEquatable{System.Nullable{System.Memory{{TItem}}}}
+  definition: System.IEquatable`1.Equals(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(Memory<TItem>?)
+  nameWithType: IEquatable<Memory<TItem>?>.Equals(Memory<TItem>?)
+  fullName: System.IEquatable<System.Memory<TItem>?>.Equals(System.Memory<TItem>?)
+  nameWithType.vb: IEquatable(Of Memory(Of TItem)?).Equals(Memory(Of TItem)?)
+  fullName.vb: System.IEquatable(Of System.Memory(Of TItem)?).Equals(System.Memory(Of TItem)?)
+  name.vb: Equals(Memory(Of TItem)?)
+  spec.csharp:
+  - uid: System.IEquatable{System.Nullable{System.Memory{`0}}}.Equals(System.Nullable{System.Memory{`0}})
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: System.Memory`1
+    name: Memory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.memory-1
+  - name: <
+  - name: TItem
+  - name: '>'
+  - name: '?'
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable{System.Nullable{System.Memory{`0}}}.Equals(System.Nullable{System.Memory{`0}})
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: System.Memory`1
+    name: Memory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.memory-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TItem
+  - name: )
+  - name: '?'
+  - name: )
+- uid: System.IEquatable{System.Nullable{System.ReadOnlyMemory{{TItem}}}}.Equals(System.Nullable{System.ReadOnlyMemory{{TItem}}})
+  commentId: M:System.IEquatable{System.Nullable{System.ReadOnlyMemory{`0}}}.Equals(System.Nullable{System.ReadOnlyMemory{`0}})
+  parent: System.IEquatable{System.Nullable{System.ReadOnlyMemory{{TItem}}}}
+  definition: System.IEquatable`1.Equals(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(ReadOnlyMemory<TItem>?)
+  nameWithType: IEquatable<ReadOnlyMemory<TItem>?>.Equals(ReadOnlyMemory<TItem>?)
+  fullName: System.IEquatable<System.ReadOnlyMemory<TItem>?>.Equals(System.ReadOnlyMemory<TItem>?)
+  nameWithType.vb: IEquatable(Of ReadOnlyMemory(Of TItem)?).Equals(ReadOnlyMemory(Of TItem)?)
+  fullName.vb: System.IEquatable(Of System.ReadOnlyMemory(Of TItem)?).Equals(System.ReadOnlyMemory(Of TItem)?)
+  name.vb: Equals(ReadOnlyMemory(Of TItem)?)
+  spec.csharp:
+  - uid: System.IEquatable{System.Nullable{System.ReadOnlyMemory{`0}}}.Equals(System.Nullable{System.ReadOnlyMemory{`0}})
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: System.ReadOnlyMemory`1
+    name: ReadOnlyMemory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+  - name: <
+  - name: TItem
+  - name: '>'
+  - name: '?'
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable{System.Nullable{System.ReadOnlyMemory{`0}}}.Equals(System.Nullable{System.ReadOnlyMemory{`0}})
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: System.ReadOnlyMemory`1
+    name: ReadOnlyMemory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TItem
+  - name: )
+  - name: '?'
+  - name: )
 - uid: OceanApocalypseStudios.RSML.Sources.ISource
   commentId: T:OceanApocalypseStudios.RSML.Sources.ISource
   parent: OceanApocalypseStudios.RSML.Sources
@@ -1453,6 +1573,129 @@ references:
   - name: " "
   - name: TItem
   - name: )
+  - name: )
+- uid: System.IEquatable{{TItem}[]}
+  commentId: T:System.IEquatable{`0[]}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<TItem[]>
+  nameWithType: IEquatable<TItem[]>
+  fullName: System.IEquatable<TItem[]>
+  nameWithType.vb: IEquatable(Of TItem())
+  fullName.vb: System.IEquatable(Of TItem())
+  name.vb: IEquatable(Of TItem())
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - name: TItem
+  - name: '['
+  - name: ']'
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TItem
+  - name: (
+  - name: )
+  - name: )
+- uid: System.IEquatable{System.Nullable{System.Memory{{TItem}}}}
+  commentId: T:System.IEquatable{System.Nullable{System.Memory{`0}}}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<Memory<TItem>?>
+  nameWithType: IEquatable<Memory<TItem>?>
+  fullName: System.IEquatable<System.Memory<TItem>?>
+  nameWithType.vb: IEquatable(Of Memory(Of TItem)?)
+  fullName.vb: System.IEquatable(Of System.Memory(Of TItem)?)
+  name.vb: IEquatable(Of Memory(Of TItem)?)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: System.Memory`1
+    name: Memory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.memory-1
+  - name: <
+  - name: TItem
+  - name: '>'
+  - name: '?'
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Memory`1
+    name: Memory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.memory-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TItem
+  - name: )
+  - name: '?'
+  - name: )
+- uid: System.IEquatable{System.Nullable{System.ReadOnlyMemory{{TItem}}}}
+  commentId: T:System.IEquatable{System.Nullable{System.ReadOnlyMemory{`0}}}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<ReadOnlyMemory<TItem>?>
+  nameWithType: IEquatable<ReadOnlyMemory<TItem>?>
+  fullName: System.IEquatable<System.ReadOnlyMemory<TItem>?>
+  nameWithType.vb: IEquatable(Of ReadOnlyMemory(Of TItem)?)
+  fullName.vb: System.IEquatable(Of System.ReadOnlyMemory(Of TItem)?)
+  name.vb: IEquatable(Of ReadOnlyMemory(Of TItem)?)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: System.ReadOnlyMemory`1
+    name: ReadOnlyMemory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+  - name: <
+  - name: TItem
+  - name: '>'
+  - name: '?'
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.ReadOnlyMemory`1
+    name: ReadOnlyMemory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TItem
+  - name: )
+  - name: '?'
   - name: )
 - uid: System
   commentId: N:System
@@ -1557,14 +1800,14 @@ references:
   - name: TItem
   - name: (
   - name: )
-- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilLineSeparator*
-  commentId: Overload:OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilLineSeparator
-  href: OceanApocalypseStudios.RSML.Sources.IBuffer-1.CountUntilLineSeparator.html#OceanApocalypseStudios_RSML_Sources_IBuffer_1_CountUntilLineSeparator_System_Int32_System_Boolean__
-  name: CountUntilLineSeparator
-  nameWithType: IBuffer<TItem>.CountUntilLineSeparator
-  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.CountUntilLineSeparator
-  nameWithType.vb: IBuffer(Of TItem).CountUntilLineSeparator
-  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).CountUntilLineSeparator
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilEndOfLine*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.IBuffer`1.CountUntilEndOfLine
+  href: OceanApocalypseStudios.RSML.Sources.IBuffer-1.CountUntilEndOfLine.html#OceanApocalypseStudios_RSML_Sources_IBuffer_1_CountUntilEndOfLine_System_Int32_System_Boolean__
+  name: CountUntilEndOfLine
+  nameWithType: IBuffer<TItem>.CountUntilEndOfLine
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.CountUntilEndOfLine
+  nameWithType.vb: IBuffer(Of TItem).CountUntilEndOfLine
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.IBuffer(Of TItem).CountUntilEndOfLine
 - uid: System.Boolean
   commentId: T:System.Boolean
   parent: System

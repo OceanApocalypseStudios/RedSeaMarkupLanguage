@@ -15,7 +15,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/IBufferReader.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: IBufferReader
     path: ../src/RSML/Sources/IBufferReader.cs

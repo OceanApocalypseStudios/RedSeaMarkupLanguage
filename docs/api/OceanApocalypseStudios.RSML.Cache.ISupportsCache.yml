@@ -18,7 +18,7 @@ items:
   source:
     remote:
       path: src/RSML/Cache/ISupportsCache.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: ISupportsCache
     path: ../src/RSML/Cache/ISupportsCache.cs
@@ -47,7 +47,7 @@ items:
   source:
     remote:
       path: src/RSML/Cache/ISupportsCache.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: CacheExists
     path: ../src/RSML/Cache/ISupportsCache.cs
@@ -78,7 +78,7 @@ items:
   source:
     remote:
       path: src/RSML/Cache/ISupportsCache.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: BuildCache
     path: ../src/RSML/Cache/ISupportsCache.cs
@@ -106,7 +106,7 @@ items:
   source:
     remote:
       path: src/RSML/Cache/ISupportsCache.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: BuildCache
     path: ../src/RSML/Cache/ISupportsCache.cs

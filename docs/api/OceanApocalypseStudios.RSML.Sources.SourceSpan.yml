@@ -28,7 +28,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceSpan.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: SourceSpan
     path: ../src/RSML/Sources/SourceSpan.cs
@@ -61,7 +61,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceSpan.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: .ctor
     path: ../src/RSML/Sources/SourceSpan.cs
@@ -97,7 +97,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceSpan.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: Start
     path: ../src/RSML/Sources/SourceSpan.cs
@@ -128,7 +128,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceSpan.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: End
     path: ../src/RSML/Sources/SourceSpan.cs
@@ -159,7 +159,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceSpan.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: Length
     path: ../src/RSML/Sources/SourceSpan.cs
@@ -190,7 +190,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceSpan.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: IsSingleLine
     path: ../src/RSML/Sources/SourceSpan.cs
@@ -221,7 +221,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceSpan.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: Equals
     path: ../src/RSML/Sources/SourceSpan.cs
@@ -266,7 +266,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceSpan.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: Equals
     path: ../src/RSML/Sources/SourceSpan.cs
@@ -301,7 +301,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceSpan.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: op_Equality
     path: ../src/RSML/Sources/SourceSpan.cs
@@ -340,7 +340,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceSpan.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: op_Inequality
     path: ../src/RSML/Sources/SourceSpan.cs
@@ -379,7 +379,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceSpan.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: ToString
     path: ../src/RSML/Sources/SourceSpan.cs
@@ -411,7 +411,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceSpan.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: ToString
     path: ../src/RSML/Sources/SourceSpan.cs
@@ -449,7 +449,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceSpan.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: ToString
     path: ../src/RSML/Sources/SourceSpan.cs
@@ -495,7 +495,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceSpan.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: GetHashCode
     path: ../src/RSML/Sources/SourceSpan.cs

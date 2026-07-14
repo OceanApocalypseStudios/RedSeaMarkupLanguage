@@ -19,7 +19,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ISource.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: ISource
     path: ../src/RSML/Sources/ISource.cs
@@ -50,7 +50,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ISource.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: CursorIndex
     path: ../src/RSML/Sources/ISource.cs
@@ -81,7 +81,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ISource.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: IsEmpty
     path: ../src/RSML/Sources/ISource.cs
@@ -112,7 +112,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ISource.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: IsReadOnly
     path: ../src/RSML/Sources/ISource.cs
@@ -143,7 +143,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ISource.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: Length
     path: ../src/RSML/Sources/ISource.cs

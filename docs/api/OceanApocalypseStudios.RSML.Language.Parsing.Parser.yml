@@ -1,0 +1,729 @@
+### YamlMime:ManagedReference
+items:
+- uid: OceanApocalypseStudios.RSML.Language.Parsing.Parser
+  commentId: T:OceanApocalypseStudios.RSML.Language.Parsing.Parser
+  id: Parser
+  parent: OceanApocalypseStudios.RSML.Language.Parsing
+  children:
+  - OceanApocalypseStudios.RSML.Language.Parsing.Parser.Freeze
+  - OceanApocalypseStudios.RSML.Language.Parsing.Parser.Inject(OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension)
+  - OceanApocalypseStudios.RSML.Language.Parsing.Parser.Inject(OceanApocalypseStudios.RSML.Sdk.ToolchainConfiguration)
+  - OceanApocalypseStudios.RSML.Language.Parsing.Parser.Inject``1
+  - OceanApocalypseStudios.RSML.Language.Parsing.Parser.IsMutable
+  langs:
+  - csharp
+  - vb
+  name: Parser
+  nameWithType: Parser
+  fullName: OceanApocalypseStudios.RSML.Language.Parsing.Parser
+  type: Class
+  source:
+    remote:
+      path: src/RSML/Language/Parsing/Parser.cs
+      branch: docs
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Parser
+    path: ../src/RSML/Language/Parsing/Parser.cs
+    startLine: 9
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Language.Parsing
+  summary: The base type that deals with parsing tokens and turning them into an organized tree.
+  example: []
+  syntax:
+    content: 'public abstract class Parser : IToolchainComponent'
+    content.vb: Public MustInherit Class Parser Implements IToolchainComponent
+  inheritance:
+  - System.Object
+  implements:
+  - OceanApocalypseStudios.RSML.Sdk.IToolchainComponent
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: OceanApocalypseStudios.RSML.Language.Parsing.Parser.IsMutable
+  commentId: P:OceanApocalypseStudios.RSML.Language.Parsing.Parser.IsMutable
+  id: IsMutable
+  parent: OceanApocalypseStudios.RSML.Language.Parsing.Parser
+  langs:
+  - csharp
+  - vb
+  name: IsMutable
+  nameWithType: Parser.IsMutable
+  fullName: OceanApocalypseStudios.RSML.Language.Parsing.Parser.IsMutable
+  type: Property
+  source:
+    remote:
+      path: src/RSML/Language/Parsing/Parser.cs
+      branch: docs
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: IsMutable
+    path: ../src/RSML/Language/Parsing/Parser.cs
+    startLine: 14
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Language.Parsing
+  summary: >-
+    Whether the toolchain component is mutable. If not, it might mean
+
+    the component has been compiled.
+  example: []
+  syntax:
+    content: public bool IsMutable { get; protected set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property IsMutable As Boolean
+  overload: OceanApocalypseStudios.RSML.Language.Parsing.Parser.IsMutable*
+  implements:
+  - OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.IsMutable
+- uid: OceanApocalypseStudios.RSML.Language.Parsing.Parser.Freeze
+  commentId: M:OceanApocalypseStudios.RSML.Language.Parsing.Parser.Freeze
+  id: Freeze
+  parent: OceanApocalypseStudios.RSML.Language.Parsing.Parser
+  langs:
+  - csharp
+  - vb
+  name: Freeze()
+  nameWithType: Parser.Freeze()
+  fullName: OceanApocalypseStudios.RSML.Language.Parsing.Parser.Freeze()
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Language/Parsing/Parser.cs
+      branch: docs
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Freeze
+    path: ../src/RSML/Language/Parsing/Parser.cs
+    startLine: 17
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Language.Parsing
+  summary: Freezes the toolchain component and doesn't allow further mutations.
+  example: []
+  syntax:
+    content: public virtual void Freeze()
+    content.vb: Public Overridable Sub Freeze()
+  overload: OceanApocalypseStudios.RSML.Language.Parsing.Parser.Freeze*
+  implements:
+  - OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.Freeze
+- uid: OceanApocalypseStudios.RSML.Language.Parsing.Parser.Inject``1
+  commentId: M:OceanApocalypseStudios.RSML.Language.Parsing.Parser.Inject``1
+  id: Inject``1
+  parent: OceanApocalypseStudios.RSML.Language.Parsing.Parser
+  langs:
+  - csharp
+  - vb
+  name: Inject<TExtension>()
+  nameWithType: Parser.Inject<TExtension>()
+  fullName: OceanApocalypseStudios.RSML.Language.Parsing.Parser.Inject<TExtension>()
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Language/Parsing/Parser.cs
+      branch: docs
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Inject
+    path: ../src/RSML/Language/Parsing/Parser.cs
+    startLine: 20
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Language.Parsing
+  summary: >-
+    Injects an extension into the toolchain component, modifying it if
+
+    it's mutable (see <xref href="OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.IsMutable" data-throw-if-not-resolved="false"></xref>). The item is of type <code class="typeparamref">TExtension</code>
+
+    and is created via the default parameter-less constructor.
+  example: []
+  syntax:
+    content: 'public void Inject<TExtension>() where TExtension : ILanguageExtension, new()'
+    typeParameters:
+    - id: TExtension
+      description: The type of the extension.
+    content.vb: Public Sub Inject(Of TExtension As {ILanguageExtension, New})()
+  overload: OceanApocalypseStudios.RSML.Language.Parsing.Parser.Inject*
+  implements:
+  - OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.Inject``1
+  nameWithType.vb: Parser.Inject(Of TExtension)()
+  fullName.vb: OceanApocalypseStudios.RSML.Language.Parsing.Parser.Inject(Of TExtension)()
+  name.vb: Inject(Of TExtension)()
+- uid: OceanApocalypseStudios.RSML.Language.Parsing.Parser.Inject(OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension)
+  commentId: M:OceanApocalypseStudios.RSML.Language.Parsing.Parser.Inject(OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension)
+  id: Inject(OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension)
+  parent: OceanApocalypseStudios.RSML.Language.Parsing.Parser
+  langs:
+  - csharp
+  - vb
+  name: Inject(ILanguageExtension)
+  nameWithType: Parser.Inject(ILanguageExtension)
+  fullName: OceanApocalypseStudios.RSML.Language.Parsing.Parser.Inject(OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Language/Parsing/Parser.cs
+      branch: docs
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Inject
+    path: ../src/RSML/Language/Parsing/Parser.cs
+    startLine: 23
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Language.Parsing
+  summary: >-
+    Injects an extension into the toolchain component, modifying it if
+
+    it's mutable (see <xref href="OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.IsMutable" data-throw-if-not-resolved="false"></xref>).
+  example: []
+  syntax:
+    content: public void Inject(ILanguageExtension injectable)
+    parameters:
+    - id: injectable
+      type: OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension
+      description: The item to inject.
+    content.vb: Public Sub Inject(injectable As ILanguageExtension)
+  overload: OceanApocalypseStudios.RSML.Language.Parsing.Parser.Inject*
+  implements:
+  - OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.Inject(OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension)
+- uid: OceanApocalypseStudios.RSML.Language.Parsing.Parser.Inject(OceanApocalypseStudios.RSML.Sdk.ToolchainConfiguration)
+  commentId: M:OceanApocalypseStudios.RSML.Language.Parsing.Parser.Inject(OceanApocalypseStudios.RSML.Sdk.ToolchainConfiguration)
+  id: Inject(OceanApocalypseStudios.RSML.Sdk.ToolchainConfiguration)
+  parent: OceanApocalypseStudios.RSML.Language.Parsing.Parser
+  langs:
+  - csharp
+  - vb
+  name: Inject(ToolchainConfiguration)
+  nameWithType: Parser.Inject(ToolchainConfiguration)
+  fullName: OceanApocalypseStudios.RSML.Language.Parsing.Parser.Inject(OceanApocalypseStudios.RSML.Sdk.ToolchainConfiguration)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Language/Parsing/Parser.cs
+      branch: docs
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Inject
+    path: ../src/RSML/Language/Parsing/Parser.cs
+    startLine: 26
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Language.Parsing
+  summary: >-
+    Injects a configuration into the toolchain component, modifying it
+
+    if it's mutable (see <xref href="OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.IsMutable" data-throw-if-not-resolved="false"></xref>).
+  example: []
+  syntax:
+    content: public virtual void Inject(ToolchainConfiguration configuration)
+    parameters:
+    - id: configuration
+      type: OceanApocalypseStudios.RSML.Sdk.ToolchainConfiguration
+      description: The configuration to inject.
+    content.vb: Public Overridable Sub Inject(configuration As ToolchainConfiguration)
+  overload: OceanApocalypseStudios.RSML.Language.Parsing.Parser.Inject*
+  implements:
+  - OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.Inject(OceanApocalypseStudios.RSML.Sdk.ToolchainConfiguration)
+references:
+- uid: OceanApocalypseStudios.RSML.Language.Parsing
+  commentId: N:OceanApocalypseStudios.RSML.Language.Parsing
+  href: OceanApocalypseStudios.html
+  name: OceanApocalypseStudios.RSML.Language.Parsing
+  nameWithType: OceanApocalypseStudios.RSML.Language.Parsing
+  fullName: OceanApocalypseStudios.RSML.Language.Parsing
+  spec.csharp:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Language
+    name: Language
+    href: OceanApocalypseStudios.RSML.Language.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Language.Parsing
+    name: Parsing
+    href: OceanApocalypseStudios.RSML.Language.Parsing.html
+  spec.vb:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Language
+    name: Language
+    href: OceanApocalypseStudios.RSML.Language.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Language.Parsing
+    name: Parsing
+    href: OceanApocalypseStudios.RSML.Language.Parsing.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: OceanApocalypseStudios.RSML.Sdk.IToolchainComponent
+  commentId: T:OceanApocalypseStudios.RSML.Sdk.IToolchainComponent
+  parent: OceanApocalypseStudios.RSML.Sdk
+  href: OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.html
+  name: IToolchainComponent
+  nameWithType: IToolchainComponent
+  fullName: OceanApocalypseStudios.RSML.Sdk.IToolchainComponent
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: OceanApocalypseStudios.RSML.Sdk
+  commentId: N:OceanApocalypseStudios.RSML.Sdk
+  href: OceanApocalypseStudios.html
+  name: OceanApocalypseStudios.RSML.Sdk
+  nameWithType: OceanApocalypseStudios.RSML.Sdk
+  fullName: OceanApocalypseStudios.RSML.Sdk
+  spec.csharp:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sdk
+    name: Sdk
+    href: OceanApocalypseStudios.RSML.Sdk.html
+  spec.vb:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sdk
+    name: Sdk
+    href: OceanApocalypseStudios.RSML.Sdk.html
+- uid: OceanApocalypseStudios.RSML.Language.Parsing.Parser.IsMutable*
+  commentId: Overload:OceanApocalypseStudios.RSML.Language.Parsing.Parser.IsMutable
+  href: OceanApocalypseStudios.RSML.Language.Parsing.Parser.IsMutable.html#OceanApocalypseStudios_RSML_Language_Parsing_Parser_IsMutable
+  name: IsMutable
+  nameWithType: Parser.IsMutable
+  fullName: OceanApocalypseStudios.RSML.Language.Parsing.Parser.IsMutable
+- uid: OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.IsMutable
+  commentId: P:OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.IsMutable
+  parent: OceanApocalypseStudios.RSML.Sdk.IToolchainComponent
+  href: OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.IsMutable.html#OceanApocalypseStudios_RSML_Sdk_IToolchainComponent_IsMutable
+  name: IsMutable
+  nameWithType: IToolchainComponent.IsMutable
+  fullName: OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.IsMutable
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: OceanApocalypseStudios.RSML.Language.Parsing.Parser.Freeze*
+  commentId: Overload:OceanApocalypseStudios.RSML.Language.Parsing.Parser.Freeze
+  href: OceanApocalypseStudios.RSML.Language.Parsing.Parser.Freeze.html#OceanApocalypseStudios_RSML_Language_Parsing_Parser_Freeze
+  name: Freeze
+  nameWithType: Parser.Freeze
+  fullName: OceanApocalypseStudios.RSML.Language.Parsing.Parser.Freeze
+- uid: OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.Freeze
+  commentId: M:OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.Freeze
+  parent: OceanApocalypseStudios.RSML.Sdk.IToolchainComponent
+  href: OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.Freeze.html#OceanApocalypseStudios_RSML_Sdk_IToolchainComponent_Freeze
+  name: Freeze()
+  nameWithType: IToolchainComponent.Freeze()
+  fullName: OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.Freeze()
+  spec.csharp:
+  - uid: OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.Freeze
+    name: Freeze
+    href: OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.Freeze.html#OceanApocalypseStudios_RSML_Sdk_IToolchainComponent_Freeze
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.Freeze
+    name: Freeze
+    href: OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.Freeze.html#OceanApocalypseStudios_RSML_Sdk_IToolchainComponent_Freeze
+  - name: (
+  - name: )
+- uid: OceanApocalypseStudios.RSML.Language.Parsing.Parser.Inject*
+  commentId: Overload:OceanApocalypseStudios.RSML.Language.Parsing.Parser.Inject
+  href: OceanApocalypseStudios.RSML.Language.Parsing.Parser.Inject.html#OceanApocalypseStudios_RSML_Language_Parsing_Parser_Inject__1
+  name: Inject
+  nameWithType: Parser.Inject
+  fullName: OceanApocalypseStudios.RSML.Language.Parsing.Parser.Inject
+- uid: OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.Inject``1
+  commentId: M:OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.Inject``1
+  parent: OceanApocalypseStudios.RSML.Sdk.IToolchainComponent
+  href: OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.Inject.html#OceanApocalypseStudios_RSML_Sdk_IToolchainComponent_Inject__1
+  name: Inject<TExtension>()
+  nameWithType: IToolchainComponent.Inject<TExtension>()
+  fullName: OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.Inject<TExtension>()
+  nameWithType.vb: IToolchainComponent.Inject(Of TExtension)()
+  fullName.vb: OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.Inject(Of TExtension)()
+  name.vb: Inject(Of TExtension)()
+  spec.csharp:
+  - uid: OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.Inject``1
+    name: Inject
+    href: OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.Inject.html#OceanApocalypseStudios_RSML_Sdk_IToolchainComponent_Inject__1
+  - name: <
+  - name: TExtension
+  - name: '>'
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.Inject``1
+    name: Inject
+    href: OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.Inject.html#OceanApocalypseStudios_RSML_Sdk_IToolchainComponent_Inject__1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TExtension
+  - name: )
+  - name: (
+  - name: )
+- uid: OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.Inject(OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension)
+  commentId: M:OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.Inject(OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension)
+  parent: OceanApocalypseStudios.RSML.Sdk.IToolchainComponent
+  href: OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.Inject.html#OceanApocalypseStudios_RSML_Sdk_IToolchainComponent_Inject_OceanApocalypseStudios_RSML_Sdk_Extensibility_ILanguageExtension_
+  name: Inject(ILanguageExtension)
+  nameWithType: IToolchainComponent.Inject(ILanguageExtension)
+  fullName: OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.Inject(OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension)
+  spec.csharp:
+  - uid: OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.Inject(OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension)
+    name: Inject
+    href: OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.Inject.html#OceanApocalypseStudios_RSML_Sdk_IToolchainComponent_Inject_OceanApocalypseStudios_RSML_Sdk_Extensibility_ILanguageExtension_
+  - name: (
+  - uid: OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension
+    name: ILanguageExtension
+    href: OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension.html
+  - name: )
+  spec.vb:
+  - uid: OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.Inject(OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension)
+    name: Inject
+    href: OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.Inject.html#OceanApocalypseStudios_RSML_Sdk_IToolchainComponent_Inject_OceanApocalypseStudios_RSML_Sdk_Extensibility_ILanguageExtension_
+  - name: (
+  - uid: OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension
+    name: ILanguageExtension
+    href: OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension.html
+  - name: )
+- uid: OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension
+  commentId: T:OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension
+  parent: OceanApocalypseStudios.RSML.Sdk.Extensibility
+  href: OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension.html
+  name: ILanguageExtension
+  nameWithType: ILanguageExtension
+  fullName: OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension
+- uid: OceanApocalypseStudios.RSML.Sdk.Extensibility
+  commentId: N:OceanApocalypseStudios.RSML.Sdk.Extensibility
+  href: OceanApocalypseStudios.html
+  name: OceanApocalypseStudios.RSML.Sdk.Extensibility
+  nameWithType: OceanApocalypseStudios.RSML.Sdk.Extensibility
+  fullName: OceanApocalypseStudios.RSML.Sdk.Extensibility
+  spec.csharp:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sdk
+    name: Sdk
+    href: OceanApocalypseStudios.RSML.Sdk.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sdk.Extensibility
+    name: Extensibility
+    href: OceanApocalypseStudios.RSML.Sdk.Extensibility.html
+  spec.vb:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sdk
+    name: Sdk
+    href: OceanApocalypseStudios.RSML.Sdk.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sdk.Extensibility
+    name: Extensibility
+    href: OceanApocalypseStudios.RSML.Sdk.Extensibility.html
+- uid: OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.Inject(OceanApocalypseStudios.RSML.Sdk.ToolchainConfiguration)
+  commentId: M:OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.Inject(OceanApocalypseStudios.RSML.Sdk.ToolchainConfiguration)
+  parent: OceanApocalypseStudios.RSML.Sdk.IToolchainComponent
+  href: OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.Inject.html#OceanApocalypseStudios_RSML_Sdk_IToolchainComponent_Inject_OceanApocalypseStudios_RSML_Sdk_ToolchainConfiguration_
+  name: Inject(ToolchainConfiguration)
+  nameWithType: IToolchainComponent.Inject(ToolchainConfiguration)
+  fullName: OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.Inject(OceanApocalypseStudios.RSML.Sdk.ToolchainConfiguration)
+  spec.csharp:
+  - uid: OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.Inject(OceanApocalypseStudios.RSML.Sdk.ToolchainConfiguration)
+    name: Inject
+    href: OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.Inject.html#OceanApocalypseStudios_RSML_Sdk_IToolchainComponent_Inject_OceanApocalypseStudios_RSML_Sdk_ToolchainConfiguration_
+  - name: (
+  - uid: OceanApocalypseStudios.RSML.Sdk.ToolchainConfiguration
+    name: ToolchainConfiguration
+    href: OceanApocalypseStudios.RSML.Sdk.ToolchainConfiguration.html
+  - name: )
+  spec.vb:
+  - uid: OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.Inject(OceanApocalypseStudios.RSML.Sdk.ToolchainConfiguration)
+    name: Inject
+    href: OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.Inject.html#OceanApocalypseStudios_RSML_Sdk_IToolchainComponent_Inject_OceanApocalypseStudios_RSML_Sdk_ToolchainConfiguration_
+  - name: (
+  - uid: OceanApocalypseStudios.RSML.Sdk.ToolchainConfiguration
+    name: ToolchainConfiguration
+    href: OceanApocalypseStudios.RSML.Sdk.ToolchainConfiguration.html
+  - name: )
+- uid: OceanApocalypseStudios.RSML.Sdk.ToolchainConfiguration
+  commentId: T:OceanApocalypseStudios.RSML.Sdk.ToolchainConfiguration
+  parent: OceanApocalypseStudios.RSML.Sdk
+  href: OceanApocalypseStudios.RSML.Sdk.ToolchainConfiguration.html
+  name: ToolchainConfiguration
+  nameWithType: ToolchainConfiguration
+  fullName: OceanApocalypseStudios.RSML.Sdk.ToolchainConfiguration
+memberLayout: SeparatePages

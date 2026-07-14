@@ -20,7 +20,7 @@ items:
   source:
     remote:
       path: src/RSML/Exceptions/Severity.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: Severity
     path: ../src/RSML/Exceptions/Severity.cs
@@ -47,7 +47,7 @@ items:
   source:
     remote:
       path: src/RSML/Exceptions/Severity.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: None
     path: ../src/RSML/Exceptions/Severity.cs
@@ -75,7 +75,7 @@ items:
   source:
     remote:
       path: src/RSML/Exceptions/Severity.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: Message
     path: ../src/RSML/Exceptions/Severity.cs
@@ -103,7 +103,7 @@ items:
   source:
     remote:
       path: src/RSML/Exceptions/Severity.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: Warning
     path: ../src/RSML/Exceptions/Severity.cs
@@ -131,7 +131,7 @@ items:
   source:
     remote:
       path: src/RSML/Exceptions/Severity.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: Error
     path: ../src/RSML/Exceptions/Severity.cs
@@ -159,7 +159,7 @@ items:
   source:
     remote:
       path: src/RSML/Exceptions/Severity.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: Critical
     path: ../src/RSML/Exceptions/Severity.cs

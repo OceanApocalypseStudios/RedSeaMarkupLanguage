@@ -22,7 +22,7 @@ items:
   source:
     remote:
       path: src/RSML/Exceptions/ErrorList.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: ErrorList
     path: ../src/RSML/Exceptions/ErrorList.cs
@@ -62,7 +62,7 @@ items:
   source:
     remote:
       path: src/RSML/Exceptions/ErrorList.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: .ctor
     path: ../src/RSML/Exceptions/ErrorList.cs
@@ -93,7 +93,7 @@ items:
   source:
     remote:
       path: src/RSML/Exceptions/ErrorList.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: Add
     path: ../src/RSML/Exceptions/ErrorList.cs
@@ -125,7 +125,7 @@ items:
   source:
     remote:
       path: src/RSML/Exceptions/ErrorList.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: AddSourceError
     path: ../src/RSML/Exceptions/ErrorList.cs
@@ -166,7 +166,7 @@ items:
   source:
     remote:
       path: src/RSML/Exceptions/ErrorList.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: AddSourceError
     path: ../src/RSML/Exceptions/ErrorList.cs
@@ -225,7 +225,7 @@ items:
   source:
     remote:
       path: src/RSML/Exceptions/ErrorList.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: Clear
     path: ../src/RSML/Exceptions/ErrorList.cs
@@ -253,7 +253,7 @@ items:
   source:
     remote:
       path: src/RSML/Exceptions/ErrorList.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: GetEnumerator
     path: ../src/RSML/Exceptions/ErrorList.cs
@@ -287,7 +287,7 @@ items:
   source:
     remote:
       path: src/RSML/Exceptions/ErrorList.cs
-      branch: v3.0.0-prerelease1-dev
+      branch: docs
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: System.Collections.IEnumerable.GetEnumerator
     path: ../src/RSML/Exceptions/ErrorList.cs

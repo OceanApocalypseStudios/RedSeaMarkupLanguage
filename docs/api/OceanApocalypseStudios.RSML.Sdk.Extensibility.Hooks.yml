@@ -1,0 +1,38 @@
+### YamlMime:ManagedReference
+items:
+- uid: OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks
+  commentId: N:OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks
+  id: OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks
+  children:
+  - OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks.IInterpreterHook
+  - OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks.ILexerHook
+  - OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks.IParserHook
+  langs:
+  - csharp
+  - vb
+  name: OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks
+  nameWithType: OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks
+  fullName: OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks
+  type: Namespace
+  assemblies:
+  - RSML
+references:
+- uid: OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks.IInterpreterHook
+  commentId: T:OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks.IInterpreterHook
+  href: OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks.IInterpreterHook.html
+  name: IInterpreterHook
+  nameWithType: IInterpreterHook
+  fullName: OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks.IInterpreterHook
+- uid: OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks.ILexerHook
+  commentId: T:OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks.ILexerHook
+  href: OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks.ILexerHook.html
+  name: ILexerHook
+  nameWithType: ILexerHook
+  fullName: OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks.ILexerHook
+- uid: OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks.IParserHook
+  commentId: T:OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks.IParserHook
+  href: OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks.IParserHook.html
+  name: IParserHook
+  nameWithType: IParserHook
+  fullName: OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks.IParserHook
+memberLayout: SeparatePages
