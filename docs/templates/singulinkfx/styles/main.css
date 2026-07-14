@@ -4,14 +4,6 @@ Modified by OceanApocalypseStudios
 Small overrides to the awesome SingulinkFX theme.
 */
 
-:root, [data-theme="dark"] {
-    /* alert-article */
-    --alert-article-title-color: #828295;
-    --alert-article-border-color: #828295;
-    --alert-article-bg-color: #35353d;
-    --alert-article-text-color: #c5cfe6;
-}
-
 .alert.alert-article {
     border: 2px solid var(--alert-article-border-color);
     background: var(--alert-article-bg-color);
