@@ -160,12 +160,12 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 			return 0; // consumed the entire buffer
 
 		ComputeLineStarts();
-
+		
 		int lineSep = GetNextLineStartPosition(index, out _);
 		isCrLf = precededByCrLf.Contains(lineSep) && data[index] is not '\n'; // to us, CRLF is only when we're not standing on the LF
 
 		if (isCrLf)
-			lineSep--; // skip the extra line separator in the CRLF sequence		
+			lineSep--; // skip the extra line separator in the CRLF sequence
 
 #if NET8_0_OR_GREATER
 		if (!(IsLastLine(index) && !data[^1].IsNewline())) // if we're not on the last line and it doesn't end with a newline then
@@ -189,6 +189,12 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	/// > [!NOTE]
 	/// > This method allows the EOF index as in-range.
 	/// > If the index is EOF (<see cref="Length"/>), then the output is always 0.
+	/// > [!NOTE]
+	/// > The return value, when summed with <paramref name="index"/>, becomes the index of the first character that
+	/// > is not whitespace, counting from <paramref name="index"/>.
+	/// > The only exception is if the buffer has been consumed (you pass EOF index or there's no more characters that are
+	/// > not whitespace), meaning the return value, when summed with <paramref name="index"/> is the value of
+	/// > <see cref="Length"/>, which is also the EOF index.
 	/// </remarks>
 	/// <inheritdoc/>
 	public int CountUntilNotWhitespace(int index)
@@ -224,6 +230,12 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	/// > [!NOTE]
 	/// > This method allows the EOF index as in-range.
 	/// > If the index is EOF (<see cref="Length"/>), then the output is always 0.
+	/// > [!NOTE]
+	/// > The return value, when summed with <paramref name="index"/>, becomes the index of the first character that
+	/// > is whitespace, counting from <paramref name="index"/>.
+	/// > The only exception is if the buffer has been consumed (you pass EOF index or there's no more characters that are
+	/// > whitespace), meaning the return value, when summed with <paramref name="index"/> is the value of
+	/// > <see cref="Length"/>, which is also the EOF index.
 	/// </remarks>
 	/// <inheritdoc/>
 	public int CountUntilWhitespace(int index)
@@ -609,7 +621,7 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 
 		return destination.Length >= actualLineLength;
 	}
-	
+
 	/// <remarks>
 	/// Unlike with other <see cref="ReadOnlyStringBuffer"/> methods, this one
 	/// does not accept the EOF index (index at <see cref="Length"/>), because it is not
