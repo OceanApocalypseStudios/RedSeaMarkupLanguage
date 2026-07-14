@@ -49,7 +49,7 @@ public class ReadOnlyStringBufferTests
 	[InlineData(TestString02, 29, 0, false)] // First LF in "\r\n\r\n."
 	[InlineData(TestString02, 30, 0, true)] // Second CR in "\r\n\r\n."
 	[InlineData(TestString02, 31, 0, false)] // Second LF in "\r\n\r\n."
-	[InlineData(TestString02, 32, 0, false)] // Dot/point in "\r\n\r\n."
+	[InlineData(TestString02, 32, 1, false)] // Dot/point in "\r\n\r\n."
 	[InlineData(TestString02, 33, 0, false)] // End of file
 	#endregion
 	#region String with a single line
