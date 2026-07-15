@@ -1,4 +1,6 @@
 using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.Text;
 
 using OceanApocalypseStudios.RSML.Exceptions;
 using OceanApocalypseStudios.RSML.Sources;
@@ -820,12 +822,164 @@ public class ReadOnlyStringBufferTests
 		Assert.Throws<BufferException>(() => buffer.GetSourceLocation(lineNumber));
 	}
 
-	/* todo: test GetWord (all overloads)
-	 * todo: test non-string constructors
-	 * todo: test Slice (all overloads)
-	 * todo: test ToString
-	 * todo: test TryGetChar
-	 * todo: test TryGetLine */
+	[Theory]
+	#region String ends with newline
+	[InlineData(TestString01, 0, 0, 0, 0, 3, 3, 0, 3)]
+	[InlineData(TestString01, 3, 3, 0, 3, 5, 5, 1, 0)]
+	[InlineData(TestString01, 4, 4, 0, 4, 33, 33, 6, 1)]
+	[InlineData(TestString01, 5, 5, 1, 0, 6, 6, 1, 1)]
+	[InlineData(TestString01, 6, 6, 1, 1, 15, 15, 3, 2)]
+	[InlineData(TestString01, 13, 13, 3, 0, 16, 16, 3, 3)]
+	[InlineData(TestString01, 15, 15, 3, 2, 22, 22, 4, 1)]
+	[InlineData(TestString01, 28, 28, 4, 7, -5, 29, 4, 8)]
+	[InlineData(TestString01, 30, 30, 5, 0, 32, 32, 6, 0)]
+	[InlineData(TestString01, -3, 31, 5, 1, 33, 33, 6, 1)]
+	#endregion
+	#region String ends without newline
+	[InlineData(TestString02, 0, 0, 0, 0, 3, 3, 0, 3)]
+	[InlineData(TestString02, 4, 4, 0, 4, 5, 5, 1, 0)]
+	[InlineData(TestString02, 6, 6, 1, 1, 22, 22, 4, 1)]
+	[InlineData(TestString02, 13, 13, 3, 0, 15, 15, 3, 2)]
+	[InlineData(TestString02, 29, 29, 4, 8, -2, 31, 5, 1)]
+	[InlineData(TestString02, 30, 30, 5, 0, -1, 32, 6, 0)]
+	#endregion
+	public void GetSourceSpan(string data, int startIndex, int expectedStartIndex, int expectedStartLine, int expectedStartColumn, int endIndex, int expectedEndIndex, int expectedEndLine, int expectedEndColumn)
+	{
+		var buffer = new ReadOnlyStringBuffer(data);
+		var span = buffer.GetSourceSpan(startIndex, endIndex);
+
+		Assert.Equal(expectedStartIndex, span.Start.Index);
+		Assert.Equal(expectedStartLine, span.Start.Line);
+		Assert.Equal(expectedStartColumn, span.Start.Column);
+
+		Assert.Equal(expectedEndIndex, span.End.Index);
+		Assert.Equal(expectedEndLine, span.End.Line);
+		Assert.Equal(expectedEndColumn, span.End.Column);
+	}
+
+	[Theory]
+	[InlineData(TestString02)]
+	[InlineData(TestString03)]
+	[InlineData(TestString04)]
+	[InlineData(TestString06)]
+	public void Constructor_CharArray(string data)
+	{
+		var array = data.ToCharArray();
+		Assert.Equal(data, array);
+		Assert.True(new ReadOnlyStringBuffer(array).Equals(data));
+	}
+
+	[Theory]
+	[InlineData(TestString01)]
+	[InlineData(TestString02)]
+	[InlineData(TestString03)]
+	[InlineData(TestString04)]
+	[InlineData(TestString05)]
+	[InlineData(TestString06)]
+	public unsafe void Constructor_BytePointer(string data)
+	{
+		var byteCount = Encoding.Default.GetByteCount(data);
+
+		fixed (byte* pointer = Encoding.Default.GetBytes(data))
+		{
+			Assert.Equal(data, Encoding.Default.GetString(pointer, byteCount));
+			Assert.True(new ReadOnlyStringBuffer(pointer, byteCount).Equals(data));
+		}
+	}
+
+	[Theory]
+	[InlineData(TestString02)]
+	[InlineData(TestString03)]
+	[InlineData(TestString04)]
+	[InlineData(TestString06)]
+	public void Constructor_ByteArray(string data)
+	{
+		var array = Encoding.Default.GetBytes(data);
+		Assert.True(new ReadOnlyStringBuffer(array).Equals(data));
+	}
+
+	[Theory]
+	[InlineData(TestString02)]
+	[InlineData(TestString03)]
+	[InlineData(TestString04)]
+	[InlineData(TestString06)]
+	public void Constructor_ReadOnlySpan(string data)
+	{
+		ReadOnlySpan<char> span = data.AsSpan();
+		Assert.True(new ReadOnlyStringBuffer(span).Equals(data));
+	}
+
+	[Theory]
+	#region String ends with newline
+	[InlineData(TestString01, 0, 4, "Hey\r")]
+	[InlineData(TestString01, 3, 2, "\r\n")]
+	[InlineData(TestString01, 5, 1, "T")]
+	[InlineData(TestString01, 7, 6, "is\rIs\u2029")]
+	[InlineData(TestString01, 12, 8, "\u2029A Test ")]
+	[InlineData(TestString01, 16, 4, "est ")]
+	[InlineData(TestString01, 30, 3, "\r\n.")]
+	[InlineData(TestString01, -3, 3, "\n.\u2028")]
+	#endregion
+	public void Slice_CharArray(string data, int index, int length, string expectedSlice)
+	{
+		var buffer = new ReadOnlyStringBuffer(data);
+		var slice = buffer.Slice(index, length);
+
+		Assert.Equal(expectedSlice, new string(slice));
+	}
+
+	[Theory]
+	#region String ends with newline
+	[InlineData(TestString01, 0, "Hey\r")]
+	[InlineData(TestString01, 3, "\r\n")]
+	[InlineData(TestString01, 5, "T")]
+	[InlineData(TestString01, 7, "is\rIs\u2029")]
+	[InlineData(TestString01, 12, "\u2029A Test ")]
+	[InlineData(TestString01, 16, "est ")]
+	[InlineData(TestString01, 30, "\r\n.")]
+	[InlineData(TestString01, -3, "\n.\u2028")]
+	#endregion
+	public void Slice_CharSpan(string data, int index, string expectedSlice)
+	{
+		Span<char> span = stackalloc char[expectedSlice.Length];
+
+		var buffer = new ReadOnlyStringBuffer(data);
+		buffer.Slice(index, span);
+
+		Assert.Equal(expectedSlice, span);
+	}
+
+	[Theory]
+	#region String ends with newline
+	[InlineData(TestString01, 0, 4, "Hey\r")]
+	[InlineData(TestString01, 3, 5, "\r\n")]
+	[InlineData(TestString01, 5, 6, "T")]
+	[InlineData(TestString01, 7, 13, "is\rIs\u2029")]
+	[InlineData(TestString01, 12, 20, "\u2029A Test ")]
+	[InlineData(TestString01, 16, 20, "est ")]
+	[InlineData(TestString01, 30, 33, "\r\n.")]
+	[InlineData(TestString01, 31, 34, "\n.\u2028")]
+	#endregion
+	public void Slice_SourceSpan(string data, int startIndex, int endIndex, string expectedSlice)
+	{
+		Span<char> span = stackalloc char[expectedSlice.Length];
+
+		var buffer = new ReadOnlyStringBuffer(data);
+		buffer.Slice(new SourceSpan(new(startIndex, 0, 0), new(endIndex, 0, 0)), span);
+
+		Assert.Equal(expectedSlice, span);
+	}
+
+	[Fact]
+	public void Slice_SourceSpan_ThrowsIfSpanTooSmall()
+	{
+		var buffer = new ReadOnlyStringBuffer(TestString05);
+		Assert.Throws<ArgumentException>(() => buffer.Slice(new SourceSpan(new(0, 0, 0), new(7, 0, 0)), stackalloc char[3]));
+	}
+
+	// todo: test ToString
+	// todo: test TryGetChar
+	// todo: test TryGetLine
 
 	[Theory]
 	#region String ends with newline
@@ -871,7 +1025,5 @@ public class ReadOnlyStringBufferTests
 		Assert.Equal(expectedLine.Length, written);
 	}
 
-	/* todo: further test TryGetLineFromIndex
-	 * todo: test TryGetWord (all overloads)
-	 */
+	// todo: further test TryGetLineFromIndex
 }
