@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -19,6 +20,7 @@ public class ReadOnlyStringBufferTests
 	private const string TestString04 = "this STRING MIXES a LOT\n of \u2029dIffereNT cas1ngs RAND0mLy!?";
 	private const string TestString05 = "!rrrrrrrrr";
 	private const string TestString06 = "r!!!!!!!!!";
+	private const string TestString07 = "This tests the\nLine\rCount property\r\n";
 
 	[Theory]
 	#region String ends with newline
@@ -54,7 +56,23 @@ public class ReadOnlyStringBufferTests
 	[InlineData(TestString02, -1, 1, false)] // Dot/point in "\r\n\r\n."
 	[InlineData(TestString02, 33, 0, false)] // End of file
 	#endregion
+	#region String with a lot of whitespace
+	[InlineData(TestString03, 0, 50, false)]
+	[InlineData(TestString03, 7, 43, false)]
+	[InlineData(TestString03, 19, 31, false)]
+	[InlineData(TestString03, 32, 18, false)]
+	[InlineData(TestString03, 49, 1, false)]
+	[InlineData(TestString03, 50, 0, false)]
+	[InlineData(TestString03, 51, 0, false)]
+	[InlineData(TestString03, 52, 10, true)]
+	[InlineData(TestString03, 59, 3, true)]
+	[InlineData(TestString03, 61, 1, true)]
+	[InlineData(TestString03, 62, 0, true)]
+	#endregion
 	#region String with a single line
+	[InlineData(TestString05, 0, 10, false)]
+	[InlineData(TestString05, 9, 1, false)]
+	[InlineData(TestString05, 10, 0, false)]
 	[InlineData(TestString06, 0, 10, false)]
 	[InlineData(TestString06, 3, 7, false)]
 	[InlineData(TestString06, 6, 4, false)]
@@ -65,7 +83,6 @@ public class ReadOnlyStringBufferTests
 	public void CountUntilEndOfLine(string data, int index, int expectedCount, bool expectedCrLf)
 	{
 		var buffer = new ReadOnlyStringBuffer(data);
-		buffer.BuildCache();
 		Assert.Equal(expectedCount, buffer.CountUntilEndOfLine(index, out bool actualCrLf));
 		Assert.Equal(expectedCrLf, actualCrLf);
 	}
@@ -77,6 +94,7 @@ public class ReadOnlyStringBufferTests
 	[InlineData(14)]
 	[InlineData(99)]
 	[InlineData(-10)]
+	[InlineData(-1)]
 	#endregion
 	public void CountUntilEndOfLine_ThrowsIfEmpty(int index)
 	{
@@ -91,6 +109,8 @@ public class ReadOnlyStringBufferTests
 	[InlineData(TestString01, 99)]
 	[InlineData(TestString01, 35)]
 	[InlineData(TestString01, -35)]
+	[InlineData(TestString02, -36)]
+	[InlineData(TestString05, -11)]
 	#endregion
 	public void CountUntilEndOfLine_ThrowsIfOutOfRange(string data, int index)
 	{
@@ -140,7 +160,6 @@ public class ReadOnlyStringBufferTests
 	public void CountUntilNotWhitespace(string data, int index, int expectedCount)
 	{
 		var buffer = new ReadOnlyStringBuffer(data);
-		buffer.BuildCache();
 		Assert.Equal(expectedCount, buffer.CountUntilNotWhitespace(index));
 	}
 
@@ -210,7 +229,6 @@ public class ReadOnlyStringBufferTests
 	public void CountUntilWhitespace(string data, int index, int expectedCount)
 	{
 		var buffer = new ReadOnlyStringBuffer(data);
-		buffer.BuildCache();
 		Assert.Equal(expectedCount, buffer.CountUntilWhitespace(index));
 	}
 
@@ -521,7 +539,6 @@ public class ReadOnlyStringBufferTests
 	public void GetLengthOfLineFromIndex(string data, int lineNumber, int expectedLength)
 	{
 		var buffer = new ReadOnlyStringBuffer(data);
-		buffer.BuildCache();
 		Assert.Equal(expectedLength, buffer.GetLengthOfLineFromIndex(lineNumber));
 	}
 
@@ -858,6 +875,79 @@ public class ReadOnlyStringBufferTests
 	}
 
 	[Theory]
+	#region String ends with newline
+	[InlineData(TestString01, 0)]
+	[InlineData(TestString01, 3)]
+	[InlineData(TestString01, 7)]
+	[InlineData(TestString01, 8)]
+	[InlineData(TestString01, 10)]
+	[InlineData(TestString01, 12)]
+	[InlineData(TestString01, 15)]
+	[InlineData(TestString01, 21)]
+	[InlineData(TestString01, 24)]
+	[InlineData(TestString01, 26)]
+	[InlineData(TestString01, 27)]
+	[InlineData(TestString01, 30)]
+	[InlineData(TestString01, 32)]
+	[InlineData(TestString01, 33)]
+	#endregion
+	#region String ends with newline
+	[InlineData(TestString02, 0)]
+	[InlineData(TestString02, 2)]
+	[InlineData(TestString02, 5)]
+	[InlineData(TestString02, 9)]
+	[InlineData(TestString02, 10)]
+	[InlineData(TestString02, 12)]
+	[InlineData(TestString02, 15)]
+	[InlineData(TestString02, 19)]
+	[InlineData(TestString02, 23)]
+	[InlineData(TestString02, 27)]
+	[InlineData(TestString02, 29)]
+	[InlineData(TestString02, 31)]
+	#endregion
+	#region String with a lot of whitespace
+	[InlineData(TestString03, 0)]
+	[InlineData(TestString03, 2)]
+	[InlineData(TestString03, 15)]
+	[InlineData(TestString03, 29)]
+	[InlineData(TestString03, 30)]
+	[InlineData(TestString03, 42)]
+	[InlineData(TestString03, 55)]
+	[InlineData(TestString03, 69)]
+	[InlineData(TestString03, 73)]
+	#endregion
+	#region String with a single line
+	[InlineData(TestString05, 0)]
+	[InlineData(TestString05, 2)]
+	[InlineData(TestString05, 5)]
+	[InlineData(TestString05, 9)]
+	[InlineData(TestString06, 1)]
+	[InlineData(TestString06, 4)]
+	[InlineData(TestString06, 6)]
+	[InlineData(TestString06, 8)]
+	#endregion
+	public void IndexAccessor(string data, int index)
+	{
+		var buffer = new ReadOnlyStringBuffer(data);
+		Assert.Equal(data[index], buffer[index]);
+		Assert.Equal(data[index], buffer[new SourceLocation(index, 0, 0)]);
+	}
+
+	[Theory]
+	[InlineData(TestString01, 7)]
+	[InlineData(TestString02, 7)]
+	[InlineData(TestString03, 4)]
+	[InlineData(TestString04, 3)]
+	[InlineData(TestString05, 1)]
+	[InlineData(TestString06, 1)]
+	[InlineData(TestString07, 3)]
+	public void LineCount_MatchesActualLineCountWithNoEof(string data, int expectedLineCount)
+	{
+		var buffer = new ReadOnlyStringBuffer(data);
+		Assert.Equal(expectedLineCount, buffer.LineCount);
+	}
+
+	[Theory]
 	[InlineData(TestString02)]
 	[InlineData(TestString03)]
 	[InlineData(TestString04)]
@@ -977,9 +1067,171 @@ public class ReadOnlyStringBufferTests
 		Assert.Throws<ArgumentException>(() => buffer.Slice(new SourceSpan(new(0, 0, 0), new(7, 0, 0)), stackalloc char[3]));
 	}
 
-	// todo: test ToString
-	// todo: test TryGetChar
-	// todo: test TryGetLine
+	[Fact]
+	public void ToString_SameAsInputData()
+	{
+		var buffer = new ReadOnlyStringBuffer(TestString02);
+		Assert.Equal(TestString02, buffer.ToString());
+	}
+
+	[Theory]
+	#region String ends with newline
+	[InlineData(TestString01, 0)]
+	[InlineData(TestString01, 3)]
+	[InlineData(TestString01, 7)]
+	[InlineData(TestString01, 8)]
+	[InlineData(TestString01, 10)]
+	[InlineData(TestString01, 12)]
+	[InlineData(TestString01, 15)]
+	[InlineData(TestString01, 21)]
+	[InlineData(TestString01, 24)]
+	[InlineData(TestString01, 26)]
+	[InlineData(TestString01, 27)]
+	[InlineData(TestString01, 30)]
+	[InlineData(TestString01, 32)]
+	[InlineData(TestString01, 33)]
+	#endregion
+	#region String ends with newline
+	[InlineData(TestString02, 0)]
+	[InlineData(TestString02, 2)]
+	[InlineData(TestString02, 5)]
+	[InlineData(TestString02, 9)]
+	[InlineData(TestString02, 10)]
+	[InlineData(TestString02, 12)]
+	[InlineData(TestString02, 15)]
+	[InlineData(TestString02, 19)]
+	[InlineData(TestString02, 23)]
+	[InlineData(TestString02, 27)]
+	[InlineData(TestString02, 29)]
+	[InlineData(TestString02, 31)]
+	#endregion
+	#region String with a lot of whitespace
+	[InlineData(TestString03, 0)]
+	[InlineData(TestString03, 2)]
+	[InlineData(TestString03, 15)]
+	[InlineData(TestString03, 29)]
+	[InlineData(TestString03, 30)]
+	[InlineData(TestString03, 42)]
+	[InlineData(TestString03, 55)]
+	[InlineData(TestString03, 69)]
+	[InlineData(TestString03, 73)]
+	#endregion
+	#region String with a single line
+	[InlineData(TestString05, 0)]
+	[InlineData(TestString05, 2)]
+	[InlineData(TestString05, 5)]
+	[InlineData(TestString05, 9)]
+	[InlineData(TestString06, 1)]
+	[InlineData(TestString06, 4)]
+	[InlineData(TestString06, 6)]
+	[InlineData(TestString06, 8)]
+	#endregion
+	public void TryGetChar(string data, int index)
+	{
+		var buffer = new ReadOnlyStringBuffer(data);
+		Assert.True(buffer.TryGetChar(index, out char item));
+		Assert.Equal(data[index], item);
+	}
+
+	[Fact]
+	public void TryGetChar_FollowsSpecificEofConvention()
+	{
+		var buffer = new ReadOnlyStringBuffer(TestString05);
+		Assert.False(buffer.TryGetChar(10, out char item));
+		Assert.Equal('\0', item);
+	}
+
+	[Fact]
+	public void TryGetChar_FalseIfEmpty()
+	{
+		var buffer = new ReadOnlyStringBuffer(String.Empty);
+		Assert.False(buffer.TryGetChar(0, out char item));
+		Assert.Equal('\0', item);
+	}
+
+	[Fact]
+	public void TryGetChar_FalseIfOutOfRange()
+	{
+		var buffer = new ReadOnlyStringBuffer(TestString06);
+		Assert.False(buffer.TryGetChar(14, out char item));
+		Assert.Equal('\0', item);
+	}
+
+	[Theory]
+	#region String ends with newline
+	[InlineData(TestString01, 0, "Hey")]
+	[InlineData(TestString01, 1, "This")]
+	[InlineData(TestString01, 2, "Is")]
+	[InlineData(TestString01, 3, "A Test ")]
+	[InlineData(TestString01, 4, " Method")]
+	[InlineData(TestString01, 5, "")]
+	[InlineData(TestString01, 6, ".")]
+	[InlineData(TestString01, 7, "")] // eof
+	#endregion
+	#region String ends without newline
+	[InlineData(TestString02, 0, "Hey")]
+	[InlineData(TestString02, 1, "This")]
+	[InlineData(TestString02, 2, "Is")]
+	[InlineData(TestString02, 3, "A Test ")]
+	[InlineData(TestString02, 4, " Method")]
+	[InlineData(TestString02, 5, "")]
+	[InlineData(TestString02, 6, ".")]
+	[InlineData(TestString02, 7, "")] // eof
+	#endregion
+	#region Single-line strings
+	[InlineData(TestString05, 0, "!rrrrrrrrr")]
+	[InlineData(TestString05, 1, "")] // eof
+	[InlineData(TestString06, 0, "r!!!!!!!!!")]
+	[InlineData(TestString06, 1, "")] // eof
+	#endregion
+	public void TryGetLine(string data, int lineNumber, string expectedLine)
+	{
+		Span<char> span = stackalloc char[expectedLine.Length];
+
+		var buffer = new ReadOnlyStringBuffer(data);
+		Assert.True(buffer.TryGetLine(lineNumber, span, out int itemCount));
+		Assert.Equal(expectedLine.Length, itemCount);
+		Assert.Equal(expectedLine, span);
+	}
+
+	[Fact]
+	public void TryGetLine_FalseIfEmpty()
+	{
+		Span<char> span = [];
+
+		var buffer = new ReadOnlyStringBuffer(String.Empty);
+		Assert.False(buffer.TryGetLine(0, span, out int itemCount));
+		Assert.Equal(0, itemCount);
+		Assert.True(span.IsEmpty);
+	}
+
+	[Fact]
+	public void TryGetLine_FalseIfOutOfRange()
+	{
+		Span<char> span = stackalloc char[10];
+
+		var buffer = new ReadOnlyStringBuffer(TestString05);
+		const string emptySequence = "\0\0\0\0\0\0\0\0\0\0";
+
+		Assert.False(buffer.TryGetLine(2, span, out int itemCount));
+		Assert.Equal(0, itemCount);
+		Assert.Equal(emptySequence, span);
+
+		Assert.False(buffer.TryGetLine(-1, span, out itemCount));
+		Assert.Equal(0, itemCount);
+		Assert.Equal(emptySequence, span);
+	}
+
+	[Fact]
+	public void TryGetLine_FalseIfSpanTooSmall()
+	{
+		Span<char> span = stackalloc char[5];
+
+		var buffer = new ReadOnlyStringBuffer(TestString05);
+		Assert.False(buffer.TryGetLine(0, span, out int itemCount));
+		Assert.Equal(5, itemCount);
+		Assert.Equal("!rrrr", span);
+	}
 
 	[Theory]
 	#region String ends with newline
@@ -1015,15 +1267,50 @@ public class ReadOnlyStringBufferTests
 	#endregion
 	public void TryGetLineFromIndex(string data, int index, string expectedLine)
 	{
+		Span<char> span = stackalloc char[expectedLine.Length];
+
 		var buffer = new ReadOnlyStringBuffer(data);
-		buffer.BuildCache();
-
-		Span<char> alloc = stackalloc char[expectedLine.Length];
-		Assert.True(buffer.TryGetLineFromIndex(index, alloc, out int written));
-
-		Assert.Equal(expectedLine, alloc.ToString());
-		Assert.Equal(expectedLine.Length, written);
+		Assert.True(buffer.TryGetLineFromIndex(index, span, out int itemCount));
+		Assert.Equal(expectedLine, span.ToString());
+		Assert.Equal(expectedLine.Length, itemCount);
 	}
 
-	// todo: further test TryGetLineFromIndex
+	[Fact]
+	public void TryGetLineFromIndex_FalseIfEmpty()
+	{
+		Span<char> span = [];
+
+		var buffer = new ReadOnlyStringBuffer(String.Empty);
+		Assert.False(buffer.TryGetLineFromIndex(0, span, out int itemCount));
+		Assert.Equal(0, itemCount);
+		Assert.True(span.IsEmpty);
+	}
+
+	[Fact]
+	public void TryGetLineFromIndex_FalseIfOutOfRange()
+	{
+		Span<char> span = stackalloc char[10];
+
+		var buffer = new ReadOnlyStringBuffer(TestString05);
+		const string emptySequence = "\0\0\0\0\0\0\0\0\0\0";
+
+		Assert.False(buffer.TryGetLineFromIndex(12, span, out int itemCount));
+		Assert.Equal(0, itemCount);
+		Assert.Equal(emptySequence, span);
+
+		Assert.False(buffer.TryGetLineFromIndex(-12, span, out itemCount));
+		Assert.Equal(0, itemCount);
+		Assert.Equal(emptySequence, span);
+	}
+
+	[Fact]
+	public void TryGetLineFromIndex_FalseIfSpanTooSmall()
+	{
+		Span<char> span = stackalloc char[5];
+
+		var buffer = new ReadOnlyStringBuffer(TestString05);
+		Assert.False(buffer.TryGetLineFromIndex(0, span, out int itemCount));
+		Assert.Equal(5, itemCount);
+		Assert.Equal("!rrrr", span);
+	}
 }

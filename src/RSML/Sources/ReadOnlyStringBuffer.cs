@@ -367,22 +367,22 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	/// <exception cref="IndexOutOfRangeException">
 	/// <paramref name="index"/> was set to something greater than the buffer's length.
 	/// </exception>
+	/// <remarks>
+	/// > [!NOTE]
+	/// > This method follows EOF conventions.
+	/// </remarks>
 	/// <inheritdoc/>
 	public int GetLineNumberFromIndex(int index)
 	{
-		if (IsEmpty)
+		var lineNumber = GetLineNumberFromIndexWithNoError(index);
+
+		if (lineNumber == -1) // specific error code from GetLineNumberFromIndexWithNoError : buffer is empty
 			throw new BufferException("The buffer cannot be empty.");
 
-		if (index < 0)
-			index += Length;
-
-		if (IsConventionallyOutOfRange(index))
+		if (lineNumber < 0) // any negative line number or specific error code from GetLineNumberFromIndexWithNoError : index out of range (eof convention)
 			throw new IndexOutOfRangeException("The index must be less than or equal to the buffer's length.");
 
-		ComputeLineStarts();
-
-		GetPreviousOrCurrentLineStartPosition(index, out int lineSepIndex);
-		return lineSepIndex;
+		return lineNumber;
 	}
 
 	/// <exception cref="BufferException">The buffer is empty.</exception>
@@ -521,6 +521,17 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 		return true;
 	}
 
+	/// <remarks>
+	/// > [!NOTE]
+	/// > This method follows EOF conventions.
+	/// > EOF is considered a 0-character sequence in line N, where N is <see cref="LineCount"/>.
+	/// > Keep in mind N does not point to an actual line (it's just a convention), as line numbers are 0-based
+	/// > (meaning the actual last line is located at N - 1).
+	/// > [!NOTE]
+	/// > This method may lead to partial reads, if <paramref name="destination"/>'s length is smaller than the line's
+	/// > length. In this case, the return value is <c>false</c> and only the first N items in the line are assigned to
+	/// > <paramref name="destination"/>, where N is <paramref name="itemCount"/>.
+	/// </remarks>
 	/// <inheritdoc/>
 	public bool TryGetLine(int lineNumber, Span<char> destination, out int itemCount)
 	{
@@ -543,9 +554,21 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 		return actualLineLength <= destination.Length;
 	}
 
+	/// <remarks>
+	/// > [!NOTE]
+	/// > This method follows EOF conventions.
+	/// > EOF is considered a 0-character sequence in line N, where N is <see cref="LineCount"/>.
+	/// > Keep in mind N does not point to an actual line (it's just a convention), as line numbers are 0-based
+	/// > (meaning the actual last line is located at N - 1). If <paramref name="index" /> is EOF, the
+	/// > line will also be EOF.
+	/// > [!NOTE]
+	/// > This method may lead to partial reads, if <paramref name="destination"/>'s length is smaller than the line's
+	/// > length. In this case, the return value is <c>false</c> and only the first N items in the line are assigned to
+	/// > <paramref name="destination"/>, where N is <paramref name="itemCount"/>.
+	/// </remarks>
 	/// <inheritdoc/>
-	public bool TryGetLineFromIndex(int index, Span<char> line, out int itemCount) =>
-		TryGetLine(GetLineNumberFromIndex(index), line, out itemCount);
+	public bool TryGetLineFromIndex(int index, Span<char> destination, out int itemCount) =>
+		TryGetLine(GetLineNumberFromIndexWithNoError(index), destination, out itemCount); // this shouldn't throw exceptions hence the use of modified method
 
 	/// <inheritdoc/>
 	public void Dispose() => GC.SuppressFinalize(this);
@@ -671,7 +694,17 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 		lineStarts.Capacity = Math.Max(lineStarts.Capacity, span.Length / 25 + 32); // just a rough guess
 		precededByCrLf.Capacity = Math.Max(precededByCrLf.Capacity, span.Length / 25 + 16); // just a rough guess
 
-		int lastIndex = span.Length - 1;
+		/* the following line ensures that if the last line:
+		 * ends with CR, LF, U2028 or U2029
+		 * ends with CRLF
+		 * does not end with any of the above
+		 * 
+		 * it will be counted as a line no matter the outcome of the previous condition
+		 * this makes it more obvious from a human side like "bruv my string is abc\ndef two lines right"
+		 * it looks normal that there are 2 lines but someone will go "acshua'y, that's erm 1 line :skull:"
+		 * not with RSML's official buffers nah bro
+		*/
+		int lastIndex = span.EndsWith("\r\n") ? span.Length - 2 : span.Length - 1;
 		int i = 0;
 
 		lineStarts.Add(0); // 0 is by convention the start of line (and also the start of the buffer)
@@ -697,6 +730,23 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 		lineStarts.Add(Length); // add the EOF as the start of a line
 
 		CacheExists = true;
+	}
+
+	private int GetLineNumberFromIndexWithNoError(int index)
+	{
+		if (IsEmpty)
+			return -1; // force an invalid line number
+
+		if (index < 0)
+			index += Length;
+
+		if (IsConventionallyOutOfRange(index))
+			return -2;
+
+		ComputeLineStarts();
+
+		GetPreviousOrCurrentLineStartPosition(index, out int lineSepIndex);
+		return lineSepIndex;
 	}
 
 	/// <param name="insertionPoint">The insertion point of the next line start.</param>
