@@ -6,17 +6,17 @@ namespace OceanApocalypseStudios.RSML.Sources;
 /// <summary>
 /// Represents a span taken from a source.
 /// </summary>
-public readonly partial struct SourceSpan(SourceLocation start, SourceLocation end) : IFormattable
+public readonly partial struct SourceSpan : IFormattable
 {
 	/// <summary>
 	/// The start of the span.
 	/// </summary>
-	public readonly SourceLocation Start => start;
+	public readonly SourceLocation Start { get; }
 
 	/// <summary>
 	/// The end of the span.
 	/// </summary>
-	public readonly SourceLocation End => end;
+	public readonly SourceLocation End { get; }
 
 	/// <summary>
 	/// The length of the span.
@@ -27,6 +27,21 @@ public readonly partial struct SourceSpan(SourceLocation start, SourceLocation e
 	/// The span is located in a single line.
 	/// </summary>
 	public bool IsSingleLine => Start.Line == End.Line;
+
+	/// <summary>
+	/// Initializes a new span given a starting and an end indexes.
+	/// </summary>
+	/// <param name="start">The start index.</param>
+	/// <param name="end">The end index.</param>
+	/// <exception cref="ArgumentException">The starting index is greater or equal to the end index.</exception>
+	public SourceSpan(SourceLocation start, SourceLocation end)
+	{
+		if (start.Index >= end.Index)
+			throw new ArgumentException("The starting index must be less than the end index.");
+
+		Start = start;
+		End = end;
+	}
 
 	/// <inheritdoc/>
 	public override bool Equals(
