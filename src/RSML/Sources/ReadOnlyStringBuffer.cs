@@ -349,9 +349,8 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 		return end - start;
 	}
 
-	/// <exception cref="IndexOutOfRangeException">
-	/// The <paramref name="index"/> is greater than the buffer's length.
-	/// </exception>
+	/// <exception cref="BufferException">The buffer is empty.</exception>
+	/// <exception cref="IndexOutOfRangeException">The index was set to a value greater than the buffer's length.</exception>
 	/// <remarks>
 	/// > [!NOTE]
 	/// > This method follows EOF conventions.
@@ -386,6 +385,10 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 		return lineSepIndex;
 	}
 
+	/// <exception cref="BufferException">The buffer is empty.</exception>
+	/// <exception cref="ArgumentOutOfRangeException">
+	/// The line number is negative or is greater than the amount of lines in the buffer.
+	/// </exception>
 	/// <remarks>
 	/// > [!NOTE]
 	/// > This method follows EOF conventions.
@@ -416,6 +419,10 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	/// <inheritdoc/>
 	public char[] GetLineFromIndex(int index) => GetLine(GetLineNumberFromIndex(index));
 
+	/// <exception cref="BufferException">The buffer is empty.</exception>
+	/// <exception cref="IndexOutOfRangeException">
+	/// The index is out of range or points to a line number that is out of range.
+	/// </exception>
 	/// <remarks>
 	/// > [!IMPORTANT]
 	/// > Unlike with other <see cref="ReadOnlyStringBuffer"/> methods, this one
@@ -448,9 +455,11 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	}
 
 	/// <remarks>
-	/// Unlike with other <see cref="ReadOnlyStringBuffer"/> methods, this one
-	/// does not accept the EOF index (index at <see cref="Length"/>), because it is not
-	/// considered part of any word.
+	/// > [!IMPORTANT]
+	/// > Unlike with other <see cref="ReadOnlyStringBuffer"/> methods, this one
+	/// > does not follow EOF conventions and, because of that, does not accept the 
+	/// > EOF index (index at <see cref="Length"/>), because it is not
+	/// > considered part of any slice.
 	/// </remarks>
 	/// <inheritdoc/>
 	public char[] GetWord(int index, out bool isWhitespace)
