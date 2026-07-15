@@ -454,6 +454,9 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 		return new(index, lineNumber, index - lineStarts[lineNumber]);
 	}
 
+	/// <inheritdoc/>
+	public SourceSpan GetSourceSpan(int startIndex, int endIndex) => new(GetSourceLocation(startIndex), GetSourceLocation(endIndex));
+
 	/// <remarks>
 	/// > [!IMPORTANT]
 	/// > Unlike with other <see cref="ReadOnlyStringBuffer"/> methods, this one
@@ -462,96 +465,28 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	/// > considered part of any slice.
 	/// </remarks>
 	/// <inheritdoc/>
-	public char[] GetWord(int index, out bool isWhitespace)
-	{
-		isWhitespace = false;
-
-		if (IsEmpty)
-			throw new BufferException("The buffer cannot be empty.");
-
-		if (index < 0)
-			index += Length;
-
-		if (IsOutOfRange(index))
-			throw new IndexOutOfRangeException("The index must be less than the buffer's length.");
-
-		isWhitespace = Char.IsWhiteSpace(data[index]);
-
-		// if first index is whitespace, the word is whitespace (ends when not whitespace/end of buffer)
-		// if first index not whitespace, the word is not whitespace (ends on whitespace/end of buffer)
-		int length = isWhitespace
-							? CountUntilNotWhitespace(index)
-							: CountUntilWhitespace(index);
-
-		return data.AsSpan(index, length).ToArray();
-	}
+	public char[] Slice(int start, int length) => data.ToCharArray(start < 0 ? start + Length : start, length);
 
 	/// <remarks>
-	/// Unlike with other <see cref="ReadOnlyStringBuffer"/> methods, this one
-	/// does not accept the EOF index (index at <see cref="Length"/>), because it is not
-	/// considered part of any word.
+	/// > [!IMPORTANT]
+	/// > Unlike with other <see cref="ReadOnlyStringBuffer"/> methods, this one
+	/// > does not follow EOF conventions and, because of that, does not accept the 
+	/// > EOF index (index at <see cref="Length"/>), because it is not
+	/// > considered part of any slice.
 	/// </remarks>
 	/// <inheritdoc/>
-	public char[] GetWord(int index, char itemKind, out bool isItemKind)
-	{
-		isItemKind = false;
+	public void Slice(int start, Span<char> slice) => data.AsSpan(start < 0 ? start + Length : start, slice.Length).CopyTo(slice);
 
-		if (IsEmpty)
-			throw new BufferException("The buffer cannot be empty.");
-
-		if (index < 0)
-			index += Length;
-
-		if (IsOutOfRange(index))
-			throw new IndexOutOfRangeException("The index must be less than the buffer's length.");
-
-		isItemKind = data[index] == itemKind;
-
-		// if first index is KIND, the word is KIND (ends when not KIND/end of buffer)
-		// if first index not KIND, the word is not KIND (ends on KIND/end of buffer)
-		int length = isItemKind
-							? CountUntilNotMatch(index, itemKind)
-							: CountUntilMatch(index, itemKind);
-
-		return data.AsSpan(index, length).ToArray();
-	}
-
+	/// <exception cref="ArgumentException">
+	/// The <paramref name="slice"/>'s length is less than the <paramref name="sourceSpan"/>'s length.
+	/// </exception>
 	/// <remarks>
-	/// Unlike with other <see cref="ReadOnlyStringBuffer"/> methods, this one
-	/// does not accept the EOF index (index at <see cref="Length"/>), because it is not
-	/// considered part of any word.
+	/// > [!IMPORTANT]
+	/// > Unlike with other <see cref="ReadOnlyStringBuffer"/> methods, this one
+	/// > does not follow EOF conventions and, because of that, does not accept the 
+	/// > EOF index (index at <see cref="Length"/>), because it is not
+	/// > considered part of any slice.
 	/// </remarks>
-	/// <inheritdoc/>
-	public char[] GetWord(int index, Func<int, char, bool> itemKindPredicate, out bool isItemKind)
-	{
-		isItemKind = false;
-
-		if (IsEmpty)
-			throw new BufferException("The buffer cannot be empty.");
-
-		if (index < 0)
-			index += Length;
-
-		if (IsOutOfRange(index))
-			throw new IndexOutOfRangeException("The index must be less than the buffer's length.");
-
-		isItemKind = itemKindPredicate(index, data[index]);
-
-		// if first index is KIND, the word is KIND (ends when not KIND/end of buffer)
-		// if first index not KIND, the word is not KIND (ends on KIND/end of buffer)
-		int length = isItemKind
-							? CountWhile((i, c) => !itemKindPredicate(i, c), index)
-							: CountWhile(itemKindPredicate, index);
-
-		return data.AsSpan(index, length).ToArray();
-	}
-
-	/// <inheritdoc/>
-	public char[] Slice(int start, int length) => data.ToCharArray(start, length);
-
-	/// <inheritdoc/>
-	public void Slice(int start, Span<char> slice) => data.AsSpan(start, slice.Length).CopyTo(slice);
-
 	/// <inheritdoc/>
 	public void Slice(SourceSpan sourceSpan, Span<char> slice)
 	{
@@ -561,6 +496,12 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 		data.AsSpan(sourceSpan.Start.Index, sourceSpan.Length).CopyTo(slice);
 	}
 
+	/// <remarks>
+	/// > [!NOTE]
+	/// > This method follows the EOF convention where the EOF character
+	/// > is 0 (<c>'\0'</c>) and the return value is <c>false</c>, due to EOF
+	/// > not being an actual buffer location.
+	/// </remarks>
 	/// <inheritdoc/>
 	public bool TryGetChar(int index, out char item)
 	{
@@ -605,108 +546,6 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	/// <inheritdoc/>
 	public bool TryGetLineFromIndex(int index, Span<char> line, out int itemCount) =>
 		TryGetLine(GetLineNumberFromIndex(index), line, out itemCount);
-
-	/// <remarks>
-	/// Unlike with other <see cref="ReadOnlyStringBuffer"/> methods, this one
-	/// does not accept the EOF index (index at <see cref="Length"/>), because it is not
-	/// considered part of any word.
-	/// </remarks>
-	/// <inheritdoc/>
-	public bool TryGetWord(int index, Span<char> destination, out bool isWhitespace, out int itemCount)
-	{
-		isWhitespace = false;
-		itemCount = 0;
-
-		if (IsEmpty)
-			return false;
-
-		if (index < 0)
-			index += Length;
-
-		if (IsOutOfRange(index))
-			return false;
-
-		isWhitespace = Char.IsWhiteSpace(data[index]);
-
-		// if first index is whitespace, the word is whitespace (ends when not whitespace/end of buffer)
-		// if first index not whitespace, the word is not whitespace (ends on whitespace/end of buffer)
-		int actualLineLength = isWhitespace
-								   ? CountUntilNotWhitespace(index)
-								   : CountUntilWhitespace(index);
-
-		itemCount = Math.Min(actualLineLength, destination.Length);
-		data.AsSpan(index, itemCount).CopyTo(destination);
-
-		return destination.Length >= actualLineLength;
-	}
-
-	/// <remarks>
-	/// Unlike with other <see cref="ReadOnlyStringBuffer"/> methods, this one
-	/// does not accept the EOF index (index at <see cref="Length"/>), because it is not
-	/// considered part of any word.
-	/// </remarks>
-	/// <inheritdoc/>
-	public bool TryGetWord(int index, char itemKind, Span<char> destination, out bool isItemKind, out int itemCount)
-	{
-		isItemKind = false;
-		itemCount = 0;
-
-		if (IsEmpty)
-			return false;
-
-		if (index < 0)
-			index += Length;
-
-		if (IsOutOfRange(index))
-			return false;
-
-		isItemKind = data[index] == itemKind;
-
-		// if first index is KIND, the word is KIND (ends when not KIND/end of buffer)
-		// if first index not KIND, the word is not KIND (ends on KIND/end of buffer)
-		int actualLineLength = isItemKind
-								   ? CountUntilNotMatch(index, itemKind)
-								   : CountUntilMatch(index, itemKind);
-
-		itemCount = Math.Min(actualLineLength, destination.Length);
-		data.AsSpan(index, itemCount).CopyTo(destination);
-
-		return destination.Length >= actualLineLength;
-	}
-
-	/// <remarks>
-	/// Unlike with other <see cref="ReadOnlyStringBuffer"/> methods, this one
-	/// does not accept the EOF index (index at <see cref="Length"/>), because it is not
-	/// considered part of any word.
-	/// </remarks>
-	/// <inheritdoc/>
-	public bool TryGetWord(int index, Func<int, char, bool> itemKindPredicate, Span<char> destination, out bool isItemKind, out int itemCount)
-	{
-		isItemKind = false;
-		itemCount = 0;
-
-		if (IsEmpty)
-			return false;
-
-		if (index < 0)
-			index += Length;
-
-		if (IsOutOfRange(index))
-			return false;
-
-		isItemKind = itemKindPredicate(index, data[index]);
-
-		// if first index is KIND, the word is KIND (ends when not KIND/end of buffer)
-		// if first index not KIND, the word is not KIND (ends on KIND/end of buffer)
-		int actualLineLength = isItemKind
-								   ? CountWhile((i, c) => !itemKindPredicate(i, c), index)
-								   : CountWhile(itemKindPredicate, index);
-
-		itemCount = Math.Min(actualLineLength, destination.Length);
-		data.AsSpan(index, itemCount).CopyTo(destination);
-
-		return destination.Length >= actualLineLength;
-	}
 
 	/// <inheritdoc/>
 	public void Dispose() => GC.SuppressFinalize(this);
@@ -860,38 +699,6 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 		CacheExists = true;
 	}
 
-	private int CountUntilMatch(int index, char character)
-	{
-		if (index < 0)
-			index = Length + index; // -1 is (Length-1) etc
-
-		var span = data.AsSpan(index);
-		int count = 0;
-
-		while (count < span.Length && span[count] == character)
-			count++;
-
-		return count;
-	}
-
-	private int CountUntilNotMatch(int index, char character)
-	{
-		if (index < 0)
-			index = Length + index; // -1 is (Length-1) etc
-
-		var span = data.AsSpan(index);
-		int count = 0;
-
-		while (count < span.Length && span[count] != character)
-			count++;
-
-		return count;
-	}
-
-	/// <summary>
-	/// Shared code context for <see cref="GetNextLineStartPosition(Int32, out Int32)"/> and
-	/// <see cref="GetNextOrCurrentLineStartPosition(Int32, out Int32)"/>.
-	/// </summary>
 	/// <param name="insertionPoint">The insertion point of the next line start.</param>
 	/// <param name="lsListIndex">The index, in <see cref="lineStarts"/> where the line start is.</param>
 	/// <returns>The line start index, in <see cref="data"/>.</returns>
@@ -923,14 +730,6 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 		// we use index + 1 to skip to the next line start if we're already standing on one :)
 		GetNextLineStartFromInsertionPoint(lineStarts.BinarySearch(index + 1), out lsListIndex);
 
-	private int GetNextOrCurrentLineStartPosition(int index, out int lsListIndex) =>
-		// we use the actual index because we might already be standing on the line start
-		GetNextLineStartFromInsertionPoint(lineStarts.BinarySearch(index), out lsListIndex);
-
-	/// <summary>
-	/// Shared code context for <see cref="GetPreviousLineStartPosition(Int32, out Int32)"/> and
-	/// <see cref="GetPreviousOrCurrentLineStartPosition(Int32, out Int32)"/>.
-	/// </summary>
 	/// <param name="insertionPoint">The insertion point of the next line start.</param>
 	/// <param name="lsListIndex">The index, in <see cref="lineStarts"/> where the line start is.</param>
 	/// <returns>The line start index, in <see cref="data"/>.</returns>
@@ -959,19 +758,6 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 		lsListIndex = previousIndex == 0 ? 0 : previousIndex - 1;
 
 		return lineStarts[lsListIndex]; // 3rd Case: we found the previous line start
-	}
-
-	private int GetPreviousLineStartPosition(int index, out int lsListIndex)
-	{
-		if (index > 0)
-		{
-			// when the index is greater than 0, we can safely get the previous line start without getting a big shitty error
-			// we use 0 as the start following standard conventions
-			return GetPreviousLineStartFromInsertionPoint(lineStarts.BinarySearch(index - 1), out lsListIndex);
-		}
-
-		lsListIndex = 0;
-		return 0;
 	}
 
 	private int GetPreviousOrCurrentLineStartPosition(int index, out int lsListIndex)
