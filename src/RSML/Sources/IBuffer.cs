@@ -131,53 +131,12 @@ public interface IBuffer<TItem> : ISource, IEquatable<IBuffer<TItem>?>, IEquatab
 	SourceLocation GetSourceLocation(int index);
 
 	/// <summary>
-	/// Tries to read the word at index <paramref name="index"/>, which can be a span of items verified by
-	/// <paramref name="itemKindPredicate"/> (if the starting index is verified by <paramref name="itemKindPredicate"/>)
-	/// or a span of content not verified by <paramref name="itemKindPredicate"/> (if
-	/// the starting index does not point to anything verified by <paramref name="itemKindPredicate"/>).
+	/// Converts the buffer region into a span.
 	/// </summary>
-	/// <param name="index">The index at which the word starts.</param>
-	/// <param name="itemKindPredicate">
-	/// A predicate that verifies if the first item in the selected range serves as the delimiter
-	/// (the predicate returns <c>true</c> if so). For example, if the predicate verifies <c>,</c>, then 
-	/// the current word if the buffer is <c>My awesome buffer, isn't it cool?</c> starting from <paramref name="index"/>,
-	/// is <c>My awesome buffer</c>. If the predicate verifies <c>;</c>, then the current word
-	/// if the buffer is <c>;;so very awesome</c> starting from <paramref name="index"/>, is <c>;;</c>.
-	/// </param>
-	/// <param name="isItemKind">
-	/// True if the array is fully comprised of the item kind verified by <paramref name="itemKindPredicate"/>.
-	/// If False, no items verified by <paramref name="itemKindPredicate"/> is present.
-	/// </param>
-	/// <returns>The line, as an array of items.</returns>
-	TItem[] GetWord(int index, Func<int, TItem, bool> itemKindPredicate, out bool isItemKind);
-
-	/// <summary>
-	/// Tries to read the word at index <paramref name="index"/>, which can be a span of whitespace (if the starting index points to whitespace)
-	/// or a span of non-whitespace content (if the starting index does not point to whitespace).
-	/// </summary>
-	/// <param name="index">The index at which the word starts.</param>
-	/// <param name="isWhitespace">True if the array is fully comprised of whitespace. If False, no whitespace is present.</param>
-	/// <returns>The line, as an array of items.</returns>
-	TItem[] GetWord(int index, out bool isWhitespace);
-
-	/// <summary>
-	/// Tries to read the word at index <paramref name="index"/>, which can be a span of <paramref name="itemKind"/> (if the starting index
-	/// points to <paramref name="itemKind"/>) or a span of non-<paramref name="itemKind"/> content (if
-	/// the starting index does not point to <paramref name="itemKind"/>).
-	/// </summary>
-	/// <param name="index">The index at which the word starts.</param>
-	/// <param name="itemKind">
-	/// The item that will serve as the delimiter. For example, if item kind is <c>,</c>, then 
-	/// the current word if the buffer is <c> My awesome buffer, isn't it cool?</c> starting from <paramref name="index"/>,
-	/// is <c> My awesome buffer</c>. If item kind is <c>;</c>, then 
-	/// the current word if the buffer is <c>;;so very awesome</c> starting from <paramref name="index"/>, is <c>;;</c>.
-	/// </param>
-	/// <param name="isItemKind">
-	/// True if the array is fully comprised of <paramref name="itemKind"/>.
-	/// If False, no <paramref name="itemKind"/> is present.
-	/// </param>
-	/// <returns>The line, as an array of items.</returns>
-	TItem[] GetWord(int index, TItem itemKind, out bool isItemKind);
+	/// <param name="startIndex">The starting index.</param>
+	/// <param name="endIndex">The end index, which is included in the span.</param>
+	/// <returns>The span.</returns>
+	SourceSpan GetSourceSpan(int startIndex, int endIndex);
 
 	/// <summary>
 	/// Slices a region of the buffer.
@@ -227,74 +186,4 @@ public interface IBuffer<TItem> : ISource, IEquatable<IBuffer<TItem>?>, IEquatab
 	/// <param name="itemCount">The amount of items that were written to <paramref name="destination"/>.</param>
 	/// <returns>False if the buffer is out of bounds, there are no more lines to read or an exception occured.</returns>
 	bool TryGetLineFromIndex(int index, Span<TItem> destination, out int itemCount);
-
-	/// <summary>
-	/// Tries to read the word at index <paramref name="index"/>, which can be a span of items verified by
-	/// <paramref name="itemKindPredicate"/> (if the starting index is verified by <paramref name="itemKindPredicate"/>)
-	/// or a span of content not verified by <paramref name="itemKindPredicate"/> (if
-	/// the starting index does not point to anything verified by <paramref name="itemKindPredicate"/>).
-	/// </summary>
-	/// <param name="index">The index at which the word starts.</param>
-	/// <param name="itemKindPredicate">
-	/// A predicate that verifies if the first item in the selected range serves as the delimiter
-	/// (the predicate returns <c>true</c> if so). For example, if the predicate verifies <c>,</c>, then 
-	/// the current word if the buffer is <c>My awesome buffer, isn't it cool?</c> starting from <paramref name="index"/>,
-	/// is <c>My awesome buffer</c>. If the predicate verifies <c>;</c>, then the current word
-	/// if the buffer is <c>;;so very awesome</c> starting from <paramref name="index"/>, is <c>;;</c>.
-	/// </param>
-	/// <param name="destination">The span which will be the destination for the read content.</param>
-	/// <param name="isItemKind">
-	/// True if the span is fully comprised of the item kind verified by <paramref name="itemKindPredicate"/>.
-	/// If False, no items verified by <paramref name="itemKindPredicate"/> is present.
-	/// </param>
-	/// <param name="itemCount">The amount of characters that were written to <paramref name="destination"/>.</param>
-	/// <remarks>
-	/// This method may lead to partial reading (for example if <paramref name="destination"/> is not
-	/// large enough). When this happens, the return value will be <strong>False</strong> but <paramref name="itemCount"/>
-	/// will be set to something greater than <c>0</c>.
-	/// </remarks>
-	/// <returns>False if the buffer is out of bounds, the reading was only partial or an exception occured.</returns>
-	bool TryGetWord(int index, Func<int, TItem, bool> itemKindPredicate, Span<TItem> destination, out bool isItemKind, out int itemCount);
-
-	/// <summary>
-	/// Tries to read the word at index <paramref name="index"/>, which can be a span of whitespace (if the starting index points to whitespace)
-	/// or a span of non-whitespace content (if the starting index does not point to whitespace).
-	/// </summary>
-	/// <param name="index">The index at which the word starts.</param>
-	/// <param name="destination">The span which will be the destination for the read content.</param>
-	/// <param name="isWhitespace">True if the span is fully comprised of whitespace. If False, no whitespace is present.</param>
-	/// <param name="itemCount">The amount of characters that were written to <paramref name="destination"/>.</param>
-	/// <remarks>
-	/// This method may lead to partial reading (for example if <paramref name="destination"/> is not
-	/// large enough). When this happens, the return value will be <strong>False</strong> but <paramref name="itemCount"/>
-	/// will be set to something greater than <c>0</c>.
-	/// </remarks>
-	/// <returns>False if the buffer is out of bounds or an exception occured.</returns>
-	bool TryGetWord(int index, Span<TItem> destination, out bool isWhitespace, out int itemCount);
-
-	/// <summary>
-	/// Tries to read the word at index <paramref name="index"/>, which can be a span of <paramref name="itemKind"/> (if the starting index
-	/// points to <paramref name="itemKind"/>) or a span of non-<paramref name="itemKind"/> content (if
-	/// the starting index does not point to <paramref name="itemKind"/>).
-	/// </summary>
-	/// <param name="index">The index at which the word starts.</param>
-	/// <param name="itemKind">
-	/// The item that will serve as the delimiter. For example, if item kind is <c>,</c>, then 
-	/// the current word if the buffer is <c> My awesome buffer, isn't it cool?</c> starting from <paramref name="index"/>,
-	/// is <c> My awesome buffer</c>. If item kind is <c>;</c>, then 
-	/// the current word if the buffer is <c>;;so very awesome</c> starting from <paramref name="index"/>, is <c>;;</c>.
-	/// </param>
-	/// <param name="destination">The span which will be the destination for the read content.</param>
-	/// <param name="isItemKind">
-	/// True if the span is fully comprised of <paramref name="itemKind"/>.
-	/// If False, no <paramref name="itemKind"/> is present.
-	/// </param>
-	/// <param name="itemCount">The amount of items that were written to <paramref name="destination"/>.</param>
-	/// <remarks>
-	/// This method may lead to partial reading (for example if <paramref name="destination"/> is not
-	/// large enough). When this happens, the return value will be <strong>False</strong> but <paramref name="itemCount"/>
-	/// will be set to something greater than <c>0</c>.
-	/// </remarks>
-	/// <returns>False if the buffer is out of bounds, the reading was only partial or an exception occured.</returns>
-	bool TryGetWord(int index, TItem itemKind, Span<TItem> destination, out bool isItemKind, out int itemCount);
 }
