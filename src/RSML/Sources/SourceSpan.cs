@@ -9,6 +9,11 @@ namespace OceanApocalypseStudios.RSML.Sources;
 public readonly partial struct SourceSpan : IFormattable
 {
 	/// <summary>
+	/// An empty span.
+	/// </summary>
+	public readonly static SourceSpan Empty = new(new(0, 0, 0), new(0, 0, 0));
+
+	/// <summary>
 	/// The start of the span.
 	/// </summary>
 	public readonly SourceLocation Start { get; }
@@ -36,7 +41,7 @@ public readonly partial struct SourceSpan : IFormattable
 	/// <exception cref="ArgumentException">The starting index is greater or equal to the end index.</exception>
 	public SourceSpan(SourceLocation start, SourceLocation end)
 	{
-		if (start.Index >= end.Index)
+		if (start.Index > end.Index)
 			throw new ArgumentException("The starting index must be less than the end index.");
 
 		Start = start;
@@ -90,7 +95,7 @@ public readonly partial struct SourceSpan : IFormattable
 		{
 			case IBuffer<char> charBuffer:
 				Span<char> destination = stackalloc char[Length];
-				charBuffer.Slice(Start.Index, destination);
+				charBuffer.TrySlice(Start.Index, destination);
 
 				return destination.ToString();
 

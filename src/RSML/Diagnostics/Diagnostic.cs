@@ -3,20 +3,36 @@ using System;
 using OceanApocalypseStudios.RSML.Sources;
 
 
-namespace OceanApocalypseStudios.RSML.Exceptions;
+namespace OceanApocalypseStudios.RSML.Diagnostics;
 
 /// <summary>
-/// An error that has happened in the RSML toolchain and comes from a source.
+/// A diagnostic reported by RSML's API.
 /// </summary>
+/// <param name="code">The error code.</param>
 /// <param name="span">The span the error relates to.</param>
 /// <param name="message">A brief error message detailing why it has happened.</param>
 /// <param name="severity">The error's severity.</param>
-public readonly struct SourceError(SourceSpan span, string message, Severity severity) : IError, IEquatable<SourceError>
+public readonly struct Diagnostic(ErrorCode code, SourceSpan span, string message, Severity severity) : IFormattable, IEquatable<Diagnostic>
 {
 	/// <summary>
 	/// The span the error relates to.
 	/// </summary>
 	public SourceSpan Span => span;
+
+	/// <summary>
+	/// The error's code. Contains information about the category of the error.
+	/// </summary>
+	public ErrorCode Code => code;
+
+	/// <summary>
+	/// The error's category.
+	/// </summary>
+	public ErrorCategory Category => Code.Category;
+
+	/// <summary>
+	/// Checks whether the error is internal (API error results, for example).
+	/// </summary>
+	public bool IsInternal => Code.Category == ErrorCategory.Internal;
 
 	/// <summary>
 	/// A brief error message detailing why it has happened.
@@ -36,22 +52,22 @@ public readonly struct SourceError(SourceSpan span, string message, Severity sev
 #else
 		object obj
 #endif
-	) => obj is SourceError error && Equals(error);
+	) => obj is Diagnostic error && Equals(error);
 
 	/// <inheritdoc/>
-	public bool Equals(SourceError other) => Message == other.Message && Severity == other.Severity && Span.Equals(other.Span);
+	public bool Equals(Diagnostic other) => Message == other.Message && Severity == other.Severity && Span.Equals(other.Span);
 
 	/// <summary>
-	/// Checks if two <see cref="SourceError"/>s are equal to each other.
+	/// Checks if two <see cref="Diagnostic"/>s are equal to each other.
 	/// </summary>
 	/// <returns>True if equals.</returns>
-	public static bool operator ==(SourceError left, SourceError right) => left.Equals(right);
+	public static bool operator ==(Diagnostic left, Diagnostic right) => left.Equals(right);
 
 	/// <summary>
-	/// Checks if two <see cref="SourceError"/>s are different from each other.
+	/// Checks if two <see cref="Diagnostic"/>s are different from each other.
 	/// </summary>
 	/// <returns>True if different.</returns>
-	public static bool operator !=(SourceError left, SourceError right) => !left.Equals(right);
+	public static bool operator !=(Diagnostic left, Diagnostic right) => !left.Equals(right);
 
 	/// <inheritdoc/>
 	public override int GetHashCode()
@@ -65,14 +81,11 @@ public readonly struct SourceError(SourceSpan span, string message, Severity sev
 		}
 	}
 
-	/// <inheritdoc/>
-	public bool Equals(IError? other) => other is SourceError error && Equals(error);
-
 	/// <summary>
 	/// Returns a generic string representation of the current instance.
 	/// </summary>
 	/// <returns>The string representation.</returns>
-	public override string ToString() => $"SourceError(Span={span}, Message={message}, Severity={severity})";
+	public override string ToString() => $"Diagnostic(Span={span}, Message={message}, Severity={severity})";
 
 	/// <summary>
 	/// Given a format, tries to return a string that uses said format as a basis for the representation.
@@ -89,13 +102,22 @@ public readonly struct SourceError(SourceSpan span, string message, Severity sev
 			case "I":
 			case "INIT":
 			case "NET":
-				return $"new SourceError({Span.ToString("ctor", null)}, \"{Message}\", {Severity})";
+				return $"new Diagnostic({Span.ToString("ctor", null)}, \"{Message}\", {Severity})";
 
 			case "LOG":
-				if (span.IsSingleLine)
-					return $"ERROR: {message} (line {span.Start.Line + 1}, column range {span.Start.Column + 1}..{span.End.Column + 1})";
+				string prefix = Severity switch
+				{
+					Severity.Message => "INFO ",
+					Severity.Warning => "WARNING ",
+					Severity.Error => "ERROR ",
+					Severity.Critical => "CRITICAL ",
+					_ => ""
+				};
 
-				return $"ERROR: {message} (line range {span.Start.Line + 1}..{span.End.Line + 1}, column range {span.Start.Column + 1}..{span.End.Column + 1})";
+				if (span.IsSingleLine)
+					return $"[{prefix}{Code}] @ L{span.Start.Line + 1},C({span.Start.Column + 1}..{span.End.Column + 1}) : {message}";
+
+				return $"[{prefix}{Code}] @ L({span.Start.Line + 1}..{span.End.Line + 1}),C({span.Start.Column + 1}..{span.End.Column + 1}) : {message}";
 
 			case "JSON":
 				return

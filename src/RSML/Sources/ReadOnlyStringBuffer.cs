@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 using OceanApocalypseStudios.RSML.Cache;
-using OceanApocalypseStudios.RSML.Exceptions;
+using OceanApocalypseStudios.RSML.Diagnostics;
 
 
 namespace OceanApocalypseStudios.RSML.Sources;
@@ -66,10 +66,10 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	public char this[int index] => data[index];
 
 	/// <inheritdoc/>
-	public char this[SourceLocation location] => this[location.Index];
+	public char this[SourceLocation location] => data[location.Index];
 
 	/// <inheritdoc/>
-	public char[] this[SourceSpan span] => Slice(span.Start.Index, span.Length);
+	public Result<char[]> this[SourceSpan span] => Slice(span.Start.Index, span.Length);
 
 	/// <summary>
 	/// Initializes a new <see cref="ReadOnlyStringBuffer"/>
@@ -125,12 +125,6 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	/// <inheritdoc/>
 	public void BuildCache(bool forceRebuild) => ComputeLineStarts(forceRebuild);
 
-	/// <exception cref="BufferException">
-	/// The buffer is empty.
-	/// </exception>
-	/// <exception cref="IndexOutOfRangeException">
-	/// <paramref name="index"/> was set to something greater than the buffer's length.
-	/// </exception>
 	/// <remarks>
 	/// > [!NOTE]
 	/// > This method allows the EOF index as in-range. The convention is as follows:
@@ -143,24 +137,24 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	/// > - <paramref name="index"/> does not point to EOF.
 	/// </remarks>
 	/// <inheritdoc/>
-	public int CountUntilEndOfLine(int index, out bool isCrLf)
+	public Result<int> CountUntilEndOfLine(int index, out bool isCrLf)
 	{
 		isCrLf = false;
 
 		if (IsEmpty)
-			throw new BufferException("The buffer cannot be empty.");
+			return Result<int>.Fail(new(new(ErrorCategory.Internal, 1), SourceSpan.Empty, "The buffer is empty.", Severity.None));
 
 		if (index < 0)
 			index += Length;
 
 		if (IsConventionallyOutOfRange(index))
-			throw new IndexOutOfRangeException("The index must be less than or equal to the buffer's length.");
+			return Result<int>.Fail(new(new(ErrorCategory.Internal, 2), SourceSpan.Empty, "The index is greater than the buffer's length.", Severity.None));
 
 		if (index == Length)
-			return 0; // consumed the entire buffer
+			return Result<int>.Success(0); // consumed the entire buffer
 
 		ComputeLineStarts();
-		
+
 		int lineSep = GetNextLineStartPosition(index, out _);
 		isCrLf = precededByCrLf.Contains(lineSep) && data[index] is not '\n'; // to us, CRLF is only when we're not standing on the LF
 
@@ -176,15 +170,9 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 			lineSep--;
 		}
 
-		return lineSep - index;
+		return Result<int>.Success(lineSep - index);
 	}
 
-	/// <exception cref="BufferException">
-	/// The buffer is empty.
-	/// </exception>
-	/// <exception cref="IndexOutOfRangeException">
-	/// <paramref name="index"/> was set to something greater than the buffer's length.
-	/// </exception>
 	/// <remarks>
 	/// > [!NOTE]
 	/// > This method allows the EOF index as in-range.
@@ -197,19 +185,19 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	/// > <see cref="Length"/>, which is also the EOF index.
 	/// </remarks>
 	/// <inheritdoc/>
-	public int CountUntilNotWhitespace(int index)
+	public Result<int> CountUntilNotWhitespace(int index)
 	{
 		if (IsEmpty)
-			throw new BufferException("The buffer cannot be empty.");
+			return Result<int>.Fail(new(new(ErrorCategory.Internal, 1), SourceSpan.Empty, "The buffer is empty.", Severity.None));
 
 		if (index < 0)
 			index = Length + index; // -1 is (Length-1) etc
 
 		if (IsConventionallyOutOfRange(index))
-			throw new IndexOutOfRangeException("The index must be less than or equal to the buffer's length.");
+			return Result<int>.Fail(new(new(ErrorCategory.Internal, 2), SourceSpan.Empty, "The index is greater than the buffer's length.", Severity.None));
 
 		if (index == Length)
-			return 0; // consumed the entire buffer
+			return Result<int>.Success(0); // consumed the entire buffer
 
 		var span = data.AsSpan(index);
 		int count = 0;
@@ -217,15 +205,9 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 		while (count < span.Length && Char.IsWhiteSpace(span[count]))
 			count++;
 
-		return count;
+		return Result<int>.Success(count);
 	}
 
-	/// <exception cref="BufferException">
-	/// The buffer is empty.
-	/// </exception>
-	/// <exception cref="IndexOutOfRangeException">
-	/// <paramref name="index"/> was set to something greater than the buffer's length.
-	/// </exception>
 	/// <remarks>
 	/// > [!NOTE]
 	/// > This method allows the EOF index as in-range.
@@ -238,19 +220,19 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	/// > <see cref="Length"/>, which is also the EOF index.
 	/// </remarks>
 	/// <inheritdoc/>
-	public int CountUntilWhitespace(int index)
+	public Result<int> CountUntilWhitespace(int index)
 	{
 		if (IsEmpty)
-			throw new BufferException("The buffer cannot be empty.");
+			return Result<int>.Fail(new(new(ErrorCategory.Internal, 1), SourceSpan.Empty, "The buffer is empty.", Severity.None));
 
 		if (index < 0)
 			index = Length + index; // -1 is (Length-1) etc
 
 		if (IsConventionallyOutOfRange(index))
-			throw new IndexOutOfRangeException("The index must be less than or equal to the buffer's length.");
+			return Result<int>.Fail(new(new(ErrorCategory.Internal, 2), SourceSpan.Empty, "The index musis greater than the buffer's length.", Severity.None));
 
 		if (index == Length)
-			return 0; // consumed the entire buffer
+			return Result<int>.Success(0); // consumed the entire buffer
 
 		var span = data.AsSpan(index);
 		int count = 0;
@@ -258,15 +240,9 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 		while (count < span.Length && !Char.IsWhiteSpace(span[count]))
 			count++;
 
-		return count;
+		return Result<int>.Success(count);
 	}
 
-	/// <exception cref="BufferException">
-	/// The buffer is empty.
-	/// </exception>
-	/// <exception cref="IndexOutOfRangeException">
-	/// <paramref name="index"/> was set to something greater than the buffer's length.
-	/// </exception>
 	/// <remarks>
 	/// > [!NOTE]
 	/// > This method allows the EOF index as in-range.
@@ -279,19 +255,19 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	/// > <see cref="Length"/>, which is also the EOF index.
 	/// </remarks>
 	/// <inheritdoc/>
-	public int CountWhile(Func<int, char, bool> predicate, int index)
+	public Result<int> CountWhile(Func<int, char, bool> predicate, int index)
 	{
 		if (IsEmpty)
-			throw new BufferException("The buffer cannot be empty.");
+			return Result<int>.Fail(new(new(ErrorCategory.Internal, 1), SourceSpan.Empty, "The buffer is empty.", Severity.None));
 
 		if (index < 0)
 			index = Length + index; // -1 is (Length-1) etc
 
 		if (IsConventionallyOutOfRange(index))
-			throw new IndexOutOfRangeException("The index must be less than or equal to the buffer's length.");
+			return Result<int>.Fail(new(new(ErrorCategory.Internal, 2), SourceSpan.Empty, "The index is greater than the buffer's length.", Severity.None));
 
 		if (index == Length)
-			return 0; // consumed the entire buffer
+			return Result<int>.Success(0); // consumed the entire buffer
 
 		var span = data.AsSpan(index);
 		int count = 0;
@@ -299,16 +275,9 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 		while (count < span.Length && predicate(count, span[count]))
 			count++;
 
-		return count;
+		return Result<int>.Success(count);
 	}
 
-	/// <exception cref="BufferException">
-	/// The buffer is empty.
-	/// </exception>
-	/// <exception cref="ArgumentOutOfRangeException">
-	/// The given <paramref name="lineNumber"/> is negative or
-	/// is greater than the amount of lines (see <see cref="LineCount"/>).
-	/// </exception>
 	/// <remarks>
 	/// > [!NOTE]
 	/// > This method follows EOF conventions.
@@ -317,18 +286,18 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	/// > (meaning the actual last line is located at N - 1).
 	/// </remarks>
 	/// <inheritdoc/>
-	public int GetLengthOfLine(int lineNumber)
+	public Result<int> GetLengthOfLine(int lineNumber)
 	{
 		if (IsEmpty)
-			throw new BufferException("The buffer cannot be empty.");
+			return Result<int>.Fail(new(new(ErrorCategory.Internal, 1), SourceSpan.Empty, "The buffer is empty.", Severity.None));
 
 		ComputeLineStarts();
 
 		if (lineNumber < 0 || lineNumber >= RawLineCount)
-			throw new ArgumentOutOfRangeException(nameof(lineNumber), "The 0-based line number must be non-negative and less than the amount of lines in the buffer.");
+			return Result<int>.Fail(new(new(ErrorCategory.Internal, 2), SourceSpan.Empty, "The 0-based line number must be non-negative and less than the amount of lines in the buffer.", Severity.None));
 
 		if (lineNumber == RawLineCount - 1)
-			return 0; // EOF means the line is empty
+			return Result<int>.Success(0); // EOF means the line is empty
 
 		int start = lineStarts[lineNumber];
 		int end = lineStarts[lineNumber + 1];
@@ -346,11 +315,9 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 			end--; // skip one more line separator
 		}
 
-		return end - start;
+		return Result<int>.Success(end - start);
 	}
 
-	/// <exception cref="BufferException">The buffer is empty.</exception>
-	/// <exception cref="IndexOutOfRangeException">The index was set to a value greater than the buffer's length.</exception>
 	/// <remarks>
 	/// > [!NOTE]
 	/// > This method follows EOF conventions.
@@ -359,70 +326,76 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	/// > (meaning the actual last line is located at N - 1).
 	/// </remarks>
 	/// <inheritdoc/>
-	public int GetLengthOfLineFromIndex(int index) => GetLengthOfLine(GetLineNumberFromIndex(index));
-
-	/// <exception cref="BufferException">
-	/// The buffer is empty.
-	/// </exception>
-	/// <exception cref="IndexOutOfRangeException">
-	/// <paramref name="index"/> was set to something greater than the buffer's length.
-	/// </exception>
-	/// <remarks>
-	/// > [!NOTE]
-	/// > This method follows EOF conventions.
-	/// </remarks>
-	/// <inheritdoc/>
-	public int GetLineNumberFromIndex(int index)
+	public Result<int> GetLengthOfLineFromIndex(int index)
 	{
-		var lineNumber = GetLineNumberFromIndexWithNoError(index);
+		var lineNumber = GetLineNumberFromIndex(index);
 
-		if (lineNumber == -1) // specific error code from GetLineNumberFromIndexWithNoError : buffer is empty
-			throw new BufferException("The buffer cannot be empty.");
+		if (lineNumber.IsError)
+			return lineNumber; // return the error result
 
-		if (lineNumber < 0) // any negative line number or specific error code from GetLineNumberFromIndexWithNoError : index out of range (eof convention)
-			throw new IndexOutOfRangeException("The index must be less than or equal to the buffer's length.");
-
-		return lineNumber;
+		return GetLengthOfLine(lineNumber.Value);
 	}
 
-	/// <exception cref="BufferException">The buffer is empty.</exception>
-	/// <exception cref="ArgumentOutOfRangeException">
-	/// The line number is negative or is greater than the amount of lines in the buffer.
-	/// </exception>
 	/// <remarks>
 	/// > [!NOTE]
 	/// > This method follows EOF conventions.
-	/// > EOF is considered a 0-character sequence in line N, where N is <see cref="LineCount"/>.
-	/// > Keep in mind N does not point to an actual line (it's just a convention), as line numbers are 0-based
-	/// > (meaning the actual last line is located at N - 1).
 	/// </remarks>
 	/// <inheritdoc/>
-	public char[] GetLine(int lineNumber)
+	public Result<int> GetLineNumberFromIndex(int index)
 	{
 		if (IsEmpty)
-			throw new BufferException("The buffer cannot be empty.");
+			return Result<int>.Fail(new(new(ErrorCategory.Internal, 1), SourceSpan.Empty, "The buffer is empty.", Severity.None));
+
+		if (index < 0)
+			index += Length;
+
+		if (IsConventionallyOutOfRange(index))
+			return Result<int>.Fail(new(new(ErrorCategory.Internal, 2), SourceSpan.Empty, "The index is greater than the buffer's length.", Severity.None));
+
+		ComputeLineStarts();
+
+		GetPreviousOrCurrentLineStartPosition(index, out int lineSepIndex);
+		return Result<int>.Success(lineSepIndex);
+	}
+
+	/// <remarks>
+	/// > [!NOTE]
+	/// > This method follows EOF conventions.
+	/// > EOF is considered a 0-character sequence in line N, where N is <see cref="LineCount"/>.
+	/// > Keep in mind N does not point to an actual line (it's just a convention), as line numbers are 0-based
+	/// > (meaning the actual last line is located at N - 1).
+	/// </remarks>
+	/// <inheritdoc/>
+	public Result<char[]> GetLine(int lineNumber)
+	{
+		if (IsEmpty)
+			return Result<char[]>.Fail(new(new(ErrorCategory.Internal, 1), SourceSpan.Empty, "The buffer is empty.", Severity.None));
 
 		ComputeLineStarts();
 
 		if (lineNumber < 0 || lineNumber >= RawLineCount)
-			throw new ArgumentOutOfRangeException(nameof(lineNumber), "The 0-based line number must be non-negative and less than the amount of lines in the buffer.");
+			return Result<char[]>.Fail(new(new(ErrorCategory.Internal, 2), SourceSpan.Empty, "The 0-based line number must be non-negative and less than the amount of lines in the buffer.", Severity.None));
 
 		if (lineNumber + 1 == RawLineCount)
-			return []; // EOF means the line is empty
+			return Result<char[]>.Success([]); // EOF means the line is empty
 
 		int start = lineStarts[lineNumber];
-		int length = GetLengthOfLine(lineNumber);
+		int length = GetLengthOfLine(lineNumber).Value; // this will never be an error because we have done exact same checks right above
 
-		return data.AsSpan(start, length).ToArray();
+		return Result<char[]>.Success(data.AsSpan(start, length).ToArray());
 	}
 
 	/// <inheritdoc/>
-	public char[] GetLineFromIndex(int index) => GetLine(GetLineNumberFromIndex(index));
+	public Result<char[]> GetLineFromIndex(int index)
+	{
+		var lineNumber = GetLineNumberFromIndex(index);
 
-	/// <exception cref="BufferException">The buffer is empty.</exception>
-	/// <exception cref="IndexOutOfRangeException">
-	/// The index is out of range or points to a line number that is out of range.
-	/// </exception>
+		if (lineNumber.IsError)
+			return Result<char[]>.Fail(lineNumber.Error); // reuse the error big brain moment
+
+		return GetLine(lineNumber.Value);
+	}
+
 	/// <remarks>
 	/// > [!IMPORTANT]
 	/// > Unlike with other <see cref="ReadOnlyStringBuffer"/> methods, this one
@@ -431,31 +404,37 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	/// > considered a location.
 	/// </remarks>
 	/// <inheritdoc/>
-	public SourceLocation GetSourceLocation(int index)
+	public Result<SourceLocation> GetSourceLocation(int index)
 	{
 		if (IsEmpty)
-			throw new BufferException("The buffer cannot be empty.");
+			return Result<SourceLocation>.Fail(new(new(ErrorCategory.Internal, 1), SourceSpan.Empty, "The buffer is empty.", Severity.None));
 
 		if (index < 0)
 			index += Length;
 
 		if (IsOutOfRange(index))
-			throw new IndexOutOfRangeException("The index must be less than or equal to the buffer's length.");
+			return Result<SourceLocation>.Fail(new(new(ErrorCategory.Internal, 2), SourceSpan.Empty, "The index must be less than the buffer's length.", Severity.None));
 
 		if (index == 0) // best "best" case = triple zero
-			return new(0, 0, 0);
+			return Result<SourceLocation>.Success(new(0, 0, 0));
 
 		ComputeLineStarts();
-		int lineNumber = GetLineNumberFromIndex(index);
+		int lineNumber = GetLineNumberFromIndex(index).Value; // we have done the same checks this emthod does so it'll never be an error
 
-		if (lineNumber >= lineStarts.Count)
-			throw new IndexOutOfRangeException("The index points to a line number that is out of range.");
-
-		return new(index, lineNumber, index - lineStarts[lineNumber]);
+		return Result<SourceLocation>.Success(new(index, lineNumber, index - lineStarts[lineNumber]));
 	}
 
 	/// <inheritdoc/>
-	public SourceSpan GetSourceSpan(int startIndex, int endIndex) => new(GetSourceLocation(startIndex), GetSourceLocation(endIndex));
+	public Result<SourceSpan> GetSourceSpan(int startIndex, int endIndex)
+	{
+		var start = GetSourceLocation(startIndex);
+		var end = GetSourceLocation(endIndex);
+
+		if (start.IsSuccessful && end.IsSuccessful)
+			return Result<SourceSpan>.Success(new(start.Value, end.Value));
+
+		return Result<SourceSpan>.Fail(start.IsError ? start.Error : end.Error);
+	}
 
 	/// <remarks>
 	/// > [!IMPORTANT]
@@ -465,7 +444,19 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	/// > considered part of any slice.
 	/// </remarks>
 	/// <inheritdoc/>
-	public char[] Slice(int start, int length) => data.ToCharArray(start < 0 ? start + Length : start, length);
+	public Result<char[]> Slice(int start, int length)
+	{
+		if (length < 0)
+			return Result<char[]>.Fail(new(new(ErrorCategory.Internal, 2), SourceSpan.Empty, "Both the index and the slice length must be positive.", Severity.None));
+
+		if (start < 0)
+			start += Length;
+
+		if (start + length > Length)
+			return Result<char[]>.Fail(new(new(ErrorCategory.Internal, 2), SourceSpan.Empty, "The slice's end index is out of range.", Severity.None));
+
+		return Result<char[]>.Success(data.ToCharArray(start, length));
+	}
 
 	/// <remarks>
 	/// > [!IMPORTANT]
@@ -475,11 +466,8 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	/// > considered part of any slice.
 	/// </remarks>
 	/// <inheritdoc/>
-	public void Slice(int start, Span<char> slice) => data.AsSpan(start < 0 ? start + Length : start, slice.Length).CopyTo(slice);
+	public bool TrySlice(int start, Span<char> slice) => data.AsSpan(start < 0 ? start + Length : start, slice.Length).TryCopyTo(slice);
 
-	/// <exception cref="ArgumentException">
-	/// The <paramref name="slice"/>'s length is less than the <paramref name="sourceSpan"/>'s length.
-	/// </exception>
 	/// <remarks>
 	/// > [!IMPORTANT]
 	/// > Unlike with other <see cref="ReadOnlyStringBuffer"/> methods, this one
@@ -488,12 +476,13 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	/// > considered part of any slice.
 	/// </remarks>
 	/// <inheritdoc/>
-	public void Slice(SourceSpan sourceSpan, Span<char> slice)
+	public bool TrySlice(SourceSpan sourceSpan, Span<char> slice)
 	{
 		if (slice.Length < sourceSpan.Length)
-			throw new ArgumentException("The slice's length is less than the span's length and therefore cannot contain the sliced region.", nameof(slice));
+			return false;
 
 		data.AsSpan(sourceSpan.Start.Index, sourceSpan.Length).CopyTo(slice);
+		return true;
 	}
 
 	/// <remarks>
@@ -523,6 +512,15 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 
 	/// <remarks>
 	/// > [!NOTE]
+	/// > This method follows the EOF convention where the EOF character
+	/// > is 0 (<c>'\0'</c>) and the return value is <c>false</c>, due to EOF
+	/// > not being an actual buffer location.
+	/// </remarks>
+	/// <inheritdoc/>
+	public bool TryGetChar(SourceLocation location, out char item) => TryGetChar(location.Index, out item);
+
+	/// <remarks>
+	/// > [!NOTE]
 	/// > This method follows EOF conventions.
 	/// > EOF is considered a 0-character sequence in line N, where N is <see cref="LineCount"/>.
 	/// > Keep in mind N does not point to an actual line (it's just a convention), as line numbers are 0-based
@@ -546,7 +544,7 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 			return true; // EOF means the line is empty (and destination is by default empty)
 
 		int start = lineStarts[lineNumber];
-		int actualLineLength = GetLengthOfLine(lineNumber);
+		int actualLineLength = GetLengthOfLine(lineNumber).Value; // guaranteed to not error out cuz the checks above protect from it
 		itemCount = Math.Min(actualLineLength, destination.Length);
 
 		data.AsSpan(start, itemCount).CopyTo(destination);
@@ -567,8 +565,13 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	/// > <paramref name="destination"/>, where N is <paramref name="itemCount"/>.
 	/// </remarks>
 	/// <inheritdoc/>
-	public bool TryGetLineFromIndex(int index, Span<char> destination, out int itemCount) =>
-		TryGetLine(GetLineNumberFromIndexWithNoError(index), destination, out itemCount); // this shouldn't throw exceptions hence the use of modified method
+	public bool TryGetLineFromIndex(int index, Span<char> destination, out int itemCount)
+	{
+		itemCount = 0;
+		var lineNumber = GetLineNumberFromIndex(index);
+
+		return lineNumber.IsError ? false : TryGetLine(lineNumber.Value, destination, out itemCount);
+	}
 
 	/// <inheritdoc/>
 	public void Dispose() => GC.SuppressFinalize(this);
@@ -730,23 +733,6 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 		lineStarts.Add(Length); // add the EOF as the start of a line
 
 		CacheExists = true;
-	}
-
-	private int GetLineNumberFromIndexWithNoError(int index)
-	{
-		if (IsEmpty)
-			return -1; // force an invalid line number
-
-		if (index < 0)
-			index += Length;
-
-		if (IsConventionallyOutOfRange(index))
-			return -2;
-
-		ComputeLineStarts();
-
-		GetPreviousOrCurrentLineStartPosition(index, out int lineSepIndex);
-		return lineSepIndex;
 	}
 
 	/// <param name="insertionPoint">The insertion point of the next line start.</param>

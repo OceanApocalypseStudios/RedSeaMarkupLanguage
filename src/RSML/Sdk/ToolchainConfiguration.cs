@@ -1,8 +1,12 @@
+using System;
+
+
 namespace OceanApocalypseStudios.RSML.Sdk;
 
 /// <summary>
 /// Configuration options for a <see cref="ToolchainExecutionPlan"/>, usually passed via a <see cref="ToolchainExecutionPlanBuilder"/>.
 /// </summary>
+[Flags]
 public enum ToolchainConfiguration
 {
 	/// <summary>
@@ -19,7 +23,7 @@ public enum ToolchainConfiguration
 	/// > to error out due to duplicated configuration, unless <see cref="SilentlyIgnoreDuplicatedConfigurations"/>
 	/// > or <see cref="SilentlyIgnoreAllErrors"/> are enabled.
 	/// </remarks>
-	DisableExtensionProcessing,
+	DisableExtensionProcessing = 0,
 
 	/// <summary>
 	/// Only allows OceanApocalypseStudios extensions, leading to an error if any non-OAS extension is active.
@@ -29,16 +33,22 @@ public enum ToolchainConfiguration
 	/// > When used alongside <see cref="SilentlyIgnoreAllErrors"/>, the non-OAS extensions will be disabled, but
 	/// > no errors will be thrown.
 	/// </remarks>
-	AllowOnlyOASExtensions,
+	AllowOnlyOASExtensions = 1,
 
 	/// <summary>
-	/// Overrides the default behavior of freezing all toolchain components after the last injection.
+	/// Ignores all errors caused by broken or faulty extensions.
 	/// </summary>
-	DoNotFreezeComponentsOnLastInjection,
+	IgnoreBrokenExtensions,
 
-	SilentlyIgnoreBrokenExtensions,
-	SilentlyIgnoreDuplicatedExtensions,
-	SilentlyIgnoreDuplicatedConfigurations,
+	/// <summary>
+	/// Ignores all errors caused by injecting already injected extensions.
+	/// </summary>
+	IgnoreDuplicatedExtensions,
+
+	/// <summary>
+	/// Ignores all errors caused by injecting already injected configurations.
+	/// </summary>
+	IgnoreDuplicatedConfigurations,
 
 	/// <summary>
 	/// Ignores all errors thrown during pipeline creation and pipeline execution.

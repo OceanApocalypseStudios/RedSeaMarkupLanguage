@@ -1,4 +1,4 @@
-namespace OceanApocalypseStudios.RSML.Exceptions;
+namespace OceanApocalypseStudios.RSML.Diagnostics;
 
 /// <summary>
 /// The severity of an error.
