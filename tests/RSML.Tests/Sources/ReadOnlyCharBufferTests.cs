@@ -594,7 +594,7 @@ public class ReadOnlyCharBufferTests
 	public void GetLine(string data, int lineNumber, string expectedLine)
 	{
 		var buffer = new ReadOnlyCharBuffer(data);
-		Assert.Equal(expectedLine, buffer.GetLine(lineNumber).Value ?? ("Nowhere near correct!".ToCharArray()));
+		Assert.Equal(expectedLine, buffer.GetLine(lineNumber).Value ?? "Nowhere near correct!");
 	}
 
 	[Theory]
@@ -670,7 +670,7 @@ public class ReadOnlyCharBufferTests
 	public void GetLineFromIndex(string data, int index, string expectedLine)
 	{
 		var buffer = new ReadOnlyCharBuffer(data);
-		Assert.Equal(expectedLine, buffer.GetLineFromIndex(index).Value ?? ("Nowhere near correct!".ToCharArray()));
+		Assert.Equal(expectedLine, buffer.GetLineFromIndex(index).Value ?? "Nowhere near correct!");
 	}
 
 	[Theory]
