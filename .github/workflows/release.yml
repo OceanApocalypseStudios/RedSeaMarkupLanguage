@@ -135,6 +135,10 @@ jobs:
         path: ./dist/
 
   deploy:
+    permissions:
+      id-token: write
+      contents: read
+
     needs: build-binaries
     runs-on: ubuntu-latest
     steps:
