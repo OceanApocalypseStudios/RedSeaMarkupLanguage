@@ -83,7 +83,7 @@ jobs:
           --self-contained true
           
     - name: Publish Native Project (Linux ARM64)
-      if: matrix.rid-os == 'linux' && matrix.arch == 'arm'
+      if: matrix.rid-os == 'linux' && matrix.arch == 'arm64'
       shell: bash
       run: |
         dotnet publish ./src/RSML.Native/RSML.Native.csproj \
