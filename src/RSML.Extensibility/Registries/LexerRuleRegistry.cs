@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
 
-using OceanApocalypseStudios.RSML.Language.Lexing;
 
-
-namespace OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries;
+namespace OceanApocalypseStudios.RSML.Extensibility.Registries;
 
 public class LexerRuleRegistry()
 {

@@ -9,7 +9,7 @@
 		<OutputType>Library</OutputType>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 
-		<RootNamespace>OceanApocalypseStudios.RSML</RootNamespace>
+		<RootNamespace>OceanApocalypseStudios.RSML.Extensibility</RootNamespace>
 
 		<Platforms>AnyCPU;ARM64;x64;x86</Platforms>
 	</PropertyGroup>
@@ -43,7 +43,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Sdk\" />
+		<ProjectReference Include="..\RSML\RSML.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -1,7 +1,8 @@
+using OceanApocalypseStudios.RSML.Language.Lexing;
 using OceanApocalypseStudios.RSML.Sources;
 
 
-namespace OceanApocalypseStudios.RSML.Language.Lexing;
+namespace OceanApocalypseStudios.RSML.Extensibility;
 
 /// <summary>
 /// Specifies a rule for the lexer to apply.

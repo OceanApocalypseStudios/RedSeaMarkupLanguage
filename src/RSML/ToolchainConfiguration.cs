@@ -1,7 +1,7 @@
 using System;
 
 
-namespace OceanApocalypseStudios.RSML.Sdk;
+namespace OceanApocalypseStudios.RSML;
 
 /// <summary>
 /// Configuration options for a <see cref="ToolchainExecutionPlan"/>, usually passed via a <see cref="ToolchainExecutionPlanBuilder"/>.

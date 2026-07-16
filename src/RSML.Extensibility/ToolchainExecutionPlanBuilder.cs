@@ -4,12 +4,10 @@ using System.IO;
 using OceanApocalypseStudios.RSML.Execution;
 using OceanApocalypseStudios.RSML.Language.Lexing;
 using OceanApocalypseStudios.RSML.Language.Parsing;
-using OceanApocalypseStudios.RSML.Sdk.Exceptions;
-using OceanApocalypseStudios.RSML.Sdk.Extensibility;
 using OceanApocalypseStudios.RSML.Sources;
 
 
-namespace OceanApocalypseStudios.RSML.Sdk;
+namespace OceanApocalypseStudios.RSML.Extensibility;
 
 public sealed class ToolchainExecutionPlanBuilder
 {
@@ -57,7 +55,7 @@ public sealed class ToolchainExecutionPlanBuilder
 		return this;
 	}
 
-	public ToolchainExecutionPlanBuilder WithDataSource<TItem>(IBuffer<TItem> buffer)
+	public ToolchainExecutionPlanBuilder WithDataSource(IBuffer buffer)
 	{
 		// todo: implement this
 		return this;
@@ -95,9 +93,6 @@ public sealed class ToolchainExecutionPlanBuilder
 
 	public ToolchainExecutionPlan Build()
 	{
-		if (hasBuilt)
-			throw new SdkException("The toolchain execution plan has already been created and cannot be built again.");
-
 		// todo: implement build
 		hasBuilt = true;
 		throw new NotImplementedException();

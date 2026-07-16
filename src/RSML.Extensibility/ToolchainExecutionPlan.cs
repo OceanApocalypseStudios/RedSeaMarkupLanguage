@@ -1,11 +1,10 @@
 using OceanApocalypseStudios.RSML.Execution;
 using OceanApocalypseStudios.RSML.Language.Lexing;
 using OceanApocalypseStudios.RSML.Language.Parsing;
-using OceanApocalypseStudios.RSML.Sdk.Extensibility;
 using OceanApocalypseStudios.RSML.Sources;
 
 
-namespace OceanApocalypseStudios.RSML.Sdk;
+namespace OceanApocalypseStudios.RSML.Extensibility;
 
 public sealed class ToolchainExecutionPlan(ISource source, Lexer lexer, Parser parser, Interpreter interpreter, ILanguageExtension[] extensions, ToolchainConfiguration[] configurations)
 {

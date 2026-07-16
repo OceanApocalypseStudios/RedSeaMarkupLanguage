@@ -1,7 +1,3 @@
-using OceanApocalypseStudios.RSML.Sdk;
-using OceanApocalypseStudios.RSML.Sdk.Extensibility;
-
-
 namespace OceanApocalypseStudios.RSML.Execution;
 
 /// <summary>
@@ -21,12 +17,5 @@ public abstract class Interpreter : IToolchainComponent
 	public void Freeze() => IsMutable = false;
 
 	/// <inheritdoc/>
-	public void TryInject<TExtension>() where TExtension : ILanguageExtension, new() => throw new System.NotImplementedException();
-
-	/// <inheritdoc/>
-	public void TryInject(ILanguageExtension extension) => throw new System.NotImplementedException();
-
-	/// <inheritdoc/>
 	public void Inject(ToolchainConfiguration configuration) => throw new System.NotImplementedException();
-	bool IToolchainComponent.TryInject(ILanguageExtension injectable) => throw new System.NotImplementedException();
 }

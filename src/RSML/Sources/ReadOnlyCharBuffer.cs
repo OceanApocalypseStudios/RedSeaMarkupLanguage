@@ -17,7 +17,7 @@ namespace OceanApocalypseStudios.RSML.Sources;
 /// > [!TIP]
 /// > If you wish to avoid allocating this buffer, it's recommended to take a look at <see cref="ReadOnlySpanBuffer"/>.
 /// </remarks>
-public class ReadOnlyCharBuffer : IBuffer<char>, ISupportsCache, IEquatable<ReadOnlyCharBuffer?>, IEquatable<string?>
+public class ReadOnlyCharBuffer : IBuffer, ISupportsCache, IEquatable<string?>
 {
 	private readonly List<int> lineStarts = [];
 
@@ -73,7 +73,7 @@ public class ReadOnlyCharBuffer : IBuffer<char>, ISupportsCache, IEquatable<Read
 	public char this[SourceLocation location] => data[location.Index];
 
 	/// <inheritdoc/>
-	public Result<char[]> this[SourceSpan span] => Slice(span.Start.Index, span.Length);
+	public Result<string> this[SourceSpan span] => Slice(span.Start.Index, span.Length);
 
 	/// <summary>
 	/// Initializes a new <see cref="ReadOnlyCharBuffer"/>
@@ -370,32 +370,32 @@ public class ReadOnlyCharBuffer : IBuffer<char>, ISupportsCache, IEquatable<Read
 	/// > (meaning the actual last line is located at N - 1).
 	/// </remarks>
 	/// <inheritdoc/>
-	public Result<char[]> GetLine(int lineNumber)
+	public Result<string> GetLine(int lineNumber)
 	{
 		if (IsEmpty)
-			return Result<char[]>.Fail(new(new(ErrorCategory.Internal, 1), SourceSpan.Empty, "The buffer is empty.", Severity.None));
+			return Result<string>.Fail(new(new(ErrorCategory.Internal, 1), SourceSpan.Empty, "The buffer is empty.", Severity.None));
 
 		ComputeLineStarts();
 
 		if (lineNumber < 0 || lineNumber >= RawLineCount)
-			return Result<char[]>.Fail(new(new(ErrorCategory.Internal, 2), SourceSpan.Empty, "The 0-based line number must be non-negative and less than the amount of lines in the buffer.", Severity.None));
+			return Result<string>.Fail(new(new(ErrorCategory.Internal, 2), SourceSpan.Empty, "The 0-based line number must be non-negative and less than the amount of lines in the buffer.", Severity.None));
 
 		if (lineNumber + 1 == RawLineCount)
-			return Result<char[]>.Success([]); // EOF means the line is empty
+			return Result<string>.Success(""); // EOF means the line is empty
 
 		int start = lineStarts[lineNumber];
 		int length = GetLengthOfLine(lineNumber).Value; // this will never be an error because we have done exact same checks right above
 
-		return Result<char[]>.Success(data.AsSpan(start, length).ToArray());
+		return Result<string>.Success(data.AsSpan(start, length).ToString());
 	}
 
 	/// <inheritdoc/>
-	public Result<char[]> GetLineFromIndex(int index)
+	public Result<string> GetLineFromIndex(int index)
 	{
 		var lineNumber = GetLineNumberFromIndex(index);
 
 		if (lineNumber.IsError)
-			return Result<char[]>.Fail(lineNumber.Error); // reuse the error big brain moment
+			return Result<string>.Fail(lineNumber.Error); // reuse the error big brain moment
 
 		return GetLine(lineNumber.Value);
 	}
@@ -448,18 +448,18 @@ public class ReadOnlyCharBuffer : IBuffer<char>, ISupportsCache, IEquatable<Read
 	/// > considered part of any slice.
 	/// </remarks>
 	/// <inheritdoc/>
-	public Result<char[]> Slice(int start, int length)
+	public Result<string> Slice(int start, int length)
 	{
 		if (length < 0)
-			return Result<char[]>.Fail(new(new(ErrorCategory.Internal, 2), SourceSpan.Empty, "Both the index and the slice length must be positive.", Severity.None));
+			return Result<string>.Fail(new(new(ErrorCategory.Internal, 2), SourceSpan.Empty, "Both the index and the slice length must be positive.", Severity.None));
 
 		if (start < 0)
 			start += Length;
 
 		if (start + length > Length)
-			return Result<char[]>.Fail(new(new(ErrorCategory.Internal, 2), SourceSpan.Empty, "The slice's end index is out of range.", Severity.None));
+			return Result<string>.Fail(new(new(ErrorCategory.Internal, 2), SourceSpan.Empty, "The slice's end index is out of range.", Severity.None));
 
-		return Result<char[]>.Success(data.ToCharArray(start, length));
+		return Result<string>.Success(data.Substring(start, length));
 	}
 
 	/// <remarks>
@@ -569,8 +569,8 @@ public class ReadOnlyCharBuffer : IBuffer<char>, ISupportsCache, IEquatable<Read
 	) => obj switch
 	{
 		string str => Equals(str),
-		ReadOnlyCharBuffer readOnlyStringBuffer => Equals(readOnlyStringBuffer),
-		IBuffer<char> buffer => Equals(buffer),
+		char[] charArray => Equals(charArray),
+		IBuffer buffer => Equals(buffer),
 		ReadOnlyMemory<char> readOnlyMemory => Equals(readOnlyMemory),
 		null => false,
 		_ => false
@@ -588,37 +588,28 @@ public class ReadOnlyCharBuffer : IBuffer<char>, ISupportsCache, IEquatable<Read
 	/// </summary>
 	/// <param name="other">The other read-only buffer.</param>
 	/// <returns>True if equals.</returns>
-	public bool Equals(IBuffer<char>? other) => other is ReadOnlyCharBuffer buffer && Equals(buffer);
+	public bool Equals(IBuffer? other) => other is not null && data.Equals(other.ToString());
 
 	/// <summary>
 	/// Checks if a read-only contiguous region of memory is equal to the current instance.
 	/// </summary>
 	/// <param name="other">The region of memory.</param>
 	/// <returns>True if equals.</returns>
-	public bool Equals(ReadOnlyMemory<char>? other) => other is not null && Length == other.Value.Length && data.Equals(other.Value.Span, StringComparison.Ordinal);
+	public bool Equals(ReadOnlyMemory<char> other) => Length == other.Length && data.SequenceEqual(other.Span);
 
 	/// <summary>
 	/// Checks if a read-only contiguous region of memory is equal to the current instance.
 	/// </summary>
 	/// <param name="other">The region of memory.</param>
 	/// <returns>True if equals.</returns>
-	public bool Equals(ReadOnlySpan<char> other) => Length == other.Length && data.Equals(other, StringComparison.Ordinal);
-
-	/// <summary>
-	/// Checks if another read-only string buffer is equal to the current instance.
-	/// </summary>
-	/// <param name="other">The other read-only string buffer.</param>
-	/// <returns>True if equals.</returns>
-	public bool Equals(ReadOnlyCharBuffer? other) =>
-		other is not null && data == other.data && Length == other.Length && IsEmpty == other.IsEmpty && LineCount == other.LineCount;
+	public bool Equals(ReadOnlySpan<char> other) => Length == other.Length && data.SequenceEqual(other);
 
 	/// <summary>
 	/// Checks if a string is equal to the current instance.
 	/// </summary>
 	/// <param name="other">The string.</param>
 	/// <returns>True if equals.</returns>
-	public bool Equals(string? other) =>
-		other is not null && Length == other.Length && data == other;
+	public bool Equals(string? other) => other is not null && Length == other.Length && data.Equals(other);
 
 	/// <inheritdoc/>
 	public override int GetHashCode()

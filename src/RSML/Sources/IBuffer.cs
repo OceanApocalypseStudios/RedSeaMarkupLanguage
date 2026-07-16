@@ -6,10 +6,9 @@ using OceanApocalypseStudios.RSML.Diagnostics;
 namespace OceanApocalypseStudios.RSML.Sources;
 
 /// <summary>
-/// Represents a buffer.
+/// Represents a buffer of characters.
 /// </summary>
-/// <typeparam name="TItem">The datatype of the values returned by the buffer methods</typeparam>
-public interface IBuffer<TItem> : ISource, IEquatable<IBuffer<TItem>?>, IEquatable<TItem[]?>, IEquatable<ReadOnlyMemory<TItem>?>
+public interface IBuffer : ISource, IEquatable<IBuffer?>, IEquatable<char[]?>, IEquatable<string?>, IEquatable<ReadOnlyMemory<char>>
 {
 	// todo: add methods that can mutate the buffer (coming to v3.0.0-prerelease2)
 
@@ -27,10 +26,10 @@ public interface IBuffer<TItem> : ISource, IEquatable<IBuffer<TItem>?>, IEquatab
 	/// <param name="index">The index of the item to retrieve.</param>
 	/// <remarks>
 	/// If you wish to ensure performance (meaning <see cref="Result{TValue}"/> over <see cref="Exception"/>),
-	/// see <see cref="TryGetChar(Int32, out TItem)"/>.
+	/// see <see cref="TryGetChar(Int32, out char)"/>.
 	/// </remarks>
 	/// <returns>The item.</returns>
-	TItem this[int index] { get; }
+	char this[int index] { get; }
 
 	/// <summary>
 	/// Gets a single item out of the buffer.
@@ -38,17 +37,17 @@ public interface IBuffer<TItem> : ISource, IEquatable<IBuffer<TItem>?>, IEquatab
 	/// <param name="location">The location of the item to retrieve.</param>
 	/// <remarks>
 	/// If you wish to ensure performance (meaning <see cref="Result{TValue}"/> over <see cref="Exception"/>),
-	/// see <see cref="TryGetChar(SourceLocation, out TItem)"/>.
+	/// see <see cref="TryGetChar(SourceLocation, out Char)"/>.
 	/// </remarks>
 	/// <returns>The item.</returns>
-	TItem this[SourceLocation location] { get; }
+	char this[SourceLocation location] { get; }
 
 	/// <summary>
 	/// Gets a range of items out of the buffer.
 	/// </summary>
 	/// <param name="span">The span of items to get.</param>
 	/// <returns>The items.</returns>
-	Result<TItem[]> this[SourceSpan span] { get; }
+	Result<string> this[SourceSpan span] { get; }
 
 	/// <summary>
 	/// Counts the amount of items until the next line separator in the buffer, relative to a given <paramref name="index"/>.
@@ -92,7 +91,7 @@ public interface IBuffer<TItem> : ISource, IEquatable<IBuffer<TItem>?>, IEquatab
 	/// equal the actual index.
 	/// </param>
 	/// <returns>The amount of items counted.</returns>
-	Result<int> CountWhile(Func<int, TItem, bool> predicate, int index);
+	Result<int> CountWhile(Func<int, char, bool> predicate, int index);
 
 	/// <summary>
 	/// Returns the length of a line given its 0-based line number.
@@ -116,7 +115,7 @@ public interface IBuffer<TItem> : ISource, IEquatable<IBuffer<TItem>?>, IEquatab
 	/// </summary>
 	/// <param name="lineNumber">The 0-based line number.</param>
 	/// <returns>The line as an array of items.</returns>
-	Result<TItem[]> GetLine(int lineNumber);
+	Result<string> GetLine(int lineNumber);
 
 	/// <summary>
 	/// Tries to read the line that contains the item at <paramref name="index"/>.
@@ -124,7 +123,7 @@ public interface IBuffer<TItem> : ISource, IEquatable<IBuffer<TItem>?>, IEquatab
 	/// </summary>
 	/// <param name="index">The index at which to determine what the current line is.</param>
 	/// <returns>The line, as an array of items.</returns>
-	Result<TItem[]> GetLineFromIndex(int index);
+	Result<string> GetLineFromIndex(int index);
 
 	/// <summary>
 	/// Determines the 0-based line number of the line that contains the item located at <paramref name="index"/>.
@@ -154,21 +153,21 @@ public interface IBuffer<TItem> : ISource, IEquatable<IBuffer<TItem>?>, IEquatab
 	/// <param name="start">The index of the first item in the slice.</param>
 	/// <param name="length">The amount of items to slice starting at <paramref name="start"/>.</param>
 	/// <returns>A slice, as an array of items.</returns>
-	Result<TItem[]> Slice(int start, int length);
+	Result<string> Slice(int start, int length);
 
 	/// <summary>
 	/// Slices a region of the buffer into a performant span.
 	/// </summary>
 	/// <param name="start">The index of the first item in the slice.</param>
 	/// <param name="slice">The span serving as the destination for the slice.</param>
-	bool TrySlice(int start, Span<TItem> slice);
+	bool TrySlice(int start, Span<char> slice);
 
 	/// <summary>
 	/// Slices a region of the buffer into a performant span.
 	/// </summary>
 	/// <param name="sourceSpan">The span indicating what the slice is.</param>
 	/// <param name="slice">The span serving as the destination for the slice.</param>
-	bool TrySlice(SourceSpan sourceSpan, Span<TItem> slice);
+	bool TrySlice(SourceSpan sourceSpan, Span<char> slice);
 
 	/// <summary>
 	/// Tries to return the item at <paramref name="index"/>.
@@ -176,7 +175,7 @@ public interface IBuffer<TItem> : ISource, IEquatable<IBuffer<TItem>?>, IEquatab
 	/// <param name="index">The index of the character.</param>
 	/// <param name="item">The item.</param>
 	/// <returns>False if the buffer is out of bounds or an exception occured.</returns>
-	bool TryGetChar(int index, out TItem item);
+	bool TryGetChar(int index, out char item);
 
 	/// <summary>
 	/// Tries to return the item at the specified <paramref name="location"/>.
@@ -184,7 +183,7 @@ public interface IBuffer<TItem> : ISource, IEquatable<IBuffer<TItem>?>, IEquatab
 	/// <param name="location">The item's location.</param>
 	/// <param name="item">The item.</param>
 	/// <returns>False if the buffer is out of bounds or an exception occured.</returns>
-	bool TryGetChar(SourceLocation location, out TItem item);
+	bool TryGetChar(SourceLocation location, out char item);
 
 	/// <summary>
 	/// Given a 0-based line number, assigns the exact line to a result buffer (<paramref name="destination"/>).
@@ -193,7 +192,7 @@ public interface IBuffer<TItem> : ISource, IEquatable<IBuffer<TItem>?>, IEquatab
 	/// <param name="lineNumber">The 0-based line number.</param>
 	/// <param name="destination">The destination buffer for the line.</param>
 	/// <returns>True if successful.</returns>
-	bool TryGetLine(int lineNumber, Span<TItem> destination);
+	bool TryGetLine(int lineNumber, Span<char> destination);
 
 	/// <summary>
 	/// Tries to read the line that contains the item at <paramref name="index"/>.
@@ -202,5 +201,5 @@ public interface IBuffer<TItem> : ISource, IEquatable<IBuffer<TItem>?>, IEquatab
 	/// <param name="index">The index at which to determine what the current line is.</param>
 	/// <param name="destination">The destination span that will contain the line.</param>
 	/// <returns>True if successful.</returns>
-	bool TryGetLineFromIndex(int index, Span<TItem> destination);
+	bool TryGetLineFromIndex(int index, Span<char> destination);
 }

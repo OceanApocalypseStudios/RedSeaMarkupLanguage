@@ -36,6 +36,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\RSML.Extensibility\RSML.Extensibility.csproj" />
 		<ProjectReference Include="..\RSML\RSML.csproj" />
 	</ItemGroup>
 

@@ -1,4 +1,4 @@
-namespace OceanApocalypseStudios.RSML.Sdk.Extensibility;
+namespace OceanApocalypseStudios.RSML.Extensibility;
 
 /// <summary>
 /// Represents an extension of RSML's language API.

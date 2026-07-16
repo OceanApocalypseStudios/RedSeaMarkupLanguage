@@ -1,4 +1,4 @@
-namespace OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks;
+namespace OceanApocalypseStudios.RSML.Extensibility.Hooks;
 
 /// <summary>
 /// Represents an extension that modifies the <see cref="Execution.Interpreter"/>.

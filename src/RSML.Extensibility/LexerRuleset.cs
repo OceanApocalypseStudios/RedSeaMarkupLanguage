@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-namespace OceanApocalypseStudios.RSML.Language.Lexing;
+namespace OceanApocalypseStudios.RSML.Extensibility;
 
 public struct LexerRuleset : ICollection<ILexerRule>
 {

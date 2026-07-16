@@ -93,9 +93,9 @@ public readonly partial struct SourceSpan : IFormattable
 	{
 		switch (source)
 		{
-			case IBuffer<char> charBuffer:
+			case IBuffer buffer:
 				Span<char> destination = stackalloc char[Length];
-				charBuffer.TrySlice(Start.Index, destination);
+				buffer.TrySlice(Start.Index, destination);
 
 				return destination.ToString();
 
@@ -111,12 +111,12 @@ public readonly partial struct SourceSpan : IFormattable
 	/// <param name="format">The format. Available formats are: CTOR (constructor-like string) and JSON (struct as JSON).</param>
 	/// <param name="formatProvider">Unused. Don't bother assigning it anything.</param>
 	/// <returns>The string representation.</returns>
-	public string ToString(string? format, IFormatProvider? formatProvider) =>
+	public string ToString(string? format, IFormatProvider? formatProvider = null) =>
 		format switch
 		{
 			"CTOR" or "I" or "INIT" or "NET" => $"new SourceSpan({Start.ToString("ctor", null)}, {End.ToString("ctor", null)})",
-			"JSON"                           => $$"""{ "start": {{Start.ToString("JSON", null)}}, "end": {{End.ToString("JSON", null)}} }""",
-			_                                => ToString()
+			"JSON" => $$"""{ "start": {{Start.ToString("JSON", null)}}, "end": {{End.ToString("JSON", null)}} }""",
+			_ => ToString()
 		};
 
 	/// <inheritdoc/>

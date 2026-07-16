@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 
+using OceanApocalypseStudios.RSML.Cache;
 using OceanApocalypseStudios.RSML.Diagnostics;
 
 
@@ -15,7 +16,7 @@ namespace OceanApocalypseStudios.RSML.Sources;
 /// is that you don't need to allocate a class and, on initialization, you don't need to allocate
 /// a string.
 /// </summary>
-public ref struct ReadOnlySpanBuffer : IBuffer<char>
+public ref struct ReadOnlySpanBuffer : IBuffer, ISupportsCache
 {
 	private readonly ReadOnlySpan<char> data;
 	private ReadOnlySpan<int> precededByCrLf;
@@ -69,7 +70,7 @@ public ref struct ReadOnlySpanBuffer : IBuffer<char>
 	public readonly char this[SourceLocation location] => data[location.Index];
 
 	/// <inheritdoc/>
-	public readonly Result<char[]> this[SourceSpan span] => Slice(span.Start.Index, span.Length);
+	public readonly Result<string> this[SourceSpan span] => Slice(span.Start.Index, span.Length);
 
 	/// <summary>
 	/// Initializes a new <see cref="ReadOnlySpanBuffer"/>
@@ -347,32 +348,32 @@ public ref struct ReadOnlySpanBuffer : IBuffer<char>
 	/// > (meaning the actual last line is located at N - 1).
 	/// </remarks>
 	/// <inheritdoc/>
-	public Result<char[]> GetLine(int lineNumber)
+	public Result<string> GetLine(int lineNumber)
 	{
 		if (IsEmpty)
-			return Result<char[]>.Fail(new(new(ErrorCategory.Internal, 1), SourceSpan.Empty, "The buffer is empty.", Severity.None));
+			return Result<string>.Fail(new(new(ErrorCategory.Internal, 1), SourceSpan.Empty, "The buffer is empty.", Severity.None));
 
 		ComputeLineStarts();
 
 		if (lineNumber < 0 || lineNumber >= RawLineCount)
-			return Result<char[]>.Fail(new(new(ErrorCategory.Internal, 2), SourceSpan.Empty, "The 0-based line number must be non-negative and less than the amount of lines in the buffer.", Severity.None));
+			return Result<string>.Fail(new(new(ErrorCategory.Internal, 2), SourceSpan.Empty, "The 0-based line number must be non-negative and less than the amount of lines in the buffer.", Severity.None));
 
 		if (lineNumber + 1 == RawLineCount)
-			return Result<char[]>.Success([]); // EOF means the line is empty
+			return Result<string>.Success(""); // EOF means the line is empty
 
 		int start = lineStarts[lineNumber];
 		int length = GetLengthOfLine(lineNumber).Value; // this will never be an error because we have done exact same checks right above
 
-		return Result<char[]>.Success(data.Slice(start, length).ToArray());
+		return Result<string>.Success(data.Slice(start, length).ToString());
 	}
 
 	/// <inheritdoc/>
-	public Result<char[]> GetLineFromIndex(int index)
+	public Result<string> GetLineFromIndex(int index)
 	{
 		var lineNumber = GetLineNumberFromIndex(index);
 
 		if (lineNumber.IsError)
-			return Result<char[]>.Fail(lineNumber.Error); // reuse the error big brain moment
+			return Result<string>.Fail(lineNumber.Error); // reuse the error big brain moment
 
 		return GetLine(lineNumber.Value);
 	}
@@ -425,18 +426,18 @@ public ref struct ReadOnlySpanBuffer : IBuffer<char>
 	/// > considered part of any slice.
 	/// </remarks>
 	/// <inheritdoc/>
-	public readonly Result<char[]> Slice(int start, int length)
+	public readonly Result<string> Slice(int start, int length)
 	{
 		if (length < 0)
-			return Result<char[]>.Fail(new(new(ErrorCategory.Internal, 2), SourceSpan.Empty, "Both the index and the slice length must be positive.", Severity.None));
+			return Result<string>.Fail(new(new(ErrorCategory.Internal, 2), SourceSpan.Empty, "Both the index and the slice length must be positive.", Severity.None));
 
 		if (start < 0)
 			start += Length;
 
 		if (start + length > Length)
-			return Result<char[]>.Fail(new(new(ErrorCategory.Internal, 2), SourceSpan.Empty, "The slice's end index is out of range.", Severity.None));
+			return Result<string>.Fail(new(new(ErrorCategory.Internal, 2), SourceSpan.Empty, "The slice's end index is out of range.", Severity.None));
 
-		return Result<char[]>.Success(data.Slice(start, length).ToArray());
+		return Result<string>.Success(data.Slice(start, length).ToString());
 	}
 
 	/// <remarks>
@@ -546,7 +547,8 @@ public ref struct ReadOnlySpanBuffer : IBuffer<char>
 	) => obj switch
 	{
 		string str => Equals(str),
-		IBuffer<char> buffer => Equals(buffer),
+		char[] charArray => Equals(charArray),
+		IBuffer buffer => Equals(buffer),
 		ReadOnlyMemory<char> readOnlyMemory => Equals(readOnlyMemory),
 		null => false,
 		_ => false
@@ -557,43 +559,42 @@ public ref struct ReadOnlySpanBuffer : IBuffer<char>
 	/// </summary>
 	/// <param name="other">The array.</param>
 	/// <returns>True if equals.</returns>
-	public readonly bool Equals(char[]? other) => other is not null && data.Equals(other.AsSpan(), StringComparison.Ordinal);
+	public readonly bool Equals(char[]? other) => other is not null && Length == other.Length && data.SequenceEqual(other.AsSpan());
 
 	/// <summary>
 	/// Checks if another read-only buffer is equal to the current instance.
 	/// </summary>
 	/// <param name="other">The other read-only buffer.</param>
 	/// <returns>True if equals.</returns>
-	public readonly bool Equals(IBuffer<char>? other) => false;
+	public readonly bool Equals(IBuffer? other) => other is not null && Length == other.Length && data.SequenceEqual(other.ToString());
 
 	/// <summary>
 	/// Checks if a read-only contiguous region of memory is equal to the current instance.
 	/// </summary>
 	/// <param name="other">The region of memory.</param>
 	/// <returns>True if equals.</returns>
-	public readonly bool Equals(ReadOnlyMemory<char>? other) => other is not null && Length == other.Value.Length && data.Equals(other.Value.Span, StringComparison.Ordinal);
+	public readonly bool Equals(ReadOnlyMemory<char> other) => Length == other.Length && data.SequenceEqual(other.Span);
 
 	/// <summary>
 	/// Checks if a read-only contiguous region of memory is equal to the current instance.
 	/// </summary>
 	/// <param name="other">The region of memory.</param>
 	/// <returns>True if equals.</returns>
-	public readonly bool Equals(ReadOnlySpan<char> other) => Length == other.Length && data.Equals(other, StringComparison.Ordinal);
+	public readonly bool Equals(ReadOnlySpan<char> other) => Length == other.Length && data.SequenceEqual(other);
 
 	/// <summary>
 	/// Checks if another read-only span buffer is equal to the current instance.
 	/// </summary>
 	/// <param name="other">The other read-only span buffer.</param>
 	/// <returns>True if equals.</returns>
-	public readonly bool Equals(ReadOnlySpanBuffer other) => data.SequenceEqual(other.data);
+	public readonly bool Equals(ReadOnlySpanBuffer other) => Length == other.Length && data.SequenceEqual(other.data);
 
 	/// <summary>
 	/// Checks if a string is equal to the current instance.
 	/// </summary>
 	/// <param name="other">The string.</param>
 	/// <returns>True if equals.</returns>
-	public readonly bool Equals(string? other) =>
-		other is not null && Length == other.Length && data.SequenceEqual(other);
+	public readonly bool Equals(string? other) => other is not null && Length == other.Length && data.SequenceEqual(other);
 
 	/// <summary>
 	/// Returns the buffer's content as a <see cref="String"/>.

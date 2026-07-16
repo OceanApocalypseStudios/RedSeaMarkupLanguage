@@ -1,0 +1,28 @@
+<!-- NuGet Packaging -->
+<Project>
+	<PropertyGroup>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+
+		<PackageId>OceanApocalypseStudios.RSML.Extensibility</PackageId>
+		<Title>RSML Extensibility SDK</Title>
+		<Authors>OceanApocalypseStudios</Authors>
+		<Company>OceanApocalypseStudios</Company>
+		<NeutralLanguage>en</NeutralLanguage>
+
+		<!-- DON'T FORGET TO EDIT THIS -->
+		<Version>3.0.0-prerelease1</Version>
+		<InformationalVersion>3.0.0-prerelease1</InformationalVersion>
+		<PackageReleaseNotes>TODO</PackageReleaseNotes>
+
+		<Description>Extensibility and modularity support for OceanApocalypseStudios' RSML.</Description>
+		<Copyright>Copyright (c) 2025 OceanApocalypseStudios</Copyright>
+		<PackageProjectUrl>https://oceanapocalypsestudios.org/rsml-docs/</PackageProjectUrl>
+		<PackageIcon>icon.png</PackageIcon>
+		<RepositoryUrl>https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>markup;language;logic;logic-path;system;host;rsml;rsea;decision;oss</PackageTags>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	</PropertyGroup>
+</Project>

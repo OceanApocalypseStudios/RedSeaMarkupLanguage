@@ -1,7 +1,7 @@
-using OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries;
+using OceanApocalypseStudios.RSML.Extensibility.Registries;
 
 
-namespace OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks;
+namespace OceanApocalypseStudios.RSML.Extensibility.Hooks;
 
 /// <summary>
 /// Represents an extension that modifies the <see cref="Language.Parsing.Parser"/>.
