@@ -6,13 +6,14 @@ The following table displays the versions of RSML that have on-going support and
 
 | Project                | Version              | Supported          | Notes                                                                                             |
 | -------                | -------------------- | ------------------ | ------------------------------------------------------------------------------------------------- |
-| RSML                   | 3.0.0-prerelease1    | :white_check_mark: |                                                                                                   |
+| RSML                   | 3.0.x                | :white_check_mark: |                                                                                                   |
 | RSML                   | 2.1.0 _(unreleased)_ | :x:                |                                                                                                   |
 | RSML                   | <= 2.0.x             | :x:                |                                                                                                   |
-| RSML.Native            | 3.0.0-prerelease1    | :white_check_mark: |                                                                                                   |
+| RSML.Extensibility     | 3.0.x                | :white_check_mark: |                                                                                                   |                           
+| RSML.Native            | 3.0.x                | :white_check_mark: |                                                                                                   |
 | RSML.Native            | 2.1.0 _(unreleased)_ | :x:                |                                                                                                   |
 | RSML.Native            | <= 2.0.x             | :x:                |                                                                                                   |
-| RSML.CLI               | 3.0.0-prerelease1    | :white_check_mark: |                                                                                                   |
+| RSML.CLI               | 3.0.x                | :white_check_mark: |                                                                                                   |
 | RSML.CLI               | 2.1.0 _(unreleased)_ | :x:                |                                                                                                   |
 | RSML.CLI               | <= 2.0.x             | :x:                |                                                                                                   |
 | RSML for Visual Studio | 0.0.x                | :white_check_mark: | Report in [this repository](https://github.com/OceanApocalypseStudios/RSML-VisualStudio) instead. |
