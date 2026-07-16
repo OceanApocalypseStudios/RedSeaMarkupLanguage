@@ -48,25 +48,50 @@ jobs:
       with:
         dotnet-version: '10.x.x'
 
-    - name: Install ARM compilation toolchain
+    - name: Install Linux ARM compilation toolchain
       if: matrix.rid-os == 'linux' && matrix.arch == 'arm'
       run: |
         sudo apt-get update
         sudo apt-get install -y binutils-arm-linux-gnueabihf gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf
 
-    - name: Install ARM64 compilation toolchain
+    - name: Install Linux ARM64 compilation toolchain
       if: matrix.rid-os == 'linux' && matrix.arch == 'arm64'
       run: |
         sudo apt-get update
         sudo apt-get install -y binutils-aarch64-linux-gnu gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
 
     - name: Publish Native Project
+      if: !(matrix.rid-os == 'linux' && (matrix.arch == 'arm' || arch == 'arm64'))
       shell: bash
       run: |
         dotnet publish ./src/RSML.Native/RSML.Native.csproj \
           -c Release \
           -r ${{ matrix.rid-os }}-${{ matrix.arch }} \
           -o ./dist/RSML.Native-${{ matrix.rid-os }}-${{ matrix.arch }} \
+          --self-contained true
+          
+    - name: Publish Native Project (Linux ARM)
+      if: matrix.rid-os == 'linux' && matrix.arch == 'arm'
+      shell: bash
+      run: |
+        dotnet publish ./src/RSML.Native/RSML.Native.csproj \
+          -c Release \
+          -r ${{ matrix.rid-os }}-${{ matrix.arch }} \
+          -o ./dist/RSML.Native-${{ matrix.rid-os }}-${{ matrix.arch }} \
+          -p:ObjCopyName=arm-linux-gnueabihf-objcopy \
+          -p:LinkerFlavor=lld \
+          --self-contained true
+          
+    - name: Publish Native Project (Linux ARM64)
+      if: matrix.rid-os == 'linux' && matrix.arch == 'arm'
+      shell: bash
+      run: |
+        dotnet publish ./src/RSML.Native/RSML.Native.csproj \
+          -c Release \
+          -r ${{ matrix.rid-os }}-${{ matrix.arch }} \
+          -o ./dist/RSML.Native-${{ matrix.rid-os }}-${{ matrix.arch }} \
+          -p:ObjCopyName=aarch64-linux-gnu-objcopy \
+          -p:LinkerFlavor=lld \
           --self-contained true
 
     - name: Publish CLI Project
