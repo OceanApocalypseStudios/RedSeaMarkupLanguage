@@ -48,11 +48,17 @@ jobs:
       with:
         dotnet-version: '10.x.x'
 
-    - name: Install ARM64 compilation toolchain
-      if: matrix.rid-os == 'linux' && (matrix.arch == 'arm64' || matrix.arch == 'arm')
+    - name: Install ARM compilation toolchain
+      if: matrix.rid-os == 'linux' && matrix.arch == 'arm'
       run: |
         sudo apt-get update
-        sudo apt-get install clang zlib1g-dev
+        sudo apt-get install -y binutils-arm-linux-gnueabihf gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf
+
+    - name: Install ARM64 compilation toolchain
+      if: matrix.rid-os == 'linux' && matrix.arch == 'arm'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y binutils-aarch64-linux-gnu gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
 
     - name: Publish Native Project
       shell: bash
