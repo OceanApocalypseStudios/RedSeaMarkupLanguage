@@ -32,49 +32,5 @@ internal static class CharSpanExtensions
 
 			return true;
 		}
-
-		public char GetCharAt(int index)
-		{
-			if (index < 0)
-				index += chars.Length;
-
-			if (index >= chars.Length)
-				return '\0';
-
-			return chars[index];
-		}
-	}
-
-	public static char GetCharAt(this Span<char> span, int index)
-	{
-		if (index < 0)
-			index += span.Length;
-
-		if (index >= span.Length)
-			return '\0';
-
-		return span[index];
-	}
-
-	public static char GetCharAt(this string span, int index)
-	{
-		if (index < 0)
-			index += span.Length;
-
-		if (index >= span.Length)
-			return '\0';
-
-		return span[index];
-	}
-
-	public static char GetCharAt(this char[] array, int index)
-	{
-		if (index < 0)
-			index += array.Length;
-
-		if (index >= array.Length)
-			return '\0';
-
-		return array[index];
 	}
 }
