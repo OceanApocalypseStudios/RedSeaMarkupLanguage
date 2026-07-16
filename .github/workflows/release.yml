@@ -95,12 +95,37 @@ jobs:
           --self-contained true
 
     - name: Publish CLI Project
+      if: (matrix.rid-os != 'linux') || (matrix.rid-os == 'linux' && matrix.arch == 'x64')
       shell: bash
       run: |
         dotnet publish ./src/RSML.CLI/RSML.CLI.csproj \
           -c Release \
           -r ${{ matrix.rid-os }}-${{ matrix.arch }} \
           -o ./dist/RSML.CLI-${{ matrix.rid-os }}-${{ matrix.arch }} \
+          --self-contained true
+          
+    - name: Publish CLI Project (Linux ARM)
+      if: matrix.rid-os == 'linux' && matrix.arch == 'arm'
+      shell: bash
+      run: |
+        dotnet publish ./src/RSML.CLI/RSML.CLI.csproj \
+          -c Release \
+          -r ${{ matrix.rid-os }}-${{ matrix.arch }} \
+          -o ./dist/RSML.CLI-${{ matrix.rid-os }}-${{ matrix.arch }} \
+          -p:ObjCopyName=arm-linux-gnueabihf-objcopy \
+          -p:LinkerFlavor=lld \
+          --self-contained true
+          
+    - name: Publish CLI Project (Linux ARM64)
+      if: matrix.rid-os == 'linux' && matrix.arch == 'arm64'
+      shell: bash
+      run: |
+        dotnet publish ./src/RSML.CLI/RSML.CLI.csproj \
+          -c Release \
+          -r ${{ matrix.rid-os }}-${{ matrix.arch }} \
+          -o ./dist/RSML.CLI-${{ matrix.rid-os }}-${{ matrix.arch }} \
+          -p:ObjCopyName=aarch64-linux-gnu-objcopy \
+          -p:LinkerFlavor=lld \
           --self-contained true
 
     - name: Upload Artifacts
