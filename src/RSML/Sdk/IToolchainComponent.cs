@@ -12,6 +12,11 @@ namespace OceanApocalypseStudios.RSML.Sdk;
 public interface IToolchainComponent
 {
 	/// <summary>
+	/// Configurations for the toolchain component.
+	/// </summary>
+	ToolchainConfiguration Configuration { get; }
+
+	/// <summary>
 	/// Whether the toolchain component is mutable. If not, it might mean
 	/// the component has been compiled.
 	/// </summary>
@@ -24,19 +29,11 @@ public interface IToolchainComponent
 
 	/// <summary>
 	/// Injects an extension into the toolchain component, modifying it if
-	/// it's mutable (see <see cref="IsMutable"/>). The item is of type <typeparamref name="TExtension"/>
-	/// and is created via the default parameter-less constructor.
-	/// </summary>
-	/// <typeparam name="TExtension">The type of the extension.</typeparam>
-	void Inject<TExtension>()
-		where TExtension : ILanguageExtension, new();
-
-	/// <summary>
-	/// Injects an extension into the toolchain component, modifying it if
 	/// it's mutable (see <see cref="IsMutable"/>).
 	/// </summary>
 	/// <param name="injectable">The item to inject.</param>
-	void Inject(ILanguageExtension injectable);
+	/// <returns>True if successful.</returns>
+	bool TryInject(ILanguageExtension injectable);
 
 	/// <summary>
 	/// Injects a configuration into the toolchain component, modifying it

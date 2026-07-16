@@ -18,10 +18,10 @@ public abstract class Parser : IToolchainComponent
 	public virtual void Freeze() => IsMutable = false;
 
 	/// <inheritdoc/>
-	public void Inject<TExtension>() where TExtension : ILanguageExtension, new() => throw new System.NotImplementedException();
+	public void TryInject<TExtension>() where TExtension : ILanguageExtension, new() => throw new System.NotImplementedException();
 
 	/// <inheritdoc/>
-	public void Inject(ILanguageExtension injectable) => throw new System.NotImplementedException();
+	public void TryInject(ILanguageExtension injectable) => throw new System.NotImplementedException();
 
 	/// <inheritdoc/>
 	public virtual void Inject(ToolchainConfiguration configuration) => throw new System.NotImplementedException();

@@ -18,10 +18,10 @@ public abstract class Interpreter : IToolchainComponent
 	public void Freeze() => IsMutable = false;
 
 	/// <inheritdoc/>
-	public void Inject<TExtension>() where TExtension : ILanguageExtension, new() => throw new System.NotImplementedException();
+	public void TryInject<TExtension>() where TExtension : ILanguageExtension, new() => throw new System.NotImplementedException();
 
 	/// <inheritdoc/>
-	public void Inject(ILanguageExtension extension) => throw new System.NotImplementedException();
+	public void TryInject(ILanguageExtension extension) => throw new System.NotImplementedException();
 
 	/// <inheritdoc/>
 	public void Inject(ToolchainConfiguration configuration) => throw new System.NotImplementedException();

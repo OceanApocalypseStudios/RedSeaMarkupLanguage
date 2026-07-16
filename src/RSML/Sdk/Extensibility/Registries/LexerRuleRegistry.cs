@@ -1,12 +1,15 @@
 using System;
+using System.Collections.Generic;
 
 using OceanApocalypseStudios.RSML.Language.Lexing;
 
 
 namespace OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries;
 
-public class LexerRuleRegistry
+public class LexerRuleRegistry()
 {
+	List<ILexerRule> rules = [];
+
 	public int GetNextTokenKindId()
 	{
 		// todo: implement this

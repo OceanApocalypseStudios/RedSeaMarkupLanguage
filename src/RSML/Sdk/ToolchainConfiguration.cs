@@ -17,38 +17,30 @@ public enum ToolchainConfiguration
 	/// > This completely disables extensions, but does not warn you if there are active extensions,
 	/// > meaning sometimes you might be wondering why your extension is not working when, in reality,
 	/// you've enabled this configuration.
-	/// > [!IMPORTANT]
-	/// > This configuration is automatically enabled when no extensions are enabled, meaning that
-	/// > if you pass this configuration manually when no extensions are active, you will cause RSML
-	/// > to error out due to duplicated configuration, unless <see cref="SilentlyIgnoreDuplicatedConfigurations"/>
-	/// > or <see cref="SilentlyIgnoreAllErrors"/> are enabled.
+	/// > [!TIP]
+	/// > This configuration is automatically enabled when no extensions are enabled.
 	/// </remarks>
-	DisableExtensionProcessing = 0,
+	DisableExtensionProcessing = 1,
 
 	/// <summary>
 	/// Only allows OceanApocalypseStudios extensions, leading to an error if any non-OAS extension is active.
 	/// </summary>
 	/// <remarks>
 	/// > [!NOTE]
-	/// > When used alongside <see cref="SilentlyIgnoreAllErrors"/>, the non-OAS extensions will be disabled, but
+	/// > When used alongside <see cref="IgnoreAllExtensibilityErrors"/>, the non-OAS extensions will be disabled, but
 	/// > no errors will be thrown.
 	/// </remarks>
-	AllowOnlyOASExtensions = 1,
+	AllowOnlyOASExtensions = 2,
 
 	/// <summary>
 	/// Ignores all errors caused by broken or faulty extensions.
 	/// </summary>
-	IgnoreBrokenExtensions,
+	IgnoreBrokenExtensions = 4,
 
 	/// <summary>
 	/// Ignores all errors caused by injecting already injected extensions.
 	/// </summary>
-	IgnoreDuplicatedExtensions,
-
-	/// <summary>
-	/// Ignores all errors caused by injecting already injected configurations.
-	/// </summary>
-	IgnoreDuplicatedConfigurations,
+	IgnoreDuplicatedExtensions = 8,
 
 	/// <summary>
 	/// Ignores all errors thrown during pipeline creation and pipeline execution.
@@ -58,6 +50,5 @@ public enum ToolchainConfiguration
 	/// > This option is only needed in beyond extremely rare occasions.
 	/// > It emulates RSML v1.x.x behavior.
 	/// </remarks>
-	SilentlyIgnoreAllErrors
+	IgnoreAllExtensibilityErrors = IgnoreBrokenExtensions | IgnoreDuplicatedExtensions
 }
-

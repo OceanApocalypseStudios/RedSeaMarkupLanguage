@@ -13,7 +13,7 @@ namespace OceanApocalypseStudios.RSML.Sources;
 /// primarily via the internal use of <see cref="ReadOnlySpan{Char}"/> over string allocations
 /// and also via caching.
 /// </summary>
-public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<ReadOnlyStringBuffer?>, IEquatable<string?>
+public class ReadOnlyCharBuffer : IBuffer<char>, ISupportsCache, IEquatable<ReadOnlyCharBuffer?>, IEquatable<string?>
 {
 	private readonly List<int> lineStarts = [];
 
@@ -25,7 +25,7 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	public bool CacheExists { get; private set; } = false;
 
 	/// <remarks>
-	/// Always returns <c>-1</c>, as <see cref="ReadOnlyStringBuffer"/> doesn't
+	/// Always returns <c>-1</c>, as <see cref="ReadOnlyCharBuffer"/> doesn't
 	/// support cursor positioning (everything is done via indexing).
 	/// </remarks>
 	/// <inheritdoc/>
@@ -35,7 +35,7 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	public bool IsEmpty => Length == 0;
 
 	/// <remarks>
-	/// Always returns <c>true</c>, as <see cref="ReadOnlyStringBuffer"/> only
+	/// Always returns <c>true</c>, as <see cref="ReadOnlyCharBuffer"/> only
 	/// supports read-only content (hence the name).
 	/// </remarks> 
 	/// <inheritdoc/>
@@ -72,28 +72,28 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	public Result<char[]> this[SourceSpan span] => Slice(span.Start.Index, span.Length);
 
 	/// <summary>
-	/// Initializes a new <see cref="ReadOnlyStringBuffer"/>
+	/// Initializes a new <see cref="ReadOnlyCharBuffer"/>
 	/// with a string.
 	/// </summary>
 	/// <param name="content">The string that the buffer will wrap.</param>
-	public ReadOnlyStringBuffer(string content) => data = content;
+	public ReadOnlyCharBuffer(string content) => data = content;
 
 	/// <summary>
-	/// Initializes a new <see cref="ReadOnlyStringBuffer"/>
+	/// Initializes a new <see cref="ReadOnlyCharBuffer"/>
 	/// by allocating a string from a <see cref="ReadOnlySpan{Char}"/>.
 	/// </summary>
 	/// <param name="content">The span pointing to the string's data.</param>
-	public ReadOnlyStringBuffer(ReadOnlySpan<char> content) => data = content.ToString();
+	public ReadOnlyCharBuffer(ReadOnlySpan<char> content) => data = content.ToString();
 
 	/// <summary>
-	/// Initializes a new <see cref="ReadOnlyStringBuffer"/>
+	/// Initializes a new <see cref="ReadOnlyCharBuffer"/>
 	/// with an array of characters.
 	/// </summary>
 	/// <param name="content">The array of characters to use for the buffer.</param>
-	public ReadOnlyStringBuffer(char[] content) => data = new(content);
+	public ReadOnlyCharBuffer(char[] content) => data = new(content);
 
 	/// <summary>
-	/// Initializes a new <see cref="ReadOnlyStringBuffer"/>
+	/// Initializes a new <see cref="ReadOnlyCharBuffer"/>
 	/// with an array of bytes and the encoding to use when decoding them.
 	/// </summary>
 	/// <param name="content">The array of bytes to use for the buffer.</param>
@@ -101,10 +101,10 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	/// The encoding to use when decoding <paramref name="content"/>.
 	/// Use <c>null</c> for the <see cref="Encoding.Default"/> encoding.
 	/// </param>
-	public ReadOnlyStringBuffer(byte[] content, Encoding? encoding = null) => data = encoding?.GetString(content) ?? Encoding.Default.GetString(content);
+	public ReadOnlyCharBuffer(byte[] content, Encoding? encoding = null) => data = encoding?.GetString(content) ?? Encoding.Default.GetString(content);
 
 	/// <summary>
-	/// Initializes a new <see cref="ReadOnlyStringBuffer"/>
+	/// Initializes a new <see cref="ReadOnlyCharBuffer"/>
 	/// with a pointer referencing an array of bytes and the encoding
 	/// to use when decoding them.
 	/// </summary>
@@ -116,7 +116,7 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	/// </param>
 	/// <remarks>This method is not CLS-compliant due to the unsafe context and the use of pointers.</remarks>
 	[CLSCompliant(false)]
-	public unsafe ReadOnlyStringBuffer(byte* contentPtr, int byteCount, Encoding? encoding = null) =>
+	public unsafe ReadOnlyCharBuffer(byte* contentPtr, int byteCount, Encoding? encoding = null) =>
 		data = (encoding ?? Encoding.Default).GetString(contentPtr, byteCount);
 
 	/// <inheritdoc/>
@@ -398,7 +398,7 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 
 	/// <remarks>
 	/// > [!IMPORTANT]
-	/// > Unlike with other <see cref="ReadOnlyStringBuffer"/> methods, this one
+	/// > Unlike with other <see cref="ReadOnlyCharBuffer"/> methods, this one
 	/// > does not follow EOF conventions and, because of that, does not accept the 
 	/// > EOF index (index at <see cref="Length"/>), because it is not
 	/// > considered a location.
@@ -438,7 +438,7 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 
 	/// <remarks>
 	/// > [!IMPORTANT]
-	/// > Unlike with other <see cref="ReadOnlyStringBuffer"/> methods, this one
+	/// > Unlike with other <see cref="ReadOnlyCharBuffer"/> methods, this one
 	/// > does not follow EOF conventions and, because of that, does not accept the 
 	/// > EOF index (index at <see cref="Length"/>), because it is not
 	/// > considered part of any slice.
@@ -460,7 +460,7 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 
 	/// <remarks>
 	/// > [!IMPORTANT]
-	/// > Unlike with other <see cref="ReadOnlyStringBuffer"/> methods, this one
+	/// > Unlike with other <see cref="ReadOnlyCharBuffer"/> methods, this one
 	/// > does not follow EOF conventions and, because of that, does not accept the 
 	/// > EOF index (index at <see cref="Length"/>), because it is not
 	/// > considered part of any slice.
@@ -470,7 +470,7 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 
 	/// <remarks>
 	/// > [!IMPORTANT]
-	/// > Unlike with other <see cref="ReadOnlyStringBuffer"/> methods, this one
+	/// > Unlike with other <see cref="ReadOnlyCharBuffer"/> methods, this one
 	/// > does not follow EOF conventions and, because of that, does not accept the 
 	/// > EOF index (index at <see cref="Length"/>), because it is not
 	/// > considered part of any slice.
@@ -587,7 +587,7 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	) => obj switch
 	{
 		string str => Equals(str),
-		ReadOnlyStringBuffer readOnlyStringBuffer => Equals(readOnlyStringBuffer),
+		ReadOnlyCharBuffer readOnlyStringBuffer => Equals(readOnlyStringBuffer),
 		IBuffer<char> buffer => Equals(buffer),
 		Memory<char> memory => Equals(memory),
 		ReadOnlyMemory<char> readOnlyMemory => Equals(readOnlyMemory),
@@ -607,7 +607,7 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	/// </summary>
 	/// <param name="other">The other read-only buffer.</param>
 	/// <returns>True if equals.</returns>
-	public bool Equals(IBuffer<char>? other) => other is ReadOnlyStringBuffer buffer && Equals(buffer);
+	public bool Equals(IBuffer<char>? other) => other is ReadOnlyCharBuffer buffer && Equals(buffer);
 
 	/// <summary>
 	/// Checks if a contiguous region of memory is equal to the current instance.
@@ -635,7 +635,7 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	/// </summary>
 	/// <param name="other">The other read-only string buffer.</param>
 	/// <returns>True if equals.</returns>
-	public bool Equals(ReadOnlyStringBuffer? other) =>
+	public bool Equals(ReadOnlyCharBuffer? other) =>
 		other is not null && data == other.data && Length == other.Length && IsEmpty == other.IsEmpty && LineCount == other.LineCount;
 
 	/// <summary>
@@ -675,14 +675,14 @@ public class ReadOnlyStringBuffer : IBuffer<char>, ISupportsCache, IEquatable<Re
 	/// Checks if two read-only string buffers are equals.
 	/// </summary>
 	/// <returns>True if equals.</returns>
-	public static bool operator ==(ReadOnlyStringBuffer left, ReadOnlyStringBuffer right) =>
-		EqualityComparer<ReadOnlyStringBuffer>.Default.Equals(left, right);
+	public static bool operator ==(ReadOnlyCharBuffer left, ReadOnlyCharBuffer right) =>
+		EqualityComparer<ReadOnlyCharBuffer>.Default.Equals(left, right);
 
 	/// <summary>
 	/// Checks if two read-only string buffers are different.
 	/// </summary>
 	/// <returns>True if different.</returns>
-	public static bool operator !=(ReadOnlyStringBuffer left, ReadOnlyStringBuffer right) => !(left == right);
+	public static bool operator !=(ReadOnlyCharBuffer left, ReadOnlyCharBuffer right) => !(left == right);
 
 	private void ComputeLineStarts(bool forceCache = false)
 	{
