@@ -8,9 +8,9 @@ using OceanApocalypseStudios.RSML.Sources;
 namespace OceanApocalypseStudios.RSML.Tests.Sources;
 
 /// <summary>
-/// Tests for the official-provided <see cref="ReadOnlyCharBuffer"/> class.
+/// Tests for the official-provided <see cref="ReadOnlySpanBuffer"/> class.
 /// </summary>
-public class ReadOnlyCharBufferTests
+public class ReadOnlySpanBufferTests
 {
 	private const string TestString01 = "Hey\r\nThis\rIs\u2029A Test \n Method\r\n\r\n.\u2028";
 	private const string TestString02 = "Hey\r\nThis\rIs\u2029A Test \n Method\r\n\r\n.";
@@ -80,7 +80,7 @@ public class ReadOnlyCharBufferTests
 	#endregion
 	public void CountUntilEndOfLine(string data, int index, int expectedCount, bool expectedCrLf)
 	{
-		var buffer = new ReadOnlyCharBuffer(data);
+		var buffer = new ReadOnlySpanBuffer(data);
 		Assert.Equal(expectedCount, buffer.CountUntilEndOfLine(index, out bool actualCrLf).Value);
 		Assert.Equal(expectedCrLf, actualCrLf);
 	}
@@ -96,7 +96,7 @@ public class ReadOnlyCharBufferTests
 	#endregion
 	public void CountUntilEndOfLine_FailsIfEmpty(int index)
 	{
-		var buffer = new ReadOnlyCharBuffer(String.Empty);
+		var buffer = new ReadOnlySpanBuffer(String.Empty);
 		Assert.True(buffer.CountUntilEndOfLine(index, out bool isCrLf).IsError);
 		Assert.False(isCrLf);
 	}
@@ -111,7 +111,7 @@ public class ReadOnlyCharBufferTests
 	#endregion
 	public void CountUntilEndOfLine_FailsIfOutOfRange(string data, int index)
 	{
-		var buffer = new ReadOnlyCharBuffer(data);
+		var buffer = new ReadOnlySpanBuffer(data);
 
 		Debug.WriteLine("Expecting an exception...");
 		Assert.True(buffer.CountUntilEndOfLine(index, out bool isCrLf).IsError);
@@ -155,7 +155,7 @@ public class ReadOnlyCharBufferTests
 	#endregion
 	public void CountUntilNotWhitespace(string data, int index, int expectedCount)
 	{
-		var buffer = new ReadOnlyCharBuffer(data);
+		var buffer = new ReadOnlySpanBuffer(data);
 		Assert.Equal(expectedCount, buffer.CountUntilNotWhitespace(index).Value);
 	}
 
@@ -169,7 +169,7 @@ public class ReadOnlyCharBufferTests
 	#endregion
 	public void CountUntilNotWhitespace_FailsIfEmpty(int index)
 	{
-		var buffer = new ReadOnlyCharBuffer(String.Empty);
+		var buffer = new ReadOnlySpanBuffer(String.Empty);
 		Assert.True(buffer.CountUntilWhitespace(index).IsError);
 	}
 
@@ -181,7 +181,7 @@ public class ReadOnlyCharBufferTests
 	#endregion
 	public void CountUntilNotWhitespace_FailsIfOutOfRange(string data, int index)
 	{
-		var buffer = new ReadOnlyCharBuffer(data);
+		var buffer = new ReadOnlySpanBuffer(data);
 
 		Debug.WriteLine("Expecting an exception...");
 		Assert.True(buffer.CountUntilNotWhitespace(index).IsError);
@@ -224,7 +224,7 @@ public class ReadOnlyCharBufferTests
 	#endregion
 	public void CountUntilWhitespace(string data, int index, int expectedCount)
 	{
-		var buffer = new ReadOnlyCharBuffer(data);
+		var buffer = new ReadOnlySpanBuffer(data);
 		Assert.Equal(expectedCount, buffer.CountUntilWhitespace(index).Value);
 	}
 
@@ -238,7 +238,7 @@ public class ReadOnlyCharBufferTests
 	#endregion
 	public void CountUntilWhitespace_FailsIfEmpty(int index)
 	{
-		var buffer = new ReadOnlyCharBuffer(String.Empty);
+		var buffer = new ReadOnlySpanBuffer(String.Empty);
 		Assert.True(buffer.CountUntilWhitespace(index).IsError);
 	}
 
@@ -250,7 +250,7 @@ public class ReadOnlyCharBufferTests
 	#endregion
 	public void CountUntilWhitespace_FailsIfOutOfRange(string data, int index)
 	{
-		var buffer = new ReadOnlyCharBuffer(data);
+		var buffer = new ReadOnlySpanBuffer(data);
 
 		Debug.WriteLine("Expecting an exception...");
 		Assert.True(buffer.CountUntilWhitespace(index).IsError);
@@ -265,7 +265,7 @@ public class ReadOnlyCharBufferTests
 	#endregion
 	public void CountWhile_SameAsLengthIfAlwaysTrue(string data)
 	{
-		var buffer = new ReadOnlyCharBuffer(data);
+		var buffer = new ReadOnlySpanBuffer(data);
 		Assert.Equal(data.Length, buffer.CountWhile((_, _) => true, 0).Value);
 	}
 
@@ -329,7 +329,7 @@ public class ReadOnlyCharBufferTests
 	#endregion
 	public void CountWhile_CountsWhileNotLowercaseR(string data, int index, int expectedCount)
 	{
-		var buffer = new ReadOnlyCharBuffer(data);
+		var buffer = new ReadOnlySpanBuffer(data);
 		Assert.Equal(expectedCount, buffer.CountWhile((_, c) => c != 'r', index).Value);
 	}
 
@@ -376,7 +376,7 @@ public class ReadOnlyCharBufferTests
 	#endregion
 	public void CountWhile_CountsWhileUppercaseOrWhitespace(string data, int index, int expectedCount)
 	{
-		var buffer = new ReadOnlyCharBuffer(data);
+		var buffer = new ReadOnlySpanBuffer(data);
 		Assert.Equal(expectedCount, buffer.CountWhile((_, c) => Char.IsWhiteSpace(c) || c.IsNewline() || Char.IsUpper(c), index).Value);
 	}
 
@@ -390,7 +390,7 @@ public class ReadOnlyCharBufferTests
 	#endregion
 	public void CountWhile_FailsIfEmpty(int index)
 	{
-		var buffer = new ReadOnlyCharBuffer(String.Empty);
+		var buffer = new ReadOnlySpanBuffer(String.Empty);
 		Assert.True(buffer.CountWhile((_, _) => true, index).IsError);
 	}
 
@@ -402,7 +402,7 @@ public class ReadOnlyCharBufferTests
 	#endregion
 	public void CountWhile_FailsIfOutOfRange(string data, int index)
 	{
-		var buffer = new ReadOnlyCharBuffer(data);
+		var buffer = new ReadOnlySpanBuffer(data);
 
 		Debug.WriteLine("Expecting an exception...");
 		Assert.True(buffer.CountWhile((_, _) => true, index).IsError);
@@ -415,7 +415,7 @@ public class ReadOnlyCharBufferTests
 	[InlineData(TestString04)]
 	[InlineData(TestString06)]
 	#endregion
-	public void EqualsBuffer(string data) => Assert.Equal(new ReadOnlyCharBuffer(data), new ReadOnlyCharBuffer(data));
+	public void EqualsBuffer(string data) => Assert.True(new ReadOnlySpanBuffer(data).Equals(new ReadOnlySpanBuffer(data)));
 
 	[Theory]
 	#region Attributes
@@ -424,7 +424,7 @@ public class ReadOnlyCharBufferTests
 	[InlineData(TestString04)]
 	[InlineData(TestString06)]
 	#endregion
-	public void EqualsMemory(string data) => Assert.True(new ReadOnlyCharBuffer(data).Equals(data.AsMemory()));
+	public void EqualsMemory(string data) => Assert.True(new ReadOnlySpanBuffer(data).Equals(data.AsMemory()));
 
 	[Theory]
 	#region Attributes
@@ -433,7 +433,7 @@ public class ReadOnlyCharBufferTests
 	[InlineData(TestString04)]
 	[InlineData(TestString06)]
 	#endregion
-	public void EqualsString(string data) => Assert.True(new ReadOnlyCharBuffer(data).Equals(data));
+	public void EqualsString(string data) => Assert.True(new ReadOnlySpanBuffer(data).Equals(data));
 
 	[Theory]
 	#region Attributes
@@ -442,7 +442,7 @@ public class ReadOnlyCharBufferTests
 	[InlineData(TestString04)]
 	[InlineData(TestString06)]
 	#endregion
-	public void EqualsSpan(string data) => Assert.True(new ReadOnlyCharBuffer(data).Equals(data.AsSpan()));
+	public void EqualsSpan(string data) => Assert.True(new ReadOnlySpanBuffer(data).Equals(data.AsSpan()));
 
 	[Theory]
 	#region String ends with newline
@@ -465,7 +465,7 @@ public class ReadOnlyCharBufferTests
 	#endregion
 	public void GetLengthOfLine(string data, int lineNumber, int expectedLength)
 	{
-		var buffer = new ReadOnlyCharBuffer(data);
+		var buffer = new ReadOnlySpanBuffer(data);
 		buffer.BuildCache();
 		Assert.Equal(expectedLength, buffer.GetLengthOfLine(lineNumber).Value);
 	}
@@ -480,7 +480,7 @@ public class ReadOnlyCharBufferTests
 	#endregion
 	public void GetLengthOfLine_FailsIfEmpty(int lineNumber)
 	{
-		var buffer = new ReadOnlyCharBuffer(String.Empty);
+		var buffer = new ReadOnlySpanBuffer(String.Empty);
 		Assert.True(buffer.GetLengthOfLine(lineNumber).IsError);
 	}
 
@@ -494,7 +494,7 @@ public class ReadOnlyCharBufferTests
 	#endregion
 	public void GetLengthOfLine_FailsIfOutOfRange(string data, int lineNumber)
 	{
-		var buffer = new ReadOnlyCharBuffer(data);
+		var buffer = new ReadOnlySpanBuffer(data);
 		Assert.True(buffer.GetLengthOfLine(lineNumber).IsError);
 	}
 
@@ -534,7 +534,7 @@ public class ReadOnlyCharBufferTests
 	#endregion
 	public void GetLengthOfLineFromIndex(string data, int lineNumber, int expectedLength)
 	{
-		var buffer = new ReadOnlyCharBuffer(data);
+		var buffer = new ReadOnlySpanBuffer(data);
 		Assert.Equal(expectedLength, buffer.GetLengthOfLineFromIndex(lineNumber).Value);
 	}
 
@@ -548,7 +548,7 @@ public class ReadOnlyCharBufferTests
 	#endregion
 	public void GetLengthOfLineFromIndex_FailsIfEmpty(int lineNumber)
 	{
-		var buffer = new ReadOnlyCharBuffer(String.Empty);
+		var buffer = new ReadOnlySpanBuffer(String.Empty);
 		Assert.True(buffer.GetLengthOfLineFromIndex(lineNumber).IsError);
 	}
 
@@ -560,7 +560,7 @@ public class ReadOnlyCharBufferTests
 	#endregion
 	public void GetLengthOfLineFromIndex_FailsIfOutOfRange(string data, int lineNumber)
 	{
-		var buffer = new ReadOnlyCharBuffer(data);
+		var buffer = new ReadOnlySpanBuffer(data);
 		Assert.True(buffer.GetLengthOfLineFromIndex(lineNumber).IsError);
 	}
 
@@ -593,7 +593,7 @@ public class ReadOnlyCharBufferTests
 	#endregion
 	public void GetLine(string data, int lineNumber, string expectedLine)
 	{
-		var buffer = new ReadOnlyCharBuffer(data);
+		var buffer = new ReadOnlySpanBuffer(data);
 		Assert.Equal(expectedLine, buffer.GetLine(lineNumber).Value ?? ("Nowhere near correct!".ToCharArray()));
 	}
 
@@ -607,7 +607,7 @@ public class ReadOnlyCharBufferTests
 	#endregion
 	public void GetLine_FailsIfEmpty(int lineNumber)
 	{
-		var buffer = new ReadOnlyCharBuffer(String.Empty);
+		var buffer = new ReadOnlySpanBuffer(String.Empty);
 		Assert.True(buffer.GetLine(lineNumber).IsError);
 	}
 
@@ -623,7 +623,7 @@ public class ReadOnlyCharBufferTests
 	#endregion
 	public void GetLine_FailsIfOutOfRange(string data, int lineNumber)
 	{
-		var buffer = new ReadOnlyCharBuffer(data);
+		var buffer = new ReadOnlySpanBuffer(data);
 		Assert.True(buffer.GetLine(lineNumber).IsError);
 	}
 
@@ -669,7 +669,7 @@ public class ReadOnlyCharBufferTests
 	#endregion
 	public void GetLineFromIndex(string data, int index, string expectedLine)
 	{
-		var buffer = new ReadOnlyCharBuffer(data);
+		var buffer = new ReadOnlySpanBuffer(data);
 		Assert.Equal(expectedLine, buffer.GetLineFromIndex(index).Value ?? ("Nowhere near correct!".ToCharArray()));
 	}
 
@@ -681,7 +681,7 @@ public class ReadOnlyCharBufferTests
 	#endregion
 	public void GetLineFromIndex_FailsIfOutOfRange(string data, int lineNumber)
 	{
-		var buffer = new ReadOnlyCharBuffer(data);
+		var buffer = new ReadOnlySpanBuffer(data);
 		Assert.True(buffer.GetLineFromIndex(lineNumber).IsError);
 	}
 
@@ -695,7 +695,7 @@ public class ReadOnlyCharBufferTests
 	#endregion
 	public void GetLineFromIndex_FailsIfEmpty(int lineNumber)
 	{
-		var buffer = new ReadOnlyCharBuffer(String.Empty);
+		var buffer = new ReadOnlySpanBuffer(String.Empty);
 		Assert.True(buffer.GetLineFromIndex(lineNumber).IsError);
 	}
 
@@ -735,7 +735,7 @@ public class ReadOnlyCharBufferTests
 	#endregion
 	public void GetLineNumberFromIndex(string data, int index, int expectedLineCount)
 	{
-		var buffer = new ReadOnlyCharBuffer(data);
+		var buffer = new ReadOnlySpanBuffer(data);
 		buffer.BuildCache();
 		Assert.Equal(expectedLineCount, buffer.GetLineNumberFromIndex(index).Value);
 	}
@@ -748,7 +748,7 @@ public class ReadOnlyCharBufferTests
 	#endregion
 	public void GetLineNumberFromIndex_FailsIfOutOfRange(string data, int lineNumber)
 	{
-		var buffer = new ReadOnlyCharBuffer(data);
+		var buffer = new ReadOnlySpanBuffer(data);
 		Assert.True(buffer.GetLineNumberFromIndex(lineNumber).IsError);
 	}
 
@@ -762,7 +762,7 @@ public class ReadOnlyCharBufferTests
 	#endregion
 	public void GetLineNumberFromIndex_FailsIfEmpty(int lineNumber)
 	{
-		var buffer = new ReadOnlyCharBuffer(String.Empty);
+		var buffer = new ReadOnlySpanBuffer(String.Empty);
 		Assert.True(buffer.GetLineNumberFromIndex(lineNumber).IsError);
 	}
 
@@ -800,7 +800,7 @@ public class ReadOnlyCharBufferTests
 	#endregion
 	public void GetSourceLocation(string data, int index, int expectedIndex, int expectedLine, int expectedColumn)
 	{
-		var buffer = new ReadOnlyCharBuffer(data);
+		var buffer = new ReadOnlySpanBuffer(data);
 		var location = buffer.GetSourceLocation(index).Value;
 
 		Assert.Equal(expectedIndex, location.Index);
@@ -817,7 +817,7 @@ public class ReadOnlyCharBufferTests
 	#endregion
 	public void GetSourceLocation_FailsIfOutOfRange(string data, int lineNumber)
 	{
-		var buffer = new ReadOnlyCharBuffer(data);
+		var buffer = new ReadOnlySpanBuffer(data);
 		Assert.True(buffer.GetSourceLocation(lineNumber).IsError);
 	}
 
@@ -831,7 +831,7 @@ public class ReadOnlyCharBufferTests
 	#endregion
 	public void GetSourceLocation_FailsIfEmpty(int lineNumber)
 	{
-		var buffer = new ReadOnlyCharBuffer(String.Empty);
+		var buffer = new ReadOnlySpanBuffer(String.Empty);
 		Assert.True(buffer.GetSourceLocation(lineNumber).IsError);
 	}
 
@@ -858,7 +858,7 @@ public class ReadOnlyCharBufferTests
 	#endregion
 	public void GetSourceSpan(string data, int startIndex, int expectedStartIndex, int expectedStartLine, int expectedStartColumn, int endIndex, int expectedEndIndex, int expectedEndLine, int expectedEndColumn)
 	{
-		var buffer = new ReadOnlyCharBuffer(data);
+		var buffer = new ReadOnlySpanBuffer(data);
 		var span = buffer.GetSourceSpan(startIndex, endIndex).Value;
 
 		Assert.Equal(expectedStartIndex, span.Start.Index);
@@ -924,7 +924,7 @@ public class ReadOnlyCharBufferTests
 	#endregion
 	public void IndexAccessor(string data, int index)
 	{
-		var buffer = new ReadOnlyCharBuffer(data);
+		var buffer = new ReadOnlySpanBuffer(data);
 		Assert.Equal(data[index], buffer[index]);
 		Assert.Equal(data[index], buffer[new SourceLocation(index, 0, 0)]);
 	}
@@ -941,7 +941,7 @@ public class ReadOnlyCharBufferTests
 	#endregion
 	public void LineCount_MatchesActualLineCountWithNoEof(string data, int expectedLineCount)
 	{
-		var buffer = new ReadOnlyCharBuffer(data);
+		var buffer = new ReadOnlySpanBuffer(data);
 		Assert.Equal(expectedLineCount, buffer.LineCount);
 	}
 
@@ -956,40 +956,7 @@ public class ReadOnlyCharBufferTests
 	{
 		var array = data.ToCharArray();
 		Assert.Equal(data, array);
-		Assert.True(new ReadOnlyCharBuffer(array).Equals(data));
-	}
-
-	[Theory]
-	#region Attributes
-	[InlineData(TestString01)]
-	[InlineData(TestString02)]
-	[InlineData(TestString03)]
-	[InlineData(TestString04)]
-	[InlineData(TestString05)]
-	[InlineData(TestString06)]
-	#endregion
-	public unsafe void Constructor_BytePointer(string data)
-	{
-		var byteCount = Encoding.Default.GetByteCount(data);
-
-		fixed (byte* pointer = Encoding.Default.GetBytes(data))
-		{
-			Assert.Equal(data, Encoding.Default.GetString(pointer, byteCount));
-			Assert.True(new ReadOnlyCharBuffer(pointer, byteCount).Equals(data));
-		}
-	}
-
-	[Theory]
-	#region Attributes
-	[InlineData(TestString02)]
-	[InlineData(TestString03)]
-	[InlineData(TestString04)]
-	[InlineData(TestString06)]
-	#endregion
-	public void Constructor_ByteArray(string data)
-	{
-		var array = Encoding.Default.GetBytes(data);
-		Assert.True(new ReadOnlyCharBuffer(array).Equals(data));
+		Assert.True(new ReadOnlySpanBuffer(array).Equals(data));
 	}
 
 	[Theory]
@@ -1002,7 +969,7 @@ public class ReadOnlyCharBufferTests
 	public void Constructor_ReadOnlySpan(string data)
 	{
 		ReadOnlySpan<char> span = data.AsSpan();
-		Assert.True(new ReadOnlyCharBuffer(span).Equals(data));
+		Assert.True(new ReadOnlySpanBuffer(span).Equals(data));
 	}
 
 	[Theory]
@@ -1018,7 +985,7 @@ public class ReadOnlyCharBufferTests
 	#endregion
 	public void Slice_CharArray(string data, int index, int length, string expectedSlice)
 	{
-		var buffer = new ReadOnlyCharBuffer(data);
+		var buffer = new ReadOnlySpanBuffer(data);
 		var slice = buffer.Slice(index, length).Value;
 
 		Assert.Equal(expectedSlice, new string(slice));
@@ -1039,7 +1006,7 @@ public class ReadOnlyCharBufferTests
 	{
 		Span<char> span = stackalloc char[expectedSlice.Length];
 
-		var buffer = new ReadOnlyCharBuffer(data);
+		var buffer = new ReadOnlySpanBuffer(data);
 		Assert.True(buffer.TrySlice(index, span));
 
 		Assert.Equal(expectedSlice, span);
@@ -1060,7 +1027,7 @@ public class ReadOnlyCharBufferTests
 	{
 		Span<char> span = stackalloc char[expectedSlice.Length];
 
-		var buffer = new ReadOnlyCharBuffer(data);
+		var buffer = new ReadOnlySpanBuffer(data);
 		Assert.True(buffer.TrySlice(new SourceSpan(new(startIndex, 0, 0), new(endIndex, 0, 0)), span));
 
 		Assert.Equal(expectedSlice, span);
@@ -1069,14 +1036,14 @@ public class ReadOnlyCharBufferTests
 	[Fact]
 	public void Slice_SourceSpan_FailsIfSpanTooSmall()
 	{
-		var buffer = new ReadOnlyCharBuffer(TestString05);
+		var buffer = new ReadOnlySpanBuffer(TestString05);
 		Assert.False(buffer.TrySlice(new SourceSpan(new(0, 0, 0), new(7, 0, 0)), stackalloc char[3]));
 	}
 
 	[Fact]
 	public void ToString_SameAsInputData()
 	{
-		var buffer = new ReadOnlyCharBuffer(TestString02);
+		var buffer = new ReadOnlySpanBuffer(TestString02);
 		Assert.Equal(TestString02, buffer.ToString());
 	}
 
@@ -1134,7 +1101,7 @@ public class ReadOnlyCharBufferTests
 	#endregion
 	public void TryGetChar(string data, int index)
 	{
-		var buffer = new ReadOnlyCharBuffer(data);
+		var buffer = new ReadOnlySpanBuffer(data);
 		Assert.True(buffer.TryGetChar(index, out char item));
 		Assert.Equal(data[index], item);
 	}
@@ -1142,7 +1109,7 @@ public class ReadOnlyCharBufferTests
 	[Fact]
 	public void TryGetChar_FollowsSpecificEofConvention()
 	{
-		var buffer = new ReadOnlyCharBuffer(TestString05);
+		var buffer = new ReadOnlySpanBuffer(TestString05);
 		Assert.False(buffer.TryGetChar(10, out char item));
 		Assert.Equal('\0', item);
 	}
@@ -1150,7 +1117,7 @@ public class ReadOnlyCharBufferTests
 	[Fact]
 	public void TryGetChar_FailsIfEmpty()
 	{
-		var buffer = new ReadOnlyCharBuffer(String.Empty);
+		var buffer = new ReadOnlySpanBuffer(String.Empty);
 		Assert.False(buffer.TryGetChar(0, out char item));
 		Assert.Equal('\0', item);
 	}
@@ -1158,7 +1125,7 @@ public class ReadOnlyCharBufferTests
 	[Fact]
 	public void TryGetChar_FailsIfOutOfRange()
 	{
-		var buffer = new ReadOnlyCharBuffer(TestString06);
+		var buffer = new ReadOnlySpanBuffer(TestString06);
 		Assert.False(buffer.TryGetChar(14, out char item));
 		Assert.Equal('\0', item);
 	}
@@ -1194,7 +1161,7 @@ public class ReadOnlyCharBufferTests
 	{
 		Span<char> span = stackalloc char[expectedLine.Length];
 
-		var buffer = new ReadOnlyCharBuffer(data);
+		var buffer = new ReadOnlySpanBuffer(data);
 		Assert.True(buffer.TryGetLine(lineNumber, span));
 		Assert.Equal(expectedLine, span);
 	}
@@ -1204,7 +1171,7 @@ public class ReadOnlyCharBufferTests
 	{
 		Span<char> span = [];
 
-		var buffer = new ReadOnlyCharBuffer(String.Empty);
+		var buffer = new ReadOnlySpanBuffer(String.Empty);
 		Assert.False(buffer.TryGetLine(0, span));
 		Assert.True(span.IsEmpty);
 	}
@@ -1214,7 +1181,7 @@ public class ReadOnlyCharBufferTests
 	{
 		Span<char> span = stackalloc char[10];
 
-		var buffer = new ReadOnlyCharBuffer(TestString05);
+		var buffer = new ReadOnlySpanBuffer(TestString05);
 		const string emptySequence = "\0\0\0\0\0\0\0\0\0\0";
 
 		Assert.False(buffer.TryGetLine(2, span));
@@ -1229,7 +1196,7 @@ public class ReadOnlyCharBufferTests
 	{
 		Span<char> span = stackalloc char[5];
 
-		var buffer = new ReadOnlyCharBuffer(TestString05);
+		var buffer = new ReadOnlySpanBuffer(TestString05);
 		Assert.False(buffer.TryGetLine(0, span));
 		Assert.Equal("\0\0\0\0\0", span);
 	}
@@ -1270,7 +1237,7 @@ public class ReadOnlyCharBufferTests
 	{
 		Span<char> span = stackalloc char[expectedLine.Length];
 
-		var buffer = new ReadOnlyCharBuffer(data);
+		var buffer = new ReadOnlySpanBuffer(data);
 		Assert.True(buffer.TryGetLineFromIndex(index, span));
 		Assert.Equal(expectedLine, span.ToString());
 	}
@@ -1280,7 +1247,7 @@ public class ReadOnlyCharBufferTests
 	{
 		Span<char> span = [];
 
-		var buffer = new ReadOnlyCharBuffer(String.Empty);
+		var buffer = new ReadOnlySpanBuffer(String.Empty);
 		Assert.False(buffer.TryGetLineFromIndex(0, span));
 		Assert.True(span.IsEmpty);
 	}
@@ -1290,7 +1257,7 @@ public class ReadOnlyCharBufferTests
 	{
 		Span<char> span = stackalloc char[10];
 
-		var buffer = new ReadOnlyCharBuffer(TestString05);
+		var buffer = new ReadOnlySpanBuffer(TestString05);
 		const string emptySequence = "\0\0\0\0\0\0\0\0\0\0";
 
 		Assert.False(buffer.TryGetLineFromIndex(12, span));
@@ -1305,7 +1272,7 @@ public class ReadOnlyCharBufferTests
 	{
 		Span<char> span = stackalloc char[5];
 
-		var buffer = new ReadOnlyCharBuffer(TestString05);
+		var buffer = new ReadOnlySpanBuffer(TestString05);
 		Assert.False(buffer.TryGetLineFromIndex(0, span));
 		Assert.Equal("\0\0\0\0\0", span);
 	}

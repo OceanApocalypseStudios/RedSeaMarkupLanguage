@@ -1,52 +1,48 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 
-using OceanApocalypseStudios.RSML.Cache;
 using OceanApocalypseStudios.RSML.Diagnostics;
 
 
 namespace OceanApocalypseStudios.RSML.Sources;
 
+// xxx: this struct is to be kept up-to-date all the time with the ReadOnlyCharBuffer class
+
 /// <summary>
-/// A read-only buffer backed by a string. All operations opt for performance
+/// A read-only buffer backed by a span of characters. All operations opt for performance
 /// primarily via the internal use of <see cref="ReadOnlySpan{Char}"/> over string allocations
-/// and also via caching.
+/// and also via caching. The main advantage of this type over <see cref="ReadOnlyCharBuffer"/>
+/// is that you don't need to allocate a class and, on initialization, you don't need to allocate
+/// a string.
 /// </summary>
-/// <remarks>
-/// > [!TIP]
-/// > If you wish to avoid allocating this buffer, it's recommended to take a look at <see cref="ReadOnlySpanBuffer"/>.
-/// </remarks>
-public class ReadOnlyCharBuffer : IBuffer<char>, ISupportsCache, IEquatable<ReadOnlyCharBuffer?>, IEquatable<string?>
+public ref struct ReadOnlySpanBuffer : IBuffer<char>
 {
-	private readonly List<int> lineStarts = [];
-
-	private readonly List<int> precededByCrLf = [];
-
-	private readonly string data;
+	private readonly ReadOnlySpan<char> data;
+	private ReadOnlySpan<int> precededByCrLf;
+	private ReadOnlySpan<int> lineStarts;
 
 	/// <inheritdoc/>
 	public bool CacheExists { get; private set; } = false;
 
 	/// <remarks>
-	/// Always returns <c>-1</c>, as <see cref="ReadOnlyCharBuffer"/> doesn't
+	/// Always returns <c>-1</c>, as <see cref="ReadOnlySpanBuffer"/> doesn't
 	/// support cursor positioning (everything is done via indexing).
 	/// </remarks>
 	/// <inheritdoc/>
-	public int CursorIndex => -1;
+	public readonly int CursorIndex => -1;
 
 	/// <inheritdoc/>
-	public bool IsEmpty => Length == 0;
+	public readonly bool IsEmpty => Length == 0;
 
 	/// <remarks>
-	/// Always returns <c>true</c>, as <see cref="ReadOnlyCharBuffer"/> only
+	/// Always returns <c>true</c>, as <see cref="ReadOnlySpanBuffer"/> only
 	/// supports read-only content (hence the name).
 	/// </remarks> 
 	/// <inheritdoc/>
-	public bool IsReadOnly => true;
+	public readonly bool IsReadOnly => true;
 
 	/// <inheritdoc/>
-	public int Length => data.Length;
+	public readonly int Length => data.Length;
 
 	/// <remarks>
 	/// <see cref="LineCount"/> automatically builds cache if
@@ -62,66 +58,38 @@ public class ReadOnlyCharBuffer : IBuffer<char>, ISupportsCache, IEquatable<Read
 		{
 			ComputeLineStarts();
 
-			return lineStarts.Count;
+			return lineStarts.Length;
 		}
 	}
 
 	/// <inheritdoc/>
-	public char this[int index] => data[index];
+	public readonly char this[int index] => data[index];
 
 	/// <inheritdoc/>
-	public char this[SourceLocation location] => data[location.Index];
+	public readonly char this[SourceLocation location] => data[location.Index];
 
 	/// <inheritdoc/>
-	public Result<char[]> this[SourceSpan span] => Slice(span.Start.Index, span.Length);
+	public readonly Result<char[]> this[SourceSpan span] => Slice(span.Start.Index, span.Length);
 
 	/// <summary>
-	/// Initializes a new <see cref="ReadOnlyCharBuffer"/>
+	/// Initializes a new <see cref="ReadOnlySpanBuffer"/>
 	/// with a string.
 	/// </summary>
 	/// <param name="content">The string that the buffer will wrap.</param>
-	public ReadOnlyCharBuffer(string content) => data = content;
+	public ReadOnlySpanBuffer(string content) => data = content.AsSpan();
 
 	/// <summary>
-	/// Initializes a new <see cref="ReadOnlyCharBuffer"/>
-	/// by allocating a string from a <see cref="ReadOnlySpan{Char}"/>.
+	/// Initializes a new <see cref="ReadOnlySpanBuffer"/> with a span.
 	/// </summary>
 	/// <param name="content">The span pointing to the string's data.</param>
-	public ReadOnlyCharBuffer(ReadOnlySpan<char> content) => data = content.ToString();
+	public ReadOnlySpanBuffer(ReadOnlySpan<char> content) => data = content;
 
 	/// <summary>
-	/// Initializes a new <see cref="ReadOnlyCharBuffer"/>
+	/// Initializes a new <see cref="ReadOnlySpanBuffer"/>
 	/// with an array of characters.
 	/// </summary>
 	/// <param name="content">The array of characters to use for the buffer.</param>
-	public ReadOnlyCharBuffer(char[] content) => data = new(content);
-
-	/// <summary>
-	/// Initializes a new <see cref="ReadOnlyCharBuffer"/>
-	/// with an array of bytes and the encoding to use when decoding them.
-	/// </summary>
-	/// <param name="content">The array of bytes to use for the buffer.</param>
-	/// <param name="encoding">
-	/// The encoding to use when decoding <paramref name="content"/>.
-	/// Use <c>null</c> for the <see cref="Encoding.Default"/> encoding.
-	/// </param>
-	public ReadOnlyCharBuffer(byte[] content, Encoding? encoding = null) => data = encoding?.GetString(content) ?? Encoding.Default.GetString(content);
-
-	/// <summary>
-	/// Initializes a new <see cref="ReadOnlyCharBuffer"/>
-	/// with a pointer referencing an array of bytes and the encoding
-	/// to use when decoding them.
-	/// </summary>
-	/// <param name="contentPtr">The pointer referecing the array of bytes to use for the buffer.</param>
-	/// <param name="byteCount">The amount of bytes in the array referenced by <paramref name="contentPtr"/>.</param>
-	/// <param name="encoding">
-	/// The encoding to use when decoding <paramref name="contentPtr"/>.
-	/// Use <c>null</c> for the <see cref="Encoding.Default"/> encoding.
-	/// </param>
-	/// <remarks>This method is not CLS-compliant due to the unsafe context and the use of pointers.</remarks>
-	[CLSCompliant(false)]
-	public unsafe ReadOnlyCharBuffer(byte* contentPtr, int byteCount, Encoding? encoding = null) =>
-		data = (encoding ?? Encoding.Default).GetString(contentPtr, byteCount);
+	public ReadOnlySpanBuffer(char[] content) => data = new(content);
 
 	/// <inheritdoc/>
 	public void BuildCache() => ComputeLineStarts();
@@ -160,7 +128,11 @@ public class ReadOnlyCharBuffer : IBuffer<char>, ISupportsCache, IEquatable<Read
 		ComputeLineStarts();
 
 		int lineSep = GetNextLineStartPosition(index, out _);
+#if NET8_0_OR_GREATER
 		isCrLf = precededByCrLf.Contains(lineSep) && data[index] is not '\n'; // to us, CRLF is only when we're not standing on the LF
+#else
+		isCrLf = precededByCrLf.IndexOf(lineSep) != -1 && data[index] is not '\n';
+#endif
 
 		if (isCrLf)
 			lineSep--; // skip the extra line separator in the CRLF sequence
@@ -189,7 +161,7 @@ public class ReadOnlyCharBuffer : IBuffer<char>, ISupportsCache, IEquatable<Read
 	/// > <see cref="Length"/>, which is also the EOF index.
 	/// </remarks>
 	/// <inheritdoc/>
-	public Result<int> CountUntilNotWhitespace(int index)
+	public readonly Result<int> CountUntilNotWhitespace(int index)
 	{
 		if (IsEmpty)
 			return Result<int>.Fail(new(new(ErrorCategory.Internal, 1), SourceSpan.Empty, "The buffer is empty.", Severity.None));
@@ -203,7 +175,7 @@ public class ReadOnlyCharBuffer : IBuffer<char>, ISupportsCache, IEquatable<Read
 		if (index == Length)
 			return Result<int>.Success(0); // consumed the entire buffer
 
-		var span = data.AsSpan(index);
+		var span = data.Slice(index);
 		int count = 0;
 
 		while (count < span.Length && Char.IsWhiteSpace(span[count]))
@@ -224,7 +196,7 @@ public class ReadOnlyCharBuffer : IBuffer<char>, ISupportsCache, IEquatable<Read
 	/// > <see cref="Length"/>, which is also the EOF index.
 	/// </remarks>
 	/// <inheritdoc/>
-	public Result<int> CountUntilWhitespace(int index)
+	public readonly Result<int> CountUntilWhitespace(int index)
 	{
 		if (IsEmpty)
 			return Result<int>.Fail(new(new(ErrorCategory.Internal, 1), SourceSpan.Empty, "The buffer is empty.", Severity.None));
@@ -238,7 +210,7 @@ public class ReadOnlyCharBuffer : IBuffer<char>, ISupportsCache, IEquatable<Read
 		if (index == Length)
 			return Result<int>.Success(0); // consumed the entire buffer
 
-		var span = data.AsSpan(index);
+		var span = data.Slice(index);
 		int count = 0;
 
 		while (count < span.Length && !Char.IsWhiteSpace(span[count]))
@@ -259,7 +231,7 @@ public class ReadOnlyCharBuffer : IBuffer<char>, ISupportsCache, IEquatable<Read
 	/// > <see cref="Length"/>, which is also the EOF index.
 	/// </remarks>
 	/// <inheritdoc/>
-	public Result<int> CountWhile(Func<int, char, bool> predicate, int index)
+	public readonly Result<int> CountWhile(Func<int, char, bool> predicate, int index)
 	{
 		if (IsEmpty)
 			return Result<int>.Fail(new(new(ErrorCategory.Internal, 1), SourceSpan.Empty, "The buffer is empty.", Severity.None));
@@ -273,7 +245,7 @@ public class ReadOnlyCharBuffer : IBuffer<char>, ISupportsCache, IEquatable<Read
 		if (index == Length)
 			return Result<int>.Success(0); // consumed the entire buffer
 
-		var span = data.AsSpan(index);
+		var span = data.Slice(index);
 		int count = 0;
 
 		while (count < span.Length && predicate(count, span[count]))
@@ -306,8 +278,13 @@ public class ReadOnlyCharBuffer : IBuffer<char>, ISupportsCache, IEquatable<Read
 		int start = lineStarts[lineNumber];
 		int end = lineStarts[lineNumber + 1];
 
+#if NET8_0_OR_GREATER
 		if (precededByCrLf.Contains(end))
 			end--; // skip the extra line separator in the CRLF sequence
+#else
+		if (precededByCrLf.IndexOf(end) != -1)
+			end--; // skip the extra line separator in the CRLF sequence
+#endif
 
 #if NET8_0_OR_GREATER
 		if (!(lineNumber + 2 == RawLineCount && !data[^1].IsNewline()))
@@ -386,7 +363,7 @@ public class ReadOnlyCharBuffer : IBuffer<char>, ISupportsCache, IEquatable<Read
 		int start = lineStarts[lineNumber];
 		int length = GetLengthOfLine(lineNumber).Value; // this will never be an error because we have done exact same checks right above
 
-		return Result<char[]>.Success(data.AsSpan(start, length).ToArray());
+		return Result<char[]>.Success(data.Slice(start, length).ToArray());
 	}
 
 	/// <inheritdoc/>
@@ -402,7 +379,7 @@ public class ReadOnlyCharBuffer : IBuffer<char>, ISupportsCache, IEquatable<Read
 
 	/// <remarks>
 	/// > [!IMPORTANT]
-	/// > Unlike with other <see cref="ReadOnlyCharBuffer"/> methods, this one
+	/// > Unlike with other <see cref="ReadOnlySpanBuffer"/> methods, this one
 	/// > does not follow EOF conventions and, because of that, does not accept the 
 	/// > EOF index (index at <see cref="Length"/>), because it is not
 	/// > considered a location.
@@ -442,13 +419,13 @@ public class ReadOnlyCharBuffer : IBuffer<char>, ISupportsCache, IEquatable<Read
 
 	/// <remarks>
 	/// > [!IMPORTANT]
-	/// > Unlike with other <see cref="ReadOnlyCharBuffer"/> methods, this one
+	/// > Unlike with other <see cref="ReadOnlySpanBuffer"/> methods, this one
 	/// > does not follow EOF conventions and, because of that, does not accept the 
 	/// > EOF index (index at <see cref="Length"/>), because it is not
 	/// > considered part of any slice.
 	/// </remarks>
 	/// <inheritdoc/>
-	public Result<char[]> Slice(int start, int length)
+	public readonly Result<char[]> Slice(int start, int length)
 	{
 		if (length < 0)
 			return Result<char[]>.Fail(new(new(ErrorCategory.Internal, 2), SourceSpan.Empty, "Both the index and the slice length must be positive.", Severity.None));
@@ -459,28 +436,28 @@ public class ReadOnlyCharBuffer : IBuffer<char>, ISupportsCache, IEquatable<Read
 		if (start + length > Length)
 			return Result<char[]>.Fail(new(new(ErrorCategory.Internal, 2), SourceSpan.Empty, "The slice's end index is out of range.", Severity.None));
 
-		return Result<char[]>.Success(data.ToCharArray(start, length));
+		return Result<char[]>.Success(data.Slice(start, length).ToArray());
 	}
 
 	/// <remarks>
 	/// > [!IMPORTANT]
-	/// > Unlike with other <see cref="ReadOnlyCharBuffer"/> methods, this one
+	/// > Unlike with other <see cref="ReadOnlySpanBuffer"/> methods, this one
 	/// > does not follow EOF conventions and, because of that, does not accept the 
 	/// > EOF index (index at <see cref="Length"/>), because it is not
 	/// > considered part of any slice.
 	/// </remarks>
 	/// <inheritdoc/>
-	public bool TrySlice(int start, Span<char> slice) => data.AsSpan(start < 0 ? start + Length : start, slice.Length).TryCopyTo(slice);
+	public readonly bool TrySlice(int start, Span<char> slice) => data.Slice(start < 0 ? start + Length : start, slice.Length).TryCopyTo(slice);
 
 	/// <remarks>
 	/// > [!IMPORTANT]
-	/// > Unlike with other <see cref="ReadOnlyCharBuffer"/> methods, this one
+	/// > Unlike with other <see cref="ReadOnlySpanBuffer"/> methods, this one
 	/// > does not follow EOF conventions and, because of that, does not accept the 
 	/// > EOF index (index at <see cref="Length"/>), because it is not
 	/// > considered part of any slice.
 	/// </remarks>
 	/// <inheritdoc/>
-	public bool TrySlice(SourceSpan sourceSpan, Span<char> slice) => data.AsSpan(sourceSpan.Start.Index, sourceSpan.Length).TryCopyTo(slice);
+	public readonly bool TrySlice(SourceSpan sourceSpan, Span<char> slice) => data.Slice(sourceSpan.Start.Index, sourceSpan.Length).TryCopyTo(slice);
 
 	/// <remarks>
 	/// > [!NOTE]
@@ -489,7 +466,7 @@ public class ReadOnlyCharBuffer : IBuffer<char>, ISupportsCache, IEquatable<Read
 	/// > not being an actual buffer location.
 	/// </remarks>
 	/// <inheritdoc/>
-	public bool TryGetChar(int index, out char item)
+	public readonly bool TryGetChar(int index, out char item)
 	{
 		item = '\0'; // default
 
@@ -514,7 +491,7 @@ public class ReadOnlyCharBuffer : IBuffer<char>, ISupportsCache, IEquatable<Read
 	/// > not being an actual buffer location.
 	/// </remarks>
 	/// <inheritdoc/>
-	public bool TryGetChar(SourceLocation location, out char item) => TryGetChar(location.Index, out item);
+	public readonly bool TryGetChar(SourceLocation location, out char item) => TryGetChar(location.Index, out item);
 
 	/// <remarks>
 	/// > [!NOTE]
@@ -524,7 +501,7 @@ public class ReadOnlyCharBuffer : IBuffer<char>, ISupportsCache, IEquatable<Read
 	/// > (meaning the actual last line is located at N - 1).
 	/// </remarks>
 	/// <inheritdoc/>
-	public bool TryGetLine(int lineNumber, Span<char> destination)
+	public bool TryGetLine(int lineNumber, scoped Span<char> destination)
 	{
 		ComputeLineStarts();
 
@@ -537,7 +514,7 @@ public class ReadOnlyCharBuffer : IBuffer<char>, ISupportsCache, IEquatable<Read
 		int start = lineStarts[lineNumber];
 		int length = GetLengthOfLine(lineNumber).Value; // guaranteed to not error out cuz the checks above protect from it
 
-		return data.AsSpan(start, length).TryCopyTo(destination);
+		return data.Slice(start, length).TryCopyTo(destination);
 	}
 
 	/// <remarks>
@@ -549,17 +526,17 @@ public class ReadOnlyCharBuffer : IBuffer<char>, ISupportsCache, IEquatable<Read
 	/// > line will also be EOF.
 	/// </remarks>
 	/// <inheritdoc/>
-	public bool TryGetLineFromIndex(int index, Span<char> destination)
+	public bool TryGetLineFromIndex(int index, scoped Span<char> destination)
 	{
 		var lineNumber = GetLineNumberFromIndex(index);
 		return !lineNumber.IsError && TryGetLine(lineNumber.Value, destination);
 	}
 
 	/// <inheritdoc/>
-	public void Dispose() => GC.SuppressFinalize(this);
+	public readonly void Dispose() { } // literally do nothing
 
 	/// <inheritdoc/>
-	public override bool Equals(
+	public override readonly bool Equals(
 #if NET8_0_OR_GREATER
 		[NotNullWhen(true)]
 		object? obj
@@ -569,7 +546,6 @@ public class ReadOnlyCharBuffer : IBuffer<char>, ISupportsCache, IEquatable<Read
 	) => obj switch
 	{
 		string str => Equals(str),
-		ReadOnlyCharBuffer readOnlyStringBuffer => Equals(readOnlyStringBuffer),
 		IBuffer<char> buffer => Equals(buffer),
 		ReadOnlyMemory<char> readOnlyMemory => Equals(readOnlyMemory),
 		null => false,
@@ -581,88 +557,83 @@ public class ReadOnlyCharBuffer : IBuffer<char>, ISupportsCache, IEquatable<Read
 	/// </summary>
 	/// <param name="other">The array.</param>
 	/// <returns>True if equals.</returns>
-	public bool Equals(char[]? other) => other is not null && data.Equals(other.AsSpan(), StringComparison.Ordinal);
+	public readonly bool Equals(char[]? other) => other is not null && data.Equals(other.AsSpan(), StringComparison.Ordinal);
 
 	/// <summary>
 	/// Checks if another read-only buffer is equal to the current instance.
 	/// </summary>
 	/// <param name="other">The other read-only buffer.</param>
 	/// <returns>True if equals.</returns>
-	public bool Equals(IBuffer<char>? other) => other is ReadOnlyCharBuffer buffer && Equals(buffer);
+	public readonly bool Equals(IBuffer<char>? other) => false;
 
 	/// <summary>
 	/// Checks if a read-only contiguous region of memory is equal to the current instance.
 	/// </summary>
 	/// <param name="other">The region of memory.</param>
 	/// <returns>True if equals.</returns>
-	public bool Equals(ReadOnlyMemory<char>? other) => other is not null && Length == other.Value.Length && data.Equals(other.Value.Span, StringComparison.Ordinal);
+	public readonly bool Equals(ReadOnlyMemory<char>? other) => other is not null && Length == other.Value.Length && data.Equals(other.Value.Span, StringComparison.Ordinal);
 
 	/// <summary>
 	/// Checks if a read-only contiguous region of memory is equal to the current instance.
 	/// </summary>
 	/// <param name="other">The region of memory.</param>
 	/// <returns>True if equals.</returns>
-	public bool Equals(ReadOnlySpan<char> other) => Length == other.Length && data.Equals(other, StringComparison.Ordinal);
+	public readonly bool Equals(ReadOnlySpan<char> other) => Length == other.Length && data.Equals(other, StringComparison.Ordinal);
 
 	/// <summary>
-	/// Checks if another read-only string buffer is equal to the current instance.
+	/// Checks if another read-only span buffer is equal to the current instance.
 	/// </summary>
-	/// <param name="other">The other read-only string buffer.</param>
+	/// <param name="other">The other read-only span buffer.</param>
 	/// <returns>True if equals.</returns>
-	public bool Equals(ReadOnlyCharBuffer? other) =>
-		other is not null && data == other.data && Length == other.Length && IsEmpty == other.IsEmpty && LineCount == other.LineCount;
+	public readonly bool Equals(ReadOnlySpanBuffer other) => data.SequenceEqual(other.data);
 
 	/// <summary>
 	/// Checks if a string is equal to the current instance.
 	/// </summary>
 	/// <param name="other">The string.</param>
 	/// <returns>True if equals.</returns>
-	public bool Equals(string? other) =>
-		other is not null && Length == other.Length && data == other;
+	public readonly bool Equals(string? other) =>
+		other is not null && Length == other.Length && data.SequenceEqual(other);
+
+	/// <summary>
+	/// Returns the buffer's content as a <see cref="String"/>.
+	/// </summary>
+	/// <returns>The buffer's content.</returns>
+	public override readonly string ToString() => data.ToString();
 
 	/// <inheritdoc/>
 	public override int GetHashCode()
 	{
 		unchecked
 		{
-			int hashCode = Constants.HashCodeSeed * Constants.HashCodeMultiplier + EqualityComparer<string>.Default.GetHashCode(data);
-			hashCode = hashCode * Constants.HashCodeMultiplier + Length.GetHashCode();
+			int hashCode = Constants.HashCodeSeed * Constants.HashCodeMultiplier + Length.GetHashCode();
 			hashCode = hashCode * Constants.HashCodeMultiplier + IsEmpty.GetHashCode();
 			return hashCode * Constants.HashCodeMultiplier + LineCount.GetHashCode();
 		}
 	}
 
 	/// <summary>
-	/// Returns the buffer's content as a <see cref="String"/>.
-	/// </summary>
-	/// <returns>The buffer's content.</returns>
-	public override string ToString() => data;
-
-	/// <summary>
-	/// Checks if two read-only string buffers are equals.
+	/// Checks if two read-only span buffers are equals.
 	/// </summary>
 	/// <returns>True if equals.</returns>
-	public static bool operator ==(ReadOnlyCharBuffer left, ReadOnlyCharBuffer right) =>
-		EqualityComparer<ReadOnlyCharBuffer>.Default.Equals(left, right);
+	public static bool operator ==(ReadOnlySpanBuffer left, ReadOnlySpanBuffer right) => left.Equals(right);
 
 	/// <summary>
-	/// Checks if two read-only string buffers are different.
+	/// Checks if two read-only span buffers are different.
 	/// </summary>
 	/// <returns>True if different.</returns>
-	public static bool operator !=(ReadOnlyCharBuffer left, ReadOnlyCharBuffer right) => !(left == right);
+	public static bool operator !=(ReadOnlySpanBuffer left, ReadOnlySpanBuffer right) => !(left == right);
 
 	private void ComputeLineStarts(bool forceCache = false)
 	{
 		if (CacheExists && !forceCache)
 			return;
 
-		var span = data.AsSpan();
+		List<int> privateLineStarts = [];
+		List<int> privatePrecededByCrLf = [];
 
-		lineStarts.Clear();
-		precededByCrLf.Clear();
-
-		lineStarts.Capacity = Math.Max(lineStarts.Capacity, span.Length / 25 + 32); // just a rough guess
-		precededByCrLf.Capacity = Math.Max(precededByCrLf.Capacity, span.Length / 25 + 16); // just a rough guess
+		privateLineStarts.Capacity = Math.Max(privateLineStarts.Capacity, data.Length / 25 + 32); // just a rough guess
+		privatePrecededByCrLf.Capacity = Math.Max(privatePrecededByCrLf.Capacity, data.Length / 25 + 16); // just a rough guess
 
 		/* the following line ensures that if the last line:
 		 * ends with CR, LF, U2028 or U2029
@@ -674,30 +645,34 @@ public class ReadOnlyCharBuffer : IBuffer<char>, ISupportsCache, IEquatable<Read
 		 * it looks normal that there are 2 lines but someone will go "acshua'y, that's erm 1 line :skull:"
 		 * not with RSML's official buffers nah bro
 		*/
-		int lastIndex = span.EndsWith("\r\n") ? span.Length - 2 : span.Length - 1;
+		int lastIndex = data.EndsWith("\r\n") ? data.Length - 2 : data.Length - 1;
 		int i = 0;
 
-		lineStarts.Add(0); // 0 is by convention the start of line (and also the start of the buffer)
+		privateLineStarts.Add(0); // 0 is by convention the start of line (and also the start of the buffer)
 
 		while (i < lastIndex)
 		{
-			if (!span[i].IsNewline())
+			if (!data[i].IsNewline())
 			{
 				i++;
 				continue;
 			}
 
-			bool isCrLf = i < lastIndex && span[i] == '\r' && span[i + 1] == '\n';
+			bool isCrLf = i < lastIndex && data[i] == '\r' && data[i + 1] == '\n';
 			int nextStart = i + (isCrLf ? 2 : 1);
-			lineStarts.Add(nextStart);
+			privateLineStarts.Add(nextStart);
 
 			if (isCrLf)
-				precededByCrLf.Add(nextStart);
+				privatePrecededByCrLf.Add(nextStart);
 
 			i = nextStart;
 		}
 
-		lineStarts.Add(Length); // add the EOF as the start of a line
+		privateLineStarts.Add(Length); // add the EOF as the start of a line
+
+		// xxx: find a way to optimize this so we don't have to allocate an array just for this
+		lineStarts = new(privateLineStarts.ToArray());
+		precededByCrLf = new(privatePrecededByCrLf.ToArray());
 
 		CacheExists = true;
 	}
@@ -705,7 +680,7 @@ public class ReadOnlyCharBuffer : IBuffer<char>, ISupportsCache, IEquatable<Read
 	/// <param name="insertionPoint">The insertion point of the next line start.</param>
 	/// <param name="lsListIndex">The index, in <see cref="lineStarts"/> where the line start is.</param>
 	/// <returns>The line start index, in <see cref="data"/>.</returns>
-	private int GetNextLineStartFromInsertionPoint(int insertionPoint, out int lsListIndex)
+	private readonly int GetNextLineStartFromInsertionPoint(int insertionPoint, out int lsListIndex)
 	{
 		if (insertionPoint >= 0)
 		{
@@ -717,7 +692,7 @@ public class ReadOnlyCharBuffer : IBuffer<char>, ISupportsCache, IEquatable<Read
 
 		int nextIndex = ~insertionPoint;
 
-		if (nextIndex == lineStarts.Count)
+		if (nextIndex == lineStarts.Length)
 		{
 			// 2nd Case: the next line start is outside of the buffer (EOF convention)
 			lsListIndex = nextIndex;
@@ -729,14 +704,14 @@ public class ReadOnlyCharBuffer : IBuffer<char>, ISupportsCache, IEquatable<Read
 		return lineStarts[nextIndex]; // 3rd Case: we found the next line start
 	}
 
-	private int GetNextLineStartPosition(int index, out int lsListIndex) =>
+	private readonly int GetNextLineStartPosition(int index, out int lsListIndex) =>
 		// we use index + 1 to skip to the next line start if we're already standing on one :)
 		GetNextLineStartFromInsertionPoint(lineStarts.BinarySearch(index + 1), out lsListIndex);
 
 	/// <param name="insertionPoint">The insertion point of the next line start.</param>
 	/// <param name="lsListIndex">The index, in <see cref="lineStarts"/> where the line start is.</param>
 	/// <returns>The line start index, in <see cref="data"/>.</returns>
-	private int GetPreviousLineStartFromInsertionPoint(int insertionPoint, out int lsListIndex)
+	private readonly int GetPreviousLineStartFromInsertionPoint(int insertionPoint, out int lsListIndex)
 	{
 		if (insertionPoint >= 0)
 		{
@@ -748,7 +723,7 @@ public class ReadOnlyCharBuffer : IBuffer<char>, ISupportsCache, IEquatable<Read
 
 		int previousIndex = ~insertionPoint;
 
-		if (previousIndex == lineStarts.Count)
+		if (previousIndex == lineStarts.Length)
 		{
 			// 2nd Case: the next line start is outside of the buffer (EOF convention)
 			// however we're gonna decrement one because otherwise all indexes from the last line that are after
@@ -763,7 +738,7 @@ public class ReadOnlyCharBuffer : IBuffer<char>, ISupportsCache, IEquatable<Read
 		return lineStarts[lsListIndex]; // 3rd Case: we found the previous line start
 	}
 
-	private int GetPreviousOrCurrentLineStartPosition(int index, out int lsListIndex)
+	private readonly int GetPreviousOrCurrentLineStartPosition(int index, out int lsListIndex)
 	{
 		if (index > 0)
 		{
@@ -783,7 +758,7 @@ public class ReadOnlyCharBuffer : IBuffer<char>, ISupportsCache, IEquatable<Read
 	/// Does not protect against <see cref="ArgumentOutOfRangeException"/> and
 	/// <see cref="IndexOutOfRangeException"/>.
 	/// </summary>
-	private bool IsConventionallyOutOfRange(int index) => index < 0 || index > Length;
+	private readonly bool IsConventionallyOutOfRange(int index) => index < 0 || index > Length;
 
 	private bool IsLastLine(int index)
 	{
@@ -805,5 +780,5 @@ public class ReadOnlyCharBuffer : IBuffer<char>, ISupportsCache, IEquatable<Read
 	/// This prevents throwing <see cref="ArgumentOutOfRangeException"/>
 	/// or <see cref="IndexOutOfRangeException"/>.
 	/// </summary>
-	private bool IsOutOfRange(int index) => index < 0 || index >= Length;
+	private readonly bool IsOutOfRange(int index) => index < 0 || index >= Length;
 }

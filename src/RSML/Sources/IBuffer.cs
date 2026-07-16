@@ -9,7 +9,7 @@ namespace OceanApocalypseStudios.RSML.Sources;
 /// Represents a buffer.
 /// </summary>
 /// <typeparam name="TItem">The datatype of the values returned by the buffer methods</typeparam>
-public interface IBuffer<TItem> : ISource, IEquatable<IBuffer<TItem>?>, IEquatable<TItem[]?>, IEquatable<Memory<TItem>?>, IEquatable<ReadOnlyMemory<TItem>?>
+public interface IBuffer<TItem> : ISource, IEquatable<IBuffer<TItem>?>, IEquatable<TItem[]?>, IEquatable<ReadOnlyMemory<TItem>?>
 {
 	// todo: add methods that can mutate the buffer (coming to v3.0.0-prerelease2)
 
@@ -192,9 +192,8 @@ public interface IBuffer<TItem> : ISource, IEquatable<IBuffer<TItem>?>, IEquatab
 	/// </summary>
 	/// <param name="lineNumber">The 0-based line number.</param>
 	/// <param name="destination">The destination buffer for the line.</param>
-	/// <param name="itemCount">The amount of items returned.</param>
 	/// <returns>True if successful.</returns>
-	bool TryGetLine(int lineNumber, Span<TItem> destination, out int itemCount);
+	bool TryGetLine(int lineNumber, Span<TItem> destination);
 
 	/// <summary>
 	/// Tries to read the line that contains the item at <paramref name="index"/>.
@@ -202,7 +201,6 @@ public interface IBuffer<TItem> : ISource, IEquatable<IBuffer<TItem>?>, IEquatab
 	/// </summary>
 	/// <param name="index">The index at which to determine what the current line is.</param>
 	/// <param name="destination">The destination span that will contain the line.</param>
-	/// <param name="itemCount">The amount of items that were written to <paramref name="destination"/>.</param>
-	/// <returns>False if the buffer is out of bounds, there are no more lines to read or an exception occured.</returns>
-	bool TryGetLineFromIndex(int index, Span<TItem> destination, out int itemCount);
+	/// <returns>True if successful.</returns>
+	bool TryGetLineFromIndex(int index, Span<TItem> destination);
 }
