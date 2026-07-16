@@ -42,6 +42,12 @@ jobs:
       with:
         dotnet-version: '10.x.x'
 
+    - name: Install ARM64 compilation toolchain
+      if: matrix.rid-os == 'linux' && matrix.arch == 'arm64'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y gcc-aarch64-linux-gnu binutils-aarch64-linux-gnu
+
     - name: Publish Native Project
       shell: bash
       run: |
