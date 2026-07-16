@@ -15,6 +15,9 @@ public abstract class Parser : IToolchainComponent
 	public bool IsMutable { get; protected set; } = true;
 
 	/// <inheritdoc/>
+	public ToolchainConfiguration Configuration { get; protected set; }
+
+	/// <inheritdoc/>
 	public virtual void Freeze() => IsMutable = false;
 
 	/// <inheritdoc/>
@@ -25,4 +28,5 @@ public abstract class Parser : IToolchainComponent
 
 	/// <inheritdoc/>
 	public virtual void Inject(ToolchainConfiguration configuration) => throw new System.NotImplementedException();
+	bool IToolchainComponent.TryInject(ILanguageExtension injectable) => throw new System.NotImplementedException();
 }
