@@ -8,7 +8,7 @@ using OceanApocalypseStudios.RSML.Sources;
 namespace OceanApocalypseStudios.RSML.Tests.Sources;
 
 /// <summary>
-/// Tests for the official-provided <see cref="ReadOnlyCharBuffer"/> class.
+/// Tests for the official-provided <see cref="ReadOnlyStringBuffer"/> class.
 /// </summary>
 public class ReadOnlyCharBufferTests
 {
