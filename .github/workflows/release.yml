@@ -6,6 +6,9 @@ on:
     tags:
       - 'v*.*.*'
 
+permissions:
+  contents: read
+
 jobs:
   build-binaries:
     strategy:
@@ -128,16 +131,24 @@ jobs:
           -p:LinkerFlavor=lld \
           --self-contained true
 
-    - name: Upload Artifacts
+    - name: Upload Native Artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: binaries-${{ matrix.rid-os }}-${{ matrix.arch }}
-        path: ./dist/
+        name: rsml-native-${{ matrix.rid-os }}-${{ matrix.arch }}
+        path: ./dist/RSML.Native-${{ matrix.rid-os }}-${{ matrix.arch }}
+        if-no-files-found: error
+        
+    - name: Upload CLI Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: rsml-cli-${{ matrix.rid-os }}-${{ matrix.arch }}
+        path: ./dist/RSML.CLI-${{ matrix.rid-os }}-${{ matrix.arch }}
+        if-no-files-found: error
 
   deploy:
     permissions:
       id-token: write
-      contents: read
+      contents: write
 
     needs: build-binaries
     runs-on: ubuntu-latest
@@ -193,9 +204,17 @@ jobs:
       run: |
         mkdir ./release-assets
         cd ./all-binaries
+        
         for dir in *; do
-          echo "../release-assets/${dir}.tar.gz"
-          tar -czf "../release-assets/${dir}.tar.gz" -C "$dir" .
+          # Check if the folder directory belongs to Windows ('win')
+          if [[ "$dir" == *"-win-"* ]]; then
+            echo "Windows: ../release-assets/${dir}.zip"
+            # no nesting
+            (cd "$dir" && zip -r "../../release-assets/${dir}.zip" .)
+          else
+            echo "Linux/macOS: ../release-assets/${dir}.tar.gz"
+            tar -czf "../release-assets/${dir}.tar.gz" -C "$dir" .
+          fi
         done
 
     #- name: Create GitHub Release

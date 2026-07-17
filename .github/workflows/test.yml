@@ -5,7 +5,22 @@ on:
     branches:
       - main
       - dev
+    paths:
+      - "src/**"
+      - "benchmarks/**"
+      - "tests/**"
+      - "**/*.csproj"
+      - "**/*.slnx"
   pull_request:
+    branches:
+      - main
+      - dev
+    paths:
+      - "src/**"
+      - "benchmarks/**"
+      - "tests/**"
+      - "**/*.csproj"
+      - "**/*.slnx"
   workflow_dispatch:
 
 permissions:

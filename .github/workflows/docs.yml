@@ -5,8 +5,22 @@ on:
     branches:
       - main
       - docs
+    paths:
+      - "docs/**"
+      - "**/*.md"
   pull_request:
+    branches:
+      - main
+      - docs
+    paths:
+      - "docs/**"
+      - "**/*.md"
   workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  
 
 jobs:
   deploy-docs:
