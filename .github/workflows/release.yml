@@ -187,12 +187,14 @@ jobs:
     - name: Generate changelog
       run: |
         npx git-cliff@latest -o ${{ github.workspace }}-CHANGELOG.md --latest
-
+        cat ${{ github.workspace }}-CHANGELOG.md
+        
     - name: Prepare Release Assets
       run: |
         mkdir ./release-assets
         cd ./all-binaries
         for dir in *; do
+          echo "../release-assets/${dir}.tar.gz"
           tar -czf "../release-assets/${dir}.tar.gz" -C "$dir" .
         done
 
