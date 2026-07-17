@@ -21,6 +21,9 @@ permissions:
   contents: write
   pages: write
   
+concurrency:
+  group: docs-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 jobs:
   deploy-docs:
