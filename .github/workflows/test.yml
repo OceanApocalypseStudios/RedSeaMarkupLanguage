@@ -5,7 +5,22 @@ on:
     branches:
       - main
       - dev
+    paths:
+      - "src/**"
+      - "benchmarks/**"
+      - "tests/**"
+      - "**/*.csproj"
+      - "**/*.slnx"
   pull_request:
+    branches:
+      - main
+      - dev
+    paths:
+      - "src/**"
+      - "benchmarks/**"
+      - "tests/**"
+      - "**/*.csproj"
+      - "**/*.slnx"
   workflow_dispatch:
 
 permissions:
@@ -32,4 +47,4 @@ jobs:
         run: dotnet build --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test --configuration Release --no-build
+        run: dotnet test --framework net10.0 --configuration Release --no-build

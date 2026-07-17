@@ -6,6 +6,9 @@ on:
     tags:
       - 'v*.*.*'
 
+permissions:
+  contents: read
+
 jobs:
   build-binaries:
     strategy:
@@ -17,9 +20,15 @@ jobs:
           - os: ubuntu-latest
             arch: arm64
             rid-os: linux
+          - os: ubuntu-latest
+            arch: arm
+            rid-os: linux
 
           - os: windows-latest
             arch: x64
+            rid-os: win
+          - os: windows-latest
+            arch: x86
             rid-os: win
           - os: windows-latest
             arch: arm64
@@ -42,41 +51,122 @@ jobs:
       with:
         dotnet-version: '10.x.x'
 
+    - name: Install Linux ARM compilation toolchain
+      if: matrix.rid-os == 'linux' && matrix.arch == 'arm'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y binutils-arm-linux-gnueabihf gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf
+
+    - name: Install Linux ARM64 compilation toolchain
+      if: matrix.rid-os == 'linux' && matrix.arch == 'arm64'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y binutils-aarch64-linux-gnu gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
+
     - name: Publish Native Project
+      if: (matrix.rid-os != 'linux') || (matrix.rid-os == 'linux' && matrix.arch == 'x64')
       shell: bash
       run: |
         dotnet publish ./src/RSML.Native/RSML.Native.csproj \
           -c Release \
           -r ${{ matrix.rid-os }}-${{ matrix.arch }} \
-          -o ./dist/native-${{ matrix.rid-os }}-${{ matrix.arch }} \
+          -o ./dist/RSML.Native-${{ matrix.rid-os }}-${{ matrix.arch }} \
+          --self-contained true
+          
+    - name: Publish Native Project (Linux ARM)
+      if: matrix.rid-os == 'linux' && matrix.arch == 'arm'
+      shell: bash
+      run: |
+        dotnet publish ./src/RSML.Native/RSML.Native.csproj \
+          -c Release \
+          -r ${{ matrix.rid-os }}-${{ matrix.arch }} \
+          -o ./dist/RSML.Native-${{ matrix.rid-os }}-${{ matrix.arch }} \
+          -p:ObjCopyName=arm-linux-gnueabihf-objcopy \
+          -p:LinkerFlavor=lld \
+          --self-contained true
+          
+    - name: Publish Native Project (Linux ARM64)
+      if: matrix.rid-os == 'linux' && matrix.arch == 'arm64'
+      shell: bash
+      run: |
+        dotnet publish ./src/RSML.Native/RSML.Native.csproj \
+          -c Release \
+          -r ${{ matrix.rid-os }}-${{ matrix.arch }} \
+          -o ./dist/RSML.Native-${{ matrix.rid-os }}-${{ matrix.arch }} \
+          -p:ObjCopyName=aarch64-linux-gnu-objcopy \
+          -p:LinkerFlavor=lld \
           --self-contained true
 
     - name: Publish CLI Project
+      if: (matrix.rid-os != 'linux') || (matrix.rid-os == 'linux' && matrix.arch == 'x64')
       shell: bash
       run: |
         dotnet publish ./src/RSML.CLI/RSML.CLI.csproj \
           -c Release \
           -r ${{ matrix.rid-os }}-${{ matrix.arch }} \
-          -o ./dist/cli-${{ matrix.rid-os }}-${{ matrix.arch }} \
+          -o ./dist/RSML.CLI-${{ matrix.rid-os }}-${{ matrix.arch }} \
+          --self-contained true
+          
+    - name: Publish CLI Project (Linux ARM)
+      if: matrix.rid-os == 'linux' && matrix.arch == 'arm'
+      shell: bash
+      run: |
+        dotnet publish ./src/RSML.CLI/RSML.CLI.csproj \
+          -c Release \
+          -r ${{ matrix.rid-os }}-${{ matrix.arch }} \
+          -o ./dist/RSML.CLI-${{ matrix.rid-os }}-${{ matrix.arch }} \
+          -p:ObjCopyName=arm-linux-gnueabihf-objcopy \
+          -p:LinkerFlavor=lld \
+          --self-contained true
+          
+    - name: Publish CLI Project (Linux ARM64)
+      if: matrix.rid-os == 'linux' && matrix.arch == 'arm64'
+      shell: bash
+      run: |
+        dotnet publish ./src/RSML.CLI/RSML.CLI.csproj \
+          -c Release \
+          -r ${{ matrix.rid-os }}-${{ matrix.arch }} \
+          -o ./dist/RSML.CLI-${{ matrix.rid-os }}-${{ matrix.arch }} \
+          -p:ObjCopyName=aarch64-linux-gnu-objcopy \
+          -p:LinkerFlavor=lld \
           --self-contained true
 
-    - name: Upload Artifacts
+    - name: Upload Native Artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: binaries-${{ matrix.rid-os }}-${{ matrix.arch }}
-        path: ./dist/
+        name: rsml-native-${{ matrix.rid-os }}-${{ matrix.arch }}
+        path: ./dist/RSML.Native-${{ matrix.rid-os }}-${{ matrix.arch }}
+        if-no-files-found: error
+        
+    - name: Upload CLI Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: rsml-cli-${{ matrix.rid-os }}-${{ matrix.arch }}
+        path: ./dist/RSML.CLI-${{ matrix.rid-os }}-${{ matrix.arch }}
+        if-no-files-found: error
 
   deploy:
+    permissions:
+      id-token: write
+      contents: write
+
     needs: build-binaries
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Code
       uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '8.0.x'
+        dotnet-version: '10.0.x'
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v7
+      with:
+        node-version: 24
 
     - name: Download All Artifacts
       uses: actions/download-artifact@v4
@@ -91,24 +181,45 @@ jobs:
     - name: Pack Projects
       run: dotnet pack --configuration Release --no-build --output ./nupkgs
 
-    - name: Push to NuGet
-      run: |
-        dotnet nuget push "./nupkgs/*.nupkg" \
-          --api-key ${{ secrets.NUGET_API_KEY_RSML }} \
-          --source "https://api.nuget.org/v3/index.json" \
-          --skip-duplicate
+    # Get a short-lived NuGet API key
+    - name: NuGet login (OIDC → temp API key)
+      uses: NuGet/login@v1
+      id: login
+      with:
+        user: ${{ secrets.NUGET_USER }}
 
+    #- name: Push to NuGet
+    #  run: |
+    #    dotnet nuget push "./nupkgs/*.nupkg" \
+    #    --api-key ${{ steps.login.outputs.NUGET_API_KEY }} \
+    #    --source "https://api.nuget.org/v3/index.json" \
+    #    --skip-duplicate
+
+    - name: Generate changelog
+      run: |
+        npx git-cliff@latest -o ${{ github.workspace }}-CHANGELOG.md --latest
+        cat ${{ github.workspace }}-CHANGELOG.md
+        
     - name: Prepare Release Assets
       run: |
         mkdir ./release-assets
         cd ./all-binaries
+        
         for dir in *; do
-          tar -czf "../release-assets/${dir}.tar.gz" -C "$dir" .
+          # Check if the folder directory belongs to Windows ('win')
+          if [[ "$dir" == *"-win-"* ]]; then
+            echo "Windows: ../release-assets/${dir}.zip"
+            # no nesting
+            (cd "$dir" && zip -r "../../release-assets/${dir}.zip" .)
+          else
+            echo "Linux/macOS: ../release-assets/${dir}.tar.gz"
+            tar -czf "../release-assets/${dir}.tar.gz" -C "$dir" .
+          fi
         done
 
-    - name: Create GitHub Release
-      uses: softprops/action-gh-release@v2
-      with:
-        files: ./release-assets/*.tar.gz
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #- name: Create GitHub Release
+    #  uses: softprops/action-gh-release@v3
+    #  with:
+    #    files: ./release-assets/*.tar.gz
+    #    body_path: ${{ github.workspace }}-CHANGELOG.txt
+    #    name: RSML ${{ github.ref_name }}
