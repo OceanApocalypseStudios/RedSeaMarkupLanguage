@@ -2,8 +2,10 @@
 items:
 - uid: OceanApocalypseStudios.RSML.Language.Parsing
   commentId: N:OceanApocalypseStudios.RSML.Language.Parsing
-  id: OceanApocalypseStudios.RSML.Language.Parsing
+  id: Parsing
+  parent: OceanApocalypseStudios.RSML.Language
   children:
+  - OceanApocalypseStudios.RSML.Language.Parsing.IParser
   - OceanApocalypseStudios.RSML.Language.Parsing.Parser
   langs:
   - csharp
@@ -15,9 +17,15 @@ items:
   assemblies:
   - RSML
 references:
+- uid: OceanApocalypseStudios.RSML.Language.Parsing.IParser
+  commentId: T:OceanApocalypseStudios.RSML.Language.Parsing.IParser
+  parent: OceanApocalypseStudios.RSML.Language.Parsing
+  href: OceanApocalypseStudios.RSML.Language.Parsing.IParser.html
+  name: IParser
+  nameWithType: IParser
+  fullName: OceanApocalypseStudios.RSML.Language.Parsing.IParser
 - uid: OceanApocalypseStudios.RSML.Language.Parsing.Parser
   commentId: T:OceanApocalypseStudios.RSML.Language.Parsing.Parser
-  parent: OceanApocalypseStudios.RSML.Language.Parsing
   href: OceanApocalypseStudios.RSML.Language.Parsing.Parser.html
   name: Parser
   nameWithType: Parser

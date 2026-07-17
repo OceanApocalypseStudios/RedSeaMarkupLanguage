@@ -1,6 +1,6 @@
 # Why 400 tests?
-> [!ARTICLE]
 > Written by [Matthew](https://github.com/mf366-dev) at [OceanApocalypseStudios](https://github.com/OceanApocalypseStudios) on July 14, 2026.
+> 
 > It will take about 1:45 to read this article at 220 WPM _(average reading speed)_.
 
 Before we get into the article, I want to inform you it will be much shorter than the last one, mostly because, currently, the focus is finishing [#60](https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/issues/60) and finally moving on to RSML's lexer and respective modularity system.

@@ -1,0 +1,1455 @@
+### YamlMime:ManagedReference
+items:
+- uid: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset
+  commentId: T:OceanApocalypseStudios.RSML.Extensibility.LexerRuleset
+  id: LexerRuleset
+  parent: OceanApocalypseStudios.RSML.Extensibility
+  children:
+  - OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Add(OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  - OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Clear
+  - OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Contains(OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  - OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.CopyTo(OceanApocalypseStudios.RSML.Extensibility.ILexerRule[],System.Int32)
+  - OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Count
+  - OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.GetEnumerator
+  - OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.IsReadOnly
+  - OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Remove(OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  - OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.System#Collections#IEnumerable#GetEnumerator
+  langs:
+  - csharp
+  - vb
+  name: LexerRuleset
+  nameWithType: LexerRuleset
+  fullName: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset
+  type: Struct
+  source:
+    remote:
+      path: src/RSML.Extensibility/LexerRuleset.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: LexerRuleset
+    path: ../src/RSML.Extensibility/LexerRuleset.cs
+    startLine: 6
+  assemblies:
+  - RSML.Extensibility
+  namespace: OceanApocalypseStudios.RSML.Extensibility
+  syntax:
+    content: 'public struct LexerRuleset : ICollection<ILexerRule>, IEnumerable<ILexerRule>, IEnumerable'
+    content.vb: Public Structure LexerRuleset Implements ICollection(Of ILexerRule), IEnumerable(Of ILexerRule), IEnumerable
+  implements:
+  - System.Collections.Generic.ICollection{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}
+  - System.Collections.Generic.IEnumerable{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}
+  - System.Collections.IEnumerable
+  inheritedMembers:
+  - System.ValueType.Equals(System.Object)
+  - System.ValueType.GetHashCode
+  - System.ValueType.ToString
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+- uid: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Count
+  commentId: P:OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Count
+  id: Count
+  parent: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset
+  langs:
+  - csharp
+  - vb
+  name: Count
+  nameWithType: LexerRuleset.Count
+  fullName: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Count
+  type: Property
+  source:
+    remote:
+      path: src/RSML.Extensibility/LexerRuleset.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Count
+    path: ../src/RSML.Extensibility/LexerRuleset.cs
+    startLine: 10
+  assemblies:
+  - RSML.Extensibility
+  namespace: OceanApocalypseStudios.RSML.Extensibility
+  summary: Gets the number of elements contained in the <xref href="System.Collections.Generic.ICollection%601" data-throw-if-not-resolved="false"></xref>.
+  example: []
+  syntax:
+    content: public int Count { get; }
+    parameters: []
+    return:
+      type: System.Int32
+      description: The number of elements contained in the <xref href="System.Collections.Generic.ICollection%601" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public ReadOnly Property Count As Integer
+  overload: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Count*
+  implements:
+  - System.Collections.Generic.ICollection{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}.Count
+- uid: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.IsReadOnly
+  commentId: P:OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.IsReadOnly
+  id: IsReadOnly
+  parent: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset
+  langs:
+  - csharp
+  - vb
+  name: IsReadOnly
+  nameWithType: LexerRuleset.IsReadOnly
+  fullName: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.IsReadOnly
+  type: Property
+  source:
+    remote:
+      path: src/RSML.Extensibility/LexerRuleset.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: IsReadOnly
+    path: ../src/RSML.Extensibility/LexerRuleset.cs
+    startLine: 12
+  assemblies:
+  - RSML.Extensibility
+  namespace: OceanApocalypseStudios.RSML.Extensibility
+  summary: Gets a value indicating whether the <xref href="System.Collections.Generic.ICollection%601" data-throw-if-not-resolved="false"></xref> is read-only.
+  example: []
+  syntax:
+    content: public bool IsReadOnly { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+      description: <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the <xref href="System.Collections.Generic.ICollection%601" data-throw-if-not-resolved="false"></xref> is read-only; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.
+    content.vb: Public ReadOnly Property IsReadOnly As Boolean
+  overload: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.IsReadOnly*
+  implements:
+  - System.Collections.Generic.ICollection{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}.IsReadOnly
+- uid: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Add(OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  commentId: M:OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Add(OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  id: Add(OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  parent: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset
+  langs:
+  - csharp
+  - vb
+  name: Add(ILexerRule)
+  nameWithType: LexerRuleset.Add(ILexerRule)
+  fullName: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Add(OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  type: Method
+  source:
+    remote:
+      path: src/RSML.Extensibility/LexerRuleset.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Add
+    path: ../src/RSML.Extensibility/LexerRuleset.cs
+    startLine: 14
+  assemblies:
+  - RSML.Extensibility
+  namespace: OceanApocalypseStudios.RSML.Extensibility
+  summary: Adds an item to the <xref href="System.Collections.Generic.ICollection%601" data-throw-if-not-resolved="false"></xref>.
+  example: []
+  syntax:
+    content: public void Add(ILexerRule item)
+    parameters:
+    - id: item
+      type: OceanApocalypseStudios.RSML.Extensibility.ILexerRule
+      description: The object to add to the <xref href="System.Collections.Generic.ICollection%601" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Sub Add(item As ILexerRule)
+  overload: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Add*
+  exceptions:
+  - type: System.NotSupportedException
+    commentId: T:System.NotSupportedException
+    description: The <xref href="System.Collections.Generic.ICollection%601" data-throw-if-not-resolved="false"></xref> is read-only.
+  implements:
+  - System.Collections.Generic.ICollection{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}.Add(OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+- uid: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Clear
+  commentId: M:OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Clear
+  id: Clear
+  parent: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset
+  langs:
+  - csharp
+  - vb
+  name: Clear()
+  nameWithType: LexerRuleset.Clear()
+  fullName: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Clear()
+  type: Method
+  source:
+    remote:
+      path: src/RSML.Extensibility/LexerRuleset.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Clear
+    path: ../src/RSML.Extensibility/LexerRuleset.cs
+    startLine: 15
+  assemblies:
+  - RSML.Extensibility
+  namespace: OceanApocalypseStudios.RSML.Extensibility
+  summary: Removes all items from the <xref href="System.Collections.Generic.ICollection%601" data-throw-if-not-resolved="false"></xref>.
+  example: []
+  syntax:
+    content: public void Clear()
+    content.vb: Public Sub Clear()
+  overload: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Clear*
+  exceptions:
+  - type: System.NotSupportedException
+    commentId: T:System.NotSupportedException
+    description: The <xref href="System.Collections.Generic.ICollection%601" data-throw-if-not-resolved="false"></xref> is read-only.
+  implements:
+  - System.Collections.Generic.ICollection{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}.Clear
+- uid: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Contains(OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  commentId: M:OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Contains(OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  id: Contains(OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  parent: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset
+  langs:
+  - csharp
+  - vb
+  name: Contains(ILexerRule)
+  nameWithType: LexerRuleset.Contains(ILexerRule)
+  fullName: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Contains(OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  type: Method
+  source:
+    remote:
+      path: src/RSML.Extensibility/LexerRuleset.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Contains
+    path: ../src/RSML.Extensibility/LexerRuleset.cs
+    startLine: 16
+  assemblies:
+  - RSML.Extensibility
+  namespace: OceanApocalypseStudios.RSML.Extensibility
+  summary: Determines whether the <xref href="System.Collections.Generic.ICollection%601" data-throw-if-not-resolved="false"></xref> contains a specific value.
+  example: []
+  syntax:
+    content: public bool Contains(ILexerRule item)
+    parameters:
+    - id: item
+      type: OceanApocalypseStudios.RSML.Extensibility.ILexerRule
+      description: The object to locate in the <xref href="System.Collections.Generic.ICollection%601" data-throw-if-not-resolved="false"></xref>.
+    return:
+      type: System.Boolean
+      description: <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if <code class="paramref">item</code> is found in the <xref href="System.Collections.Generic.ICollection%601" data-throw-if-not-resolved="false"></xref>; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.
+    content.vb: Public Function Contains(item As ILexerRule) As Boolean
+  overload: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Contains*
+  implements:
+  - System.Collections.Generic.ICollection{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}.Contains(OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+- uid: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.CopyTo(OceanApocalypseStudios.RSML.Extensibility.ILexerRule[],System.Int32)
+  commentId: M:OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.CopyTo(OceanApocalypseStudios.RSML.Extensibility.ILexerRule[],System.Int32)
+  id: CopyTo(OceanApocalypseStudios.RSML.Extensibility.ILexerRule[],System.Int32)
+  parent: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset
+  langs:
+  - csharp
+  - vb
+  name: CopyTo(ILexerRule[], int)
+  nameWithType: LexerRuleset.CopyTo(ILexerRule[], int)
+  fullName: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.CopyTo(OceanApocalypseStudios.RSML.Extensibility.ILexerRule[], int)
+  type: Method
+  source:
+    remote:
+      path: src/RSML.Extensibility/LexerRuleset.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: CopyTo
+    path: ../src/RSML.Extensibility/LexerRuleset.cs
+    startLine: 17
+  assemblies:
+  - RSML.Extensibility
+  namespace: OceanApocalypseStudios.RSML.Extensibility
+  summary: Copies the elements of the <xref href="System.Collections.Generic.ICollection%601" data-throw-if-not-resolved="false"></xref> to an <xref href="System.Array" data-throw-if-not-resolved="false"></xref>, starting at a particular <xref href="System.Array" data-throw-if-not-resolved="false"></xref> index.
+  example: []
+  syntax:
+    content: public void CopyTo(ILexerRule[] array, int arrayIndex)
+    parameters:
+    - id: array
+      type: OceanApocalypseStudios.RSML.Extensibility.ILexerRule[]
+      description: The one-dimensional <xref href="System.Array" data-throw-if-not-resolved="false"></xref> that is the destination of the elements copied from <xref href="System.Collections.Generic.ICollection%601" data-throw-if-not-resolved="false"></xref>. The <xref href="System.Array" data-throw-if-not-resolved="false"></xref> must have zero-based indexing.
+    - id: arrayIndex
+      type: System.Int32
+      description: The zero-based index in <code class="paramref">array</code> at which copying begins.
+    content.vb: Public Sub CopyTo(array As ILexerRule(), arrayIndex As Integer)
+  overload: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.CopyTo*
+  exceptions:
+  - type: System.ArgumentNullException
+    commentId: T:System.ArgumentNullException
+    description: <code class="paramref">array</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.
+  - type: System.ArgumentOutOfRangeException
+    commentId: T:System.ArgumentOutOfRangeException
+    description: <code class="paramref">arrayIndex</code> is less than 0.
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: The number of elements in the source <xref href="System.Collections.Generic.ICollection%601" data-throw-if-not-resolved="false"></xref> is greater than the available space from <code class="paramref">arrayIndex</code> to the end of the destination <code class="paramref">array</code>.
+  implements:
+  - System.Collections.Generic.ICollection{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}.CopyTo(OceanApocalypseStudios.RSML.Extensibility.ILexerRule[],System.Int32)
+  nameWithType.vb: LexerRuleset.CopyTo(ILexerRule(), Integer)
+  fullName.vb: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.CopyTo(OceanApocalypseStudios.RSML.Extensibility.ILexerRule(), Integer)
+  name.vb: CopyTo(ILexerRule(), Integer)
+- uid: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.GetEnumerator
+  commentId: M:OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.GetEnumerator
+  id: GetEnumerator
+  parent: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset
+  langs:
+  - csharp
+  - vb
+  name: GetEnumerator()
+  nameWithType: LexerRuleset.GetEnumerator()
+  fullName: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.GetEnumerator()
+  type: Method
+  source:
+    remote:
+      path: src/RSML.Extensibility/LexerRuleset.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: GetEnumerator
+    path: ../src/RSML.Extensibility/LexerRuleset.cs
+    startLine: 18
+  assemblies:
+  - RSML.Extensibility
+  namespace: OceanApocalypseStudios.RSML.Extensibility
+  summary: Returns an enumerator that iterates through the collection.
+  example: []
+  syntax:
+    content: public IEnumerator<ILexerRule> GetEnumerator()
+    return:
+      type: System.Collections.Generic.IEnumerator{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}
+      description: An enumerator that can be used to iterate through the collection.
+    content.vb: Public Function GetEnumerator() As IEnumerator(Of ILexerRule)
+  overload: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.GetEnumerator*
+  implements:
+  - System.Collections.Generic.IEnumerable{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}.GetEnumerator
+- uid: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Remove(OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  commentId: M:OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Remove(OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  id: Remove(OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  parent: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset
+  langs:
+  - csharp
+  - vb
+  name: Remove(ILexerRule)
+  nameWithType: LexerRuleset.Remove(ILexerRule)
+  fullName: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Remove(OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  type: Method
+  source:
+    remote:
+      path: src/RSML.Extensibility/LexerRuleset.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Remove
+    path: ../src/RSML.Extensibility/LexerRuleset.cs
+    startLine: 19
+  assemblies:
+  - RSML.Extensibility
+  namespace: OceanApocalypseStudios.RSML.Extensibility
+  summary: Removes the first occurrence of a specific object from the <xref href="System.Collections.Generic.ICollection%601" data-throw-if-not-resolved="false"></xref>.
+  example: []
+  syntax:
+    content: public bool Remove(ILexerRule item)
+    parameters:
+    - id: item
+      type: OceanApocalypseStudios.RSML.Extensibility.ILexerRule
+      description: The object to remove from the <xref href="System.Collections.Generic.ICollection%601" data-throw-if-not-resolved="false"></xref>.
+    return:
+      type: System.Boolean
+      description: <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if <code class="paramref">item</code> was successfully removed from the <xref href="System.Collections.Generic.ICollection%601" data-throw-if-not-resolved="false"></xref>; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>. This method also returns <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a> if <code class="paramref">item</code> is not found in the original <xref href="System.Collections.Generic.ICollection%601" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Function Remove(item As ILexerRule) As Boolean
+  overload: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Remove*
+  exceptions:
+  - type: System.NotSupportedException
+    commentId: T:System.NotSupportedException
+    description: The <xref href="System.Collections.Generic.ICollection%601" data-throw-if-not-resolved="false"></xref> is read-only.
+  implements:
+  - System.Collections.Generic.ICollection{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}.Remove(OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+- uid: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.System#Collections#IEnumerable#GetEnumerator
+  commentId: M:OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.System#Collections#IEnumerable#GetEnumerator
+  id: System#Collections#IEnumerable#GetEnumerator
+  isEii: true
+  parent: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset
+  langs:
+  - csharp
+  - vb
+  name: IEnumerable.GetEnumerator()
+  nameWithType: LexerRuleset.IEnumerable.GetEnumerator()
+  fullName: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.System.Collections.IEnumerable.GetEnumerator()
+  type: Method
+  source:
+    remote:
+      path: src/RSML.Extensibility/LexerRuleset.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: System.Collections.IEnumerable.GetEnumerator
+    path: ../src/RSML.Extensibility/LexerRuleset.cs
+    startLine: 20
+  assemblies:
+  - RSML.Extensibility
+  namespace: OceanApocalypseStudios.RSML.Extensibility
+  summary: Returns an enumerator that iterates through a collection.
+  example: []
+  syntax:
+    content: IEnumerator IEnumerable.GetEnumerator()
+    return:
+      type: System.Collections.IEnumerator
+      description: An <xref href="System.Collections.IEnumerator" data-throw-if-not-resolved="false"></xref> object that can be used to iterate through the collection.
+    content.vb: ''
+  overload: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.System#Collections#IEnumerable#GetEnumerator*
+  implements:
+  - System.Collections.IEnumerable.GetEnumerator
+  nameWithType.vb: ''
+  fullName.vb: ''
+  name.vb: ''
+references:
+- uid: OceanApocalypseStudios.RSML.Extensibility
+  commentId: N:OceanApocalypseStudios.RSML.Extensibility
+  href: OceanApocalypseStudios.html
+  name: OceanApocalypseStudios.RSML.Extensibility
+  nameWithType: OceanApocalypseStudios.RSML.Extensibility
+  fullName: OceanApocalypseStudios.RSML.Extensibility
+  spec.csharp:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Extensibility
+    name: Extensibility
+    href: OceanApocalypseStudios.RSML.Extensibility.html
+  spec.vb:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Extensibility
+    name: Extensibility
+    href: OceanApocalypseStudios.RSML.Extensibility.html
+- uid: System.Collections.Generic.ICollection{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}
+  commentId: T:System.Collections.Generic.ICollection{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.ICollection`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1
+  name: ICollection<ILexerRule>
+  nameWithType: ICollection<ILexerRule>
+  fullName: System.Collections.Generic.ICollection<OceanApocalypseStudios.RSML.Extensibility.ILexerRule>
+  nameWithType.vb: ICollection(Of ILexerRule)
+  fullName.vb: System.Collections.Generic.ICollection(Of OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  name.vb: ICollection(Of ILexerRule)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1
+    name: ICollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1
+  - name: <
+  - uid: OceanApocalypseStudios.RSML.Extensibility.ILexerRule
+    name: ILexerRule
+    href: OceanApocalypseStudios.RSML.Extensibility.ILexerRule.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1
+    name: ICollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: OceanApocalypseStudios.RSML.Extensibility.ILexerRule
+    name: ILexerRule
+    href: OceanApocalypseStudios.RSML.Extensibility.ILexerRule.html
+  - name: )
+- uid: System.Collections.Generic.IEnumerable{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}
+  commentId: T:System.Collections.Generic.IEnumerable{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<ILexerRule>
+  nameWithType: IEnumerable<ILexerRule>
+  fullName: System.Collections.Generic.IEnumerable<OceanApocalypseStudios.RSML.Extensibility.ILexerRule>
+  nameWithType.vb: IEnumerable(Of ILexerRule)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  name.vb: IEnumerable(Of ILexerRule)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: OceanApocalypseStudios.RSML.Extensibility.ILexerRule
+    name: ILexerRule
+    href: OceanApocalypseStudios.RSML.Extensibility.ILexerRule.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: OceanApocalypseStudios.RSML.Extensibility.ILexerRule
+    name: ILexerRule
+    href: OceanApocalypseStudios.RSML.Extensibility.ILexerRule.html
+  - name: )
+- uid: System.Collections.IEnumerable
+  commentId: T:System.Collections.IEnumerable
+  parent: System.Collections
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.ienumerable
+  name: IEnumerable
+  nameWithType: IEnumerable
+  fullName: System.Collections.IEnumerable
+- uid: System.ValueType.Equals(System.Object)
+  commentId: M:System.ValueType.Equals(System.Object)
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  name: Equals(object)
+  nameWithType: ValueType.Equals(object)
+  fullName: System.ValueType.Equals(object)
+  nameWithType.vb: ValueType.Equals(Object)
+  fullName.vb: System.ValueType.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.ValueType.GetHashCode
+  commentId: M:System.ValueType.GetHashCode
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  name: GetHashCode()
+  nameWithType: ValueType.GetHashCode()
+  fullName: System.ValueType.GetHashCode()
+  spec.csharp:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Collections.Generic.ICollection`1
+  commentId: T:System.Collections.Generic.ICollection`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1
+  name: ICollection<T>
+  nameWithType: ICollection<T>
+  fullName: System.Collections.Generic.ICollection<T>
+  nameWithType.vb: ICollection(Of T)
+  fullName.vb: System.Collections.Generic.ICollection(Of T)
+  name.vb: ICollection(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1
+    name: ICollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1
+    name: ICollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections
+  commentId: N:System.Collections
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections
+  nameWithType: System.Collections
+  fullName: System.Collections
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Count*
+  commentId: Overload:OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Count
+  href: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Count.html#OceanApocalypseStudios_RSML_Extensibility_LexerRuleset_Count
+  name: Count
+  nameWithType: LexerRuleset.Count
+  fullName: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Count
+- uid: System.Collections.Generic.ICollection{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}.Count
+  commentId: P:System.Collections.Generic.ICollection{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}.Count
+  parent: System.Collections.Generic.ICollection{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}
+  definition: System.Collections.Generic.ICollection`1.Count
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.count
+  name: Count
+  nameWithType: ICollection<ILexerRule>.Count
+  fullName: System.Collections.Generic.ICollection<OceanApocalypseStudios.RSML.Extensibility.ILexerRule>.Count
+  nameWithType.vb: ICollection(Of ILexerRule).Count
+  fullName.vb: System.Collections.Generic.ICollection(Of OceanApocalypseStudios.RSML.Extensibility.ILexerRule).Count
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: System.Collections.Generic.ICollection`1.Count
+  commentId: P:System.Collections.Generic.ICollection`1.Count
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.count
+  name: Count
+  nameWithType: ICollection<T>.Count
+  fullName: System.Collections.Generic.ICollection<T>.Count
+  nameWithType.vb: ICollection(Of T).Count
+  fullName.vb: System.Collections.Generic.ICollection(Of T).Count
+- uid: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.IsReadOnly*
+  commentId: Overload:OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.IsReadOnly
+  href: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.IsReadOnly.html#OceanApocalypseStudios_RSML_Extensibility_LexerRuleset_IsReadOnly
+  name: IsReadOnly
+  nameWithType: LexerRuleset.IsReadOnly
+  fullName: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.IsReadOnly
+- uid: System.Collections.Generic.ICollection{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}.IsReadOnly
+  commentId: P:System.Collections.Generic.ICollection{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}.IsReadOnly
+  parent: System.Collections.Generic.ICollection{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}
+  definition: System.Collections.Generic.ICollection`1.IsReadOnly
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.isreadonly
+  name: IsReadOnly
+  nameWithType: ICollection<ILexerRule>.IsReadOnly
+  fullName: System.Collections.Generic.ICollection<OceanApocalypseStudios.RSML.Extensibility.ILexerRule>.IsReadOnly
+  nameWithType.vb: ICollection(Of ILexerRule).IsReadOnly
+  fullName.vb: System.Collections.Generic.ICollection(Of OceanApocalypseStudios.RSML.Extensibility.ILexerRule).IsReadOnly
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: System.Collections.Generic.ICollection`1.IsReadOnly
+  commentId: P:System.Collections.Generic.ICollection`1.IsReadOnly
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.isreadonly
+  name: IsReadOnly
+  nameWithType: ICollection<T>.IsReadOnly
+  fullName: System.Collections.Generic.ICollection<T>.IsReadOnly
+  nameWithType.vb: ICollection(Of T).IsReadOnly
+  fullName.vb: System.Collections.Generic.ICollection(Of T).IsReadOnly
+- uid: System.NotSupportedException
+  commentId: T:System.NotSupportedException
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.notsupportedexception
+  name: NotSupportedException
+  nameWithType: NotSupportedException
+  fullName: System.NotSupportedException
+- uid: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Add*
+  commentId: Overload:OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Add
+  href: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Add.html#OceanApocalypseStudios_RSML_Extensibility_LexerRuleset_Add_OceanApocalypseStudios_RSML_Extensibility_ILexerRule_
+  name: Add
+  nameWithType: LexerRuleset.Add
+  fullName: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Add
+- uid: System.Collections.Generic.ICollection{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}.Add(OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  commentId: M:System.Collections.Generic.ICollection{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}.Add(OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  parent: System.Collections.Generic.ICollection{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}
+  definition: System.Collections.Generic.ICollection`1.Add(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.add
+  name: Add(ILexerRule)
+  nameWithType: ICollection<ILexerRule>.Add(ILexerRule)
+  fullName: System.Collections.Generic.ICollection<OceanApocalypseStudios.RSML.Extensibility.ILexerRule>.Add(OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  nameWithType.vb: ICollection(Of ILexerRule).Add(ILexerRule)
+  fullName.vb: System.Collections.Generic.ICollection(Of OceanApocalypseStudios.RSML.Extensibility.ILexerRule).Add(OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}.Add(OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+    name: Add
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.add
+  - name: (
+  - uid: OceanApocalypseStudios.RSML.Extensibility.ILexerRule
+    name: ILexerRule
+    href: OceanApocalypseStudios.RSML.Extensibility.ILexerRule.html
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}.Add(OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+    name: Add
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.add
+  - name: (
+  - uid: OceanApocalypseStudios.RSML.Extensibility.ILexerRule
+    name: ILexerRule
+    href: OceanApocalypseStudios.RSML.Extensibility.ILexerRule.html
+  - name: )
+- uid: OceanApocalypseStudios.RSML.Extensibility.ILexerRule
+  commentId: T:OceanApocalypseStudios.RSML.Extensibility.ILexerRule
+  parent: OceanApocalypseStudios.RSML.Extensibility
+  href: OceanApocalypseStudios.RSML.Extensibility.ILexerRule.html
+  name: ILexerRule
+  nameWithType: ILexerRule
+  fullName: OceanApocalypseStudios.RSML.Extensibility.ILexerRule
+- uid: System.Collections.Generic.ICollection`1.Add(`0)
+  commentId: M:System.Collections.Generic.ICollection`1.Add(`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.add
+  name: Add(T)
+  nameWithType: ICollection<T>.Add(T)
+  fullName: System.Collections.Generic.ICollection<T>.Add(T)
+  nameWithType.vb: ICollection(Of T).Add(T)
+  fullName.vb: System.Collections.Generic.ICollection(Of T).Add(T)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1.Add(`0)
+    name: Add
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.add
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1.Add(`0)
+    name: Add
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.add
+  - name: (
+  - name: T
+  - name: )
+- uid: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Clear*
+  commentId: Overload:OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Clear
+  href: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Clear.html#OceanApocalypseStudios_RSML_Extensibility_LexerRuleset_Clear
+  name: Clear
+  nameWithType: LexerRuleset.Clear
+  fullName: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Clear
+- uid: System.Collections.Generic.ICollection{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}.Clear
+  commentId: M:System.Collections.Generic.ICollection{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}.Clear
+  parent: System.Collections.Generic.ICollection{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}
+  definition: System.Collections.Generic.ICollection`1.Clear
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.clear
+  name: Clear()
+  nameWithType: ICollection<ILexerRule>.Clear()
+  fullName: System.Collections.Generic.ICollection<OceanApocalypseStudios.RSML.Extensibility.ILexerRule>.Clear()
+  nameWithType.vb: ICollection(Of ILexerRule).Clear()
+  fullName.vb: System.Collections.Generic.ICollection(Of OceanApocalypseStudios.RSML.Extensibility.ILexerRule).Clear()
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}.Clear
+    name: Clear
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.clear
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}.Clear
+    name: Clear
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.clear
+  - name: (
+  - name: )
+- uid: System.Collections.Generic.ICollection`1.Clear
+  commentId: M:System.Collections.Generic.ICollection`1.Clear
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.clear
+  name: Clear()
+  nameWithType: ICollection<T>.Clear()
+  fullName: System.Collections.Generic.ICollection<T>.Clear()
+  nameWithType.vb: ICollection(Of T).Clear()
+  fullName.vb: System.Collections.Generic.ICollection(Of T).Clear()
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1.Clear
+    name: Clear
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.clear
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1.Clear
+    name: Clear
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.clear
+  - name: (
+  - name: )
+- uid: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Contains*
+  commentId: Overload:OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Contains
+  href: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Contains.html#OceanApocalypseStudios_RSML_Extensibility_LexerRuleset_Contains_OceanApocalypseStudios_RSML_Extensibility_ILexerRule_
+  name: Contains
+  nameWithType: LexerRuleset.Contains
+  fullName: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Contains
+- uid: System.Collections.Generic.ICollection{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}.Contains(OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  commentId: M:System.Collections.Generic.ICollection{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}.Contains(OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  parent: System.Collections.Generic.ICollection{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}
+  definition: System.Collections.Generic.ICollection`1.Contains(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.contains
+  name: Contains(ILexerRule)
+  nameWithType: ICollection<ILexerRule>.Contains(ILexerRule)
+  fullName: System.Collections.Generic.ICollection<OceanApocalypseStudios.RSML.Extensibility.ILexerRule>.Contains(OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  nameWithType.vb: ICollection(Of ILexerRule).Contains(ILexerRule)
+  fullName.vb: System.Collections.Generic.ICollection(Of OceanApocalypseStudios.RSML.Extensibility.ILexerRule).Contains(OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}.Contains(OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+    name: Contains
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.contains
+  - name: (
+  - uid: OceanApocalypseStudios.RSML.Extensibility.ILexerRule
+    name: ILexerRule
+    href: OceanApocalypseStudios.RSML.Extensibility.ILexerRule.html
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}.Contains(OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+    name: Contains
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.contains
+  - name: (
+  - uid: OceanApocalypseStudios.RSML.Extensibility.ILexerRule
+    name: ILexerRule
+    href: OceanApocalypseStudios.RSML.Extensibility.ILexerRule.html
+  - name: )
+- uid: System.Collections.Generic.ICollection`1.Contains(`0)
+  commentId: M:System.Collections.Generic.ICollection`1.Contains(`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.contains
+  name: Contains(T)
+  nameWithType: ICollection<T>.Contains(T)
+  fullName: System.Collections.Generic.ICollection<T>.Contains(T)
+  nameWithType.vb: ICollection(Of T).Contains(T)
+  fullName.vb: System.Collections.Generic.ICollection(Of T).Contains(T)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1.Contains(`0)
+    name: Contains
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.contains
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1.Contains(`0)
+    name: Contains
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.contains
+  - name: (
+  - name: T
+  - name: )
+- uid: System.Array
+  commentId: T:System.Array
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.array
+  name: Array
+  nameWithType: Array
+  fullName: System.Array
+- uid: System.ArgumentNullException
+  commentId: T:System.ArgumentNullException
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.argumentnullexception
+  name: ArgumentNullException
+  nameWithType: ArgumentNullException
+  fullName: System.ArgumentNullException
+- uid: System.ArgumentOutOfRangeException
+  commentId: T:System.ArgumentOutOfRangeException
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.argumentoutofrangeexception
+  name: ArgumentOutOfRangeException
+  nameWithType: ArgumentOutOfRangeException
+  fullName: System.ArgumentOutOfRangeException
+- uid: System.ArgumentException
+  commentId: T:System.ArgumentException
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.argumentexception
+  name: ArgumentException
+  nameWithType: ArgumentException
+  fullName: System.ArgumentException
+- uid: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.CopyTo*
+  commentId: Overload:OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.CopyTo
+  href: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.CopyTo.html#OceanApocalypseStudios_RSML_Extensibility_LexerRuleset_CopyTo_OceanApocalypseStudios_RSML_Extensibility_ILexerRule___System_Int32_
+  name: CopyTo
+  nameWithType: LexerRuleset.CopyTo
+  fullName: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.CopyTo
+- uid: System.Collections.Generic.ICollection{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}.CopyTo(OceanApocalypseStudios.RSML.Extensibility.ILexerRule[],System.Int32)
+  commentId: M:System.Collections.Generic.ICollection{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}.CopyTo(OceanApocalypseStudios.RSML.Extensibility.ILexerRule[],System.Int32)
+  parent: System.Collections.Generic.ICollection{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}
+  definition: System.Collections.Generic.ICollection`1.CopyTo(`0[],System.Int32)
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.copyto
+  name: CopyTo(ILexerRule[], int)
+  nameWithType: ICollection<ILexerRule>.CopyTo(ILexerRule[], int)
+  fullName: System.Collections.Generic.ICollection<OceanApocalypseStudios.RSML.Extensibility.ILexerRule>.CopyTo(OceanApocalypseStudios.RSML.Extensibility.ILexerRule[], int)
+  nameWithType.vb: ICollection(Of ILexerRule).CopyTo(ILexerRule(), Integer)
+  fullName.vb: System.Collections.Generic.ICollection(Of OceanApocalypseStudios.RSML.Extensibility.ILexerRule).CopyTo(OceanApocalypseStudios.RSML.Extensibility.ILexerRule(), Integer)
+  name.vb: CopyTo(ILexerRule(), Integer)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}.CopyTo(OceanApocalypseStudios.RSML.Extensibility.ILexerRule[],System.Int32)
+    name: CopyTo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.copyto
+  - name: (
+  - uid: OceanApocalypseStudios.RSML.Extensibility.ILexerRule
+    name: ILexerRule
+    href: OceanApocalypseStudios.RSML.Extensibility.ILexerRule.html
+  - name: '['
+  - name: ']'
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}.CopyTo(OceanApocalypseStudios.RSML.Extensibility.ILexerRule[],System.Int32)
+    name: CopyTo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.copyto
+  - name: (
+  - uid: OceanApocalypseStudios.RSML.Extensibility.ILexerRule
+    name: ILexerRule
+    href: OceanApocalypseStudios.RSML.Extensibility.ILexerRule.html
+  - name: (
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: OceanApocalypseStudios.RSML.Extensibility.ILexerRule[]
+  isExternal: true
+  href: OceanApocalypseStudios.RSML.Extensibility.ILexerRule.html
+  name: ILexerRule[]
+  nameWithType: ILexerRule[]
+  fullName: OceanApocalypseStudios.RSML.Extensibility.ILexerRule[]
+  nameWithType.vb: ILexerRule()
+  fullName.vb: OceanApocalypseStudios.RSML.Extensibility.ILexerRule()
+  name.vb: ILexerRule()
+  spec.csharp:
+  - uid: OceanApocalypseStudios.RSML.Extensibility.ILexerRule
+    name: ILexerRule
+    href: OceanApocalypseStudios.RSML.Extensibility.ILexerRule.html
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: OceanApocalypseStudios.RSML.Extensibility.ILexerRule
+    name: ILexerRule
+    href: OceanApocalypseStudios.RSML.Extensibility.ILexerRule.html
+  - name: (
+  - name: )
+- uid: System.Collections.Generic.ICollection`1.CopyTo(`0[],System.Int32)
+  commentId: M:System.Collections.Generic.ICollection`1.CopyTo(`0[],System.Int32)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.copyto
+  name: CopyTo(T[], int)
+  nameWithType: ICollection<T>.CopyTo(T[], int)
+  fullName: System.Collections.Generic.ICollection<T>.CopyTo(T[], int)
+  nameWithType.vb: ICollection(Of T).CopyTo(T(), Integer)
+  fullName.vb: System.Collections.Generic.ICollection(Of T).CopyTo(T(), Integer)
+  name.vb: CopyTo(T(), Integer)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1.CopyTo(`0[],System.Int32)
+    name: CopyTo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.copyto
+  - name: (
+  - name: T
+  - name: '['
+  - name: ']'
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1.CopyTo(`0[],System.Int32)
+    name: CopyTo
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.copyto
+  - name: (
+  - name: T
+  - name: (
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.GetEnumerator*
+  commentId: Overload:OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.GetEnumerator
+  href: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.GetEnumerator.html#OceanApocalypseStudios_RSML_Extensibility_LexerRuleset_GetEnumerator
+  name: GetEnumerator
+  nameWithType: LexerRuleset.GetEnumerator
+  fullName: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.GetEnumerator
+- uid: System.Collections.Generic.IEnumerable{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}.GetEnumerator
+  commentId: M:System.Collections.Generic.IEnumerable{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}.GetEnumerator
+  parent: System.Collections.Generic.IEnumerable{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}
+  definition: System.Collections.Generic.IEnumerable`1.GetEnumerator
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1.getenumerator
+  name: GetEnumerator()
+  nameWithType: IEnumerable<ILexerRule>.GetEnumerator()
+  fullName: System.Collections.Generic.IEnumerable<OceanApocalypseStudios.RSML.Extensibility.ILexerRule>.GetEnumerator()
+  nameWithType.vb: IEnumerable(Of ILexerRule).GetEnumerator()
+  fullName.vb: System.Collections.Generic.IEnumerable(Of OceanApocalypseStudios.RSML.Extensibility.ILexerRule).GetEnumerator()
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}.GetEnumerator
+    name: GetEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1.getenumerator
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}.GetEnumerator
+    name: GetEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1.getenumerator
+  - name: (
+  - name: )
+- uid: System.Collections.Generic.IEnumerator{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}
+  commentId: T:System.Collections.Generic.IEnumerator{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerator`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1
+  name: IEnumerator<ILexerRule>
+  nameWithType: IEnumerator<ILexerRule>
+  fullName: System.Collections.Generic.IEnumerator<OceanApocalypseStudios.RSML.Extensibility.ILexerRule>
+  nameWithType.vb: IEnumerator(Of ILexerRule)
+  fullName.vb: System.Collections.Generic.IEnumerator(Of OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  name.vb: IEnumerator(Of ILexerRule)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerator`1
+    name: IEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1
+  - name: <
+  - uid: OceanApocalypseStudios.RSML.Extensibility.ILexerRule
+    name: ILexerRule
+    href: OceanApocalypseStudios.RSML.Extensibility.ILexerRule.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerator`1
+    name: IEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: OceanApocalypseStudios.RSML.Extensibility.ILexerRule
+    name: ILexerRule
+    href: OceanApocalypseStudios.RSML.Extensibility.ILexerRule.html
+  - name: )
+- uid: System.Collections.Generic.IEnumerable`1.GetEnumerator
+  commentId: M:System.Collections.Generic.IEnumerable`1.GetEnumerator
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1.getenumerator
+  name: GetEnumerator()
+  nameWithType: IEnumerable<T>.GetEnumerator()
+  fullName: System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+  nameWithType.vb: IEnumerable(Of T).GetEnumerator()
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T).GetEnumerator()
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1.GetEnumerator
+    name: GetEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1.getenumerator
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1.GetEnumerator
+    name: GetEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1.getenumerator
+  - name: (
+  - name: )
+- uid: System.Collections.Generic.IEnumerator`1
+  commentId: T:System.Collections.Generic.IEnumerator`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1
+  name: IEnumerator<T>
+  nameWithType: IEnumerator<T>
+  fullName: System.Collections.Generic.IEnumerator<T>
+  nameWithType.vb: IEnumerator(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerator(Of T)
+  name.vb: IEnumerator(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerator`1
+    name: IEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerator`1
+    name: IEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Remove*
+  commentId: Overload:OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Remove
+  href: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Remove.html#OceanApocalypseStudios_RSML_Extensibility_LexerRuleset_Remove_OceanApocalypseStudios_RSML_Extensibility_ILexerRule_
+  name: Remove
+  nameWithType: LexerRuleset.Remove
+  fullName: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Remove
+- uid: System.Collections.Generic.ICollection{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}.Remove(OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  commentId: M:System.Collections.Generic.ICollection{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}.Remove(OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  parent: System.Collections.Generic.ICollection{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}
+  definition: System.Collections.Generic.ICollection`1.Remove(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.remove
+  name: Remove(ILexerRule)
+  nameWithType: ICollection<ILexerRule>.Remove(ILexerRule)
+  fullName: System.Collections.Generic.ICollection<OceanApocalypseStudios.RSML.Extensibility.ILexerRule>.Remove(OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  nameWithType.vb: ICollection(Of ILexerRule).Remove(ILexerRule)
+  fullName.vb: System.Collections.Generic.ICollection(Of OceanApocalypseStudios.RSML.Extensibility.ILexerRule).Remove(OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}.Remove(OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+    name: Remove
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.remove
+  - name: (
+  - uid: OceanApocalypseStudios.RSML.Extensibility.ILexerRule
+    name: ILexerRule
+    href: OceanApocalypseStudios.RSML.Extensibility.ILexerRule.html
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection{OceanApocalypseStudios.RSML.Extensibility.ILexerRule}.Remove(OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+    name: Remove
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.remove
+  - name: (
+  - uid: OceanApocalypseStudios.RSML.Extensibility.ILexerRule
+    name: ILexerRule
+    href: OceanApocalypseStudios.RSML.Extensibility.ILexerRule.html
+  - name: )
+- uid: System.Collections.Generic.ICollection`1.Remove(`0)
+  commentId: M:System.Collections.Generic.ICollection`1.Remove(`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.remove
+  name: Remove(T)
+  nameWithType: ICollection<T>.Remove(T)
+  fullName: System.Collections.Generic.ICollection<T>.Remove(T)
+  nameWithType.vb: ICollection(Of T).Remove(T)
+  fullName.vb: System.Collections.Generic.ICollection(Of T).Remove(T)
+  spec.csharp:
+  - uid: System.Collections.Generic.ICollection`1.Remove(`0)
+    name: Remove
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.remove
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.Collections.Generic.ICollection`1.Remove(`0)
+    name: Remove
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1.remove
+  - name: (
+  - name: T
+  - name: )
+- uid: System.Collections.IEnumerator
+  commentId: T:System.Collections.IEnumerator
+  parent: System.Collections
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.ienumerator
+  name: IEnumerator
+  nameWithType: IEnumerator
+  fullName: System.Collections.IEnumerator
+- uid: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.System#Collections#IEnumerable#GetEnumerator*
+  commentId: Overload:OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.System#Collections#IEnumerable#GetEnumerator
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.ienumerable
+  name: IEnumerable.GetEnumerator
+  nameWithType: LexerRuleset.IEnumerable.GetEnumerator
+  fullName: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.System.Collections.IEnumerable.GetEnumerator
+  spec.csharp:
+  - uid: System.Collections.IEnumerable*
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.ienumerable
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.System#Collections#IEnumerable#GetEnumerator*
+    name: GetEnumerator
+    href: OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.System-Collections-IEnumerable-GetEnumerator.html#OceanApocalypseStudios_RSML_Extensibility_LexerRuleset_System_Collections_IEnumerable_GetEnumerator
+- uid: System.Collections.IEnumerable.GetEnumerator
+  commentId: M:System.Collections.IEnumerable.GetEnumerator
+  parent: System.Collections.IEnumerable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.ienumerable.getenumerator
+  name: GetEnumerator()
+  nameWithType: IEnumerable.GetEnumerator()
+  fullName: System.Collections.IEnumerable.GetEnumerator()
+  spec.csharp:
+  - uid: System.Collections.IEnumerable.GetEnumerator
+    name: GetEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.ienumerable.getenumerator
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Collections.IEnumerable.GetEnumerator
+    name: GetEnumerator
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.ienumerable.getenumerator
+  - name: (
+  - name: )
+memberLayout: SeparatePages

@@ -15,7 +15,7 @@ items:
   source:
     remote:
       path: src/RSML.Native/Class1.cs
-      branch: docs
+      branch: dev
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: Class1
     path: ../src/RSML.Native/Class1.cs

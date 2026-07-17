@@ -1,0 +1,1067 @@
+### YamlMime:ManagedReference
+items:
+- uid: OceanApocalypseStudios.RSML.Sources.SourceSpan
+  commentId: T:OceanApocalypseStudios.RSML.Sources.SourceSpan
+  id: SourceSpan
+  parent: OceanApocalypseStudios.RSML.Sources
+  children:
+  - OceanApocalypseStudios.RSML.Sources.SourceSpan.#ctor(OceanApocalypseStudios.RSML.Sources.SourceLocation,OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  - OceanApocalypseStudios.RSML.Sources.SourceSpan.Empty
+  - OceanApocalypseStudios.RSML.Sources.SourceSpan.End
+  - OceanApocalypseStudios.RSML.Sources.SourceSpan.Equals(System.Nullable{OceanApocalypseStudios.RSML.Sources.SourceSpan})
+  - OceanApocalypseStudios.RSML.Sources.SourceSpan.Equals(System.Object)
+  - OceanApocalypseStudios.RSML.Sources.SourceSpan.GetHashCode
+  - OceanApocalypseStudios.RSML.Sources.SourceSpan.IsSingleLine
+  - OceanApocalypseStudios.RSML.Sources.SourceSpan.Length
+  - OceanApocalypseStudios.RSML.Sources.SourceSpan.Start
+  - OceanApocalypseStudios.RSML.Sources.SourceSpan.ToString
+  - OceanApocalypseStudios.RSML.Sources.SourceSpan.ToString(OceanApocalypseStudios.RSML.Sources.ISource)
+  - OceanApocalypseStudios.RSML.Sources.SourceSpan.ToString(System.String,System.IFormatProvider)
+  - OceanApocalypseStudios.RSML.Sources.SourceSpan.op_Equality(OceanApocalypseStudios.RSML.Sources.SourceSpan,OceanApocalypseStudios.RSML.Sources.SourceSpan)
+  - OceanApocalypseStudios.RSML.Sources.SourceSpan.op_Inequality(OceanApocalypseStudios.RSML.Sources.SourceSpan,OceanApocalypseStudios.RSML.Sources.SourceSpan)
+  langs:
+  - csharp
+  - vb
+  name: SourceSpan
+  nameWithType: SourceSpan
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan
+  type: Struct
+  source:
+    remote:
+      path: src/RSML/Sources/SourceSpan.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: SourceSpan
+    path: src/RSML/Sources/SourceSpan.cs
+    startLine: 8
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Represents a span taken from a source.
+  example: []
+  syntax:
+    content: 'public readonly struct SourceSpan : IFormattable'
+    content.vb: Public Structure SourceSpan Implements IFormattable
+  implements:
+  - System.IFormattable
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+- uid: OceanApocalypseStudios.RSML.Sources.SourceSpan.Empty
+  commentId: F:OceanApocalypseStudios.RSML.Sources.SourceSpan.Empty
+  id: Empty
+  parent: OceanApocalypseStudios.RSML.Sources.SourceSpan
+  langs:
+  - csharp
+  - vb
+  name: Empty
+  nameWithType: SourceSpan.Empty
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan.Empty
+  type: Field
+  source:
+    remote:
+      path: src/RSML/Sources/SourceSpan.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Empty
+    path: src/RSML/Sources/SourceSpan.cs
+    startLine: 13
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: An empty span.
+  example: []
+  syntax:
+    content: public static readonly SourceSpan Empty
+    return:
+      type: OceanApocalypseStudios.RSML.Sources.SourceSpan
+    content.vb: Public Shared ReadOnly Empty As SourceSpan
+- uid: OceanApocalypseStudios.RSML.Sources.SourceSpan.Start
+  commentId: P:OceanApocalypseStudios.RSML.Sources.SourceSpan.Start
+  id: Start
+  parent: OceanApocalypseStudios.RSML.Sources.SourceSpan
+  langs:
+  - csharp
+  - vb
+  name: Start
+  nameWithType: SourceSpan.Start
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan.Start
+  type: Property
+  source:
+    remote:
+      path: src/RSML/Sources/SourceSpan.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Start
+    path: src/RSML/Sources/SourceSpan.cs
+    startLine: 18
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: The start of the span.
+  example: []
+  syntax:
+    content: public SourceLocation Start { get; }
+    parameters: []
+    return:
+      type: OceanApocalypseStudios.RSML.Sources.SourceLocation
+    content.vb: Public ReadOnly Property Start As SourceLocation
+  overload: OceanApocalypseStudios.RSML.Sources.SourceSpan.Start*
+- uid: OceanApocalypseStudios.RSML.Sources.SourceSpan.End
+  commentId: P:OceanApocalypseStudios.RSML.Sources.SourceSpan.End
+  id: End
+  parent: OceanApocalypseStudios.RSML.Sources.SourceSpan
+  langs:
+  - csharp
+  - vb
+  name: End
+  nameWithType: SourceSpan.End
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan.End
+  type: Property
+  source:
+    remote:
+      path: src/RSML/Sources/SourceSpan.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: End
+    path: src/RSML/Sources/SourceSpan.cs
+    startLine: 23
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: The end of the span.
+  example: []
+  syntax:
+    content: public SourceLocation End { get; }
+    parameters: []
+    return:
+      type: OceanApocalypseStudios.RSML.Sources.SourceLocation
+    content.vb: Public ReadOnly Property [End] As SourceLocation
+  overload: OceanApocalypseStudios.RSML.Sources.SourceSpan.End*
+- uid: OceanApocalypseStudios.RSML.Sources.SourceSpan.Length
+  commentId: P:OceanApocalypseStudios.RSML.Sources.SourceSpan.Length
+  id: Length
+  parent: OceanApocalypseStudios.RSML.Sources.SourceSpan
+  langs:
+  - csharp
+  - vb
+  name: Length
+  nameWithType: SourceSpan.Length
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan.Length
+  type: Property
+  source:
+    remote:
+      path: src/RSML/Sources/SourceSpan.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Length
+    path: src/RSML/Sources/SourceSpan.cs
+    startLine: 28
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: The length of the span.
+  example: []
+  syntax:
+    content: public int Length { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property Length As Integer
+  overload: OceanApocalypseStudios.RSML.Sources.SourceSpan.Length*
+- uid: OceanApocalypseStudios.RSML.Sources.SourceSpan.IsSingleLine
+  commentId: P:OceanApocalypseStudios.RSML.Sources.SourceSpan.IsSingleLine
+  id: IsSingleLine
+  parent: OceanApocalypseStudios.RSML.Sources.SourceSpan
+  langs:
+  - csharp
+  - vb
+  name: IsSingleLine
+  nameWithType: SourceSpan.IsSingleLine
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan.IsSingleLine
+  type: Property
+  source:
+    remote:
+      path: src/RSML/Sources/SourceSpan.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: IsSingleLine
+    path: src/RSML/Sources/SourceSpan.cs
+    startLine: 33
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: The span is located in a single line.
+  example: []
+  syntax:
+    content: public bool IsSingleLine { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property IsSingleLine As Boolean
+  overload: OceanApocalypseStudios.RSML.Sources.SourceSpan.IsSingleLine*
+- uid: OceanApocalypseStudios.RSML.Sources.SourceSpan.#ctor(OceanApocalypseStudios.RSML.Sources.SourceLocation,OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.SourceSpan.#ctor(OceanApocalypseStudios.RSML.Sources.SourceLocation,OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  id: '#ctor(OceanApocalypseStudios.RSML.Sources.SourceLocation,OceanApocalypseStudios.RSML.Sources.SourceLocation)'
+  parent: OceanApocalypseStudios.RSML.Sources.SourceSpan
+  langs:
+  - csharp
+  - vb
+  name: SourceSpan(SourceLocation, SourceLocation)
+  nameWithType: SourceSpan.SourceSpan(SourceLocation, SourceLocation)
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan.SourceSpan(OceanApocalypseStudios.RSML.Sources.SourceLocation, OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  type: Constructor
+  source:
+    remote:
+      path: src/RSML/Sources/SourceSpan.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: .ctor
+    path: src/RSML/Sources/SourceSpan.cs
+    startLine: 41
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Initializes a new span given a starting and an end indexes.
+  example: []
+  syntax:
+    content: public SourceSpan(SourceLocation start, SourceLocation end)
+    parameters:
+    - id: start
+      type: OceanApocalypseStudios.RSML.Sources.SourceLocation
+      description: The start index.
+    - id: end
+      type: OceanApocalypseStudios.RSML.Sources.SourceLocation
+      description: The end index.
+    content.vb: Public Sub New(start As SourceLocation, [end] As SourceLocation)
+  overload: OceanApocalypseStudios.RSML.Sources.SourceSpan.#ctor*
+  exceptions:
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: The starting index is greater or equal to the end index.
+  nameWithType.vb: SourceSpan.New(SourceLocation, SourceLocation)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.SourceSpan.New(OceanApocalypseStudios.RSML.Sources.SourceLocation, OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  name.vb: New(SourceLocation, SourceLocation)
+- uid: OceanApocalypseStudios.RSML.Sources.SourceSpan.Equals(System.Object)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.SourceSpan.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: OceanApocalypseStudios.RSML.Sources.SourceSpan
+  langs:
+  - csharp
+  - vb
+  name: Equals(object?)
+  nameWithType: SourceSpan.Equals(object?)
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan.Equals(object?)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/SourceSpan.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Equals
+    path: src/RSML/Sources/SourceSpan.cs
+    startLine: 51
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Indicates whether this instance and a specified object are equal.
+  example: []
+  syntax:
+    content: public override bool Equals(object? obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: The object to compare with the current instance.
+      attributes:
+      - type: System.Diagnostics.CodeAnalysis.NotNullWhenAttribute
+        ctor: System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.#ctor(System.Boolean)
+        arguments:
+        - type: System.Boolean
+          value: true
+    return:
+      type: System.Boolean
+      description: <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if <code class="paramref">obj</code> and this instance are the same type and represent the same value; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.ValueType.Equals(System.Object)
+  overload: OceanApocalypseStudios.RSML.Sources.SourceSpan.Equals*
+  nameWithType.vb: SourceSpan.Equals(Object)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.SourceSpan.Equals(Object)
+  name.vb: Equals(Object)
+- uid: OceanApocalypseStudios.RSML.Sources.SourceSpan.Equals(System.Nullable{OceanApocalypseStudios.RSML.Sources.SourceSpan})
+  commentId: M:OceanApocalypseStudios.RSML.Sources.SourceSpan.Equals(System.Nullable{OceanApocalypseStudios.RSML.Sources.SourceSpan})
+  id: Equals(System.Nullable{OceanApocalypseStudios.RSML.Sources.SourceSpan})
+  parent: OceanApocalypseStudios.RSML.Sources.SourceSpan
+  langs:
+  - csharp
+  - vb
+  name: Equals(SourceSpan?)
+  nameWithType: SourceSpan.Equals(SourceSpan?)
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan.Equals(OceanApocalypseStudios.RSML.Sources.SourceSpan?)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/SourceSpan.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Equals
+    path: src/RSML/Sources/SourceSpan.cs
+    startLine: 65
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Checks whether two <xref href="OceanApocalypseStudios.RSML.Sources.SourceSpan" data-throw-if-not-resolved="false"></xref>s are equals.
+  example: []
+  syntax:
+    content: public bool Equals(SourceSpan? other)
+    parameters:
+    - id: other
+      type: System.Nullable{OceanApocalypseStudios.RSML.Sources.SourceSpan}
+      description: The span to check against
+    return:
+      type: System.Boolean
+      description: True if equals
+    content.vb: Public Function Equals(other As SourceSpan?) As Boolean
+  overload: OceanApocalypseStudios.RSML.Sources.SourceSpan.Equals*
+- uid: OceanApocalypseStudios.RSML.Sources.SourceSpan.op_Equality(OceanApocalypseStudios.RSML.Sources.SourceSpan,OceanApocalypseStudios.RSML.Sources.SourceSpan)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.SourceSpan.op_Equality(OceanApocalypseStudios.RSML.Sources.SourceSpan,OceanApocalypseStudios.RSML.Sources.SourceSpan)
+  id: op_Equality(OceanApocalypseStudios.RSML.Sources.SourceSpan,OceanApocalypseStudios.RSML.Sources.SourceSpan)
+  parent: OceanApocalypseStudios.RSML.Sources.SourceSpan
+  langs:
+  - csharp
+  - vb
+  name: operator ==(SourceSpan, SourceSpan)
+  nameWithType: SourceSpan.operator ==(SourceSpan, SourceSpan)
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan.operator ==(OceanApocalypseStudios.RSML.Sources.SourceSpan, OceanApocalypseStudios.RSML.Sources.SourceSpan)
+  type: Operator
+  source:
+    remote:
+      path: src/RSML/Sources/SourceSpan.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: op_Equality
+    path: src/RSML/Sources/SourceSpan.cs
+    startLine: 71
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Checks whether two <xref href="OceanApocalypseStudios.RSML.Sources.SourceSpan" data-throw-if-not-resolved="false"></xref>s are equals.
+  example: []
+  syntax:
+    content: public static bool operator ==(SourceSpan left, SourceSpan right)
+    parameters:
+    - id: left
+      type: OceanApocalypseStudios.RSML.Sources.SourceSpan
+    - id: right
+      type: OceanApocalypseStudios.RSML.Sources.SourceSpan
+    return:
+      type: System.Boolean
+      description: True if equals
+    content.vb: Public Shared Operator =(left As SourceSpan, right As SourceSpan) As Boolean
+  overload: OceanApocalypseStudios.RSML.Sources.SourceSpan.op_Equality*
+  nameWithType.vb: SourceSpan.=(SourceSpan, SourceSpan)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.SourceSpan.=(OceanApocalypseStudios.RSML.Sources.SourceSpan, OceanApocalypseStudios.RSML.Sources.SourceSpan)
+  name.vb: =(SourceSpan, SourceSpan)
+- uid: OceanApocalypseStudios.RSML.Sources.SourceSpan.op_Inequality(OceanApocalypseStudios.RSML.Sources.SourceSpan,OceanApocalypseStudios.RSML.Sources.SourceSpan)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.SourceSpan.op_Inequality(OceanApocalypseStudios.RSML.Sources.SourceSpan,OceanApocalypseStudios.RSML.Sources.SourceSpan)
+  id: op_Inequality(OceanApocalypseStudios.RSML.Sources.SourceSpan,OceanApocalypseStudios.RSML.Sources.SourceSpan)
+  parent: OceanApocalypseStudios.RSML.Sources.SourceSpan
+  langs:
+  - csharp
+  - vb
+  name: operator !=(SourceSpan, SourceSpan)
+  nameWithType: SourceSpan.operator !=(SourceSpan, SourceSpan)
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan.operator !=(OceanApocalypseStudios.RSML.Sources.SourceSpan, OceanApocalypseStudios.RSML.Sources.SourceSpan)
+  type: Operator
+  source:
+    remote:
+      path: src/RSML/Sources/SourceSpan.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: op_Inequality
+    path: src/RSML/Sources/SourceSpan.cs
+    startLine: 77
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Checks whether two <xref href="OceanApocalypseStudios.RSML.Sources.SourceSpan" data-throw-if-not-resolved="false"></xref>s are different from each other.
+  example: []
+  syntax:
+    content: public static bool operator !=(SourceSpan left, SourceSpan right)
+    parameters:
+    - id: left
+      type: OceanApocalypseStudios.RSML.Sources.SourceSpan
+    - id: right
+      type: OceanApocalypseStudios.RSML.Sources.SourceSpan
+    return:
+      type: System.Boolean
+      description: True if different
+    content.vb: Public Shared Operator <>(left As SourceSpan, right As SourceSpan) As Boolean
+  overload: OceanApocalypseStudios.RSML.Sources.SourceSpan.op_Inequality*
+  nameWithType.vb: SourceSpan.<>(SourceSpan, SourceSpan)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.SourceSpan.<>(OceanApocalypseStudios.RSML.Sources.SourceSpan, OceanApocalypseStudios.RSML.Sources.SourceSpan)
+  name.vb: <>(SourceSpan, SourceSpan)
+- uid: OceanApocalypseStudios.RSML.Sources.SourceSpan.ToString
+  commentId: M:OceanApocalypseStudios.RSML.Sources.SourceSpan.ToString
+  id: ToString
+  parent: OceanApocalypseStudios.RSML.Sources.SourceSpan
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: SourceSpan.ToString()
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan.ToString()
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/SourceSpan.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: ToString
+    path: src/RSML/Sources/SourceSpan.cs
+    startLine: 83
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Returns a generic string representation of the current instance.
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: The string representation.
+    content.vb: Public Overrides Function ToString() As String
+  overridden: System.ValueType.ToString
+  overload: OceanApocalypseStudios.RSML.Sources.SourceSpan.ToString*
+- uid: OceanApocalypseStudios.RSML.Sources.SourceSpan.ToString(OceanApocalypseStudios.RSML.Sources.ISource)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.SourceSpan.ToString(OceanApocalypseStudios.RSML.Sources.ISource)
+  id: ToString(OceanApocalypseStudios.RSML.Sources.ISource)
+  parent: OceanApocalypseStudios.RSML.Sources.SourceSpan
+  langs:
+  - csharp
+  - vb
+  name: ToString(ISource)
+  nameWithType: SourceSpan.ToString(ISource)
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan.ToString(OceanApocalypseStudios.RSML.Sources.ISource)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/SourceSpan.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: ToString
+    path: src/RSML/Sources/SourceSpan.cs
+    startLine: 91
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: >-
+    Given a source, tries to return a string that uses said source as a basis for the representation.
+
+    If it fails, it defaults to <xref href="OceanApocalypseStudios.RSML.Sources.SourceSpan.ToString" data-throw-if-not-resolved="false"></xref>.
+  example: []
+  syntax:
+    content: public string ToString(ISource source)
+    parameters:
+    - id: source
+      type: OceanApocalypseStudios.RSML.Sources.ISource
+      description: The source.
+    return:
+      type: System.String
+      description: The string representation.
+    content.vb: Public Function ToString(source As ISource) As String
+  overload: OceanApocalypseStudios.RSML.Sources.SourceSpan.ToString*
+- uid: OceanApocalypseStudios.RSML.Sources.SourceSpan.ToString(System.String,System.IFormatProvider)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.SourceSpan.ToString(System.String,System.IFormatProvider)
+  id: ToString(System.String,System.IFormatProvider)
+  parent: OceanApocalypseStudios.RSML.Sources.SourceSpan
+  langs:
+  - csharp
+  - vb
+  name: ToString(string?, IFormatProvider?)
+  nameWithType: SourceSpan.ToString(string?, IFormatProvider?)
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan.ToString(string?, System.IFormatProvider?)
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/SourceSpan.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: ToString
+    path: src/RSML/Sources/SourceSpan.cs
+    startLine: 113
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: >-
+    Given a format, tries to return a string that uses said format as a basis for the representation.
+
+    If it fails, it defaults to <xref href="OceanApocalypseStudios.RSML.Sources.SourceSpan.ToString" data-throw-if-not-resolved="false"></xref>.
+  example: []
+  syntax:
+    content: public string ToString(string? format, IFormatProvider? formatProvider = null)
+    parameters:
+    - id: format
+      type: System.String
+      description: 'The format. Available formats are: CTOR (constructor-like string) and JSON (struct as JSON).'
+    - id: formatProvider
+      type: System.IFormatProvider
+      description: Unused. Don't bother assigning it anything.
+    return:
+      type: System.String
+      description: The string representation.
+    content.vb: Public Function ToString(format As String, formatProvider As IFormatProvider = Nothing) As String
+  overload: OceanApocalypseStudios.RSML.Sources.SourceSpan.ToString*
+  implements:
+  - System.IFormattable.ToString(System.String,System.IFormatProvider)
+  nameWithType.vb: SourceSpan.ToString(String, IFormatProvider)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.SourceSpan.ToString(String, System.IFormatProvider)
+  name.vb: ToString(String, IFormatProvider)
+- uid: OceanApocalypseStudios.RSML.Sources.SourceSpan.GetHashCode
+  commentId: M:OceanApocalypseStudios.RSML.Sources.SourceSpan.GetHashCode
+  id: GetHashCode
+  parent: OceanApocalypseStudios.RSML.Sources.SourceSpan
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: SourceSpan.GetHashCode()
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: src/RSML/Sources/SourceSpan.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: GetHashCode
+    path: src/RSML/Sources/SourceSpan.cs
+    startLine: 122
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Returns the hash code for this instance.
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer that is the hash code for this instance.
+    content.vb: Public Overrides Function GetHashCode() As Integer
+  overridden: System.ValueType.GetHashCode
+  overload: OceanApocalypseStudios.RSML.Sources.SourceSpan.GetHashCode*
+references:
+- uid: OceanApocalypseStudios.RSML.Sources
+  commentId: N:OceanApocalypseStudios.RSML.Sources
+  href: OceanApocalypseStudios.html
+  name: OceanApocalypseStudios.RSML.Sources
+  nameWithType: OceanApocalypseStudios.RSML.Sources
+  fullName: OceanApocalypseStudios.RSML.Sources
+  spec.csharp:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sources
+    name: Sources
+    href: OceanApocalypseStudios.RSML.Sources.html
+  spec.vb:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sources
+    name: Sources
+    href: OceanApocalypseStudios.RSML.Sources.html
+- uid: System.IFormattable
+  commentId: T:System.IFormattable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iformattable
+  name: IFormattable
+  nameWithType: IFormattable
+  fullName: System.IFormattable
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: OceanApocalypseStudios.RSML.Sources.SourceSpan
+  commentId: T:OceanApocalypseStudios.RSML.Sources.SourceSpan
+  parent: OceanApocalypseStudios.RSML.Sources
+  href: OceanApocalypseStudios.RSML.Sources.SourceSpan.html
+  name: SourceSpan
+  nameWithType: SourceSpan
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan
+- uid: OceanApocalypseStudios.RSML.Sources.SourceSpan.Start*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.SourceSpan.Start
+  href: OceanApocalypseStudios.RSML.Sources.SourceSpan.Start.html#OceanApocalypseStudios_RSML_Sources_SourceSpan_Start
+  name: Start
+  nameWithType: SourceSpan.Start
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan.Start
+- uid: OceanApocalypseStudios.RSML.Sources.SourceLocation
+  commentId: T:OceanApocalypseStudios.RSML.Sources.SourceLocation
+  parent: OceanApocalypseStudios.RSML.Sources
+  href: OceanApocalypseStudios.RSML.Sources.SourceLocation.html
+  name: SourceLocation
+  nameWithType: SourceLocation
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceLocation
+- uid: OceanApocalypseStudios.RSML.Sources.SourceSpan.End*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.SourceSpan.End
+  href: OceanApocalypseStudios.RSML.Sources.SourceSpan.End.html#OceanApocalypseStudios_RSML_Sources_SourceSpan_End
+  name: End
+  nameWithType: SourceSpan.End
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan.End
+- uid: OceanApocalypseStudios.RSML.Sources.SourceSpan.Length*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.SourceSpan.Length
+  href: OceanApocalypseStudios.RSML.Sources.SourceSpan.Length.html#OceanApocalypseStudios_RSML_Sources_SourceSpan_Length
+  name: Length
+  nameWithType: SourceSpan.Length
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan.Length
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: OceanApocalypseStudios.RSML.Sources.SourceSpan.IsSingleLine*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.SourceSpan.IsSingleLine
+  href: OceanApocalypseStudios.RSML.Sources.SourceSpan.IsSingleLine.html#OceanApocalypseStudios_RSML_Sources_SourceSpan_IsSingleLine
+  name: IsSingleLine
+  nameWithType: SourceSpan.IsSingleLine
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan.IsSingleLine
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: System.ArgumentException
+  commentId: T:System.ArgumentException
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.argumentexception
+  name: ArgumentException
+  nameWithType: ArgumentException
+  fullName: System.ArgumentException
+- uid: OceanApocalypseStudios.RSML.Sources.SourceSpan.#ctor*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.SourceSpan.#ctor
+  href: OceanApocalypseStudios.RSML.Sources.SourceSpan.-ctor.html#OceanApocalypseStudios_RSML_Sources_SourceSpan__ctor_OceanApocalypseStudios_RSML_Sources_SourceLocation_OceanApocalypseStudios_RSML_Sources_SourceLocation_
+  name: SourceSpan
+  nameWithType: SourceSpan.SourceSpan
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan.SourceSpan
+  nameWithType.vb: SourceSpan.New
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.SourceSpan.New
+  name.vb: New
+- uid: System.ValueType.Equals(System.Object)
+  commentId: M:System.ValueType.Equals(System.Object)
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  name: Equals(object)
+  nameWithType: ValueType.Equals(object)
+  fullName: System.ValueType.Equals(object)
+  nameWithType.vb: ValueType.Equals(Object)
+  fullName.vb: System.ValueType.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: OceanApocalypseStudios.RSML.Sources.SourceSpan.Equals*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.SourceSpan.Equals
+  href: OceanApocalypseStudios.RSML.Sources.SourceSpan.Equals.html#OceanApocalypseStudios_RSML_Sources_SourceSpan_Equals_System_Object_
+  name: Equals
+  nameWithType: SourceSpan.Equals
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan.Equals
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
+- uid: System.Nullable{OceanApocalypseStudios.RSML.Sources.SourceSpan}
+  commentId: T:System.Nullable{OceanApocalypseStudios.RSML.Sources.SourceSpan}
+  parent: System
+  definition: System.Nullable`1
+  href: OceanApocalypseStudios.RSML.Sources.SourceSpan.html
+  name: SourceSpan?
+  nameWithType: SourceSpan?
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan?
+  spec.csharp:
+  - uid: OceanApocalypseStudios.RSML.Sources.SourceSpan
+    name: SourceSpan
+    href: OceanApocalypseStudios.RSML.Sources.SourceSpan.html
+  - name: '?'
+  spec.vb:
+  - uid: OceanApocalypseStudios.RSML.Sources.SourceSpan
+    name: SourceSpan
+    href: OceanApocalypseStudios.RSML.Sources.SourceSpan.html
+  - name: '?'
+- uid: System.Nullable`1
+  commentId: T:System.Nullable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: OceanApocalypseStudios.RSML.Sources.SourceSpan.op_Equality*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.SourceSpan.op_Equality
+  href: OceanApocalypseStudios.RSML.Sources.SourceSpan.op_Equality.html#OceanApocalypseStudios_RSML_Sources_SourceSpan_op_Equality_OceanApocalypseStudios_RSML_Sources_SourceSpan_OceanApocalypseStudios_RSML_Sources_SourceSpan_
+  name: operator ==
+  nameWithType: SourceSpan.operator ==
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan.operator ==
+  nameWithType.vb: SourceSpan.=
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.SourceSpan.=
+  name.vb: =
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: OceanApocalypseStudios.RSML.Sources.SourceSpan.op_Equality*
+    name: ==
+    href: OceanApocalypseStudios.RSML.Sources.SourceSpan.op_Equality.html#OceanApocalypseStudios_RSML_Sources_SourceSpan_op_Equality_OceanApocalypseStudios_RSML_Sources_SourceSpan_OceanApocalypseStudios_RSML_Sources_SourceSpan_
+- uid: OceanApocalypseStudios.RSML.Sources.SourceSpan.op_Inequality*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.SourceSpan.op_Inequality
+  href: OceanApocalypseStudios.RSML.Sources.SourceSpan.op_Inequality.html#OceanApocalypseStudios_RSML_Sources_SourceSpan_op_Inequality_OceanApocalypseStudios_RSML_Sources_SourceSpan_OceanApocalypseStudios_RSML_Sources_SourceSpan_
+  name: operator !=
+  nameWithType: SourceSpan.operator !=
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan.operator !=
+  nameWithType.vb: SourceSpan.<>
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.SourceSpan.<>
+  name.vb: <>
+  spec.csharp:
+  - name: operator
+  - name: " "
+  - uid: OceanApocalypseStudios.RSML.Sources.SourceSpan.op_Inequality*
+    name: '!='
+    href: OceanApocalypseStudios.RSML.Sources.SourceSpan.op_Inequality.html#OceanApocalypseStudios_RSML_Sources_SourceSpan_op_Inequality_OceanApocalypseStudios_RSML_Sources_SourceSpan_OceanApocalypseStudios_RSML_Sources_SourceSpan_
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+- uid: OceanApocalypseStudios.RSML.Sources.SourceSpan.ToString*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.SourceSpan.ToString
+  href: OceanApocalypseStudios.RSML.Sources.SourceSpan.ToString.html#OceanApocalypseStudios_RSML_Sources_SourceSpan_ToString
+  name: ToString
+  nameWithType: SourceSpan.ToString
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan.ToString
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: OceanApocalypseStudios.RSML.Sources.SourceSpan.ToString
+  commentId: M:OceanApocalypseStudios.RSML.Sources.SourceSpan.ToString
+  href: OceanApocalypseStudios.RSML.Sources.SourceSpan.ToString.html#OceanApocalypseStudios_RSML_Sources_SourceSpan_ToString
+  name: ToString()
+  nameWithType: SourceSpan.ToString()
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan.ToString()
+  spec.csharp:
+  - uid: OceanApocalypseStudios.RSML.Sources.SourceSpan.ToString
+    name: ToString
+    href: OceanApocalypseStudios.RSML.Sources.SourceSpan.ToString.html#OceanApocalypseStudios_RSML_Sources_SourceSpan_ToString
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: OceanApocalypseStudios.RSML.Sources.SourceSpan.ToString
+    name: ToString
+    href: OceanApocalypseStudios.RSML.Sources.SourceSpan.ToString.html#OceanApocalypseStudios_RSML_Sources_SourceSpan_ToString
+  - name: (
+  - name: )
+- uid: OceanApocalypseStudios.RSML.Sources.ISource
+  commentId: T:OceanApocalypseStudios.RSML.Sources.ISource
+  parent: OceanApocalypseStudios.RSML.Sources
+  href: OceanApocalypseStudios.RSML.Sources.ISource.html
+  name: ISource
+  nameWithType: ISource
+  fullName: OceanApocalypseStudios.RSML.Sources.ISource
+- uid: System.IFormattable.ToString(System.String,System.IFormatProvider)
+  commentId: M:System.IFormattable.ToString(System.String,System.IFormatProvider)
+  parent: System.IFormattable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iformattable.tostring
+  name: ToString(string, IFormatProvider)
+  nameWithType: IFormattable.ToString(string, IFormatProvider)
+  fullName: System.IFormattable.ToString(string, System.IFormatProvider)
+  nameWithType.vb: IFormattable.ToString(String, IFormatProvider)
+  fullName.vb: System.IFormattable.ToString(String, System.IFormatProvider)
+  name.vb: ToString(String, IFormatProvider)
+  spec.csharp:
+  - uid: System.IFormattable.ToString(System.String,System.IFormatProvider)
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iformattable.tostring
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.IFormatProvider
+    name: IFormatProvider
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iformatprovider
+  - name: )
+  spec.vb:
+  - uid: System.IFormattable.ToString(System.String,System.IFormatProvider)
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iformattable.tostring
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.IFormatProvider
+    name: IFormatProvider
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iformatprovider
+  - name: )
+- uid: System.IFormatProvider
+  commentId: T:System.IFormatProvider
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iformatprovider
+  name: IFormatProvider
+  nameWithType: IFormatProvider
+  fullName: System.IFormatProvider
+- uid: System.ValueType.GetHashCode
+  commentId: M:System.ValueType.GetHashCode
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  name: GetHashCode()
+  nameWithType: ValueType.GetHashCode()
+  fullName: System.ValueType.GetHashCode()
+  spec.csharp:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+- uid: OceanApocalypseStudios.RSML.Sources.SourceSpan.GetHashCode*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.SourceSpan.GetHashCode
+  href: OceanApocalypseStudios.RSML.Sources.SourceSpan.GetHashCode.html#OceanApocalypseStudios_RSML_Sources_SourceSpan_GetHashCode
+  name: GetHashCode
+  nameWithType: SourceSpan.GetHashCode
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan.GetHashCode
+memberLayout: SeparatePages

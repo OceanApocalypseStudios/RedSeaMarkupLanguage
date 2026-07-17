@@ -7,7 +7,7 @@
 	<a href="https://www.nuget.org/packages/OceanApocalypseStudios.RSML" target="_blank"><img src="https://img.shields.io/nuget/v/OceanApocalypseStudios.RSML?style=for-the-badge&logo=nuget&logoColor=white&logoSize=auto&label=Available%20on%20NuGet&labelColor=%231265fb&color=%2308317b"/></a>
 	<img src="https://img.shields.io/nuget/dt/OceanApocalypseStudios.RSML?style=for-the-badge&logo=nuget&logoColor=white&logoSize=auto&label=downloads%20(modern)&labelColor=%234929ca&color=%2327156f" />
 	<img src="https://img.shields.io/nuget/dt/RSML?style=for-the-badge&logo=nuget&logoColor=white&logoSize=auto&label=Downloads%20(Legacy)&labelColor=%23ad4734&color=%236e2d20" />
-	<br/>
+	<br/><br/>
 	<a href="https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/releases/latest"><img src="https://img.shields.io/github/v/release/OceanApocalypseStudios/RedSeaMarkupLanguage?sort=semver&display_name=tag&style=for-the-badge&logo=github&logoColor=white&logoSize=auto&label=Latest&labelColor=%23161616&color=%23000308"/></a>
 	<img src="https://img.shields.io/github/stars/OceanApocalypseStudios/RedSeaMarkupLanguage?style=for-the-badge&logo=star&logoColor=black&logoSize=auto&labelColor=%2379610b&color=%23413405" />
 	<img src="https://img.shields.io/github/languages/top/OceanApocalypseStudios/RedSeaMarkupLanguage?style=for-the-badge&logo=dotnet&logoColor=white&logoSize=auto&label=%20&labelColor=%234929ca&color=%234929ca" />
@@ -55,6 +55,19 @@ roadmap [here](https://github.com/orgs/OceanApocalypseStudios/projects/6/views/2
 ---
 
 ## Why RSML?
+**Red Sea Markup Language** is **the** powerful and robust fork of [MF's CrossRoad Solution](https://mf366-dev.github.io/documentation/mfroad/mfroad_1.0.html), a language designed to **dynamically interpret different logic paths based on the local host OS and CPU architecture**.
+
+RSML, which is short for Red Sea Markup Language, is still in development, but the finished v3.0.0 will observe the following core features:
+
+- A complete toolchain featuring buffers, readers, lexers, parsers and evaluators.
+- The core library available in C#, Visual Basic, Python and many other languages.
+- SDK for convenience and a more idiomatic usage of RSML in C#.
+- A native shared library for those using RSML in C, C++ or languages that don't have official bindings.
+- A CLI for interacting with the RSML toolchain easily.
+- A static website for evaluating RSML on the go.
+- First-class support for Visual Studio.
+- Syntax highlighting for Visual Studio Code, JetBrains IDEs, Notepad++ and more.
+
 RSML solves the issue of resolving logic paths dynamically based on a given host's characteristics.
 When assigned an host, which could be the local host, RSML solves the logic paths and returns the first match's
 associated value.
@@ -124,9 +137,9 @@ purely for documentation purposes and the `.pdb` file only matters for debugging
 ---
 
 ## Performance Analysis
-We analyse performance to see what can be improved for general user experience. We use [`BenchmarkDotNet`](https://benchmarkdotnet.org), a reputable benchmarking framework for .NET code.
+We analyse performance to see what can be improved for general user experience. We use [BenchmarkDotNet](https://benchmarkdotnet.org), a reputable benchmarking framework for .NET code.
 
-For more information, see: <img src="https://raw.githubusercontent.com/dotnet/BenchmarkDotNet/refs/heads/master/docs/logo/icon.svg" alt="BenchmarkDotNet Icon" height="20" width="20" style="vertical-align: middle;" /> <a href="BENCHMARKS.md">Regarding Performance</a>.
+More data on performance coming soon.
 
 ---
 
@@ -134,7 +147,7 @@ For more information, see: <img src="https://raw.githubusercontent.com/dotnet/Be
 RSML is supported in **Visual Studio** and **Visual Studio Code** via extensions.
 Support for more code editors and IDEs is also part of our RSML roadmap!
 
-For more information, see: <img src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/refs/heads/master/icons/file_type_sln.svg" alt="Visual Studio Logo" height="20" width="20" style="vertical-align: middle;" /> <a href="EDITOR.md">Editor Support</a>.
+For more information, see: <img src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/refs/heads/master/icons/file_type_sln.svg" alt="Visual Studio Logo" height="20" width="20" style="vertical-align: middle;" /> <a href="docs/tools/editor-support/list.md">Editor Support</a>.
 
 ---
 
@@ -142,7 +155,7 @@ For more information, see: <img src="https://raw.githubusercontent.com/vscode-ic
 As of now, you can only use RSML's API in **.NET** languages, such as **C#** (recommended for maximum support), **Visual Basic** and **F#**.
 Support for more programming languages, such as Python, is also part of our RSML roadmap!
 
-For more information, see: <img src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/refs/heads/master/icons/file_type_csharp.svg" alt="C# Logo" height="20" width="20" style="vertical-align: middle;" /> <a href="LANGUAGES.md">Programming Language Support</a>.
+For more information, see: <img src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/refs/heads/master/icons/file_type_csharp.svg" alt="C# Logo" height="20" width="20" style="vertical-align: middle;" /> <a href="docs/bindings/list.md">Programming Language Support</a>.
 
 ---
 
@@ -152,7 +165,7 @@ For more information, see: <img src="https://raw.githubusercontent.com/vscode-ic
 > Modern RSML (RSML v2.0.0).
 > In any other context, RSML and OceanApocalypseStudios.RSML have the exact same meaning.
 
-[![RSML on NuGet Trends](extras/NuGetTrends_July5.png)](https://nugettrends.com/packages?ids=RSML&ids=OceanApocalypseStudios.RSML&months=12)
+[![RSML on NuGet Trends](docs/images/NuGetTrends_July5.png)](https://nugettrends.com/packages?ids=RSML&ids=OceanApocalypseStudios.RSML&months=12)
 
 
 > **Copyright (c) 2025 OceanApocalypseStudios**

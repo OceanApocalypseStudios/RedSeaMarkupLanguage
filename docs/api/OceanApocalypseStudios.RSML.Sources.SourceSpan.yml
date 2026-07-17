@@ -6,6 +6,7 @@ items:
   parent: OceanApocalypseStudios.RSML.Sources
   children:
   - OceanApocalypseStudios.RSML.Sources.SourceSpan.#ctor(OceanApocalypseStudios.RSML.Sources.SourceLocation,OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  - OceanApocalypseStudios.RSML.Sources.SourceSpan.Empty
   - OceanApocalypseStudios.RSML.Sources.SourceSpan.End
   - OceanApocalypseStudios.RSML.Sources.SourceSpan.Equals(System.Nullable{OceanApocalypseStudios.RSML.Sources.SourceSpan})
   - OceanApocalypseStudios.RSML.Sources.SourceSpan.Equals(System.Object)
@@ -28,7 +29,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceSpan.cs
-      branch: docs
+      branch: dev
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: SourceSpan
     path: ../src/RSML/Sources/SourceSpan.cs
@@ -47,42 +48,35 @@ items:
   - System.Object.Equals(System.Object,System.Object)
   - System.Object.GetType
   - System.Object.ReferenceEquals(System.Object,System.Object)
-- uid: OceanApocalypseStudios.RSML.Sources.SourceSpan.#ctor(OceanApocalypseStudios.RSML.Sources.SourceLocation,OceanApocalypseStudios.RSML.Sources.SourceLocation)
-  commentId: M:OceanApocalypseStudios.RSML.Sources.SourceSpan.#ctor(OceanApocalypseStudios.RSML.Sources.SourceLocation,OceanApocalypseStudios.RSML.Sources.SourceLocation)
-  id: '#ctor(OceanApocalypseStudios.RSML.Sources.SourceLocation,OceanApocalypseStudios.RSML.Sources.SourceLocation)'
+- uid: OceanApocalypseStudios.RSML.Sources.SourceSpan.Empty
+  commentId: F:OceanApocalypseStudios.RSML.Sources.SourceSpan.Empty
+  id: Empty
   parent: OceanApocalypseStudios.RSML.Sources.SourceSpan
   langs:
   - csharp
   - vb
-  name: SourceSpan(SourceLocation, SourceLocation)
-  nameWithType: SourceSpan.SourceSpan(SourceLocation, SourceLocation)
-  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan.SourceSpan(OceanApocalypseStudios.RSML.Sources.SourceLocation, OceanApocalypseStudios.RSML.Sources.SourceLocation)
-  type: Constructor
+  name: Empty
+  nameWithType: SourceSpan.Empty
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan.Empty
+  type: Field
   source:
     remote:
       path: src/RSML/Sources/SourceSpan.cs
-      branch: docs
+      branch: dev
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
-    id: .ctor
+    id: Empty
     path: ../src/RSML/Sources/SourceSpan.cs
-    startLine: 8
+    startLine: 13
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
-  summary: Represents a span taken from a source.
+  summary: An empty span.
   example: []
   syntax:
-    content: public SourceSpan(SourceLocation start, SourceLocation end)
-    parameters:
-    - id: start
-      type: OceanApocalypseStudios.RSML.Sources.SourceLocation
-    - id: end
-      type: OceanApocalypseStudios.RSML.Sources.SourceLocation
-    content.vb: Public Sub New(start As SourceLocation, [end] As SourceLocation)
-  overload: OceanApocalypseStudios.RSML.Sources.SourceSpan.#ctor*
-  nameWithType.vb: SourceSpan.New(SourceLocation, SourceLocation)
-  fullName.vb: OceanApocalypseStudios.RSML.Sources.SourceSpan.New(OceanApocalypseStudios.RSML.Sources.SourceLocation, OceanApocalypseStudios.RSML.Sources.SourceLocation)
-  name.vb: New(SourceLocation, SourceLocation)
+    content: public static readonly SourceSpan Empty
+    return:
+      type: OceanApocalypseStudios.RSML.Sources.SourceSpan
+    content.vb: Public Shared ReadOnly Empty As SourceSpan
 - uid: OceanApocalypseStudios.RSML.Sources.SourceSpan.Start
   commentId: P:OceanApocalypseStudios.RSML.Sources.SourceSpan.Start
   id: Start
@@ -97,11 +91,11 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceSpan.cs
-      branch: docs
+      branch: dev
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: Start
     path: ../src/RSML/Sources/SourceSpan.cs
-    startLine: 13
+    startLine: 18
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
@@ -128,11 +122,11 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceSpan.cs
-      branch: docs
+      branch: dev
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: End
     path: ../src/RSML/Sources/SourceSpan.cs
-    startLine: 18
+    startLine: 23
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
@@ -159,11 +153,11 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceSpan.cs
-      branch: docs
+      branch: dev
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: Length
     path: ../src/RSML/Sources/SourceSpan.cs
-    startLine: 23
+    startLine: 28
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
@@ -190,11 +184,11 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceSpan.cs
-      branch: docs
+      branch: dev
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: IsSingleLine
     path: ../src/RSML/Sources/SourceSpan.cs
-    startLine: 28
+    startLine: 33
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
@@ -207,6 +201,48 @@ items:
       type: System.Boolean
     content.vb: Public ReadOnly Property IsSingleLine As Boolean
   overload: OceanApocalypseStudios.RSML.Sources.SourceSpan.IsSingleLine*
+- uid: OceanApocalypseStudios.RSML.Sources.SourceSpan.#ctor(OceanApocalypseStudios.RSML.Sources.SourceLocation,OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  commentId: M:OceanApocalypseStudios.RSML.Sources.SourceSpan.#ctor(OceanApocalypseStudios.RSML.Sources.SourceLocation,OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  id: '#ctor(OceanApocalypseStudios.RSML.Sources.SourceLocation,OceanApocalypseStudios.RSML.Sources.SourceLocation)'
+  parent: OceanApocalypseStudios.RSML.Sources.SourceSpan
+  langs:
+  - csharp
+  - vb
+  name: SourceSpan(SourceLocation, SourceLocation)
+  nameWithType: SourceSpan.SourceSpan(SourceLocation, SourceLocation)
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan.SourceSpan(OceanApocalypseStudios.RSML.Sources.SourceLocation, OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  type: Constructor
+  source:
+    remote:
+      path: src/RSML/Sources/SourceSpan.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: .ctor
+    path: ../src/RSML/Sources/SourceSpan.cs
+    startLine: 41
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Initializes a new span given a starting and an end indexes.
+  example: []
+  syntax:
+    content: public SourceSpan(SourceLocation start, SourceLocation end)
+    parameters:
+    - id: start
+      type: OceanApocalypseStudios.RSML.Sources.SourceLocation
+      description: The start index.
+    - id: end
+      type: OceanApocalypseStudios.RSML.Sources.SourceLocation
+      description: The end index.
+    content.vb: Public Sub New(start As SourceLocation, [end] As SourceLocation)
+  overload: OceanApocalypseStudios.RSML.Sources.SourceSpan.#ctor*
+  exceptions:
+  - type: System.ArgumentException
+    commentId: T:System.ArgumentException
+    description: The starting index is greater or equal to the end index.
+  nameWithType.vb: SourceSpan.New(SourceLocation, SourceLocation)
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.SourceSpan.New(OceanApocalypseStudios.RSML.Sources.SourceLocation, OceanApocalypseStudios.RSML.Sources.SourceLocation)
+  name.vb: New(SourceLocation, SourceLocation)
 - uid: OceanApocalypseStudios.RSML.Sources.SourceSpan.Equals(System.Object)
   commentId: M:OceanApocalypseStudios.RSML.Sources.SourceSpan.Equals(System.Object)
   id: Equals(System.Object)
@@ -221,11 +257,11 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceSpan.cs
-      branch: docs
+      branch: dev
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: Equals
     path: ../src/RSML/Sources/SourceSpan.cs
-    startLine: 31
+    startLine: 51
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
@@ -266,11 +302,11 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceSpan.cs
-      branch: docs
+      branch: dev
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: Equals
     path: ../src/RSML/Sources/SourceSpan.cs
-    startLine: 45
+    startLine: 65
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
@@ -301,11 +337,11 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceSpan.cs
-      branch: docs
+      branch: dev
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: op_Equality
     path: ../src/RSML/Sources/SourceSpan.cs
-    startLine: 51
+    startLine: 71
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
@@ -340,11 +376,11 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceSpan.cs
-      branch: docs
+      branch: dev
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: op_Inequality
     path: ../src/RSML/Sources/SourceSpan.cs
-    startLine: 57
+    startLine: 77
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
@@ -379,11 +415,11 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceSpan.cs
-      branch: docs
+      branch: dev
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: ToString
     path: ../src/RSML/Sources/SourceSpan.cs
-    startLine: 63
+    startLine: 83
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
@@ -411,11 +447,11 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceSpan.cs
-      branch: docs
+      branch: dev
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: ToString
     path: ../src/RSML/Sources/SourceSpan.cs
-    startLine: 71
+    startLine: 91
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
@@ -449,11 +485,11 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceSpan.cs
-      branch: docs
+      branch: dev
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: ToString
     path: ../src/RSML/Sources/SourceSpan.cs
-    startLine: 93
+    startLine: 113
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
@@ -463,7 +499,7 @@ items:
     If it fails, it defaults to <xref href="OceanApocalypseStudios.RSML.Sources.SourceSpan.ToString" data-throw-if-not-resolved="false"></xref>.
   example: []
   syntax:
-    content: public string ToString(string? format, IFormatProvider? formatProvider)
+    content: public string ToString(string? format, IFormatProvider? formatProvider = null)
     parameters:
     - id: format
       type: System.String
@@ -474,7 +510,7 @@ items:
     return:
       type: System.String
       description: The string representation.
-    content.vb: Public Function ToString(format As String, formatProvider As IFormatProvider) As String
+    content.vb: Public Function ToString(format As String, formatProvider As IFormatProvider = Nothing) As String
   overload: OceanApocalypseStudios.RSML.Sources.SourceSpan.ToString*
   implements:
   - System.IFormattable.ToString(System.String,System.IFormatProvider)
@@ -495,11 +531,11 @@ items:
   source:
     remote:
       path: src/RSML/Sources/SourceSpan.cs
-      branch: docs
+      branch: dev
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: GetHashCode
     path: ../src/RSML/Sources/SourceSpan.cs
-    startLine: 102
+    startLine: 122
   assemblies:
   - RSML
   namespace: OceanApocalypseStudios.RSML.Sources
@@ -684,15 +720,19 @@ references:
   nameWithType.vb: Object
   fullName.vb: Object
   name.vb: Object
-- uid: OceanApocalypseStudios.RSML.Sources.SourceSpan.#ctor*
-  commentId: Overload:OceanApocalypseStudios.RSML.Sources.SourceSpan.#ctor
-  href: OceanApocalypseStudios.RSML.Sources.SourceSpan.-ctor.html#OceanApocalypseStudios_RSML_Sources_SourceSpan__ctor_OceanApocalypseStudios_RSML_Sources_SourceLocation_OceanApocalypseStudios_RSML_Sources_SourceLocation_
+- uid: OceanApocalypseStudios.RSML.Sources.SourceSpan
+  commentId: T:OceanApocalypseStudios.RSML.Sources.SourceSpan
+  parent: OceanApocalypseStudios.RSML.Sources
+  href: OceanApocalypseStudios.RSML.Sources.SourceSpan.html
   name: SourceSpan
-  nameWithType: SourceSpan.SourceSpan
-  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan.SourceSpan
-  nameWithType.vb: SourceSpan.New
-  fullName.vb: OceanApocalypseStudios.RSML.Sources.SourceSpan.New
-  name.vb: New
+  nameWithType: SourceSpan
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan
+- uid: OceanApocalypseStudios.RSML.Sources.SourceSpan.Start*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.SourceSpan.Start
+  href: OceanApocalypseStudios.RSML.Sources.SourceSpan.Start.html#OceanApocalypseStudios_RSML_Sources_SourceSpan_Start
+  name: Start
+  nameWithType: SourceSpan.Start
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan.Start
 - uid: OceanApocalypseStudios.RSML.Sources.SourceLocation
   commentId: T:OceanApocalypseStudios.RSML.Sources.SourceLocation
   parent: OceanApocalypseStudios.RSML.Sources
@@ -700,12 +740,6 @@ references:
   name: SourceLocation
   nameWithType: SourceLocation
   fullName: OceanApocalypseStudios.RSML.Sources.SourceLocation
-- uid: OceanApocalypseStudios.RSML.Sources.SourceSpan.Start*
-  commentId: Overload:OceanApocalypseStudios.RSML.Sources.SourceSpan.Start
-  href: OceanApocalypseStudios.RSML.Sources.SourceSpan.Start.html#OceanApocalypseStudios_RSML_Sources_SourceSpan_Start
-  name: Start
-  nameWithType: SourceSpan.Start
-  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan.Start
 - uid: OceanApocalypseStudios.RSML.Sources.SourceSpan.End*
   commentId: Overload:OceanApocalypseStudios.RSML.Sources.SourceSpan.End
   href: OceanApocalypseStudios.RSML.Sources.SourceSpan.End.html#OceanApocalypseStudios_RSML_Sources_SourceSpan_End
@@ -746,6 +780,22 @@ references:
   nameWithType.vb: Boolean
   fullName.vb: Boolean
   name.vb: Boolean
+- uid: System.ArgumentException
+  commentId: T:System.ArgumentException
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.argumentexception
+  name: ArgumentException
+  nameWithType: ArgumentException
+  fullName: System.ArgumentException
+- uid: OceanApocalypseStudios.RSML.Sources.SourceSpan.#ctor*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sources.SourceSpan.#ctor
+  href: OceanApocalypseStudios.RSML.Sources.SourceSpan.-ctor.html#OceanApocalypseStudios_RSML_Sources_SourceSpan__ctor_OceanApocalypseStudios_RSML_Sources_SourceLocation_OceanApocalypseStudios_RSML_Sources_SourceLocation_
+  name: SourceSpan
+  nameWithType: SourceSpan.SourceSpan
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan.SourceSpan
+  nameWithType.vb: SourceSpan.New
+  fullName.vb: OceanApocalypseStudios.RSML.Sources.SourceSpan.New
+  name.vb: New
 - uid: System.ValueType.Equals(System.Object)
   commentId: M:System.ValueType.Equals(System.Object)
   parent: System.ValueType
@@ -793,13 +843,6 @@ references:
   name: ValueType
   nameWithType: ValueType
   fullName: System.ValueType
-- uid: OceanApocalypseStudios.RSML.Sources.SourceSpan
-  commentId: T:OceanApocalypseStudios.RSML.Sources.SourceSpan
-  parent: OceanApocalypseStudios.RSML.Sources
-  href: OceanApocalypseStudios.RSML.Sources.SourceSpan.html
-  name: SourceSpan
-  nameWithType: SourceSpan
-  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan
 - uid: System.Nullable{OceanApocalypseStudios.RSML.Sources.SourceSpan}
   commentId: T:System.Nullable{OceanApocalypseStudios.RSML.Sources.SourceSpan}
   parent: System

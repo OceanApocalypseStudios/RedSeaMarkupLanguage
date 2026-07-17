@@ -1,3 +1,5 @@
+- name: List of Bindings
+  href: list.md
 - name: RSML for Python
   items:
     - name: Getting Started

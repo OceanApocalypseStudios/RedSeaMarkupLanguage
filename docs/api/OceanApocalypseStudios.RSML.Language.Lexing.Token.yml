@@ -19,7 +19,7 @@ items:
   source:
     remote:
       path: src/RSML/Language/Lexing/Token.cs
-      branch: docs
+      branch: dev
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: Token
     path: ../src/RSML/Language/Lexing/Token.cs
@@ -53,7 +53,7 @@ items:
   source:
     remote:
       path: src/RSML/Language/Lexing/Token.cs
-      branch: docs
+      branch: dev
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: .ctor
     path: ../src/RSML/Language/Lexing/Token.cs
@@ -89,7 +89,7 @@ items:
   source:
     remote:
       path: src/RSML/Language/Lexing/Token.cs
-      branch: docs
+      branch: dev
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: TokenKind
     path: ../src/RSML/Language/Lexing/Token.cs
@@ -118,7 +118,7 @@ items:
   source:
     remote:
       path: src/RSML/Language/Lexing/Token.cs
-      branch: docs
+      branch: dev
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: Value
     path: ../src/RSML/Language/Lexing/Token.cs
@@ -147,7 +147,7 @@ items:
   source:
     remote:
       path: src/RSML/Language/Lexing/Token.cs
-      branch: docs
+      branch: dev
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: Span
     path: ../src/RSML/Language/Lexing/Token.cs

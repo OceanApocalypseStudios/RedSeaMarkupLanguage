@@ -19,7 +19,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ISource.cs
-      branch: docs
+      branch: dev
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: ISource
     path: ../src/RSML/Sources/ISource.cs
@@ -33,6 +33,7 @@ items:
     content: 'public interface ISource : IDisposable'
     content.vb: Public Interface ISource Inherits IDisposable
   derivedClasses:
+  - OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer
   - OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer
   inheritedMembers:
   - System.IDisposable.Dispose
@@ -50,7 +51,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ISource.cs
-      branch: docs
+      branch: dev
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: CursorIndex
     path: ../src/RSML/Sources/ISource.cs
@@ -81,7 +82,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ISource.cs
-      branch: docs
+      branch: dev
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: IsEmpty
     path: ../src/RSML/Sources/ISource.cs
@@ -112,7 +113,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ISource.cs
-      branch: docs
+      branch: dev
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: IsReadOnly
     path: ../src/RSML/Sources/ISource.cs
@@ -143,7 +144,7 @@ items:
   source:
     remote:
       path: src/RSML/Sources/ISource.cs
-      branch: docs
+      branch: dev
       repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
     id: Length
     path: ../src/RSML/Sources/ISource.cs

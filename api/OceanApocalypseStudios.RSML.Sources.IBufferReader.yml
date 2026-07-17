@@ -1,0 +1,267 @@
+### YamlMime:ManagedReference
+items:
+- uid: OceanApocalypseStudios.RSML.Sources.IBufferReader
+  commentId: T:OceanApocalypseStudios.RSML.Sources.IBufferReader
+  id: IBufferReader
+  parent: OceanApocalypseStudios.RSML.Sources
+  children: []
+  langs:
+  - csharp
+  - vb
+  name: IBufferReader
+  nameWithType: IBufferReader
+  fullName: OceanApocalypseStudios.RSML.Sources.IBufferReader
+  type: Interface
+  source:
+    remote:
+      path: src/RSML/Sources/IBufferReader.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: IBufferReader
+    path: src/RSML/Sources/IBufferReader.cs
+    startLine: 8
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sources
+  summary: Represents a sequential buffer reader whose data is composed of <xref href="System.Byte" data-throw-if-not-resolved="false"></xref>s.
+  example: []
+  syntax:
+    content: 'public interface IBufferReader : ISource, IDisposable, IEquatable<IBufferReader?>'
+    content.vb: Public Interface IBufferReader Inherits ISource, IDisposable, IEquatable(Of IBufferReader)
+  inheritedMembers:
+  - OceanApocalypseStudios.RSML.Sources.ISource.CursorIndex
+  - OceanApocalypseStudios.RSML.Sources.ISource.IsEmpty
+  - OceanApocalypseStudios.RSML.Sources.ISource.IsReadOnly
+  - OceanApocalypseStudios.RSML.Sources.ISource.Length
+  - System.IDisposable.Dispose
+  - System.IEquatable{OceanApocalypseStudios.RSML.Sources.IBufferReader}.Equals(OceanApocalypseStudios.RSML.Sources.IBufferReader)
+references:
+- uid: System.Byte
+  commentId: T:System.Byte
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.byte
+  name: byte
+  nameWithType: byte
+  fullName: byte
+  nameWithType.vb: Byte
+  fullName.vb: Byte
+  name.vb: Byte
+- uid: OceanApocalypseStudios.RSML.Sources
+  commentId: N:OceanApocalypseStudios.RSML.Sources
+  href: OceanApocalypseStudios.html
+  name: OceanApocalypseStudios.RSML.Sources
+  nameWithType: OceanApocalypseStudios.RSML.Sources
+  fullName: OceanApocalypseStudios.RSML.Sources
+  spec.csharp:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sources
+    name: Sources
+    href: OceanApocalypseStudios.RSML.Sources.html
+  spec.vb:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sources
+    name: Sources
+    href: OceanApocalypseStudios.RSML.Sources.html
+- uid: OceanApocalypseStudios.RSML.Sources.ISource.CursorIndex
+  commentId: P:OceanApocalypseStudios.RSML.Sources.ISource.CursorIndex
+  parent: OceanApocalypseStudios.RSML.Sources.ISource
+  href: OceanApocalypseStudios.RSML.Sources.ISource.CursorIndex.html#OceanApocalypseStudios_RSML_Sources_ISource_CursorIndex
+  name: CursorIndex
+  nameWithType: ISource.CursorIndex
+  fullName: OceanApocalypseStudios.RSML.Sources.ISource.CursorIndex
+- uid: OceanApocalypseStudios.RSML.Sources.ISource.IsEmpty
+  commentId: P:OceanApocalypseStudios.RSML.Sources.ISource.IsEmpty
+  parent: OceanApocalypseStudios.RSML.Sources.ISource
+  href: OceanApocalypseStudios.RSML.Sources.ISource.IsEmpty.html#OceanApocalypseStudios_RSML_Sources_ISource_IsEmpty
+  name: IsEmpty
+  nameWithType: ISource.IsEmpty
+  fullName: OceanApocalypseStudios.RSML.Sources.ISource.IsEmpty
+- uid: OceanApocalypseStudios.RSML.Sources.ISource.IsReadOnly
+  commentId: P:OceanApocalypseStudios.RSML.Sources.ISource.IsReadOnly
+  parent: OceanApocalypseStudios.RSML.Sources.ISource
+  href: OceanApocalypseStudios.RSML.Sources.ISource.IsReadOnly.html#OceanApocalypseStudios_RSML_Sources_ISource_IsReadOnly
+  name: IsReadOnly
+  nameWithType: ISource.IsReadOnly
+  fullName: OceanApocalypseStudios.RSML.Sources.ISource.IsReadOnly
+- uid: OceanApocalypseStudios.RSML.Sources.ISource.Length
+  commentId: P:OceanApocalypseStudios.RSML.Sources.ISource.Length
+  parent: OceanApocalypseStudios.RSML.Sources.ISource
+  href: OceanApocalypseStudios.RSML.Sources.ISource.Length.html#OceanApocalypseStudios_RSML_Sources_ISource_Length
+  name: Length
+  nameWithType: ISource.Length
+  fullName: OceanApocalypseStudios.RSML.Sources.ISource.Length
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+- uid: System.IEquatable{OceanApocalypseStudios.RSML.Sources.IBufferReader}.Equals(OceanApocalypseStudios.RSML.Sources.IBufferReader)
+  commentId: M:System.IEquatable{OceanApocalypseStudios.RSML.Sources.IBufferReader}.Equals(OceanApocalypseStudios.RSML.Sources.IBufferReader)
+  parent: System.IEquatable{OceanApocalypseStudios.RSML.Sources.IBufferReader}
+  definition: System.IEquatable`1.Equals(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(IBufferReader)
+  nameWithType: IEquatable<IBufferReader>.Equals(IBufferReader)
+  fullName: System.IEquatable<OceanApocalypseStudios.RSML.Sources.IBufferReader>.Equals(OceanApocalypseStudios.RSML.Sources.IBufferReader)
+  nameWithType.vb: IEquatable(Of IBufferReader).Equals(IBufferReader)
+  fullName.vb: System.IEquatable(Of OceanApocalypseStudios.RSML.Sources.IBufferReader).Equals(OceanApocalypseStudios.RSML.Sources.IBufferReader)
+  spec.csharp:
+  - uid: System.IEquatable{OceanApocalypseStudios.RSML.Sources.IBufferReader}.Equals(OceanApocalypseStudios.RSML.Sources.IBufferReader)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: OceanApocalypseStudios.RSML.Sources.IBufferReader
+    name: IBufferReader
+    href: OceanApocalypseStudios.RSML.Sources.IBufferReader.html
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable{OceanApocalypseStudios.RSML.Sources.IBufferReader}.Equals(OceanApocalypseStudios.RSML.Sources.IBufferReader)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: OceanApocalypseStudios.RSML.Sources.IBufferReader
+    name: IBufferReader
+    href: OceanApocalypseStudios.RSML.Sources.IBufferReader.html
+  - name: )
+- uid: OceanApocalypseStudios.RSML.Sources.ISource
+  commentId: T:OceanApocalypseStudios.RSML.Sources.ISource
+  parent: OceanApocalypseStudios.RSML.Sources
+  href: OceanApocalypseStudios.RSML.Sources.ISource.html
+  name: ISource
+  nameWithType: ISource
+  fullName: OceanApocalypseStudios.RSML.Sources.ISource
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: System.IEquatable`1.Equals(`0)
+  commentId: M:System.IEquatable`1.Equals(`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(T)
+  nameWithType: IEquatable<T>.Equals(T)
+  fullName: System.IEquatable<T>.Equals(T)
+  nameWithType.vb: IEquatable(Of T).Equals(T)
+  fullName.vb: System.IEquatable(Of T).Equals(T)
+  spec.csharp:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+- uid: System.IEquatable{OceanApocalypseStudios.RSML.Sources.IBufferReader}
+  commentId: T:System.IEquatable{OceanApocalypseStudios.RSML.Sources.IBufferReader}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<IBufferReader>
+  nameWithType: IEquatable<IBufferReader>
+  fullName: System.IEquatable<OceanApocalypseStudios.RSML.Sources.IBufferReader>
+  nameWithType.vb: IEquatable(Of IBufferReader)
+  fullName.vb: System.IEquatable(Of OceanApocalypseStudios.RSML.Sources.IBufferReader)
+  name.vb: IEquatable(Of IBufferReader)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: OceanApocalypseStudios.RSML.Sources.IBufferReader
+    name: IBufferReader
+    href: OceanApocalypseStudios.RSML.Sources.IBufferReader.html
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: OceanApocalypseStudios.RSML.Sources.IBufferReader
+    name: IBufferReader
+    href: OceanApocalypseStudios.RSML.Sources.IBufferReader.html
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.IEquatable`1
+  commentId: T:System.IEquatable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<T>
+  nameWithType: IEquatable<T>
+  fullName: System.IEquatable<T>
+  nameWithType.vb: IEquatable(Of T)
+  fullName.vb: System.IEquatable(Of T)
+  name.vb: IEquatable(Of T)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+memberLayout: SeparatePages

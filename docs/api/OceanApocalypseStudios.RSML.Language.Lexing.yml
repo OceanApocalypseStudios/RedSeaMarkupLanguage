@@ -2,10 +2,13 @@
 items:
 - uid: OceanApocalypseStudios.RSML.Language.Lexing
   commentId: N:OceanApocalypseStudios.RSML.Language.Lexing
-  id: OceanApocalypseStudios.RSML.Language.Lexing
+  id: Lexing
+  parent: OceanApocalypseStudios.RSML.Language
   children:
-  - OceanApocalypseStudios.RSML.Language.Lexing.ILexerRule
+  - OceanApocalypseStudios.RSML.Language.Lexing.DefaultLexer
+  - OceanApocalypseStudios.RSML.Language.Lexing.ILexer
   - OceanApocalypseStudios.RSML.Language.Lexing.Lexer
+  - OceanApocalypseStudios.RSML.Language.Lexing.StatelessLexer
   - OceanApocalypseStudios.RSML.Language.Lexing.Token
   langs:
   - csharp
@@ -17,13 +20,19 @@ items:
   assemblies:
   - RSML
 references:
-- uid: OceanApocalypseStudios.RSML.Language.Lexing.ILexerRule
-  commentId: T:OceanApocalypseStudios.RSML.Language.Lexing.ILexerRule
+- uid: OceanApocalypseStudios.RSML.Language.Lexing.DefaultLexer
+  commentId: T:OceanApocalypseStudios.RSML.Language.Lexing.DefaultLexer
+  href: OceanApocalypseStudios.RSML.Language.Lexing.DefaultLexer.html
+  name: DefaultLexer
+  nameWithType: DefaultLexer
+  fullName: OceanApocalypseStudios.RSML.Language.Lexing.DefaultLexer
+- uid: OceanApocalypseStudios.RSML.Language.Lexing.ILexer
+  commentId: T:OceanApocalypseStudios.RSML.Language.Lexing.ILexer
   parent: OceanApocalypseStudios.RSML.Language.Lexing
-  href: OceanApocalypseStudios.RSML.Language.Lexing.ILexerRule.html
-  name: ILexerRule
-  nameWithType: ILexerRule
-  fullName: OceanApocalypseStudios.RSML.Language.Lexing.ILexerRule
+  href: OceanApocalypseStudios.RSML.Language.Lexing.ILexer.html
+  name: ILexer
+  nameWithType: ILexer
+  fullName: OceanApocalypseStudios.RSML.Language.Lexing.ILexer
 - uid: OceanApocalypseStudios.RSML.Language.Lexing.Lexer
   commentId: T:OceanApocalypseStudios.RSML.Language.Lexing.Lexer
   parent: OceanApocalypseStudios.RSML.Language.Lexing
@@ -31,9 +40,14 @@ references:
   name: Lexer
   nameWithType: Lexer
   fullName: OceanApocalypseStudios.RSML.Language.Lexing.Lexer
+- uid: OceanApocalypseStudios.RSML.Language.Lexing.StatelessLexer
+  commentId: T:OceanApocalypseStudios.RSML.Language.Lexing.StatelessLexer
+  href: OceanApocalypseStudios.RSML.Language.Lexing.StatelessLexer.html
+  name: StatelessLexer
+  nameWithType: StatelessLexer
+  fullName: OceanApocalypseStudios.RSML.Language.Lexing.StatelessLexer
 - uid: OceanApocalypseStudios.RSML.Language.Lexing.Token
   commentId: T:OceanApocalypseStudios.RSML.Language.Lexing.Token
-  parent: OceanApocalypseStudios.RSML.Language.Lexing
   href: OceanApocalypseStudios.RSML.Language.Lexing.Token.html
   name: Token
   nameWithType: Token

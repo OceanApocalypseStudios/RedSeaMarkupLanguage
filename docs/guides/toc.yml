@@ -1,5 +1,5 @@
 - name: All Guides
-  href: index.md
+  href: list.md
 - name: Getting Started with RSML
   items:
     - name: Hello, World!

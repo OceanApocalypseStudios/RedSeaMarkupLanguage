@@ -1,0 +1,104 @@
+### YamlMime:ManagedReference
+items:
+- uid: OceanApocalypseStudios.RSML.Sources
+  commentId: N:OceanApocalypseStudios.RSML.Sources
+  id: Sources
+  parent: OceanApocalypseStudios.RSML
+  children:
+  - OceanApocalypseStudios.RSML.Sources.IBuffer
+  - OceanApocalypseStudios.RSML.Sources.IBufferReader
+  - OceanApocalypseStudios.RSML.Sources.ISource
+  - OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer
+  - OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer
+  - OceanApocalypseStudios.RSML.Sources.SourceLocation
+  - OceanApocalypseStudios.RSML.Sources.SourceSpan
+  langs:
+  - csharp
+  - vb
+  name: OceanApocalypseStudios.RSML.Sources
+  nameWithType: OceanApocalypseStudios.RSML.Sources
+  fullName: OceanApocalypseStudios.RSML.Sources
+  type: Namespace
+  assemblies:
+  - RSML
+references:
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer
+  commentId: T:OceanApocalypseStudios.RSML.Sources.IBuffer
+  parent: OceanApocalypseStudios.RSML.Sources
+  href: OceanApocalypseStudios.RSML.Sources.IBuffer.html
+  name: IBuffer
+  nameWithType: IBuffer
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer
+- uid: OceanApocalypseStudios.RSML.Sources.IBufferReader
+  commentId: T:OceanApocalypseStudios.RSML.Sources.IBufferReader
+  parent: OceanApocalypseStudios.RSML.Sources
+  href: OceanApocalypseStudios.RSML.Sources.IBufferReader.html
+  name: IBufferReader
+  nameWithType: IBufferReader
+  fullName: OceanApocalypseStudios.RSML.Sources.IBufferReader
+- uid: OceanApocalypseStudios.RSML.Sources.ISource
+  commentId: T:OceanApocalypseStudios.RSML.Sources.ISource
+  parent: OceanApocalypseStudios.RSML.Sources
+  href: OceanApocalypseStudios.RSML.Sources.ISource.html
+  name: ISource
+  nameWithType: ISource
+  fullName: OceanApocalypseStudios.RSML.Sources.ISource
+- uid: OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer
+  commentId: T:OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer
+  parent: OceanApocalypseStudios.RSML.Sources
+  href: OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.html
+  name: ReadOnlySpanBuffer
+  nameWithType: ReadOnlySpanBuffer
+  fullName: OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer
+- uid: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer
+  commentId: T:OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer
+  parent: OceanApocalypseStudios.RSML.Sources
+  href: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.html
+  name: ReadOnlyStringBuffer
+  nameWithType: ReadOnlyStringBuffer
+  fullName: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer
+- uid: OceanApocalypseStudios.RSML.Sources.SourceLocation
+  commentId: T:OceanApocalypseStudios.RSML.Sources.SourceLocation
+  parent: OceanApocalypseStudios.RSML.Sources
+  href: OceanApocalypseStudios.RSML.Sources.SourceLocation.html
+  name: SourceLocation
+  nameWithType: SourceLocation
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceLocation
+- uid: OceanApocalypseStudios.RSML.Sources.SourceSpan
+  commentId: T:OceanApocalypseStudios.RSML.Sources.SourceSpan
+  parent: OceanApocalypseStudios.RSML.Sources
+  href: OceanApocalypseStudios.RSML.Sources.SourceSpan.html
+  name: SourceSpan
+  nameWithType: SourceSpan
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan
+- uid: OceanApocalypseStudios.RSML.Sources
+  commentId: N:OceanApocalypseStudios.RSML.Sources
+  href: OceanApocalypseStudios.html
+  name: OceanApocalypseStudios.RSML.Sources
+  nameWithType: OceanApocalypseStudios.RSML.Sources
+  fullName: OceanApocalypseStudios.RSML.Sources
+  spec.csharp:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sources
+    name: Sources
+    href: OceanApocalypseStudios.RSML.Sources.html
+  spec.vb:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sources
+    name: Sources
+    href: OceanApocalypseStudios.RSML.Sources.html
+memberLayout: SeparatePages

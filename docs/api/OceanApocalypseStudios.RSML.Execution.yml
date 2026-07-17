@@ -2,7 +2,8 @@
 items:
 - uid: OceanApocalypseStudios.RSML.Execution
   commentId: N:OceanApocalypseStudios.RSML.Execution
-  id: OceanApocalypseStudios.RSML.Execution
+  id: Execution
+  parent: OceanApocalypseStudios.RSML
   children:
   - OceanApocalypseStudios.RSML.Execution.Interpreter
   langs:
@@ -17,39 +18,8 @@ items:
 references:
 - uid: OceanApocalypseStudios.RSML.Execution.Interpreter
   commentId: T:OceanApocalypseStudios.RSML.Execution.Interpreter
-  parent: OceanApocalypseStudios.RSML.Execution
   href: OceanApocalypseStudios.RSML.Execution.Interpreter.html
   name: Interpreter
   nameWithType: Interpreter
   fullName: OceanApocalypseStudios.RSML.Execution.Interpreter
-- uid: OceanApocalypseStudios.RSML.Execution
-  commentId: N:OceanApocalypseStudios.RSML.Execution
-  href: OceanApocalypseStudios.html
-  name: OceanApocalypseStudios.RSML.Execution
-  nameWithType: OceanApocalypseStudios.RSML.Execution
-  fullName: OceanApocalypseStudios.RSML.Execution
-  spec.csharp:
-  - uid: OceanApocalypseStudios
-    name: OceanApocalypseStudios
-    href: OceanApocalypseStudios.html
-  - name: .
-  - uid: OceanApocalypseStudios.RSML
-    name: RSML
-    href: OceanApocalypseStudios.RSML.html
-  - name: .
-  - uid: OceanApocalypseStudios.RSML.Execution
-    name: Execution
-    href: OceanApocalypseStudios.RSML.Execution.html
-  spec.vb:
-  - uid: OceanApocalypseStudios
-    name: OceanApocalypseStudios
-    href: OceanApocalypseStudios.html
-  - name: .
-  - uid: OceanApocalypseStudios.RSML
-    name: RSML
-    href: OceanApocalypseStudios.RSML.html
-  - name: .
-  - uid: OceanApocalypseStudios.RSML.Execution
-    name: Execution
-    href: OceanApocalypseStudios.RSML.Execution.html
 memberLayout: SeparatePages

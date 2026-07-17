@@ -1,0 +1,960 @@
+### YamlMime:ManagedReference
+items:
+- uid: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder
+  commentId: T:OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder
+  id: ToolchainExecutionPlanBuilder
+  parent: OceanApocalypseStudios.RSML.Extensibility
+  children:
+  - OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Build
+  - OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Override(OceanApocalypseStudios.RSML.IToolchainComponent)
+  - OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Override``1
+  - OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Register(OceanApocalypseStudios.RSML.Extensibility.ILanguageExtension)
+  - OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Register``1
+  - OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithConfiguration(OceanApocalypseStudios.RSML.ToolchainConfiguration)
+  - OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource(OceanApocalypseStudios.RSML.Sources.IBuffer)
+  - OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource(OceanApocalypseStudios.RSML.Sources.IBufferReader)
+  - OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource(OceanApocalypseStudios.RSML.Sources.ISource)
+  - OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource(System.IO.FileInfo)
+  - OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource(System.IO.Stream)
+  - OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource(System.ReadOnlyMemory{System.Char})
+  - OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource(System.String)
+  langs:
+  - csharp
+  - vb
+  name: ToolchainExecutionPlanBuilder
+  nameWithType: ToolchainExecutionPlanBuilder
+  fullName: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder
+  type: Class
+  source:
+    remote:
+      path: src/RSML.Extensibility/ToolchainExecutionPlanBuilder.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: ToolchainExecutionPlanBuilder
+    path: ../src/RSML.Extensibility/ToolchainExecutionPlanBuilder.cs
+    startLine: 11
+  assemblies:
+  - RSML.Extensibility
+  namespace: OceanApocalypseStudios.RSML.Extensibility
+  syntax:
+    content: public sealed class ToolchainExecutionPlanBuilder
+    content.vb: Public NotInheritable Class ToolchainExecutionPlanBuilder
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Override(OceanApocalypseStudios.RSML.IToolchainComponent)
+  commentId: M:OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Override(OceanApocalypseStudios.RSML.IToolchainComponent)
+  id: Override(OceanApocalypseStudios.RSML.IToolchainComponent)
+  parent: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder
+  langs:
+  - csharp
+  - vb
+  name: Override(IToolchainComponent)
+  nameWithType: ToolchainExecutionPlanBuilder.Override(IToolchainComponent)
+  fullName: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Override(OceanApocalypseStudios.RSML.IToolchainComponent)
+  type: Method
+  source:
+    remote:
+      path: src/RSML.Extensibility/ToolchainExecutionPlanBuilder.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Override
+    path: ../src/RSML.Extensibility/ToolchainExecutionPlanBuilder.cs
+    startLine: 19
+  assemblies:
+  - RSML.Extensibility
+  namespace: OceanApocalypseStudios.RSML.Extensibility
+  syntax:
+    content: public ToolchainExecutionPlanBuilder Override(IToolchainComponent component)
+    parameters:
+    - id: component
+      type: OceanApocalypseStudios.RSML.IToolchainComponent
+    return:
+      type: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder
+    content.vb: Public Function Override(component As IToolchainComponent) As ToolchainExecutionPlanBuilder
+  overload: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Override*
+- uid: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Override``1
+  commentId: M:OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Override``1
+  id: Override``1
+  parent: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder
+  langs:
+  - csharp
+  - vb
+  name: Override<TToolchainComponent>()
+  nameWithType: ToolchainExecutionPlanBuilder.Override<TToolchainComponent>()
+  fullName: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Override<TToolchainComponent>()
+  type: Method
+  source:
+    remote:
+      path: src/RSML.Extensibility/ToolchainExecutionPlanBuilder.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Override
+    path: ../src/RSML.Extensibility/ToolchainExecutionPlanBuilder.cs
+    startLine: 25
+  assemblies:
+  - RSML.Extensibility
+  namespace: OceanApocalypseStudios.RSML.Extensibility
+  syntax:
+    content: 'public ToolchainExecutionPlanBuilder Override<TToolchainComponent>() where TToolchainComponent : IToolchainComponent, new()'
+    typeParameters:
+    - id: TToolchainComponent
+    return:
+      type: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder
+    content.vb: Public Function Override(Of TToolchainComponent As {IToolchainComponent, New})() As ToolchainExecutionPlanBuilder
+  overload: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Override*
+  nameWithType.vb: ToolchainExecutionPlanBuilder.Override(Of TToolchainComponent)()
+  fullName.vb: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Override(Of TToolchainComponent)()
+  name.vb: Override(Of TToolchainComponent)()
+- uid: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Register(OceanApocalypseStudios.RSML.Extensibility.ILanguageExtension)
+  commentId: M:OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Register(OceanApocalypseStudios.RSML.Extensibility.ILanguageExtension)
+  id: Register(OceanApocalypseStudios.RSML.Extensibility.ILanguageExtension)
+  parent: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder
+  langs:
+  - csharp
+  - vb
+  name: Register(ILanguageExtension)
+  nameWithType: ToolchainExecutionPlanBuilder.Register(ILanguageExtension)
+  fullName: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Register(OceanApocalypseStudios.RSML.Extensibility.ILanguageExtension)
+  type: Method
+  source:
+    remote:
+      path: src/RSML.Extensibility/ToolchainExecutionPlanBuilder.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Register
+    path: ../src/RSML.Extensibility/ToolchainExecutionPlanBuilder.cs
+    startLine: 32
+  assemblies:
+  - RSML.Extensibility
+  namespace: OceanApocalypseStudios.RSML.Extensibility
+  syntax:
+    content: public ToolchainExecutionPlanBuilder Register(ILanguageExtension extension)
+    parameters:
+    - id: extension
+      type: OceanApocalypseStudios.RSML.Extensibility.ILanguageExtension
+    return:
+      type: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder
+    content.vb: Public Function Register(extension As ILanguageExtension) As ToolchainExecutionPlanBuilder
+  overload: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Register*
+- uid: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Register``1
+  commentId: M:OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Register``1
+  id: Register``1
+  parent: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder
+  langs:
+  - csharp
+  - vb
+  name: Register<TExtension>()
+  nameWithType: ToolchainExecutionPlanBuilder.Register<TExtension>()
+  fullName: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Register<TExtension>()
+  type: Method
+  source:
+    remote:
+      path: src/RSML.Extensibility/ToolchainExecutionPlanBuilder.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Register
+    path: ../src/RSML.Extensibility/ToolchainExecutionPlanBuilder.cs
+    startLine: 38
+  assemblies:
+  - RSML.Extensibility
+  namespace: OceanApocalypseStudios.RSML.Extensibility
+  syntax:
+    content: 'public ToolchainExecutionPlanBuilder Register<TExtension>() where TExtension : ILanguageExtension, new()'
+    typeParameters:
+    - id: TExtension
+    return:
+      type: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder
+    content.vb: Public Function Register(Of TExtension As {ILanguageExtension, New})() As ToolchainExecutionPlanBuilder
+  overload: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Register*
+  nameWithType.vb: ToolchainExecutionPlanBuilder.Register(Of TExtension)()
+  fullName.vb: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Register(Of TExtension)()
+  name.vb: Register(Of TExtension)()
+- uid: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource(OceanApocalypseStudios.RSML.Sources.ISource)
+  commentId: M:OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource(OceanApocalypseStudios.RSML.Sources.ISource)
+  id: WithDataSource(OceanApocalypseStudios.RSML.Sources.ISource)
+  parent: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder
+  langs:
+  - csharp
+  - vb
+  name: WithDataSource(ISource)
+  nameWithType: ToolchainExecutionPlanBuilder.WithDataSource(ISource)
+  fullName: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource(OceanApocalypseStudios.RSML.Sources.ISource)
+  type: Method
+  source:
+    remote:
+      path: src/RSML.Extensibility/ToolchainExecutionPlanBuilder.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: WithDataSource
+    path: ../src/RSML.Extensibility/ToolchainExecutionPlanBuilder.cs
+    startLine: 45
+  assemblies:
+  - RSML.Extensibility
+  namespace: OceanApocalypseStudios.RSML.Extensibility
+  syntax:
+    content: public ToolchainExecutionPlanBuilder WithDataSource(ISource source)
+    parameters:
+    - id: source
+      type: OceanApocalypseStudios.RSML.Sources.ISource
+    return:
+      type: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder
+    content.vb: Public Function WithDataSource(source As ISource) As ToolchainExecutionPlanBuilder
+  overload: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource*
+- uid: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource(OceanApocalypseStudios.RSML.Sources.IBufferReader)
+  commentId: M:OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource(OceanApocalypseStudios.RSML.Sources.IBufferReader)
+  id: WithDataSource(OceanApocalypseStudios.RSML.Sources.IBufferReader)
+  parent: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder
+  langs:
+  - csharp
+  - vb
+  name: WithDataSource(IBufferReader)
+  nameWithType: ToolchainExecutionPlanBuilder.WithDataSource(IBufferReader)
+  fullName: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource(OceanApocalypseStudios.RSML.Sources.IBufferReader)
+  type: Method
+  source:
+    remote:
+      path: src/RSML.Extensibility/ToolchainExecutionPlanBuilder.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: WithDataSource
+    path: ../src/RSML.Extensibility/ToolchainExecutionPlanBuilder.cs
+    startLine: 51
+  assemblies:
+  - RSML.Extensibility
+  namespace: OceanApocalypseStudios.RSML.Extensibility
+  syntax:
+    content: public ToolchainExecutionPlanBuilder WithDataSource(IBufferReader reader)
+    parameters:
+    - id: reader
+      type: OceanApocalypseStudios.RSML.Sources.IBufferReader
+    return:
+      type: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder
+    content.vb: Public Function WithDataSource(reader As IBufferReader) As ToolchainExecutionPlanBuilder
+  overload: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource*
+- uid: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource(OceanApocalypseStudios.RSML.Sources.IBuffer)
+  commentId: M:OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource(OceanApocalypseStudios.RSML.Sources.IBuffer)
+  id: WithDataSource(OceanApocalypseStudios.RSML.Sources.IBuffer)
+  parent: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder
+  langs:
+  - csharp
+  - vb
+  name: WithDataSource(IBuffer)
+  nameWithType: ToolchainExecutionPlanBuilder.WithDataSource(IBuffer)
+  fullName: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource(OceanApocalypseStudios.RSML.Sources.IBuffer)
+  type: Method
+  source:
+    remote:
+      path: src/RSML.Extensibility/ToolchainExecutionPlanBuilder.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: WithDataSource
+    path: ../src/RSML.Extensibility/ToolchainExecutionPlanBuilder.cs
+    startLine: 57
+  assemblies:
+  - RSML.Extensibility
+  namespace: OceanApocalypseStudios.RSML.Extensibility
+  syntax:
+    content: public ToolchainExecutionPlanBuilder WithDataSource(IBuffer buffer)
+    parameters:
+    - id: buffer
+      type: OceanApocalypseStudios.RSML.Sources.IBuffer
+    return:
+      type: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder
+    content.vb: Public Function WithDataSource(buffer As IBuffer) As ToolchainExecutionPlanBuilder
+  overload: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource*
+- uid: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource(System.String)
+  commentId: M:OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource(System.String)
+  id: WithDataSource(System.String)
+  parent: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder
+  langs:
+  - csharp
+  - vb
+  name: WithDataSource(string?)
+  nameWithType: ToolchainExecutionPlanBuilder.WithDataSource(string?)
+  fullName: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource(string?)
+  type: Method
+  source:
+    remote:
+      path: src/RSML.Extensibility/ToolchainExecutionPlanBuilder.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: WithDataSource
+    path: ../src/RSML.Extensibility/ToolchainExecutionPlanBuilder.cs
+    startLine: 63
+  assemblies:
+  - RSML.Extensibility
+  namespace: OceanApocalypseStudios.RSML.Extensibility
+  syntax:
+    content: public ToolchainExecutionPlanBuilder WithDataSource(string? data)
+    parameters:
+    - id: data
+      type: System.String
+    return:
+      type: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder
+    content.vb: Public Function WithDataSource(data As String) As ToolchainExecutionPlanBuilder
+  overload: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource*
+  nameWithType.vb: ToolchainExecutionPlanBuilder.WithDataSource(String)
+  fullName.vb: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource(String)
+  name.vb: WithDataSource(String)
+- uid: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource(System.ReadOnlyMemory{System.Char})
+  commentId: M:OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource(System.ReadOnlyMemory{System.Char})
+  id: WithDataSource(System.ReadOnlyMemory{System.Char})
+  parent: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder
+  langs:
+  - csharp
+  - vb
+  name: WithDataSource(ReadOnlyMemory<char>)
+  nameWithType: ToolchainExecutionPlanBuilder.WithDataSource(ReadOnlyMemory<char>)
+  fullName: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource(System.ReadOnlyMemory<char>)
+  type: Method
+  source:
+    remote:
+      path: src/RSML.Extensibility/ToolchainExecutionPlanBuilder.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: WithDataSource
+    path: ../src/RSML.Extensibility/ToolchainExecutionPlanBuilder.cs
+    startLine: 69
+  assemblies:
+  - RSML.Extensibility
+  namespace: OceanApocalypseStudios.RSML.Extensibility
+  syntax:
+    content: public ToolchainExecutionPlanBuilder WithDataSource(ReadOnlyMemory<char> data)
+    parameters:
+    - id: data
+      type: System.ReadOnlyMemory{System.Char}
+    return:
+      type: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder
+    content.vb: Public Function WithDataSource(data As ReadOnlyMemory(Of Char)) As ToolchainExecutionPlanBuilder
+  overload: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource*
+  nameWithType.vb: ToolchainExecutionPlanBuilder.WithDataSource(ReadOnlyMemory(Of Char))
+  fullName.vb: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource(System.ReadOnlyMemory(Of Char))
+  name.vb: WithDataSource(ReadOnlyMemory(Of Char))
+- uid: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource(System.IO.FileInfo)
+  commentId: M:OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource(System.IO.FileInfo)
+  id: WithDataSource(System.IO.FileInfo)
+  parent: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder
+  langs:
+  - csharp
+  - vb
+  name: WithDataSource(FileInfo)
+  nameWithType: ToolchainExecutionPlanBuilder.WithDataSource(FileInfo)
+  fullName: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource(System.IO.FileInfo)
+  type: Method
+  source:
+    remote:
+      path: src/RSML.Extensibility/ToolchainExecutionPlanBuilder.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: WithDataSource
+    path: ../src/RSML.Extensibility/ToolchainExecutionPlanBuilder.cs
+    startLine: 75
+  assemblies:
+  - RSML.Extensibility
+  namespace: OceanApocalypseStudios.RSML.Extensibility
+  syntax:
+    content: public ToolchainExecutionPlanBuilder WithDataSource(FileInfo file)
+    parameters:
+    - id: file
+      type: System.IO.FileInfo
+    return:
+      type: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder
+    content.vb: Public Function WithDataSource(file As FileInfo) As ToolchainExecutionPlanBuilder
+  overload: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource*
+- uid: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource(System.IO.Stream)
+  commentId: M:OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource(System.IO.Stream)
+  id: WithDataSource(System.IO.Stream)
+  parent: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder
+  langs:
+  - csharp
+  - vb
+  name: WithDataSource(Stream)
+  nameWithType: ToolchainExecutionPlanBuilder.WithDataSource(Stream)
+  fullName: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource(System.IO.Stream)
+  type: Method
+  source:
+    remote:
+      path: src/RSML.Extensibility/ToolchainExecutionPlanBuilder.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: WithDataSource
+    path: ../src/RSML.Extensibility/ToolchainExecutionPlanBuilder.cs
+    startLine: 81
+  assemblies:
+  - RSML.Extensibility
+  namespace: OceanApocalypseStudios.RSML.Extensibility
+  syntax:
+    content: public ToolchainExecutionPlanBuilder WithDataSource(Stream stream)
+    parameters:
+    - id: stream
+      type: System.IO.Stream
+    return:
+      type: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder
+    content.vb: Public Function WithDataSource(stream As Stream) As ToolchainExecutionPlanBuilder
+  overload: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource*
+- uid: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithConfiguration(OceanApocalypseStudios.RSML.ToolchainConfiguration)
+  commentId: M:OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithConfiguration(OceanApocalypseStudios.RSML.ToolchainConfiguration)
+  id: WithConfiguration(OceanApocalypseStudios.RSML.ToolchainConfiguration)
+  parent: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder
+  langs:
+  - csharp
+  - vb
+  name: WithConfiguration(ToolchainConfiguration)
+  nameWithType: ToolchainExecutionPlanBuilder.WithConfiguration(ToolchainConfiguration)
+  fullName: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithConfiguration(OceanApocalypseStudios.RSML.ToolchainConfiguration)
+  type: Method
+  source:
+    remote:
+      path: src/RSML.Extensibility/ToolchainExecutionPlanBuilder.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: WithConfiguration
+    path: ../src/RSML.Extensibility/ToolchainExecutionPlanBuilder.cs
+    startLine: 87
+  assemblies:
+  - RSML.Extensibility
+  namespace: OceanApocalypseStudios.RSML.Extensibility
+  syntax:
+    content: public ToolchainExecutionPlanBuilder WithConfiguration(ToolchainConfiguration configuration)
+    parameters:
+    - id: configuration
+      type: OceanApocalypseStudios.RSML.ToolchainConfiguration
+    return:
+      type: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder
+    content.vb: Public Function WithConfiguration(configuration As ToolchainConfiguration) As ToolchainExecutionPlanBuilder
+  overload: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithConfiguration*
+- uid: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Build
+  commentId: M:OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Build
+  id: Build
+  parent: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder
+  langs:
+  - csharp
+  - vb
+  name: Build()
+  nameWithType: ToolchainExecutionPlanBuilder.Build()
+  fullName: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Build()
+  type: Method
+  source:
+    remote:
+      path: src/RSML.Extensibility/ToolchainExecutionPlanBuilder.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Build
+    path: ../src/RSML.Extensibility/ToolchainExecutionPlanBuilder.cs
+    startLine: 93
+  assemblies:
+  - RSML.Extensibility
+  namespace: OceanApocalypseStudios.RSML.Extensibility
+  syntax:
+    content: public ToolchainExecutionPlan Build()
+    return:
+      type: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlan
+    content.vb: Public Function Build() As ToolchainExecutionPlan
+  overload: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Build*
+references:
+- uid: OceanApocalypseStudios.RSML.Extensibility
+  commentId: N:OceanApocalypseStudios.RSML.Extensibility
+  href: OceanApocalypseStudios.html
+  name: OceanApocalypseStudios.RSML.Extensibility
+  nameWithType: OceanApocalypseStudios.RSML.Extensibility
+  fullName: OceanApocalypseStudios.RSML.Extensibility
+  spec.csharp:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Extensibility
+    name: Extensibility
+    href: OceanApocalypseStudios.RSML.Extensibility.html
+  spec.vb:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Extensibility
+    name: Extensibility
+    href: OceanApocalypseStudios.RSML.Extensibility.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Override*
+  commentId: Overload:OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Override
+  href: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Override.html#OceanApocalypseStudios_RSML_Extensibility_ToolchainExecutionPlanBuilder_Override_OceanApocalypseStudios_RSML_IToolchainComponent_
+  name: Override
+  nameWithType: ToolchainExecutionPlanBuilder.Override
+  fullName: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Override
+- uid: OceanApocalypseStudios.RSML.IToolchainComponent
+  commentId: T:OceanApocalypseStudios.RSML.IToolchainComponent
+  parent: OceanApocalypseStudios.RSML
+  href: OceanApocalypseStudios.RSML.IToolchainComponent.html
+  name: IToolchainComponent
+  nameWithType: IToolchainComponent
+  fullName: OceanApocalypseStudios.RSML.IToolchainComponent
+- uid: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder
+  commentId: T:OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder
+  parent: OceanApocalypseStudios.RSML.Extensibility
+  href: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.html
+  name: ToolchainExecutionPlanBuilder
+  nameWithType: ToolchainExecutionPlanBuilder
+  fullName: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder
+- uid: OceanApocalypseStudios.RSML
+  commentId: N:OceanApocalypseStudios.RSML
+  href: OceanApocalypseStudios.html
+  name: OceanApocalypseStudios.RSML
+  nameWithType: OceanApocalypseStudios.RSML
+  fullName: OceanApocalypseStudios.RSML
+  spec.csharp:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  spec.vb:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+- uid: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Register*
+  commentId: Overload:OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Register
+  href: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Register.html#OceanApocalypseStudios_RSML_Extensibility_ToolchainExecutionPlanBuilder_Register_OceanApocalypseStudios_RSML_Extensibility_ILanguageExtension_
+  name: Register
+  nameWithType: ToolchainExecutionPlanBuilder.Register
+  fullName: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Register
+- uid: OceanApocalypseStudios.RSML.Extensibility.ILanguageExtension
+  commentId: T:OceanApocalypseStudios.RSML.Extensibility.ILanguageExtension
+  parent: OceanApocalypseStudios.RSML.Extensibility
+  href: OceanApocalypseStudios.RSML.Extensibility.ILanguageExtension.html
+  name: ILanguageExtension
+  nameWithType: ILanguageExtension
+  fullName: OceanApocalypseStudios.RSML.Extensibility.ILanguageExtension
+- uid: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource*
+  commentId: Overload:OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource
+  href: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource.html#OceanApocalypseStudios_RSML_Extensibility_ToolchainExecutionPlanBuilder_WithDataSource_OceanApocalypseStudios_RSML_Sources_ISource_
+  name: WithDataSource
+  nameWithType: ToolchainExecutionPlanBuilder.WithDataSource
+  fullName: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource
+- uid: OceanApocalypseStudios.RSML.Sources.ISource
+  commentId: T:OceanApocalypseStudios.RSML.Sources.ISource
+  parent: OceanApocalypseStudios.RSML.Sources
+  href: OceanApocalypseStudios.RSML.Sources.ISource.html
+  name: ISource
+  nameWithType: ISource
+  fullName: OceanApocalypseStudios.RSML.Sources.ISource
+- uid: OceanApocalypseStudios.RSML.Sources
+  commentId: N:OceanApocalypseStudios.RSML.Sources
+  href: OceanApocalypseStudios.html
+  name: OceanApocalypseStudios.RSML.Sources
+  nameWithType: OceanApocalypseStudios.RSML.Sources
+  fullName: OceanApocalypseStudios.RSML.Sources
+  spec.csharp:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sources
+    name: Sources
+    href: OceanApocalypseStudios.RSML.Sources.html
+  spec.vb:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sources
+    name: Sources
+    href: OceanApocalypseStudios.RSML.Sources.html
+- uid: OceanApocalypseStudios.RSML.Sources.IBufferReader
+  commentId: T:OceanApocalypseStudios.RSML.Sources.IBufferReader
+  parent: OceanApocalypseStudios.RSML.Sources
+  href: OceanApocalypseStudios.RSML.Sources.IBufferReader.html
+  name: IBufferReader
+  nameWithType: IBufferReader
+  fullName: OceanApocalypseStudios.RSML.Sources.IBufferReader
+- uid: OceanApocalypseStudios.RSML.Sources.IBuffer
+  commentId: T:OceanApocalypseStudios.RSML.Sources.IBuffer
+  parent: OceanApocalypseStudios.RSML.Sources
+  href: OceanApocalypseStudios.RSML.Sources.IBuffer.html
+  name: IBuffer
+  nameWithType: IBuffer
+  fullName: OceanApocalypseStudios.RSML.Sources.IBuffer
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System.ReadOnlyMemory{System.Char}
+  commentId: T:System.ReadOnlyMemory{System.Char}
+  parent: System
+  definition: System.ReadOnlyMemory`1
+  href: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+  name: ReadOnlyMemory<char>
+  nameWithType: ReadOnlyMemory<char>
+  fullName: System.ReadOnlyMemory<char>
+  nameWithType.vb: ReadOnlyMemory(Of Char)
+  fullName.vb: System.ReadOnlyMemory(Of Char)
+  name.vb: ReadOnlyMemory(Of Char)
+  spec.csharp:
+  - uid: System.ReadOnlyMemory`1
+    name: ReadOnlyMemory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+  - name: <
+  - uid: System.Char
+    name: char
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.char
+  - name: '>'
+  spec.vb:
+  - uid: System.ReadOnlyMemory`1
+    name: ReadOnlyMemory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Char
+    name: Char
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.char
+  - name: )
+- uid: System.ReadOnlyMemory`1
+  commentId: T:System.ReadOnlyMemory`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+  name: ReadOnlyMemory<T>
+  nameWithType: ReadOnlyMemory<T>
+  fullName: System.ReadOnlyMemory<T>
+  nameWithType.vb: ReadOnlyMemory(Of T)
+  fullName.vb: System.ReadOnlyMemory(Of T)
+  name.vb: ReadOnlyMemory(Of T)
+  spec.csharp:
+  - uid: System.ReadOnlyMemory`1
+    name: ReadOnlyMemory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.ReadOnlyMemory`1
+    name: ReadOnlyMemory
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.readonlymemory-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.IO.FileInfo
+  commentId: T:System.IO.FileInfo
+  parent: System.IO
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.fileinfo
+  name: FileInfo
+  nameWithType: FileInfo
+  fullName: System.IO.FileInfo
+- uid: System.IO
+  commentId: N:System.IO
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.IO
+  nameWithType: System.IO
+  fullName: System.IO
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.IO
+    name: IO
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.IO
+    name: IO
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.io
+- uid: System.IO.Stream
+  commentId: T:System.IO.Stream
+  parent: System.IO
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.io.stream
+  name: Stream
+  nameWithType: Stream
+  fullName: System.IO.Stream
+- uid: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithConfiguration*
+  commentId: Overload:OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithConfiguration
+  href: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithConfiguration.html#OceanApocalypseStudios_RSML_Extensibility_ToolchainExecutionPlanBuilder_WithConfiguration_OceanApocalypseStudios_RSML_ToolchainConfiguration_
+  name: WithConfiguration
+  nameWithType: ToolchainExecutionPlanBuilder.WithConfiguration
+  fullName: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithConfiguration
+- uid: OceanApocalypseStudios.RSML.ToolchainConfiguration
+  commentId: T:OceanApocalypseStudios.RSML.ToolchainConfiguration
+  parent: OceanApocalypseStudios.RSML
+  href: OceanApocalypseStudios.RSML.ToolchainConfiguration.html
+  name: ToolchainConfiguration
+  nameWithType: ToolchainConfiguration
+  fullName: OceanApocalypseStudios.RSML.ToolchainConfiguration
+- uid: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Build*
+  commentId: Overload:OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Build
+  href: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Build.html#OceanApocalypseStudios_RSML_Extensibility_ToolchainExecutionPlanBuilder_Build
+  name: Build
+  nameWithType: ToolchainExecutionPlanBuilder.Build
+  fullName: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Build
+- uid: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlan
+  commentId: T:OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlan
+  parent: OceanApocalypseStudios.RSML.Extensibility
+  href: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlan.html
+  name: ToolchainExecutionPlan
+  nameWithType: ToolchainExecutionPlan
+  fullName: OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlan
+memberLayout: SeparatePages

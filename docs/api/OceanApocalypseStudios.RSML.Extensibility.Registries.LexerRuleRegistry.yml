@@ -1,0 +1,670 @@
+### YamlMime:ManagedReference
+items:
+- uid: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry
+  commentId: T:OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry
+  id: LexerRuleRegistry
+  parent: OceanApocalypseStudios.RSML.Extensibility.Registries
+  children:
+  - OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.#ctor
+  - OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.GetNextTokenKindId
+  - OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.GetOrRegisterRule(System.Int32,OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  - OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.RegisterKeyword(System.Int32,System.String)
+  - OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.RegisterLiteralPrefix(System.Int32,System.String,OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  - OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.RegisterToken(System.Int32,OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  - OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.TryGetRule(System.Int32,OceanApocalypseStudios.RSML.Extensibility.ILexerRule@)
+  langs:
+  - csharp
+  - vb
+  name: LexerRuleRegistry
+  nameWithType: LexerRuleRegistry
+  fullName: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry
+  type: Class
+  source:
+    remote:
+      path: src/RSML.Extensibility/Registries/LexerRuleRegistry.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: LexerRuleRegistry
+    path: ../src/RSML.Extensibility/Registries/LexerRuleRegistry.cs
+    startLine: 6
+  assemblies:
+  - RSML.Extensibility
+  namespace: OceanApocalypseStudios.RSML.Extensibility.Registries
+  syntax:
+    content: public class LexerRuleRegistry
+    content.vb: Public Class LexerRuleRegistry
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.#ctor
+  commentId: M:OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.#ctor
+  id: '#ctor'
+  parent: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry
+  langs:
+  - csharp
+  - vb
+  name: LexerRuleRegistry()
+  nameWithType: LexerRuleRegistry.LexerRuleRegistry()
+  fullName: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.LexerRuleRegistry()
+  type: Constructor
+  source:
+    remote:
+      path: src/RSML.Extensibility/Registries/LexerRuleRegistry.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: .ctor
+    path: ../src/RSML.Extensibility/Registries/LexerRuleRegistry.cs
+    startLine: 6
+  assemblies:
+  - RSML.Extensibility
+  namespace: OceanApocalypseStudios.RSML.Extensibility.Registries
+  syntax:
+    content: public LexerRuleRegistry()
+    content.vb: Public Sub New()
+  overload: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.#ctor*
+  nameWithType.vb: LexerRuleRegistry.New()
+  fullName.vb: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.New()
+  name.vb: New()
+- uid: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.GetNextTokenKindId
+  commentId: M:OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.GetNextTokenKindId
+  id: GetNextTokenKindId
+  parent: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry
+  langs:
+  - csharp
+  - vb
+  name: GetNextTokenKindId()
+  nameWithType: LexerRuleRegistry.GetNextTokenKindId()
+  fullName: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.GetNextTokenKindId()
+  type: Method
+  source:
+    remote:
+      path: src/RSML.Extensibility/Registries/LexerRuleRegistry.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: GetNextTokenKindId
+    path: ../src/RSML.Extensibility/Registries/LexerRuleRegistry.cs
+    startLine: 10
+  assemblies:
+  - RSML.Extensibility
+  namespace: OceanApocalypseStudios.RSML.Extensibility.Registries
+  syntax:
+    content: public int GetNextTokenKindId()
+    return:
+      type: System.Int32
+    content.vb: Public Function GetNextTokenKindId() As Integer
+  overload: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.GetNextTokenKindId*
+- uid: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.GetOrRegisterRule(System.Int32,OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  commentId: M:OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.GetOrRegisterRule(System.Int32,OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  id: GetOrRegisterRule(System.Int32,OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  parent: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry
+  langs:
+  - csharp
+  - vb
+  name: GetOrRegisterRule(int, ILexerRule)
+  nameWithType: LexerRuleRegistry.GetOrRegisterRule(int, ILexerRule)
+  fullName: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.GetOrRegisterRule(int, OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  type: Method
+  source:
+    remote:
+      path: src/RSML.Extensibility/Registries/LexerRuleRegistry.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: GetOrRegisterRule
+    path: ../src/RSML.Extensibility/Registries/LexerRuleRegistry.cs
+    startLine: 16
+  assemblies:
+  - RSML.Extensibility
+  namespace: OceanApocalypseStudios.RSML.Extensibility.Registries
+  syntax:
+    content: public ILexerRule? GetOrRegisterRule(int kind, ILexerRule rule)
+    parameters:
+    - id: kind
+      type: System.Int32
+    - id: rule
+      type: OceanApocalypseStudios.RSML.Extensibility.ILexerRule
+    return:
+      type: OceanApocalypseStudios.RSML.Extensibility.ILexerRule
+    content.vb: Public Function GetOrRegisterRule(kind As Integer, rule As ILexerRule) As ILexerRule
+  overload: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.GetOrRegisterRule*
+  nameWithType.vb: LexerRuleRegistry.GetOrRegisterRule(Integer, ILexerRule)
+  fullName.vb: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.GetOrRegisterRule(Integer, OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  name.vb: GetOrRegisterRule(Integer, ILexerRule)
+- uid: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.RegisterLiteralPrefix(System.Int32,System.String,OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  commentId: M:OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.RegisterLiteralPrefix(System.Int32,System.String,OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  id: RegisterLiteralPrefix(System.Int32,System.String,OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  parent: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry
+  langs:
+  - csharp
+  - vb
+  name: RegisterLiteralPrefix(int, string, ILexerRule)
+  nameWithType: LexerRuleRegistry.RegisterLiteralPrefix(int, string, ILexerRule)
+  fullName: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.RegisterLiteralPrefix(int, string, OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  type: Method
+  source:
+    remote:
+      path: src/RSML.Extensibility/Registries/LexerRuleRegistry.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: RegisterLiteralPrefix
+    path: ../src/RSML.Extensibility/Registries/LexerRuleRegistry.cs
+    startLine: 25
+  assemblies:
+  - RSML.Extensibility
+  namespace: OceanApocalypseStudios.RSML.Extensibility.Registries
+  syntax:
+    content: public void RegisterLiteralPrefix(int kind, string prefix, ILexerRule rule)
+    parameters:
+    - id: kind
+      type: System.Int32
+    - id: prefix
+      type: System.String
+    - id: rule
+      type: OceanApocalypseStudios.RSML.Extensibility.ILexerRule
+    content.vb: Public Sub RegisterLiteralPrefix(kind As Integer, prefix As String, rule As ILexerRule)
+  overload: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.RegisterLiteralPrefix*
+  nameWithType.vb: LexerRuleRegistry.RegisterLiteralPrefix(Integer, String, ILexerRule)
+  fullName.vb: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.RegisterLiteralPrefix(Integer, String, OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  name.vb: RegisterLiteralPrefix(Integer, String, ILexerRule)
+- uid: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.RegisterKeyword(System.Int32,System.String)
+  commentId: M:OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.RegisterKeyword(System.Int32,System.String)
+  id: RegisterKeyword(System.Int32,System.String)
+  parent: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry
+  langs:
+  - csharp
+  - vb
+  name: RegisterKeyword(int, string)
+  nameWithType: LexerRuleRegistry.RegisterKeyword(int, string)
+  fullName: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.RegisterKeyword(int, string)
+  type: Method
+  source:
+    remote:
+      path: src/RSML.Extensibility/Registries/LexerRuleRegistry.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: RegisterKeyword
+    path: ../src/RSML.Extensibility/Registries/LexerRuleRegistry.cs
+    startLine: 31
+  assemblies:
+  - RSML.Extensibility
+  namespace: OceanApocalypseStudios.RSML.Extensibility.Registries
+  syntax:
+    content: public void RegisterKeyword(int kind, string keyword)
+    parameters:
+    - id: kind
+      type: System.Int32
+    - id: keyword
+      type: System.String
+    content.vb: Public Sub RegisterKeyword(kind As Integer, keyword As String)
+  overload: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.RegisterKeyword*
+  nameWithType.vb: LexerRuleRegistry.RegisterKeyword(Integer, String)
+  fullName.vb: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.RegisterKeyword(Integer, String)
+  name.vb: RegisterKeyword(Integer, String)
+- uid: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.RegisterToken(System.Int32,OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  commentId: M:OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.RegisterToken(System.Int32,OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  id: RegisterToken(System.Int32,OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  parent: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry
+  langs:
+  - csharp
+  - vb
+  name: RegisterToken(int, ILexerRule)
+  nameWithType: LexerRuleRegistry.RegisterToken(int, ILexerRule)
+  fullName: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.RegisterToken(int, OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  type: Method
+  source:
+    remote:
+      path: src/RSML.Extensibility/Registries/LexerRuleRegistry.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: RegisterToken
+    path: ../src/RSML.Extensibility/Registries/LexerRuleRegistry.cs
+    startLine: 37
+  assemblies:
+  - RSML.Extensibility
+  namespace: OceanApocalypseStudios.RSML.Extensibility.Registries
+  syntax:
+    content: public void RegisterToken(int kind, ILexerRule rule)
+    parameters:
+    - id: kind
+      type: System.Int32
+    - id: rule
+      type: OceanApocalypseStudios.RSML.Extensibility.ILexerRule
+    content.vb: Public Sub RegisterToken(kind As Integer, rule As ILexerRule)
+  overload: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.RegisterToken*
+  nameWithType.vb: LexerRuleRegistry.RegisterToken(Integer, ILexerRule)
+  fullName.vb: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.RegisterToken(Integer, OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  name.vb: RegisterToken(Integer, ILexerRule)
+- uid: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.TryGetRule(System.Int32,OceanApocalypseStudios.RSML.Extensibility.ILexerRule@)
+  commentId: M:OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.TryGetRule(System.Int32,OceanApocalypseStudios.RSML.Extensibility.ILexerRule@)
+  id: TryGetRule(System.Int32,OceanApocalypseStudios.RSML.Extensibility.ILexerRule@)
+  parent: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry
+  langs:
+  - csharp
+  - vb
+  name: TryGetRule(int, out ILexerRule)
+  nameWithType: LexerRuleRegistry.TryGetRule(int, out ILexerRule)
+  fullName: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.TryGetRule(int, out OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  type: Method
+  source:
+    remote:
+      path: src/RSML.Extensibility/Registries/LexerRuleRegistry.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: TryGetRule
+    path: ../src/RSML.Extensibility/Registries/LexerRuleRegistry.cs
+    startLine: 43
+  assemblies:
+  - RSML.Extensibility
+  namespace: OceanApocalypseStudios.RSML.Extensibility.Registries
+  syntax:
+    content: public bool TryGetRule(int kind, out ILexerRule rule)
+    parameters:
+    - id: kind
+      type: System.Int32
+    - id: rule
+      type: OceanApocalypseStudios.RSML.Extensibility.ILexerRule
+    return:
+      type: System.Boolean
+    content.vb: Public Function TryGetRule(kind As Integer, rule As ILexerRule) As Boolean
+  overload: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.TryGetRule*
+  nameWithType.vb: LexerRuleRegistry.TryGetRule(Integer, ILexerRule)
+  fullName.vb: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.TryGetRule(Integer, OceanApocalypseStudios.RSML.Extensibility.ILexerRule)
+  name.vb: TryGetRule(Integer, ILexerRule)
+references:
+- uid: OceanApocalypseStudios.RSML.Extensibility.Registries
+  commentId: N:OceanApocalypseStudios.RSML.Extensibility.Registries
+  href: OceanApocalypseStudios.html
+  name: OceanApocalypseStudios.RSML.Extensibility.Registries
+  nameWithType: OceanApocalypseStudios.RSML.Extensibility.Registries
+  fullName: OceanApocalypseStudios.RSML.Extensibility.Registries
+  spec.csharp:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Extensibility
+    name: Extensibility
+    href: OceanApocalypseStudios.RSML.Extensibility.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Extensibility.Registries
+    name: Registries
+    href: OceanApocalypseStudios.RSML.Extensibility.Registries.html
+  spec.vb:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Extensibility
+    name: Extensibility
+    href: OceanApocalypseStudios.RSML.Extensibility.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Extensibility.Registries
+    name: Registries
+    href: OceanApocalypseStudios.RSML.Extensibility.Registries.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.#ctor*
+  commentId: Overload:OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.#ctor
+  href: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.-ctor.html#OceanApocalypseStudios_RSML_Extensibility_Registries_LexerRuleRegistry__ctor
+  name: LexerRuleRegistry
+  nameWithType: LexerRuleRegistry.LexerRuleRegistry
+  fullName: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.LexerRuleRegistry
+  nameWithType.vb: LexerRuleRegistry.New
+  fullName.vb: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.New
+  name.vb: New
+- uid: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.GetNextTokenKindId*
+  commentId: Overload:OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.GetNextTokenKindId
+  href: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.GetNextTokenKindId.html#OceanApocalypseStudios_RSML_Extensibility_Registries_LexerRuleRegistry_GetNextTokenKindId
+  name: GetNextTokenKindId
+  nameWithType: LexerRuleRegistry.GetNextTokenKindId
+  fullName: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.GetNextTokenKindId
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.GetOrRegisterRule*
+  commentId: Overload:OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.GetOrRegisterRule
+  href: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.GetOrRegisterRule.html#OceanApocalypseStudios_RSML_Extensibility_Registries_LexerRuleRegistry_GetOrRegisterRule_System_Int32_OceanApocalypseStudios_RSML_Extensibility_ILexerRule_
+  name: GetOrRegisterRule
+  nameWithType: LexerRuleRegistry.GetOrRegisterRule
+  fullName: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.GetOrRegisterRule
+- uid: OceanApocalypseStudios.RSML.Extensibility.ILexerRule
+  commentId: T:OceanApocalypseStudios.RSML.Extensibility.ILexerRule
+  parent: OceanApocalypseStudios.RSML.Extensibility
+  href: OceanApocalypseStudios.RSML.Extensibility.ILexerRule.html
+  name: ILexerRule
+  nameWithType: ILexerRule
+  fullName: OceanApocalypseStudios.RSML.Extensibility.ILexerRule
+- uid: OceanApocalypseStudios.RSML.Extensibility
+  commentId: N:OceanApocalypseStudios.RSML.Extensibility
+  href: OceanApocalypseStudios.html
+  name: OceanApocalypseStudios.RSML.Extensibility
+  nameWithType: OceanApocalypseStudios.RSML.Extensibility
+  fullName: OceanApocalypseStudios.RSML.Extensibility
+  spec.csharp:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Extensibility
+    name: Extensibility
+    href: OceanApocalypseStudios.RSML.Extensibility.html
+  spec.vb:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Extensibility
+    name: Extensibility
+    href: OceanApocalypseStudios.RSML.Extensibility.html
+- uid: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.RegisterLiteralPrefix*
+  commentId: Overload:OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.RegisterLiteralPrefix
+  href: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.RegisterLiteralPrefix.html#OceanApocalypseStudios_RSML_Extensibility_Registries_LexerRuleRegistry_RegisterLiteralPrefix_System_Int32_System_String_OceanApocalypseStudios_RSML_Extensibility_ILexerRule_
+  name: RegisterLiteralPrefix
+  nameWithType: LexerRuleRegistry.RegisterLiteralPrefix
+  fullName: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.RegisterLiteralPrefix
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.RegisterKeyword*
+  commentId: Overload:OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.RegisterKeyword
+  href: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.RegisterKeyword.html#OceanApocalypseStudios_RSML_Extensibility_Registries_LexerRuleRegistry_RegisterKeyword_System_Int32_System_String_
+  name: RegisterKeyword
+  nameWithType: LexerRuleRegistry.RegisterKeyword
+  fullName: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.RegisterKeyword
+- uid: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.RegisterToken*
+  commentId: Overload:OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.RegisterToken
+  href: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.RegisterToken.html#OceanApocalypseStudios_RSML_Extensibility_Registries_LexerRuleRegistry_RegisterToken_System_Int32_OceanApocalypseStudios_RSML_Extensibility_ILexerRule_
+  name: RegisterToken
+  nameWithType: LexerRuleRegistry.RegisterToken
+  fullName: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.RegisterToken
+- uid: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.TryGetRule*
+  commentId: Overload:OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.TryGetRule
+  href: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.TryGetRule.html#OceanApocalypseStudios_RSML_Extensibility_Registries_LexerRuleRegistry_TryGetRule_System_Int32_OceanApocalypseStudios_RSML_Extensibility_ILexerRule__
+  name: TryGetRule
+  nameWithType: LexerRuleRegistry.TryGetRule
+  fullName: OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.TryGetRule
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+memberLayout: SeparatePages

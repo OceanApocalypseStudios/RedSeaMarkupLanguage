@@ -1,6 +1,6 @@
 # Hello, DocFX!
-> [!ARTICLE]
 > Written by [Matthew](https://github.com/mf366-dev) at [OceanApocalypseStudios](https://github.com/OceanApocalypseStudios) on July 10, 2026.
+> 
 > It will take about 1:57 to read this article at 220 WPM _(average reading speed)_.
 
 This is the very first blog article to be available to the public in RSML's site. Those who have followed the development of this project certainly have noticed the site is looking _somewhat_ different. Well, you're clearly not wrong!

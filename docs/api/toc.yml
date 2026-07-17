@@ -1,135 +1,121 @@
 ### YamlMime:TableOfContent
 items:
-- uid: OceanApocalypseStudios.RSML.Cache
-  name: OceanApocalypseStudios.RSML.Cache
+- uid: OceanApocalypseStudios.RSML
+  name: OceanApocalypseStudios.RSML
   type: Namespace
   items:
-  - uid: OceanApocalypseStudios.RSML.Cache.ISupportsCache
-    name: ISupportsCache
-    type: Interface
-- uid: OceanApocalypseStudios.RSML.Exceptions
-  name: OceanApocalypseStudios.RSML.Exceptions
-  type: Namespace
-  items:
-  - uid: OceanApocalypseStudios.RSML.Exceptions.BufferException
-    name: BufferException
-    type: Class
-  - uid: OceanApocalypseStudios.RSML.Exceptions.ErrorList
-    name: ErrorList
-    type: Class
-  - uid: OceanApocalypseStudios.RSML.Exceptions.IError
-    name: IError
-    type: Interface
-  - uid: OceanApocalypseStudios.RSML.Exceptions.Severity
-    name: Severity
-    type: Enum
-  - uid: OceanApocalypseStudios.RSML.Exceptions.SourceError
-    name: SourceError
-    type: Struct
-- uid: OceanApocalypseStudios.RSML.Execution
-  name: OceanApocalypseStudios.RSML.Execution
-  type: Namespace
-  items:
-  - uid: OceanApocalypseStudios.RSML.Execution.Interpreter
-    name: Interpreter
-    type: Class
-- uid: OceanApocalypseStudios.RSML.Language.Lexing
-  name: OceanApocalypseStudios.RSML.Language.Lexing
-  type: Namespace
-  items:
-  - uid: OceanApocalypseStudios.RSML.Language.Lexing.ILexerRule
-    name: ILexerRule
-    type: Interface
-  - uid: OceanApocalypseStudios.RSML.Language.Lexing.Lexer
-    name: Lexer
-    type: Class
-  - uid: OceanApocalypseStudios.RSML.Language.Lexing.Token
-    name: Token
-    type: Struct
-- uid: OceanApocalypseStudios.RSML.Language.Parsing
-  name: OceanApocalypseStudios.RSML.Language.Parsing
-  type: Namespace
-  items:
-  - uid: OceanApocalypseStudios.RSML.Language.Parsing.Parser
-    name: Parser
-    type: Class
-- uid: OceanApocalypseStudios.RSML.Native
-  name: OceanApocalypseStudios.RSML.Native
-  type: Namespace
-  items:
-  - uid: OceanApocalypseStudios.RSML.Native.Class1
-    name: Class1
-    type: Class
-- uid: OceanApocalypseStudios.RSML.Sdk
-  name: OceanApocalypseStudios.RSML.Sdk
-  type: Namespace
-  items:
-  - uid: OceanApocalypseStudios.RSML.Sdk.IToolchainComponent
+  - uid: OceanApocalypseStudios.RSML.Cache
+    name: Cache
+    type: Namespace
+    items:
+    - uid: OceanApocalypseStudios.RSML.Cache.ISupportsCache
+      name: ISupportsCache
+      type: Interface
+  - uid: OceanApocalypseStudios.RSML.Diagnostics
+    name: Diagnostics
+    type: Namespace
+    items:
+    - uid: OceanApocalypseStudios.RSML.Diagnostics.Diagnostic
+      name: Diagnostic
+      type: Struct
+    - uid: OceanApocalypseStudios.RSML.Diagnostics.DiagnosticCollector
+      name: DiagnosticCollector
+      type: Class
+    - uid: OceanApocalypseStudios.RSML.Diagnostics.ErrorCategory
+      name: ErrorCategory
+      type: Enum
+    - uid: OceanApocalypseStudios.RSML.Diagnostics.ErrorCode
+      name: ErrorCode
+      type: Struct
+    - uid: OceanApocalypseStudios.RSML.Diagnostics.Result`1
+      name: Result<TValue>
+      type: Struct
+    - uid: OceanApocalypseStudios.RSML.Diagnostics.Severity
+      name: Severity
+      type: Enum
+  - uid: OceanApocalypseStudios.RSML.Execution
+    name: Execution
+    type: Namespace
+    items:
+    - uid: OceanApocalypseStudios.RSML.Execution.Interpreter
+      name: Interpreter
+      type: Class
+  - uid: OceanApocalypseStudios.RSML.Extensibility
+    name: Extensibility
+    type: Namespace
+    items:
+    - uid: OceanApocalypseStudios.RSML.Extensibility.Class1
+      name: Class1
+      type: Class
+  - uid: OceanApocalypseStudios.RSML.Language
+    name: Language
+    type: Namespace
+    items:
+    - uid: OceanApocalypseStudios.RSML.Language.Lexing
+      name: Lexing
+      type: Namespace
+      items:
+      - uid: OceanApocalypseStudios.RSML.Language.Lexing.DefaultLexer
+        name: DefaultLexer
+        type: Class
+      - uid: OceanApocalypseStudios.RSML.Language.Lexing.ILexer
+        name: ILexer
+        type: Interface
+      - uid: OceanApocalypseStudios.RSML.Language.Lexing.Lexer
+        name: Lexer
+        type: Class
+      - uid: OceanApocalypseStudios.RSML.Language.Lexing.StatelessLexer
+        name: StatelessLexer
+        type: Struct
+      - uid: OceanApocalypseStudios.RSML.Language.Lexing.Token
+        name: Token
+        type: Struct
+    - uid: OceanApocalypseStudios.RSML.Language.Parsing
+      name: Parsing
+      type: Namespace
+      items:
+      - uid: OceanApocalypseStudios.RSML.Language.Parsing.IParser
+        name: IParser
+        type: Interface
+      - uid: OceanApocalypseStudios.RSML.Language.Parsing.Parser
+        name: Parser
+        type: Class
+  - uid: OceanApocalypseStudios.RSML.Native
+    name: Native
+    type: Namespace
+    items:
+    - uid: OceanApocalypseStudios.RSML.Native.Class1
+      name: Class1
+      type: Class
+  - uid: OceanApocalypseStudios.RSML.Sources
+    name: Sources
+    type: Namespace
+    items:
+    - uid: OceanApocalypseStudios.RSML.Sources.IBuffer
+      name: IBuffer
+      type: Interface
+    - uid: OceanApocalypseStudios.RSML.Sources.IBufferReader
+      name: IBufferReader
+      type: Interface
+    - uid: OceanApocalypseStudios.RSML.Sources.ISource
+      name: ISource
+      type: Interface
+    - uid: OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer
+      name: ReadOnlySpanBuffer
+      type: Struct
+    - uid: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer
+      name: ReadOnlyStringBuffer
+      type: Class
+    - uid: OceanApocalypseStudios.RSML.Sources.SourceLocation
+      name: SourceLocation
+      type: Struct
+    - uid: OceanApocalypseStudios.RSML.Sources.SourceSpan
+      name: SourceSpan
+      type: Struct
+  - uid: OceanApocalypseStudios.RSML.IToolchainComponent
     name: IToolchainComponent
     type: Interface
-  - uid: OceanApocalypseStudios.RSML.Sdk.ToolchainConfiguration
+  - uid: OceanApocalypseStudios.RSML.ToolchainConfiguration
     name: ToolchainConfiguration
     type: Enum
-  - uid: OceanApocalypseStudios.RSML.Sdk.ToolchainExecutionPlan
-    name: ToolchainExecutionPlan
-    type: Class
-  - uid: OceanApocalypseStudios.RSML.Sdk.ToolchainExecutionPlanBuilder
-    name: ToolchainExecutionPlanBuilder
-    type: Class
-- uid: OceanApocalypseStudios.RSML.Sdk.Exceptions
-  name: OceanApocalypseStudios.RSML.Sdk.Exceptions
-  type: Namespace
-  items:
-  - uid: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException
-    name: SdkException
-    type: Class
-- uid: OceanApocalypseStudios.RSML.Sdk.Extensibility
-  name: OceanApocalypseStudios.RSML.Sdk.Extensibility
-  type: Namespace
-  items:
-  - uid: OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension
-    name: ILanguageExtension
-    type: Interface
-- uid: OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks
-  name: OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks
-  type: Namespace
-  items:
-  - uid: OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks.IInterpreterHook
-    name: IInterpreterHook
-    type: Interface
-  - uid: OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks.ILexerHook
-    name: ILexerHook
-    type: Interface
-  - uid: OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks.IParserHook
-    name: IParserHook
-    type: Interface
-- uid: OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries
-  name: OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries
-  type: Namespace
-  items:
-  - uid: OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries.LexerRuleRegistry
-    name: LexerRuleRegistry
-    type: Class
-- uid: OceanApocalypseStudios.RSML.Sources
-  name: OceanApocalypseStudios.RSML.Sources
-  type: Namespace
-  items:
-  - uid: OceanApocalypseStudios.RSML.Sources.IBufferReader
-    name: IBufferReader
-    type: Interface
-  - uid: OceanApocalypseStudios.RSML.Sources.IBuffer`1
-    name: IBuffer<TItem>
-    type: Interface
-  - uid: OceanApocalypseStudios.RSML.Sources.ISource
-    name: ISource
-    type: Interface
-  - uid: OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer
-    name: ReadOnlyStringBuffer
-    type: Class
-  - uid: OceanApocalypseStudios.RSML.Sources.SourceLocation
-    name: SourceLocation
-    type: Struct
-  - uid: OceanApocalypseStudios.RSML.Sources.SourceSpan
-    name: SourceSpan
-    type: Struct
 memberLayout: SeparatePages

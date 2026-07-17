@@ -1,16 +1,18 @@
-- name: Introduction
+- name: Getting Started
   href: index.md
 - name: Changelog
   href: changelog.md
-- name: Language and Specification
+- name: Language
   href: language/
-- name: RSML's .NET API
+- name: API
   href: api/
 - name: Bindings
   href: bindings/
-- name: Other Tools
+- name: Native
+  href: native/
+- name: CLI & Tools
   href: tools/
-- name: Guides and Tutorials
+- name: Guides
   href: guides/
 - name: Blog
   href: articles/
