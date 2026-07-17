@@ -11,15 +11,10 @@
 	<a href="https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/releases/latest"><img src="https://img.shields.io/github/v/release/OceanApocalypseStudios/RedSeaMarkupLanguage?sort=semver&display_name=tag&style=for-the-badge&logo=github&logoColor=white&logoSize=auto&label=Latest&labelColor=%23161616&color=%23000308"/></a>
 	<img src="https://img.shields.io/github/stars/OceanApocalypseStudios/RedSeaMarkupLanguage?style=for-the-badge&logo=star&logoColor=black&logoSize=auto&labelColor=%2379610b&color=%23413405" />
 	<img src="https://img.shields.io/github/languages/top/OceanApocalypseStudios/RedSeaMarkupLanguage?style=for-the-badge&logo=dotnet&logoColor=white&logoSize=auto&label=%20&labelColor=%234929ca&color=%234929ca" />
-	<!--<a href="COPYING.txt"><img src="https://img.shields.io/badge/ignored-Custom_clause-ignored?style=for-the-badge&logo=opensourceinitiative&logoColor=white&logoSize=auto&label=repository%20licensing&labelColor=%23496300&color=%232b3c00"/></a>-->
 	<a href="LICENSE.txt"><img src="https://img.shields.io/badge/ignored-mit-ignored?style=for-the-badge&logo=opensourceinitiative&logoColor=white&logoSize=auto&label=code%20license&labelColor=%23496300&color=%232b3c00"/></a>
-	<a href="LICENSE-DOCS.txt"><img src="https://img.shields.io/badge/ignored-cc0_1.0_universal-ignored?style=for-the-badge&logo=opensourceinitiative&logoColor=white&logoSize=auto&label=documentation%20license&labelColor=%23496300&color=%232b3c00"/></a>
-	<br/>
-	<a href="https://marketplace.visualstudio.com/items?itemName=OceanApocalypseStudios.oas-rsml-support-vs" target="_blank"><img src="https://img.shields.io/badge/RSML_for_Visual_Studio-b35ff2?style=for-the-badge"></a>
-	<a href="https://marketplace.visualstudio.com/items?itemName=OceanApocalypseStudios.rsml" target="_blank"><img src="https://img.shields.io/badge/RSML_for_VS_Code-1f9cf0?style=for-the-badge"></a>
-	<br/>
-	<img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/OceanApocalypseStudios/RedSeaMarkupLanguage/test.yml?style=for-the-badge&label=tests">
-	<img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/OceanApocalypseStudios/RedSeaMarkupLanguage/release.yml?style=for-the-badge&label=release">
+	<img alt="GitHub Actions Test Status" src="https://img.shields.io/github/actions/workflow/status/OceanApocalypseStudios/RedSeaMarkupLanguage/test.yml?style=for-the-badge&label=tests">
+	<img alt="GitHub Actions Release Status" src="https://img.shields.io/github/actions/workflow/status/OceanApocalypseStudios/RedSeaMarkupLanguage/release.yml?style=for-the-badge&label=release">
+	<img alt="GitHub Actions Documentation Status" src="https://img.shields.io/github/actions/workflow/status/OceanApocalypseStudios/RedSeaMarkupLanguage/docs.yml?style=for-the-badge&label=docs">
 </div>
 <hr/>
 <div align="center">
@@ -37,11 +32,15 @@ the modern language designed to dynamically interpret different logic paths base
 - [Red Sea Markup Language (RSML)](#section)
 	- [Why RSML?](#why-rsml)
 	- [How to build RSML?](#how-to-build-rsml)
+	- [Performance Analysis](#performance-analysis)
+	- [Supported Editors](#supported-editors)
+	- [Supported Programming Languages](#supported-programming-languages)
 
 <details open>
 <summary><strong>Where's the "How to use" section?</strong></summary>
 
-You can find full documentation [here](https://oceanapocalypsestudios.org/rsml-docs/).
+This file does not attempt to be a full documentation on how to use RSML.
+Instead, you can find full documentation [here](https://oceanapocalypsestudios.org/rsml-docs/).
 
 </details>
 
@@ -124,6 +123,29 @@ purely for documentation purposes and the `.pdb` file only matters for debugging
 
 ---
 
+## Performance Analysis
+We analyse performance to see what can be improved for general user experience. We use [`BenchmarkDotNet`](https://benchmarkdotnet.org), a reputable benchmarking framework for .NET code.
+
+For more information, see: <img src="https://raw.githubusercontent.com/dotnet/BenchmarkDotNet/refs/heads/master/docs/logo/icon.svg" alt="BenchmarkDotNet Icon" height="20" width="20" style="vertical-align: middle;" /> <a href="BENCHMARKS.md">Regarding Performance</a>.
+
+---
+
+## Supported Editors
+RSML is supported in **Visual Studio** and **Visual Studio Code** via extensions.
+Support for more code editors and IDEs is also part of our RSML roadmap!
+
+For more information, see: <img src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/refs/heads/master/icons/file_type_sln.svg" alt="Visual Studio Logo" height="20" width="20" style="vertical-align: middle;" /> <a href="EDITOR.md">Editor Support</a>.
+
+---
+
+## Supported Programming Languages
+As of now, you can only use RSML's API in **.NET** languages, such as **C#** (recommended for maximum support), **Visual Basic** and **F#**.
+Support for more programming languages, such as Python, is also part of our RSML roadmap!
+
+For more information, see: <img src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/refs/heads/master/icons/file_type_csharp.svg" alt="C# Logo" height="20" width="20" style="vertical-align: middle;" /> <a href="LANGUAGES.md">Programming Language Support</a>.
+
+---
+
 ## RSML on NuGet Trends
 > [!NOTE]
 > In the image below, **RSML** refers to Legacy RSML (RSML v1.x.x), while **OceanApocalypseStudios.RSML** refers to
@@ -132,22 +154,6 @@ purely for documentation purposes and the `.pdb` file only matters for debugging
 
 [![RSML on NuGet Trends](extras/NuGetTrends_July5.png)](https://nugettrends.com/packages?ids=RSML&ids=OceanApocalypseStudios.RSML&months=12)
 
----
-
-## See Also
-<ul>
-	<li>
-		<img src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/refs/heads/master/icons/file_type_csharp.svg" alt="C# Logo" height="20" width="20" style="vertical-align: middle;" /> <a href="LANGUAGES.md">Programming Language Support</a>
-	</li>
-	<li>
-		<img src="https://raw.githubusercontent.com/vscode-icons/vscode-icons/refs/heads/master/icons/file_type_sln.svg" alt="Visual Studio Logo" height="20" width="20" style="vertical-align: middle;" /> <a href="EDITOR.md">Editor Support</a>
-	</li>
-	<li>
-		<img src="https://raw.githubusercontent.com/dotnet/BenchmarkDotNet/refs/heads/master/docs/logo/icon.svg" alt="BenchmarkDotNet Icon" height="20" width="20" style="vertical-align: middle;" /> <a href="BENCHMARKS.md">Benchmarks</a>
-	</li>
-</ul>
-
-<hr />
 
 > **Copyright (c) 2025 OceanApocalypseStudios**
 >
