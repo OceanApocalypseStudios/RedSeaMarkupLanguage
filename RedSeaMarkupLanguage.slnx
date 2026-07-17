@@ -10,9 +10,8 @@
 	<Folder Name="/Solution Items/">
 		<File Path=".gitignore" />
 		<File Path="cliff.toml" />
-		<File Path="README.md" />
 		<File Path="docs/docfx.json" />
-		<File Path="CHANGELOG.md" />
+		<File Path="README.md" />
 		<File Path="SECURITY.md" />
 	</Folder>
 
@@ -57,10 +56,10 @@
 		<Platform Solution="*|x86" Project="x86" />
 	</Project>
 	<Project Path="src/RSML.Extensibility/RSML.Extensibility.csproj" Id="de53662d-20b1-4289-a51b-43c3c401bbd7">
-        <Platform Solution="*|ARM64" Project="ARM64" />
+		<Platform Solution="*|ARM64" Project="ARM64" />
 		<Platform Solution="*|x64" Project="x64" />
 		<Platform Solution="*|x86" Project="x86" />
-    </Project>
+	</Project>
 	<Project Path="src/RSML.Native/RSML.Native.csproj">
 		<Platform Solution="*|ARM64" Project="ARM64" />
 		<Platform Solution="*|x64" Project="x64" />

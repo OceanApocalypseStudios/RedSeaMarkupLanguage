@@ -4,7 +4,7 @@ using System;
 namespace OceanApocalypseStudios.RSML;
 
 /// <summary>
-/// Configuration options for a <see cref="ToolchainExecutionPlan"/>, usually passed via a <see cref="ToolchainExecutionPlanBuilder"/>.
+/// Configuration options for a <see cref="IToolchainComponent"/>.
 /// </summary>
 [Flags]
 public enum ToolchainConfiguration

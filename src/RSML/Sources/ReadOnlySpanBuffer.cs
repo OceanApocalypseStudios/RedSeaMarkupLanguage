@@ -12,10 +12,14 @@ namespace OceanApocalypseStudios.RSML.Sources;
 /// <summary>
 /// A read-only buffer backed by a span of characters. All operations opt for performance
 /// primarily via the internal use of <see cref="ReadOnlySpan{Char}"/> over string allocations
-/// and also via caching. The main advantage of this type over <see cref="ReadOnlyCharBuffer"/>
-/// is that you don't need to allocate a class and, on initialization, you don't need to allocate
-/// a string.
+/// and also via caching.
 /// </summary>
+/// <remarks>
+/// > [!TIP]
+/// > The main advantage of this type over <see cref="ReadOnlyStringBuffer"/>
+/// > is that you don't need to allocate a class and, on initialization, you don't need to allocate
+/// > a string.
+/// </remarks>
 public ref struct ReadOnlySpanBuffer : IBuffer, ISupportsCache
 {
 	private readonly ReadOnlySpan<char> data;
@@ -64,10 +68,10 @@ public ref struct ReadOnlySpanBuffer : IBuffer, ISupportsCache
 	}
 
 	/// <inheritdoc/>
-	public readonly char this[int index] => data[index];
+	public readonly char? this[int index] => TryGetChar(index, out char item) ? item : null;
 
 	/// <inheritdoc/>
-	public readonly char this[SourceLocation location] => data[location.Index];
+	public readonly char? this[SourceLocation location] => this[location.Index];
 
 	/// <inheritdoc/>
 	public readonly Result<string> this[SourceSpan span] => Slice(span.Start.Index, span.Length);

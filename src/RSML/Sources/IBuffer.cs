@@ -24,23 +24,15 @@ public interface IBuffer : ISource, IEquatable<IBuffer?>, IEquatable<char[]?>, I
 	/// Gets a single item out of the buffer.
 	/// </summary>
 	/// <param name="index">The index of the item to retrieve.</param>
-	/// <remarks>
-	/// If you wish to ensure performance (meaning <see cref="Result{TValue}"/> over <see cref="Exception"/>),
-	/// see <see cref="TryGetChar(Int32, out char)"/>.
-	/// </remarks>
 	/// <returns>The item.</returns>
-	char this[int index] { get; }
+	char? this[int index] { get; }
 
 	/// <summary>
 	/// Gets a single item out of the buffer.
 	/// </summary>
 	/// <param name="location">The location of the item to retrieve.</param>
-	/// <remarks>
-	/// If you wish to ensure performance (meaning <see cref="Result{TValue}"/> over <see cref="Exception"/>),
-	/// see <see cref="TryGetChar(SourceLocation, out Char)"/>.
-	/// </remarks>
 	/// <returns>The item.</returns>
-	char this[SourceLocation location] { get; }
+	char? this[SourceLocation location] { get; }
 
 	/// <summary>
 	/// Gets a range of items out of the buffer.

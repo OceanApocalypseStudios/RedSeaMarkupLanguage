@@ -67,10 +67,10 @@ public class ReadOnlyStringBuffer : IBuffer, ISupportsCache, IEquatable<string?>
 	}
 
 	/// <inheritdoc/>
-	public char this[int index] => data[index];
+	public char? this[int index] => TryGetChar(index, out char item) ? item : null;
 
 	/// <inheritdoc/>
-	public char this[SourceLocation location] => data[location.Index];
+	public char? this[SourceLocation location] => this[location.Index];
 
 	/// <inheritdoc/>
 	public Result<string> this[SourceSpan span] => Slice(span.Start.Index, span.Length);
