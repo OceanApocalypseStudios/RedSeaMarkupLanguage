@@ -5,7 +5,8 @@
 		<Nullable>enable</Nullable>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<LangVersion>latest</LangVersion>
-
+		<IsAotCompatible>true</IsAotCompatible>
+		
 		<OutputType>Library</OutputType>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 

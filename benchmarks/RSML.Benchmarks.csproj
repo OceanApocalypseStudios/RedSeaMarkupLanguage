@@ -6,6 +6,8 @@
 		<Nullable>enable</Nullable>
 		<RootNamespace>OceanApocalypseStudios.RSML.Benchmarks</RootNamespace>
 		<Platforms>AnyCPU;ARM64;x64;x86</Platforms>
+
+		<IsPackable>false</IsPackable>
 	</PropertyGroup>
 
 	<ItemGroup>
