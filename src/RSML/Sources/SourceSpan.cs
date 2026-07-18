@@ -93,7 +93,7 @@ public readonly partial struct SourceSpan : IFormattable
 	{
 		switch (source)
 		{
-			case IBuffer buffer:
+			case IReadOnlyBuffer buffer:
 				Span<char> destination = stackalloc char[Length];
 				buffer.TrySlice(Start.Index, destination);
 

@@ -9,11 +9,6 @@ namespace OceanApocalypseStudios.RSML.Sources;
 public interface ISource : IDisposable
 {
 	/// <summary>
-	/// The current index of the cursor.
-	/// </summary>
-	int CursorIndex { get; }
-
-	/// <summary>
 	/// Whether the source is completely empty.
 	/// </summary>
 	bool IsEmpty { get; }

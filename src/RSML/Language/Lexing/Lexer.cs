@@ -1,3 +1,9 @@
+using System;
+using System.Collections.Generic;
+
+using OceanApocalypseStudios.RSML.Diagnostics;
+
+
 namespace OceanApocalypseStudios.RSML.Language.Lexing;
 
 /// <summary>
@@ -10,4 +16,10 @@ public abstract class Lexer : ILexer
 
 	/// <inheritdoc/>
 	public virtual void Inject(ToolchainConfiguration configuration) => Configuration |= configuration;
+
+	/// <inheritdoc/>
+	public abstract Result<IEnumerable<Token>> Lex();
+
+	/// <inheritdoc/>
+	public virtual void Dispose() => GC.SuppressFinalize(this);
 }

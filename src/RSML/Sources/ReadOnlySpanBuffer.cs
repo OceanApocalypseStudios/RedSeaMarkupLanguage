@@ -20,7 +20,7 @@ namespace OceanApocalypseStudios.RSML.Sources;
 /// > is that you don't need to allocate a class and, on initialization, you don't need to allocate
 /// > a string.
 /// </remarks>
-public ref struct ReadOnlySpanBuffer : IBuffer, ISupportsCache
+public ref struct ReadOnlySpanBuffer : IReadOnlyBuffer, ISupportsCache
 {
 	private readonly ReadOnlySpan<char> data;
 	private ReadOnlySpan<int> precededByCrLf;
@@ -28,13 +28,6 @@ public ref struct ReadOnlySpanBuffer : IBuffer, ISupportsCache
 
 	/// <inheritdoc/>
 	public bool CacheExists { get; private set; } = false;
-
-	/// <remarks>
-	/// Always returns <c>-1</c>, as <see cref="ReadOnlySpanBuffer"/> doesn't
-	/// support cursor positioning (everything is done via indexing).
-	/// </remarks>
-	/// <inheritdoc/>
-	public readonly int CursorIndex => -1;
 
 	/// <inheritdoc/>
 	public readonly bool IsEmpty => Length == 0;
@@ -535,7 +528,7 @@ public ref struct ReadOnlySpanBuffer : IBuffer, ISupportsCache
 	{
 		string str => Equals(str),
 		char[] charArray => Equals(charArray),
-		IBuffer buffer => Equals(buffer),
+		IReadOnlyBuffer buffer => Equals(buffer),
 		ReadOnlyMemory<char> readOnlyMemory => Equals(readOnlyMemory),
 		null => false,
 		_ => false
@@ -553,7 +546,7 @@ public ref struct ReadOnlySpanBuffer : IBuffer, ISupportsCache
 	/// </summary>
 	/// <param name="other">The other read-only buffer.</param>
 	/// <returns>True if equals.</returns>
-	public readonly bool Equals(IBuffer? other) => other is not null && Length == other.Length && data.SequenceEqual(other.ToString());
+	public readonly bool Equals(IReadOnlyBuffer? other) => other is not null && Length == other.Length && data.SequenceEqual(other.ToString());
 
 	/// <summary>
 	/// Checks if a read-only contiguous region of memory is equal to the current instance.
@@ -748,16 +741,7 @@ public ref struct ReadOnlySpanBuffer : IBuffer, ISupportsCache
 	/// </summary>
 	private readonly bool IsConventionallyOutOfRange(int index) => index < 0 || index > Length;
 
-	private bool IsLastLine(int index)
-	{
-		if (RawLineCount == 1)
-			return true; // only raw line is last line
-
-		if (index >= lineStarts[^2] && index < lineStarts[^1])
-			return true;
-
-		return false;
-	}
+	private bool IsLastLine(int index) => RawLineCount == 1 || index >= lineStarts[^2] && index < lineStarts[^1];
 
 	/// <summary>
 	/// True if index is greater than or equal to the length.

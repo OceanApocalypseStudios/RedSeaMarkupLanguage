@@ -1,3 +1,5 @@
+using System;
+
 namespace OceanApocalypseStudios.RSML;
 
 /// <summary>
@@ -6,7 +8,7 @@ namespace OceanApocalypseStudios.RSML;
 /// <seealso cref="Language.Lexing.Lexer"/>
 /// <seealso cref="Language.Parsing.Parser"/>
 /// <seealso cref="Execution.Interpreter"/>
-public interface IToolchainComponent
+public interface IToolchainComponent : IDisposable
 {
 	/// <summary>
 	/// Configurations for the toolchain component.

@@ -9,5 +9,8 @@ public abstract class Parser : IParser
 	public ToolchainConfiguration Configuration { get; protected set; }
 
 	/// <inheritdoc/>
+	public abstract void Dispose();
+
+	/// <inheritdoc/>
 	public virtual void Inject(ToolchainConfiguration configuration) => throw new System.NotImplementedException();
 }

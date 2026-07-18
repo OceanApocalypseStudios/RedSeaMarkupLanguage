@@ -14,6 +14,9 @@ public abstract class Interpreter : IToolchainComponent
 	public ToolchainConfiguration Configuration { get; protected set; }
 
 	/// <inheritdoc/>
+	public abstract void Dispose();
+
+	/// <inheritdoc/>
 	public void Freeze() => IsMutable = false;
 
 	/// <inheritdoc/>
