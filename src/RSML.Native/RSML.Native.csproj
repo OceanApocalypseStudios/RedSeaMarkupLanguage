@@ -15,7 +15,7 @@
 		<TieredCompilation>true</TieredCompilation>
 		<PublishSingleFile>false</PublishSingleFile>
 
-		<Platforms>AnyCPU;ARM64;x64;x86</Platforms>
+		<Platforms>AnyCPU;ARM64;x64;x86;ARM32</Platforms>
 	</PropertyGroup>
 
 	<ItemGroup Label="Resources">
@@ -32,12 +32,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="JetBrains.Annotations" Version="2026.2.0" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<ProjectReference Include="..\RSML.Extensibility\RSML.Extensibility.csproj" />
 		<ProjectReference Include="..\RSML\RSML.csproj" />
+		<ProjectReference Include="..\RSML.Extensibility\RSML.Extensibility.csproj" />
 	</ItemGroup>
 
 </Project>

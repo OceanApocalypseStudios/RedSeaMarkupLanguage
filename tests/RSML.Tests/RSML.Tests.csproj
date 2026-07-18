@@ -9,7 +9,7 @@
 		<RootNamespace>OceanApocalypseStudios.RSML.Tests</RootNamespace>
 		<LangVersion>latest</LangVersion>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-		<Platforms>AnyCPU;ARM64;x64;x86</Platforms>
+		<Platforms>AnyCPU;ARM64;x64;x86;ARM32</Platforms>
 	</PropertyGroup>
 
 	<ItemGroup>
