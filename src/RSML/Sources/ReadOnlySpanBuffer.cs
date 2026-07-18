@@ -133,20 +133,12 @@ public ref struct ReadOnlySpanBuffer : IBuffer, ISupportsCache
 		ComputeLineStarts();
 
 		int lineSep = GetNextLineStartPosition(index, out _);
-#if NET8_0_OR_GREATER
 		isCrLf = precededByCrLf.Contains(lineSep) && data[index] is not '\n'; // to us, CRLF is only when we're not standing on the LF
-#else
-		isCrLf = precededByCrLf.IndexOf(lineSep) != -1 && data[index] is not '\n';
-#endif
 
 		if (isCrLf)
 			lineSep--; // skip the extra line separator in the CRLF sequence
 
-#if NET8_0_OR_GREATER
 		if (!(IsLastLine(index) && !data[^1].IsNewline())) // if we're not on the last line and it doesn't end with a newline then
-#else
-		if (!(IsLastLine(index) && !data[Length - 1].IsNewline()))
-#endif
 		{
 			lineSep--;
 		}
@@ -283,19 +275,10 @@ public ref struct ReadOnlySpanBuffer : IBuffer, ISupportsCache
 		int start = lineStarts[lineNumber];
 		int end = lineStarts[lineNumber + 1];
 
-#if NET8_0_OR_GREATER
 		if (precededByCrLf.Contains(end))
 			end--; // skip the extra line separator in the CRLF sequence
-#else
-		if (precededByCrLf.IndexOf(end) != -1)
-			end--; // skip the extra line separator in the CRLF sequence
-#endif
 
-#if NET8_0_OR_GREATER
 		if (!(lineNumber + 2 == RawLineCount && !data[^1].IsNewline()))
-#else
-		if (!(lineNumber + 2 == RawLineCount && !data[Length - 1].IsNewline()))
-#endif
 		{
 			// if we're not on the last line and it doesn't end with newline then
 			end--; // skip one more line separator
@@ -542,7 +525,7 @@ public ref struct ReadOnlySpanBuffer : IBuffer, ISupportsCache
 
 	/// <inheritdoc/>
 	public override readonly bool Equals(
-#if NET8_0_OR_GREATER
+#if NETCOREAPP3_0_OR_GREATER
 		[NotNullWhen(true)]
 		object? obj
 #else
@@ -770,11 +753,7 @@ public ref struct ReadOnlySpanBuffer : IBuffer, ISupportsCache
 		if (RawLineCount == 1)
 			return true; // only raw line is last line
 
-#if NET8_0_OR_GREATER
 		if (index >= lineStarts[^2] && index < lineStarts[^1])
-#else
-		if (index >= lineStarts[RawLineCount - 2] && index < lineStarts[RawLineCount - 1])
-#endif
 			return true;
 
 		return false;

@@ -38,7 +38,7 @@ public readonly struct SourceLocation(int index, int line, int column) : IEquata
 
 	/// <inheritdoc/>
 	public override bool Equals(
-#if NET8_0_OR_GREATER
+#if NETCOREAPP3_0_OR_GREATER
 		[NotNullWhen(true)]
 		object? obj
 #else

@@ -10,7 +10,7 @@ public readonly struct Result<TValue>
 	/// The return value. Might be null or an arbitrary default if
 	/// <see cref="IsSuccessful"/> is <c>false</c>.
 	/// </summary>
-#if NET8_0_OR_GREATER
+#if NET5_0_OR_GREATER
 	[MemberNotNullWhen(true, nameof(Value))]
 #endif
 	public readonly TValue? Value { get; }

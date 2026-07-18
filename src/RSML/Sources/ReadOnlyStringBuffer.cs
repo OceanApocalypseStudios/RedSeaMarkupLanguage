@@ -165,11 +165,7 @@ public class ReadOnlyStringBuffer : IBuffer, ISupportsCache, IEquatable<string?>
 		if (isCrLf)
 			lineSep--; // skip the extra line separator in the CRLF sequence
 
-#if NET8_0_OR_GREATER
 		if (!(IsLastLine(index) && !data[^1].IsNewline())) // if we're not on the last line and it doesn't end with a newline then
-#else
-		if (!(IsLastLine(index) && !data[Length - 1].IsNewline()))
-#endif
 		{
 			lineSep--;
 		}
@@ -309,11 +305,7 @@ public class ReadOnlyStringBuffer : IBuffer, ISupportsCache, IEquatable<string?>
 		if (precededByCrLf.Contains(end))
 			end--; // skip the extra line separator in the CRLF sequence
 
-#if NET8_0_OR_GREATER
 		if (!(lineNumber + 2 == RawLineCount && !data[^1].IsNewline()))
-#else
-		if (!(lineNumber + 2 == RawLineCount && !data[Length - 1].IsNewline()))
-#endif
 		{
 			// if we're not on the last line and it doesn't end with newline then
 			end--; // skip one more line separator
@@ -560,7 +552,7 @@ public class ReadOnlyStringBuffer : IBuffer, ISupportsCache, IEquatable<string?>
 
 	/// <inheritdoc/>
 	public override bool Equals(
-#if NET8_0_OR_GREATER
+#if NETCOREAPP3_0_OR_GREATER
 		[NotNullWhen(true)]
 		object? obj
 #else
@@ -781,11 +773,7 @@ public class ReadOnlyStringBuffer : IBuffer, ISupportsCache, IEquatable<string?>
 		if (RawLineCount == 1)
 			return true; // only raw line is last line
 
-#if NET8_0_OR_GREATER
 		if (index >= lineStarts[^2] && index < lineStarts[^1])
-#else
-		if (index >= lineStarts[RawLineCount - 2] && index < lineStarts[RawLineCount - 1])
-#endif
 			return true;
 
 		return false;

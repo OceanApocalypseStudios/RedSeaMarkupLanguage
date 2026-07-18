@@ -58,4 +58,11 @@ internal static class InternalExtensions
 			return true;
 		}
 	}
+
+	extension(ReadOnlySpan<int> integers)
+	{
+#if !NETCOREAPP3_0_OR_GREATER
+		public bool Contains(int item) => integers.IndexOf(item) != -1;
+#endif
+	}
 }

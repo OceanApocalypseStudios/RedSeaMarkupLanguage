@@ -50,7 +50,7 @@ public readonly partial struct SourceSpan : IFormattable
 
 	/// <inheritdoc/>
 	public override bool Equals(
-#if NET8_0_OR_GREATER
+#if NETCOREAPP3_0_OR_GREATER
 		[NotNullWhen(true)]
 		object? obj
 #else
