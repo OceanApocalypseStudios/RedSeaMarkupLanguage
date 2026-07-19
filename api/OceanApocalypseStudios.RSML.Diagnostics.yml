@@ -1,0 +1,115 @@
+### YamlMime:ManagedReference
+items:
+- uid: OceanApocalypseStudios.RSML.Diagnostics
+  commentId: N:OceanApocalypseStudios.RSML.Diagnostics
+  id: Diagnostics
+  parent: OceanApocalypseStudios.RSML
+  children:
+  - OceanApocalypseStudios.RSML.Diagnostics.Diagnostic
+  - OceanApocalypseStudios.RSML.Diagnostics.DiagnosticCollector
+  - OceanApocalypseStudios.RSML.Diagnostics.ErrorCategory
+  - OceanApocalypseStudios.RSML.Diagnostics.ErrorCode
+  - OceanApocalypseStudios.RSML.Diagnostics.Result`1
+  - OceanApocalypseStudios.RSML.Diagnostics.Severity
+  langs:
+  - csharp
+  - vb
+  name: OceanApocalypseStudios.RSML.Diagnostics
+  nameWithType: OceanApocalypseStudios.RSML.Diagnostics
+  fullName: OceanApocalypseStudios.RSML.Diagnostics
+  type: Namespace
+  assemblies:
+  - RSML
+references:
+- uid: OceanApocalypseStudios.RSML.Diagnostics.Diagnostic
+  commentId: T:OceanApocalypseStudios.RSML.Diagnostics.Diagnostic
+  parent: OceanApocalypseStudios.RSML.Diagnostics
+  href: OceanApocalypseStudios.RSML.Diagnostics.Diagnostic.html
+  name: Diagnostic
+  nameWithType: Diagnostic
+  fullName: OceanApocalypseStudios.RSML.Diagnostics.Diagnostic
+- uid: OceanApocalypseStudios.RSML.Diagnostics.DiagnosticCollector
+  commentId: T:OceanApocalypseStudios.RSML.Diagnostics.DiagnosticCollector
+  parent: OceanApocalypseStudios.RSML.Diagnostics
+  href: OceanApocalypseStudios.RSML.Diagnostics.DiagnosticCollector.html
+  name: DiagnosticCollector
+  nameWithType: DiagnosticCollector
+  fullName: OceanApocalypseStudios.RSML.Diagnostics.DiagnosticCollector
+- uid: OceanApocalypseStudios.RSML.Diagnostics.ErrorCategory
+  commentId: T:OceanApocalypseStudios.RSML.Diagnostics.ErrorCategory
+  parent: OceanApocalypseStudios.RSML.Diagnostics
+  href: OceanApocalypseStudios.RSML.Diagnostics.ErrorCategory.html
+  name: ErrorCategory
+  nameWithType: ErrorCategory
+  fullName: OceanApocalypseStudios.RSML.Diagnostics.ErrorCategory
+- uid: OceanApocalypseStudios.RSML.Diagnostics.ErrorCode
+  commentId: T:OceanApocalypseStudios.RSML.Diagnostics.ErrorCode
+  parent: OceanApocalypseStudios.RSML.Diagnostics
+  href: OceanApocalypseStudios.RSML.Diagnostics.ErrorCode.html
+  name: ErrorCode
+  nameWithType: ErrorCode
+  fullName: OceanApocalypseStudios.RSML.Diagnostics.ErrorCode
+- uid: OceanApocalypseStudios.RSML.Diagnostics.Result`1
+  commentId: T:OceanApocalypseStudios.RSML.Diagnostics.Result`1
+  parent: OceanApocalypseStudios.RSML.Diagnostics
+  href: OceanApocalypseStudios.RSML.Diagnostics.Result-1.html
+  name: Result<TValue>
+  nameWithType: Result<TValue>
+  fullName: OceanApocalypseStudios.RSML.Diagnostics.Result<TValue>
+  nameWithType.vb: Result(Of TValue)
+  fullName.vb: OceanApocalypseStudios.RSML.Diagnostics.Result(Of TValue)
+  name.vb: Result(Of TValue)
+  spec.csharp:
+  - uid: OceanApocalypseStudios.RSML.Diagnostics.Result`1
+    name: Result
+    href: OceanApocalypseStudios.RSML.Diagnostics.Result-1.html
+  - name: <
+  - name: TValue
+  - name: '>'
+  spec.vb:
+  - uid: OceanApocalypseStudios.RSML.Diagnostics.Result`1
+    name: Result
+    href: OceanApocalypseStudios.RSML.Diagnostics.Result-1.html
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TValue
+  - name: )
+- uid: OceanApocalypseStudios.RSML.Diagnostics.Severity
+  commentId: T:OceanApocalypseStudios.RSML.Diagnostics.Severity
+  parent: OceanApocalypseStudios.RSML.Diagnostics
+  href: OceanApocalypseStudios.RSML.Diagnostics.Severity.html
+  name: Severity
+  nameWithType: Severity
+  fullName: OceanApocalypseStudios.RSML.Diagnostics.Severity
+- uid: OceanApocalypseStudios.RSML.Diagnostics
+  commentId: N:OceanApocalypseStudios.RSML.Diagnostics
+  href: OceanApocalypseStudios.html
+  name: OceanApocalypseStudios.RSML.Diagnostics
+  nameWithType: OceanApocalypseStudios.RSML.Diagnostics
+  fullName: OceanApocalypseStudios.RSML.Diagnostics
+  spec.csharp:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Diagnostics
+    name: Diagnostics
+    href: OceanApocalypseStudios.RSML.Diagnostics.html
+  spec.vb:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Diagnostics
+    name: Diagnostics
+    href: OceanApocalypseStudios.RSML.Diagnostics.html
+memberLayout: SeparatePages

@@ -1,0 +1,557 @@
+### YamlMime:ManagedReference
+items:
+- uid: OceanApocalypseStudios.RSML.Language.Lexing.Token
+  commentId: T:OceanApocalypseStudios.RSML.Language.Lexing.Token
+  id: Token
+  parent: OceanApocalypseStudios.RSML.Language.Lexing
+  children:
+  - OceanApocalypseStudios.RSML.Language.Lexing.Token.#ctor(System.Int32,System.Object,OceanApocalypseStudios.RSML.Sources.SourceSpan)
+  - OceanApocalypseStudios.RSML.Language.Lexing.Token.Span
+  - OceanApocalypseStudios.RSML.Language.Lexing.Token.TokenKind
+  - OceanApocalypseStudios.RSML.Language.Lexing.Token.Value
+  langs:
+  - csharp
+  - vb
+  name: Token
+  nameWithType: Token
+  fullName: OceanApocalypseStudios.RSML.Language.Lexing.Token
+  type: Struct
+  source:
+    remote:
+      path: src/RSML/Language/Lexing/Token.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Token
+    path: ../src/RSML/Language/Lexing/Token.cs
+    startLine: 5
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Language.Lexing
+  syntax:
+    content: 'public record struct Token : IEquatable<Token>'
+    content.vb: Public Structure Token Implements IEquatable(Of Token)
+  implements:
+  - System.IEquatable{OceanApocalypseStudios.RSML.Language.Lexing.Token}
+  inheritedMembers:
+  - System.ValueType.Equals(System.Object)
+  - System.ValueType.GetHashCode
+  - System.ValueType.ToString
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+- uid: OceanApocalypseStudios.RSML.Language.Lexing.Token.#ctor(System.Int32,System.Object,OceanApocalypseStudios.RSML.Sources.SourceSpan)
+  commentId: M:OceanApocalypseStudios.RSML.Language.Lexing.Token.#ctor(System.Int32,System.Object,OceanApocalypseStudios.RSML.Sources.SourceSpan)
+  id: '#ctor(System.Int32,System.Object,OceanApocalypseStudios.RSML.Sources.SourceSpan)'
+  parent: OceanApocalypseStudios.RSML.Language.Lexing.Token
+  langs:
+  - csharp
+  - vb
+  name: Token(int, object?, SourceSpan)
+  nameWithType: Token.Token(int, object?, SourceSpan)
+  fullName: OceanApocalypseStudios.RSML.Language.Lexing.Token.Token(int, object?, OceanApocalypseStudios.RSML.Sources.SourceSpan)
+  type: Constructor
+  source:
+    remote:
+      path: src/RSML/Language/Lexing/Token.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: .ctor
+    path: ../src/RSML/Language/Lexing/Token.cs
+    startLine: 5
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Language.Lexing
+  syntax:
+    content: public Token(int TokenKind, object? Value, SourceSpan Span)
+    parameters:
+    - id: TokenKind
+      type: System.Int32
+    - id: Value
+      type: System.Object
+    - id: Span
+      type: OceanApocalypseStudios.RSML.Sources.SourceSpan
+    content.vb: Public Sub New(TokenKind As Integer, Value As Object, Span As SourceSpan)
+  overload: OceanApocalypseStudios.RSML.Language.Lexing.Token.#ctor*
+  nameWithType.vb: Token.New(Integer, Object, SourceSpan)
+  fullName.vb: OceanApocalypseStudios.RSML.Language.Lexing.Token.New(Integer, Object, OceanApocalypseStudios.RSML.Sources.SourceSpan)
+  name.vb: New(Integer, Object, SourceSpan)
+- uid: OceanApocalypseStudios.RSML.Language.Lexing.Token.TokenKind
+  commentId: P:OceanApocalypseStudios.RSML.Language.Lexing.Token.TokenKind
+  id: TokenKind
+  parent: OceanApocalypseStudios.RSML.Language.Lexing.Token
+  langs:
+  - csharp
+  - vb
+  name: TokenKind
+  nameWithType: Token.TokenKind
+  fullName: OceanApocalypseStudios.RSML.Language.Lexing.Token.TokenKind
+  type: Property
+  source:
+    remote:
+      path: src/RSML/Language/Lexing/Token.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: TokenKind
+    path: ../src/RSML/Language/Lexing/Token.cs
+    startLine: 5
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Language.Lexing
+  syntax:
+    content: public int TokenKind { readonly get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property TokenKind As Integer
+  overload: OceanApocalypseStudios.RSML.Language.Lexing.Token.TokenKind*
+- uid: OceanApocalypseStudios.RSML.Language.Lexing.Token.Value
+  commentId: P:OceanApocalypseStudios.RSML.Language.Lexing.Token.Value
+  id: Value
+  parent: OceanApocalypseStudios.RSML.Language.Lexing.Token
+  langs:
+  - csharp
+  - vb
+  name: Value
+  nameWithType: Token.Value
+  fullName: OceanApocalypseStudios.RSML.Language.Lexing.Token.Value
+  type: Property
+  source:
+    remote:
+      path: src/RSML/Language/Lexing/Token.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Value
+    path: ../src/RSML/Language/Lexing/Token.cs
+    startLine: 5
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Language.Lexing
+  syntax:
+    content: public object? Value { readonly get; set; }
+    parameters: []
+    return:
+      type: System.Object
+    content.vb: Public Property Value As Object
+  overload: OceanApocalypseStudios.RSML.Language.Lexing.Token.Value*
+- uid: OceanApocalypseStudios.RSML.Language.Lexing.Token.Span
+  commentId: P:OceanApocalypseStudios.RSML.Language.Lexing.Token.Span
+  id: Span
+  parent: OceanApocalypseStudios.RSML.Language.Lexing.Token
+  langs:
+  - csharp
+  - vb
+  name: Span
+  nameWithType: Token.Span
+  fullName: OceanApocalypseStudios.RSML.Language.Lexing.Token.Span
+  type: Property
+  source:
+    remote:
+      path: src/RSML/Language/Lexing/Token.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Span
+    path: ../src/RSML/Language/Lexing/Token.cs
+    startLine: 5
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Language.Lexing
+  syntax:
+    content: public SourceSpan Span { readonly get; set; }
+    parameters: []
+    return:
+      type: OceanApocalypseStudios.RSML.Sources.SourceSpan
+    content.vb: Public Property Span As SourceSpan
+  overload: OceanApocalypseStudios.RSML.Language.Lexing.Token.Span*
+references:
+- uid: OceanApocalypseStudios.RSML.Language.Lexing
+  commentId: N:OceanApocalypseStudios.RSML.Language.Lexing
+  href: OceanApocalypseStudios.html
+  name: OceanApocalypseStudios.RSML.Language.Lexing
+  nameWithType: OceanApocalypseStudios.RSML.Language.Lexing
+  fullName: OceanApocalypseStudios.RSML.Language.Lexing
+  spec.csharp:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Language
+    name: Language
+    href: OceanApocalypseStudios.RSML.Language.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Language.Lexing
+    name: Lexing
+    href: OceanApocalypseStudios.RSML.Language.Lexing.html
+  spec.vb:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Language
+    name: Language
+    href: OceanApocalypseStudios.RSML.Language.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Language.Lexing
+    name: Lexing
+    href: OceanApocalypseStudios.RSML.Language.Lexing.html
+- uid: System.IEquatable{OceanApocalypseStudios.RSML.Language.Lexing.Token}
+  commentId: T:System.IEquatable{OceanApocalypseStudios.RSML.Language.Lexing.Token}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<Token>
+  nameWithType: IEquatable<Token>
+  fullName: System.IEquatable<OceanApocalypseStudios.RSML.Language.Lexing.Token>
+  nameWithType.vb: IEquatable(Of Token)
+  fullName.vb: System.IEquatable(Of OceanApocalypseStudios.RSML.Language.Lexing.Token)
+  name.vb: IEquatable(Of Token)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: OceanApocalypseStudios.RSML.Language.Lexing.Token
+    name: Token
+    href: OceanApocalypseStudios.RSML.Language.Lexing.Token.html
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: OceanApocalypseStudios.RSML.Language.Lexing.Token
+    name: Token
+    href: OceanApocalypseStudios.RSML.Language.Lexing.Token.html
+  - name: )
+- uid: System.ValueType.Equals(System.Object)
+  commentId: M:System.ValueType.Equals(System.Object)
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  name: Equals(object)
+  nameWithType: ValueType.Equals(object)
+  fullName: System.ValueType.Equals(object)
+  nameWithType.vb: ValueType.Equals(Object)
+  fullName.vb: System.ValueType.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.ValueType.GetHashCode
+  commentId: M:System.ValueType.GetHashCode
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  name: GetHashCode()
+  nameWithType: ValueType.GetHashCode()
+  fullName: System.ValueType.GetHashCode()
+  spec.csharp:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.IEquatable`1
+  commentId: T:System.IEquatable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<T>
+  nameWithType: IEquatable<T>
+  fullName: System.IEquatable<T>
+  nameWithType.vb: IEquatable(Of T)
+  fullName.vb: System.IEquatable(Of T)
+  name.vb: IEquatable(Of T)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: OceanApocalypseStudios.RSML.Language.Lexing.Token.#ctor*
+  commentId: Overload:OceanApocalypseStudios.RSML.Language.Lexing.Token.#ctor
+  href: OceanApocalypseStudios.RSML.Language.Lexing.Token.-ctor.html#OceanApocalypseStudios_RSML_Language_Lexing_Token__ctor_System_Int32_System_Object_OceanApocalypseStudios_RSML_Sources_SourceSpan_
+  name: Token
+  nameWithType: Token.Token
+  fullName: OceanApocalypseStudios.RSML.Language.Lexing.Token.Token
+  nameWithType.vb: Token.New
+  fullName.vb: OceanApocalypseStudios.RSML.Language.Lexing.Token.New
+  name.vb: New
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: OceanApocalypseStudios.RSML.Sources.SourceSpan
+  commentId: T:OceanApocalypseStudios.RSML.Sources.SourceSpan
+  parent: OceanApocalypseStudios.RSML.Sources
+  href: OceanApocalypseStudios.RSML.Sources.SourceSpan.html
+  name: SourceSpan
+  nameWithType: SourceSpan
+  fullName: OceanApocalypseStudios.RSML.Sources.SourceSpan
+- uid: OceanApocalypseStudios.RSML.Sources
+  commentId: N:OceanApocalypseStudios.RSML.Sources
+  href: OceanApocalypseStudios.html
+  name: OceanApocalypseStudios.RSML.Sources
+  nameWithType: OceanApocalypseStudios.RSML.Sources
+  fullName: OceanApocalypseStudios.RSML.Sources
+  spec.csharp:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sources
+    name: Sources
+    href: OceanApocalypseStudios.RSML.Sources.html
+  spec.vb:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sources
+    name: Sources
+    href: OceanApocalypseStudios.RSML.Sources.html
+- uid: OceanApocalypseStudios.RSML.Language.Lexing.Token.TokenKind*
+  commentId: Overload:OceanApocalypseStudios.RSML.Language.Lexing.Token.TokenKind
+  href: OceanApocalypseStudios.RSML.Language.Lexing.Token.TokenKind.html#OceanApocalypseStudios_RSML_Language_Lexing_Token_TokenKind
+  name: TokenKind
+  nameWithType: Token.TokenKind
+  fullName: OceanApocalypseStudios.RSML.Language.Lexing.Token.TokenKind
+- uid: OceanApocalypseStudios.RSML.Language.Lexing.Token.Value*
+  commentId: Overload:OceanApocalypseStudios.RSML.Language.Lexing.Token.Value
+  href: OceanApocalypseStudios.RSML.Language.Lexing.Token.Value.html#OceanApocalypseStudios_RSML_Language_Lexing_Token_Value
+  name: Value
+  nameWithType: Token.Value
+  fullName: OceanApocalypseStudios.RSML.Language.Lexing.Token.Value
+- uid: OceanApocalypseStudios.RSML.Language.Lexing.Token.Span*
+  commentId: Overload:OceanApocalypseStudios.RSML.Language.Lexing.Token.Span
+  href: OceanApocalypseStudios.RSML.Language.Lexing.Token.Span.html#OceanApocalypseStudios_RSML_Language_Lexing_Token_Span
+  name: Span
+  nameWithType: Token.Span
+  fullName: OceanApocalypseStudios.RSML.Language.Lexing.Token.Span
+memberLayout: SeparatePages

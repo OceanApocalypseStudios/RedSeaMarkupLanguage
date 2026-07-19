@@ -1,0 +1,71 @@
+### YamlMime:ManagedReference
+items:
+- uid: OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries
+  commentId: N:OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries
+  id: OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries
+  children:
+  - OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries.LexerRuleRegistry
+  langs:
+  - csharp
+  - vb
+  name: OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries
+  nameWithType: OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries
+  fullName: OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries
+  type: Namespace
+  assemblies:
+  - RSML
+references:
+- uid: OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries.LexerRuleRegistry
+  commentId: T:OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries.LexerRuleRegistry
+  parent: OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries
+  href: OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries.LexerRuleRegistry.html
+  name: LexerRuleRegistry
+  nameWithType: LexerRuleRegistry
+  fullName: OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries.LexerRuleRegistry
+- uid: OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries
+  commentId: N:OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries
+  href: OceanApocalypseStudios.html
+  name: OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries
+  nameWithType: OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries
+  fullName: OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries
+  spec.csharp:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sdk
+    name: Sdk
+    href: OceanApocalypseStudios.RSML.Sdk.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sdk.Extensibility
+    name: Extensibility
+    href: OceanApocalypseStudios.RSML.Sdk.Extensibility.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries
+    name: Registries
+    href: OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries.html
+  spec.vb:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sdk
+    name: Sdk
+    href: OceanApocalypseStudios.RSML.Sdk.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sdk.Extensibility
+    name: Extensibility
+    href: OceanApocalypseStudios.RSML.Sdk.Extensibility.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries
+    name: Registries
+    href: OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries.html
+memberLayout: SeparatePages

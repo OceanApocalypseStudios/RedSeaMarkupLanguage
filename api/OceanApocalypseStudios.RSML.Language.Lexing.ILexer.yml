@@ -1,0 +1,136 @@
+### YamlMime:ManagedReference
+items:
+- uid: OceanApocalypseStudios.RSML.Language.Lexing.ILexer
+  commentId: T:OceanApocalypseStudios.RSML.Language.Lexing.ILexer
+  id: ILexer
+  parent: OceanApocalypseStudios.RSML.Language.Lexing
+  children: []
+  langs:
+  - csharp
+  - vb
+  name: ILexer
+  nameWithType: ILexer
+  fullName: OceanApocalypseStudios.RSML.Language.Lexing.ILexer
+  type: Interface
+  source:
+    remote:
+      path: src/RSML/Language/Lexing/ILexer.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: ILexer
+    path: src/RSML/Language/Lexing/ILexer.cs
+    startLine: 2
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Language.Lexing
+  syntax:
+    content: 'public interface ILexer : IToolchainComponent'
+    content.vb: Public Interface ILexer Inherits IToolchainComponent
+  derivedClasses:
+  - OceanApocalypseStudios.RSML.Language.Lexing.DefaultLexer
+  - OceanApocalypseStudios.RSML.Language.Lexing.Lexer
+  - OceanApocalypseStudios.RSML.Language.Lexing.StatelessLexer
+  inheritedMembers:
+  - OceanApocalypseStudios.RSML.IToolchainComponent.Configuration
+  - OceanApocalypseStudios.RSML.IToolchainComponent.Inject(OceanApocalypseStudios.RSML.ToolchainConfiguration)
+references:
+- uid: OceanApocalypseStudios.RSML.Language.Lexing
+  commentId: N:OceanApocalypseStudios.RSML.Language.Lexing
+  href: OceanApocalypseStudios.html
+  name: OceanApocalypseStudios.RSML.Language.Lexing
+  nameWithType: OceanApocalypseStudios.RSML.Language.Lexing
+  fullName: OceanApocalypseStudios.RSML.Language.Lexing
+  spec.csharp:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Language
+    name: Language
+    href: OceanApocalypseStudios.RSML.Language.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Language.Lexing
+    name: Lexing
+    href: OceanApocalypseStudios.RSML.Language.Lexing.html
+  spec.vb:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Language
+    name: Language
+    href: OceanApocalypseStudios.RSML.Language.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Language.Lexing
+    name: Lexing
+    href: OceanApocalypseStudios.RSML.Language.Lexing.html
+- uid: OceanApocalypseStudios.RSML.IToolchainComponent.Configuration
+  commentId: P:OceanApocalypseStudios.RSML.IToolchainComponent.Configuration
+  parent: OceanApocalypseStudios.RSML.IToolchainComponent
+  href: OceanApocalypseStudios.RSML.IToolchainComponent.Configuration.html#OceanApocalypseStudios_RSML_IToolchainComponent_Configuration
+  name: Configuration
+  nameWithType: IToolchainComponent.Configuration
+  fullName: OceanApocalypseStudios.RSML.IToolchainComponent.Configuration
+- uid: OceanApocalypseStudios.RSML.IToolchainComponent.Inject(OceanApocalypseStudios.RSML.ToolchainConfiguration)
+  commentId: M:OceanApocalypseStudios.RSML.IToolchainComponent.Inject(OceanApocalypseStudios.RSML.ToolchainConfiguration)
+  parent: OceanApocalypseStudios.RSML.IToolchainComponent
+  href: OceanApocalypseStudios.RSML.IToolchainComponent.Inject.html#OceanApocalypseStudios_RSML_IToolchainComponent_Inject_OceanApocalypseStudios_RSML_ToolchainConfiguration_
+  name: Inject(ToolchainConfiguration)
+  nameWithType: IToolchainComponent.Inject(ToolchainConfiguration)
+  fullName: OceanApocalypseStudios.RSML.IToolchainComponent.Inject(OceanApocalypseStudios.RSML.ToolchainConfiguration)
+  spec.csharp:
+  - uid: OceanApocalypseStudios.RSML.IToolchainComponent.Inject(OceanApocalypseStudios.RSML.ToolchainConfiguration)
+    name: Inject
+    href: OceanApocalypseStudios.RSML.IToolchainComponent.Inject.html#OceanApocalypseStudios_RSML_IToolchainComponent_Inject_OceanApocalypseStudios_RSML_ToolchainConfiguration_
+  - name: (
+  - uid: OceanApocalypseStudios.RSML.ToolchainConfiguration
+    name: ToolchainConfiguration
+    href: OceanApocalypseStudios.RSML.ToolchainConfiguration.html
+  - name: )
+  spec.vb:
+  - uid: OceanApocalypseStudios.RSML.IToolchainComponent.Inject(OceanApocalypseStudios.RSML.ToolchainConfiguration)
+    name: Inject
+    href: OceanApocalypseStudios.RSML.IToolchainComponent.Inject.html#OceanApocalypseStudios_RSML_IToolchainComponent_Inject_OceanApocalypseStudios_RSML_ToolchainConfiguration_
+  - name: (
+  - uid: OceanApocalypseStudios.RSML.ToolchainConfiguration
+    name: ToolchainConfiguration
+    href: OceanApocalypseStudios.RSML.ToolchainConfiguration.html
+  - name: )
+- uid: OceanApocalypseStudios.RSML.IToolchainComponent
+  commentId: T:OceanApocalypseStudios.RSML.IToolchainComponent
+  parent: OceanApocalypseStudios.RSML
+  href: OceanApocalypseStudios.RSML.IToolchainComponent.html
+  name: IToolchainComponent
+  nameWithType: IToolchainComponent
+  fullName: OceanApocalypseStudios.RSML.IToolchainComponent
+- uid: OceanApocalypseStudios.RSML
+  commentId: N:OceanApocalypseStudios.RSML
+  href: OceanApocalypseStudios.html
+  name: OceanApocalypseStudios.RSML
+  nameWithType: OceanApocalypseStudios.RSML
+  fullName: OceanApocalypseStudios.RSML
+  spec.csharp:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  spec.vb:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+memberLayout: SeparatePages

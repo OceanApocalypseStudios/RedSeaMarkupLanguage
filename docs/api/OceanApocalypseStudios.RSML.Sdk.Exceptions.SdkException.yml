@@ -1,0 +1,639 @@
+### YamlMime:ManagedReference
+items:
+- uid: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException
+  commentId: T:OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException
+  id: SdkException
+  parent: OceanApocalypseStudios.RSML.Sdk.Exceptions
+  children:
+  - OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.#ctor
+  - OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.#ctor(System.String)
+  - OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.#ctor(System.String,System.Exception)
+  langs:
+  - csharp
+  - vb
+  name: SdkException
+  nameWithType: SdkException
+  fullName: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException
+  type: Class
+  source:
+    remote:
+      path: src/RSML/Sdk/Exceptions/SdkException.cs
+      branch: docs
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: SdkException
+    path: ../src/RSML/Sdk/Exceptions/SdkException.cs
+    startLine: 8
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sdk.Exceptions
+  summary: An exception caused by a mal-function of the <xref href="OceanApocalypseStudios.RSML.Sdk" data-throw-if-not-resolved="false"></xref>.
+  example: []
+  syntax:
+    content: 'public class SdkException : Exception, ISerializable'
+    content.vb: Public Class SdkException Inherits Exception Implements ISerializable
+  inheritance:
+  - System.Object
+  - System.Exception
+  implements:
+  - System.Runtime.Serialization.ISerializable
+  inheritedMembers:
+  - System.Exception.GetBaseException
+  - System.Exception.GetType
+  - System.Exception.ToString
+  - System.Exception.Data
+  - System.Exception.HelpLink
+  - System.Exception.HResult
+  - System.Exception.InnerException
+  - System.Exception.Message
+  - System.Exception.Source
+  - System.Exception.StackTrace
+  - System.Exception.TargetSite
+  - System.Exception.SerializeObjectState
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+- uid: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.#ctor
+  commentId: M:OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.#ctor
+  id: '#ctor'
+  parent: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException
+  langs:
+  - csharp
+  - vb
+  name: SdkException()
+  nameWithType: SdkException.SdkException()
+  fullName: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.SdkException()
+  type: Constructor
+  source:
+    remote:
+      path: src/RSML/Sdk/Exceptions/SdkException.cs
+      branch: docs
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: .ctor
+    path: ../src/RSML/Sdk/Exceptions/SdkException.cs
+    startLine: 13
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sdk.Exceptions
+  summary: Creates an empty <xref href="OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException" data-throw-if-not-resolved="false"></xref>.
+  example: []
+  syntax:
+    content: public SdkException()
+    content.vb: Public Sub New()
+  overload: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.#ctor*
+  nameWithType.vb: SdkException.New()
+  fullName.vb: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.New()
+  name.vb: New()
+- uid: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.#ctor(System.String)
+  commentId: M:OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.#ctor(System.String)
+  id: '#ctor(System.String)'
+  parent: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException
+  langs:
+  - csharp
+  - vb
+  name: SdkException(string)
+  nameWithType: SdkException.SdkException(string)
+  fullName: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.SdkException(string)
+  type: Constructor
+  source:
+    remote:
+      path: src/RSML/Sdk/Exceptions/SdkException.cs
+      branch: docs
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: .ctor
+    path: ../src/RSML/Sdk/Exceptions/SdkException.cs
+    startLine: 19
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sdk.Exceptions
+  summary: Creates a <xref href="OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException" data-throw-if-not-resolved="false"></xref> with a custom error message.
+  example: []
+  syntax:
+    content: public SdkException(string message)
+    parameters:
+    - id: message
+      type: System.String
+      description: The error message.
+    content.vb: Public Sub New(message As String)
+  overload: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.#ctor*
+  nameWithType.vb: SdkException.New(String)
+  fullName.vb: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.New(String)
+  name.vb: New(String)
+- uid: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.#ctor(System.String,System.Exception)
+  commentId: M:OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.#ctor(System.String,System.Exception)
+  id: '#ctor(System.String,System.Exception)'
+  parent: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException
+  langs:
+  - csharp
+  - vb
+  name: SdkException(string?, Exception)
+  nameWithType: SdkException.SdkException(string?, Exception)
+  fullName: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.SdkException(string?, System.Exception)
+  type: Constructor
+  source:
+    remote:
+      path: src/RSML/Sdk/Exceptions/SdkException.cs
+      branch: docs
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: .ctor
+    path: ../src/RSML/Sdk/Exceptions/SdkException.cs
+    startLine: 27
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sdk.Exceptions
+  summary: >-
+    Creates a <xref href="OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException" data-throw-if-not-resolved="false"></xref> with a custom error message
+
+    and a reference to the <xref href="System.Exception" data-throw-if-not-resolved="false"></xref> that caused this issue.
+  example: []
+  syntax:
+    content: public SdkException(string? message, Exception innerException)
+    parameters:
+    - id: message
+      type: System.String
+      description: The error message.
+    - id: innerException
+      type: System.Exception
+      description: The exception that caused the issue.
+    content.vb: Public Sub New(message As String, innerException As Exception)
+  overload: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.#ctor*
+  nameWithType.vb: SdkException.New(String, Exception)
+  fullName.vb: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.New(String, System.Exception)
+  name.vb: New(String, Exception)
+references:
+- uid: OceanApocalypseStudios.RSML.Sdk
+  commentId: N:OceanApocalypseStudios.RSML.Sdk
+  href: OceanApocalypseStudios.html
+  name: OceanApocalypseStudios.RSML.Sdk
+  nameWithType: OceanApocalypseStudios.RSML.Sdk
+  fullName: OceanApocalypseStudios.RSML.Sdk
+  spec.csharp:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sdk
+    name: Sdk
+    href: OceanApocalypseStudios.RSML.Sdk.html
+  spec.vb:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sdk
+    name: Sdk
+    href: OceanApocalypseStudios.RSML.Sdk.html
+- uid: OceanApocalypseStudios.RSML.Sdk.Exceptions
+  commentId: N:OceanApocalypseStudios.RSML.Sdk.Exceptions
+  href: OceanApocalypseStudios.html
+  name: OceanApocalypseStudios.RSML.Sdk.Exceptions
+  nameWithType: OceanApocalypseStudios.RSML.Sdk.Exceptions
+  fullName: OceanApocalypseStudios.RSML.Sdk.Exceptions
+  spec.csharp:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sdk
+    name: Sdk
+    href: OceanApocalypseStudios.RSML.Sdk.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sdk.Exceptions
+    name: Exceptions
+    href: OceanApocalypseStudios.RSML.Sdk.Exceptions.html
+  spec.vb:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sdk
+    name: Sdk
+    href: OceanApocalypseStudios.RSML.Sdk.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sdk.Exceptions
+    name: Exceptions
+    href: OceanApocalypseStudios.RSML.Sdk.Exceptions.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Exception
+  commentId: T:System.Exception
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.exception
+  name: Exception
+  nameWithType: Exception
+  fullName: System.Exception
+- uid: System.Runtime.Serialization.ISerializable
+  commentId: T:System.Runtime.Serialization.ISerializable
+  parent: System.Runtime.Serialization
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.runtime.serialization.iserializable
+  name: ISerializable
+  nameWithType: ISerializable
+  fullName: System.Runtime.Serialization.ISerializable
+- uid: System.Exception.GetBaseException
+  commentId: M:System.Exception.GetBaseException
+  parent: System.Exception
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.exception.getbaseexception
+  name: GetBaseException()
+  nameWithType: Exception.GetBaseException()
+  fullName: System.Exception.GetBaseException()
+  spec.csharp:
+  - uid: System.Exception.GetBaseException
+    name: GetBaseException
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.exception.getbaseexception
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Exception.GetBaseException
+    name: GetBaseException
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.exception.getbaseexception
+  - name: (
+  - name: )
+- uid: System.Exception.GetType
+  commentId: M:System.Exception.GetType
+  parent: System.Exception
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.exception.gettype
+  name: GetType()
+  nameWithType: Exception.GetType()
+  fullName: System.Exception.GetType()
+  spec.csharp:
+  - uid: System.Exception.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.exception.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Exception.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.exception.gettype
+  - name: (
+  - name: )
+- uid: System.Exception.ToString
+  commentId: M:System.Exception.ToString
+  parent: System.Exception
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.exception.tostring
+  name: ToString()
+  nameWithType: Exception.ToString()
+  fullName: System.Exception.ToString()
+  spec.csharp:
+  - uid: System.Exception.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.exception.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Exception.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.exception.tostring
+  - name: (
+  - name: )
+- uid: System.Exception.Data
+  commentId: P:System.Exception.Data
+  parent: System.Exception
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.exception.data
+  name: Data
+  nameWithType: Exception.Data
+  fullName: System.Exception.Data
+- uid: System.Exception.HelpLink
+  commentId: P:System.Exception.HelpLink
+  parent: System.Exception
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.exception.helplink
+  name: HelpLink
+  nameWithType: Exception.HelpLink
+  fullName: System.Exception.HelpLink
+- uid: System.Exception.HResult
+  commentId: P:System.Exception.HResult
+  parent: System.Exception
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.exception.hresult
+  name: HResult
+  nameWithType: Exception.HResult
+  fullName: System.Exception.HResult
+- uid: System.Exception.InnerException
+  commentId: P:System.Exception.InnerException
+  parent: System.Exception
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.exception.innerexception
+  name: InnerException
+  nameWithType: Exception.InnerException
+  fullName: System.Exception.InnerException
+- uid: System.Exception.Message
+  commentId: P:System.Exception.Message
+  parent: System.Exception
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.exception.message
+  name: Message
+  nameWithType: Exception.Message
+  fullName: System.Exception.Message
+- uid: System.Exception.Source
+  commentId: P:System.Exception.Source
+  parent: System.Exception
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.exception.source
+  name: Source
+  nameWithType: Exception.Source
+  fullName: System.Exception.Source
+- uid: System.Exception.StackTrace
+  commentId: P:System.Exception.StackTrace
+  parent: System.Exception
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.exception.stacktrace
+  name: StackTrace
+  nameWithType: Exception.StackTrace
+  fullName: System.Exception.StackTrace
+- uid: System.Exception.TargetSite
+  commentId: P:System.Exception.TargetSite
+  parent: System.Exception
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.exception.targetsite
+  name: TargetSite
+  nameWithType: Exception.TargetSite
+  fullName: System.Exception.TargetSite
+- uid: System.Exception.SerializeObjectState
+  commentId: E:System.Exception.SerializeObjectState
+  parent: System.Exception
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.exception.serializeobjectstate
+  name: SerializeObjectState
+  nameWithType: Exception.SerializeObjectState
+  fullName: System.Exception.SerializeObjectState
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Runtime.Serialization
+  commentId: N:System.Runtime.Serialization
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Runtime.Serialization
+  nameWithType: System.Runtime.Serialization
+  fullName: System.Runtime.Serialization
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Runtime
+    name: Runtime
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.runtime
+  - name: .
+  - uid: System.Runtime.Serialization
+    name: Serialization
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.runtime.serialization
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Runtime
+    name: Runtime
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.runtime
+  - name: .
+  - uid: System.Runtime.Serialization
+    name: Serialization
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.runtime.serialization
+- uid: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException
+  commentId: T:OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException
+  href: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.html
+  name: SdkException
+  nameWithType: SdkException
+  fullName: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException
+- uid: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.#ctor*
+  commentId: Overload:OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.#ctor
+  href: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.-ctor.html#OceanApocalypseStudios_RSML_Sdk_Exceptions_SdkException__ctor
+  name: SdkException
+  nameWithType: SdkException.SdkException
+  fullName: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.SdkException
+  nameWithType.vb: SdkException.New
+  fullName.vb: OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.New
+  name.vb: New
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+memberLayout: SeparatePages

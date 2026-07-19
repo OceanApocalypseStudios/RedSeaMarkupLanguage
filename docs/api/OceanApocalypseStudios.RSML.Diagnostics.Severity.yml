@@ -1,0 +1,217 @@
+### YamlMime:ManagedReference
+items:
+- uid: OceanApocalypseStudios.RSML.Diagnostics.Severity
+  commentId: T:OceanApocalypseStudios.RSML.Diagnostics.Severity
+  id: Severity
+  parent: OceanApocalypseStudios.RSML.Diagnostics
+  children:
+  - OceanApocalypseStudios.RSML.Diagnostics.Severity.None
+  - OceanApocalypseStudios.RSML.Diagnostics.Severity.Message
+  - OceanApocalypseStudios.RSML.Diagnostics.Severity.Warning
+  - OceanApocalypseStudios.RSML.Diagnostics.Severity.Error
+  - OceanApocalypseStudios.RSML.Diagnostics.Severity.Critical
+  langs:
+  - csharp
+  - vb
+  name: Severity
+  nameWithType: Severity
+  fullName: OceanApocalypseStudios.RSML.Diagnostics.Severity
+  type: Enum
+  source:
+    remote:
+      path: src/RSML/Diagnostics/Severity.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Severity
+    path: ../src/RSML/Diagnostics/Severity.cs
+    startLine: 5
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Diagnostics
+  summary: The severity of an error.
+  example: []
+  syntax:
+    content: public enum Severity
+    content.vb: Public Enum Severity
+- uid: OceanApocalypseStudios.RSML.Diagnostics.Severity.None
+  commentId: F:OceanApocalypseStudios.RSML.Diagnostics.Severity.None
+  id: None
+  parent: OceanApocalypseStudios.RSML.Diagnostics.Severity
+  langs:
+  - csharp
+  - vb
+  name: None
+  nameWithType: Severity.None
+  fullName: OceanApocalypseStudios.RSML.Diagnostics.Severity.None
+  type: Field
+  source:
+    remote:
+      path: src/RSML/Diagnostics/Severity.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: None
+    path: ../src/RSML/Diagnostics/Severity.cs
+    startLine: 10
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Diagnostics
+  summary: No severity information.
+  example: []
+  syntax:
+    content: None = 0
+    return:
+      type: OceanApocalypseStudios.RSML.Diagnostics.Severity
+- uid: OceanApocalypseStudios.RSML.Diagnostics.Severity.Message
+  commentId: F:OceanApocalypseStudios.RSML.Diagnostics.Severity.Message
+  id: Message
+  parent: OceanApocalypseStudios.RSML.Diagnostics.Severity
+  langs:
+  - csharp
+  - vb
+  name: Message
+  nameWithType: Severity.Message
+  fullName: OceanApocalypseStudios.RSML.Diagnostics.Severity.Message
+  type: Field
+  source:
+    remote:
+      path: src/RSML/Diagnostics/Severity.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Message
+    path: ../src/RSML/Diagnostics/Severity.cs
+    startLine: 15
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Diagnostics
+  summary: Messages and hints.
+  example: []
+  syntax:
+    content: Message = 1
+    return:
+      type: OceanApocalypseStudios.RSML.Diagnostics.Severity
+- uid: OceanApocalypseStudios.RSML.Diagnostics.Severity.Warning
+  commentId: F:OceanApocalypseStudios.RSML.Diagnostics.Severity.Warning
+  id: Warning
+  parent: OceanApocalypseStudios.RSML.Diagnostics.Severity
+  langs:
+  - csharp
+  - vb
+  name: Warning
+  nameWithType: Severity.Warning
+  fullName: OceanApocalypseStudios.RSML.Diagnostics.Severity.Warning
+  type: Field
+  source:
+    remote:
+      path: src/RSML/Diagnostics/Severity.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Warning
+    path: ../src/RSML/Diagnostics/Severity.cs
+    startLine: 20
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Diagnostics
+  summary: Non-critical warnings.
+  example: []
+  syntax:
+    content: Warning = 2
+    return:
+      type: OceanApocalypseStudios.RSML.Diagnostics.Severity
+- uid: OceanApocalypseStudios.RSML.Diagnostics.Severity.Error
+  commentId: F:OceanApocalypseStudios.RSML.Diagnostics.Severity.Error
+  id: Error
+  parent: OceanApocalypseStudios.RSML.Diagnostics.Severity
+  langs:
+  - csharp
+  - vb
+  name: Error
+  nameWithType: Severity.Error
+  fullName: OceanApocalypseStudios.RSML.Diagnostics.Severity.Error
+  type: Field
+  source:
+    remote:
+      path: src/RSML/Diagnostics/Severity.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Error
+    path: ../src/RSML/Diagnostics/Severity.cs
+    startLine: 25
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Diagnostics
+  summary: Non-critical errors, such as style errors.
+  example: []
+  syntax:
+    content: Error = 3
+    return:
+      type: OceanApocalypseStudios.RSML.Diagnostics.Severity
+- uid: OceanApocalypseStudios.RSML.Diagnostics.Severity.Critical
+  commentId: F:OceanApocalypseStudios.RSML.Diagnostics.Severity.Critical
+  id: Critical
+  parent: OceanApocalypseStudios.RSML.Diagnostics.Severity
+  langs:
+  - csharp
+  - vb
+  name: Critical
+  nameWithType: Severity.Critical
+  fullName: OceanApocalypseStudios.RSML.Diagnostics.Severity.Critical
+  type: Field
+  source:
+    remote:
+      path: src/RSML/Diagnostics/Severity.cs
+      branch: dev
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: Critical
+    path: ../src/RSML/Diagnostics/Severity.cs
+    startLine: 31
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Diagnostics
+  summary: >-
+    Fatal error that should abort the executing
+
+    toolchain component.
+  example: []
+  syntax:
+    content: Critical = 4
+    return:
+      type: OceanApocalypseStudios.RSML.Diagnostics.Severity
+references:
+- uid: OceanApocalypseStudios.RSML.Diagnostics
+  commentId: N:OceanApocalypseStudios.RSML.Diagnostics
+  href: OceanApocalypseStudios.html
+  name: OceanApocalypseStudios.RSML.Diagnostics
+  nameWithType: OceanApocalypseStudios.RSML.Diagnostics
+  fullName: OceanApocalypseStudios.RSML.Diagnostics
+  spec.csharp:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Diagnostics
+    name: Diagnostics
+    href: OceanApocalypseStudios.RSML.Diagnostics.html
+  spec.vb:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Diagnostics
+    name: Diagnostics
+    href: OceanApocalypseStudios.RSML.Diagnostics.html
+- uid: OceanApocalypseStudios.RSML.Diagnostics.Severity
+  commentId: T:OceanApocalypseStudios.RSML.Diagnostics.Severity
+  parent: OceanApocalypseStudios.RSML.Diagnostics
+  href: OceanApocalypseStudios.RSML.Diagnostics.Severity.html
+  name: Severity
+  nameWithType: Severity
+  fullName: OceanApocalypseStudios.RSML.Diagnostics.Severity
+memberLayout: SeparatePages

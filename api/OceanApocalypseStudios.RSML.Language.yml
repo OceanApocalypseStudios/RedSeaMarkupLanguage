@@ -1,0 +1,91 @@
+### YamlMime:ManagedReference
+items:
+- uid: OceanApocalypseStudios.RSML.Language
+  id: Language
+  parent: OceanApocalypseStudios.RSML
+  children:
+  - OceanApocalypseStudios.RSML.Language.Lexing
+  - OceanApocalypseStudios.RSML.Language.Parsing
+  langs:
+  - csharp
+  - vb
+  name: OceanApocalypseStudios.RSML.Language
+  type: Namespace
+references:
+- uid: OceanApocalypseStudios.RSML.Language.Lexing
+  commentId: N:OceanApocalypseStudios.RSML.Language.Lexing
+  href: OceanApocalypseStudios.html
+  name: OceanApocalypseStudios.RSML.Language.Lexing
+  nameWithType: OceanApocalypseStudios.RSML.Language.Lexing
+  fullName: OceanApocalypseStudios.RSML.Language.Lexing
+  spec.csharp:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Language
+    name: Language
+    href: OceanApocalypseStudios.RSML.Language.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Language.Lexing
+    name: Lexing
+    href: OceanApocalypseStudios.RSML.Language.Lexing.html
+  spec.vb:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Language
+    name: Language
+    href: OceanApocalypseStudios.RSML.Language.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Language.Lexing
+    name: Lexing
+    href: OceanApocalypseStudios.RSML.Language.Lexing.html
+- uid: OceanApocalypseStudios.RSML.Language.Parsing
+  commentId: N:OceanApocalypseStudios.RSML.Language.Parsing
+  href: OceanApocalypseStudios.html
+  name: OceanApocalypseStudios.RSML.Language.Parsing
+  nameWithType: OceanApocalypseStudios.RSML.Language.Parsing
+  fullName: OceanApocalypseStudios.RSML.Language.Parsing
+  spec.csharp:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Language
+    name: Language
+    href: OceanApocalypseStudios.RSML.Language.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Language.Parsing
+    name: Parsing
+    href: OceanApocalypseStudios.RSML.Language.Parsing.html
+  spec.vb:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Language
+    name: Language
+    href: OceanApocalypseStudios.RSML.Language.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Language.Parsing
+    name: Parsing
+    href: OceanApocalypseStudios.RSML.Language.Parsing.html
+memberLayout: SeparatePages

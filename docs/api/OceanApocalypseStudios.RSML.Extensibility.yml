@@ -1,0 +1,25 @@
+### YamlMime:ManagedReference
+items:
+- uid: OceanApocalypseStudios.RSML.Extensibility
+  commentId: N:OceanApocalypseStudios.RSML.Extensibility
+  id: Extensibility
+  parent: OceanApocalypseStudios.RSML
+  children:
+  - OceanApocalypseStudios.RSML.Extensibility.Class1
+  langs:
+  - csharp
+  - vb
+  name: OceanApocalypseStudios.RSML.Extensibility
+  nameWithType: OceanApocalypseStudios.RSML.Extensibility
+  fullName: OceanApocalypseStudios.RSML.Extensibility
+  type: Namespace
+  assemblies:
+  - RSML.Extensibility
+references:
+- uid: OceanApocalypseStudios.RSML.Extensibility.Class1
+  commentId: T:OceanApocalypseStudios.RSML.Extensibility.Class1
+  href: OceanApocalypseStudios.RSML.Extensibility.Class1.html
+  name: Class1
+  nameWithType: Class1
+  fullName: OceanApocalypseStudios.RSML.Extensibility.Class1
+memberLayout: SeparatePages

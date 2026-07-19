@@ -1,0 +1,185 @@
+### YamlMime:ManagedReference
+items:
+- uid: OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks.IInterpreterHook
+  commentId: T:OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks.IInterpreterHook
+  id: IInterpreterHook
+  parent: OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks
+  children: []
+  langs:
+  - csharp
+  - vb
+  name: IInterpreterHook
+  nameWithType: IInterpreterHook
+  fullName: OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks.IInterpreterHook
+  type: Interface
+  source:
+    remote:
+      path: src/RSML/Sdk/Extensibility/Hooks/IInterpreterHook.cs
+      branch: docs
+      repo: https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage.git
+    id: IInterpreterHook
+    path: ../src/RSML/Sdk/Extensibility/Hooks/IInterpreterHook.cs
+    startLine: 5
+  assemblies:
+  - RSML
+  namespace: OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks
+  summary: Represents an extension that modifies the <xref href="OceanApocalypseStudios.RSML.Execution.Interpreter" data-throw-if-not-resolved="false"></xref>.
+  example: []
+  syntax:
+    content: 'public interface IInterpreterHook : ILanguageExtension'
+    content.vb: Public Interface IInterpreterHook Inherits ILanguageExtension
+  inheritedMembers:
+  - OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension.Name
+  - OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension.Description
+  - OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension.Major
+references:
+- uid: OceanApocalypseStudios.RSML.Execution.Interpreter
+  commentId: T:OceanApocalypseStudios.RSML.Execution.Interpreter
+  parent: OceanApocalypseStudios.RSML.Execution
+  href: OceanApocalypseStudios.RSML.Execution.Interpreter.html
+  name: Interpreter
+  nameWithType: Interpreter
+  fullName: OceanApocalypseStudios.RSML.Execution.Interpreter
+- uid: OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks
+  commentId: N:OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks
+  href: OceanApocalypseStudios.html
+  name: OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks
+  nameWithType: OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks
+  fullName: OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks
+  spec.csharp:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sdk
+    name: Sdk
+    href: OceanApocalypseStudios.RSML.Sdk.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sdk.Extensibility
+    name: Extensibility
+    href: OceanApocalypseStudios.RSML.Sdk.Extensibility.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks
+    name: Hooks
+    href: OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks.html
+  spec.vb:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sdk
+    name: Sdk
+    href: OceanApocalypseStudios.RSML.Sdk.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sdk.Extensibility
+    name: Extensibility
+    href: OceanApocalypseStudios.RSML.Sdk.Extensibility.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks
+    name: Hooks
+    href: OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks.html
+- uid: OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension.Name
+  commentId: P:OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension.Name
+  parent: OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension
+  href: OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension.Name.html#OceanApocalypseStudios_RSML_Sdk_Extensibility_ILanguageExtension_Name
+  name: Name
+  nameWithType: ILanguageExtension.Name
+  fullName: OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension.Name
+- uid: OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension.Description
+  commentId: P:OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension.Description
+  parent: OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension
+  href: OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension.Description.html#OceanApocalypseStudios_RSML_Sdk_Extensibility_ILanguageExtension_Description
+  name: Description
+  nameWithType: ILanguageExtension.Description
+  fullName: OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension.Description
+- uid: OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension.Major
+  commentId: P:OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension.Major
+  parent: OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension
+  href: OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension.Major.html#OceanApocalypseStudios_RSML_Sdk_Extensibility_ILanguageExtension_Major
+  name: Major
+  nameWithType: ILanguageExtension.Major
+  fullName: OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension.Major
+- uid: OceanApocalypseStudios.RSML.Execution
+  commentId: N:OceanApocalypseStudios.RSML.Execution
+  href: OceanApocalypseStudios.html
+  name: OceanApocalypseStudios.RSML.Execution
+  nameWithType: OceanApocalypseStudios.RSML.Execution
+  fullName: OceanApocalypseStudios.RSML.Execution
+  spec.csharp:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Execution
+    name: Execution
+    href: OceanApocalypseStudios.RSML.Execution.html
+  spec.vb:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Execution
+    name: Execution
+    href: OceanApocalypseStudios.RSML.Execution.html
+- uid: OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension
+  commentId: T:OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension
+  parent: OceanApocalypseStudios.RSML.Sdk.Extensibility
+  href: OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension.html
+  name: ILanguageExtension
+  nameWithType: ILanguageExtension
+  fullName: OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension
+- uid: OceanApocalypseStudios.RSML.Sdk.Extensibility
+  commentId: N:OceanApocalypseStudios.RSML.Sdk.Extensibility
+  href: OceanApocalypseStudios.html
+  name: OceanApocalypseStudios.RSML.Sdk.Extensibility
+  nameWithType: OceanApocalypseStudios.RSML.Sdk.Extensibility
+  fullName: OceanApocalypseStudios.RSML.Sdk.Extensibility
+  spec.csharp:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sdk
+    name: Sdk
+    href: OceanApocalypseStudios.RSML.Sdk.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sdk.Extensibility
+    name: Extensibility
+    href: OceanApocalypseStudios.RSML.Sdk.Extensibility.html
+  spec.vb:
+  - uid: OceanApocalypseStudios
+    name: OceanApocalypseStudios
+    href: OceanApocalypseStudios.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML
+    name: RSML
+    href: OceanApocalypseStudios.RSML.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sdk
+    name: Sdk
+    href: OceanApocalypseStudios.RSML.Sdk.html
+  - name: .
+  - uid: OceanApocalypseStudios.RSML.Sdk.Extensibility
+    name: Extensibility
+    href: OceanApocalypseStudios.RSML.Sdk.Extensibility.html
+memberLayout: SeparatePages
