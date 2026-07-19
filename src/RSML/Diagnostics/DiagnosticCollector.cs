@@ -8,9 +8,26 @@ namespace OceanApocalypseStudios.RSML.Diagnostics;
 /// <summary>
 /// A list of RSML toolchain errors.
 /// </summary>
-public sealed record DiagnosticCollector() : IEnumerable<Diagnostic>
+public sealed record DiagnosticCollector : IEnumerable<Diagnostic>
 {
+	/// <summary>
+	/// Creates a new diagnostic collector.
+	/// </summary>
+	/// <param name="minimumCriticalSeverity">The minimum diagnostic severity for a diagnostic to be considered critical.</param>
+	public DiagnosticCollector(Severity minimumCriticalSeverity = Severity.Error) => MinimumCriticalSeverity = minimumCriticalSeverity;
+
 	private readonly List<Diagnostic> diagnostics = [];
+
+	/// <summary>
+	/// A property that indicates whether there are critical diagnostics.
+	/// The toolchain should break if this is <c>true</c>.
+	/// </summary>
+	public bool HasCriticalErrors { get; private set; } = false;
+
+	/// <summary>
+	/// The minimum diagnostic severity for a diagnostic to be considered critical.
+	/// </summary>
+	public Severity MinimumCriticalSeverity { get; }
 
 	/// <summary>
 	/// Adds an error to the list of errors.
@@ -19,6 +36,10 @@ public sealed record DiagnosticCollector() : IEnumerable<Diagnostic>
 	public DiagnosticCollector Add(Diagnostic diagnostic)
 	{
 		diagnostics.Add(diagnostic);
+
+		if ((byte)diagnostic.Severity >= (byte)MinimumCriticalSeverity)
+			HasCriticalErrors = true;
+
 		return this;
 	}
 

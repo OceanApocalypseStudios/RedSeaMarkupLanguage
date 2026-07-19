@@ -118,6 +118,21 @@ public interface IReadOnlyBuffer : ISource, IEquatable<IReadOnlyBuffer?>, IEquat
 	Result<string> GetLineFromIndex(int index);
 
 	/// <summary>
+	/// Given a 0-based line number, returns the matching line as an array of buffer items.
+	/// </summary>
+	/// <param name="lineNumber">The 0-based line number.</param>
+	/// <returns>The line as a span.</returns>
+	ReadOnlySpan<char> GetLineAsSpan(int lineNumber);
+
+	/// <summary>
+	/// Tries to read the line that contains the item at <paramref name="index"/>.
+	/// No end of line characters are added.
+	/// </summary>
+	/// <param name="index">The index at which to determine what the current line is.</param>
+	/// <returns>The line, as a span.</returns>
+	ReadOnlySpan<char> GetLineAsSpanFromIndex(int index);
+
+	/// <summary>
 	/// Determines the 0-based line number of the line that contains the item located at <paramref name="index"/>.
 	/// </summary>
 	/// <param name="index">The index whose parent line's number is to be returned.</param>

@@ -31,6 +31,9 @@ public readonly struct Result<TValue>
 	/// the other is false. This means you can use any of the two to evaluate whether the operation was successful
 	/// and if it's safe to access <see cref="Value"/>.
 	/// </remarks>
+#if NET5_0_OR_GREATER
+	[MemberNotNullWhen(true, nameof(Value))]
+#endif
 	public readonly bool IsSuccessful { get; }
 
 	/// <summary>

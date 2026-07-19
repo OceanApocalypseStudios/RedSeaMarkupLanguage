@@ -20,5 +20,5 @@ public interface ILexer : IToolchainComponent
 	/// Tokenizes a source passed to the lexer.
 	/// </summary>
 	/// <returns>The tokens.</returns>
-	Result<IEnumerable<Token>> Lex();
+	IEnumerable<Token> Lex();
 }

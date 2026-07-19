@@ -25,7 +25,7 @@ public class BufferBenchmarks
 	private string data = "";
 	private ReadOnlyStringBuffer buffer = null!;
 
-	[Params(1, 10, 100, 1_000, 10_000)]
+	[Params(1, 10, 100, 1_000)]
 	public int RepeatCount; // 1 is the string itself
 
 	[GlobalSetup]

@@ -359,6 +359,41 @@ public ref struct ReadOnlySpanBuffer : IReadOnlyBuffer, ISupportsCache
 	}
 
 	/// <remarks>
+	/// > [!NOTE]
+	/// > This method follows EOF conventions.
+	/// > EOF is considered a 0-character sequence in line N, where N is <see cref="LineCount"/>.
+	/// > Keep in mind N does not point to an actual line (it's just a convention), as line numbers are 0-based
+	/// > (meaning the actual last line is located at N - 1).
+	/// </remarks>
+	/// <inheritdoc/>
+	public ReadOnlySpan<char> GetLineAsSpan(int lineNumber)
+	{
+		if (IsEmpty)
+			return [];
+
+		ComputeLineStarts();
+
+		if (lineNumber < 0 || lineNumber >= RawLineCount)
+			return [];
+
+		if (lineNumber + 1 == RawLineCount)
+			return []; // EOF means the line is empty
+
+		int start = lineStarts[lineNumber];
+		int length = GetLengthOfLine(lineNumber).Value; // this will never be an error because we have done exact same checks right above
+
+		return data.Slice(start, length);
+	}
+
+	/// <inheritdoc/>
+	public ReadOnlySpan<char> GetLineAsSpanFromIndex(int index)
+	{
+		var lineNumber = GetLineNumberFromIndex(index);
+
+		return lineNumber.IsError ? [] : GetLineAsSpan(lineNumber.Value);
+	}
+
+	/// <remarks>
 	/// > [!IMPORTANT]
 	/// > Unlike with other <see cref="ReadOnlySpanBuffer"/> methods, this one
 	/// > does not follow EOF conventions and, because of that, does not accept the 

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 
 using OceanApocalypseStudios.RSML.Diagnostics;
+using OceanApocalypseStudios.RSML.Sources;
 
 
 namespace OceanApocalypseStudios.RSML.Language.Lexing;
@@ -18,7 +19,7 @@ public abstract class Lexer : ILexer
 	public virtual void Inject(ToolchainConfiguration configuration) => Configuration |= configuration;
 
 	/// <inheritdoc/>
-	public abstract Result<IEnumerable<Token>> Lex();
+	public abstract IEnumerable<Token> Lex();
 
 	/// <inheritdoc/>
 	public virtual void Dispose() => GC.SuppressFinalize(this);
