@@ -28,13 +28,6 @@ the modern language designed to dynamically interpret different logic paths base
 
 ---
 
-> [!WARNING]
-> ## Archival Notice
-> RSML is being archived for now. We currently cannot support a project this big and will move to smaller projects. RSML is far from dead, however: the repository will still be here, and its code is free for anyone to use - following the license, of course.
-> ## What's next?
-> RSML will actually be reborn as the **Red Sea Engine**: we've taken the best part of RSML - the evaluation of dynamic logic paths - and retired the "custom language" side of things.
-> [Red Sea Engine](https://github.com/OceanApocalypseStudios/RedSeaEngine) is also open-source and currently in development.
-
 ## Contents
 - [Red Sea Markup Language (RSML)](#section)
 	- [Why RSML?](#why-rsml)

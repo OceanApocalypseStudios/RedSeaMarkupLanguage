@@ -6,15 +6,16 @@
 				{
 					"src": "../src/",
 					"files": [
-						"RSML/*.csproj",
-						"RSML.Extensibility/*.csproj",
-						"RSML.Native/*.csproj"
+						"**/*.csproj"
 					]
 				}
 			],
+			"properties": {
+				"TargetFramework": "net10.0"
+			},
 			"output": "api",
 			"memberLayout": "separatePages",
-			"namespaceLayout": "nested",
+			"namespaceLayout": "flattened",
 			"enumSortOrder": "declaringOrder",
 			"globalNamespaceId": "OceanApocalypseStudios.RSML",
 			"includeExplicitInterfaceImplementations": true
@@ -45,7 +46,8 @@
 		"output": "__site",
 		"template": [
 			"default",
-			"modern"
+			"modern",
+			"templates/override"
 		],
 		"globalMetadata": {
 			"_appName": "Red Sea Markup Language",
@@ -68,6 +70,8 @@
 				"DefinitionLists"
 			]
 		},
-		"postProcessors": ["ExtractSearchIndex"]
+		"postProcessors": [
+			"ExtractSearchIndex"
+		]
 	}
 }
