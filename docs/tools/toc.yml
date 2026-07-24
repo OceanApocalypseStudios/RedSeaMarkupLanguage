@@ -1,8 +1,0 @@
-- name: Using the CLI
-  items:
-    - name: Getting Started
-      href: cli/getting-started.md
-- name: RSML in Code Editors
-  items:
-    - name: List of Supported Editors
-      href: editor-support/list.md
