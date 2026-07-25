@@ -66,16 +66,7 @@ public readonly struct SourceLocation(int index, int line, int column) : IEquata
 	public bool Equals(int other) => Index.Equals(other);
 
 	/// <inheritdoc/>
-	public override int GetHashCode()
-	{
-		unchecked
-		{
-			int hashCode = Constants.HashCodeSeed * Constants.HashCodeMultiplier + Index.GetHashCode();
-			hashCode = hashCode * Constants.HashCodeMultiplier + Line.GetHashCode();
-
-			return hashCode * Constants.HashCodeMultiplier + Column.GetHashCode();
-		}
-	}
+	public override int GetHashCode() => unchecked(HashCode.Combine(Index, Line, Column));
 
 	/// <summary>
 	/// Returns a generic string representation of the current instance.

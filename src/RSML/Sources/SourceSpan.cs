@@ -6,7 +6,7 @@ namespace OceanApocalypseStudios.RSML.Sources;
 /// <summary>
 /// Represents a span taken from a source.
 /// </summary>
-public readonly partial struct SourceSpan : IFormattable
+public readonly struct SourceSpan : IFormattable, IEquatable<SourceSpan>
 {
 	/// <summary>
 	/// An empty span.
@@ -63,7 +63,7 @@ public readonly partial struct SourceSpan : IFormattable
 	/// </summary>
 	/// <param name="other">The span to check against</param>
 	/// <returns>True if equals</returns>
-	public bool Equals(SourceSpan? other) => other is SourceSpan span && Start.Equals(span.Start) && End.Equals(span.End);
+	public bool Equals(SourceSpan other) => other is SourceSpan span && Start.Equals(span.Start) && End.Equals(span.End);
 
 	/// <summary>
 	/// Checks whether two <see cref="SourceSpan"/>s are equals.
@@ -120,13 +120,5 @@ public readonly partial struct SourceSpan : IFormattable
 		};
 
 	/// <inheritdoc/>
-	public override int GetHashCode()
-	{
-		unchecked
-		{
-			int hashCode = Constants.HashCodeSeed * Constants.HashCodeMultiplier + Start.GetHashCode();
-
-			return hashCode * Constants.HashCodeMultiplier + End.GetHashCode();
-		}
-	}
+	public override int GetHashCode() => unchecked(HashCode.Combine(Start, End));
 }
