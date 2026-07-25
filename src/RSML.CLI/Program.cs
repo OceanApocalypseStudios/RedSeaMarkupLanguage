@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace OceanApocalypseStudios.RSML.CLI;
 
-internal class Program
+internal sealed class Program
 {
 	private static void Main(string[] args)
 	{
