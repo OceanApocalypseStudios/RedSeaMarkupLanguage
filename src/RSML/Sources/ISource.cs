@@ -8,18 +8,5 @@ namespace OceanApocalypseStudios.RSML.Sources;
 /// </summary>
 public interface ISource : IDisposable
 {
-	/// <summary>
-	/// Whether the source is completely empty.
-	/// </summary>
-	bool IsEmpty { get; }
-
-	/// <summary>
-	/// Whether the source can be mutated.
-	/// </summary>
-	bool IsReadOnly { get; }
-
-	/// <summary>
-	/// The length of the source.
-	/// </summary>
-	int Length { get; }
+	
 }

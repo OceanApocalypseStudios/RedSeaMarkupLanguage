@@ -1,12 +1,9 @@
-using System;
-
-
 namespace OceanApocalypseStudios.RSML.Sources;
 
 /// <summary>
-/// Represents a read and write sequential stream.
+/// Represents a read and write sequential scanner.
 /// </summary>
-public interface IStream : IReadOnlyStream
+public interface IScanner : IReadOnlyScanner
 {
 	// todo: planned for v3.0.0-prerelease2
 }
