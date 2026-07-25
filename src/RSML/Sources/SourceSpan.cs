@@ -84,24 +84,16 @@ public readonly struct SourceSpan : IFormattable, IEquatable<SourceSpan>
 	public override string ToString() => $"SourceSpan(Start={Start}, End={End})";
 
 	/// <summary>
-	/// Given a source, tries to return a string that uses said source as a basis for the representation.
+	/// Given a buffer, tries to return a string that uses said buffer as a basis for the representation.
 	/// If it fails, it defaults to <see cref="ToString()"/>.
 	/// </summary>
-	/// <param name="source">The source.</param>
+	/// <param name="buffer">The buffer.</param>
 	/// <returns>The string representation.</returns>
-	public string ToString(ISource source)
+	public string ToString(IReadOnlyBuffer buffer)
 	{
-		switch (source)
-		{
-			case IReadOnlyBuffer buffer:
-				Span<char> destination = stackalloc char[Length];
-				buffer.TrySlice(Start.Index, destination);
-
-				return destination.ToString();
-
-			default:
-				return ToString();
-		}
+		ArgumentNullException.ThrowIfNull(buffer, nameof(buffer));
+		Span<char> destination = stackalloc char[Length];
+		return buffer.TrySlice(Start.Index, destination) ? destination.ToString() : ToString();
 	}
 
 	/// <summary>

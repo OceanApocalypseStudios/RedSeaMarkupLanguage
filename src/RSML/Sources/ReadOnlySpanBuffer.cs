@@ -16,10 +16,11 @@ namespace OceanApocalypseStudios.RSML.Sources;
 /// and also via caching.
 /// </summary>
 /// <remarks>
-/// > [!TIP]
-/// > The main advantage of this type over <see cref="ReadOnlyStringBuffer"/>
-/// > is that you don't need to allocate a class and, on initialization, you don't need to allocate
-/// > a string.
+/// :::tip[Allocation-free buffer]
+/// The main advantage of this type over <see cref="ReadOnlyStringBuffer"/>
+/// is that you don't need to allocate a class and, on initialization, you don't need to allocate
+/// a string.
+/// :::
 /// </remarks>
 public ref struct ReadOnlySpanBuffer : IReadOnlyBuffer, ISupportsCache
 {
@@ -94,15 +95,18 @@ public ref struct ReadOnlySpanBuffer : IReadOnlyBuffer, ISupportsCache
 	public void BuildCache(bool forceRebuild) => ComputeLineStarts(forceRebuild);
 
 	/// <remarks>
-	/// > [!NOTE]
-	/// > This method allows the EOF index as in-range. The convention is as follows:
-	/// > - If the index is EOF (<see cref="Length"/>), then the output is always 0 and <paramref name="isCrLf"/> is always <c>false</c>.
-	/// > - If the index is the last (<see cref="Length"/> - 1), then the output is always 0.
-	/// > [!NOTE]
-	/// > <paramref name="isCrLf"/> is only <c>true</c> if all the following conditions are true:
-	/// > - The next line start counting from <paramref name="index"/> is preceded by a CRLF sequence.
-	/// > - <paramref name="index"/> does not point to the LF in the CRLF sequence.
-	/// > - <paramref name="index"/> does not point to EOF.
+	/// :::info[EOF Conventions]
+	/// This method accepts the EOF index as in-range. The convention is as follows:
+	/// - If the index is EOF (<see cref="Length"/>), then the output is always 0 and <paramref name="isCrLf"/> is always <c>false</c>.
+	/// - If the index is the last (<see cref="Length"/> - 1), then the output is always 0.
+	/// :::
+	/// 
+	/// :::info[Value of 'isCrLf' parameter]
+	/// <paramref name="isCrLf"/> is only <c>true</c> if all the following conditions are true:
+	/// - The next line start counting from <paramref name="index"/> is preceded by a CRLF sequence.
+	/// - <paramref name="index"/> does not point to the LF in the CRLF sequence.
+	/// - <paramref name="index"/> does not point to EOF.
+	/// :::
 	/// </remarks>
 	/// <inheritdoc/>
 	public Result<int> CountUntilEndOfLine(int index, out bool isCrLf)
@@ -138,15 +142,18 @@ public ref struct ReadOnlySpanBuffer : IReadOnlyBuffer, ISupportsCache
 	}
 
 	/// <remarks>
-	/// > [!NOTE]
-	/// > This method allows the EOF index as in-range.
-	/// > If the index is EOF (<see cref="Length"/>), then the output is always 0.
-	/// > [!NOTE]
-	/// > The return value, when summed with <paramref name="index"/>, becomes the index of the first character that
-	/// > is not whitespace, counting from <paramref name="index"/>.
-	/// > The only exception is if the buffer has been consumed (you pass EOF index or there's no more characters that are
-	/// > not whitespace), meaning the return value, when summed with <paramref name="index"/> is the value of
-	/// > <see cref="Length"/>, which is also the EOF index.
+	/// :::info[EOF Conventions]
+	/// This method accepts the EOF index as in-range.
+	/// If the index is EOF (<see cref="Length"/>), then the output is always 0.
+	/// :::
+	/// 
+	/// :::tip[About the return value]
+	/// The return value, when summed with <paramref name="index"/>, becomes the index of the first character that
+	/// is not whitespace, counting from <paramref name="index"/>.
+	/// The only exception is if the buffer has been consumed (you pass EOF index or there's no more characters that are
+	/// not whitespace), meaning the return value, when summed with <paramref name="index"/> is the value of
+	/// <see cref="Length"/>, which is also the EOF index.
+	/// :::
 	/// </remarks>
 	/// <inheritdoc/>
 	public readonly Result<int> CountUntilNotWhitespace(int index)
@@ -173,15 +180,18 @@ public ref struct ReadOnlySpanBuffer : IReadOnlyBuffer, ISupportsCache
 	}
 
 	/// <remarks>
-	/// > [!NOTE]
-	/// > This method allows the EOF index as in-range.
-	/// > If the index is EOF (<see cref="Length"/>), then the output is always 0.
-	/// > [!NOTE]
-	/// > The return value, when summed with <paramref name="index"/>, becomes the index of the first character that
-	/// > is whitespace, counting from <paramref name="index"/>.
-	/// > The only exception is if the buffer has been consumed (you pass EOF index or there's no more characters that are
-	/// > whitespace), meaning the return value, when summed with <paramref name="index"/> is the value of
-	/// > <see cref="Length"/>, which is also the EOF index.
+	/// :::info[EOF Conventions]
+	/// This method allows the EOF index as in-range.
+	/// If the index is EOF (<see cref="Length"/>), then the output is always 0.
+	/// :::
+	/// 
+	/// :::tip[About the return value]
+	/// The return value, when summed with <paramref name="index"/>, becomes the index of the first character that
+	/// is whitespace, counting from <paramref name="index"/>.
+	/// The only exception is if the buffer has been consumed (you pass EOF index or there's no more characters that are
+	/// whitespace), meaning the return value, when summed with <paramref name="index"/> is the value of
+	/// <see cref="Length"/>, which is also the EOF index.
+	/// :::
 	/// </remarks>
 	/// <inheritdoc/>
 	public readonly Result<int> CountUntilWhitespace(int index)
@@ -208,15 +218,18 @@ public ref struct ReadOnlySpanBuffer : IReadOnlyBuffer, ISupportsCache
 	}
 
 	/// <remarks>
-	/// > [!NOTE]
-	/// > This method allows the EOF index as in-range.
-	/// > If the index is EOF (<see cref="Length"/>), then the output is always 0.
-	/// > [!NOTE]
-	/// > The return value, when summed with <paramref name="index"/>, becomes the index of the first character that
-	/// > fails to verify the <paramref name="predicate"/>, counting from <paramref name="index"/>.
-	/// > The only exception is if the buffer has been consumed (you pass EOF index or there's no more characters that fail to verify
-	/// > the <paramref name="predicate"/>), meaning the return value, when summed with <paramref name="index"/> is the value of
-	/// > <see cref="Length"/>, which is also the EOF index.
+	/// :::info[EOF Conventions]
+	/// This method allows the EOF index as in-range.
+	/// If the index is EOF (<see cref="Length"/>), then the output is always 0.
+	/// :::
+	/// 
+	/// :::tip[About the return value]
+	/// The return value, when summed with <paramref name="index"/>, becomes the index of the first character that
+	/// fails to verify the <paramref name="predicate"/>, counting from <paramref name="index"/>.
+	/// The only exception is if the buffer has been consumed (you pass EOF index or there's no more characters that fail to verify
+	/// the <paramref name="predicate"/>), meaning the return value, when summed with <paramref name="index"/> is the value of
+	/// <see cref="Length"/>, which is also the EOF index.
+	/// :::
 	/// </remarks>
 	/// <inheritdoc/>
 	public readonly Result<int> CountWhile(Func<int, char, bool> predicate, int index)
@@ -245,11 +258,12 @@ public ref struct ReadOnlySpanBuffer : IReadOnlyBuffer, ISupportsCache
 	}
 
 	/// <remarks>
-	/// > [!NOTE]
-	/// > This method follows EOF conventions.
-	/// > EOF is considered a 0-character sequence in line N, where N is <see cref="LineCount"/>.
-	/// > Keep in mind N does not point to an actual line (it's just a convention), as line numbers are 0-based
-	/// > (meaning the actual last line is located at N - 1).
+	/// :::info[EOF Conventions]
+	/// This method follows EOF conventions.
+	/// EOF is considered a 0-character sequence in line N, where N is <see cref="LineCount"/>.
+	/// Keep in mind N does not point to an actual line (it's just a convention), as line numbers are 0-based
+	/// (meaning the actual last line is located at N - 1).
+	/// :::
 	/// </remarks>
 	/// <inheritdoc/>
 	public Result<int> GetLengthOfLine(int lineNumber)
@@ -281,11 +295,12 @@ public ref struct ReadOnlySpanBuffer : IReadOnlyBuffer, ISupportsCache
 	}
 
 	/// <remarks>
-	/// > [!NOTE]
-	/// > This method follows EOF conventions.
-	/// > EOF is considered a 0-character sequence in line N, where N is <see cref="LineCount"/>.
-	/// > Keep in mind N does not point to an actual line (it's just a convention), as line numbers are 0-based
-	/// > (meaning the actual last line is located at N - 1).
+	/// :::info[EOF Conventions]
+	/// This method follows EOF conventions.
+	/// EOF is considered a 0-character sequence in line N, where N is <see cref="LineCount"/>.
+	/// Keep in mind N does not point to an actual line (it's just a convention), as line numbers are 0-based
+	/// (meaning the actual last line is located at N - 1).
+	/// :::
 	/// </remarks>
 	/// <inheritdoc/>
 	public Result<int> GetLengthOfLineFromIndex(int index)
@@ -299,8 +314,9 @@ public ref struct ReadOnlySpanBuffer : IReadOnlyBuffer, ISupportsCache
 	}
 
 	/// <remarks>
-	/// > [!NOTE]
-	/// > This method follows EOF conventions.
+	/// :::info[EOF Conventions]
+	/// This method follows EOF conventions.
+	/// :::
 	/// </remarks>
 	/// <inheritdoc/>
 	public Result<int> GetLineNumberFromIndex(int index)
@@ -321,11 +337,12 @@ public ref struct ReadOnlySpanBuffer : IReadOnlyBuffer, ISupportsCache
 	}
 
 	/// <remarks>
-	/// > [!NOTE]
-	/// > This method follows EOF conventions.
-	/// > EOF is considered a 0-character sequence in line N, where N is <see cref="LineCount"/>.
-	/// > Keep in mind N does not point to an actual line (it's just a convention), as line numbers are 0-based
-	/// > (meaning the actual last line is located at N - 1).
+	/// :::info[EOF Conventions]
+	/// This method follows EOF conventions.
+	/// EOF is considered a 0-character sequence in line N, where N is <see cref="LineCount"/>.
+	/// Keep in mind N does not point to an actual line (it's just a convention), as line numbers are 0-based
+	/// (meaning the actual last line is located at N - 1).
+	/// :::
 	/// </remarks>
 	/// <inheritdoc/>
 	public Result<string> GetLine(int lineNumber)
@@ -359,11 +376,12 @@ public ref struct ReadOnlySpanBuffer : IReadOnlyBuffer, ISupportsCache
 	}
 
 	/// <remarks>
-	/// > [!NOTE]
-	/// > This method follows EOF conventions.
-	/// > EOF is considered a 0-character sequence in line N, where N is <see cref="LineCount"/>.
-	/// > Keep in mind N does not point to an actual line (it's just a convention), as line numbers are 0-based
-	/// > (meaning the actual last line is located at N - 1).
+	/// :::info[EOF Conventions]
+	/// This method follows EOF conventions.
+	/// EOF is considered a 0-character sequence in line N, where N is <see cref="LineCount"/>.
+	/// Keep in mind N does not point to an actual line (it's just a convention), as line numbers are 0-based
+	/// (meaning the actual last line is located at N - 1).
+	/// :::
 	/// </remarks>
 	/// <inheritdoc/>
 	public ReadOnlySpan<char> GetLineAsSpan(int lineNumber)
@@ -394,11 +412,12 @@ public ref struct ReadOnlySpanBuffer : IReadOnlyBuffer, ISupportsCache
 	}
 
 	/// <remarks>
-	/// > [!IMPORTANT]
-	/// > Unlike with other <see cref="ReadOnlySpanBuffer"/> methods, this one
-	/// > does not follow EOF conventions and, because of that, does not accept the 
-	/// > EOF index (index at <see cref="Length"/>), because it is not
-	/// > considered a location.
+	/// :::warning[EOF Conventions]
+	/// Unlike with other <see cref="ReadOnlySpanBuffer"/> methods, this one
+	/// does not follow EOF conventions and, because of that, does not accept the 
+	/// EOF index (index at <see cref="Length"/>), because it is not
+	/// considered a location.
+	/// :::
 	/// </remarks>
 	/// <inheritdoc/>
 	public Result<SourceLocation> GetSourceLocation(int index)
@@ -434,11 +453,12 @@ public ref struct ReadOnlySpanBuffer : IReadOnlyBuffer, ISupportsCache
 	}
 
 	/// <remarks>
-	/// > [!IMPORTANT]
-	/// > Unlike with other <see cref="ReadOnlySpanBuffer"/> methods, this one
-	/// > does not follow EOF conventions and, because of that, does not accept the 
-	/// > EOF index (index at <see cref="Length"/>), because it is not
-	/// > considered part of any slice.
+	/// :::warning[EOF Conventions]
+	/// Unlike with other <see cref="ReadOnlySpanBuffer"/> methods, this one
+	/// does not follow EOF conventions and, because of that, does not accept the 
+	/// EOF index (index at <see cref="Length"/>), because it is not
+	/// considered part of any slice.
+	/// :::
 	/// </remarks>
 	/// <inheritdoc/>
 	public readonly Result<string> Slice(int start, int length)
@@ -456,30 +476,33 @@ public ref struct ReadOnlySpanBuffer : IReadOnlyBuffer, ISupportsCache
 	}
 
 	/// <remarks>
-	/// > [!IMPORTANT]
-	/// > Unlike with other <see cref="ReadOnlySpanBuffer"/> methods, this one
-	/// > does not follow EOF conventions and, because of that, does not accept the 
-	/// > EOF index (index at <see cref="Length"/>), because it is not
-	/// > considered part of any slice.
+	/// :::warning[EOF Conventions]
+	/// Unlike with other <see cref="ReadOnlySpanBuffer"/> methods, this one
+	/// does not follow EOF conventions and, because of that, does not accept the 
+	/// EOF index (index at <see cref="Length"/>), because it is not
+	/// considered part of any slice.
+	/// :::
 	/// </remarks>
 	/// <inheritdoc/>
 	public readonly bool TrySlice(int start, Span<char> slice) => data.Slice(start < 0 ? start + Length : start, slice.Length).TryCopyTo(slice);
 
 	/// <remarks>
-	/// > [!IMPORTANT]
-	/// > Unlike with other <see cref="ReadOnlySpanBuffer"/> methods, this one
-	/// > does not follow EOF conventions and, because of that, does not accept the 
-	/// > EOF index (index at <see cref="Length"/>), because it is not
-	/// > considered part of any slice.
+	/// :::warning[EOF Conventions]
+	/// Unlike with other <see cref="ReadOnlySpanBuffer"/> methods, this one
+	/// does not follow EOF conventions and, because of that, does not accept the 
+	/// EOF index (index at <see cref="Length"/>), because it is not
+	/// considered part of any slice.
+	/// :::
 	/// </remarks>
 	/// <inheritdoc/>
 	public readonly bool TrySlice(SourceSpan sourceSpan, Span<char> slice) => data.Slice(sourceSpan.Start.Index, sourceSpan.Length).TryCopyTo(slice);
 
 	/// <remarks>
-	/// > [!NOTE]
-	/// > This method follows the EOF convention where the EOF character
-	/// > is 0 (<c>'\0'</c>) and the return value is <c>false</c>, due to EOF
-	/// > not being an actual buffer location.
+	/// :::info[EOF Conventions]
+	/// This method follows the EOF convention where the EOF character
+	/// is 0 (<c>'\0'</c>) and the return value is <c>false</c>, due to EOF
+	/// not being an actual buffer location.
+	/// :::
 	/// </remarks>
 	/// <inheritdoc/>
 	public readonly bool TryGetChar(int index, out char item)
@@ -501,20 +524,22 @@ public ref struct ReadOnlySpanBuffer : IReadOnlyBuffer, ISupportsCache
 	}
 
 	/// <remarks>
-	/// > [!NOTE]
-	/// > This method follows the EOF convention where the EOF character
-	/// > is 0 (<c>'\0'</c>) and the return value is <c>false</c>, due to EOF
-	/// > not being an actual buffer location.
+	/// :::info[EOF Conventions]
+	/// This method follows the EOF convention where the EOF character
+	/// is 0 (<c>'\0'</c>) and the return value is <c>false</c>, due to EOF
+	/// not being an actual buffer location.
+	/// :::
 	/// </remarks>
 	/// <inheritdoc/>
 	public readonly bool TryGetChar(SourceLocation location, out char item) => TryGetChar(location.Index, out item);
 
 	/// <remarks>
-	/// > [!NOTE]
-	/// > This method follows EOF conventions.
-	/// > EOF is considered a 0-character sequence in line N, where N is <see cref="LineCount"/>.
-	/// > Keep in mind N does not point to an actual line (it's just a convention), as line numbers are 0-based
-	/// > (meaning the actual last line is located at N - 1).
+	/// :::info[EOF Conventions]
+	/// This method follows EOF conventions.
+	/// EOF is considered a 0-character sequence in line N, where N is <see cref="LineCount"/>.
+	/// Keep in mind N does not point to an actual line (it's just a convention), as line numbers are 0-based
+	/// (meaning the actual last line is located at N - 1).
+	/// :::
 	/// </remarks>
 	/// <inheritdoc/>
 	public bool TryGetLine(int lineNumber, scoped Span<char> destination)
@@ -534,12 +559,13 @@ public ref struct ReadOnlySpanBuffer : IReadOnlyBuffer, ISupportsCache
 	}
 
 	/// <remarks>
-	/// > [!NOTE]
-	/// > This method follows EOF conventions.
-	/// > EOF is considered a 0-character sequence in line N, where N is <see cref="LineCount"/>.
-	/// > Keep in mind N does not point to an actual line (it's just a convention), as line numbers are 0-based
-	/// > (meaning the actual last line is located at N - 1). If <paramref name="index" /> is EOF, the
-	/// > line will also be EOF.
+	/// :::info[EOF Conventions]
+	/// This method follows EOF conventions.
+	/// EOF is considered a 0-character sequence in line N, where N is <see cref="LineCount"/>.
+	/// Keep in mind N does not point to an actual line (it's just a convention), as line numbers are 0-based
+	/// (meaning the actual last line is located at N - 1). If <paramref name="index" /> is EOF, the
+	/// line will also be EOF.
+	/// :::
 	/// </remarks>
 	/// <inheritdoc/>
 	public bool TryGetLineFromIndex(int index, scoped Span<char> destination)

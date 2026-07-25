@@ -15,14 +15,6 @@ public static class StaticLexer
 {
 	private readonly static ImmutableArray<string> keywords = ["return", "if", "requires"];
 
-	/// <inheritdoc cref="ILexer.Lex"/>
-	public static IEnumerable<Token> Lex(ISource source, ToolchainConfiguration configurations, DiagnosticCollector diagnostics) => source switch
-	{
-		IReadOnlyScanner stream => LexStream(stream, configurations, diagnostics),
-		IReadOnlyBuffer buffer => LexBuffer(buffer, configurations, diagnostics),
-		_ => []
-	};
-
 	/// <summary>
 	/// Tokenizes a read-only span buffer passed to the lexer.
 	/// </summary>
@@ -36,12 +28,11 @@ public static class StaticLexer
 	/// Tokenizes a buffer passed to the lexer.
 	/// </summary>
 	/// <remarks>
-	/// > [!NOTE]
-	/// > This method avoids boxing.
-	/// > [!NOTE]
-	/// > This method accepts ref structs if the target framework is
-	/// > .NET 9.0 or higher. Otherwise, you might want to take a look at
-	/// > <see cref="LexSpan(ReadOnlySpanBuffer, ToolchainConfiguration, DiagnosticCollector)"/>.
+	/// :::note[Framework support]
+	/// This method accepts ref structs if the target framework is
+	/// .NET 9.0 or higher. Otherwise, you might want to take a look at
+	/// <see cref="LexSpan(ReadOnlySpanBuffer, ToolchainConfiguration, DiagnosticCollector)"/>.
+	/// :::
 	/// </remarks>
 	/// <returns>The tokens.</returns>
 	public static IEnumerable<Token> LexBuffer<TBuffer>(TBuffer buffer, ToolchainConfiguration configurations, DiagnosticCollector diagnostics)
@@ -53,10 +44,6 @@ public static class StaticLexer
 	/// <summary>
 	/// Tokenizes a stream passed to the lexer.
 	/// </summary>
-	/// <remarks>
-	/// > [!NOTE]
-	/// > This method avoids boxing.
-	/// </remarks>
 	/// <returns>The tokens.</returns>
 	public static IEnumerable<Token> LexStream<TStream>(TStream stream, ToolchainConfiguration configurations, DiagnosticCollector diagnostics)
 		where TStream : IReadOnlyScanner

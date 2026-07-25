@@ -13,12 +13,15 @@ public enum ToolchainConfiguration
 	/// Optimizes the toolchain pipeline by disabling extension processing.
 	/// </summary>
 	/// <remarks>
-	/// > [!WARNING]
-	/// > This completely disables extensions, but does not warn you if there are active extensions,
-	/// > meaning sometimes you might be wondering why your extension is not working when, in reality,
+	/// :::warning
+	/// This completely disables extensions, but does not warn you if there are active extensions,
+	/// meaning sometimes you might be wondering why your extension is not working when, in reality,
 	/// you've enabled this configuration.
-	/// > [!TIP]
-	/// > This configuration is automatically enabled when no extensions are enabled.
+	/// :::
+	/// 
+	/// :::tip
+	/// This configuration is automatically enabled when no extensions are enabled.
+	/// :::
 	/// </remarks>
 	DisableExtensionProcessing = 1,
 
@@ -26,9 +29,10 @@ public enum ToolchainConfiguration
 	/// Only allows OceanApocalypseStudios extensions, leading to an error if any non-OAS extension is active.
 	/// </summary>
 	/// <remarks>
-	/// > [!NOTE]
-	/// > When used alongside <see cref="IgnoreAllExtensibilityErrors"/>, the non-OAS extensions will be disabled, but
-	/// > no errors will be thrown.
+	/// :::note
+	/// When used alongside <see cref="IgnoreAllExtensibilityErrors"/>, the non-OAS extensions will be disabled, but
+	/// no errors will be thrown.
+	/// :::
 	/// </remarks>
 	AllowOnlyOASExtensions = 2,
 
@@ -46,9 +50,10 @@ public enum ToolchainConfiguration
 	/// Ignores all errors thrown during pipeline creation and pipeline execution.
 	/// </summary>
 	/// <remarks>
-	/// > [!CAUTION]
-	/// > This option is only needed in beyond extremely rare occasions.
-	/// > It emulates RSML v1.x.x behavior.
+	/// :::danger
+	/// This option is only needed in beyond extremely rare occasions.
+	/// It emulates RSML v1.x.x behavior.
+	/// :::
 	/// </remarks>
 	IgnoreAllExtensibilityErrors = IgnoreBrokenExtensions | IgnoreDuplicatedExtensions
 }

@@ -4,7 +4,7 @@ using System;
 namespace OceanApocalypseStudios.RSML.Sources;
 
 /// <summary>
-/// Specifies the location of an item in a <see cref="ISource"/>.
+/// Specifies the location of an item in a <see cref="IBuffer"/> or <see cref="IScanner"/>.
 /// </summary>
 /// <param name="index">The 0-based index.</param>
 /// <param name="line">The 0-based line number.</param>
