@@ -478,7 +478,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer, ISupportsCache, IEquatable<
 		if (start < 0)
 			start += Length;
 
-		if (start + length > Length)
+		if (IsConventionallyOutOfRange(start + length))
 			return Result.Failure<string>(new(InternalErrorCodes.IndexOutOfRange, "The slice's end index is out of range."));
 
 		return Result.Success(data.Substring(start, length));

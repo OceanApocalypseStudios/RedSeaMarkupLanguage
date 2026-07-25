@@ -449,7 +449,7 @@ public ref struct ReadOnlySpanBuffer : IReadOnlyBuffer, ISupportsCache
 		if (start < 0)
 			start += Length;
 
-		if (IsOutOfRange(start + length))
+		if (IsConventionallyOutOfRange(start + length))
 			return Result.Failure<string>(new(InternalErrorCodes.IndexOutOfRange, "The slice's end index is greater than the buffer's length or points to EOF."));
 
 		return Result.Success(data.Slice(start, length).ToString());
