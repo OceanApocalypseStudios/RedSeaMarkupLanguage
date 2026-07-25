@@ -4,6 +4,11 @@
 // a specific target and scoped to a namespace, type, member, etc.
 using C = OceanApocalypseStudios.RSML.Constants;
 
+// Code analysis.
+[assembly: SuppressMessage("Design", C.CA1043, Justification = "SourceLocation refers to a specific location in the source, not a span.", Scope = "member", Target = "~P:OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.Item(OceanApocalypseStudios.RSML.Sources.SourceLocation)")]
+[assembly: SuppressMessage("Design", C.CA1043, Justification = "SourceLocation refers to a specific location in the source, not a span.", Scope = "member", Target = "~P:OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.Item(OceanApocalypseStudios.RSML.Sources.SourceLocation)")]
+[assembly: SuppressMessage("Design", C.CA1043, Justification = "SourceLocation refers to a specific location in the source, not a span.", Scope = "member", Target = "~P:OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Item(OceanApocalypseStudios.RSML.Sources.SourceLocation)")]
+
 // Code style.
 [assembly: SuppressMessage("Style", C.Ide0046, Justification = "The conditional expression in this case hurts readability.", Scope = "member", Target = "~M:OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetSourceSpan(System.Int32,System.Int32)~OceanApocalypseStudios.RSML.Diagnostics.Result{OceanApocalypseStudios.RSML.Sources.SourceSpan}")]
 [assembly: SuppressMessage("Style", C.Ide0046, Justification = "The conditional expression in this case hurts readability.", Scope = "member", Target = "~M:OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.GetSourceSpan(System.Int32,System.Int32)~OceanApocalypseStudios.RSML.Diagnostics.Result{OceanApocalypseStudios.RSML.Sources.SourceSpan}")]

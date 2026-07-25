@@ -1,6 +1,3 @@
-using System;
-
-
 namespace OceanApocalypseStudios.RSML.Sources;
 
 /// <summary>

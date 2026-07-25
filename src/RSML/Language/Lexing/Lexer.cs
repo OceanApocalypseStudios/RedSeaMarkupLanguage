@@ -1,10 +1,6 @@
 using System;
 using System.Collections.Generic;
 
-using OceanApocalypseStudios.RSML.Diagnostics;
-using OceanApocalypseStudios.RSML.Sources;
-
-
 namespace OceanApocalypseStudios.RSML.Language.Lexing;
 
 /// <summary>
