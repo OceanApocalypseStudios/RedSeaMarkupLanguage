@@ -8,21 +8,17 @@ namespace OceanApocalypseStudios.RSML.Diagnostics;
 /// <summary>
 /// A diagnostic reported by RSML's API.
 /// </summary>
-/// <param name="code">The error code.</param>
-/// <param name="span">The span the error relates to.</param>
-/// <param name="message">A brief error message detailing why it has happened.</param>
-/// <param name="severity">The error's severity.</param>
-public readonly struct Diagnostic(ErrorCode code, SourceSpan span, string message, Severity severity) : IFormattable, IEquatable<Diagnostic>
+public readonly struct Diagnostic : IFormattable, IEquatable<Diagnostic>
 {
 	/// <summary>
 	/// The span the error relates to.
 	/// </summary>
-	public SourceSpan Span => span;
+	public SourceSpan Span { get; }
 
 	/// <summary>
 	/// The error's code. Contains information about the category of the error.
 	/// </summary>
-	public ErrorCode Code => code;
+	public ErrorCode Code { get; }
 
 	/// <summary>
 	/// The error's category.
@@ -37,12 +33,69 @@ public readonly struct Diagnostic(ErrorCode code, SourceSpan span, string messag
 	/// <summary>
 	/// A brief error message detailing why it has happened.
 	/// </summary>
-	public string Message => message;
+	public string Message { get; }
 
 	/// <summary>
 	/// The error's severity.
 	/// </summary>
-	public Severity Severity => severity;
+	public Severity Severity { get; }
+
+	/// <summary>Creates a new diagnostic with a basic error code.</summary>
+	/// <param name="code">The error code.</param>
+	public Diagnostic(ErrorCode code)
+	{
+		Code = code;
+		Span = SourceSpan.Empty;
+		Message = "";
+		Severity = Severity.None;
+	}
+
+	/// <summary>Creates a new diagnostic.</summary>
+	/// <param name="code">The error code.</param>
+	/// <param name="message">A brief error message detailing why it has happened.</param>
+	public Diagnostic(ErrorCode code, string message)
+	{
+		Code = code;
+		Span = SourceSpan.Empty;
+		Message = message;
+		Severity = Severity.None;
+	}
+
+	/// <summary>Creates a new diagnostic.</summary>
+	/// <param name="code">The error code.</param>
+	/// <param name="severity">The error's severity.</param>
+	public Diagnostic(ErrorCode code, Severity severity)
+	{
+		Code = code;
+		Span = SourceSpan.Empty;
+		Message = "";
+		Severity = severity;
+	}
+
+	/// <summary>Creates a new diagnostic.</summary>
+	/// <param name="code">The error code.</param>
+	/// <param name="message">A brief error message detailing why it has happened.</param>
+	/// <param name="severity">The error's severity.</param>
+	public Diagnostic(ErrorCode code, string message, Severity severity)
+	{
+		Code = code;
+		Span = SourceSpan.Empty;
+		Message = message;
+		Severity = severity;
+	}
+
+	/// <summary>Creates a new diagnostic.</summary>
+	/// <param name="code">The error code.</param>
+	/// <param name="span">The span the error relates to.</param>
+	/// <param name="message">A brief error message detailing why it has happened.</param>
+	/// <param name="severity">The error's severity.</param>
+	public Diagnostic(ErrorCode code, SourceSpan span, string message, Severity severity)
+	{
+		Code = code;
+		Span = span;
+		Message = message;
+		Severity = severity;
+	}
 
 	/// <inheritdoc/>
 	public override bool Equals(
@@ -70,22 +123,13 @@ public readonly struct Diagnostic(ErrorCode code, SourceSpan span, string messag
 	public static bool operator !=(Diagnostic left, Diagnostic right) => !left.Equals(right);
 
 	/// <inheritdoc/>
-	public override int GetHashCode()
-	{
-		unchecked
-		{
-			int hashCode = Constants.HashCodeSeed * Constants.HashCodeMultiplier + Span.GetHashCode();
-			hashCode = hashCode * Constants.HashCodeMultiplier + Message.GetHashCode();
-
-			return hashCode * Constants.HashCodeMultiplier + Severity.GetHashCode();
-		}
-	}
+	public override int GetHashCode() => unchecked(HashCode.Combine(Span, Code, Message, Severity));
 
 	/// <summary>
 	/// Returns a generic string representation of the current instance.
 	/// </summary>
 	/// <returns>The string representation.</returns>
-	public override string ToString() => $"Diagnostic(Span={span}, Message={message}, Severity={severity})";
+	public override string ToString() => $"Diagnostic(Code={Code}, Span={Span}, Message={Message}, Severity={Severity})";
 
 	/// <summary>
 	/// Given a format, tries to return a string that uses said format as a basis for the representation.
@@ -114,18 +158,19 @@ public readonly struct Diagnostic(ErrorCode code, SourceSpan span, string messag
 					_ => ""
 				};
 
-				if (span.IsSingleLine)
-					return $"[{prefix}{Code}] @ L{span.Start.Line + 1},C({span.Start.Column + 1}..{span.End.Column + 1}) : {message}";
+				if (Span.IsSingleLine)
+					return $"[{prefix}{Code}] @ L{Span.Start.Line + 1},C({Span.Start.Column + 1}..{Span.End.Column + 1}) : {Message}";
 
-				return $"[{prefix}{Code}] @ L({span.Start.Line + 1}..{span.End.Line + 1}),C({span.Start.Column + 1}..{span.End.Column + 1}) : {message}";
+				return $"[{prefix}{Code}] @ L({Span.Start.Line + 1}..{Span.End.Line + 1}),C({Span.Start.Column + 1}..{Span.End.Column + 1}) : {Message}";
 
 			case "JSON":
 				return
 					$$"""
 					  {
-					  	"span": {{span.ToString("JSON", null)}},
-					  	"message": "{{message}}",
-					  	"severity": "{{severity}}"
+					    "errorCode": "{{Code}}",
+					  	"span": {{Span.ToString("JSON", null)}},
+					  	"message": "{{Message}}",
+					  	"severity": "{{Severity}}"
 					  }
 					  """;
 

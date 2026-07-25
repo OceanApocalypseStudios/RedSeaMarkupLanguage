@@ -22,7 +22,7 @@ public sealed record DiagnosticCollector : IEnumerable<Diagnostic>
 	/// A property that indicates whether there are critical diagnostics.
 	/// The toolchain should break if this is <c>true</c>.
 	/// </summary>
-	public bool HasCriticalErrors { get; private set; } = false;
+	public bool HasCriticalErrors { get; private set; }
 
 	/// <summary>
 	/// The minimum diagnostic severity for a diagnostic to be considered critical.
