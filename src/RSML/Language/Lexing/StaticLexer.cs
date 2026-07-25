@@ -18,7 +18,7 @@ public static class StaticLexer
 	/// <inheritdoc cref="ILexer.Lex"/>
 	public static IEnumerable<Token> Lex(ISource source, ToolchainConfiguration configurations, DiagnosticCollector diagnostics) => source switch
 	{
-		IReadOnlyStream stream => LexStream(stream, configurations, diagnostics),
+		IReadOnlyScanner stream => LexStream(stream, configurations, diagnostics),
 		IReadOnlyBuffer buffer => LexBuffer(buffer, configurations, diagnostics),
 		_ => []
 	};
@@ -29,7 +29,7 @@ public static class StaticLexer
 	/// <returns>The tokens.</returns>
 	public static IEnumerable<Token> LexSpan(ReadOnlySpanBuffer buffer, ToolchainConfiguration configuration, DiagnosticCollector collector)
 	{
-		throw new System.NotImplementedException(); // todo
+		throw new NotImplementedException(); // todo
 	}
 
 	/// <summary>
@@ -47,7 +47,7 @@ public static class StaticLexer
 	public static IEnumerable<Token> LexBuffer<TBuffer>(TBuffer buffer, ToolchainConfiguration configurations, DiagnosticCollector diagnostics)
 		where TBuffer : IReadOnlyBuffer
 	{
-		throw new System.NotImplementedException(); // todo: implement
+		throw new NotImplementedException(); // todo: implement
 	}
 
 	/// <summary>
@@ -59,6 +59,6 @@ public static class StaticLexer
 	/// </remarks>
 	/// <returns>The tokens.</returns>
 	public static IEnumerable<Token> LexStream<TStream>(TStream stream, ToolchainConfiguration configurations, DiagnosticCollector diagnostics)
-		where TStream : IReadOnlyStream
-		=> throw new System.NotImplementedException(); // todo: implement
+		where TStream : IReadOnlyScanner
+		=> throw new NotImplementedException(); // todo: implement
 }

@@ -13,6 +13,21 @@ public interface IReadOnlyBuffer : ISource, IEquatable<IReadOnlyBuffer?>, IEquat
 	// todo: add methods that can mutate the buffer (coming to v3.0.0-prerelease2)
 
 	/// <summary>
+	/// Whether the source is completely empty.
+	/// </summary>
+	bool IsEmpty { get; }
+
+	/// <summary>
+	/// Whether the source can be mutated.
+	/// </summary>
+	bool IsReadOnly { get; }
+
+	/// <summary>
+	/// The length of the source.
+	/// </summary>
+	int Length { get; }
+
+	/// <summary>
 	/// The total amount of lines in the buffer.
 	/// </summary>
 	/// <remarks>
@@ -33,13 +48,6 @@ public interface IReadOnlyBuffer : ISource, IEquatable<IReadOnlyBuffer?>, IEquat
 	/// <param name="location">The location of the item to retrieve.</param>
 	/// <returns>The item.</returns>
 	char? this[SourceLocation location] { get; }
-
-	/// <summary>
-	/// Gets a range of items out of the buffer.
-	/// </summary>
-	/// <param name="span">The span of items to get.</param>
-	/// <returns>The items.</returns>
-	Result<string> this[SourceSpan span] { get; }
 
 	/// <summary>
 	/// Counts the amount of items until the next line separator in the buffer, relative to a given <paramref name="index"/>.

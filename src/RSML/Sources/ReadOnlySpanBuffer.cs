@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 using OceanApocalypseStudios.RSML.Cache;
 using OceanApocalypseStudios.RSML.Diagnostics;
+using OceanApocalypseStudios.RSML.Diagnostics.ErrorCodes;
 
 
 namespace OceanApocalypseStudios.RSML.Sources;
@@ -66,9 +67,6 @@ public ref struct ReadOnlySpanBuffer : IReadOnlyBuffer, ISupportsCache
 	/// <inheritdoc/>
 	public readonly char? this[SourceLocation location] => this[location.Index];
 
-	/// <inheritdoc/>
-	public readonly Result<string> this[SourceSpan span] => Slice(span.Start.Index, span.Length);
-
 	/// <summary>
 	/// Initializes a new <see cref="ReadOnlySpanBuffer"/>
 	/// with a string.
@@ -112,16 +110,16 @@ public ref struct ReadOnlySpanBuffer : IReadOnlyBuffer, ISupportsCache
 		isCrLf = false;
 
 		if (IsEmpty)
-			return Result<int>.Fail(new(new(ErrorCategory.Internal, 1), SourceSpan.Empty, "The buffer is empty.", Severity.None));
+			return Result.Failure<int>(new(InternalErrorCodes.EmptyBuffer, "The buffer is empty."));
 
 		if (index < 0)
 			index += Length;
 
 		if (IsConventionallyOutOfRange(index))
-			return Result<int>.Fail(new(new(ErrorCategory.Internal, 2), SourceSpan.Empty, "The index is greater than the buffer's length.", Severity.None));
+			return Result.Failure<int>(new(InternalErrorCodes.IndexOutOfRange, "The index is greater than the buffer's length."));
 
 		if (index == Length)
-			return Result<int>.Success(0); // consumed the entire buffer
+			return Result.Success(0); // consumed the entire buffer
 
 		ComputeLineStarts();
 
@@ -136,7 +134,7 @@ public ref struct ReadOnlySpanBuffer : IReadOnlyBuffer, ISupportsCache
 			lineSep--;
 		}
 
-		return Result<int>.Success(lineSep - index);
+		return Result.Success(lineSep - index);
 	}
 
 	/// <remarks>
@@ -154,16 +152,16 @@ public ref struct ReadOnlySpanBuffer : IReadOnlyBuffer, ISupportsCache
 	public readonly Result<int> CountUntilNotWhitespace(int index)
 	{
 		if (IsEmpty)
-			return Result<int>.Fail(new(new(ErrorCategory.Internal, 1), SourceSpan.Empty, "The buffer is empty.", Severity.None));
+			return Result.Failure<int>(new(InternalErrorCodes.EmptyBuffer, "The buffer is empty."));
 
 		if (index < 0)
 			index = Length + index; // -1 is (Length-1) etc
 
 		if (IsConventionallyOutOfRange(index))
-			return Result<int>.Fail(new(new(ErrorCategory.Internal, 2), SourceSpan.Empty, "The index is greater than the buffer's length.", Severity.None));
+			return Result.Failure<int>(new(InternalErrorCodes.IndexOutOfRange, "The index is greater than the buffer's length."));
 
 		if (index == Length)
-			return Result<int>.Success(0); // consumed the entire buffer
+			return Result.Success(0); // consumed the entire buffer
 
 		var span = data.Slice(index);
 		int count = 0;
@@ -171,7 +169,7 @@ public ref struct ReadOnlySpanBuffer : IReadOnlyBuffer, ISupportsCache
 		while (count < span.Length && Char.IsWhiteSpace(span[count]))
 			count++;
 
-		return Result<int>.Success(count);
+		return Result.Success(count);
 	}
 
 	/// <remarks>
@@ -189,16 +187,16 @@ public ref struct ReadOnlySpanBuffer : IReadOnlyBuffer, ISupportsCache
 	public readonly Result<int> CountUntilWhitespace(int index)
 	{
 		if (IsEmpty)
-			return Result<int>.Fail(new(new(ErrorCategory.Internal, 1), SourceSpan.Empty, "The buffer is empty.", Severity.None));
+			return Result.Failure<int>(new(InternalErrorCodes.EmptyBuffer, "The buffer is empty."));
 
 		if (index < 0)
 			index = Length + index; // -1 is (Length-1) etc
 
 		if (IsConventionallyOutOfRange(index))
-			return Result<int>.Fail(new(new(ErrorCategory.Internal, 2), SourceSpan.Empty, "The index musis greater than the buffer's length.", Severity.None));
+			return Result.Failure<int>(new(InternalErrorCodes.IndexOutOfRange, "The index is greater than the buffer's length."));
 
 		if (index == Length)
-			return Result<int>.Success(0); // consumed the entire buffer
+			return Result.Success(0); // consumed the entire buffer
 
 		var span = data.Slice(index);
 		int count = 0;
@@ -206,7 +204,7 @@ public ref struct ReadOnlySpanBuffer : IReadOnlyBuffer, ISupportsCache
 		while (count < span.Length && !Char.IsWhiteSpace(span[count]))
 			count++;
 
-		return Result<int>.Success(count);
+		return Result.Success(count);
 	}
 
 	/// <remarks>
@@ -223,17 +221,19 @@ public ref struct ReadOnlySpanBuffer : IReadOnlyBuffer, ISupportsCache
 	/// <inheritdoc/>
 	public readonly Result<int> CountWhile(Func<int, char, bool> predicate, int index)
 	{
+		ArgumentNullException.ThrowIfNull(predicate, nameof(predicate));
+
 		if (IsEmpty)
-			return Result<int>.Fail(new(new(ErrorCategory.Internal, 1), SourceSpan.Empty, "The buffer is empty.", Severity.None));
+			return Result.Failure<int>(new(InternalErrorCodes.EmptyBuffer, "The buffer is empty."));
 
 		if (index < 0)
 			index = Length + index; // -1 is (Length-1) etc
 
 		if (IsConventionallyOutOfRange(index))
-			return Result<int>.Fail(new(new(ErrorCategory.Internal, 2), SourceSpan.Empty, "The index is greater than the buffer's length.", Severity.None));
+			return Result.Failure<int>(new(InternalErrorCodes.IndexOutOfRange, "The index is greater than the buffer's length."));
 
 		if (index == Length)
-			return Result<int>.Success(0); // consumed the entire buffer
+			return Result.Success(0); // consumed the entire buffer
 
 		var span = data.Slice(index);
 		int count = 0;
@@ -241,7 +241,7 @@ public ref struct ReadOnlySpanBuffer : IReadOnlyBuffer, ISupportsCache
 		while (count < span.Length && predicate(count, span[count]))
 			count++;
 
-		return Result<int>.Success(count);
+		return Result.Success(count);
 	}
 
 	/// <remarks>
@@ -255,15 +255,15 @@ public ref struct ReadOnlySpanBuffer : IReadOnlyBuffer, ISupportsCache
 	public Result<int> GetLengthOfLine(int lineNumber)
 	{
 		if (IsEmpty)
-			return Result<int>.Fail(new(new(ErrorCategory.Internal, 1), SourceSpan.Empty, "The buffer is empty.", Severity.None));
+			return Result.Failure<int>(new(InternalErrorCodes.EmptyBuffer, "The buffer is empty."));
 
 		ComputeLineStarts();
 
 		if (lineNumber < 0 || lineNumber >= RawLineCount)
-			return Result<int>.Fail(new(new(ErrorCategory.Internal, 2), SourceSpan.Empty, "The 0-based line number must be non-negative and less than the amount of lines in the buffer.", Severity.None));
+			return Result.Failure<int>(new(InternalErrorCodes.LineNumberOutOfRange, "The line number must be non-negative and less than the amount of lines in the buffer."));
 
 		if (lineNumber == RawLineCount - 1)
-			return Result<int>.Success(0); // EOF means the line is empty
+			return Result.Success(0); // EOF means the line is empty
 
 		int start = lineStarts[lineNumber];
 		int end = lineStarts[lineNumber + 1];
@@ -277,7 +277,7 @@ public ref struct ReadOnlySpanBuffer : IReadOnlyBuffer, ISupportsCache
 			end--; // skip one more line separator
 		}
 
-		return Result<int>.Success(end - start);
+		return Result.Success(end - start);
 	}
 
 	/// <remarks>
@@ -306,18 +306,18 @@ public ref struct ReadOnlySpanBuffer : IReadOnlyBuffer, ISupportsCache
 	public Result<int> GetLineNumberFromIndex(int index)
 	{
 		if (IsEmpty)
-			return Result<int>.Fail(new(new(ErrorCategory.Internal, 1), SourceSpan.Empty, "The buffer is empty.", Severity.None));
+			return Result.Failure<int>(new(InternalErrorCodes.EmptyBuffer, "The buffer is empty."));
 
 		if (index < 0)
 			index += Length;
 
 		if (IsConventionallyOutOfRange(index))
-			return Result<int>.Fail(new(new(ErrorCategory.Internal, 2), SourceSpan.Empty, "The index is greater than the buffer's length.", Severity.None));
+			return Result.Failure<int>(new(InternalErrorCodes.IndexOutOfRange, "The index is greater than the buffer's length."));
 
 		ComputeLineStarts();
 
 		GetPreviousOrCurrentLineStartPosition(index, out int lineSepIndex);
-		return Result<int>.Success(lineSepIndex);
+		return Result.Success(lineSepIndex);
 	}
 
 	/// <remarks>
@@ -331,20 +331,20 @@ public ref struct ReadOnlySpanBuffer : IReadOnlyBuffer, ISupportsCache
 	public Result<string> GetLine(int lineNumber)
 	{
 		if (IsEmpty)
-			return Result<string>.Fail(new(new(ErrorCategory.Internal, 1), SourceSpan.Empty, "The buffer is empty.", Severity.None));
+			return Result.Failure<string>(new(InternalErrorCodes.EmptyBuffer, "The buffer is empty."));
 
 		ComputeLineStarts();
 
 		if (lineNumber < 0 || lineNumber >= RawLineCount)
-			return Result<string>.Fail(new(new(ErrorCategory.Internal, 2), SourceSpan.Empty, "The 0-based line number must be non-negative and less than the amount of lines in the buffer.", Severity.None));
+			return Result.Failure<string>(new(InternalErrorCodes.LineNumberOutOfRange, "The line number must be non-negative and less than the amount of lines in the buffer."));
 
 		if (lineNumber + 1 == RawLineCount)
-			return Result<string>.Success(""); // EOF means the line is empty
+			return Result.Success(""); // EOF means the line is empty
 
 		int start = lineStarts[lineNumber];
 		int length = GetLengthOfLine(lineNumber).Value; // this will never be an error because we have done exact same checks right above
 
-		return Result<string>.Success(data.Slice(start, length).ToString());
+		return Result.Success(data.Slice(start, length).ToString());
 	}
 
 	/// <inheritdoc/>
@@ -353,7 +353,7 @@ public ref struct ReadOnlySpanBuffer : IReadOnlyBuffer, ISupportsCache
 		var lineNumber = GetLineNumberFromIndex(index);
 
 		if (lineNumber.IsError)
-			return Result<string>.Fail(lineNumber.Error); // reuse the error big brain moment
+			return Result.Failure<string>(lineNumber.Error); // reuse the error big brain moment
 
 		return GetLine(lineNumber.Value);
 	}
@@ -404,21 +404,21 @@ public ref struct ReadOnlySpanBuffer : IReadOnlyBuffer, ISupportsCache
 	public Result<SourceLocation> GetSourceLocation(int index)
 	{
 		if (IsEmpty)
-			return Result<SourceLocation>.Fail(new(new(ErrorCategory.Internal, 1), SourceSpan.Empty, "The buffer is empty.", Severity.None));
+			return Result.Failure<SourceLocation>(new(InternalErrorCodes.EmptyBuffer, "The buffer is empty."));
 
 		if (index < 0)
 			index += Length;
 
 		if (IsOutOfRange(index))
-			return Result<SourceLocation>.Fail(new(new(ErrorCategory.Internal, 2), SourceSpan.Empty, "The index must be less than the buffer's length.", Severity.None));
+			return Result.Failure<SourceLocation>(new(InternalErrorCodes.IndexOutOfRange, "The index is greater than the buffer's length or points to EOF."));
 
 		if (index == 0) // best "best" case = triple zero
-			return Result<SourceLocation>.Success(new(0, 0, 0));
+			return Result.Success<SourceLocation>(new(0, 0, 0));
 
 		ComputeLineStarts();
 		int lineNumber = GetLineNumberFromIndex(index).Value; // we have done the same checks this emthod does so it'll never be an error
 
-		return Result<SourceLocation>.Success(new(index, lineNumber, index - lineStarts[lineNumber]));
+		return Result.Success<SourceLocation>(new(index, lineNumber, index - lineStarts[lineNumber]));
 	}
 
 	/// <inheritdoc/>
@@ -428,9 +428,9 @@ public ref struct ReadOnlySpanBuffer : IReadOnlyBuffer, ISupportsCache
 		var end = GetSourceLocation(endIndex);
 
 		if (start.IsSuccessful && end.IsSuccessful)
-			return Result<SourceSpan>.Success(new(start.Value, end.Value));
+			return Result.Success<SourceSpan>(new(start.Value, end.Value));
 
-		return Result<SourceSpan>.Fail(start.IsError ? start.Error : end.Error);
+		return Result.Failure<SourceSpan>(start.IsError ? start.Error : end.Error);
 	}
 
 	/// <remarks>
@@ -444,15 +444,15 @@ public ref struct ReadOnlySpanBuffer : IReadOnlyBuffer, ISupportsCache
 	public readonly Result<string> Slice(int start, int length)
 	{
 		if (length < 0)
-			return Result<string>.Fail(new(new(ErrorCategory.Internal, 2), SourceSpan.Empty, "Both the index and the slice length must be positive.", Severity.None));
+			return Result.Failure<string>(new(InternalErrorCodes.IndexOutOfRange, "The slice length must be positive."));
 
 		if (start < 0)
 			start += Length;
 
-		if (start + length > Length)
-			return Result<string>.Fail(new(new(ErrorCategory.Internal, 2), SourceSpan.Empty, "The slice's end index is out of range.", Severity.None));
+		if (IsOutOfRange(start + length))
+			return Result.Failure<string>(new(InternalErrorCodes.IndexOutOfRange, "The slice's end index is greater than the buffer's length or points to EOF."));
 
-		return Result<string>.Success(data.Slice(start, length).ToString());
+		return Result.Success(data.Slice(start, length).ToString());
 	}
 
 	/// <remarks>
@@ -622,9 +622,11 @@ public ref struct ReadOnlySpanBuffer : IReadOnlyBuffer, ISupportsCache
 	{
 		unchecked
 		{
-			int hashCode = Constants.HashCodeSeed * Constants.HashCodeMultiplier + Length.GetHashCode();
-			hashCode = hashCode * Constants.HashCodeMultiplier + IsEmpty.GetHashCode();
-			return hashCode * Constants.HashCodeMultiplier + LineCount.GetHashCode();
+			var hashCode = new HashCode();
+			hashCode.Add(data.GetHashCodeForSpan());
+			hashCode.Add(lineStarts.GetHashCodeForSpan());
+			hashCode.Add(precededByCrLf.GetHashCodeForSpan());
+			return hashCode.ToHashCode();
 		}
 	}
 
