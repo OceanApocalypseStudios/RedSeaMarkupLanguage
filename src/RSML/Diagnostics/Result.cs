@@ -1,78 +1,86 @@
+using System;
+
 namespace OceanApocalypseStudios.RSML.Diagnostics;
 
 /// <summary>
-/// An operation's result.
+/// A collection of factory methods for easier initialization of <see cref="Result{TValue}"/> objects.
 /// </summary>
-/// <typeparam name="TValue">The type of the return value when successful.</typeparam>
-public readonly struct Result<TValue>
+public static class Result
 {
 	/// <summary>
-	/// The return value. Might be null or an arbitrary default if
-	/// <see cref="IsSuccessful"/> is <c>false</c>.
+	/// Tries to run function <paramref name="check"/> and return its output,
+	/// unless it fails, in which case the returned result is also a failure.
 	/// </summary>
-#if NET5_0_OR_GREATER
-	[MemberNotNullWhen(true, nameof(Value))]
-#endif
-	public readonly TValue? Value { get; }
-
-	/// <summary>
-	/// The diagnostic that serves as the error value when an error occurs.
-	/// Might be null or an arbitrary default if <see cref="IsError"/> is <c>true</c>.
-	/// </summary>
-	public readonly Diagnostic Error { get; }
-
-	/// <summary>
-	/// Set to <c>true</c> when the operation is successful. Otherwise, it's set to <c>false</c>.
-	/// It also indicates whether <see cref="Value"/> can be safely accessed or not (safe to access if
-	/// <see cref="IsSuccessful"/> is <c>true</c>).
-	/// </summary>
-	/// <remarks>
-	/// <see cref="IsSuccessful"/> and <see cref="IsError"/> are mutually exclusive conditions. When one is true,
-	/// the other is false. This means you can use any of the two to evaluate whether the operation was successful
-	/// and if it's safe to access <see cref="Value"/>.
-	/// </remarks>
-#if NET5_0_OR_GREATER
-	[MemberNotNullWhen(true, nameof(Value))]
-#endif
-	public readonly bool IsSuccessful { get; }
-
-	/// <summary>
-	/// Set to <c>false</c> when the operation is successful. Otherwise, it's set to <c>true</c>.
-	/// It also indicates whether <see cref="Value"/> can be safely accessed or not (safe to access if
-	/// <see cref="IsError"/> is <c>false</c>).
-	/// </summary>
-	/// <remarks>
-	/// <see cref="IsSuccessful"/> and <see cref="IsError"/> are mutually exclusive conditions. When one is true,
-	/// the other is false. This means you can use any of the two to evaluate whether the operation was successful
-	/// and if it's safe to access <see cref="Value"/>.
-	/// </remarks>
-	public readonly bool IsError => !IsSuccessful;
-
-	private Result(TValue value)
+	/// <typeparam name="TValue">The type of value to return if successful</typeparam>
+	/// <typeparam name="TException">
+	/// The type of exception to check for.
+	/// The check mode is not strict, polymorphism is checked.
+	/// </typeparam>
+	/// <param name="check">The function to try and run.</param>
+	/// <exception cref="ArgumentNullException"><paramref name="check"/> is null.</exception>
+	/// <returns>Either a successful result, with the function's return value, or a failure.</returns>
+	public static Result<TValue> TryCatch<TValue, TException>(Func<TValue> check)
+		where TException : Exception
 	{
-		Value = value;
-		Error = default;
-		IsSuccessful = true;
-	}
+		ArgumentNullException.ThrowIfNull(check, nameof(check));
 
-	private Result(Diagnostic error)
-	{
-		Value = default;
-		Error = error;
-		IsSuccessful = false;
+		try
+		{
+			return new(check());
+		}
+		catch (TException ex)
+		{
+			return FromException<TValue>(ex, 5);
+		}
 	}
 
 	/// <summary>
-	/// Creates a return result with a successful outcome.
+	/// Returns a successful result with a given value.
 	/// </summary>
-	/// <param name="value">The return value.</param>
-	/// <returns>The result.</returns>
-	public static Result<TValue> Success(TValue value) => new(value);
+	/// <typeparam name="TValue">The type of value.</typeparam>
+	/// <param name="value">The value.</param>
+	/// <returns>The successful result.</returns>
+	public static Result<TValue> Success<TValue>(TValue value) => new(value);
 
 	/// <summary>
-	/// Creates a return result with an unsuccessful outcome.
+	/// Returns a successful result with a <c>true</c> boolean.
+	/// </summary>
+	/// <returns>The successful result, with value set to <c>true</c>.</returns>
+	public static Result<bool> Success() => new(true);
+
+	/// <summary>
+	/// Returns a failure ("bad" result) for a boolean type.
 	/// </summary>
 	/// <param name="error">The error.</param>
-	/// <returns>The result.</returns>
-	public static Result<TValue> Fail(Diagnostic error) => new(error);
+	/// <returns>The failure, as a boolean result.</returns>
+	public static Result<bool> Failure(Diagnostic error) => new(error);
+
+	/// <summary>
+	/// Returns a failure ("bad" result) for a given type.
+	/// </summary>
+	/// <typeparam name="TValue">The type of value the result would normally contain.</typeparam>
+	/// <param name="error">The error.</param>
+	/// <returns>The failure.</returns>
+	public static Result<TValue> Failure<TValue>(Diagnostic error) => new(error);
+
+	/// <summary>
+	/// Returns a failure ("bad" result) for a given type, given an <see cref="Exception"/>.
+	/// </summary>
+	/// <typeparam name="TValue">The type of value the result would normally contain.</typeparam>
+	/// <param name="exception">The exception whose data to retrieve and use as failure data.</param>
+	/// <param name="errorCode">An integer error code for the failure.</param>
+	/// <returns>The failure.</returns>
+	public static Result<TValue> FromException<TValue>(Exception? exception, int errorCode) =>
+		new(new Diagnostic(new ErrorCode(ErrorCategory.Internal, errorCode), exception?.Message ?? "No message provided."));
+
+	/// <summary>
+	/// Checks if a given object is null and, if it is, returns a failure.
+	/// If the object is not null, returns a successful result with a given <paramref name="value"/>.
+	/// </summary>
+	/// <typeparam name="TValue">The type of value the result will contain if <paramref name="check"/> is not null.</typeparam>
+	/// <param name="check">The object to check if null.</param>
+	/// <param name="value">The result value if <paramref name="check"/> is not null.</param>
+	/// <returns>Either a successful result or a failure.</returns>
+	public static Result<TValue> FromNullable<TValue>(object? check, TValue value) =>
+		check is not null ? new(value) : new(new Diagnostic(new ErrorCode(ErrorCategory.Internal, 4), "Null-check failed: object is null."));
 }

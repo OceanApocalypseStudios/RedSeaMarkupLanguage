@@ -3,7 +3,7 @@ namespace OceanApocalypseStudios.RSML.Diagnostics;
 /// <summary>
 /// The severity of an error.
 /// </summary>
-public enum Severity : byte
+public enum Severity
 {
 	/// <summary>
 	/// No severity information.
