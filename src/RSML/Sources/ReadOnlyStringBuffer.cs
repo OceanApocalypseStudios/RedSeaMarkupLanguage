@@ -19,6 +19,8 @@ namespace OceanApocalypseStudios.RSML.Sources;
 /// </remarks>
 public class ReadOnlyStringBuffer : IReadOnlyBuffer, ISupportsCache, IEquatable<string?>
 {
+	private bool isDisposed;
+
 	private readonly List<int> lineStarts = [];
 
 	private readonly List<int> precededByCrLf = [];
@@ -576,7 +578,11 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer, ISupportsCache, IEquatable<
 	}
 
 	/// <inheritdoc/>
-	public void Dispose() => GC.SuppressFinalize(this);
+	public void Dispose()
+	{
+		Dispose(true);
+		GC.SuppressFinalize(this);
+	}
 
 	/// <inheritdoc/>
 	public override bool Equals(
@@ -661,6 +667,25 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer, ISupportsCache, IEquatable<
 	/// </summary>
 	/// <returns>True if different.</returns>
 	public static bool operator !=(ReadOnlyStringBuffer left, ReadOnlyStringBuffer right) => !(left == right);
+
+	/// <summary>
+	/// Disposes of both managed and unmanaged resources.
+	/// </summary>
+	/// <param name="disposing">When set to <c>false</c>, disposes of unmanaged resources only.</param>
+	protected virtual void Dispose(bool disposing)
+	{
+		if (isDisposed)
+			return;
+
+		if (disposing)
+		{
+			lineStarts.Clear();
+			precededByCrLf.Clear();
+			CacheExists = false;
+		}
+
+		isDisposed = true;
+	}
 
 	private void ComputeLineStarts(bool forceCache = false)
 	{

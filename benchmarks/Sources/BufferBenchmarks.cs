@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Engines;
@@ -19,14 +20,16 @@ namespace OceanApocalypseStudios.RSML.Benchmarks.Sources;
 [MemoryDiagnoser]
 [CsvExporter]
 [RPlotExporter]
-public class BufferBenchmarks
+[SuppressMessage("Maintainability", "CA1515:Consider making public types internal", Justification = "Benchmarks have to be public.")]
+public class BufferBenchmarks : IDisposable
 {
+	private bool isDisposed;
 	private readonly Consumer consumer = new();
 	private string data = "";
 	private ReadOnlyStringBuffer buffer = null!;
 
 	[Params(1, 10, 100, 1_000)]
-	public int RepeatCount; // 1 is the string itself
+	public int RepeatCount { get; set; } // 1 is the string itself
 
 	[GlobalSetup]
 	public void Setup()
@@ -45,7 +48,27 @@ public class BufferBenchmarks
 	[Benchmark]
 	public void ReadOnlySpanBuffer_GetLine()
 	{
+		using var buffer = new ReadOnlySpanBuffer(data);
+
 		for (int i = 0; i <= data.Length; i++)
-			consumer.Consume(new ReadOnlySpanBuffer(data).GetLineNumberFromIndex(i));
+			consumer.Consume(buffer.GetLineNumberFromIndex(i));
+	}
+
+	[GlobalCleanup]
+	public void Dispose()
+	{
+		Dispose(true);
+		GC.SuppressFinalize(this);
+	}
+
+	protected virtual void Dispose(bool disposing)
+	{
+		if (isDisposed)
+			return;
+
+		if (disposing) // managed resources
+			buffer.Dispose();
+
+		isDisposed = true;
 	}
 }
