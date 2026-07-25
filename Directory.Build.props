@@ -1,0 +1,28 @@
+<Project>
+	<PropertyGroup>
+		<GITHUB_RUN_NUMBER Condition="'$(GITHUB_RUN_NUMBER)' == ''">0</GITHUB_RUN_NUMBER>
+		
+		<Nullable>enable</Nullable>
+		<LangVersion>14</LangVersion>
+		<Platforms>AnyCPU;ARM64;x64;x86;ARM32</Platforms>
+		
+		<Authors>OceanApocalypseStudios</Authors>
+		<Company>OceanApocalypseStudios</Company>
+		<RepositoryType>git</RepositoryType>
+		<NeutralLanguage>en</NeutralLanguage>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+
+		<!--
+		XXX: CHANGE ON NEW VERSION
+		All of these four should be changed when a new version is created.
+		-->
+		<SemVerMajor>3</SemVerMajor>
+		<VersionPrefix>3.0.0</VersionPrefix>
+		<VersionSuffix>prerelease1</VersionSuffix>
+		<PackageReleaseNotes>TODO</PackageReleaseNotes>
+		
+		<!-- Don't change these ones -->
+		<AssemblyVersion>$(SemVerMajor).0.0.0</AssemblyVersion>
+		<FileVersion>$(VersionPrefix).$(GITHUB_RUN_NUMBER)</FileVersion>
+	</PropertyGroup>
+</Project>

@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using System.Text;
 
@@ -377,7 +378,7 @@ public class ReadOnlySpanBufferTests
 	public void CountWhile_CountsWhileUppercaseOrWhitespace(string data, int index, int expectedCount)
 	{
 		var buffer = new ReadOnlySpanBuffer(data);
-		Assert.Equal(expectedCount, buffer.CountWhile((_, c) => Char.IsWhiteSpace(c) || c.IsNewline() || Char.IsUpper(c), index).Value);
+		Assert.Equal(expectedCount, buffer.CountWhile((_, c) => Char.IsWhiteSpace(c) || c is '\r' or '\n' or '\u2028' or '\u2029' || Char.IsUpper(c), index).Value);
 	}
 
 	[Theory]

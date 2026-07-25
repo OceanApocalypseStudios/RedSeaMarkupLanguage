@@ -1,0 +1,6 @@
+<Project>
+	<PropertyGroup>
+		<UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
+		<IsPackable>false</IsPackable>
+	</PropertyGroup>
+</Project>

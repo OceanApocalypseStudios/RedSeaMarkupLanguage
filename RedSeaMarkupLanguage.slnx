@@ -12,6 +12,7 @@
 		<File Path=".gitignore" />
 		<File Path="cliff.toml" />
 		<File Path="README.md" />
+		<File Path="Directory.Build.props" />
         <File Path="LICENSE.txt" />
 		<File Path="SECURITY.md" />
 	</Folder>
@@ -28,21 +29,18 @@
 			<Platform Solution="*|x64" Project="x64" />
 			<Platform Solution="*|x86" Project="x86" />
 		</Project>
-
 		<Project Path="src/RSML.Extensibility/RSML.Extensibility.csproj" Id="de53662d-20b1-4289-a51b-43c3c401bbd7">
 			<Platform Solution="*|ARM32" Project="ARM32" />
 			<Platform Solution="*|ARM64" Project="ARM64" />
 			<Platform Solution="*|x64" Project="x64" />
 			<Platform Solution="*|x86" Project="x86" />
 		</Project>
-
 		<Project Path="src/RSML.Native/RSML.Native.csproj">
 			<Platform Solution="*|ARM32" Project="ARM32" />
 			<Platform Solution="*|ARM64" Project="ARM64" />
 			<Platform Solution="*|x64" Project="x64" />
 			<Platform Solution="*|x86" Project="x86" />
 		</Project>
-
 		<Project Path="src/RSML/RSML.csproj">
 			<Platform Solution="*|ARM32" Project="ARM32" />
 			<Platform Solution="*|ARM64" Project="ARM64" />
@@ -52,12 +50,14 @@
 	</Folder>
 
 	<Folder Name="/Source/Tests/">
+		<File Path="tests/Directory.Build.props" />
 		<Project Path="benchmarks/RSML.Benchmarks.csproj">
 			<Platform Solution="*|ARM32" Project="ARM32" />
 			<Platform Solution="*|ARM64" Project="ARM64" />
 			<Platform Solution="*|x64" Project="x64" />
 			<Platform Solution="*|x86" Project="x86" />
 		</Project>
+		<Project Path="tests/RSML.InternalTests/RSML.InternalTests.csproj" Id="bcf74754-66fd-40c5-9faa-6d803d66467f" />
 		<Project Path="tests/RSML.NativeTests/RSML.NativeTests.csproj" Id="9c3a8c42-d460-4a2a-bcb0-5363a9d7022c">
 			<Platform Solution="*|ARM32" Project="ARM32" />
 			<Platform Solution="*|ARM64" Project="ARM64" />
