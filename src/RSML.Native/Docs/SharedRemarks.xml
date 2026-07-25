@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<docs>
+	<members name="InstallInstructions">
+		<remarks>
+		:::note
+		This type can be installed via the <c>RSML.Native</c> package.
+		:::
+		</remarks>
+	</members>
+</docs>
