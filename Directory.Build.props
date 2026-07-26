@@ -21,6 +21,8 @@ Note for future self:
 		<!-- NuGet Package Setup -->
 		<Authors>OceanApocalypseStudios</Authors>
 		<Company>OceanApocalypseStudios</Company>
+		<Copyright>Copyright 2025-2026 OceanApocalypseStudios</Copyright>
+		<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
 		<RepositoryType>git</RepositoryType>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<NeutralLanguage>en</NeutralLanguage>

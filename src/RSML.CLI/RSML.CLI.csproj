@@ -9,6 +9,8 @@
 		<Description>The official RSML CLI.</Description>
 		<RootNamespace>OceanApocalypseStudios.RSML.CLI</RootNamespace>
 
+		<PackageLicenseExpression>GPL-3.0</PackageLicenseExpression>
+
 		<IsPackable>false</IsPackable>
 	</PropertyGroup>
 

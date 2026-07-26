@@ -168,6 +168,6 @@ For more information, see: <img src="https://raw.githubusercontent.com/vscode-ic
 [![RSML on NuGet Trends](docs/images/NuGetTrends_July5.png)](https://nugettrends.com/packages?ids=RSML&ids=OceanApocalypseStudios.RSML&months=12)
 
 
-> **Copyright (c) 2025 OceanApocalypseStudios**
+> **Copyright 2025-2026 OceanApocalypseStudios**
 >
 > We :heart: open-source!

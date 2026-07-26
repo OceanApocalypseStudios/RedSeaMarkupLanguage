@@ -20,13 +20,11 @@
 		<Title>RSML Native ABI</Title>
 
 		<Description>Native C interopability for RSML.</Description>
-		<Copyright>Copyright (c) 2025 OceanApocalypseStudios</Copyright>
 		<PackageProjectUrl>https://oceanapocalypsestudios.org/rsml-docs/2.0.0-prerelease8/</PackageProjectUrl>
 		<PackageIcon>icon.png</PackageIcon>
 		<RepositoryUrl>https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/</RepositoryUrl>
 		<PackageTags>markup;native;interop;c;cpp;c++;language;logic;logic-path;rsml;rsea;decision;oss</PackageTags>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	</PropertyGroup>
 
 	<ItemGroup>
