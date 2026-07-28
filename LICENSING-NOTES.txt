@@ -1,9 +1,21 @@
-Regarding RSML Licensing
-===============================================================
-* RSML and its core framework, including the extensibility
-  and native projects, is licensed under Apache 2.0.
-  
-* RSML's very own official CLI is licensed under GPL 3.0.
+{[( / *================================================* \ )]}
+{[( / *=    OceanApocalypseStudios PUBLIC DOCUMENT    =* \ )]}
+{[( / *================================================* \ )]}
 
-* You can find both license files in the repository, in their
-  respective directories.
+|> Regarding the licenses used under the RSML project
+   ===========================================================
+   - RSML and its core framework, including the extensibility
+     and native projects, are licensed under Apache 2.0.
+     => src/**/* EXCEPT src/RSML.CLI/*
+     
+   - RSML's very own official CLI is licensed under GPL 3.0.
+     => src/RSML.CLI/*
+   
+   - You can find both license files in the repository, in
+     their respective directories.
+     => LICENSE.txt [Apache-2.0]
+     => src/RSML.CLI/LICENSE.txt [GPL-3.0]
+   
+   - Information regarding third party licenses can be found
+     in the repository.
+     => THIRD-PARTY-LICENSES.md
