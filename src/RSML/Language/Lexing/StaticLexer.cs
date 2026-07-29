@@ -13,13 +13,13 @@ namespace OceanApocalypseStudios.RSML.Language.Lexing;
 /// </summary>
 public static class StaticLexer
 {
-	private readonly static ImmutableArray<string> keywords = ["return", "if", "requires"];
+	public readonly static ImmutableArray<string> Keywords = ["return", "if", "requires"];
 
 	/// <summary>
 	/// Tokenizes a read-only span buffer passed to the lexer.
 	/// </summary>
 	/// <returns>The tokens.</returns>
-	public static IEnumerable<Token> LexSpan(ReadOnlySpanBuffer buffer, ToolchainConfiguration configuration, DiagnosticCollector collector)
+	public static ImmutableArray<Token> LexSpan(ReadOnlySpanBuffer buffer, ToolchainConfiguration configuration, DiagnosticCollector collector)
 	{
 		throw new NotImplementedException(); // todo
 	}
@@ -27,13 +27,6 @@ public static class StaticLexer
 	/// <summary>
 	/// Tokenizes a buffer passed to the lexer.
 	/// </summary>
-	/// <remarks>
-	/// :::note[Framework support]
-	/// This method accepts ref structs if the target framework is
-	/// .NET 9.0 or higher. Otherwise, you might want to take a look at
-	/// <see cref="LexSpan(ReadOnlySpanBuffer, ToolchainConfiguration, DiagnosticCollector)"/>.
-	/// :::
-	/// </remarks>
 	/// <returns>The tokens.</returns>
 	public static IEnumerable<Token> LexBuffer<TBuffer>(TBuffer buffer, ToolchainConfiguration configurations, DiagnosticCollector diagnostics)
 		where TBuffer : IReadOnlyBuffer
