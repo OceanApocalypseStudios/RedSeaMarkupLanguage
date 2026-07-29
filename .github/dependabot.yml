@@ -27,6 +27,6 @@ updates:
     assignees:
       - "mf366-dev"
     labels:
-      - "Dependencies"
+      - "Scope/Dependencies"
     commit-message:
       prefix: "chore(deps.nuget):"
