@@ -1,0 +1,5117 @@
+{
+  "source_base_path": "/home/runner/work/RedSeaMarkupLanguage/RedSeaMarkupLanguage/docs",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      }
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Cache.ISupportsCache.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Cache.ISupportsCache.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Cache.ISupportsCache",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Cache.ISupportsCache.yml\" sourcestartlinenumber=\"1\">Represents a service or a type that supports cached data.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Cache.ISupportsCache.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Cache.ISupportsCache.BuildCache.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Cache.ISupportsCache.BuildCache",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Cache.ISupportsCache.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Cache.ISupportsCache.CacheExists.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Cache.ISupportsCache.CacheExists",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Cache.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Cache.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Cache",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Diagnostic.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Diagnostic.op_Inequality.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Diagnostics.Diagnostic.operator !=",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Diagnostic.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Diagnostic.op_Equality.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Diagnostics.Diagnostic.operator ==",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Diagnostic.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Diagnostic.Severity.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Diagnostics.Diagnostic.Severity",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Diagnostic.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Diagnostic.Message.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Diagnostics.Diagnostic.Message",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Diagnostic.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Diagnostic.ToString.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Diagnostics.Diagnostic.ToString",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Diagnostic.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Diagnostic.Category.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Diagnostics.Diagnostic.Category",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Diagnostic.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Diagnostic.Code.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Diagnostics.Diagnostic.Code",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Diagnostic.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Diagnostic.Span.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Diagnostics.Diagnostic.Span",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Diagnostic.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Diagnostic.-ctor.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Diagnostics.Diagnostic.Diagnostic",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Diagnostic.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Diagnostic.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Diagnostics.Diagnostic",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Diagnostics.Diagnostic.yml\" sourcestartlinenumber=\"1\">A diagnostic reported by RSML's API.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Diagnostic.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Diagnostic.GetHashCode.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Diagnostics.Diagnostic.GetHashCode",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Diagnostic.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Diagnostic.IsInternal.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Diagnostics.Diagnostic.IsInternal",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Diagnostic.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Diagnostic.Equals.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Diagnostics.Diagnostic.Equals",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.DiagnosticCollector.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.DiagnosticCollector.Add.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Diagnostics.DiagnosticCollector.Add",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.DiagnosticCollector.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.DiagnosticCollector.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Diagnostics.DiagnosticCollector",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Diagnostics.DiagnosticCollector.yml\" sourcestartlinenumber=\"1\">A list of RSML toolchain errors.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.DiagnosticCollector.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.DiagnosticCollector.System-Collections-IEnumerable-GetEnumerator.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Diagnostics.DiagnosticCollector.System.Collections.IEnumerable.GetEnumerator",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.DiagnosticCollector.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.DiagnosticCollector.-ctor.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Diagnostics.DiagnosticCollector.DiagnosticCollector",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.DiagnosticCollector.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.DiagnosticCollector.GetEnumerator.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Diagnostics.DiagnosticCollector.GetEnumerator",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.DiagnosticCollector.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.DiagnosticCollector.GetAll.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Diagnostics.DiagnosticCollector.GetAll",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.DiagnosticCollector.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.DiagnosticCollector.Clear.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Diagnostics.DiagnosticCollector.Clear",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.DiagnosticCollector.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.DiagnosticCollector.MinimumCriticalSeverity.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Diagnostics.DiagnosticCollector.MinimumCriticalSeverity",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.DiagnosticCollector.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.DiagnosticCollector.HasCriticalErrors.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Diagnostics.DiagnosticCollector.HasCriticalErrors",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.ErrorCategory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.ErrorCategory.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Diagnostics.ErrorCategory",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Diagnostics.ErrorCategory.yml\" sourcestartlinenumber=\"1\">The category of an error, which changes its error code.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.ErrorCode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.ErrorCode.Code.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Diagnostics.ErrorCode.Code",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.ErrorCode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.ErrorCode.LanguagePrefix.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Diagnostics.ErrorCode.LanguagePrefix",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Diagnostics.ErrorCode.yml\" sourcestartlinenumber=\"1\">The prefix for all error codes related to RSML.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.ErrorCode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.ErrorCode.CategoryPrefix.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Diagnostics.ErrorCode.CategoryPrefix",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.ErrorCode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.ErrorCode.ToString.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Diagnostics.ErrorCode.ToString",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.ErrorCode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.ErrorCode.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Diagnostics.ErrorCode",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Diagnostics.ErrorCode.yml\" sourcestartlinenumber=\"1\">Represents a code specific to an error.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.ErrorCode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.ErrorCode.-ctor.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Diagnostics.ErrorCode.ErrorCode",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.ErrorCode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.ErrorCode.Category.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Diagnostics.ErrorCode.Category",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Result-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Result-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Diagnostics.Result<TValue>",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Diagnostics.Result-1.yml\" sourcestartlinenumber=\"1\">An operation's result.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Result-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Result-1.Value.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Diagnostics.Result<TValue>.Value",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Result-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Result-1.Error.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Diagnostics.Result<TValue>.Error",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Result-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Result-1.IsSuccessful.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Diagnostics.Result<TValue>.IsSuccessful",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Result-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Result-1.IsError.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Diagnostics.Result<TValue>.IsError",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Result-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Result-1.Success.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Diagnostics.Result<TValue>.Success",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Result-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Result-1.Fail.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Diagnostics.Result<TValue>.Fail",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Severity.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.Severity.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Diagnostics.Severity",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Diagnostics.Severity.yml\" sourcestartlinenumber=\"1\">The severity of an error.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Diagnostics.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Diagnostics",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.BufferException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.BufferException.-ctor.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Exceptions.BufferException.BufferException",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.BufferException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.BufferException.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Exceptions.BufferException",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Exceptions.BufferException.yml\" sourcestartlinenumber=\"1\">An exception that is thrown when an error occurs inside a buffer operation.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.ErrorList.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.ErrorList.-ctor.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Exceptions.ErrorList.ErrorList",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.ErrorList.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.ErrorList.Add.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Exceptions.ErrorList.Add",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.ErrorList.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.ErrorList.AddSourceError.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Exceptions.ErrorList.AddSourceError",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.ErrorList.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.ErrorList.Clear.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Exceptions.ErrorList.Clear",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.ErrorList.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.ErrorList.System-Collections-IEnumerable-GetEnumerator.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Exceptions.ErrorList.System.Collections.IEnumerable.GetEnumerator",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.ErrorList.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.ErrorList.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Exceptions.ErrorList",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Exceptions.ErrorList.yml\" sourcestartlinenumber=\"1\">A list of RSML toolchain errors.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.ErrorList.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.ErrorList.GetEnumerator.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Exceptions.ErrorList.GetEnumerator",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.IError.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.IError.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Exceptions.IError",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Exceptions.IError.yml\" sourcestartlinenumber=\"1\">Represents an error in the RSML toolchain.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.Severity.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.Severity.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Exceptions.Severity",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Exceptions.Severity.yml\" sourcestartlinenumber=\"1\">The severity of an error.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.SourceError.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.SourceError.Severity.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Exceptions.SourceError.Severity",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.SourceError.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.SourceError.ToString.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Exceptions.SourceError.ToString",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.SourceError.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.SourceError.GetHashCode.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Exceptions.SourceError.GetHashCode",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.SourceError.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.SourceError.Equals.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Exceptions.SourceError.Equals",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.SourceError.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.SourceError.op_Inequality.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Exceptions.SourceError.operator !=",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.SourceError.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.SourceError.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Exceptions.SourceError",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Exceptions.SourceError.yml\" sourcestartlinenumber=\"1\">An error that has happened in the RSML toolchain and comes from a source.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.SourceError.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.SourceError.-ctor.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Exceptions.SourceError.SourceError",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.SourceError.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.SourceError.Span.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Exceptions.SourceError.Span",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.SourceError.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.SourceError.Message.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Exceptions.SourceError.Message",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.SourceError.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.SourceError.op_Equality.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Exceptions.SourceError.operator ==",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Exceptions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Exceptions",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Execution.Interpreter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Execution.Interpreter.IsMutable.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Execution.Interpreter.IsMutable",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Execution.Interpreter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Execution.Interpreter.Configuration.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Execution.Interpreter.Configuration",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Execution.Interpreter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Execution.Interpreter.Dispose.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Execution.Interpreter.Dispose",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Execution.Interpreter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Execution.Interpreter.Freeze.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Execution.Interpreter.Freeze",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Execution.Interpreter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Execution.Interpreter.Inject.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Execution.Interpreter.Inject",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Execution.Interpreter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Execution.Interpreter.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Execution.Interpreter",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Execution.Interpreter.yml\" sourcestartlinenumber=\"1\">The base type that deals with evaluating, interpreting and executing RSML.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Execution.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Execution.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Execution",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.Class1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.Class1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Extensibility.Class1",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.Hooks.IInterpreterHook.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.Hooks.IInterpreterHook.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Extensibility.Hooks.IInterpreterHook",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Extensibility.Hooks.IInterpreterHook.yml\" sourcestartlinenumber=\"1\">Represents an extension that modifies the <xref href=\"OceanApocalypseStudios.RSML.Execution.Interpreter\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.Hooks.ILexerHook.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.Hooks.ILexerHook.Register.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Extensibility.Hooks.ILexerHook.Register",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.Hooks.ILexerHook.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.Hooks.ILexerHook.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Extensibility.Hooks.ILexerHook",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Extensibility.Hooks.ILexerHook.yml\" sourcestartlinenumber=\"1\">Represents an extension that modifies the <xref href=\"OceanApocalypseStudios.RSML.Language.Parsing.Parser\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.Hooks.IParserHook.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.Hooks.IParserHook.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Extensibility.Hooks.IParserHook",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Extensibility.Hooks.IParserHook.yml\" sourcestartlinenumber=\"1\">Represents an extension that modifies the <xref href=\"OceanApocalypseStudios.RSML.Language.Parsing.Parser\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.Hooks.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.Hooks.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Extensibility.Hooks",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.ILanguageExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.ILanguageExtension.Name.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Extensibility.ILanguageExtension.Name",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.ILanguageExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.ILanguageExtension.Major.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Extensibility.ILanguageExtension.Major",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.ILanguageExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.ILanguageExtension.Description.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Extensibility.ILanguageExtension.Description",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.ILanguageExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.ILanguageExtension.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Extensibility.ILanguageExtension",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Extensibility.ILanguageExtension.yml\" sourcestartlinenumber=\"1\">Represents an extension of RSML's language API.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.ILexerRule.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.ILexerRule.TryMatch.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Extensibility.ILexerRule.TryMatch",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.ILexerRule.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.ILexerRule.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Extensibility.ILexerRule",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Extensibility.ILexerRule.yml\" sourcestartlinenumber=\"1\">Specifies a rule for the lexer to apply.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.System-Collections-IEnumerable-GetEnumerator.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.System.Collections.IEnumerable.GetEnumerator",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Extensibility.LexerRuleset",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Remove.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Remove",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.GetEnumerator.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.GetEnumerator",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.CopyTo.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.CopyTo",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Contains.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Contains",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Clear.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Clear",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Add.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Add",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.IsReadOnly.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.IsReadOnly",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Count.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Extensibility.LexerRuleset.Count",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.TryGetRule.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.TryGetRule",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.RegisterToken.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.RegisterToken",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.RegisterKeyword.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.RegisterKeyword",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.RegisterLiteralPrefix.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.RegisterLiteralPrefix",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.GetOrRegisterRule.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.GetOrRegisterRule",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.GetNextTokenKindId.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.GetNextTokenKindId",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.-ctor.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Extensibility.Registries.LexerRuleRegistry.LexerRuleRegistry",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.Registries.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.Registries.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Extensibility.Registries",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlan.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlan.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlan",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlan.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlan.-ctor.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlan.ToolchainExecutionPlan",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Build.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Build",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithConfiguration.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithConfiguration",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.WithDataSource",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Register.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Register",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Override.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Extensibility.ToolchainExecutionPlanBuilder.Override",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Extensibility.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Extensibility",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.IToolchainComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.IToolchainComponent.Inject.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.IToolchainComponent.Inject",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.IToolchainComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.IToolchainComponent.Configuration.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.IToolchainComponent.Configuration",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.IToolchainComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.IToolchainComponent.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.IToolchainComponent",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.IToolchainComponent.yml\" sourcestartlinenumber=\"1\">A component of the RSML toolchain.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexer.ILexer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexer.ILexer.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Lexer.ILexer",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexer.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Lexer",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.BufferLexer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.BufferLexer.-ctor.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Lexing.BufferLexer.BufferLexer",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.BufferLexer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.BufferLexer.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Lexing.BufferLexer",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Language.Lexing.BufferLexer.yml\" sourcestartlinenumber=\"1\">An implementation of a RSML lexer backed by a read-only or read-and-write buffer.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.BufferLexer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.BufferLexer.Lex.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Lexing.BufferLexer.Lex",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.DefaultLexer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.DefaultLexer.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Lexing.DefaultLexer",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Language.Lexing.DefaultLexer.yml\" sourcestartlinenumber=\"1\">An implementation of a RSML lexer backed by a <xref href=\"OceanApocalypseStudios.RSML.Sources.IBuffer\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.ILexer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.ILexer.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Lexing.ILexer",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Language.Lexing.ILexer.yml\" sourcestartlinenumber=\"1\">Represents a lexer for RSML.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.ILexer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.ILexer.Lex.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Lexing.ILexer.Lex",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.ILexerRule.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.ILexerRule.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Lexing.ILexerRule",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Language.Lexing.ILexerRule.yml\" sourcestartlinenumber=\"1\">Specifies a rule for the lexer to apply.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.ILexerRule.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.ILexerRule.TryMatch.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Lexing.ILexerRule.TryMatch",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.Lexer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.Lexer.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Lexing.Lexer",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Language.Lexing.Lexer.yml\" sourcestartlinenumber=\"1\">The base class for implementations of RSML lexers and tokenizers.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.Lexer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.Lexer.Dispose.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Lexing.Lexer.Dispose",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.Lexer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.Lexer.Lex.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Lexing.Lexer.Lex",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.Lexer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.Lexer.Configuration.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Lexing.Lexer.Configuration",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.Lexer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.Lexer.Inject.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Lexing.Lexer.Inject",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.StatelessLexer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.StatelessLexer.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Lexing.StatelessLexer",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Language.Lexing.StatelessLexer.yml\" sourcestartlinenumber=\"1\">An implementation of a lexer as a by-ref struct, ensuring allocations are reduced to a minimum.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.StatelessLexer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.StatelessLexer.Inject.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Lexing.StatelessLexer.Inject",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.StatelessLexer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.StatelessLexer.Configuration.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Lexing.StatelessLexer.Configuration",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.StaticLexer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.StaticLexer.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Lexing.StaticLexer",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Language.Lexing.StaticLexer.yml\" sourcestartlinenumber=\"1\">A static lexer for when you don't need to lex from a builder.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.StaticLexer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.StaticLexer.LexStream.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Lexing.StaticLexer.LexStream",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.StaticLexer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.StaticLexer.LexBuffer.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Lexing.StaticLexer.LexBuffer",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.StaticLexer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.StaticLexer.LexSpan.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Lexing.StaticLexer.LexSpan",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.StaticLexer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.StaticLexer.Lex.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Lexing.StaticLexer.Lex",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.StreamLexer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.StreamLexer.-ctor.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Lexing.StreamLexer.StreamLexer",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.StreamLexer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.StreamLexer.Lex.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Lexing.StreamLexer.Lex",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.StreamLexer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.StreamLexer.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Lexing.StreamLexer",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Language.Lexing.StreamLexer.yml\" sourcestartlinenumber=\"1\">An implementation of a RSML lexer backed by a read-only or read-and-write stream.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.Token.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.Token.-ctor.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Lexing.Token.Token",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.Token.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.Token.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Lexing.Token",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Language.Lexing.Token.yml\" sourcestartlinenumber=\"1\">Represents a RSML token.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.Token.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.Token.Empty.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Lexing.Token.Empty",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Language.Lexing.Token.yml\" sourcestartlinenumber=\"1\">Empty token. Used when something goes wrong.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.Token.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.Token.Span.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Lexing.Token.Span",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.Token.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.Token.Value.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Lexing.Token.Value",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.Token.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.Token.TokenKind.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Lexing.Token.TokenKind",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Lexing.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Lexing",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Parsing.IParser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Parsing.IParser.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Parsing.IParser",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Language.Parsing.IParser.yml\" sourcestartlinenumber=\"1\">Represents a parser for the RSML language.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Parsing.Parser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Parsing.Parser.Inject.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Parsing.Parser.Inject",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Parsing.Parser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Parsing.Parser.Dispose.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Parsing.Parser.Dispose",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Parsing.Parser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Parsing.Parser.Configuration.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Parsing.Parser.Configuration",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Parsing.Parser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Parsing.Parser.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Parsing.Parser",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Language.Parsing.Parser.yml\" sourcestartlinenumber=\"1\">The base type that deals with parsing tokens and turning them into an organized tree.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Parsing.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Parsing.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Parsing",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Syntax.SyntaxToken.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Syntax.SyntaxToken.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Syntax.SyntaxToken",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Syntax.TokenKind.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Syntax.TokenKind.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Syntax.TokenKind",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.Syntax.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.Syntax.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Language.Syntax",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Language.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Language.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": null,
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Native.Class1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Native.Class1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Native.Class1",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Native.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Native.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Native",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Class1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Class1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sdk.Class1",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.-ctor.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.SdkException",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Sdk.Exceptions.SdkException.yml\" sourcestartlinenumber=\"1\">An exception caused by a mal-function of the <xref href=\"OceanApocalypseStudios.RSML.Sdk\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Exceptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Exceptions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sdk.Exceptions",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks.IInterpreterHook.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks.IInterpreterHook.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks.IInterpreterHook",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks.IInterpreterHook.yml\" sourcestartlinenumber=\"1\">Represents an extension that modifies the <xref href=\"OceanApocalypseStudios.RSML.Execution.Interpreter\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks.ILexerHook.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks.ILexerHook.Register.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks.ILexerHook.Register",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks.ILexerHook.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks.ILexerHook.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks.ILexerHook",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks.ILexerHook.yml\" sourcestartlinenumber=\"1\">Represents an extension that modifies the <xref href=\"OceanApocalypseStudios.RSML.Language.Parsing.Parser\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks.IParserHook.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks.IParserHook.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks.IParserHook",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks.IParserHook.yml\" sourcestartlinenumber=\"1\">Represents an extension that modifies the <xref href=\"OceanApocalypseStudios.RSML.Language.Parsing.Parser\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sdk.Extensibility.Hooks",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension.yml\" sourcestartlinenumber=\"1\">Represents an extension of RSML's language API.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension.Major.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension.Major",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension.Description.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension.Description",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension.Name.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sdk.Extensibility.ILanguageExtension.Name",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries.LexerRuleRegistry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries.LexerRuleRegistry.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries.LexerRuleRegistry",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries.LexerRuleRegistry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries.LexerRuleRegistry.RegisterKeyword.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries.LexerRuleRegistry.RegisterKeyword",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries.LexerRuleRegistry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries.LexerRuleRegistry.RegisterLiteralPrefix.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries.LexerRuleRegistry.RegisterLiteralPrefix",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries.LexerRuleRegistry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries.LexerRuleRegistry.GetOrRegisterRule.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries.LexerRuleRegistry.GetOrRegisterRule",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries.LexerRuleRegistry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries.LexerRuleRegistry.GetNextTokenKindId.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries.LexerRuleRegistry.GetNextTokenKindId",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries.LexerRuleRegistry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries.LexerRuleRegistry.RegisterToken.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries.LexerRuleRegistry.RegisterToken",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries.LexerRuleRegistry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries.LexerRuleRegistry.TryGetRule.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries.LexerRuleRegistry.TryGetRule",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sdk.Extensibility.Registries",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Extensibility.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sdk.Extensibility.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sdk.Extensibility",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sdk.IToolchainComponent",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.yml\" sourcestartlinenumber=\"1\">A component of the RSML toolchain.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.Inject.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.Inject",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.IsMutable.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.IsMutable",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.Freeze.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sdk.IToolchainComponent.Freeze",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sdk.ToolchainConfiguration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sdk.ToolchainConfiguration.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sdk.ToolchainConfiguration",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Sdk.ToolchainConfiguration.yml\" sourcestartlinenumber=\"1\">Configuration options for a <xref href=\"OceanApocalypseStudios.RSML.Sdk.ToolchainExecutionPlan\" data-throw-if-not-resolved=\"false\"></xref>, usually passed via a <xref href=\"OceanApocalypseStudios.RSML.Sdk.ToolchainExecutionPlanBuilder\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sdk.ToolchainExecutionPlan.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sdk.ToolchainExecutionPlan.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sdk.ToolchainExecutionPlan",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sdk.ToolchainExecutionPlan.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sdk.ToolchainExecutionPlan.-ctor.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sdk.ToolchainExecutionPlan.ToolchainExecutionPlan",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sdk.ToolchainExecutionPlanBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sdk.ToolchainExecutionPlanBuilder.Override.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sdk.ToolchainExecutionPlanBuilder.Override",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sdk.ToolchainExecutionPlanBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sdk.ToolchainExecutionPlanBuilder.WithDataSource.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sdk.ToolchainExecutionPlanBuilder.WithDataSource",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sdk.ToolchainExecutionPlanBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sdk.ToolchainExecutionPlanBuilder.WithConfiguration.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sdk.ToolchainExecutionPlanBuilder.WithConfiguration",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sdk.ToolchainExecutionPlanBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sdk.ToolchainExecutionPlanBuilder.Build.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sdk.ToolchainExecutionPlanBuilder.Build",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sdk.ToolchainExecutionPlanBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sdk.ToolchainExecutionPlanBuilder.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sdk.ToolchainExecutionPlanBuilder",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sdk.ToolchainExecutionPlanBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sdk.ToolchainExecutionPlanBuilder.Register.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sdk.ToolchainExecutionPlanBuilder.Register",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sdk.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sdk.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sdk",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.GetLengthOfLine.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.GetLengthOfLine",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.GetLineFromIndex.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.GetLineFromIndex",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.GetLineNumberFromIndex.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.GetLineNumberFromIndex",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.TryGetLineFromIndex.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.TryGetLineFromIndex",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.GetWord.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.GetWord",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.yml\" sourcestartlinenumber=\"1\">Represents a buffer.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.TryGetWord.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.TryGetWord",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.GetLine.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.GetLine",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.TryGetLine.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.TryGetLine",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.TryGetChar.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.TryGetChar",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.GetLengthOfLineFromIndex.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.GetLengthOfLineFromIndex",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.GetSourceLocation.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.GetSourceLocation",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.Slice.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.Slice",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.CountWhile.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.CountWhile",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.LineCount.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.LineCount",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.Item.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.this",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.CountUntilEndOfLine.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.CountUntilEndOfLine",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.CountUntilWhitespace.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.CountUntilWhitespace",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBuffer-1.CountUntilNotWhitespace.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IBuffer<TItem>.CountUntilNotWhitespace",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBuffer.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IBuffer",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Sources.IBuffer.yml\" sourcestartlinenumber=\"1\">Represents a read and write buffer of characters.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBufferReader.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IBufferReader.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IBufferReader",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Sources.IBufferReader.yml\" sourcestartlinenumber=\"1\">Represents a sequential buffer reader whose data is composed of <xref href=\"System.Byte\" data-throw-if-not-resolved=\"false\"></xref>s.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.GetSourceSpan.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.GetSourceSpan",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.GetSourceLocation.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.GetSourceLocation",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.GetLineNumberFromIndex.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.GetLineNumberFromIndex",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.GetLineAsSpanFromIndex.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.GetLineAsSpanFromIndex",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.GetLineAsSpan.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.GetLineAsSpan",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.GetLineFromIndex.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.GetLineFromIndex",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.GetLine.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.GetLine",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.CountWhile.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.CountWhile",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.GetLengthOfLine.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.GetLengthOfLine",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.Slice.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.Slice",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.CountUntilWhitespace.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.CountUntilWhitespace",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.CountUntilNotWhitespace.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.CountUntilNotWhitespace",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.CountUntilEndOfLine.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.CountUntilEndOfLine",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.Item.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.this",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.LineCount.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.LineCount",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.GetLengthOfLineFromIndex.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.GetLengthOfLineFromIndex",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.TrySlice.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.TrySlice",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.TryGetChar.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.TryGetChar",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.TryGetLine.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.TryGetLine",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.TryGetLineFromIndex.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.TryGetLineFromIndex",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Sources.IReadOnlyBuffer.yml\" sourcestartlinenumber=\"1\">Represents a read-only buffer of characters.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyStream.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyStream.CursorIndex.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IReadOnlyStream.CursorIndex",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyStream.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IReadOnlyStream.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IReadOnlyStream",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Sources.IReadOnlyStream.yml\" sourcestartlinenumber=\"1\">Represents a read-only sequential stream.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ISource.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ISource.IsEmpty.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ISource.IsEmpty",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ISource.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ISource.IsReadOnly.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ISource.IsReadOnly",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ISource.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ISource.Length.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ISource.Length",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ISource.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ISource.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ISource",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Sources.ISource.yml\" sourcestartlinenumber=\"1\">A data source for RSML's toolchain members.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.IStream.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.IStream.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.IStream",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Sources.IStream.yml\" sourcestartlinenumber=\"1\">Represents a read and write sequential stream.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.TryGetLineFromIndex.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.TryGetLineFromIndex",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.TryGetLine.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.TryGetLine",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.TryGetChar.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.TryGetChar",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.TrySlice.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.TrySlice",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.Slice.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.Slice",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.GetSourceSpan.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.GetSourceSpan",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.op_Inequality.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.operator !=",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.GetLineAsSpanFromIndex.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.GetLineAsSpanFromIndex",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.ToString.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.ToString",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.GetHashCode.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.GetHashCode",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.Equals.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.Equals",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.yml\" sourcestartlinenumber=\"1\">A read-only buffer backed by a span of characters. All operations opt for performance\nprimarily via the internal use of <xref href=\"System.ReadOnlySpan%601\" data-throw-if-not-resolved=\"false\"></xref> over string allocations\nand also via caching.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.GetSourceLocation.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.GetSourceLocation",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.Dispose.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.Dispose",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.op_Equality.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.operator ==",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.IsEmpty.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.IsEmpty",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.GetLineAsSpan.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.GetLineAsSpan",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.GetLineFromIndex.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.GetLineFromIndex",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.GetLine.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.GetLine",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.GetLineNumberFromIndex.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.GetLineNumberFromIndex",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.GetLengthOfLineFromIndex.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.GetLengthOfLineFromIndex",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.GetLengthOfLine.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.GetLengthOfLine",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.CountWhile.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.CountWhile",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.CountUntilWhitespace.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.CountUntilWhitespace",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.CacheExists.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.CacheExists",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.CountUntilEndOfLine.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.CountUntilEndOfLine",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.BuildCache.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.BuildCache",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.-ctor.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.ReadOnlySpanBuffer",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.Item.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.this",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.LineCount.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.LineCount",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.Length.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.Length",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.IsReadOnly.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.IsReadOnly",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.CountUntilNotWhitespace.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlySpanBuffer.CountUntilNotWhitespace",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetLineAsSpanFromIndex.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetLineAsSpanFromIndex",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetSourceLocation.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetSourceLocation",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetSourceSpan.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetSourceSpan",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Slice.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Slice",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.TrySlice.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.TrySlice",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.TryGetChar.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.TryGetChar",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.TryGetLine.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.TryGetLine",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetHashCode.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetHashCode",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Dispose.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Dispose",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Equals",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.ToString.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.ToString",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.op_Equality.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.operator ==",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.op_Inequality.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.operator !=",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.yml\" sourcestartlinenumber=\"1\">A read-only buffer backed by a string. All operations opt for performance\nprimarily via the internal use of <xref href=\"System.ReadOnlySpan%601\" data-throw-if-not-resolved=\"false\"></xref> over string allocations\nand also via caching.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetLineAsSpan.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetLineAsSpan",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.TryGetLineFromIndex.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.TryGetLineFromIndex",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetLineFromIndex.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetLineFromIndex",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CountUntilNotWhitespace.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CountUntilNotWhitespace",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetLineNumberFromIndex.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetLineNumberFromIndex",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CacheExists.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CacheExists",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.IsEmpty.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.IsEmpty",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.IsReadOnly.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.IsReadOnly",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetLine.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetLine",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.LineCount.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.LineCount",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Item.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.this",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.-ctor.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.ReadOnlyStringBuffer",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Length.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.Length",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CountUntilEndOfLine.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CountUntilEndOfLine",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CountUntilWhitespace.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CountUntilWhitespace",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CountWhile.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.CountWhile",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetLengthOfLine.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetLengthOfLine",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetLengthOfLineFromIndex.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.GetLengthOfLineFromIndex",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.BuildCache.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.ReadOnlyStringBuffer.BuildCache",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.op_Equality.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.SourceLocation.operator ==",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.op_GreaterThanOrEqual.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.SourceLocation.operator >=",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.op_LessThanOrEqual.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.SourceLocation.operator <=",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.op_GreaterThan.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.SourceLocation.operator >",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.op_LessThan.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.SourceLocation.operator <",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.SourceLocation",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Sources.SourceLocation.yml\" sourcestartlinenumber=\"1\">Specifies the location of an item in a <xref href=\"OceanApocalypseStudios.RSML.Sources.ISource\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.op_Inequality.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.SourceLocation.operator !=",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.ToString.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.SourceLocation.ToString",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.Column.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.SourceLocation.Column",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.Equals.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.SourceLocation.Equals",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.CompareTo.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.SourceLocation.CompareTo",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.Index.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.SourceLocation.Index",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.Line.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.SourceLocation.Line",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.-ctor.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.SourceLocation.SourceLocation",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceLocation.GetHashCode.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.SourceLocation.GetHashCode",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.SourceSpan",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Sources.SourceSpan.yml\" sourcestartlinenumber=\"1\">Represents a span taken from a source.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.GetHashCode.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.SourceSpan.GetHashCode",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.ToString.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.SourceSpan.ToString",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.op_Inequality.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.SourceSpan.operator !=",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.op_Equality.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.SourceSpan.operator ==",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.Equals.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.SourceSpan.Equals",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.-ctor.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.SourceSpan.SourceSpan",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.Length.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.SourceSpan.Length",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.End.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.SourceSpan.End",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.Start.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.SourceSpan.Start",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.Empty.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.SourceSpan.Empty",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.Sources.SourceSpan.yml\" sourcestartlinenumber=\"1\">An empty span.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.SourceSpan.IsSingleLine.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources.SourceSpan.IsSingleLine",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.Sources.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.Sources.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.Sources",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.ToolchainConfiguration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.ToolchainConfiguration.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML.ToolchainConfiguration",
+      "Summary": "<p sourcefile=\"api/OceanApocalypseStudios.RSML.ToolchainConfiguration.yml\" sourcestartlinenumber=\"1\">Configuration options for a <xref href=\"OceanApocalypseStudios.RSML.IToolchainComponent\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/OceanApocalypseStudios.RSML.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/OceanApocalypseStudios.RSML.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "OceanApocalypseStudios.RSML",
+      "Summary": null
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html"
+        },
+        ".json": {
+          "relative_path": "api/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/announcements/hello-docfx.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/announcements/hello-docfx.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "articles/images/hello-docfx-new-website-demo.png",
+      "output": {
+        "resource": {
+          "relative_path": "articles/images/hello-docfx-new-website-demo.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "articles/images/hello-docfx-old-website-demo.png",
+      "output": {
+        "resource": {
+          "relative_path": "articles/images/hello-docfx-old-website-demo.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/insights/why-400-tests.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/insights/why-400-tests.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/toc.html"
+        },
+        ".json": {
+          "relative_path": "articles/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "bindings/list.md",
+      "output": {
+        ".html": {
+          "relative_path": "bindings/list.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "bindings/python/getting-started.md",
+      "output": {
+        ".html": {
+          "relative_path": "bindings/python/getting-started.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "bindings/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "bindings/toc.html"
+        },
+        ".json": {
+          "relative_path": "bindings/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "changelog.md",
+      "output": {
+        ".html": {
+          "relative_path": "changelog.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "guides/hello-world-cli.md",
+      "output": {
+        ".html": {
+          "relative_path": "guides/hello-world-cli.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "guides/hello-world.md",
+      "output": {
+        ".html": {
+          "relative_path": "guides/hello-world.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "guides/list.md",
+      "output": {
+        ".html": {
+          "relative_path": "guides/list.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "guides/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "guides/toc.html"
+        },
+        ".json": {
+          "relative_path": "guides/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/NuGetTrends_July5.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/NuGetTrends_July5.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/favicon.ico",
+      "output": {
+        "resource": {
+          "relative_path": "images/favicon.ico"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/logo.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/logo.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/small.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/small.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/xsmall.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/xsmall.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "language/evaluation-flow.md",
+      "output": {
+        ".html": {
+          "relative_path": "language/evaluation-flow.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "language/getting-started.md",
+      "output": {
+        ".html": {
+          "relative_path": "language/getting-started.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "language/syntax.md",
+      "output": {
+        ".html": {
+          "relative_path": "language/syntax.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "language/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "language/toc.html"
+        },
+        ".json": {
+          "relative_path": "language/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "native/getting-started.md",
+      "output": {
+        ".html": {
+          "relative_path": "native/getting-started.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "native/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "native/toc.html"
+        },
+        ".json": {
+          "relative_path": "native/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html"
+        },
+        ".json": {
+          "relative_path": "toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "tools/cli/getting-started.md",
+      "output": {
+        ".html": {
+          "relative_path": "tools/cli/getting-started.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "tools/editor-support/list.md",
+      "output": {
+        ".html": {
+          "relative_path": "tools/editor-support/list.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "tools/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "tools/toc.html"
+        },
+        ".json": {
+          "relative_path": "tools/toc.json"
+        }
+      },
+      "version": ""
+    }
+  ],
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
