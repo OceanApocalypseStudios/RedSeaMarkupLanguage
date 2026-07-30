@@ -19,20 +19,14 @@ public static class StaticLexer
 	/// Tokenizes a read-only span buffer passed to the lexer.
 	/// </summary>
 	/// <returns>The tokens.</returns>
-	public static ImmutableArray<Token> LexSpan(ReadOnlySpanBuffer buffer, ToolchainConfiguration configuration, DiagnosticCollector collector)
-	{
-		throw new NotImplementedException(); // todo
-	}
+	public static ImmutableArray<Token> LexSpan(ReadOnlySpanBuffer buffer, ToolchainConfiguration configuration, DiagnosticCollector collector) => throw new NotImplementedException(); // todo
 
 	/// <summary>
 	/// Tokenizes a buffer passed to the lexer.
 	/// </summary>
 	/// <returns>The tokens.</returns>
 	public static IEnumerable<Token> LexBuffer<TBuffer>(TBuffer buffer, ToolchainConfiguration configurations, DiagnosticCollector diagnostics)
-		where TBuffer : IReadOnlyBuffer
-	{
-		throw new NotImplementedException(); // todo: implement
-	}
+		where TBuffer : IReadOnlyBuffer => throw new NotImplementedException(); // todo: implement
 
 	/// <summary>
 	/// Tokenizes a stream passed to the lexer.

@@ -4,7 +4,6 @@ using System.Text;
 
 using OceanApocalypseStudios.RSML.Cache;
 using OceanApocalypseStudios.RSML.Diagnostics;
-using OceanApocalypseStudios.RSML.Diagnostics.ErrorCodes;
 
 
 namespace OceanApocalypseStudios.RSML.Sources;
@@ -23,9 +22,9 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer, ISupportsCache, IEquatable<
 {
 	private bool isDisposed;
 
-	private readonly List<int> lineStarts = [];
+	private int[] lineStarts = [];
 
-	private readonly List<int> precededByCrLf = [];
+	private int[] precededByCrLf = [];
 
 	private readonly string data;
 
@@ -59,7 +58,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer, ISupportsCache, IEquatable<
 		{
 			ComputeLineStarts();
 
-			return lineStarts.Count;
+			return lineStarts.Length;
 		}
 	}
 
@@ -140,34 +139,8 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer, ISupportsCache, IEquatable<
 	/// <inheritdoc/>
 	public Result<int> CountUntilEndOfLine(int index, out bool isCrLf)
 	{
-		isCrLf = false;
-
-		if (IsEmpty)
-			return Result.Failure<int>(new(InternalErrorCodes.EmptyBuffer, "The buffer is empty."));
-
-		if (index < 0)
-			index += Length;
-
-		if (IsConventionallyOutOfRange(index))
-			return Result.Failure<int>(new(InternalErrorCodes.IndexOutOfRange, "The index is greater than the buffer's length."));
-
-		if (index == Length)
-			return Result.Success(0); // consumed the entire buffer
-
 		ComputeLineStarts();
-
-		int lineSep = GetNextLineStartPosition(index, out _);
-		isCrLf = precededByCrLf.Contains(lineSep) && data[index] is not '\n'; // to us, CRLF is only when we're not standing on the LF
-
-		if (isCrLf)
-			lineSep--; // skip the extra line separator in the CRLF sequence
-
-		if (!(IsLastLine(index) && !data[^1].IsNewline())) // if we're not on the last line and it doesn't end with a newline then
-		{
-			lineSep--;
-		}
-
-		return Result.Success(lineSep - index);
+		return data.AsSpan().CountUntilEndOfLine(index, out isCrLf, lineStarts, precededByCrLf);
 	}
 
 	/// <remarks>
@@ -185,28 +158,8 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer, ISupportsCache, IEquatable<
 	/// :::
 	/// </remarks>
 	/// <inheritdoc/>
-	public Result<int> CountUntilNotWhitespace(int index)
-	{
-		if (IsEmpty)
-			return Result.Failure<int>(new(InternalErrorCodes.EmptyBuffer, "The buffer is empty."));
-
-		if (index < 0)
-			index = Length + index; // -1 is (Length-1) etc
-
-		if (IsConventionallyOutOfRange(index))
-			return Result.Failure<int>(new(InternalErrorCodes.IndexOutOfRange, "The index is greater than the buffer's length."));
-
-		if (index == Length)
-			return Result.Success(0); // consumed the entire buffer
-
-		var span = data.AsSpan(index);
-		int count = 0;
-
-		while (count < span.Length && Char.IsWhiteSpace(span[count]))
-			count++;
-
-		return Result.Success(count);
-	}
+	public Result<int> CountUntilNotWhitespace(int index) =>
+		data.AsSpan().CountUntilNotWhitespace(index);
 
 	/// <remarks>
 	/// :::info[EOF Conventions]
@@ -223,28 +176,8 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer, ISupportsCache, IEquatable<
 	/// :::
 	/// </remarks>
 	/// <inheritdoc/>
-	public Result<int> CountUntilWhitespace(int index)
-	{
-		if (IsEmpty)
-			return Result.Failure<int>(new(InternalErrorCodes.EmptyBuffer, "The buffer is empty."));
-
-		if (index < 0)
-			index = Length + index; // -1 is (Length-1) etc
-
-		if (IsConventionallyOutOfRange(index))
-			return Result.Failure<int>(new(InternalErrorCodes.IndexOutOfRange, "The index is greater than the buffer's length."));
-
-		if (index == Length)
-			return Result.Success(0); // consumed the entire buffer
-
-		var span = data.AsSpan(index);
-		int count = 0;
-
-		while (count < span.Length && !Char.IsWhiteSpace(span[count]))
-			count++;
-
-		return Result.Success(count);
-	}
+	public Result<int> CountUntilWhitespace(int index) =>
+		data.AsSpan().CountUntilWhitespace(index);
 
 	/// <remarks>
 	/// :::info[EOF Conventions]
@@ -261,30 +194,8 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer, ISupportsCache, IEquatable<
 	/// :::
 	/// </remarks>
 	/// <inheritdoc/>
-	public Result<int> CountWhile(Func<int, char, bool> predicate, int index)
-	{
-		ArgumentNullException.ThrowIfNull(predicate, nameof(predicate));
-
-		if (IsEmpty)
-			return Result.Failure<int>(new(InternalErrorCodes.EmptyBuffer, "The buffer is empty."));
-
-		if (index < 0)
-			index = Length + index; // -1 is (Length-1) etc
-
-		if (IsConventionallyOutOfRange(index))
-			return Result.Failure<int>(new(InternalErrorCodes.IndexOutOfRange, "The index is greater than the buffer's length."));
-
-		if (index == Length)
-			return Result.Success(0); // consumed the entire buffer
-
-		var span = data.AsSpan(index);
-		int count = 0;
-
-		while (count < span.Length && predicate(count, span[count]))
-			count++;
-
-		return Result.Success(count);
-	}
+	public Result<int> CountWhile(Func<int, char, bool> predicate, int index) =>
+		data.AsSpan().CountWhile(predicate, index); // todo: fix CA1062
 
 	/// <remarks>
 	/// :::info[EOF Conventions]
@@ -297,30 +208,8 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer, ISupportsCache, IEquatable<
 	/// <inheritdoc/>
 	public Result<int> GetLengthOfLine(int lineNumber)
 	{
-		if (IsEmpty)
-			return Result.Failure<int>(new(InternalErrorCodes.EmptyBuffer, "The buffer is empty."));
-
 		ComputeLineStarts();
-
-		if (lineNumber < 0 || lineNumber >= RawLineCount)
-			return Result.Failure<int>(new(InternalErrorCodes.LineNumberOutOfRange, "The line number must be non-negative and less than the amount of lines in the buffer."));
-
-		if (lineNumber == RawLineCount - 1)
-			return Result.Success(0); // EOF means the line is empty
-
-		int start = lineStarts[lineNumber];
-		int end = lineStarts[lineNumber + 1];
-
-		if (precededByCrLf.Contains(end))
-			end--; // skip the extra line separator in the CRLF sequence
-
-		if (!(lineNumber + 2 == RawLineCount && !data[^1].IsNewline()))
-		{
-			// if we're not on the last line and it doesn't end with newline then
-			end--; // skip one more line separator
-		}
-
-		return Result.Success(end - start);
+		return data.AsSpan().GetLengthOfLine(lineNumber, lineStarts, precededByCrLf);
 	}
 
 	/// <remarks>
@@ -350,19 +239,8 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer, ISupportsCache, IEquatable<
 	/// <inheritdoc/>
 	public Result<int> GetLineNumberFromIndex(int index)
 	{
-		if (IsEmpty)
-			return Result.Failure<int>(new(InternalErrorCodes.EmptyBuffer, "The buffer is empty."));
-
-		if (index < 0)
-			index += Length;
-
-		if (IsConventionallyOutOfRange(index))
-			return Result.Failure<int>(new(InternalErrorCodes.IndexOutOfRange, "The index is greater than the buffer's length."));
-
 		ComputeLineStarts();
-
-		GetPreviousOrCurrentLineStartPosition(index, out int lineSepIndex);
-		return Result.Success(lineSepIndex);
+		return data.AsSpan().GetLineNumberFromIndex(index, lineStarts);
 	}
 
 	/// <remarks>
@@ -376,21 +254,8 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer, ISupportsCache, IEquatable<
 	/// <inheritdoc/>
 	public Result<string> GetLine(int lineNumber)
 	{
-		if (IsEmpty)
-			return Result.Failure<string>(new(InternalErrorCodes.EmptyBuffer, "The buffer is empty."));
-
 		ComputeLineStarts();
-
-		if (lineNumber < 0 || lineNumber >= RawLineCount)
-			return Result.Failure<string>(new(InternalErrorCodes.LineNumberOutOfRange, "The line number must be non-negative and less than the amount of lines in the buffer."));
-
-		if (lineNumber + 1 == RawLineCount)
-			return Result.Success(""); // EOF means the line is empty
-
-		int start = lineStarts[lineNumber];
-		int length = GetLengthOfLine(lineNumber).Value; // this will never be an error because we have done exact same checks right above
-
-		return Result.Success(data.AsSpan(start, length).ToString());
+		return data.AsSpan().GetLine(lineNumber, lineStarts, precededByCrLf);
 	}
 
 	/// <inheritdoc/>
@@ -415,21 +280,8 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer, ISupportsCache, IEquatable<
 	/// <inheritdoc/>
 	public ReadOnlySpan<char> GetLineAsSpan(int lineNumber)
 	{
-		if (IsEmpty)
-			return [];
-
 		ComputeLineStarts();
-
-		if (lineNumber < 0 || lineNumber >= RawLineCount)
-			return [];
-
-		if (lineNumber + 1 == RawLineCount)
-			return []; // EOF means the line is empty
-
-		int start = lineStarts[lineNumber];
-		int length = GetLengthOfLine(lineNumber).Value; // this will never be an error because we have done exact same checks right above
-
-		return data.AsSpan(start, length);
+		return data.AsSpan().GetLineAsSpan(lineNumber, lineStarts, precededByCrLf);
 	}
 
 	/// <inheritdoc/>
@@ -451,34 +303,15 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer, ISupportsCache, IEquatable<
 	/// <inheritdoc/>
 	public Result<SourceLocation> GetSourceLocation(int index)
 	{
-		if (IsEmpty)
-			return Result.Failure<SourceLocation>(new(InternalErrorCodes.EmptyBuffer, "The buffer is empty."));
-
-		if (index < 0)
-			index += Length;
-
-		if (IsOutOfRange(index))
-			return Result.Failure<SourceLocation>(new(InternalErrorCodes.IndexOutOfRange, "The index is greater than the buffer's length or points to EOF."));
-
-		if (index == 0) // best "best" case = triple zero
-			return Result.Success<SourceLocation>(new(0, 0, 0));
-
 		ComputeLineStarts();
-		int lineNumber = GetLineNumberFromIndex(index).Value; // we have done the same checks this emthod does so it'll never be an error
-
-		return Result.Success<SourceLocation>(new(index, lineNumber, index - lineStarts[lineNumber]));
+		return data.AsSpan().GetSourceLocation(index, lineStarts);
 	}
 
 	/// <inheritdoc/>
 	public Result<SourceSpan> GetSourceSpan(int startIndex, int endIndex)
 	{
-		var start = GetSourceLocation(startIndex);
-		var end = GetSourceLocation(endIndex);
-
-		if (start.IsSuccessful && end.IsSuccessful)
-			return Result.Success<SourceSpan>(new(start.Value, end.Value));
-
-		return Result.Failure<SourceSpan>(start.IsError ? start.Error : end.Error);
+		ComputeLineStarts();
+		return data.AsSpan().GetSourceSpan(startIndex, endIndex, lineStarts);
 	}
 
 	/// <remarks>
@@ -490,19 +323,8 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer, ISupportsCache, IEquatable<
 	/// :::
 	/// </remarks>
 	/// <inheritdoc/>
-	public Result<string> Slice(int start, int length)
-	{
-		if (length < 0)
-			return Result.Failure<string>(new(InternalErrorCodes.IndexOutOfRange, "The slice length must be positive."));
-
-		if (start < 0)
-			start += Length;
-
-		if (IsConventionallyOutOfRange(start + length))
-			return Result.Failure<string>(new(InternalErrorCodes.IndexOutOfRange, "The slice's end index is out of range."));
-
-		return Result.Success(data.Substring(start, length));
-	}
+	public Result<string> Slice(int start, int length) =>
+		data.AsSpan().SliceAsResult(start, length);
 
 	/// <remarks>
 	/// :::warning[EOF Conventions]
@@ -534,23 +356,8 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer, ISupportsCache, IEquatable<
 	/// :::
 	/// </remarks>
 	/// <inheritdoc/>
-	public bool TryGetChar(int index, out char item)
-	{
-		item = '\0'; // default
-
-		if (IsEmpty)
-			return false;
-
-		if (index < 0)
-			index = Length + index; // -1 is (Length-1) etc
-
-		if (IsOutOfRange(index))
-			return false;
-
-		item = data[index];
-
-		return true;
-	}
+	public bool TryGetChar(int index, out char item) =>
+		data.AsSpan().TryGetChar(index, out item);
 
 	/// <remarks>
 	/// :::info[EOF Conventions]
@@ -560,7 +367,8 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer, ISupportsCache, IEquatable<
 	/// :::
 	/// </remarks>
 	/// <inheritdoc/>
-	public bool TryGetChar(SourceLocation location, out char item) => TryGetChar(location.Index, out item);
+	public bool TryGetChar(SourceLocation location, out char item) =>
+		TryGetChar(location.Index, out item);
 
 	/// <remarks>
 	/// :::info[EOF Conventions]
@@ -574,17 +382,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer, ISupportsCache, IEquatable<
 	public bool TryGetLine(int lineNumber, Span<char> destination)
 	{
 		ComputeLineStarts();
-
-		if (IsEmpty || lineNumber < 0 || lineNumber >= RawLineCount)
-			return false;
-
-		if (lineNumber + 1 == RawLineCount)
-			return true; // EOF means the line is empty (and destination is by default empty)
-
-		int start = lineStarts[lineNumber];
-		int length = GetLengthOfLine(lineNumber).Value; // guaranteed to not error out cuz the checks above protect from it
-
-		return data.AsSpan(start, length).TryCopyTo(destination);
+		return data.AsSpan().TryGetLine(lineNumber, destination, lineStarts, precededByCrLf);
 	}
 
 	/// <remarks>
@@ -695,11 +493,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer, ISupportsCache, IEquatable<
 			return;
 
 		if (disposing)
-		{
-			lineStarts.Clear();
-			precededByCrLf.Clear();
 			CacheExists = false;
-		}
 
 		isDisposed = true;
 	}
@@ -709,141 +503,12 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer, ISupportsCache, IEquatable<
 		if (CacheExists && !forceCache)
 			return;
 
-		var span = data.AsSpan();
+		var result = data.AsSpan().ComputeLineStarts();
 
-		lineStarts.Clear();
-		precededByCrLf.Clear();
-
-		lineStarts.Capacity = Math.Max(lineStarts.Capacity, span.Length / 25 + 32); // just a rough guess
-		precededByCrLf.Capacity = Math.Max(precededByCrLf.Capacity, span.Length / 25 + 16); // just a rough guess
-
-		/* the following line ensures that if the last line:
-		 * ends with CR, LF, U2028 or U2029
-		 * ends with CRLF
-		 * does not end with any of the above
-		 * 
-		 * it will be counted as a line no matter the outcome of the previous condition
-		 * this makes it more obvious from a human side like "bruv my string is abc\ndef two lines right"
-		 * it looks normal that there are 2 lines but someone will go "acshua'y, that's erm 1 line :skull:"
-		 * not with RSML's official buffers nah bro
-		*/
-		int lastIndex = span.EndsWith("\r\n") ? span.Length - 2 : span.Length - 1;
-		int i = 0;
-
-		lineStarts.Add(0); // 0 is by convention the start of line (and also the start of the buffer)
-
-		while (i < lastIndex)
-		{
-			if (!span[i].IsNewline())
-			{
-				i++;
-				continue;
-			}
-
-			bool isCrLf = i < lastIndex && span[i] == '\r' && span[i + 1] == '\n';
-			int nextStart = i + (isCrLf ? 2 : 1);
-			lineStarts.Add(nextStart);
-
-			if (isCrLf)
-				precededByCrLf.Add(nextStart);
-
-			i = nextStart;
-		}
-
-		lineStarts.Add(Length); // add the EOF as the start of a line
+		// xxx: avoid allocating these arrays
+		lineStarts = result[0].ToArray();
+		precededByCrLf = result[1].ToArray();
 
 		CacheExists = true;
 	}
-
-	/// <param name="insertionPoint">The insertion point of the next line start.</param>
-	/// <param name="lsListIndex">The index, in <see cref="lineStarts"/> where the line start is.</param>
-	/// <returns>The line start index, in <see cref="data"/>.</returns>
-	private int GetNextLineStartFromInsertionPoint(int insertionPoint, out int lsListIndex)
-	{
-		if (insertionPoint >= 0)
-		{
-			// 1st Case: the used index (might have been index + 1 based on the method that called this)
-			// points to an actual line start
-			lsListIndex = insertionPoint;
-			return lineStarts[insertionPoint];
-		}
-
-		int nextIndex = ~insertionPoint;
-
-		if (nextIndex == lineStarts.Count)
-		{
-			// 2nd Case: the next line start is outside of the buffer (EOF convention)
-			lsListIndex = nextIndex;
-			return Length;
-		}
-
-		lsListIndex = nextIndex;
-
-		return lineStarts[nextIndex]; // 3rd Case: we found the next line start
-	}
-
-	private int GetNextLineStartPosition(int index, out int lsListIndex) =>
-		// we use index + 1 to skip to the next line start if we're already standing on one :)
-		GetNextLineStartFromInsertionPoint(lineStarts.BinarySearch(index + 1), out lsListIndex);
-
-	/// <param name="insertionPoint">The insertion point of the next line start.</param>
-	/// <param name="lsListIndex">The index, in <see cref="lineStarts"/> where the line start is.</param>
-	/// <returns>The line start index, in <see cref="data"/>.</returns>
-	private int GetPreviousLineStartFromInsertionPoint(int insertionPoint, out int lsListIndex)
-	{
-		if (insertionPoint >= 0)
-		{
-			// 1st Case: the used index (might have been index + 1 based on the method that called this)
-			// points to an actual line start
-			lsListIndex = insertionPoint;
-			return lineStarts[insertionPoint];
-		}
-
-		int previousIndex = ~insertionPoint;
-
-		if (previousIndex == lineStarts.Count)
-		{
-			// 2nd Case: the next line start is outside of the buffer (EOF convention)
-			// however we're gonna decrement one because otherwise all indexes from the last line that are after
-			// start of said line suddenly become part of the EOF line
-			// however this might also mean we're at last character
-			lsListIndex = previousIndex;
-			return Length;
-		}
-
-		lsListIndex = previousIndex == 0 ? 0 : previousIndex - 1;
-
-		return lineStarts[lsListIndex]; // 3rd Case: we found the previous line start
-	}
-
-	private int GetPreviousOrCurrentLineStartPosition(int index, out int lsListIndex)
-	{
-		if (index > 0)
-		{
-			// when the index is greater than 0, we can safely get the previous line start without getting a big shitty error
-			// we use 0 as the start following standard conventions
-			return GetPreviousLineStartFromInsertionPoint(lineStarts.BinarySearch(index), out lsListIndex);
-		}
-
-		lsListIndex = 0;
-		return 0;
-	}
-
-	/// <summary>
-	/// True if index is greater than the length.
-	/// This allows for the EOF convention, where the EOF is a possible output for
-	/// some methods.
-	/// Does not protect against <see cref="ArgumentOutOfRangeException"/> and
-	/// <see cref="IndexOutOfRangeException"/>.
-	/// </summary>
-	private bool IsConventionallyOutOfRange(int index) => index < 0 || index > Length;
-
-	private bool IsLastLine(int index) => RawLineCount == 1 || index >= lineStarts[^2] && index < lineStarts[^1];
-
-	/// <summary>
-	/// True if index is greater than or equal to the length.
-	/// This prevents throwing <see cref="ArgumentOutOfRangeException"/>
-	/// or <see cref="IndexOutOfRangeException"/>.
-	/// </summary>
-	private bool IsOutOfRange(int index) => index < 0 || index >= Length;
 }
