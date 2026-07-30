@@ -22,7 +22,7 @@ public static class Result
 	public static Result<TValue> TryCatch<TValue, TException>(Func<TValue> check)
 		where TException : Exception
 	{
-		ArgumentNullException.ThrowIfNull(check, nameof(check));
+		ArgumentNullException.ThrowIfNull(check);
 
 		try
 		{
@@ -30,7 +30,7 @@ public static class Result
 		}
 		catch (TException ex)
 		{
-			return FromException<TValue>(ex, 5);
+			return FromException<TValue>(ex, ErrorCodes.InternalErrorCodes.UnhandledException.Code);
 		}
 	}
 
@@ -82,5 +82,5 @@ public static class Result
 	/// <param name="value">The result value if <paramref name="check"/> is not null.</param>
 	/// <returns>Either a successful result or a failure.</returns>
 	public static Result<TValue> FromNullable<TValue>(object? check, TValue value) =>
-		check is not null ? new(value) : new(new Diagnostic(new ErrorCode(ErrorCategory.Internal, 4), "Null-check failed: object is null."));
+		check is not null ? new(value) : new(new Diagnostic(ErrorCodes.InternalErrorCodes.NullCheckFailed, "Null-check failed: object is null."));
 }

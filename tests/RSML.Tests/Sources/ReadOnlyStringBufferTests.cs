@@ -112,8 +112,6 @@ public class ReadOnlyStringBufferTests
 	public void CountUntilEndOfLine_FailsIfOutOfRange(string data, int index)
 	{
 		var buffer = new ReadOnlyStringBuffer(data);
-
-		Debug.WriteLine("Expecting an exception...");
 		Assert.True(buffer.CountUntilEndOfLine(index, out bool isCrLf).IsError);
 		Assert.False(isCrLf);
 	}
@@ -170,7 +168,7 @@ public class ReadOnlyStringBufferTests
 	public void CountUntilNotWhitespace_FailsIfEmpty(int index)
 	{
 		var buffer = new ReadOnlyStringBuffer(String.Empty);
-		Assert.True(buffer.CountUntilWhitespace(index).IsError);
+		Assert.True(buffer.CountUntilNotWhitespace(index).IsError);
 	}
 
 	[Theory]
@@ -182,8 +180,6 @@ public class ReadOnlyStringBufferTests
 	public void CountUntilNotWhitespace_FailsIfOutOfRange(string data, int index)
 	{
 		var buffer = new ReadOnlyStringBuffer(data);
-
-		Debug.WriteLine("Expecting an exception...");
 		Assert.True(buffer.CountUntilNotWhitespace(index).IsError);
 	}
 
@@ -251,8 +247,6 @@ public class ReadOnlyStringBufferTests
 	public void CountUntilWhitespace_FailsIfOutOfRange(string data, int index)
 	{
 		var buffer = new ReadOnlyStringBuffer(data);
-
-		Debug.WriteLine("Expecting an exception...");
 		Assert.True(buffer.CountUntilWhitespace(index).IsError);
 	}
 
@@ -403,8 +397,6 @@ public class ReadOnlyStringBufferTests
 	public void CountWhile_FailsIfOutOfRange(string data, int index)
 	{
 		var buffer = new ReadOnlyStringBuffer(data);
-
-		Debug.WriteLine("Expecting an exception...");
 		Assert.True(buffer.CountWhile((_, _) => true, index).IsError);
 	}
 
