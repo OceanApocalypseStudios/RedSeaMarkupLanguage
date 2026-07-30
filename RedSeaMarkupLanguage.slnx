@@ -21,6 +21,12 @@
         <File Path="assets/logo.png" />
         <File Path="assets/icon.png" />
     </Folder>
+	<Folder Name="/Solution Items/Workflows/">
+		<File Path=".github/CODEOWNERS" />
+		<File Path=".github/dependabot.yml" />
+		<File Path=".github/workflows/release.yml" />
+		<File Path=".github/workflows/test.yml" />
+	</Folder>
 
 	<Folder Name="/Source/">
 		<Project Path="src/RSML.CLI/RSML.CLI.csproj">
