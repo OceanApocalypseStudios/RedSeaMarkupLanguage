@@ -48,7 +48,7 @@ jobs:
         run: dotnet build --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test --framework net10.0 --configuration Release --no-build
+        run: dotnet test --framework net10.0 --configuration Release --no-build -- --coverage --coverage-output-format xml
 
   sonarqube:
     name: Build and analyze
@@ -91,6 +91,13 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          ${{ runner.temp }}/scanner/dotnet-sonarscanner begin /k:"OceanApocalypseStudios_RedSeaMarkupLanguage" /o:"oceanapocalypsestudios" /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+          ${{ runner.temp }}/scanner/dotnet-sonarscanner begin \
+            /k:"OceanApocalypseStudios_RedSeaMarkupLanguage" \
+            /o:"oceanapocalypsestudios" \
+            /d:sonar.token="${{ secrets.SONAR_TOKEN }}" \
+            /d:sonar.cs.vscoveragexml.reportsPaths="**/TestResults/**/*.xml" \
+            /d:sonar.exclusions="**/*.png,**/*.jpg,**/*.jpeg,**/*.ico,**/*.gif"
+
           dotnet build
+
           ${{ runner.temp }}/scanner/dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
