@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace OceanApocalypseStudios.RSML.CLI;
 
-#pragma warning disable S1118 // it's en entry point
+#pragma warning disable S1118 // it's an entry point class
 internal sealed class Program
 #pragma warning restore S1118
 {

@@ -83,7 +83,7 @@ jobs:
             /k:"OceanApocalypseStudios_RedSeaMarkupLanguage" \
             /o:"oceanapocalypsestudios" \
             /d:sonar.token="$SONAR_TOKEN" \
-            /d:sonar.cs.vscoveragexml.reportsPaths="**/TestResults/**/*.xml" \
+            /d:sonar.cs.vscoveragexml.reportsPaths="TestResults/*.xml" \
             /d:sonar.exclusions="**/*.png,**/*.jpg,**/*.jpeg,**/*.ico,**/*.gif"
 
       - name: Build

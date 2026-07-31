@@ -8,16 +8,16 @@
 		<OutputType>Library</OutputType>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 
-		<RootNamespace>OceanApocalypseStudios.RSML</RootNamespace>
+		<RootNamespace>OceanApocalypseStudios.RSML.Toolchain.Abstractions</RootNamespace>
 	</PropertyGroup>
 
 	<PropertyGroup Label="NuGet Package Setup">
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 
-		<PackageId>OceanApocalypseStudios.RSML</PackageId>
-		<Title>Red Sea Markup Language (RSML)</Title>
+		<PackageId>OceanApocalypseStudios.RSML.Toolchain.Abstractions</PackageId>
+		<Title>RSML Abstractions</Title>
 		<Description>The only markup language that dynamically interprets different logic paths based on an host's OS and CPU architecture.</Description>
-		
+
 		<PackageProjectUrl>https://oceanapocalypsestudios.org/rsml-docs/</PackageProjectUrl>
 		<PackageIcon>icon.png</PackageIcon>
 		<RepositoryUrl>https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/</RepositoryUrl>
@@ -28,7 +28,6 @@
 
 	<PropertyGroup Label="Debug Build" Condition="'$(Configuration)' == 'Debug'">
 		<DebugType>full</DebugType>
-		<CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
 	</PropertyGroup>
 
 	<PropertyGroup Label="Release (Optimized) Build" Condition="'$(Configuration)' == 'Release'">
@@ -50,6 +49,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		
+		<PackageReference Include="Microsoft.Bcl.HashCode" />
+		<PackageReference Include="System.Collections.Immutable" />
+		<PackageReference Include="System.Memory" />
+		<PackageReference Include="PolySharp">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 	</ItemGroup>
 </Project>

@@ -17,6 +17,7 @@ Note for future self:
 		<Nullable>enable</Nullable>
 		<LangVersion>14</LangVersion>
 		<Platforms>AnyCPU;ARM64;x64;x86;ARM32</Platforms>
+		<CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
 
 		<!-- NuGet Package Setup -->
 		<Authors>OceanApocalypseStudios</Authors>

@@ -13,6 +13,8 @@
 		<File Path="cliff.toml" />
 		<File Path="README.md" />
 		<File Path="Directory.Build.props" />
+        <File Path="Directory.Build.targets" />
+		<File Path="Directory.Packages.props" />
         <File Path="LICENSE.txt" />
 		<File Path="SECURITY.md" />
 	</Folder>
@@ -35,13 +37,49 @@
 			<Platform Solution="*|x64" Project="x64" />
 			<Platform Solution="*|x86" Project="x86" />
 		</Project>
-		<Project Path="src/RSML.Extensibility/RSML.Extensibility.csproj" Id="de53662d-20b1-4289-a51b-43c3c401bbd7">
+		<Project Path="src/RSML.Language.Lexing/RSML.Language.Lexing.csproj" Id="703e357b-7521-426c-94f3-9ed41f2c81fa">
 			<Platform Solution="*|ARM32" Project="ARM32" />
 			<Platform Solution="*|ARM64" Project="ARM64" />
 			<Platform Solution="*|x64" Project="x64" />
 			<Platform Solution="*|x86" Project="x86" />
 		</Project>
-		<Project Path="src/RSML.Native/RSML.Native.csproj">
+		<Project Path="src/RSML.Language.Parsing/RSML.Language.Parsing.csproj" Id="834983b4-d272-494d-9747-bc7098c98671">
+			<Platform Solution="*|ARM32" Project="ARM32" />
+			<Platform Solution="*|ARM64" Project="ARM64" />
+			<Platform Solution="*|x64" Project="x64" />
+			<Platform Solution="*|x86" Project="x86" />
+		</Project>
+		<Project Path="src/RSML.Toolchain.Abstractions/RSML.Toolchain.Abstractions.csproj" Id="6ec4bfa1-7021-4240-9c92-c2e4d86ebfe6">
+			<Platform Solution="*|ARM32" Project="ARM32" />
+			<Platform Solution="*|ARM64" Project="ARM64" />
+			<Platform Solution="*|x64" Project="x64" />
+			<Platform Solution="*|x86" Project="x86" />
+		</Project>
+		<Project Path="src/RSML.Toolchain.Execution/RSML.Toolchain.Execution.csproj" Id="18c14a5b-4ebc-458a-83f2-82cba558be9f">
+			<Platform Solution="*|ARM32" Project="ARM32" />
+			<Platform Solution="*|ARM64" Project="ARM64" />
+			<Platform Solution="*|x64" Project="x64" />
+			<Platform Solution="*|x86" Project="x86" />
+		</Project>
+		<Project Path="src/RSML.Toolchain.Extensibility.Execution/RSML.Toolchain.Extensibility.Execution.csproj" Id="435a14bf-45db-4508-9058-63e014f1e937">
+			<Platform Solution="*|ARM32" Project="ARM32" />
+			<Platform Solution="*|ARM64" Project="ARM64" />
+			<Platform Solution="*|x64" Project="x64" />
+			<Platform Solution="*|x86" Project="x86" />
+		</Project>
+		<Project Path="src/RSML.Toolchain.Extensibility.Lexing/RSML.Toolchain.Extensibility.Lexing.csproj" Id="f6860668-2f67-4a70-b45c-8ac97bad9d72">
+			<Platform Solution="*|ARM32" Project="ARM32" />
+			<Platform Solution="*|ARM64" Project="ARM64" />
+			<Platform Solution="*|x64" Project="x64" />
+			<Platform Solution="*|x86" Project="x86" />
+		</Project>
+		<Project Path="src/RSML.Toolchain.Extensibility.Parsing/RSML.Toolchain.Extensibility.Parsing.csproj" Id="226e3834-acc1-4ff9-8d40-f634d68463a0">
+			<Platform Solution="*|ARM32" Project="ARM32" />
+			<Platform Solution="*|ARM64" Project="ARM64" />
+			<Platform Solution="*|x64" Project="x64" />
+			<Platform Solution="*|x86" Project="x86" />
+		</Project>
+		<Project Path="src/RSML.Toolchain.Sources/RSML.Toolchain.Sources.csproj" Id="2d823e97-6c73-493b-ad3e-62fefda05206">
 			<Platform Solution="*|ARM32" Project="ARM32" />
 			<Platform Solution="*|ARM64" Project="ARM64" />
 			<Platform Solution="*|x64" Project="x64" />
@@ -55,15 +93,23 @@
 		</Project>
 	</Folder>
 
+    <Folder Name="/Source/Benchmarks/">
+    	<Project Path="benchmarks/RSML.Benchmarks.csproj">
+    		<Platform Solution="*|ARM32" Project="ARM32" />
+    		<Platform Solution="*|ARM64" Project="ARM64" />
+    		<Platform Solution="*|x64" Project="x64" />
+    		<Platform Solution="*|x86" Project="x86" />
+    	</Project>
+    </Folder>
+
 	<Folder Name="/Source/Tests/">
 		<File Path="tests/Directory.Build.props" />
-		<Project Path="benchmarks/RSML.Benchmarks.csproj">
+		<Project Path="tests/RSML.InternalTests/RSML.InternalTests.csproj" Id="bcf74754-66fd-40c5-9faa-6d803d66467f">
 			<Platform Solution="*|ARM32" Project="ARM32" />
 			<Platform Solution="*|ARM64" Project="ARM64" />
 			<Platform Solution="*|x64" Project="x64" />
 			<Platform Solution="*|x86" Project="x86" />
 		</Project>
-		<Project Path="tests/RSML.InternalTests/RSML.InternalTests.csproj" Id="bcf74754-66fd-40c5-9faa-6d803d66467f" />
 		<Project Path="tests/RSML.NativeTests/RSML.NativeTests.csproj" Id="9c3a8c42-d460-4a2a-bcb0-5363a9d7022c">
 			<Platform Solution="*|ARM32" Project="ARM32" />
 			<Platform Solution="*|ARM64" Project="ARM64" />

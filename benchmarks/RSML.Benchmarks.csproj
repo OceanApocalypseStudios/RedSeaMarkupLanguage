@@ -13,12 +13,14 @@
 		<Configuration>Release</Configuration>
 		<IsPackable>false</IsPackable>
 	</PropertyGroup>
+
 	<ItemGroup>
-		<PackageReference Include="BenchmarkDotNet" Version="0.15.8" />
-		<PackageReference Include="BenchmarkDotNet.Diagnostics.Windows" Version="0.15.8" Condition="'$(OS)' == 'Windows_NT'" />
+		<PackageReference Include="BenchmarkDotNet" />
+		<PackageReference Include="BenchmarkDotNet.Diagnostics.Windows" Condition="'$(OS)' == 'Windows_NT'" />
 	</ItemGroup>
+
 	<ItemGroup>
-		<ProjectReference Include="..\src\RSML\RSML.csproj" />
-		<ProjectReference Include="..\src\RSML.Extensibility\RSML.Extensibility.csproj" />
+		<ProjectReference Include="..\src\RSML.Toolchain.Abstractions\RSML.Toolchain.Abstractions.csproj" />
+		<ProjectReference Include="..\src\RSML.Toolchain.Sources\RSML.Toolchain.Sources.csproj" />
 	</ItemGroup>
 </Project>

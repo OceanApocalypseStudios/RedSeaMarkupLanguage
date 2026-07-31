@@ -6,7 +6,7 @@ using BenchmarkDotNet.Engines;
 using BenchmarkDotNet.Jobs;
 
 using OceanApocalypseStudios.RSML.Benchmarks.Helpers;
-using OceanApocalypseStudios.RSML.Sources;
+using OceanApocalypseStudios.RSML.Toolchain.Sources;
 
 
 namespace OceanApocalypseStudios.RSML.Benchmarks.Sources;
@@ -41,15 +41,6 @@ public class BufferBenchmarks : IDisposable
 	[Benchmark]
 	public void ReadOnlyStringBuffer_GetLine()
 	{
-		for (int i = 0; i <= data.Length; i++)
-			consumer.Consume(buffer.GetLineNumberFromIndex(i));
-	}
-
-	[Benchmark]
-	public void ReadOnlySpanBuffer_GetLine()
-	{
-		using var buffer = new ReadOnlySpanBuffer(data);
-
 		for (int i = 0; i <= data.Length; i++)
 			consumer.Consume(buffer.GetLineNumberFromIndex(i));
 	}
