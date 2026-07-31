@@ -75,9 +75,6 @@ jobs:
           mkdir -p ${{ runner.temp }}/scanner
           dotnet tool update dotnet-sonarscanner --tool-path ${{ runner.temp }}/scanner
 
-      - name: Install dotnet-coverage
-        run: dotnet tool install --global dotnet-coverage
-
       - name: Being analysis
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -86,14 +83,14 @@ jobs:
             /k:"OceanApocalypseStudios_RedSeaMarkupLanguage" \
             /o:"oceanapocalypsestudios" \
             /d:sonar.token="$SONAR_TOKEN" \
-            /d:sonar.cs.vscoveragexml.reportsPaths="coverage.xml" \
+            /d:sonar.cs.vscoveragexml.reportsPaths="**/TestResults/**/*.xml" \
             /d:sonar.exclusions="**/*.png,**/*.jpg,**/*.jpeg,**/*.ico,**/*.gif"
 
       - name: Build
         run: dotnet build --configuration Release --no-restore
 
       - name: Test
-        run: dotnet-coverage collect "dotnet test --framework net10.0 --configuration Release --no-build" -f xml -o coverage.xml
+        run: dotnet test --framework net10.0 --configuration Debug --no-build -- --coverage --coverage-output-format xml
 
       - name: End analysis
         env:
