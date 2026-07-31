@@ -63,7 +63,7 @@ public readonly struct SourceSpan : IFormattable, IEquatable<SourceSpan>
 	/// </summary>
 	/// <param name="other">The span to check against</param>
 	/// <returns>True if equals</returns>
-	public bool Equals(SourceSpan other) => other is SourceSpan span && Start.Equals(span.Start) && End.Equals(span.End);
+	public bool Equals(SourceSpan other) => Start.Equals(other.Start) && End.Equals(other.End);
 
 	/// <summary>
 	/// Checks whether two <see cref="SourceSpan"/>s are equals.
@@ -91,7 +91,7 @@ public readonly struct SourceSpan : IFormattable, IEquatable<SourceSpan>
 	/// <returns>The string representation.</returns>
 	public string ToString(IReadOnlyBuffer buffer)
 	{
-		ArgumentNullException.ThrowIfNull(buffer, nameof(buffer));
+		ArgumentNullException.ThrowIfNull(buffer);
 		Span<char> destination = stackalloc char[Length];
 		return buffer.TrySlice(Start.Index, destination) ? destination.ToString() : ToString();
 	}
@@ -103,7 +103,7 @@ public readonly struct SourceSpan : IFormattable, IEquatable<SourceSpan>
 	/// <param name="format">The format. Available formats are: CTOR (constructor-like string) and JSON (struct as JSON).</param>
 	/// <param name="formatProvider">Unused. Don't bother assigning it anything.</param>
 	/// <returns>The string representation.</returns>
-	public string ToString(string? format, IFormatProvider? formatProvider = null) =>
+	public string ToString(string? format, IFormatProvider? formatProvider) =>
 		format switch
 		{
 			"CTOR" or "I" or "INIT" or "NET" => $"new SourceSpan({Start.ToString("ctor", null)}, {End.ToString("ctor", null)})",

@@ -18,7 +18,7 @@ namespace OceanApocalypseStudios.RSML.Sources;
 /// If you wish to avoid allocating this buffer, it's recommended to take a look at <see cref="ReadOnlySpanBuffer"/>.
 /// :::
 /// </remarks>
-public class ReadOnlyStringBuffer : IReadOnlyBuffer, ISupportsCache, IEquatable<string?>
+public sealed class ReadOnlyStringBuffer : IReadOnlyBuffer, ISupportsCache
 {
 	private bool isDisposed;
 
@@ -194,8 +194,11 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer, ISupportsCache, IEquatable<
 	/// :::
 	/// </remarks>
 	/// <inheritdoc/>
-	public Result<int> CountWhile(Func<int, char, bool> predicate, int index) =>
-		data.AsSpan().CountWhile(predicate, index); // todo: fix CA1062
+	public Result<int> CountWhile(Func<int, char, bool> predicate, int index)
+	{
+		ArgumentNullException.ThrowIfNull(predicate);
+		return data.AsSpan().CountWhile(predicate, index);
+	}
 
 	/// <remarks>
 	/// :::info[EOF Conventions]
@@ -462,7 +465,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer, ISupportsCache, IEquatable<
 	public bool Equals(string? other) => other is not null && Length == other.Length && data.Equals(other, StringComparison.Ordinal);
 
 	/// <inheritdoc/>
-	public override int GetHashCode() => unchecked(HashCode.Combine(data, lineStarts, precededByCrLf));
+	public override int GetHashCode() => unchecked(data.AsSpan().GetHashCodeForSpan());
 
 	/// <summary>
 	/// Returns the buffer's content as a <see cref="String"/>.
@@ -487,7 +490,7 @@ public class ReadOnlyStringBuffer : IReadOnlyBuffer, ISupportsCache, IEquatable<
 	/// Disposes of both managed and unmanaged resources.
 	/// </summary>
 	/// <param name="disposing">When set to <c>false</c>, disposes of unmanaged resources only.</param>
-	protected virtual void Dispose(bool disposing)
+	private void Dispose(bool disposing)
 	{
 		if (isDisposed)
 			return;

@@ -2,13 +2,12 @@ using System;
 
 using OceanApocalypseStudios.RSML.Diagnostics;
 
-
 namespace OceanApocalypseStudios.RSML.Sources;
 
 /// <summary>
 /// Represents a read-only buffer of characters.
 /// </summary>
-public interface IReadOnlyBuffer : IDisposable, IEquatable<IReadOnlyBuffer?>, IEquatable<char[]?>, IEquatable<string?>, IEquatable<ReadOnlyMemory<char>>
+public interface IReadOnlyBuffer : IDisposable, IEquatable<IReadOnlyBuffer>, IEquatable<char[]?>, IEquatable<string?>, IEquatable<ReadOnlyMemory<char>>
 {
 	// todo: add methods that can mutate the buffer (coming to v3.0.0-prerelease2)
 

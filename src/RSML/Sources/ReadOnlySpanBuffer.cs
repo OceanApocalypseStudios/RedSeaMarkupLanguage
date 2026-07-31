@@ -164,8 +164,11 @@ public ref struct ReadOnlySpanBuffer : IReadOnlyBuffer, ISupportsCache
 	/// :::
 	/// </remarks>
 	/// <inheritdoc/>
-	public readonly Result<int> CountWhile(Func<int, char, bool> predicate, int index) =>
-		data.CountWhile(predicate, index); // todo: fix CA1062
+	public readonly Result<int> CountWhile(Func<int, char, bool> predicate, int index)
+	{
+		ArgumentNullException.ThrowIfNull(predicate);
+		return data.CountWhile(predicate, index);
+	}
 
 	/// <remarks>
 	/// :::info[EOF Conventions]
@@ -441,17 +444,7 @@ public ref struct ReadOnlySpanBuffer : IReadOnlyBuffer, ISupportsCache
 	public override readonly string ToString() => data.ToString();
 
 	/// <inheritdoc/>
-	public override int GetHashCode()
-	{
-		unchecked
-		{
-			var hashCode = new HashCode();
-			hashCode.Add(data.GetHashCodeForSpan());
-			hashCode.Add(lineStarts.GetHashCodeForSpan());
-			hashCode.Add(precededByCrLf.GetHashCodeForSpan());
-			return hashCode.ToHashCode();
-		}
-	}
+	public override readonly int GetHashCode() => unchecked(data.GetHashCodeForSpan());
 
 	/// <summary>
 	/// Checks if two read-only span buffers are equals.
@@ -477,5 +470,5 @@ public ref struct ReadOnlySpanBuffer : IReadOnlyBuffer, ISupportsCache
 		precededByCrLf = new(result[1].ToArray());
 
 		CacheExists = true;
-	}	
+	}
 }

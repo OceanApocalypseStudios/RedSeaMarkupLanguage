@@ -2,10 +2,11 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-
 namespace OceanApocalypseStudios.RSML.CLI;
 
+#pragma warning disable S1118 // it's en entry point
 internal sealed class Program
+#pragma warning restore S1118
 {
 	private static void Main(string[] args)
 	{
@@ -16,26 +17,26 @@ internal sealed class Program
 				.GetName()
 				.Version
 				?.ToString()
-			?? "Not Found")
+			)
 		);
 		Console.WriteLine("File Version: " +
 			(Assembly.GetExecutingAssembly()
 				.GetCustomAttribute<AssemblyFileVersionAttribute>()
 				?.Version
-			?? "Not Found")
+			)
 		);
 		Console.WriteLine("Informational Version: " +
 			(Assembly.GetExecutingAssembly()
 				.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
 				?.InformationalVersion
-			?? "Not Found")
+			)
 		);
 		Console.WriteLine("Semantic Version: " +
 			(Assembly.GetExecutingAssembly()
 				.GetCustomAttributes<AssemblyMetadataAttribute>()
 				.FirstOrDefault(a => a.Key == "SemVersion")
 				?.Value
-			?? "Not Found")
+			)
 		);
 	}
 }

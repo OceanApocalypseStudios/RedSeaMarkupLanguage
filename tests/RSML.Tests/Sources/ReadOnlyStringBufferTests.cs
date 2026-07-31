@@ -829,37 +829,37 @@ public class ReadOnlyStringBufferTests
 
 	[Theory]
 	#region String ends with newline
-	[InlineData(TestString01, 0, 0, 0, 0, 3, 3, 0, 3)]
-	[InlineData(TestString01, 3, 3, 0, 3, 5, 5, 1, 0)]
-	[InlineData(TestString01, 4, 4, 0, 4, 33, 33, 6, 1)]
-	[InlineData(TestString01, 5, 5, 1, 0, 6, 6, 1, 1)]
-	[InlineData(TestString01, 6, 6, 1, 1, 15, 15, 3, 2)]
-	[InlineData(TestString01, 13, 13, 3, 0, 16, 16, 3, 3)]
-	[InlineData(TestString01, 15, 15, 3, 2, 22, 22, 4, 1)]
-	[InlineData(TestString01, 28, 28, 4, 7, -5, 29, 4, 8)]
-	[InlineData(TestString01, 30, 30, 5, 0, 32, 32, 6, 0)]
-	[InlineData(TestString01, -3, 31, 5, 1, 33, 33, 6, 1)]
+	[InlineData(TestString01, 0, 3, new int[] { 0, 0, 0, 3, 0, 3 })]
+	[InlineData(TestString01, 3, 5, new int[] { 3, 0, 3, 5, 1, 0 })]
+	[InlineData(TestString01, 4, 33, new int[] { 4, 0, 4, 33, 6, 1 })]
+	[InlineData(TestString01, 5, 6, new int[] { 5, 1, 0, 6, 1, 1 })]
+	[InlineData(TestString01, 6, 15, new int[] { 6, 1, 1, 15, 3, 2 })]
+	[InlineData(TestString01, 13, 16, new int[] { 13, 3, 0, 16, 3, 3 })]
+	[InlineData(TestString01, 15, 22, new int[] { 15, 3, 2, 22, 4, 1 })]
+	[InlineData(TestString01, 28, -5, new int[] { 28, 4, 7, 29, 4, 8 })]
+	[InlineData(TestString01, 30, 32, new int[] { 30, 5, 0, 32, 6, 0 })]
+	[InlineData(TestString01, -3, 33, new int[] { 31, 5, 1, 33, 6, 1 })]
 	#endregion
-	#region String ends without newline
-	[InlineData(TestString02, 0, 0, 0, 0, 3, 3, 0, 3)]
-	[InlineData(TestString02, 4, 4, 0, 4, 5, 5, 1, 0)]
-	[InlineData(TestString02, 6, 6, 1, 1, 22, 22, 4, 1)]
-	[InlineData(TestString02, 13, 13, 3, 0, 15, 15, 3, 2)]
-	[InlineData(TestString02, 29, 29, 4, 8, -2, 31, 5, 1)]
-	[InlineData(TestString02, 30, 30, 5, 0, -1, 32, 6, 0)]
+	#region String ends with newline
+	[InlineData(TestString02, 0, 3, new int[] { 0, 0, 0, 3, 0, 3 })]
+	[InlineData(TestString02, 3, 5, new int[] { 3, 0, 3, 5, 1, 0 })]
+	[InlineData(TestString02, 5, 6, new int[] { 5, 1, 0, 6, 1, 1 })]
+	[InlineData(TestString02, 6, 15, new int[] { 6, 1, 1, 15, 3, 2 })]
+	[InlineData(TestString02, 13, 16, new int[] { 13, 3, 0, 16, 3, 3 })]
+	[InlineData(TestString02, 15, 22, new int[] { 15, 3, 2, 22, 4, 1 })]
 	#endregion
-	public void GetSourceSpan(string data, int startIndex, int expectedStartIndex, int expectedStartLine, int expectedStartColumn, int endIndex, int expectedEndIndex, int expectedEndLine, int expectedEndColumn)
+	public void GetSourceSpan(string data, int startIndex, int endIndex, int[] expectations)
 	{
 		var buffer = new ReadOnlyStringBuffer(data);
 		var span = buffer.GetSourceSpan(startIndex, endIndex).Value;
 
-		Assert.Equal(expectedStartIndex, span.Start.Index);
-		Assert.Equal(expectedStartLine, span.Start.Line);
-		Assert.Equal(expectedStartColumn, span.Start.Column);
+		Assert.Equal(expectations[0], span.Start.Index);
+		Assert.Equal(expectations[1], span.Start.Line);
+		Assert.Equal(expectations[2], span.Start.Column);
 
-		Assert.Equal(expectedEndIndex, span.End.Index);
-		Assert.Equal(expectedEndLine, span.End.Line);
-		Assert.Equal(expectedEndColumn, span.End.Column);
+		Assert.Equal(expectations[3], span.End.Index);
+		Assert.Equal(expectations[4], span.End.Line);
+		Assert.Equal(expectations[5], span.End.Column);
 	}
 
 	[Theory]
@@ -960,7 +960,9 @@ public class ReadOnlyStringBufferTests
 	[InlineData(TestString05)]
 	[InlineData(TestString06)]
 	#endregion
+#pragma warning disable S6640 // needed for testing
 	public unsafe void Constructor_BytePointer(string data)
+#pragma warning restore S6640
 	{
 		var byteCount = Encoding.Default.GetByteCount(data);
 

@@ -8,6 +8,9 @@ namespace OceanApocalypseStudios.RSML.Sources;
 
 internal static class BufferExtensions
 {
+	private const string EmptyBufferMessage = "The buffer is empty.";
+	private const string IndexGreaterThanLengthMessage = "The index is greater than the buffer's length.";
+
 	/// <summary>
 	/// True if index is greater than or equal to the length.
 	/// This prevents throwing <see cref="ArgumentOutOfRangeException"/>
@@ -18,16 +21,15 @@ internal static class BufferExtensions
 	/// <param name="lineStarts"></param>
 	/// <param name="insertionPoint">The insertion point of the next line start.</param>
 	/// <param name="lsListIndex">The index, in <paramref name="lineStarts"/> where the line start is.</param>
-	/// <param name="length"></param>
 	/// <returns>The line start index, in the span.</returns>
-	private static int GetPreviousLineStartFromInsertionPoint(ReadOnlySpan<int> lineStarts, int insertionPoint, out int lsListIndex, int length)
+	private static void GetPreviousLineStartFromInsertionPoint(ReadOnlySpan<int> lineStarts, int insertionPoint, out int lsListIndex)
 	{
 		if (insertionPoint >= 0)
 		{
 			// 1st Case: the used index (might have been index + 1 based on the method that called this)
 			// points to an actual line start
 			lsListIndex = insertionPoint;
-			return lineStarts[insertionPoint];
+			return; // this would return lineStarts indexed at insertionPoint;
 		}
 
 		int previousIndex = ~insertionPoint;
@@ -39,25 +41,25 @@ internal static class BufferExtensions
 			// start of said line suddenly become part of the EOF line
 			// however this might also mean we're at last character
 			lsListIndex = previousIndex;
-			return length;
+			return; // this would return length;
 		}
 
 		lsListIndex = previousIndex == 0 ? 0 : previousIndex - 1;
-
-		return lineStarts[lsListIndex]; // 3rd Case: we found the previous line start
+		// this would return lineStarts[lsListIndex]; // 3rd Case: we found the previous line start
 	}
 
-	private static int GetPreviousOrCurrentLineStartPosition(ReadOnlySpan<int> lineStarts, int index, out int lsListIndex, int spanLength)
+	private static void GetPreviousOrCurrentLineStartPosition(ReadOnlySpan<int> lineStarts, int index, out int lsListIndex)
 	{
 		if (index > 0)
 		{
 			// when the index is greater than 0, we can safely get the previous line start without getting a big shitty error
 			// we use 0 as the start following standard conventions
-			return GetPreviousLineStartFromInsertionPoint(lineStarts, lineStarts.BinarySearch(index), out lsListIndex, spanLength);
+			GetPreviousLineStartFromInsertionPoint(lineStarts, lineStarts.BinarySearch(index), out lsListIndex);
 		}
-
-		lsListIndex = 0;
-		return 0;
+		else
+		{
+			lsListIndex = 0;
+		}
 	}
 
 	/// <summary>
@@ -106,13 +108,13 @@ internal static class BufferExtensions
 			isCrLf = false;
 
 			if (span.Length == 0)
-				return Result.Failure<int>(new(InternalErrorCodes.EmptyBuffer, "The buffer is empty."));
+				return Result.Failure<int>(new(InternalErrorCodes.EmptyBuffer, EmptyBufferMessage));
 
 			if (index < 0)
 				index += span.Length;
 
 			if (IsConventionallyOutOfRange(index, span.Length))
-				return Result.Failure<int>(new(InternalErrorCodes.IndexOutOfRange, "The index is greater than the buffer's length."));
+				return Result.Failure<int>(new(InternalErrorCodes.IndexOutOfRange, IndexGreaterThanLengthMessage));
 
 			if (index == span.Length)
 				return Result.Success(0); // consumed the entire buffer
@@ -134,13 +136,13 @@ internal static class BufferExtensions
 		public Result<int> CountUntilNotWhitespace(int index)
 		{
 			if (span.Length == 0)
-				return Result.Failure<int>(new(InternalErrorCodes.EmptyBuffer, "The buffer is empty."));
+				return Result.Failure<int>(new(InternalErrorCodes.EmptyBuffer, EmptyBufferMessage));
 
 			if (index < 0)
 				index = span.Length + index; // -1 is (Length-1) etc
 
 			if (IsConventionallyOutOfRange(index, span.Length))
-				return Result.Failure<int>(new(InternalErrorCodes.IndexOutOfRange, "The index is greater than the buffer's length."));
+				return Result.Failure<int>(new(InternalErrorCodes.IndexOutOfRange, IndexGreaterThanLengthMessage));
 
 			if (index == span.Length)
 				return Result.Success(0); // consumed the entire buffer
@@ -157,13 +159,13 @@ internal static class BufferExtensions
 		public Result<int> CountUntilWhitespace(int index)
 		{
 			if (span.Length == 0)
-				return Result.Failure<int>(new(InternalErrorCodes.EmptyBuffer, "The buffer is empty."));
+				return Result.Failure<int>(new(InternalErrorCodes.EmptyBuffer, EmptyBufferMessage));
 
 			if (index < 0)
 				index = span.Length + index; // -1 is (Length-1) etc
 
 			if (IsConventionallyOutOfRange(index, span.Length))
-				return Result.Failure<int>(new(InternalErrorCodes.IndexOutOfRange, "The index is greater than the buffer's length."));
+				return Result.Failure<int>(new(InternalErrorCodes.IndexOutOfRange, IndexGreaterThanLengthMessage));
 
 			if (index == span.Length)
 				return Result.Success(0); // consumed the entire buffer
@@ -179,16 +181,14 @@ internal static class BufferExtensions
 
 		public Result<int> CountWhile(Func<int, char, bool> predicate, int index)
 		{
-			ArgumentNullException.ThrowIfNull(predicate, nameof(predicate));
-
 			if (span.Length == 0)
-				return Result.Failure<int>(new(InternalErrorCodes.EmptyBuffer, "The buffer is empty."));
+				return Result.Failure<int>(new(InternalErrorCodes.EmptyBuffer, EmptyBufferMessage));
 
 			if (index < 0)
 				index = span.Length + index; // -1 is (Length-1) etc
 
 			if (IsConventionallyOutOfRange(index, span.Length))
-				return Result.Failure<int>(new(InternalErrorCodes.IndexOutOfRange, "The index is greater than the buffer's length."));
+				return Result.Failure<int>(new(InternalErrorCodes.IndexOutOfRange, IndexGreaterThanLengthMessage));
 
 			if (index == span.Length)
 				return Result.Success(0); // consumed the entire buffer
@@ -205,7 +205,7 @@ internal static class BufferExtensions
 		public Result<int> GetLengthOfLine(int lineNumber, ReadOnlySpan<int> lineStarts, ReadOnlySpan<int> precededByCrLf)
 		{
 			if (span.Length == 0)
-				return Result.Failure<int>(new(InternalErrorCodes.EmptyBuffer, "The buffer is empty."));
+				return Result.Failure<int>(new(InternalErrorCodes.EmptyBuffer, EmptyBufferMessage));
 
 			if (lineNumber < 0 || lineNumber >= lineStarts.Length)
 				return Result.Failure<int>(new(InternalErrorCodes.LineNumberOutOfRange, "The line number must be non-negative and less than the amount of lines in the buffer."));
@@ -231,22 +231,22 @@ internal static class BufferExtensions
 		public Result<int> GetLineNumberFromIndex(int index, ReadOnlySpan<int> lineStarts)
 		{
 			if (span.Length == 0)
-				return Result.Failure<int>(new(InternalErrorCodes.EmptyBuffer, "The buffer is empty."));
+				return Result.Failure<int>(new(InternalErrorCodes.EmptyBuffer, EmptyBufferMessage));
 
 			if (index < 0)
 				index += span.Length;
 
 			if (IsConventionallyOutOfRange(index, span.Length))
-				return Result.Failure<int>(new(InternalErrorCodes.IndexOutOfRange, "The index is greater than the buffer's length."));
+				return Result.Failure<int>(new(InternalErrorCodes.IndexOutOfRange, IndexGreaterThanLengthMessage));
 
-			GetPreviousOrCurrentLineStartPosition(lineStarts, index, out int lineSepIndex, span.Length);
+			GetPreviousOrCurrentLineStartPosition(lineStarts, index, out int lineSepIndex);
 			return Result.Success(lineSepIndex);
 		}
 
 		public Result<string> GetLine(int lineNumber, ReadOnlySpan<int> lineStarts, ReadOnlySpan<int> precededByCrLf)
 		{
 			if (span.Length == 0)
-				return Result.Failure<string>(new(InternalErrorCodes.EmptyBuffer, "The buffer is empty."));
+				return Result.Failure<string>(new(InternalErrorCodes.EmptyBuffer, EmptyBufferMessage));
 
 			if (lineNumber < 0 || lineNumber >= lineStarts.Length)
 				return Result.Failure<string>(new(InternalErrorCodes.LineNumberOutOfRange, "The line number must be non-negative and less than the amount of lines in the buffer."));
@@ -280,7 +280,7 @@ internal static class BufferExtensions
 		public Result<SourceLocation> GetSourceLocation(int index, ReadOnlySpan<int> lineStarts)
 		{
 			if (span.Length == 0)
-				return Result.Failure<SourceLocation>(new(InternalErrorCodes.EmptyBuffer, "The buffer is empty."));
+				return Result.Failure<SourceLocation>(new(InternalErrorCodes.EmptyBuffer, EmptyBufferMessage));
 
 			if (index < 0)
 				index += span.Length;
@@ -303,7 +303,12 @@ internal static class BufferExtensions
 
 			return start.IsSuccessful && end.IsSuccessful
 				? Result.Success<SourceSpan>(new(start.Value, end.Value))
-				: Result.Failure<SourceSpan>(start.IsError ? start.Error : end.Error);
+				: Result.Failure<SourceSpan>(
+					start.IsError switch
+					{
+						true => start.Error,
+						false => end.Error
+					});
 		}
 
 		public Result<string> SliceAsResult(int start, int length)
