@@ -75,13 +75,7 @@ jobs:
           mkdir -p ${{ runner.temp }}/scanner
           dotnet tool update dotnet-sonarscanner --tool-path ${{ runner.temp }}/scanner
 
-      - name: Build
-        run: dotnet build --configuration Release --no-restore
-
-      - name: Test
-        run: dotnet test --framework net10.0 --configuration Release --no-build -- --coverage --coverage-output-format xml
-
-      - name: Build and analyze
+      - name: Being analysis
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
@@ -92,4 +86,11 @@ jobs:
             /d:sonar.cs.vscoveragexml.reportsPaths="**/TestResults/**/*.xml" \
             /d:sonar.exclusions="**/*.png,**/*.jpg,**/*.jpeg,**/*.ico,**/*.gif"
 
-          ${{ runner.temp }}/scanner/dotnet-sonarscanner end /d:sonar.token="$SONAR_TOKEN"
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test --framework net10.0 --configuration Release --no-build -- --coverage --coverage-output-format xml
+
+      - name: End analysis
+        run: ${{ runner.temp }}/scanner/dotnet-sonarscanner end /d:sonar.token="$SONAR_TOKEN"
