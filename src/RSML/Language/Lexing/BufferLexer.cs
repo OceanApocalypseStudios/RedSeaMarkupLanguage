@@ -14,5 +14,5 @@ namespace OceanApocalypseStudios.RSML.Language.Lexing;
 public class BufferLexer(IReadOnlyBuffer buffer, DiagnosticCollector diagnostics) : Lexer
 {
 	/// <inheritdoc/>
-	public override IEnumerable<Token> Lex() => StaticLexer.LexBuffer(buffer, Configuration, diagnostics);
+	public override IEnumerable<Token> Lex() => throw new System.NotImplementedException();
 }

@@ -14,5 +14,5 @@ namespace OceanApocalypseStudios.RSML.Language.Lexing;
 public class StreamLexer(IReadOnlyStream stream, DiagnosticCollector diagnostics) : Lexer
 {
 	/// <inheritdoc/>
-	public override IEnumerable<Token> Lex() => StaticLexer.LexStream(stream, Configuration, diagnostics);
+	public override IEnumerable<Token> Lex() => throw new System.NotImplementedException();
 }
