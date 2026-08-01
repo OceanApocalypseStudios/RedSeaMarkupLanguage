@@ -12,9 +12,10 @@
 	<img src="https://img.shields.io/github/stars/OceanApocalypseStudios/RedSeaMarkupLanguage?style=for-the-badge&logo=star&logoColor=black&logoSize=auto&labelColor=%2379610b&color=%23413405" />
 	<img src="https://img.shields.io/github/languages/top/OceanApocalypseStudios/RedSeaMarkupLanguage?style=for-the-badge&logo=dotnet&logoColor=white&logoSize=auto&label=%20&labelColor=%234929ca&color=%234929ca" />
 	<a href="LICENSE.txt"><img src="https://img.shields.io/badge/ignored-mit-ignored?style=for-the-badge&logo=opensourceinitiative&logoColor=white&logoSize=auto&label=code%20license&labelColor=%23496300&color=%232b3c00"/></a>
-	<img alt="GitHub Actions Test Status" src="https://img.shields.io/github/actions/workflow/status/OceanApocalypseStudios/RedSeaMarkupLanguage/test.yml?style=for-the-badge&label=tests">
+	<img alt="GitHub Actions Test Status" src="https://img.shields.io/github/actions/workflow/status/OceanApocalypseStudios/RedSeaMarkupLanguage/ci.yml?style=for-the-badge&label=tests">
 	<img alt="GitHub Actions Release Status" src="https://img.shields.io/github/actions/workflow/status/OceanApocalypseStudios/RedSeaMarkupLanguage/release.yml?style=for-the-badge&label=release">
-	<img alt="GitHub Actions Documentation Status" src="https://img.shields.io/github/actions/workflow/status/OceanApocalypseStudios/RedSeaMarkupLanguage/docs.yml?style=for-the-badge&label=docs">
+	<img alt="GitHub Actions Documentation Status" src="https://img.shields.io/github/actions/workflow/status/OceanApocalypseStudios/RedSeaMarkupLanguage/docs.yml?style=for-the-badge&label=docs"><br/>
+	<img alt="Quality gate" src="https://sonarcloud.io/api/project_badges/quality_gate?project=OceanApocalypseStudios_RedSeaMarkupLanguage">
 </div>
 <hr/>
 <div align="center">
