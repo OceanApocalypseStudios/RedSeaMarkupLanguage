@@ -22,4 +22,10 @@ public interface ILexer : IToolchainComponent
 	/// </summary>
 	/// <returns>The tokens.</returns>
 	IEnumerable<Token> Lex();
+
+	/// <summary>
+	/// Returns the next token.
+	/// </summary>
+	/// <returns>The next token.</returns>
+	Token GetNextToken();
 }

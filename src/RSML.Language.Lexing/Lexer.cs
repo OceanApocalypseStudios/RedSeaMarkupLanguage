@@ -42,4 +42,7 @@ public abstract class Lexer : ILexer
 
 		isDisposed = true;
 	}
+
+	/// <inheritdoc/>
+	public abstract Token GetNextToken();
 }
