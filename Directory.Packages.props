@@ -8,13 +8,6 @@
 		<PackageVersion Include="SixLabors.ImageSharp" Version="3.1.12" />
 		<PackageVersion Include="Spectre.Console" Version="0.57.2" />
 		<PackageVersion Include="System.CommandLine" Version="2.0.10" />
-
-		<!-- Compatibility with .NET Framework -->
-		<PackageVersion Include="PolySharp" Version="1.16.0" />
-		<PackageVersion Include="Microsoft.Bcl.HashCode" Version="6.0.0" />
-		<PackageVersion Include="System.Collections.Immutable" Version="10.0.10" />
-		<PackageVersion Include="System.Memory" Version="4.6.3" />
-		<PackageVersion Include="Microsoft.Bcl.Memory" Version="10.0.10" />
 		
 		<!-- Tests and benchmarks -->
 		<PackageVersion Include="xunit.v3.mtp-v2" Version="3.2.2" />

@@ -35,7 +35,8 @@ Note for future self:
 		<AnalysisMode>All</AnalysisMode>
 
 		<!-- CA1016 leads to false positives after running dotnet clean (though it fixes itself on build) -->
-		<NoWarn>$(NoWarn);CA1016</NoWarn>
+		<!-- CA1034 leads to false positives when using C# 14 extension members -->
+		<NoWarn>$(NoWarn);CA1016;CA1034</NoWarn>
 	</PropertyGroup>
 
 	<!-- Don't make changes to this group. Everything is determined from data above. -->
