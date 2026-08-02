@@ -7,7 +7,7 @@ namespace OceanApocalypseStudios.RSML.Toolchain.Abstractions;
 /// Configuration options for a <see cref="IToolchainComponent"/>.
 /// </summary>
 [Flags]
-public enum ToolchainConfiguration
+public enum ToolchainConfigurations
 {
 	/// <summary>
 	/// Optimizes the toolchain pipeline by disabling extension processing.
