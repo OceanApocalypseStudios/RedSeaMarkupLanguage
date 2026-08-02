@@ -1,4 +1,4 @@
-namespace OceanApocalypseStudios.RSML.Language.Lexing;
+namespace OceanApocalypseStudios.RSML.Language.Lexing.Tokens;
 
 /// <summary>
 /// Represents a specific kind of token.

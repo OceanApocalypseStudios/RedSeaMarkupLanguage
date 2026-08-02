@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 
+using OceanApocalypseStudios.RSML.Language.Lexing.Tokens;
 using OceanApocalypseStudios.RSML.Toolchain.Abstractions.Diagnostics;
 using OceanApocalypseStudios.RSML.Toolchain.Abstractions.Sources;
 
@@ -12,7 +13,8 @@ namespace OceanApocalypseStudios.RSML.Language.Lexing;
 /// <param name="diagnostics">A collector for all emitted diagnostics.</param>
 public class StreamLexer(IScanner stream, DiagnosticCollector diagnostics) : Lexer
 {
-	public override Token GetNextToken() => throw new System.NotImplementedException();
+	/// <inheritdoc/>
+	public override Result<Token> GetNextToken() => throw new System.NotImplementedException();
 
 	/// <inheritdoc/>
 	public override IEnumerable<Token> Lex() => throw new System.NotImplementedException();

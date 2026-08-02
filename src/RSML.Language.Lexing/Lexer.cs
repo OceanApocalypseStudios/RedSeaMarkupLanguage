@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 
+using OceanApocalypseStudios.RSML.Language.Lexing.Tokens;
 using OceanApocalypseStudios.RSML.Toolchain.Abstractions;
+using OceanApocalypseStudios.RSML.Toolchain.Abstractions.Diagnostics;
 
 namespace OceanApocalypseStudios.RSML.Language.Lexing;
 
@@ -13,10 +15,10 @@ public abstract class Lexer : ILexer
 	private bool isDisposed;
 
 	/// <inheritdoc/>
-	public virtual ToolchainConfiguration Configuration { get; protected set; }
+	public virtual ToolchainConfigurations Configuration { get; protected set; }
 
 	/// <inheritdoc/>
-	public virtual void Inject(ToolchainConfiguration configuration) => Configuration |= configuration;
+	public virtual void Inject(ToolchainConfigurations configuration) => Configuration |= configuration;
 
 	/// <inheritdoc/>
 	public abstract IEnumerable<Token> Lex();
@@ -37,12 +39,11 @@ public abstract class Lexer : ILexer
 		if (isDisposed)
 			return;
 
-		if (disposing)
-		{ }
+		// dispose of managed stuff if disposing is true
 
 		isDisposed = true;
 	}
 
 	/// <inheritdoc/>
-	public abstract Token GetNextToken();
+	public abstract Result<Token> GetNextToken();
 }

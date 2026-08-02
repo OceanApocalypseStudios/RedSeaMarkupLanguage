@@ -55,6 +55,12 @@
 			<Platform Solution="*|x64" Project="x64" />
 			<Platform Solution="*|x86" Project="x86" />
 		</Project>
+		<Project Path="src/RSML.Toolchain.Analyzer/RSML.Toolchain.Analysis.csproj" Id="391b8946-a7d2-4e31-b365-5bf4cc191ee9">
+			<Platform Solution="*|ARM32" Project="ARM32" />
+			<Platform Solution="*|ARM64" Project="ARM64" />
+			<Platform Solution="*|x64" Project="x64" />
+			<Platform Solution="*|x86" Project="x86" />
+		</Project>
 		<Project Path="src/RSML.Toolchain.Execution/RSML.Toolchain.Execution.csproj" Id="18c14a5b-4ebc-458a-83f2-82cba558be9f">
 			<Platform Solution="*|ARM32" Project="ARM32" />
 			<Platform Solution="*|ARM64" Project="ARM64" />

@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 
+using OceanApocalypseStudios.RSML.Language.Lexing.Tokens;
 using OceanApocalypseStudios.RSML.Toolchain.Abstractions;
+using OceanApocalypseStudios.RSML.Toolchain.Abstractions.Diagnostics;
 
 
 namespace OceanApocalypseStudios.RSML.Language.Lexing;
@@ -27,5 +29,5 @@ public interface ILexer : IToolchainComponent
 	/// Returns the next token.
 	/// </summary>
 	/// <returns>The next token.</returns>
-	Token GetNextToken();
+	Result<Token> GetNextToken();
 }
