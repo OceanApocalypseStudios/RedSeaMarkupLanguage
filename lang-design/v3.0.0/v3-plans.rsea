@@ -1,0 +1,34 @@
+# RSML v3 Plans
+
+return <value>
+requires <string>
+<op> if <cond>
+end # ends script
+region <cond>
+  <op>
+  <...>
+end previous
+
+let x = 4 # constant
+let mut y: int = 5 # variable - notice the type hinting? RSML infers types but you can manually add them - they must match tho
+y = 10
+
+# function:
+let fn z = 4 * x # evaluates every time that called, meaning when x changes this also changes
+# vs
+let mut z = 4 * x # x is evaluated on z creation and even if it changes, z doesn't (unless in this case, you reassign manually)
+
+# multiline function:
+let fn z = {
+  return 4 * x;
+}
+
+# Structures
+type MyAwesomeStructure as struct {
+    x: int, y: int, z: string
+}
+
+# Built-in constants
+# they start with $ like $host.systemName
+
+# maybe interfaces in the future
