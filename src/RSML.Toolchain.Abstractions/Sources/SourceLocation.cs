@@ -14,6 +14,11 @@ public readonly struct SourceLocation(int index, int line, int column) : IEquata
 																		 IComparable<SourceLocation>, IComparable<int>
 {
 	/// <summary>
+	/// An empty source location.
+	/// </summary>
+	public static readonly SourceLocation Empty = new(0, 0, 0);
+
+	/// <summary>
 	/// The 0-based line number, counting from the start of the source.
 	/// </summary>
 	public int Line => line;
@@ -69,7 +74,7 @@ public readonly struct SourceLocation(int index, int line, int column) : IEquata
 	/// Returns a generic string representation of the current instance.
 	/// </summary>
 	/// <returns>The string representation.</returns>
-	public override string ToString() => $"SourceLocation(Index={Index}, Line={Line}, Column={Column})";
+	public override string ToString() => $"SourceLocation(Index={Index}, Line={Line + 1}, Column={Column + 1})";
 
 	/// <summary>
 	/// Given a format, tries to return a string that uses said format as a basis for the representation.
@@ -82,7 +87,7 @@ public readonly struct SourceLocation(int index, int line, int column) : IEquata
 		format switch
 		{
 			"CTOR" or "I" or "INIT" or "NET" => $"new SourceLocation({Index}, {Line}, {Column})",
-			"JSON" => $$"""{ "index": {{Index}}, "line": {{Line}}, "column": {{Column}} }""",
+			"JSON" => $$"""{ "index": {{Index}}, "line": {{Line + 1}}, "column": {{Column + 1}} }""",
 			_ => ToString()
 		};
 
