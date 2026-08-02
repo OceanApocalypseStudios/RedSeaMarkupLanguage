@@ -7,7 +7,7 @@ namespace OceanApocalypseStudios.RSML.Toolchain.Abstractions.Sources;
 /// </summary>
 public interface IBuffer : IDisposable, IEquatable<IBuffer>, IEquatable<char[]?>, IEquatable<string?>, IEquatable<ReadOnlyMemory<char>>
 {
-	// todo: add methods that can mutate the buffer (coming to v3.0.0-prerelease2)
+	// todo: add methods that can mutate the buffer (coming to v3.0.0-prerelease2 ??)
 
 	/// <summary>
 	/// Whether the source is completely empty.

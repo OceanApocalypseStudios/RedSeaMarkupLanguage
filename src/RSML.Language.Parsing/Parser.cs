@@ -12,7 +12,7 @@ public abstract class Parser : IParser
 	private bool isDisposed;
 
 	/// <inheritdoc/>
-	public ToolchainConfiguration Configuration { get; protected set; }
+	public ToolchainConfigurations Configuration { get; protected set; }
 
 	/// <inheritdoc/>
 	public void Dispose()
@@ -22,7 +22,7 @@ public abstract class Parser : IParser
 	}
 
 	/// <inheritdoc/>
-	public virtual void Inject(ToolchainConfiguration configuration) => throw new NotImplementedException();
+	public virtual void Inject(ToolchainConfigurations configuration) => throw new NotImplementedException();
 
 	/// <summary>
 	/// Disposes of both managed and unmanaged resources.

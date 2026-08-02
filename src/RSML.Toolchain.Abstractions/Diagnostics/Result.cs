@@ -1,5 +1,7 @@
 using System;
 
+using OceanApocalypseStudios.RSML.Toolchain.Abstractions.Diagnostics.ErrorCodes;
+
 namespace OceanApocalypseStudios.RSML.Toolchain.Abstractions.Diagnostics;
 
 /// <summary>
@@ -22,8 +24,7 @@ public static class Result
 	public static Result<TValue> TryCatch<TValue, TException>(Func<TValue> check)
 		where TException : Exception
 	{
-		if (check is null)
-			throw new ArgumentNullException(nameof(check), "The object is null.");
+		ArgumentNullException.ThrowIfNull(check);
 
 		try
 		{
@@ -31,7 +32,7 @@ public static class Result
 		}
 		catch (TException ex)
 		{
-			return FromException<TValue>(ex, ErrorCodes.InternalErrorCodes.UnhandledException.Code);
+			return FromException<TValue>(ex, InternalErrorCodes.UnhandledException);
 		}
 	}
 
@@ -69,10 +70,10 @@ public static class Result
 	/// </summary>
 	/// <typeparam name="TValue">The type of value the result would normally contain.</typeparam>
 	/// <param name="exception">The exception whose data to retrieve and use as failure data.</param>
-	/// <param name="errorCode">An integer error code for the failure.</param>
+	/// <param name="errorCode">A string error code for the failure. Leave null for a generic error code.</param>
 	/// <returns>The failure.</returns>
-	public static Result<TValue> FromException<TValue>(Exception? exception, int errorCode) =>
-		new(new Diagnostic(new ErrorCode(ErrorCategory.Internal, errorCode), exception?.Message ?? "No message provided."));
+	public static Result<TValue> FromException<TValue>(Exception? exception, string? errorCode) =>
+		new(new Diagnostic(errorCode ?? InternalErrorCodes.GenericError, exception?.Message ?? "No message provided."));
 
 	/// <summary>
 	/// Checks if a given object is null and, if it is, returns a failure.

@@ -19,17 +19,12 @@ public readonly struct Diagnostic : IFormattable, IEquatable<Diagnostic>
 	/// <summary>
 	/// The error's code. Contains information about the category of the error.
 	/// </summary>
-	public ErrorCode Code { get; }
-
-	/// <summary>
-	/// The error's category.
-	/// </summary>
-	public ErrorCategory Category => Code.Category;
+	public string Code { get; }
 
 	/// <summary>
 	/// Checks whether the error is internal (API error results, for example).
 	/// </summary>
-	public bool IsInternal => Code.Category == ErrorCategory.Internal;
+	public bool IsInternal => Code[1] == 'I';
 
 	/// <summary>
 	/// A brief error message detailing why it has happened.
@@ -43,8 +38,11 @@ public readonly struct Diagnostic : IFormattable, IEquatable<Diagnostic>
 
 	/// <summary>Creates a new diagnostic with a basic error code.</summary>
 	/// <param name="code">The error code.</param>
-	public Diagnostic(ErrorCode code)
+	public Diagnostic(string code)
 	{
+		ArgumentNullException.ThrowIfNullOrWhiteSpace(code);
+		ThrowIfInvalidErrorCode(code);
+
 		Code = code;
 		Span = SourceSpan.Empty;
 		Message = "";
@@ -54,8 +52,11 @@ public readonly struct Diagnostic : IFormattable, IEquatable<Diagnostic>
 	/// <summary>Creates a new diagnostic.</summary>
 	/// <param name="code">The error code.</param>
 	/// <param name="message">A brief error message detailing why it has happened.</param>
-	public Diagnostic(ErrorCode code, string message)
+	public Diagnostic(string code, string message)
 	{
+		ArgumentNullException.ThrowIfNullOrWhiteSpace(code);
+		ThrowIfInvalidErrorCode(code);
+
 		Code = code;
 		Span = SourceSpan.Empty;
 		Message = message;
@@ -65,8 +66,11 @@ public readonly struct Diagnostic : IFormattable, IEquatable<Diagnostic>
 	/// <summary>Creates a new diagnostic.</summary>
 	/// <param name="code">The error code.</param>
 	/// <param name="severity">The error's severity.</param>
-	public Diagnostic(ErrorCode code, Severity severity)
+	public Diagnostic(string code, Severity severity)
 	{
+		ArgumentNullException.ThrowIfNullOrWhiteSpace(code);
+		ThrowIfInvalidErrorCode(code);
+
 		Code = code;
 		Span = SourceSpan.Empty;
 		Message = "";
@@ -77,8 +81,11 @@ public readonly struct Diagnostic : IFormattable, IEquatable<Diagnostic>
 	/// <param name="code">The error code.</param>
 	/// <param name="message">A brief error message detailing why it has happened.</param>
 	/// <param name="severity">The error's severity.</param>
-	public Diagnostic(ErrorCode code, string message, Severity severity)
+	public Diagnostic(string code, string message, Severity severity)
 	{
+		ArgumentNullException.ThrowIfNullOrWhiteSpace(code);
+		ThrowIfInvalidErrorCode(code);
+
 		Code = code;
 		Span = SourceSpan.Empty;
 		Message = message;
@@ -90,8 +97,11 @@ public readonly struct Diagnostic : IFormattable, IEquatable<Diagnostic>
 	/// <param name="span">The span the error relates to.</param>
 	/// <param name="message">A brief error message detailing why it has happened.</param>
 	/// <param name="severity">The error's severity.</param>
-	public Diagnostic(ErrorCode code, SourceSpan span, string message, Severity severity)
+	public Diagnostic(string code, SourceSpan span, string message, Severity severity)
 	{
+		ArgumentNullException.ThrowIfNullOrWhiteSpace(code);
+		ThrowIfInvalidErrorCode(code);
+
 		Code = code;
 		Span = span;
 		Message = message;
@@ -105,7 +115,7 @@ public readonly struct Diagnostic : IFormattable, IEquatable<Diagnostic>
 	) => obj is Diagnostic error && Equals(error);
 
 	/// <inheritdoc/>
-	public bool Equals(Diagnostic other) => Message == other.Message && Severity == other.Severity && Span.Equals(other.Span);
+	public bool Equals(Diagnostic other) => Message == other.Message && Code == other.Code && Severity == other.Severity && Span.Equals(other.Span);
 
 	/// <summary>
 	/// Checks if two <see cref="Diagnostic"/>s are equal to each other.
@@ -143,7 +153,7 @@ public readonly struct Diagnostic : IFormattable, IEquatable<Diagnostic>
 			case "I":
 			case "INIT":
 			case "NET":
-				return $"new Diagnostic({Span.ToString("ctor", null)}, \"{Message}\", {Severity})";
+				return $"new Diagnostic(\"{Code}\", {Span.ToString("ctor", null)}, \"{Message}\", {Severity})";
 
 			case "LOG":
 				string prefix = Severity switch
@@ -174,5 +184,11 @@ public readonly struct Diagnostic : IFormattable, IEquatable<Diagnostic>
 			default:
 				return ToString();
 		}
+	}
+
+	private static void ThrowIfInvalidErrorCode(string code, string? paramName = null)
+	{
+		if (code.Length != 6 || code[0] != 'R' || code[1] is not 'I' and not 'L' and not 'S' and not 'P' and not '-' || Char.IsAsciiDigit(code[2]) || Char.IsAsciiDigit(code[3]) || Char.IsAsciiDigit(code[4]) || Char.IsAsciiDigit(code[5]))
+			throw new ArgumentException("The error code is not in the correct format. Correct format in Regex is: R(-|I|L|P|S)\\d\\d\\d\\d", paramName ?? nameof(code));
 	}
 }
