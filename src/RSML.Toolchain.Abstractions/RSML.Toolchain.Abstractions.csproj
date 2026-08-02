@@ -16,13 +16,13 @@
 
 		<PackageId>OceanApocalypseStudios.RSML.Toolchain.Abstractions</PackageId>
 		<Title>RSML Abstractions</Title>
-		<Description>The only markup language that dynamically interprets different logic paths based on an host's OS and CPU architecture.</Description>
+		<Description>The only DSL that dynamically interprets different logic paths based on an host's OS and CPU architecture.</Description>
 
 		<PackageProjectUrl>https://oceanapocalypsestudios.org/rsml-docs/</PackageProjectUrl>
 		<PackageIcon>icon.png</PackageIcon>
-		<RepositoryUrl>https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/</RepositoryUrl>
+		<RepositoryUrl>https://github.com/OceanApocalypseStudios/RedSeaModernLanguage/</RepositoryUrl>
 
-		<PackageTags>markup;language;logic;logic-path;system;host;rsml;rsea;decision;oss</PackageTags>
+		<PackageTags>DSL;language;logic;logic-path;system;host;rsml;rsea;decision;oss</PackageTags>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
 

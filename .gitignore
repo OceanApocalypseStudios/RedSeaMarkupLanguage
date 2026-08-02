@@ -357,6 +357,7 @@ FodyWeavers.xsd
 # JetBrains Project Configuration
 .idea/**/*
 !.idea/.idea.RedSeaMarkupLanguage/.idea/encodings.xml
+!.idea/.idea.RedSeaModernLanguage/.idea/encodings.xml
 
 # Backup files
 *.bak

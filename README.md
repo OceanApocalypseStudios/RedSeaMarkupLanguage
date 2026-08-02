@@ -1,21 +1,21 @@
 #
 <div align="center">
 	<img src="assets/logo.png" alt="RSML Logo" align="center" width="150">
-	<h1>Red Sea Markup Language</h1>
+	<h1>Red Sea Modern Language</h1>
 </div>
 <div align="center">
 	<a href="https://www.nuget.org/packages/OceanApocalypseStudios.RSML" target="_blank"><img src="https://img.shields.io/nuget/v/OceanApocalypseStudios.RSML?style=for-the-badge&logo=nuget&logoColor=white&logoSize=auto&label=Available%20on%20NuGet&labelColor=%231265fb&color=%2308317b"/></a>
 	<img src="https://img.shields.io/nuget/dt/OceanApocalypseStudios.RSML?style=for-the-badge&logo=nuget&logoColor=white&logoSize=auto&label=downloads%20(modern)&labelColor=%234929ca&color=%2327156f" />
 	<img src="https://img.shields.io/nuget/dt/RSML?style=for-the-badge&logo=nuget&logoColor=white&logoSize=auto&label=Downloads%20(Legacy)&labelColor=%23ad4734&color=%236e2d20" />
 	<br/><br/>
-	<a href="https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage/releases/latest"><img src="https://img.shields.io/github/v/release/OceanApocalypseStudios/RedSeaMarkupLanguage?sort=semver&display_name=tag&style=for-the-badge&logo=github&logoColor=white&logoSize=auto&label=Latest&labelColor=%23161616&color=%23000308"/></a>
-	<img src="https://img.shields.io/github/stars/OceanApocalypseStudios/RedSeaMarkupLanguage?style=for-the-badge&logo=star&logoColor=black&logoSize=auto&labelColor=%2379610b&color=%23413405" />
-	<img src="https://img.shields.io/github/languages/top/OceanApocalypseStudios/RedSeaMarkupLanguage?style=for-the-badge&logo=dotnet&logoColor=white&logoSize=auto&label=%20&labelColor=%234929ca&color=%234929ca" />
+	<a href="https://github.com/OceanApocalypseStudios/RedSeaModernLanguage/releases/latest"><img src="https://img.shields.io/github/v/release/OceanApocalypseStudios/RedSeaModernLanguage?sort=semver&display_name=tag&style=for-the-badge&logo=github&logoColor=white&logoSize=auto&label=Latest&labelColor=%23161616&color=%23000308"/></a>
+	<img src="https://img.shields.io/github/stars/OceanApocalypseStudios/RedSeaModernLanguage?style=for-the-badge&logo=star&logoColor=black&logoSize=auto&labelColor=%2379610b&color=%23413405" />
+	<img src="https://img.shields.io/github/languages/top/OceanApocalypseStudios/RedSeaModernLanguage?style=for-the-badge&logo=dotnet&logoColor=white&logoSize=auto&label=%20&labelColor=%234929ca&color=%234929ca" />
 	<a href="LICENSE.txt"><img src="https://img.shields.io/badge/ignored-mit-ignored?style=for-the-badge&logo=opensourceinitiative&logoColor=white&logoSize=auto&label=code%20license&labelColor=%23496300&color=%232b3c00"/></a>
-	<img alt="GitHub Actions Test Status" src="https://img.shields.io/github/actions/workflow/status/OceanApocalypseStudios/RedSeaMarkupLanguage/ci.yml?style=for-the-badge&label=tests">
-	<img alt="GitHub Actions Release Status" src="https://img.shields.io/github/actions/workflow/status/OceanApocalypseStudios/RedSeaMarkupLanguage/release.yml?style=for-the-badge&label=release">
-	<img alt="GitHub Actions Documentation Status" src="https://img.shields.io/github/actions/workflow/status/OceanApocalypseStudios/RedSeaMarkupLanguage/docs.yml?style=for-the-badge&label=docs"><br/>
-	<img alt="Quality gate" src="https://sonarcloud.io/api/project_badges/quality_gate?project=OceanApocalypseStudios_RedSeaMarkupLanguage">
+	<img alt="GitHub Actions Test Status" src="https://img.shields.io/github/actions/workflow/status/OceanApocalypseStudios/RedSeaModernLanguage/ci.yml?style=for-the-badge&label=tests">
+	<img alt="GitHub Actions Release Status" src="https://img.shields.io/github/actions/workflow/status/OceanApocalypseStudios/RedSeaModernLanguage/release.yml?style=for-the-badge&label=release">
+	<a href="https://oceanapocalypsestudios.org/rsml-docs/"><img alt="GitHub Actions Documentation Status" src="https://img.shields.io/github/actions/workflow/status/OceanApocalypseStudios/rsml-docs/docs.yml?style=for-the-badge&label=docs"></a><br/>
+	<img alt="Quality gate" src="https://sonarcloud.io/api/project_badges/quality_gate?project=OceanApocalypseStudios_RedSeaModernLanguage">
 </div>
 <hr/>
 <div align="center">
@@ -30,7 +30,7 @@ the modern language designed to dynamically interpret different logic paths base
 ---
 
 ## Contents
-- [Red Sea Markup Language (RSML)](#section)
+- [Red Sea Modern Language (RSML)](#section)
 	- [Why RSML?](#why-rsml)
 	- [How to build RSML?](#how-to-build-rsml)
 	- [Performance Analysis](#performance-analysis)
@@ -56,9 +56,9 @@ roadmap [here](https://github.com/orgs/OceanApocalypseStudios/projects/6/views/2
 ---
 
 ## Why RSML?
-**Red Sea Markup Language** is **the** powerful and robust fork of [MF's CrossRoad Solution](https://mf366-dev.github.io/documentation/mfroad/mfroad_1.0.html), a language designed to **dynamically interpret different logic paths based on the local host OS and CPU architecture**.
+**Red Sea Modern Language** is **the** powerful and robust fork of [MF's CrossRoad Solution](https://mf366-dev.github.io/documentation/mfroad/mfroad_1.0.html), a language designed to **dynamically interpret different logic paths based on the local host OS and CPU architecture**.
 
-RSML, which is short for Red Sea Markup Language, is still in development, but the finished v3.0.0 will observe the following core features:
+RSML, which is short for Red Sea Modern Language, is still in development, but the finished v3.0.0 will observe the following core features:
 
 - A complete toolchain featuring buffers, readers, lexers, parsers and evaluators.
 - The core library available in C#, Visual Basic, Python and many other languages.
@@ -84,11 +84,11 @@ would adapt accordingly.
 	<summary><strong>Debug build</strong></summary>
 
 1. Install the [.NET SDK 10.0](https://dotnet.microsoft.com/download).
-2. Clone [this repository](https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage).
+2. Clone [this repository](https://github.com/OceanApocalypseStudios/RedSeaModernLanguage).
 3. Open the terminal in the root RSML directory (the one with the solution file).
 
 ```
-dotnet build -c Debug RedSeaMarkupLanguage.slnx
+dotnet build -c Debug RedSeaModernLanguage.slnx
 ./src/RSML.CLI/bin/Debug/net10.0/RSML.CLI.exe
 ```
 
@@ -98,11 +98,11 @@ dotnet build -c Debug RedSeaMarkupLanguage.slnx
 	<summary><strong>Optimized build</strong></summary>
 
 1. Install the [.NET SDK 10.0](https://dotnet.microsoft.com/download).
-2. Clone [this repository](https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage).
+2. Clone [this repository](https://github.com/OceanApocalypseStudios/RedSeaModernLanguage).
 3. Open the terminal in the root RSML directory (the one with the solution file).
 
 ```
-dotnet build -c Release RedSeaMarkupLanguage.slnx
+dotnet build -c Release RedSeaModernLanguage.slnx
 ./src/RSML.CLI/bin/Release/net10.0/RSML.CLI.exe
 ```
 
@@ -111,7 +111,7 @@ dotnet build -c Release RedSeaMarkupLanguage.slnx
 	<summary><strong>CLI Framework-dependent Build</strong> <em>(good if you want a lighter CLI that uses your installed .NET SDK)</em></summary>
 
 1. Install the [.NET SDK 10.0](https://dotnet.microsoft.com/download).
-2. Clone [this repository](https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage).
+2. Clone [this repository](https://github.com/OceanApocalypseStudios/RedSeaModernLanguage).
 3. Open the terminal in the root RSML directory (the one with the solution file).
 
 ```
@@ -122,7 +122,7 @@ dotnet publish -c Release -r <rid> src/RSML.CLI/RSML.CLI.csproj --no-self-contai
 	<summary><strong>Native build</strong> <em>(compiles into a shared library)</em></summary>
 
 1. Install the [.NET SDK 10.0](https://dotnet.microsoft.com/download).
-2. Clone [this repository](https://github.com/OceanApocalypseStudios/RedSeaMarkupLanguage).
+2. Clone [this repository](https://github.com/OceanApocalypseStudios/RedSeaModernLanguage).
 3. Open the terminal in the root RSML directory (the one with the solution file).
 
 ```

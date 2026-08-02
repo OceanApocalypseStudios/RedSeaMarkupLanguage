@@ -100,4 +100,4 @@ recurse_submodules = false
 
 [remote.github]
 owner = "OceanApocalypseStudios"
-repo = "RedSeaMarkupLanguage"
+repo = "RedSeaModernLanguage"

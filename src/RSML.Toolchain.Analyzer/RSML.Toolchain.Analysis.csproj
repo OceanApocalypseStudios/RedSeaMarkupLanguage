@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup Label="General Properties">
 		<TargetFrameworks>net10.0;net8.0</TargetFrameworks>
@@ -8,14 +8,14 @@
 		<OutputType>Library</OutputType>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 
-		<RootNamespace>OceanApocalypseStudios.RSML.Toolchain.Execution</RootNamespace>
+		<RootNamespace>OceanApocalypseStudios.RSML.Toolchain.Analysis</RootNamespace>
 	</PropertyGroup>
 
 	<PropertyGroup Label="NuGet Package Setup">
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 
-		<PackageId>OceanApocalypseStudios.RSML.Toolchain.Execution</PackageId>
-		<Title>RSML Interpreters</Title>
+		<PackageId>OceanApocalypseStudios.RSML.Toolchain.Analysis</PackageId>
+		<Title>RSML Analyzers</Title>
 		<Description>The only DSL that dynamically interprets different logic paths based on an host's OS and CPU architecture.</Description>
 
 		<PackageProjectUrl>https://oceanapocalypsestudios.org/rsml-docs/</PackageProjectUrl>

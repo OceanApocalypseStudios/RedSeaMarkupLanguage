@@ -5,7 +5,7 @@
 		<TargetFramework>net10.0</TargetFramework>
 		<PublishAot>true</PublishAot>
 		<InvariantGlobalization>true</InvariantGlobalization>
-		<Title>Red Sea Markup Language CLI</Title>
+		<Title>RSML CLI</Title>
 		<Description>The official RSML CLI.</Description>
 		<RootNamespace>OceanApocalypseStudios.RSML.CLI</RootNamespace>
 
