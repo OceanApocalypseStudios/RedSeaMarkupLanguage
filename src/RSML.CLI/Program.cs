@@ -13,26 +13,26 @@ internal sealed class Program
 		// todo: implement
 
 		Console.WriteLine("Assembly Version: " +
-			(Assembly.GetExecutingAssembly()
+			(typeof(Program).Assembly
 				.GetName()
 				.Version
 				?.ToString()
 			)
 		);
 		Console.WriteLine("File Version: " +
-			(Assembly.GetExecutingAssembly()
+			(typeof(Program).Assembly
 				.GetCustomAttribute<AssemblyFileVersionAttribute>()
 				?.Version
 			)
 		);
 		Console.WriteLine("Informational Version: " +
-			(Assembly.GetExecutingAssembly()
+			(typeof(Program).Assembly
 				.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
 				?.InformationalVersion
 			)
 		);
 		Console.WriteLine("Semantic Version: " +
-			(Assembly.GetExecutingAssembly()
+			(typeof(Program).Assembly
 				.GetCustomAttributes<AssemblyMetadataAttribute>()
 				.FirstOrDefault(a => a.Key == "SemVersion")
 				?.Value
