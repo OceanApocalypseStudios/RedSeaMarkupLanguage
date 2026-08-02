@@ -1,7 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup Label="General Properties">
-		<TargetFrameworks>net10.0;net8.0;net481;net472</TargetFrameworks>
+		<TargetFrameworks>net10.0;net8.0</TargetFrameworks>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<IsAotCompatible>true</IsAotCompatible>
 
@@ -46,13 +46,6 @@
 			<PackagePath>\</PackagePath>
 			<Visible>false</Visible>
 		</None>
-	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="PolySharp">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
 	</ItemGroup>
 
 	<ItemGroup>

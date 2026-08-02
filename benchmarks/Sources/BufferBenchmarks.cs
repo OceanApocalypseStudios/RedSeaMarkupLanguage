@@ -13,8 +13,6 @@ namespace OceanApocalypseStudios.RSML.Benchmarks.Sources;
 
 [SimpleJob(RuntimeMoniker.Net10_0)]
 [SimpleJob(RuntimeMoniker.Net80)]
-[SimpleJob(RuntimeMoniker.Net481)]
-[SimpleJob(RuntimeMoniker.Net472)]
 [SimpleJob(RuntimeMoniker.NativeAot10_0)]
 [SimpleJob(RuntimeMoniker.NativeAot80)]
 [MemoryDiagnoser]
