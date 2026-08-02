@@ -19,6 +19,8 @@ namespace OceanApocalypseStudios.RSML.Toolchain.Sources;
 /// </summary>
 public sealed class ReadOnlyStringBuffer : IBuffer, ISupportsCache
 {
+	private const int AverageCharactersPerLine = 40;
+	private const int ExtraCharacterCapacity = 64;
 	private bool isDisposed;
 
 	private readonly List<int> lineStarts = [];
@@ -112,8 +114,10 @@ public sealed class ReadOnlyStringBuffer : IBuffer, ISupportsCache
 	/// </param>
 	/// <remarks>This method is not CLS-compliant due to the unsafe context and the use of pointers.</remarks>
 	[CLSCompliant(false)]
+#pragma warning disable S6640
 	public unsafe ReadOnlyStringBuffer(byte* contentPtr, int byteCount, Encoding? encoding = null) =>
 		data = (encoding ?? Encoding.Default).GetString(contentPtr, byteCount);
+#pragma warning restore S6640
 
 	/// <inheritdoc/>
 	public void BuildCache() => ComputeLineStarts();
@@ -616,8 +620,8 @@ public sealed class ReadOnlyStringBuffer : IBuffer, ISupportsCache
 		lineStarts.Clear();
 		precededByCrLf.Clear();
 
-		lineStarts.Capacity = Math.Max(lineStarts.Capacity, span.Length / 25 + 32); // just a rough guess
-		precededByCrLf.Capacity = Math.Max(precededByCrLf.Capacity, span.Length / 25 + 16); // just a rough guess
+		lineStarts.Capacity = Math.Max(lineStarts.Capacity, span.Length / AverageCharactersPerLine + ExtraCharacterCapacity); // just a rough guess
+		precededByCrLf.Capacity = Math.Max(precededByCrLf.Capacity, span.Length / AverageCharactersPerLine + (OperatingSystem.IsWindows() ? ExtraCharacterCapacity : 0));
 
 		/* the following line ensures that if the last line:
 		 * ends with CR, LF, U2028 or U2029
