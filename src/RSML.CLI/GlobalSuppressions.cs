@@ -5,4 +5,4 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("CodeQuality", "IDE0079:Remove unnecessary suppression", Justification = "This suppression is not unnecessary.", Scope = "type", Target = "~T:OceanApocalypseStudios.RSML.CLI.Program")]
+[assembly: SuppressMessage("CodeQuality", "IDE0079:Remove unnecessary suppression", Justification = "This suppression is not unnecessary.", Scope = "type", Target = "~T:OceanApocalypse.RSML.CLI.Program")]

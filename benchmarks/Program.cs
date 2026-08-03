@@ -1,8 +1,8 @@
 using BenchmarkDotNet.Running;
 
-using OceanApocalypseStudios.RSML.Benchmarks.Sources;
+using OceanApocalypse.RSML.Benchmarks.Sources;
 
-namespace OceanApocalypseStudios.RSML.Benchmarks;
+namespace OceanApocalypse.RSML.Benchmarks;
 
 internal sealed class Program
 {

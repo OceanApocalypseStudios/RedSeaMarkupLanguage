@@ -99,5 +99,5 @@ sort_commits = "newest"
 recurse_submodules = false
 
 [remote.github]
-owner = "OceanApocalypseStudios"
+owner = "OceanApocalypse"
 repo = "RedSeaModernLanguage"

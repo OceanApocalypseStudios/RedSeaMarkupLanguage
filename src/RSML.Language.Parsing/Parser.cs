@@ -1,8 +1,8 @@
 using System;
 
-using OceanApocalypseStudios.RSML.Toolchain.Abstractions;
+using OceanApocalypse.RSML.Toolchain.Abstractions;
 
-namespace OceanApocalypseStudios.RSML.Language.Parsing;
+namespace OceanApocalypse.RSML.Language.Parsing;
 
 /// <summary>
 /// The base type that deals with parsing tokens and turning them into an organized tree.

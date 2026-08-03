@@ -1,11 +1,11 @@
 using System;
 using System.Text;
 
-using OceanApocalypseStudios.RSML.Toolchain.Abstractions.Panic;
-using OceanApocalypseStudios.RSML.Toolchain.Abstractions.Sources;
-using OceanApocalypseStudios.RSML.Toolchain.Sources;
+using OceanApocalypse.RSML.Toolchain.Abstractions.Panic;
+using OceanApocalypse.RSML.Toolchain.Abstractions.Sources;
+using OceanApocalypse.RSML.Toolchain.Sources;
 
-namespace OceanApocalypseStudios.RSML.Tests.Sources;
+namespace OceanApocalypse.RSML.Tests.Sources;
 
 /// <summary>
 /// Tests for the official-provided <see cref="ReadOnlyStringBuffer"/> class.

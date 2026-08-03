@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 
 
-namespace OceanApocalypseStudios.RSML.Benchmarks.Helpers;
+namespace OceanApocalypse.RSML.Benchmarks.Helpers;
 
 internal static class DataGenerator
 {

@@ -1,4 +1,4 @@
-namespace OceanApocalypseStudios.RSML.Tests.Native;
+namespace OceanApocalypse.RSML.Tests.Native;
 
 /*
  * todo: delete this class and replace with actual testing

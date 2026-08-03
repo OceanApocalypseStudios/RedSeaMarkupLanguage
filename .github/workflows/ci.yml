@@ -80,8 +80,8 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           ${{ runner.temp }}/scanner/dotnet-sonarscanner begin \
-            /k:"OceanApocalypseStudios_RedSeaModernLanguage" \
-            /o:"oceanapocalypsestudios" \
+            /k:"OceanApocalypse_RedSeaModernLanguage" \
+            /o:"OceanApocalypse" \
             /d:sonar.token="$SONAR_TOKEN" \
             /d:sonar.cs.vscoveragexml.reportsPaths="**/TestResults/**/*.xml" \
             /d:sonar.exclusions="**/*.png,**/*.jpg,**/*.jpeg,**/*.ico,**/*.gif"

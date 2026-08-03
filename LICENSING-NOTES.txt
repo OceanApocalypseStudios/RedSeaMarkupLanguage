@@ -1,5 +1,5 @@
 {[( / *================================================* \ )]}
-{[( / *=    OceanApocalypseStudios PUBLIC DOCUMENT    =* \ )]}
+{[( / *=    OceanApocalypse PUBLIC DOCUMENT    =* \ )]}
 {[( / *================================================* \ )]}
 
 |> Regarding the licenses used under the RSML project

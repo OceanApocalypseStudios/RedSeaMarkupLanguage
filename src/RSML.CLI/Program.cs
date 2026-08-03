@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-namespace OceanApocalypseStudios.RSML.CLI;
+namespace OceanApocalypse.RSML.CLI;
 
 #pragma warning disable S1118 // it's an entry point class
 internal sealed class Program

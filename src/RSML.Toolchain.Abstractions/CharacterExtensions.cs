@@ -1,6 +1,6 @@
 using System.Runtime.CompilerServices;
 
-namespace OceanApocalypseStudios.RSML.Toolchain.Abstractions;
+namespace OceanApocalypse.RSML.Toolchain.Abstractions;
 
 /// <summary>
 /// Extension members for characters.

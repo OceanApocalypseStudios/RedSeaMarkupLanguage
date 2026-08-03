@@ -1,4 +1,4 @@
-namespace OceanApocalypseStudios.RSML.Tests.Internal;
+namespace OceanApocalypse.RSML.Tests.Internal;
 
 public class UnitTest1
 {

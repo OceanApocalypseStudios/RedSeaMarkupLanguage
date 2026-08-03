@@ -8,19 +8,19 @@
 		<OutputType>Library</OutputType>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 
-		<RootNamespace>OceanApocalypseStudios.RSML.Toolchain.Extensibility.Execution</RootNamespace>
+		<RootNamespace>OceanApocalypse.RSML.Toolchain.Extensibility.Execution</RootNamespace>
 	</PropertyGroup>
 
 	<PropertyGroup Label="NuGet Package Setup">
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 
-		<PackageId>OceanApocalypseStudios.RSML.Toolchain.Extensibility.Execution</PackageId>
+		<PackageId>OceanApocalypse.RSML.Toolchain.Extensibility.Execution</PackageId>
 		<Title>RSML Extensible Interpreters</Title>
 		<Description>The only DSL that dynamically interprets different logic paths based on an host's OS and CPU architecture.</Description>
 
-		<PackageProjectUrl>https://oceanapocalypsestudios.org/rsml-docs/</PackageProjectUrl>
+		<PackageProjectUrl>https://OceanApocalypse.org/rsml-docs/</PackageProjectUrl>
 		<PackageIcon>icon.png</PackageIcon>
-		<RepositoryUrl>https://github.com/OceanApocalypseStudios/RedSeaModernLanguage/</RepositoryUrl>
+		<RepositoryUrl>https://github.com/OceanApocalypse/RedSeaModernLanguage/</RepositoryUrl>
 
 		<PackageTags>DSL;language;logic;logic-path;system;host;rsml;rsea;decision;oss</PackageTags>
 		<PackageReadmeFile>README.md</PackageReadmeFile>

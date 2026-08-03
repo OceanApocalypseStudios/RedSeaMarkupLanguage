@@ -1,6 +1,6 @@
-using OceanApocalypseStudios.RSML.Toolchain.Abstractions;
+using OceanApocalypse.RSML.Toolchain.Abstractions;
 
-namespace OceanApocalypseStudios.RSML.Language.Parsing;
+namespace OceanApocalypse.RSML.Language.Parsing;
 
 /// <summary>
 /// Represents a parser for the RSML language.

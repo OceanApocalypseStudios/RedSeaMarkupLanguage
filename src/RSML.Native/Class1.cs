@@ -1,4 +1,4 @@
-namespace OceanApocalypseStudios.RSML.Native;
+namespace OceanApocalypse.RSML.Native;
 
 public class Class1
 {

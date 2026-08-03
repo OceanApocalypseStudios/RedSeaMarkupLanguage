@@ -1,6 +1,6 @@
 using System;
 
-namespace OceanApocalypseStudios.RSML.Toolchain.Abstractions;
+namespace OceanApocalypse.RSML.Toolchain.Abstractions;
 
 /// <summary>
 /// A component of the RSML toolchain.

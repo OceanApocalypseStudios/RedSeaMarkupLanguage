@@ -7,7 +7,7 @@
 		<InvariantGlobalization>true</InvariantGlobalization>
 		<Title>RSML CLI</Title>
 		<Description>The official RSML CLI.</Description>
-		<RootNamespace>OceanApocalypseStudios.RSML.CLI</RootNamespace>
+		<RootNamespace>OceanApocalypse.RSML.CLI</RootNamespace>
 
 		<PackageLicenseExpression>GPL-3.0</PackageLicenseExpression>
 

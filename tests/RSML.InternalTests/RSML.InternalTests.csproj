@@ -5,7 +5,7 @@
 		<Nullable>enable</Nullable>
 		<OutputType>Exe</OutputType>
 		<UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
-		<RootNamespace>OceanApocalypseStudios.RSML.Tests.Internal</RootNamespace>
+		<RootNamespace>OceanApocalypse.RSML.Tests.Internal</RootNamespace>
 		<LangVersion>latest</LangVersion>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<Platforms>AnyCPU;ARM64;x64;x86;ARM32</Platforms>

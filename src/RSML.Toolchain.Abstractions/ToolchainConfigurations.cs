@@ -1,7 +1,7 @@
 using System;
 
 
-namespace OceanApocalypseStudios.RSML.Toolchain.Abstractions;
+namespace OceanApocalypse.RSML.Toolchain.Abstractions;
 
 /// <summary>
 /// Configuration options for a <see cref="IToolchainComponent"/>.
@@ -26,7 +26,7 @@ public enum ToolchainConfigurations
 	DisableExtensionProcessing = 1,
 
 	/// <summary>
-	/// Only allows OceanApocalypseStudios extensions, leading to an error if any non-OAS extension is active.
+	/// Only allows OceanApocalypse extensions, leading to an error if any non-OAS extension is active.
 	/// </summary>
 	/// <remarks>
 	/// :::note

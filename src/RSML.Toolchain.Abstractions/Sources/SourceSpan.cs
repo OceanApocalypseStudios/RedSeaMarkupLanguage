@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 
 
-namespace OceanApocalypseStudios.RSML.Toolchain.Abstractions.Sources;
+namespace OceanApocalypse.RSML.Toolchain.Abstractions.Sources;
 
 /// <summary>
 /// Represents a span taken from a source.

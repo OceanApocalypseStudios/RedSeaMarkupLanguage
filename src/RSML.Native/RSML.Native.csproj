@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<TargetFramework>net10.0</TargetFramework>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<RootNamespace>OceanApocalypseStudios.RSML.Native</RootNamespace>
+		<RootNamespace>OceanApocalypse.RSML.Native</RootNamespace>
 		<OutputType>Library</OutputType>
 
 		<!-- Native Publishing -->
@@ -16,13 +16,13 @@
 	</PropertyGroup>
 
 	<PropertyGroup Label="NuGet Package Setup">
-		<PackageId>OceanApocalypseStudios.RSML.Native</PackageId>
+		<PackageId>OceanApocalypse.RSML.Native</PackageId>
 		<Title>RSML Native ABI</Title>
 
 		<Description>Native C interopability for RSML.</Description>
-		<PackageProjectUrl>https://oceanapocalypsestudios.org/rsml-docs/</PackageProjectUrl>
+		<PackageProjectUrl>https://OceanApocalypse.org/rsml-docs/</PackageProjectUrl>
 		<PackageIcon>icon.png</PackageIcon>
-		<RepositoryUrl>https://github.com/OceanApocalypseStudios/RedSeaModernLanguage/</RepositoryUrl>
+		<RepositoryUrl>https://github.com/OceanApocalypse/RedSeaModernLanguage/</RepositoryUrl>
 		<PackageTags>DSL;native;interop;c;cpp;c++;language;logic;logic-path;rsml;rsea;decision;oss</PackageTags>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>

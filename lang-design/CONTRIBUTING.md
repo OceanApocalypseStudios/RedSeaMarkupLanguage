@@ -33,6 +33,6 @@ And that's it! Just like that, you've contributed to the Red Sea Project.
 
 **We thank you for your support and contribution.**
 
-> **Copyright 2025-2026 OceanApocalypseStudios**
+> **Copyright 2025-2026 OceanApocalypse**
 >
 > We :heart: open-source!

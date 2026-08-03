@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 
-using OceanApocalypseStudios.RSML.Language.Lexing.Tokens;
-using OceanApocalypseStudios.RSML.Toolchain.Abstractions;
-using OceanApocalypseStudios.RSML.Toolchain.Abstractions.Diagnostics;
+using OceanApocalypse.RSML.Language.Lexing.Tokens;
+using OceanApocalypse.RSML.Toolchain.Abstractions;
+using OceanApocalypse.RSML.Toolchain.Abstractions.Diagnostics;
 
 
-namespace OceanApocalypseStudios.RSML.Language.Lexing;
+namespace OceanApocalypse.RSML.Language.Lexing;
 
 /// <summary>
 /// Represents a lexer for RSML.

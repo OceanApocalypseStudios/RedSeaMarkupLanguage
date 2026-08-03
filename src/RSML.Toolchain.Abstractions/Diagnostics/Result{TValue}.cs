@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
-namespace OceanApocalypseStudios.RSML.Toolchain.Abstractions.Diagnostics;
+namespace OceanApocalypse.RSML.Toolchain.Abstractions.Diagnostics;
 
 /// <summary>
 /// An operation's result.

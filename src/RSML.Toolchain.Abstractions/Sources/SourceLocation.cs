@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 
 
-namespace OceanApocalypseStudios.RSML.Toolchain.Abstractions.Sources;
+namespace OceanApocalypse.RSML.Toolchain.Abstractions.Sources;
 
 /// <summary>
 /// Specifies the location of an item in a <see cref="IBuffer"/> or <see cref="IScanner"/>.

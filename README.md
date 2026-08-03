@@ -4,23 +4,23 @@
 	<h1>Red Sea Modern Language</h1>
 </div>
 <div align="center">
-	<a href="https://www.nuget.org/packages/OceanApocalypseStudios.RSML" target="_blank"><img src="https://img.shields.io/nuget/v/OceanApocalypseStudios.RSML?style=for-the-badge&logo=nuget&logoColor=white&logoSize=auto&label=Available%20on%20NuGet&labelColor=%231265fb&color=%2308317b"/></a>
-	<img src="https://img.shields.io/nuget/dt/OceanApocalypseStudios.RSML?style=for-the-badge&logo=nuget&logoColor=white&logoSize=auto&label=downloads%20(modern)&labelColor=%234929ca&color=%2327156f" />
+	<a href="https://www.nuget.org/packages/OceanApocalypse.RSML" target="_blank"><img src="https://img.shields.io/nuget/v/OceanApocalypse.RSML?style=for-the-badge&logo=nuget&logoColor=white&logoSize=auto&label=Available%20on%20NuGet&labelColor=%231265fb&color=%2308317b"/></a>
+	<img src="https://img.shields.io/nuget/dt/OceanApocalypse.RSML?style=for-the-badge&logo=nuget&logoColor=white&logoSize=auto&label=downloads%20(modern)&labelColor=%234929ca&color=%2327156f" />
 	<img src="https://img.shields.io/nuget/dt/RSML?style=for-the-badge&logo=nuget&logoColor=white&logoSize=auto&label=Downloads%20(Legacy)&labelColor=%23ad4734&color=%236e2d20" />
 	<br/><br/>
-	<a href="https://github.com/OceanApocalypseStudios/RedSeaModernLanguage/releases/latest"><img src="https://img.shields.io/github/v/release/OceanApocalypseStudios/RedSeaModernLanguage?sort=semver&display_name=tag&style=for-the-badge&logo=github&logoColor=white&logoSize=auto&label=Latest&labelColor=%23161616&color=%23000308"/></a>
-	<img src="https://img.shields.io/github/stars/OceanApocalypseStudios/RedSeaModernLanguage?style=for-the-badge&logo=star&logoColor=black&logoSize=auto&labelColor=%2379610b&color=%23413405" />
-	<img src="https://img.shields.io/github/languages/top/OceanApocalypseStudios/RedSeaModernLanguage?style=for-the-badge&logo=dotnet&logoColor=white&logoSize=auto&label=%20&labelColor=%234929ca&color=%234929ca" />
+	<a href="https://github.com/OceanApocalypse/RedSeaModernLanguage/releases/latest"><img src="https://img.shields.io/github/v/release/OceanApocalypse/RedSeaModernLanguage?sort=semver&display_name=tag&style=for-the-badge&logo=github&logoColor=white&logoSize=auto&label=Latest&labelColor=%23161616&color=%23000308"/></a>
+	<img src="https://img.shields.io/github/stars/OceanApocalypse/RedSeaModernLanguage?style=for-the-badge&logo=star&logoColor=black&logoSize=auto&labelColor=%2379610b&color=%23413405" />
+	<img src="https://img.shields.io/github/languages/top/OceanApocalypse/RedSeaModernLanguage?style=for-the-badge&logo=dotnet&logoColor=white&logoSize=auto&label=%20&labelColor=%234929ca&color=%234929ca" />
 	<a href="LICENSE.txt"><img src="https://img.shields.io/badge/ignored-mit-ignored?style=for-the-badge&logo=opensourceinitiative&logoColor=white&logoSize=auto&label=code%20license&labelColor=%23496300&color=%232b3c00"/></a>
-	<img alt="GitHub Actions Test Status" src="https://img.shields.io/github/actions/workflow/status/OceanApocalypseStudios/RedSeaModernLanguage/ci.yml?style=for-the-badge&label=tests">
-	<img alt="GitHub Actions Release Status" src="https://img.shields.io/github/actions/workflow/status/OceanApocalypseStudios/RedSeaModernLanguage/release.yml?style=for-the-badge&label=release">
-	<a href="https://oceanapocalypsestudios.org/rsml-docs/"><img alt="GitHub Actions Documentation Status" src="https://img.shields.io/github/actions/workflow/status/OceanApocalypseStudios/rsml-docs/docs.yml?style=for-the-badge&label=docs"></a><br/>
-	<img alt="Quality gate" src="https://sonarcloud.io/api/project_badges/quality_gate?project=OceanApocalypseStudios_RedSeaModernLanguage">
+	<img alt="GitHub Actions Test Status" src="https://img.shields.io/github/actions/workflow/status/OceanApocalypse/RedSeaModernLanguage/ci.yml?style=for-the-badge&label=tests">
+	<img alt="GitHub Actions Release Status" src="https://img.shields.io/github/actions/workflow/status/OceanApocalypse/RedSeaModernLanguage/release.yml?style=for-the-badge&label=release">
+	<a href="https://OceanApocalypse.org/rsml-docs/"><img alt="GitHub Actions Documentation Status" src="https://img.shields.io/github/actions/workflow/status/OceanApocalypse/rsml-docs/docs.yml?style=for-the-badge&label=docs"></a><br/>
+	<img alt="Quality gate" src="https://sonarcloud.io/api/project_badges/quality_gate?project=OceanApocalypse_RedSeaModernLanguage">
 </div>
 <hr/>
 <div align="center">
 <strong style="font-size: small">
-An OceanApocalypseStudios project,
+An OceanApocalypse project,
 </strong>
 <p>
 the modern language designed to dynamically interpret different logic paths based on an host's OS and CPU architecture.
@@ -41,7 +41,7 @@ the modern language designed to dynamically interpret different logic paths base
 <summary><strong>Where's the "How to use" section?</strong></summary>
 
 This file does not attempt to be a full documentation on how to use RSML.
-Instead, you can find full documentation [here](https://oceanapocalypsestudios.org/rsml-docs/).
+Instead, you can find full documentation [here](https://OceanApocalypse.org/rsml-docs/).
 
 </details>
 
@@ -49,7 +49,7 @@ Instead, you can find full documentation [here](https://oceanapocalypsestudios.o
 <summary><strong>How can I see what is being worked on in RSML?</strong></summary>
 
 You can find the official bug tracker and
-roadmap [here](https://github.com/orgs/OceanApocalypseStudios/projects/6/views/2).
+roadmap [here](https://github.com/orgs/OceanApocalypse/projects/6/views/2).
 
 </details>
 
@@ -84,7 +84,7 @@ would adapt accordingly.
 	<summary><strong>Debug build</strong></summary>
 
 1. Install the [.NET SDK 10.0](https://dotnet.microsoft.com/download).
-2. Clone [this repository](https://github.com/OceanApocalypseStudios/RedSeaModernLanguage).
+2. Clone [this repository](https://github.com/OceanApocalypse/RedSeaModernLanguage).
 3. Open the terminal in the root RSML directory (the one with the solution file).
 
 ```
@@ -98,7 +98,7 @@ dotnet build -c Debug RedSeaModernLanguage.slnx
 	<summary><strong>Optimized build</strong></summary>
 
 1. Install the [.NET SDK 10.0](https://dotnet.microsoft.com/download).
-2. Clone [this repository](https://github.com/OceanApocalypseStudios/RedSeaModernLanguage).
+2. Clone [this repository](https://github.com/OceanApocalypse/RedSeaModernLanguage).
 3. Open the terminal in the root RSML directory (the one with the solution file).
 
 ```
@@ -111,7 +111,7 @@ dotnet build -c Release RedSeaModernLanguage.slnx
 	<summary><strong>CLI Framework-dependent Build</strong> <em>(good if you want a lighter CLI that uses your installed .NET SDK)</em></summary>
 
 1. Install the [.NET SDK 10.0](https://dotnet.microsoft.com/download).
-2. Clone [this repository](https://github.com/OceanApocalypseStudios/RedSeaModernLanguage).
+2. Clone [this repository](https://github.com/OceanApocalypse/RedSeaModernLanguage).
 3. Open the terminal in the root RSML directory (the one with the solution file).
 
 ```
@@ -122,7 +122,7 @@ dotnet publish -c Release -r <rid> src/RSML.CLI/RSML.CLI.csproj --no-self-contai
 	<summary><strong>Native build</strong> <em>(compiles into a shared library)</em></summary>
 
 1. Install the [.NET SDK 10.0](https://dotnet.microsoft.com/download).
-2. Clone [this repository](https://github.com/OceanApocalypseStudios/RedSeaModernLanguage).
+2. Clone [this repository](https://github.com/OceanApocalypse/RedSeaModernLanguage).
 3. Open the terminal in the root RSML directory (the one with the solution file).
 
 ```
@@ -162,13 +162,13 @@ For more information, see: <img src="https://raw.githubusercontent.com/vscode-ic
 
 ## RSML on NuGet Trends
 > [!NOTE]
-> In the image below, **RSML** refers to Legacy RSML (RSML v1.x.x), while **OceanApocalypseStudios.RSML** refers to
+> In the image below, **RSML** refers to Legacy RSML (RSML v1.x.x), while **OceanApocalypse.RSML** refers to
 > Modern RSML (RSML v2.0.0).
-> In any other context, RSML and OceanApocalypseStudios.RSML have the exact same meaning.
+> In any other context, RSML and OceanApocalypse.RSML have the exact same meaning.
 
-[![RSML on NuGet Trends](docs/images/NuGetTrends_July5.png)](https://nugettrends.com/packages?ids=RSML&ids=OceanApocalypseStudios.RSML&months=12)
+[![RSML on NuGet Trends](docs/images/NuGetTrends_July5.png)](https://nugettrends.com/packages?ids=RSML&ids=OceanApocalypse.RSML&months=12)
 
 
-> **Copyright 2025-2026 OceanApocalypseStudios**
+> **Copyright 2025-2026 OceanApocalypse**
 >
 > We :heart: open-source!

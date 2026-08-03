@@ -20,9 +20,9 @@ Note for future self:
 		<CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
 
 		<!-- NuGet Package Setup -->
-		<Authors>OceanApocalypseStudios</Authors>
-		<Company>OceanApocalypseStudios</Company>
-		<Copyright>Copyright 2025-2026 OceanApocalypseStudios</Copyright>
+		<Authors>OceanApocalypse</Authors>
+		<Company>OceanApocalypse</Company>
+		<Copyright>Copyright 2025-2026 OceanApocalypse</Copyright>
 		<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
 		<RepositoryType>git</RepositoryType>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>

@@ -1,4 +1,4 @@
-namespace OceanApocalypseStudios.RSML.Language.Lexing.Tokens;
+namespace OceanApocalypse.RSML.Language.Lexing.Tokens;
 
 /// <summary>
 /// Represents a specific kind of token.
@@ -139,7 +139,7 @@ public enum TokenKind
 	/// The comma (,).
 	/// </summary>
 	Comma,
-	
+
 	/// <summary>
 	/// The semicolon (;).
 	/// </summary>

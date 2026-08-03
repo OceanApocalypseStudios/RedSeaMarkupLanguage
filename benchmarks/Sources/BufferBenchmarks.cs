@@ -5,11 +5,11 @@ using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Engines;
 using BenchmarkDotNet.Jobs;
 
-using OceanApocalypseStudios.RSML.Benchmarks.Helpers;
-using OceanApocalypseStudios.RSML.Toolchain.Sources;
+using OceanApocalypse.RSML.Benchmarks.Helpers;
+using OceanApocalypse.RSML.Toolchain.Sources;
 
 
-namespace OceanApocalypseStudios.RSML.Benchmarks.Sources;
+namespace OceanApocalypse.RSML.Benchmarks.Sources;
 
 [SimpleJob(RuntimeMoniker.Net10_0)]
 [SimpleJob(RuntimeMoniker.Net80)]

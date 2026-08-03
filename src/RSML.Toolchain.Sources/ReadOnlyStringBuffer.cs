@@ -4,13 +4,13 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-using OceanApocalypseStudios.RSML.Toolchain.Abstractions;
-using OceanApocalypseStudios.RSML.Toolchain.Abstractions.Cache;
-using OceanApocalypseStudios.RSML.Toolchain.Abstractions.Panic;
-using OceanApocalypseStudios.RSML.Toolchain.Abstractions.Sources;
+using OceanApocalypse.RSML.Toolchain.Abstractions;
+using OceanApocalypse.RSML.Toolchain.Abstractions.Cache;
+using OceanApocalypse.RSML.Toolchain.Abstractions.Panic;
+using OceanApocalypse.RSML.Toolchain.Abstractions.Sources;
 
 
-namespace OceanApocalypseStudios.RSML.Toolchain.Sources;
+namespace OceanApocalypse.RSML.Toolchain.Sources;
 
 /// <summary>
 /// A read-only buffer backed by a string. All operations opt for performance

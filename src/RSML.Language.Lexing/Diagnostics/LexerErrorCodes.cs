@@ -1,4 +1,4 @@
-namespace OceanApocalypseStudios.RSML.Language.Lexing.Diagnostics;
+namespace OceanApocalypse.RSML.Language.Lexing.Diagnostics;
 
 internal static class LexerErrorCodes
 {

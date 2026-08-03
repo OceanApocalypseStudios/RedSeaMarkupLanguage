@@ -1,8 +1,8 @@
 using System;
 
-using OceanApocalypseStudios.RSML.Toolchain.Abstractions;
+using OceanApocalypse.RSML.Toolchain.Abstractions;
 
-namespace OceanApocalypseStudios.RSML.Toolchain.Extensibility.Execution;
+namespace OceanApocalypse.RSML.Toolchain.Extensibility.Execution;
 
 /// <summary>
 /// The base type that deals with evaluating, interpreting and executing RSML.

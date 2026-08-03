@@ -5,4 +5,4 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("CodeQuality", "IDE0079:Remove unnecessary suppression", Justification = "Not an unnecessary suppresion.", Scope = "member", Target = "~M:OceanApocalypseStudios.RSML.Tests.Sources.ReadOnlyStringBufferTests.Constructor_BytePointer(System.String)")]
+[assembly: SuppressMessage("CodeQuality", "IDE0079:Remove unnecessary suppression", Justification = "Not an unnecessary suppresion.", Scope = "member", Target = "~M:OceanApocalypse.RSML.Tests.Sources.ReadOnlyStringBufferTests.Constructor_BytePointer(System.String)")]

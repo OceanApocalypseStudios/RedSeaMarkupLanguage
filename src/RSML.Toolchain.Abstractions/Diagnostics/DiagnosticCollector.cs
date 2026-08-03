@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 
 
-namespace OceanApocalypseStudios.RSML.Toolchain.Abstractions.Diagnostics;
+namespace OceanApocalypse.RSML.Toolchain.Abstractions.Diagnostics;
 
 /// <summary>
 /// A list of RSML toolchain errors.

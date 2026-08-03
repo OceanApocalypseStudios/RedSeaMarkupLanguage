@@ -1,6 +1,6 @@
-using OceanApocalypseStudios.RSML.Toolchain.Abstractions.Sources;
+using OceanApocalypse.RSML.Toolchain.Abstractions.Sources;
 
-namespace OceanApocalypseStudios.RSML.Language.Lexing.Tokens;
+namespace OceanApocalypse.RSML.Language.Lexing.Tokens;
 
 
 /// <summary>

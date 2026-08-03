@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace OceanApocalypseStudios.RSML.Toolchain.Abstractions.Panic;
+namespace OceanApocalypse.RSML.Toolchain.Abstractions.Panic;
 
 /// <summary>
 /// An exception that occurs in <see cref="Sources.IBuffer"/> and <see cref="Sources.IBuffer"/> types.
