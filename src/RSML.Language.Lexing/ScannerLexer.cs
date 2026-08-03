@@ -7,11 +7,11 @@ using OceanApocalypse.RSML.Toolchain.Abstractions.Sources;
 namespace OceanApocalypse.RSML.Language.Lexing;
 
 /// <summary>
-/// An implementation of a RSML lexer backed by a read-only or read-and-write stream.
+/// An implementation of a RSML lexer backed by a scanner.
 /// </summary>
-/// <param name="stream">A stream. Can be read-only (<see cref="IScanner"/>) or read and write (<see cref="IScanner"/>).</param>
+/// <param name="scanner">A scanner.</param>
 /// <param name="diagnostics">A collector for all emitted diagnostics.</param>
-public class StreamLexer(IScanner stream, DiagnosticCollector diagnostics) : Lexer
+public class ScannerLexer(IScanner scanner, DiagnosticCollector diagnostics) : Lexer
 {
 	/// <inheritdoc/>
 	public override Result<Token> GetNextToken() => throw new System.NotImplementedException();

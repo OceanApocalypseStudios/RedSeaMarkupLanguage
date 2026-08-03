@@ -114,10 +114,8 @@ public sealed class ReadOnlyStringBuffer : IBuffer, ISupportsCache
 	/// </param>
 	/// <remarks>This method is not CLS-compliant due to the unsafe context and the use of pointers.</remarks>
 	[CLSCompliant(false)]
-#pragma warning disable S6640
 	public unsafe ReadOnlyStringBuffer(byte* contentPtr, int byteCount, Encoding? encoding = null) =>
 		data = (encoding ?? Encoding.Default).GetString(contentPtr, byteCount);
-#pragma warning restore S6640
 
 	/// <inheritdoc/>
 	public void BuildCache() => ComputeLineStarts();

@@ -962,9 +962,7 @@ public class ReadOnlyStringBufferTests
 	[InlineData(TestString05)]
 	[InlineData(TestString06)]
 	#endregion
-#pragma warning disable S6640 // needed for testing
 	public unsafe void Constructor_BytePointer(string data)
-#pragma warning restore S6640
 	{
 		var byteCount = Encoding.Default.GetByteCount(data);
 
