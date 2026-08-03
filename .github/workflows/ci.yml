@@ -17,13 +17,9 @@ on:
     branches:
       - main
       - dev
-    paths:
-      - "src/**"
-      - "benchmarks/**"
-      - "tests/**"
-      - "**/*.csproj"
-      - "**/*.slnx"
-      - ".github/workflows/ci.yml"
+  schedule:
+    - cron: '0 6 1,15 * *'
+      timezone: 'Europe/Lisbon'
   workflow_dispatch:
 
 permissions:
@@ -75,13 +71,13 @@ jobs:
           mkdir -p ${{ runner.temp }}/scanner
           dotnet tool update dotnet-sonarscanner --tool-path ${{ runner.temp }}/scanner
 
-      - name: Being analysis
+      - name: Begin analysis
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           ${{ runner.temp }}/scanner/dotnet-sonarscanner begin \
-            /k:"OceanApocalypse_RedSeaModernLanguage" \
-            /o:"OceanApocalypse" \
+            /k:"oas_RedSeaModernLanguage" \
+            /o:"oas" \
             /d:sonar.token="$SONAR_TOKEN" \
             /d:sonar.cs.vscoveragexml.reportsPaths="**/TestResults/**/*.xml" \
             /d:sonar.exclusions="**/*.png,**/*.jpg,**/*.jpeg,**/*.ico,**/*.gif"
