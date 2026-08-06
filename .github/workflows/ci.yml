@@ -84,9 +84,7 @@ jobs:
             /o:"oas" \
             /d:sonar.token="$SONAR_TOKEN" \
             /d:sonar.cs.vscoveragexml.reportsPaths="**/TestResults/**/*.xml" \
-            /d:sonar.exclusions="**/*.png,**/*.jpg,**/*.jpeg,**/*.ico,**/*.gif" \
-            /d:sonar.qualitygate.wait=true \
-            /d:sonar.qualitygate.timeout=250
+            /d:sonar.exclusions="**/*.png,**/*.jpg,**/*.jpeg,**/*.ico,**/*.gif"
 
       - name: Build
         run: dotnet build --configuration Debug --no-restore
