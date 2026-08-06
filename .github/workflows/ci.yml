@@ -17,9 +17,13 @@ on:
     branches:
       - main
       - dev
-  schedule:
-    - cron: '0 6 1,15 * *'
-      timezone: 'Europe/Lisbon'
+    paths:
+      - "src/**"
+      - "benchmarks/**"
+      - "tests/**"
+      - "**/*.csproj"
+      - "**/*.slnx"
+    types: [opened, synchronize, reopened]
   workflow_dispatch:
 
 permissions:
