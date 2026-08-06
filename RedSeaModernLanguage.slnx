@@ -25,7 +25,6 @@
     </Folder>
 	<Folder Name="/Solution Items/Workflows/">
 		<File Path=".github/dependabot.yml" />
-		<File Path=".github/workflows/analysis.yml" />
 		<File Path=".github/workflows/ci.yml" />
 		<File Path=".github/workflows/release.yml" />
 		<File Path="CODEOWNERS" />
