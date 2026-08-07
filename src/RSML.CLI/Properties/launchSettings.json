@@ -1,0 +1,14 @@
+{
+	"profiles": {
+		"Launch RSML.CLI": {
+			"commandName": "Project",
+			"environmentVariables": {
+				"RSML_EXTENDED_BACKTRACE": "1"
+			}
+		},
+		"WSL": {
+			"commandName": "WSL2",
+			"distributionName": ""
+		}
+	}
+}
