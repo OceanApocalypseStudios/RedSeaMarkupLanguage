@@ -18,6 +18,13 @@ public static class CharacterExtensions
 		/// <returns></returns>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public bool IsNewline() => character is '\r' or '\n' or '\u2028' or '\u2029';
+
+		/// <summary>
+		/// Checks if the character in question is ASCII punctuation. Used by RSML.
+		/// </summary>
+		/// <returns></returns>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public bool IsAsciiPunctuation() => character is '=' or '<' or '>' or '!' or '|' or '&';
 	}
 
 	extension(IImmutableList<string> strings)

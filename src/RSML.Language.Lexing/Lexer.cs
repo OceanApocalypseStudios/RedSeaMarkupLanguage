@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 
 using OceanApocalypse.RSML.Language.Lexing.Tokens;
 using OceanApocalypse.RSML.Toolchain.Abstractions;
@@ -12,6 +13,41 @@ namespace OceanApocalypse.RSML.Language.Lexing;
 /// </summary>
 public abstract class Lexer : ILexer
 {
+	/// <summary>
+	/// The RSML keywords defined in its language specification.
+	/// Also contains reserved keywords.
+	/// </summary>
+	public static readonly ImmutableArray<string> Keywords = [
+		// keywords
+		"as", "end", "if", "let", "region", "requires", "return", "struct", "type",
+		// modifiers
+		"fn", "mut", "previous",
+		// reserved keywords - not yet implemented but blocked from being used as identifiers
+		"class", "interface"
+	];
+
+	// this should always be synced with the keywords field
+	internal static TokenKind GetKeywordTokenKind(scoped ReadOnlySpan<char> keyword) => keyword switch
+	{
+		// keywords
+		"as" => TokenKind.As,
+		"end" => TokenKind.End,
+		"if" => TokenKind.If,
+		"let" => TokenKind.Let,
+		"region" => TokenKind.Region,
+		"requires" => TokenKind.Requires,
+		"return" => TokenKind.Return,
+		"struct" => TokenKind.Struct,
+		"type" => TokenKind.Type,
+
+		// modifiers
+		"fn" => TokenKind.FunctionModifier,
+		"mut" => TokenKind.MutableModifier,
+		"previous" => TokenKind.PreviousModifier,
+
+		_ => TokenKind.Unknown,
+	};
+
 	private bool isDisposed;
 
 	/// <inheritdoc/>

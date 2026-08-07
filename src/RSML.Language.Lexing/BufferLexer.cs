@@ -17,14 +17,6 @@ namespace OceanApocalypse.RSML.Language.Lexing;
 /// <param name="diagnostics">A collector for all emitted diagnostics.</param>
 public class BufferLexer(IBuffer buffer, DiagnosticCollector diagnostics) : Lexer
 {
-	private static readonly ImmutableArray<string> keywords = [
-		// keywords
-		"as", "end", "if", "let", "region", "requires", "return", "struct", "type",
-		// modifiers
-		"fn", "mut", "previous",
-		// reserved keywords - not yet implemented but blocked from being used as identifiers
-		"class"
-	];
 	private int cursor;
 
 	/// <remarks>
@@ -46,14 +38,20 @@ public class BufferLexer(IBuffer buffer, DiagnosticCollector diagnostics) : Lexe
 
 		char c = buffer[cursor];
 
+		// strings
 		if (c == '"')
 			return ScanStringLiteral(startLoc);
 
+		// number literals
 		if (Char.IsAsciiDigit(c))
 			return ScanNumber(startLoc);
 
+		// identifiers and keywords
 		if (Char.IsAsciiLetter(c) || c == '_')
 			return ScanIdentifierOrKeyword(startLoc);
+
+		if (c == '.')
+			return Result.Success(new Token(TokenKind.MemberAccess, null, new(startLoc, buffer.GetSourceLocation(++cursor))));
 
 		// todo: add the remaining possible paths
 		return Result.Failure<Token>(new(LexerErrorCodes.FailedToLexToken, "Tried all possible token logic paths, but none was true.", Severity.Error));
@@ -144,31 +142,25 @@ public class BufferLexer(IBuffer buffer, DiagnosticCollector diagnostics) : Lexe
 
 		SourceSpan span = new(startLoc, buffer.GetSourceLocation(cursor));
 
-		return keywords.Contains(buffer[span])
-			? Result.Success(new Token(GetKeywordTokenKind(buffer[span]), null, span)) // is keyword
-			: Result.Success(new Token(TokenKind.Identifier, null, span)); // is identifier
+		if (Keywords.Contains(buffer[span]))
+		{
+			var token = new Token(GetKeywordTokenKind(buffer[span]), null, span); // is keyword
+
+			return token.Kind == TokenKind.Unknown
+				? Result.Failure<Token>(new(
+					LexerErrorCodes.FailedToIdentifyKeyword,
+					new SourceSpan(startLoc, new(cursor, startLoc.Line, cursor - startLoc.Index + startLoc.Column)),
+					"Despite identifying the object in question as a keyword, the lexer failed to resolve exactly which keyword it was." +
+					"This likely means the keyword in question is reserved for future use, but isn't implemented yet.",
+					Severity.Error
+				))
+				: Result.Success(token);
+		}
+		else
+		{
+			return Result.Success(new Token(TokenKind.Identifier, null, span)); // is identifier
+		}
 	}
-
-	private static TokenKind GetKeywordTokenKind(scoped ReadOnlySpan<char> keyword) => keyword switch
-	{
-		// keywords
-		"as" => TokenKind.As,
-		"end" => TokenKind.End,
-		"if" => TokenKind.If,
-		"let" => TokenKind.Let,
-		"region" => TokenKind.Region,
-		"requires" => TokenKind.Requires,
-		"return" => TokenKind.Return,
-		"struct" => TokenKind.Struct,
-		"type" => TokenKind.Type,
-
-		// modifiers
-		"fn" => TokenKind.FunctionModifier,
-		"mut" => TokenKind.MutableModifier,
-		"previous" => TokenKind.PreviousModifier,
-
-		_ => TokenKind.Unknown,
-	};
 
 	private void SkipWhitespaceAndComments()
 	{

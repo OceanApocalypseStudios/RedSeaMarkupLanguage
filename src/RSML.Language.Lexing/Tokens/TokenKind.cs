@@ -183,5 +183,10 @@ public enum TokenKind
 	/// <summary>
 	/// The closed parenthesis.
 	/// </summary>
-	CloseParenthesis
+	CloseParenthesis,
+
+	/// <summary>
+	/// The member access mark (<c>.</c>), which is a dot.
+	/// </summary>
+	MemberAccess
 }
