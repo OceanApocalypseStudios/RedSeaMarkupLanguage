@@ -2,6 +2,17 @@ name: Build, pack and release
 
 on:
   workflow_dispatch:
+    inputs:
+      debug_mode:
+        description: "Run the workflow in Debug Mode (skips NuGet and GitHub release)."
+        required: true
+        type: boolean
+        default: false
+      run_sonar:
+        description: "Analyze with Sonar and fail if quality gate fails. If set to false, also skips past testing."
+        required: true
+        type: boolean
+        default: true
   push:
     tags:
       - 'v*.*.*'
@@ -10,8 +21,14 @@ permissions:
   contents: read
 
 jobs:
+
+  # Builds all the binaries.
+  # Also tests with MTP and forces the workflow to fail if SonarQube fails the quality gate.
+  # Only exception is if IGNORE_SONAR_ANALYSIS is disabled, where Sonar analysis will run,
+  # but won't force the quality gate to fail.
   build-binaries:
     strategy:
+      fail-fast: true
       matrix:
         include:
           - os: ubuntu-latest
@@ -42,6 +59,7 @@ jobs:
             rid-os: osx
 
     runs-on: ${{ matrix.os }}
+
     steps:
     - name: Checkout Code
       uses: actions/checkout@v7
@@ -64,72 +82,60 @@ jobs:
         sudo apt-get install -y binutils-aarch64-linux-gnu gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
 
     - name: Publish Native Project
-      if: (matrix.rid-os != 'linux') || (matrix.rid-os == 'linux' && matrix.arch == 'x64')
-      shell: bash
+      shell: pwsh
       run: |
-        dotnet publish ./src/RSML.Native/RSML.Native.csproj \
-          -c Release \
-          -r ${{ matrix.rid-os }}-${{ matrix.arch }} \
-          -o ./dist/RSML.Native-${{ matrix.rid-os }}-${{ matrix.arch }} \
-          --self-contained true
-          
-    - name: Publish Native Project (Linux ARM)
-      if: matrix.rid-os == 'linux' && matrix.arch == 'arm'
-      shell: bash
-      run: |
-        dotnet publish ./src/RSML.Native/RSML.Native.csproj \
-          -c Release \
-          -r ${{ matrix.rid-os }}-${{ matrix.arch }} \
-          -o ./dist/RSML.Native-${{ matrix.rid-os }}-${{ matrix.arch }} \
-          -p:ObjCopyName=arm-linux-gnueabihf-objcopy \
-          -p:LinkerFlavor=lld \
-          --self-contained true
-          
-    - name: Publish Native Project (Linux ARM64)
-      if: matrix.rid-os == 'linux' && matrix.arch == 'arm64'
-      shell: bash
-      run: |
-        dotnet publish ./src/RSML.Native/RSML.Native.csproj \
-          -c Release \
-          -r ${{ matrix.rid-os }}-${{ matrix.arch }} \
-          -o ./dist/RSML.Native-${{ matrix.rid-os }}-${{ matrix.arch }} \
-          -p:ObjCopyName=aarch64-linux-gnu-objcopy \
-          -p:LinkerFlavor=lld \
-          --self-contained true
+        $rid = "${{ matrix.rid-os }}-${{ matrix.arch }}"
+        $outputDir = "./dist/RSML.Native-$rid"
+
+        $dotnetArgs = @(
+            "./src/RSML.Native/RSML.Native.csproj",
+            "-c", "Release",
+            "-r", $rid,
+            "-o", $outputDir,
+            "--self-contained", "true"
+        )
+
+        if ("${{ matrix.rid-os }}" -eq "linux") {
+            if ("${{ matrix.arch }}" -eq "arm") {
+                $dotnetArgs += "-p:ObjCopyName=arm-linux-gnueabihf-objcopy"
+                $dotnetArgs += "-p:LinkerFlavor=lld"
+            }
+            elseif ("${{ matrix.arch }}" -eq "arm64") {
+                $dotnetArgs += "-p:ObjCopyName=aarch64-linux-gnu-objcopy"
+                $dotnetArgs += "-p:LinkerFlavor=lld"
+            }
+        }
+
+        dotnet publish @dotnetArgs
+        if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
     - name: Publish CLI Project
-      if: (matrix.rid-os != 'linux') || (matrix.rid-os == 'linux' && matrix.arch == 'x64')
       shell: bash
       run: |
-        dotnet publish ./src/RSML.CLI/RSML.CLI.csproj \
-          -c Release \
-          -r ${{ matrix.rid-os }}-${{ matrix.arch }} \
-          -o ./dist/RSML.CLI-${{ matrix.rid-os }}-${{ matrix.arch }} \
-          --self-contained true
-          
-    - name: Publish CLI Project (Linux ARM)
-      if: matrix.rid-os == 'linux' && matrix.arch == 'arm'
-      shell: bash
-      run: |
-        dotnet publish ./src/RSML.CLI/RSML.CLI.csproj \
-          -c Release \
-          -r ${{ matrix.rid-os }}-${{ matrix.arch }} \
-          -o ./dist/RSML.CLI-${{ matrix.rid-os }}-${{ matrix.arch }} \
-          -p:ObjCopyName=arm-linux-gnueabihf-objcopy \
-          -p:LinkerFlavor=lld \
-          --self-contained true
-          
-    - name: Publish CLI Project (Linux ARM64)
-      if: matrix.rid-os == 'linux' && matrix.arch == 'arm64'
-      shell: bash
-      run: |
-        dotnet publish ./src/RSML.CLI/RSML.CLI.csproj \
-          -c Release \
-          -r ${{ matrix.rid-os }}-${{ matrix.arch }} \
-          -o ./dist/RSML.CLI-${{ matrix.rid-os }}-${{ matrix.arch }} \
-          -p:ObjCopyName=aarch64-linux-gnu-objcopy \
-          -p:LinkerFlavor=lld \
-          --self-contained true
+        $rid = "${{ matrix.rid-os }}-${{ matrix.arch }}"
+        $outputDir = "./dist/RSML.CLI-$rid"
+
+        $dotnetArgs = @(
+            "./src/RSML.CLI/RSML.CLI.csproj",
+            "-c", "Release",
+            "-r", $rid,
+            "-o", $outputDir,
+            "--self-contained", "true"
+        )
+
+        if ("${{ matrix.rid-os }}" -eq "linux") {
+            if ("${{ matrix.arch }}" -eq "arm") {
+                $dotnetArgs += "-p:ObjCopyName=arm-linux-gnueabihf-objcopy"
+                $dotnetArgs += "-p:LinkerFlavor=lld"
+            }
+            elseif ("${{ matrix.arch }}" -eq "arm64") {
+                $dotnetArgs += "-p:ObjCopyName=aarch64-linux-gnu-objcopy"
+                $dotnetArgs += "-p:LinkerFlavor=lld"
+            }
+        }
+
+        dotnet publish @dotnetArgs
+        if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
     - name: Upload Native Artifacts
       uses: actions/upload-artifact@v4
@@ -145,6 +151,7 @@ jobs:
         path: ./dist/RSML.CLI-${{ matrix.rid-os }}-${{ matrix.arch }}
         if-no-files-found: error
 
+  # Release on NuGet and GitHub.
   deploy:
     permissions:
       id-token: write
@@ -152,6 +159,7 @@ jobs:
 
     needs: build-binaries
     runs-on: ubuntu-latest
+
     steps:
     - name: Checkout Code
       uses: actions/checkout@v7
@@ -173,22 +181,100 @@ jobs:
       with:
         path: ./all-binaries
 
-    - name: Restore & Build Solution
-      run: |
-        dotnet restore
-        dotnet build --configuration Release --no-restore
+    - name: Restore solution
+      run: dotnet restore
 
-    - name: Pack Projects
+    - name: Set up JDK 21
+      uses: actions/setup-java@v5
+      with:
+        java-version: 21
+        distribution: 'zulu'
+
+    - name: Restore
+      run: dotnet restore
+
+    - name: Cache SonarQube Cloud packages
+      uses: actions/cache@v5
+      if: github.ref_type == 'tag' || inputs.run_sonar == true
+      with:
+        path: ~/.sonar/cache
+        key: ${{ runner.os }}-sonar
+        restore-keys: ${{ runner.os }}-sonar
+
+    - name: Cache SonarQube Cloud scanner
+      id: cache-sonar-scanner
+      uses: actions/cache@v5
+      if: github.ref_type == 'tag' || inputs.run_sonar == true
+      with:
+        path: ${{ runner.temp }}/scanner
+        key: ${{ runner.os }}-sonar-scanner
+        restore-keys: ${{ runner.os }}-sonar-scanner
+
+    - name: Install SonarQube Cloud scanner
+      if: steps.cache-sonar-scanner.outputs.cache-hit != 'true' && (github.ref_type == 'tag' || inputs.run_sonar == true)
+      run: |
+        mkdir -p ${{ runner.temp }}/scanner
+        dotnet tool update dotnet-sonarscanner --tool-path ${{ runner.temp }}/scanner
+
+    - name: Extract version from solution properties
+      if: github.ref_type != 'tag'
+      shell: pwsh
+      run: |
+        [xml]$xml = Get-Content Directory.Build.props
+        $prefix = $xml.SelectSingleNode("//VersionPrefix")?.InnerText
+        $suffix = $xml.SelectSingleNode("//VersionSuffix")?.InnerText
+        $semver = if ($suffix) { "$prefix-$suffix" } else { $prefix }
+        echo "SEMVER=$semver" >> $env:GITHUB_ENV
+
+    - name: Set version from tag
+      if: github.ref_type == 'tag'
+      shell: pwsh
+      run: echo "SEMVER=${{ github.ref_name }}" >> $env:GITHUB_ENV
+
+    - name: Begin analysis
+      if: github.ref_type == 'tag' || inputs.run_sonar == true
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: |
+        ${{ runner.temp }}/scanner/dotnet-sonarscanner begin \
+          /k:"oas_RedSeaModernLanguage" \
+          /o:"oas" \
+          /v:"${{ env.SEMVER }}" \
+          /d:sonar.token="$SONAR_TOKEN" \
+          /d:sonar.cs.vscoveragexml.reportsPaths="**/TestResults/**/*.xml" \
+          /d:sonar.exclusions="**/*.png,**/*.jpg,**/*.jpeg,**/*.ico,**/*.gif" \
+          /d:sonar.qualitygate.wait=true \
+          /d:sonar.qualitygate.timeout=215
+
+    - name: Build solution (debug)
+      if: github.ref_type == 'tag' || inputs.run_sonar == true
+      run: dotnet build --configuration Debug --no-restore
+
+    - name: Test
+      if: github.ref_type == 'tag' || inputs.run_sonar == true
+      run: dotnet test --framework net10.0 --configuration Debug --no-build -- --coverage --coverage-output-format xml
+
+    - name: End analysis (fail if quality gate fails)
+      if: github.ref_type == 'tag' || inputs.run_sonar == true
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: ${{ runner.temp }}/scanner/dotnet-sonarscanner end /d:sonar.token="$SONAR_TOKEN"
+
+    - name: Build solution (release)
+      run: dotnet build --configuration Release --no-restore
+
+    - name: Pack projects
       run: dotnet pack --configuration Release --no-build --output ./nupkgs
 
     # Get a short-lived NuGet API key (v1.2.0)
-    - name: NuGet login (OIDC → temp API key)
+    - name: Login to NuGet (OIDC → temp API key)
       uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841
       id: login
       with:
         user: ${{ secrets.NUGET_USER }}
 
     - name: Push to NuGet
+      if: github.ref_type == 'tag' || inputs.debug_mode != true
       run: |
         dotnet nuget push "./nupkgs/*.nupkg" \
         --api-key ${{ steps.login.outputs.NUGET_API_KEY }} \
@@ -200,24 +286,27 @@ jobs:
         npx git-cliff@latest -o ${{ github.workspace }}-CHANGELOG.md --latest
         cat ${{ github.workspace }}-CHANGELOG.md
         
-    - name: Prepare Release Assets
+    - name: Prepare release assets
       run: |
-        mkdir ./release-assets
-        cd ./all-binaries
-        
-        for dir in *; do
-          # Check if the folder directory belongs to Windows ('win')
-          if [[ "$dir" == *"-win-"* ]]; then
-            echo "Windows: ../release-assets/${dir}.zip"
-            # no nesting
-            (cd "$dir" && zip -r "../../release-assets/${dir}.zip" .)
-          else
-            echo "Linux/macOS: ../release-assets/${dir}.tar.gz"
-            tar -czf "../release-assets/${dir}.tar.gz" -C "$dir" .
-          fi
-        done
+        New-Item -ItemType Directory -Force -Path "./release-assets" | Out-Null
+        cd "./all-binaries"
+
+        Get-ChildItem -Directory | ForEach-Object {
+            $dir = $_.Name
+            $destPath = "../release-assets/$dir"
+
+            if ($dir -like "*-win-*") {
+                Write-Host "Windows: $destPath.zip"
+                Compress-Archive -Path "$dir/*" -DestinationPath "$destPath.zip" -Force
+            }
+            else {
+                Write-Host "Linux/macOS: $destPath.tar.gz"
+                tar -czf "$destPath.tar.gz" -C "$dir" .
+            }
+        }
 
     - name: Create GitHub Release
+      if: github.ref_type == 'tag' || inputs.debug_mode != true
       uses: softprops/action-gh-release@3d0d9888cb7fd7b750713d6e236d1fcb99157228 # 3.0.2
       with:
         files: ./release-assets/*.tar.gz

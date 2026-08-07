@@ -75,17 +75,6 @@ jobs:
           mkdir -p ${{ runner.temp }}/scanner
           dotnet tool update dotnet-sonarscanner --tool-path ${{ runner.temp }}/scanner
 
-      - name: Extract Version
-        run: |
-          VERSION_PREFIX=$(awk -F'[><]' '/<VersionPrefix>/{print $3}' Directory.Build.props)
-          VERSION_SUFFIX=$(awk -F'[><]' '/<VersionSuffix>/{print $3}' Directory.Build.props)
-    
-          if [ -n "$VERSION_SUFFIX" ]; then
-            echo "SEMVER=$VERSION_PREFIX-$VERSION_SUFFIX" >> $GITHUB_ENV
-          else
-            echo "SEMVER=$VERSION_PREFIX" >> $GITHUB_ENV
-          fi
-
       - name: Begin analysis
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -93,7 +82,6 @@ jobs:
           ${{ runner.temp }}/scanner/dotnet-sonarscanner begin \
             /k:"oas_RedSeaModernLanguage" \
             /o:"oas" \
-            /v:"${{ env.SEMVER }}" \
             /d:sonar.token="$SONAR_TOKEN" \
             /d:sonar.cs.vscoveragexml.reportsPaths="**/TestResults/**/*.xml" \
             /d:sonar.exclusions="**/*.png,**/*.jpg,**/*.jpeg,**/*.ico,**/*.gif"
