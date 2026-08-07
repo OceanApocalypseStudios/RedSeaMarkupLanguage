@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 
 using OceanApocalypse.RSML.Language.Lexing.Diagnostics;
 using OceanApocalypse.RSML.Language.Lexing.Tokens;
@@ -16,6 +17,14 @@ namespace OceanApocalypse.RSML.Language.Lexing;
 /// <param name="diagnostics">A collector for all emitted diagnostics.</param>
 public class BufferLexer(IBuffer buffer, DiagnosticCollector diagnostics) : Lexer
 {
+	private static readonly ImmutableArray<string> keywords = [
+		// keywords
+		"as", "end", "if", "let", "region", "requires", "return", "struct", "type",
+		// modifiers
+		"fn", "mut", "previous",
+		// reserved keywords - not yet implemented but blocked from being used as identifiers
+		"class"
+	];
 	private int cursor;
 
 	/// <remarks>
@@ -44,7 +53,7 @@ public class BufferLexer(IBuffer buffer, DiagnosticCollector diagnostics) : Lexe
 			return ScanNumber(startLoc);
 
 		if (Char.IsAsciiLetter(c) || c == '_')
-			return ScanIdentifier(startLoc);
+			return ScanIdentifierOrKeyword(startLoc);
 
 		// todo: add the remaining possible paths
 		return Result.Failure<Token>(new(LexerErrorCodes.FailedToLexToken, "Tried all possible token logic paths, but none was true.", Severity.Error));
@@ -128,13 +137,38 @@ public class BufferLexer(IBuffer buffer, DiagnosticCollector diagnostics) : Lexe
 		return Result.Success(new Token(TokenKind.StringLiteral, null, new(startLoc, buffer.GetSourceLocation(cursor))));
 	}
 
-	private Result<Token> ScanIdentifier(SourceLocation startLoc)
+	private Result<Token> ScanIdentifierOrKeyword(SourceLocation startLoc)
 	{
 		while (cursor < buffer.Length && (Char.IsAsciiLetterOrDigit(buffer[cursor]) || buffer[cursor] == '_'))
 			cursor++;
 
-		return Result.Success(new Token(TokenKind.Identifier, null, new(startLoc, buffer.GetSourceLocation(cursor))));
+		SourceSpan span = new(startLoc, buffer.GetSourceLocation(cursor));
+
+		return keywords.Contains(buffer[span])
+			? Result.Success(new Token(GetKeywordTokenKind(buffer[span]), null, span)) // is keyword
+			: Result.Success(new Token(TokenKind.Identifier, null, span)); // is identifier
 	}
+
+	private static TokenKind GetKeywordTokenKind(scoped ReadOnlySpan<char> keyword) => keyword switch
+	{
+		// keywords
+		"as" => TokenKind.As,
+		"end" => TokenKind.End,
+		"if" => TokenKind.If,
+		"let" => TokenKind.Let,
+		"region" => TokenKind.Region,
+		"requires" => TokenKind.Requires,
+		"return" => TokenKind.Return,
+		"struct" => TokenKind.Struct,
+		"type" => TokenKind.Type,
+
+		// modifiers
+		"fn" => TokenKind.FunctionModifier,
+		"mut" => TokenKind.MutableModifier,
+		"previous" => TokenKind.PreviousModifier,
+
+		_ => TokenKind.Unknown,
+	};
 
 	private void SkipWhitespaceAndComments()
 	{

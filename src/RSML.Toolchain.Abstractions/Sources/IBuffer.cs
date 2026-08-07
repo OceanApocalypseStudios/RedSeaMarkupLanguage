@@ -12,12 +12,7 @@ public interface IBuffer : IDisposable, IEquatable<IBuffer>, IEquatable<char[]?>
 	/// <summary>
 	/// Whether the source is completely empty.
 	/// </summary>
-	bool IsEmpty
-#if NETCOREAPP3_0_OR_GREATER
-		=> Length == 0;
-#else
-	{ get; }
-#endif
+	bool IsEmpty => Length == 0;
 
 	/// <summary>
 	/// Whether the source can be mutated.
@@ -43,6 +38,13 @@ public interface IBuffer : IDisposable, IEquatable<IBuffer>, IEquatable<char[]?>
 	/// <param name="index">The index of the item to retrieve.</param>
 	/// <returns>The item.</returns>
 	char this[int index] { get; }
+
+	/// <summary>
+	/// Gets a span of items out of the buffer.
+	/// </summary>
+	/// <param name="span">The start and end locations of the span to retrieve.</param>
+	/// <returns>The items.</returns>
+	ReadOnlySpan<char> this[SourceSpan span] { get; }
 
 	/// <summary>
 	/// Gets a single item out of the buffer.

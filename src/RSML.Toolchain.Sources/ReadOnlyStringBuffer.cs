@@ -69,6 +69,9 @@ public sealed class ReadOnlyStringBuffer : IBuffer, ISupportsCache
 	/// <inheritdoc/>
 	public char this[SourceLocation location] => this[location.Index];
 
+	/// <inheritdoc/>
+	public ReadOnlySpan<char> this[SourceSpan span] => data.AsSpan().Slice(span.Start.Index, span.Length);
+
 	/// <summary>
 	/// Initializes a new <see cref="ReadOnlyStringBuffer"/>
 	/// with a string.

@@ -185,4 +185,3 @@ public enum TokenKind
 	/// </summary>
 	CloseParenthesis
 }
-
